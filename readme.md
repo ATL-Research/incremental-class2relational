@@ -1,0 +1,35 @@
+## TODO
+
+- [ ] write this readme
+- [ ] choose a licence for the repo
+    - EPL v2 ?
+- [ ] add metamodels
+    - [x] add change metamodel
+    - [ ] add source metamodel
+    - [ ] add target metamodel
+- [ ] add source models for "correctness"
+    - [ ] generate sample source models
+        - manually ?
+        - taken from zoo ?
+    - [ ] generate change model
+        - using fuzzer ?
+        - manually ?
+- [ ] add test cases for "completeness"
+    - [ ] identify which test to perform
+        - for each test
+            - create source model(s) + change + expected results
+- [ ] java driver
+    - [ ] code the AbstractDriver
+        - read env variable
+        - loads models
+        - apply change
+        - save results
+    - [ ] package it to lib ?
+    - [ ] write documentation for other languages
+    - embed fuzzer so that solutions can test if they are correct on more case than the one we provide ?
+- [ ] script to launch solutions and perform tests
+    - python ? bash ? ...
+    - we need to agree on how solutions declare how to run their executable
+    - [ ] make a CLI executable from model comparator to check if models are similar
+    - automate testing so that checking is done by github actions ?
+    - generate report ?
