@@ -1,0 +1,6 @@
+# usuall java & gradle files
+
+*.class
+.gradle
+build/
+bin/
