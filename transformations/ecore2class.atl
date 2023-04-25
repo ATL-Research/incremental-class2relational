@@ -1,0 +1,47 @@
+-- @atl compiler emftvm
+-- @nsURI MOF=http://www.eclipse.org/emf/2004/Ecore2Ecore
+
+module ecore2class;
+
+create OUT : Class from IN : MOF;
+
+rule EClass2Class {
+	from
+		ic : MOF!EClass
+	to
+		oc : Class!Class (
+			name <- ic.name,
+			attr <- ic.eStructuralFeatures-- oclIsKindOf(MOF!EAttribute)
+		)
+}
+
+rule EAttribute2Attribute {
+	from
+		ia : MOF!EAttribute
+	to
+		oa : Class!Attribute (
+			name <- ia.name,
+			multiValued <- (ia.upperBound > 1) or (ia.upperBound = 0-1),
+			type <- ia.eType
+		)
+}
+
+rule EReference2Attribute {
+	from
+		ia : MOF!EReference
+	to
+		oa : Class!Attribute (
+			name <- ia.name,
+			multiValued <- (ia.upperBound > 1) or (ia.upperBound = 0-1),
+			type <- ia.eType
+		)
+}
+
+rule EDataType2DataType {
+	from
+		idt : MOF!EDataType
+	to
+		odt : Class!DataType (
+			name <- idt.name
+		)
+}
