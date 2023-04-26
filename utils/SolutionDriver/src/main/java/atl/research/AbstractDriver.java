@@ -25,6 +25,16 @@ public abstract class AbstractDriver {
         setupResourceSet();
 
         // loading & creating models
+        if (System.getenv("SOURCE_PATH") == null) {
+            throw new Exception("SOURCE_PATH environment variable not set");
+        }
+        else if (System.getenv("CHANGE_PATH") == null) {
+            throw new Exception("CHANGE_PATH environment variable not set");
+        }
+        else if (System.getenv("TARGET_PATH") == null) {
+            throw new Exception("TARGET_PATH environment variable not set");
+        }
+
         source = loadModel(System.getenv("SOURCE_PATH"));
         changes = loadModel(System.getenv("CHANGES_PATH"));
         target = createModel(System.getenv("TARGET_PATH"));
