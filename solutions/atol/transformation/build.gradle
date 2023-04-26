@@ -25,7 +25,11 @@ repositories {
         url "https://repo.eclipse.org/content/repositories/atl-releases/"
     }
     maven {
-        url "https://public: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@maven.pkg.github.com/ATL-Research/*"
+        url "https://maven.pkg.github.com/ATL-Research/*"
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+            password = project.findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
+        }
     }
 }
 
