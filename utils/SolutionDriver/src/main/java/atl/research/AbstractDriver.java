@@ -20,7 +20,7 @@ abstract class AbstractDriver {
     Resource target;
     Resource changes;
 
-    AbstractDriver() throws Exception {
+    public AbstractDriver() throws Exception {
         // setup EMF resource set to load models
         setupResourceSet();
 
