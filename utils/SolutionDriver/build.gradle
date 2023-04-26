@@ -1,6 +1,9 @@
 plugins {
     id 'java-library'
+    id 'maven-publish'
 }
+
+targetCompatibility = "11"
 
 repositories {
     mavenCentral()
@@ -9,4 +12,28 @@ repositories {
 dependencies {
     implementation 'org.eclipse.emf:org.eclipse.emf.ecore:+'
     implementation "org.eclipse.emf:org.eclipse.emf.ecore.xmi:+"
+}
+
+
+publishing {
+    publications {
+        myLibrary(MavenPublication) {
+            group = 'io.github.atlresearch.ttc2023'
+            artifactId 'solutionDriver'
+            version = '0.1'
+
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            name 'github'
+            url "https://maven.pkg.github.com/ATL-Research/incremental-class2relational"
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
 }
