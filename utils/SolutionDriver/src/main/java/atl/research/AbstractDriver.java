@@ -14,13 +14,13 @@ import Changes.ModelChange;
 import atl.research.class_.Class_Package;
 import atl.research.relational_.Relational_Package;
 
-abstract class AbstractDriver {
+public abstract class AbstractDriver {
     ResourceSet resourceSet = new ResourceSetImpl();
     Resource source;
     Resource target;
     Resource changes;
 
-    AbstractDriver() throws Exception {
+    public AbstractDriver() throws Exception {
         // setup EMF resource set to load models
         setupResourceSet();
 
