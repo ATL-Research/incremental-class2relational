@@ -10,8 +10,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.eclipse.emf:org.eclipse.emf.ecore:+'
-    implementation "org.eclipse.emf:org.eclipse.emf.ecore.xmi:+"
+    implementation 'org.eclipse.emf:org.eclipse.emf.ecore:2.33.0'
+    implementation "org.eclipse.emf:org.eclipse.emf.ecore.xmi:2.18.0"
 }
 
 
@@ -19,7 +19,7 @@ publishing {
     publications {
         myLibrary(MavenPublication) {
             group = 'io.github.atlresearch.ttc2023'
-            artifactId 'solutionDriver'
+            artifactId = 'solutiondriver'
             version = '0.1'
 
             from components.java
