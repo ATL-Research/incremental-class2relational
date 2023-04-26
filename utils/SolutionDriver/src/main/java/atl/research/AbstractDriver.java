@@ -92,6 +92,6 @@ public abstract class AbstractDriver {
         target.save(Collections.emptyMap());
     }
 
-    abstract void applyTransformation();
+    protected abstract void applyTransformation();
 
 }
