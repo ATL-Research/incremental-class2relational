@@ -14,7 +14,7 @@ class Run extends AbstractDriver {
 		new Run()
     }
 
-	new() {
+	new() throws Exception {
 		// call AbstractDriver constructor to initialize source, changes and target
 		super()
 
