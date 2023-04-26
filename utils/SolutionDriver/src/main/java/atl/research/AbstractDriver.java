@@ -20,37 +20,7 @@ public abstract class AbstractDriver {
     Resource target;
     Resource changes;
 
-    public AbstractDriver() throws Exception {
-        // setup EMF resource set to load models
-        setupResourceSet();
 
-        // loading & creating models
-        if (System.getenv("SOURCE_PATH") == null) {
-            throw new Exception("SOURCE_PATH environment variable not set");
-        }
-        else if (System.getenv("CHANGE_PATH") == null) {
-            throw new Exception("CHANGE_PATH environment variable not set");
-        }
-        else if (System.getenv("TARGET_PATH") == null) {
-            throw new Exception("TARGET_PATH environment variable not set");
-        }
-
-        source = loadModel(System.getenv("SOURCE_PATH"));
-        changes = loadModel(System.getenv("CHANGES_PATH"));
-        target = createModel(System.getenv("TARGET_PATH"));
-
-        // apply transformation
-        applyTransformation();
-
-        // apply changes
-        applyChange();
-
-        // save target model
-        saveTarget();
-    }
-
-    
-    
 
     public Resource getSource() {
         return source;
@@ -62,8 +32,12 @@ public abstract class AbstractDriver {
         return target;
     }
 
-
-    void setupResourceSet() {
+    public void init() throws Exception {
+        setupResourceSet();
+        loadModels();
+    }
+    
+    protected void setupResourceSet() {
         resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(
             "xmi",
             new XMIResourceFactoryImpl()
@@ -82,15 +56,32 @@ public abstract class AbstractDriver {
         );
     }
 
-    Resource loadModel(String modelPath) {
-        return resourceSet.getResource(URI.createFileURI(modelPath), false);
+    protected void loadModels() throws Exception {
+        if (System.getenv("SOURCE_PATH") == null) {
+            throw new Exception("SOURCE_PATH environment variable not set");
+        }
+        else if (System.getenv("CHANGE_PATH") == null) {
+            throw new Exception("CHANGE_PATH environment variable not set");
+        }
+        else if (System.getenv("TARGET_PATH") == null) {
+            throw new Exception("TARGET_PATH environment variable not set");
+        }
+
+        source = loadModel(System.getenv("SOURCE_PATH"));
+        changes = loadModel(System.getenv("CHANGE_PATH"));
+        target = createModel(System.getenv("TARGET_PATH"));
     }
 
-    Resource createModel(String modelPath) {
+    private Resource loadModel(String modelPath) {
+        System.out.println("Loading model from " + modelPath);
+        return resourceSet.getResource(URI.createFileURI(modelPath), true);
+    }
+
+    private Resource createModel(String modelPath) {
         return resourceSet.createResource(URI.createFileURI(modelPath));
     }
 
-    void applyChange() {
+    protected void applyChange() {
         // we ignore change models that are empty (for checking correctness)
         if (changes.getContents().size() > 0) {
             ModelChange change = (ModelChange) changes.getContents().get(0);
@@ -98,7 +89,7 @@ public abstract class AbstractDriver {
         }
     }
 
-    void saveTarget() throws IOException {
+    protected void saveTarget() throws IOException {
         target.save(Collections.emptyMap());
     }
 

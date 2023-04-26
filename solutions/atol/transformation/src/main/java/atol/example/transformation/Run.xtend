@@ -3,23 +3,26 @@ package atol.example.transformation
 
 import atl.research.AbstractDriver
 import atl.research.class_.Class
+import atl.research.class_.DataType
 import io.github.atlresearch.emfmodelfuzzer.SimpleEMFModelFuzzer
 import org.eclipse.emf.ecore.EObject
 
 
 class Run extends AbstractDriver {
-	val Class2Relational transformation
+	var Class2Relational transformation
 
 	static def void main(String[] args) {
-		new Run()
+		val solution = new Run()
+
+		solution.init
+        solution.applyTransformation
+        solution.applyChange
+        solution.saveTarget
     }
 
-	new() throws Exception {
-		// call AbstractDriver constructor to initialize source, changes and target
-		super()
-
+	new() {
 		// initialize transformation
-        transformation = new Class2Relational()
+        this.transformation = new Class2Relational()
 
 		// other initialization code
 	}
@@ -27,7 +30,11 @@ class Run extends AbstractDriver {
 	override void applyTransformation() {
 		for(EObject e : source.contents) {
 			if(e instanceof Class) {
-				val res = transformation.Class2Table(e)._out
+				val res = this.transformation.Class2Table(e)._out
+				target.contents.add(res)
+			}
+			else if (e instanceof DataType) {
+				val res = this.transformation.DataType2Type(e)._out
 				target.contents.add(res)
 			}
 		}
