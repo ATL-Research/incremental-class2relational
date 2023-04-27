@@ -31,8 +31,14 @@ public class ATLRunner extends AbstractDriver {
 		try {
 			ATLRunner solution = new ATLRunner();
 			solution.init();
-			solution.applyTransformation();
-			solution.applyChange();
+			if (isBatchMode()) {
+				solution.applyChange();
+				solution.applyTransformation();
+			}
+			else {
+				solution.applyTransformation();
+				solution.applyChange();
+			}
 			solution.saveTarget();
 		}
 		catch (Exception e) {

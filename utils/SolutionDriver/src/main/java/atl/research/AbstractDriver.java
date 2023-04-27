@@ -21,16 +21,18 @@ public abstract class AbstractDriver {
     Resource target;
     Resource changes;
 
-
+    boolean batchMode = false;
 
     public Resource getSource() {
         return source;
     }
 
-
-
     public Resource getTarget() {
         return target;
+    }
+
+    public boolean isBatchMode() {
+        return batchMode;
     }
 
     public void init() throws Exception {
@@ -67,6 +69,7 @@ public abstract class AbstractDriver {
         else if (System.getenv("TARGET_PATH") == null) {
             throw new Exception("TARGET_PATH environment variable not set");
         }
+        batchMode = (System.getenv("BATCH_MODE") != null);
 
         source = loadModel(System.getenv("SOURCE_PATH"));
         changes = loadModel(System.getenv("CHANGE_PATH"));
