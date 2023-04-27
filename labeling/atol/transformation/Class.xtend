@@ -5,15 +5,13 @@ import atl.research.class_.Class_Package
 
 import static fr.eseo.atol.gen.MetamodelUtils.*
 
+//Setup 2
 @AOFAccessors(Class_Package)
 class Class {
-	//public val __multiValued = boolOneDefault[_multiValued]
+	//Helper 10
 	public val __multiValued = boolOneDefault[
 		_multiValued.collect[
 			it ?: false
 		]
 	]
-/*
-	public val __y = oneDefault(0)[_y]
-*/
 }
