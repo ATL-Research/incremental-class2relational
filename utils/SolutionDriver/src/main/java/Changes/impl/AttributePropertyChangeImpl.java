@@ -215,7 +215,24 @@ public class AttributePropertyChangeImpl extends AttributeChangeImpl implements 
 
 	@Override
 	public void apply() {
-		this.getAffectedElement().eSet(this.getFeature(), this.getNewValue());
+		if (this.getNewValue() != null) {
+			switch (this.getFeature().getEType().getName()) {
+				case "EString":
+					this.getAffectedElement().eSet(this.getFeature(), this.getNewValue());
+					break;
+				case "EInt":
+					this.getAffectedElement().eSet(this.getFeature(), Integer.parseInt(this.getNewValue()));
+					break;
+				case "EBoolean":
+					this.getAffectedElement().eSet(this.getFeature(), Boolean.parseBoolean(this.getNewValue()));
+					break;
+				default:
+					break;
+			}
+		}
+		else {
+			this.getAffectedElement().eSet(this.getFeature(), null);
+		}
 	}
 
 } //AttributePropertyChangeImpl
