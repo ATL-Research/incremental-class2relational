@@ -38,8 +38,6 @@ dependencies {
 
     implementation 'fr.eseo.atol:fr.eseo.atol.gen:1.0'
 
-    implementation project(':metamodels')
-
     implementation 'io.github.atlresearch:emfmodelfuzzer:+'
 
     implementation 'io.github.atlresearch.ttc2023:solutiondriver:+'
