@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import Changes.ChangesPackage;
 import Changes.ModelChange;
+import Changes.ModelChangeSet;
 import atl.research.class_.Class_Package;
 import atl.research.relational_.Relational_Package;
 
@@ -84,8 +85,11 @@ public abstract class AbstractDriver {
     protected void applyChange() {
         // we ignore change models that are empty (for checking correctness)
         if (changes.getContents().size() > 0) {
-            ModelChange change = (ModelChange) changes.getContents().get(0);
-            change.apply();
+            ModelChangeSet change = (ModelChangeSet) changes.getContents().get(0);
+            for (ModelChange c : change.getChanges()) {
+                // System.out.println("Applying change " + c);
+                c.apply();
+            }
         }
     }
 
