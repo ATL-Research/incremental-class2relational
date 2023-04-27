@@ -7,7 +7,7 @@ public class ExampleSolution extends AbstractDriver {
         ExampleSolution solution = new ExampleSolution();
 
         solution.init();
-        if (isBatchMode()) {
+        if (solution.isBatchMode()) {
             solution.applyChange();
             solution.applyTransformation();
         }

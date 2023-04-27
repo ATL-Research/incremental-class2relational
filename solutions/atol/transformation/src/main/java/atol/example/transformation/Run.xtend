@@ -15,7 +15,7 @@ class Run extends AbstractDriver {
 		val solution = new Run()
 
 		solution.init
-		if (isBatchMode) {
+		if (solution.batchMode) {
 			solution.applyChange
 			solution.applyTransformation
 		}

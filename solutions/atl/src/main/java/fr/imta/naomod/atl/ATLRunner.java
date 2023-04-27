@@ -31,7 +31,7 @@ public class ATLRunner extends AbstractDriver {
 		try {
 			ATLRunner solution = new ATLRunner();
 			solution.init();
-			if (isBatchMode()) {
+			if (solution.isBatchMode()) {
 				solution.applyChange();
 				solution.applyTransformation();
 			}
