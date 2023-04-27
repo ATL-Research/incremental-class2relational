@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/JavaIncrementalTransformations/src" modelPluginID="JavaIncrementalTransformations"
+    modelName="ClassDiagram" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>ClassDiagram.ecore</foreignModel>
+  <genPackages prefix="PrimitiveTypes" basePackage="metamodels" disposableProviderFactory="true"
+      ecorePackage="ClassDiagram.ecore#/0">
+    <genDataTypes ecoreDataType="ClassDiagram.ecore#/0/Boolean"/>
+    <genDataTypes ecoreDataType="ClassDiagram.ecore#/0/Integer"/>
+    <genDataTypes ecoreDataType="ClassDiagram.ecore#/0/String"/>
+  </genPackages>
+  <genPackages prefix="ClassDiagram" basePackage="metamodels" disposableProviderFactory="true"
+      ecorePackage="ClassDiagram.ecore#/1">
+    <genClasses image="false" ecoreClass="ClassDiagram.ecore#/1/NamedElt">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassDiagram.ecore#/1/NamedElt/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ClassDiagram.ecore#/1/Classifier"/>
+    <genClasses ecoreClass="ClassDiagram.ecore#/1/DataType"/>
+    <genClasses ecoreClass="ClassDiagram.ecore#/1/Class">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassDiagram.ecore#/1/Class/super"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassDiagram.ecore#/1/Class/attr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassDiagram.ecore#/1/Class/isAbstract"/>
+    </genClasses>
+    <genClasses ecoreClass="ClassDiagram.ecore#/1/Attribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassDiagram.ecore#/1/Attribute/multiValued"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassDiagram.ecore#/1/Attribute/type"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassDiagram.ecore#/1/Attribute/owner"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

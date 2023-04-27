@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated MyClass -->
+      <package
+            uri="http://www.example.org/MyClass"
+            class="MyClass.MyClassPackage"
+            genModel="resources/metamodels/MyClass.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Class -->
+      <package
+            uri="http://www.example.org/Class"
+            class="Class.ClassPackage"
+            genModel="resources/metamodels/Class.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Relational -->
+      <package
+            uri="http://www.example.org/Relational"
+            class="metamodels.Relational.RelationalPackage"
+            genModel="resources/metamodels/Relational.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ClassDiagram -->
+      <package
+            uri="http://www.example.org/PrimitiveTypes"
+            class="metamodels.PrimitiveTypes.PrimitiveTypesPackage"
+            genModel="resources/metamodels/ClassDiagram.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ClassDiagram -->
+      <package
+            uri="http://www.example.org/ClassDiagram"
+            class="metamodels.ClassDiagram.ClassDiagramPackage"
+            genModel="resources/metamodels/ClassDiagram.genmodel"/>
+   </extension>
+</plugin>

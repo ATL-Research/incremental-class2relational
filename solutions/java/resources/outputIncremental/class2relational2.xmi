@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:Relational="http://www.example.org/Relational">
+  <Relational:Column name="objectId" keyOf="/1" type="/6"/>
+  <Relational:Table name="foo" key="/0"/>
+  <Relational:Table name="Person" key="/3"/>
+  <Relational:Column name="objectId" keyOf="/2" type="/6"/>
+  <Relational:Type name="String"/>
+  <Relational:Type name="Integer"/>
+  <Relational:Type name="Integer"/>
+</xmi:XMI>
