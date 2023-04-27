@@ -1,0 +1,31 @@
+plugins {
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+targetCompatibility = "11"
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://maven.pkg.github.com/ATL-Research/*"
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+            password = project.findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
+        }
+    }
+}
+
+dependencies {
+    implementation 'org.eclipse.emf:org.eclipse.emf.ecore:+'
+    
+    implementation "org.eclipse.emf:org.eclipse.emf.ecore.xmi:+"
+
+    implementation 'io.github.atlresearch:emfmodelfuzzer:+'
+    implementation 'io.github.atlresearch.ttc2023:solutiondriver:+'
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'atl.research.Comparator'
+}
