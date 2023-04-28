@@ -24,45 +24,33 @@ import metamodels.ClassDiagram.Class;
 
 public class App extends AbstractDriver {
 	
-	private static boolean BATCH = false;
-	
 	private static void registerPackages() {
 		ClassDiagramPackage.eINSTANCE.eClass();
 	}
 	
+	public App() {
+		registerPackages();
+	}
+	
 	// static run
 	public static void main(String[] args) {
-		registerPackages();
+		App solution = new App();
 		
-		if(BATCH) {
-			batch();
-		} else {
-			incremental();
+		try {
+			solution.init();
+			
+			if (solution.isBatchMode()) {
+				solution.applyChange();
+				solution.applyTransformation();
+			}
+			else {
+				solution.applyTransformation();
+				solution.applyChange();
+			}
+			solution.saveTarget();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-	}
-	
-	private static void batch() {
-		var class2relationalIN = IO.readModels(CONSTANTS.MODEL_DIR+ "outClassXMI.ecore");
-		var class2relationalOUT = new LinkedList<EObject>();
-		class2relationalOUT.addAll(Class2Relational.transform(class2relationalIN.stream().map($ -> (EObject) $).collect(Collectors.toList())));
-		IO.persistModel(class2relationalOUT, CONSTANTS.OUTPUT_DIR + "class2relational.xmi");
-	}
-	
-	public static void incremental() {
-		var class2relationalIN = Class2RelationalIncremental.start(CONSTANTS.MODEL_DIR+ "outClassXMI.ecore", CONSTANTS.OUTPUT_DIR_INC + "class2relationalContinuous.xmi");
-		
-		// simulate some changes
-		System.out.println("Start");
-		// modification
-		Class c = (Class) class2relationalIN.getContents().get(0);
-		c.setName("foo");
-		// removal toplevel
-		var clazz = class2relationalIN.getContents().get(1);
-		class2relationalIN.getContents().remove(1);
-		// additon toplevel
-		class2relationalIN.getContents().add(clazz);
-		System.out.println("Stop");
 		
 	}
 
