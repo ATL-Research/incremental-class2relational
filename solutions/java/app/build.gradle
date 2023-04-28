@@ -14,6 +14,14 @@ plugins {
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+    
+    maven {
+        url "https://maven.pkg.github.com/ATL-Research/*"
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+            password = project.findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
+        }
+    }
 }
 
 dependencies {
@@ -30,6 +38,9 @@ dependencies {
     implementation 'org.eclipse.emf:org.eclipse.emf.ecore:2.28.0'
     // https://mvnrepository.com/artifact/org.eclipse.emf/org.eclipse.emf.ecore.xmi
     implementation 'org.eclipse.emf:org.eclipse.emf.ecore.xmi:2.18.0'
+    
+    // Solution Driver for TTC2023
+    implementation 'io.github.atlresearch.ttc2023:solutiondriver:0.3'
 
 
 }

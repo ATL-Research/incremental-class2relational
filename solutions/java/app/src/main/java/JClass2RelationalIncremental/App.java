@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 
+import atl.research.AbstractDriver;
 import transformations.batch.Class2Relational;
 import transformations.incremental.Class2RelationalIncremental;
 import util.CONSTANTS;
@@ -21,14 +22,15 @@ import util.IO;
 import metamodels.ClassDiagram.ClassDiagramPackage;
 import metamodels.ClassDiagram.Class;
 
-public class App {
+public class App extends AbstractDriver {
 	
 	private static boolean BATCH = false;
 	
-	public static void registerPackages() {
+	private static void registerPackages() {
 		ClassDiagramPackage.eINSTANCE.eClass();
 	}
 	
+	// static run
 	public static void main(String[] args) {
 		registerPackages();
 		
@@ -40,7 +42,7 @@ public class App {
 		
 	}
 	
-	public static void batch() {
+	private static void batch() {
 		var class2relationalIN = IO.readModels(CONSTANTS.MODEL_DIR+ "outClassXMI.ecore");
 		var class2relationalOUT = new LinkedList<EObject>();
 		class2relationalOUT.addAll(Class2Relational.transform(class2relationalIN.stream().map($ -> (EObject) $).collect(Collectors.toList())));
@@ -50,7 +52,7 @@ public class App {
 	public static void incremental() {
 		var class2relationalIN = Class2RelationalIncremental.start(CONSTANTS.MODEL_DIR+ "outClassXMI.ecore", CONSTANTS.OUTPUT_DIR_INC + "class2relationalContinuous.xmi");
 		
-		// changes
+		// simulate some changes
 		System.out.println("Start");
 		// modification
 		Class c = (Class) class2relationalIN.getContents().get(0);
@@ -62,6 +64,15 @@ public class App {
 		class2relationalIN.getContents().add(clazz);
 		System.out.println("Stop");
 		
+	}
+
+	// run via AbstractDriver
+	@Override
+	protected void applyTransformation() {
+		// register packages if this has not already happened
+		registerPackages();
+		
+		Class2RelationalIncremental.start(this.getSource(), this.getTarget());
 	}
 
 }

@@ -6,6 +6,6 @@
   <Relational:Type name="String"/>
   <Relational:Type name="Integer"/>
   <Relational:Type name="Integer"/>
-  <Relational:Column name="objectId" keyOf="/5" type="/3"/>
-  <Relational:Table name="Person" key="/4"/>
+  <Relational:Table name="Person" key="/5"/>
+  <Relational:Column name="objectId" keyOf="/4" type="/3"/>
 </xmi:XMI>

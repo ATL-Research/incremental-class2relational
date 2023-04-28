@@ -44,11 +44,7 @@ public class Class2RelationalIncremental {
 		return objectIdType;
 	}
 	
-	public static Resource start(String inPath, String outPath) {
-		var class2relationalIN = IO.getResource(inPath);
-		var class2relationalOUT = IO.createResource(outPath);
-		
-		
+	public static Resource start(Resource class2relationalIN, Resource class2relationalOUT) {
 		class2relationalOUT.getContents().addAll(Class2RelationalIncremental.transform(class2relationalIN.getContents().stream().map($ -> (EObject) $).collect(Collectors.toList())));
 		IO.persist(class2relationalOUT);
 		
@@ -104,6 +100,13 @@ public class Class2RelationalIncremental {
 		class2relationalOUT.eAdapters().add(adapterOut);
 		
 		return class2relationalIN;
+	}
+	
+	public static Resource start(String inPath, String outPath) {
+		var class2relationalIN = IO.getResource(inPath);
+		var class2relationalOUT = IO.createResource(outPath);
+		
+		return start(class2relationalIN, class2relationalOUT);
 	}
 	
 	private static List<Named> transform(List<EObject> input) {
