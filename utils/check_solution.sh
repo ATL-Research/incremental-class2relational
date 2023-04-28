@@ -90,22 +90,16 @@ function checkScenario() {
     pushd ../../utils/Comparator > /dev/null
 
     echo "Comparing both runs"
-    local error=0
+    local error="ok"
 
-    ./gradlew -q run || error=1 && true
+    ./gradlew -q run || error="error" && true
 
     local reportFile="$outputDir/../report.csv"
-    local message=""
-    if [ $error -eq 1 ]; then
-        message="$solution,$scenario,error"
-    else
-        message="$solution,$scenario,ok"
-    fi
-
+    
     if [ ! -f "$reportFile" ]; then
-        echo "solution,scenario,status" > "$reportFile"
+        echo "solution,scenario,test,status" > "$reportFile"
     fi
-    echo "$message" >> "$reportFile"
+    echo "$solution,$scenario,correctness,$error" >> "$reportFile"
 
     popd > /dev/null
 }
