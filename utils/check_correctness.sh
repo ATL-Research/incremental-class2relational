@@ -7,6 +7,9 @@ if [ $# -ge 1 ]; then
     solution="$1"
 fi
 
+INPUT_DIR="../../models/"
+OUTPUT_DIR="../../output/"
+
 function buildComparator() {
     pushd Comparator > /dev/null
 
@@ -19,6 +22,8 @@ function buildComparator() {
 
 function checkSolution() {
     local solution="$1"
+    local outputDir="$OUTPUT_DIR/$solution/$(date +%Y-%m-%d_%H-%M)/"
+
     pushd "../solutions/$solution" > /dev/null
 
     echo "Checking $solution"
@@ -32,17 +37,37 @@ function checkSolution() {
 
     source launch.env
 
-    local inputDir="../../models/"
-    local outputDir="../../output/$solution/$(date +%Y-%m-%d_%H-%M-%S)"
+    eval "$build"
+
+    for scenario in $(ls "$INPUT_DIR")
+    do
+        if [ -f "$INPUT_DIR/$scenario/class.xmi" ]; then
+            echo "Checking $solution with $scenario"
+            checkScenario "$solution" "$scenario" "$outputDir"
+        else
+            echo "Skipping $solution with $scenario"
+            continue
+        fi
+    done
+
+
+    popd > /dev/null
+}
+
+function checkScenario() {
+    local solution="$1"
+    local scenario="$2"
+    local outputDir="$3/$scenario"
+    
 
     mkdir -p "$outputDir"
 
     # set common source and change
-    export SOURCE_PATH="$(realpath $inputDir/SampleClass.xmi)"
-    export CHANGE_PATH="$(realpath $inputDir/SampleClassChangeModel.xmi)"
+    export SOURCE_PATH="$(realpath $INPUT_DIR/$scenario/class.xmi)"
+    export CHANGE_PATH="$(realpath $INPUT_DIR/$scenario/change.xmi)"
 
     # set target for incremental run
-    local incrementalRunTarget="$outputDir/SampleClass-incremental.xmi"
+    local incrementalRunTarget="$outputDir/target_incremental.xmi"
     touch "$incrementalRunTarget"
     export TARGET_PATH="$(realpath $incrementalRunTarget)"
     export EXPECTED_MODEL="$TARGET_PATH"
@@ -51,7 +76,7 @@ function checkSolution() {
     eval "$run"
 
     # set target for batch run
-    local batchRunTarget="$outputDir/SampleClass-batch.xmi"
+    local batchRunTarget="$outputDir/target_batchbatch.xmi"
     export TARGET_PATH="$(realpath "$batchRunTarget")"
     export CURRENT_MODEL="$TARGET_PATH"
     export BATCH_MODE="1"
@@ -62,23 +87,23 @@ function checkSolution() {
     unset BATCH_MODE
 
     # compare results using comparator
-    cd ../../utils/Comparator > /dev/null
+    pushd ../../utils/Comparator > /dev/null
 
     echo "Comparing both runs"
     local error=0
 
     ./gradlew -q run || error=1 && true
 
-    local reportFile="$outputDir/report.csv"
+    local reportFile="$outputDir/../report.csv"
     local message=""
     if [ $error -eq 1 ]; then
-        message="$SOURCE_PATH,$CHANGE_PATH,$EXPECTED_MODEL,$CURRENT_MODEL,error"
+        message="$solution,$scenario,error"
     else
-        message="$SOURCE_PATH,$CHANGE_PATH,$EXPECTED_MODEL,$CURRENT_MODEL,ok"
+        message="$solution,$scenario,ok"
     fi
 
     if [ ! -f "$reportFile" ]; then
-        echo "source,change,incremental_output,batch_output,status" > "$reportFile"
+        echo "solution,scenario,status" > "$reportFile"
     fi
     echo "$message" >> "$reportFile"
 
