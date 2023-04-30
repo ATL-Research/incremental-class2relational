@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="ASCII"?>
+<changes:DeleteFromRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:changes="http://nmf.codeplex.com/changes">
+  <deletedElement href="../../incremental_models/correctness8/change.xmi#//@newObject"/>
+</changes:DeleteFromRoot>
