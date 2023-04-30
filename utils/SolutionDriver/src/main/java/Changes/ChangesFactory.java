@@ -4,6 +4,7 @@ package Changes;
 
 import org.eclipse.emf.ecore.EFactory;
 
+
 /**
  * <!-- begin-user-doc -->
  * The <b>Factory</b> for the model.
@@ -254,6 +255,33 @@ public interface ChangesFactory extends EFactory {
 	 * @generated
 	 */
 	ReferenceArgument createReferenceArgument();
+
+	/**
+	 * Returns a new object of class '<em>Add To Root</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Add To Root</em>'.
+	 * @generated
+	 */
+	AddToRoot createAddToRoot();
+
+	/**
+	 * Returns a new object of class '<em>Delete From Root</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Delete From Root</em>'.
+	 * @generated
+	 */
+	DeleteFromRoot createDeleteFromRoot();
+
+	/**
+	 * Returns a new object of class '<em>Reference Set Null</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Reference Set Null</em>'.
+	 * @generated
+	 */
+	ReferenceSetNull createReferenceSetNull();
 
 	/**
 	 * Returns the package supported by this factory.

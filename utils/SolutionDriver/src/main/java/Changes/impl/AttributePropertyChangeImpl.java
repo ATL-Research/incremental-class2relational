@@ -8,28 +8,29 @@ import Changes.ChangesPackage;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Attribute Property Change</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object
+ * '<em><b>Attribute Property Change</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.AttributePropertyChangeImpl#getNewValue <em>New Value</em>}</li>
- *   <li>{@link Changes.impl.AttributePropertyChangeImpl#getOldValue <em>Old Value</em>}</li>
+ * <li>{@link Changes.impl.AttributePropertyChangeImpl#getNewValue <em>New
+ * Value</em>}</li>
+ * <li>{@link Changes.impl.AttributePropertyChangeImpl#getOldValue <em>Old
+ * Value</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class AttributePropertyChangeImpl extends AttributeChangeImpl implements AttributePropertyChange {
 	/**
-	 * The default value of the '{@link #getNewValue() <em>New Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getNewValue() <em>New Value</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getNewValue()
 	 * @generated
 	 * @ordered
@@ -37,9 +38,9 @@ public class AttributePropertyChangeImpl extends AttributeChangeImpl implements 
 	protected static final String NEW_VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getNewValue() <em>New Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getNewValue() <em>New Value</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getNewValue()
 	 * @generated
 	 * @ordered
@@ -47,9 +48,9 @@ public class AttributePropertyChangeImpl extends AttributeChangeImpl implements 
 	protected String newValue = NEW_VALUE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getOldValue() <em>Old Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getOldValue() <em>Old Value</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getOldValue()
 	 * @generated
 	 * @ordered
@@ -57,9 +58,9 @@ public class AttributePropertyChangeImpl extends AttributeChangeImpl implements 
 	protected static final String OLD_VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getOldValue() <em>Old Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getOldValue() <em>Old Value</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getOldValue()
 	 * @generated
 	 * @ordered
@@ -67,8 +68,8 @@ public class AttributePropertyChangeImpl extends AttributeChangeImpl implements 
 	protected String oldValue = OLD_VALUE_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected AttributePropertyChangeImpl() {
@@ -76,8 +77,8 @@ public class AttributePropertyChangeImpl extends AttributeChangeImpl implements 
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -86,8 +87,8 @@ public class AttributePropertyChangeImpl extends AttributeChangeImpl implements 
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getNewValue() {
@@ -95,20 +96,21 @@ public class AttributePropertyChangeImpl extends AttributeChangeImpl implements 
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setNewValue(String newNewValue) {
 		String oldNewValue = newValue;
 		newValue = newNewValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__NEW_VALUE, oldNewValue, newValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__NEW_VALUE,
+					oldNewValue, newValue));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getOldValue() {
@@ -116,93 +118,95 @@ public class AttributePropertyChangeImpl extends AttributeChangeImpl implements 
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setOldValue(String newOldValue) {
 		String oldOldValue = oldValue;
 		oldValue = newOldValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__OLD_VALUE, oldOldValue, oldValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__OLD_VALUE,
+					oldOldValue, oldValue));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__NEW_VALUE:
-				return getNewValue();
-			case ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__OLD_VALUE:
-				return getOldValue();
+		case ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__NEW_VALUE:
+			return getNewValue();
+		case ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__OLD_VALUE:
+			return getOldValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__NEW_VALUE:
-				setNewValue((String)newValue);
-				return;
-			case ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__OLD_VALUE:
-				setOldValue((String)newValue);
-				return;
+		case ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__NEW_VALUE:
+			setNewValue((String) newValue);
+			return;
+		case ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__OLD_VALUE:
+			setOldValue((String) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__NEW_VALUE:
-				setNewValue(NEW_VALUE_EDEFAULT);
-				return;
-			case ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__OLD_VALUE:
-				setOldValue(OLD_VALUE_EDEFAULT);
-				return;
+		case ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__NEW_VALUE:
+			setNewValue(NEW_VALUE_EDEFAULT);
+			return;
+		case ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__OLD_VALUE:
+			setOldValue(OLD_VALUE_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__NEW_VALUE:
-				return NEW_VALUE_EDEFAULT == null ? newValue != null : !NEW_VALUE_EDEFAULT.equals(newValue);
-			case ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__OLD_VALUE:
-				return OLD_VALUE_EDEFAULT == null ? oldValue != null : !OLD_VALUE_EDEFAULT.equals(oldValue);
+		case ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__NEW_VALUE:
+			return NEW_VALUE_EDEFAULT == null ? newValue != null : !NEW_VALUE_EDEFAULT.equals(newValue);
+		case ChangesPackage.ATTRIBUTE_PROPERTY_CHANGE__OLD_VALUE:
+			return OLD_VALUE_EDEFAULT == null ? oldValue != null : !OLD_VALUE_EDEFAULT.equals(oldValue);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (newValue: ");
@@ -216,23 +220,35 @@ public class AttributePropertyChangeImpl extends AttributeChangeImpl implements 
 	@Override
 	public void apply() {
 		if (this.getNewValue() != null) {
-			switch (this.getFeature().getEType().getName()) {
-				case "EString":
-					this.getAffectedElement().eSet(this.getFeature(), this.getNewValue());
-					break;
-				case "EInt":
-					this.getAffectedElement().eSet(this.getFeature(), Integer.parseInt(this.getNewValue()));
-					break;
-				case "EBoolean":
-					this.getAffectedElement().eSet(this.getFeature(), Boolean.parseBoolean(this.getNewValue()));
-					break;
-				default:
-					break;
-			}
-		}
-		else {
+//			System.out.println(featureTypeName);
+//			switch (this.getFeature().getEType().getName()) {
+//				case "EString":
+//					this.getAffectedElement().eSet(this.getFeature(), this.getNewValue());
+//					break;
+//				case "EInt":
+//					this.getAffectedElement().eSet(this.getFeature(), Integer.parseInt(this.getNewValue()));
+//					break;
+//				case "EBoolean":
+//					EStructuralFeature feat = this.getFeature();
+//					this.getAffectedElement().eSet(feat, Boolean.parseBoolean(this.getNewValue()));
+//					break;
+//				case "EDataType":
+//					this.getAffectedElement().eSet(this.getFeature(), this.getNewValue());			
+//				default:
+//					break;
+//			}
+			String featureTypeName = this.getFeature().getEType().getName();
+			if (featureTypeName.contains("String"))
+				this.getAffectedElement().eSet(this.getFeature(), this.getNewValue());
+			else if (featureTypeName.contains("Int"))
+				this.getAffectedElement().eSet(this.getFeature(), Integer.parseInt(this.getNewValue()));
+
+			else if (featureTypeName.contains("Boolean"))
+				this.getAffectedElement().eSet(this.getFeature(), Boolean.parseBoolean(this.getNewValue()));
+
+		} else {
 			this.getAffectedElement().eSet(this.getFeature(), null);
 		}
 	}
 
-} //AttributePropertyChangeImpl
+} // AttributePropertyChangeImpl

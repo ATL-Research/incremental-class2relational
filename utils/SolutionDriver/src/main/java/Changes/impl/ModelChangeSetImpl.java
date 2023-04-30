@@ -8,16 +8,18 @@ import Changes.ModelChangeSet;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -28,7 +30,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.ModelChangeSetImpl#getChanges <em>Changes</em>}</li>
+ *   <li>{@link changes_new.Changes.impl.ModelChangeSetImpl#getChanges <em>Changes</em>}</li>
+ *   <li>{@link changes_new.Changes.impl.ModelChangeSetImpl#getSourceModel <em>Source Model</em>}</li>
  * </ul>
  *
  * @generated
@@ -43,6 +46,16 @@ public class ModelChangeSetImpl extends MinimalEObjectImpl.Container implements 
 	 * @ordered
 	 */
 	protected EList<ModelChange> changes;
+
+	/**
+	 * The cached value of the '{@link #getSourceModel() <em>Source Model</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourceModel()
+	 * @generated
+	 * @ordered
+	 */
+	protected EObject sourceModel;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,9 +83,62 @@ public class ModelChangeSetImpl extends MinimalEObjectImpl.Container implements 
 	 */
 	public EList<ModelChange> getChanges() {
 		if (changes == null) {
-			changes = new EObjectContainmentEList<ModelChange>(ModelChange.class, this, ChangesPackage.MODEL_CHANGE_SET__CHANGES);
+			changes = new EObjectContainmentWithInverseEList<ModelChange>(ModelChange.class, this, ChangesPackage.MODEL_CHANGE_SET__CHANGES, ChangesPackage.MODEL_CHANGE__CHANGE_SET);
 		}
 		return changes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EObject getSourceModel() {
+		if (sourceModel != null && sourceModel.eIsProxy()) {
+			InternalEObject oldSourceModel = (InternalEObject)sourceModel;
+			sourceModel = eResolveProxy(oldSourceModel);
+			if (sourceModel != oldSourceModel) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ChangesPackage.MODEL_CHANGE_SET__SOURCE_MODEL, oldSourceModel, sourceModel));
+			}
+		}
+		return sourceModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EObject basicGetSourceModel() {
+		return sourceModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSourceModel(EObject newSourceModel) {
+		EObject oldSourceModel = sourceModel;
+		sourceModel = newSourceModel;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ChangesPackage.MODEL_CHANGE_SET__SOURCE_MODEL, oldSourceModel, sourceModel));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ChangesPackage.MODEL_CHANGE_SET__CHANGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getChanges()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -99,6 +165,9 @@ public class ModelChangeSetImpl extends MinimalEObjectImpl.Container implements 
 		switch (featureID) {
 			case ChangesPackage.MODEL_CHANGE_SET__CHANGES:
 				return getChanges();
+			case ChangesPackage.MODEL_CHANGE_SET__SOURCE_MODEL:
+				if (resolve) return getSourceModel();
+				return basicGetSourceModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -116,6 +185,9 @@ public class ModelChangeSetImpl extends MinimalEObjectImpl.Container implements 
 				getChanges().clear();
 				getChanges().addAll((Collection<? extends ModelChange>)newValue);
 				return;
+			case ChangesPackage.MODEL_CHANGE_SET__SOURCE_MODEL:
+				setSourceModel((EObject)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -131,6 +203,9 @@ public class ModelChangeSetImpl extends MinimalEObjectImpl.Container implements 
 			case ChangesPackage.MODEL_CHANGE_SET__CHANGES:
 				getChanges().clear();
 				return;
+			case ChangesPackage.MODEL_CHANGE_SET__SOURCE_MODEL:
+				setSourceModel((EObject)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -145,6 +220,8 @@ public class ModelChangeSetImpl extends MinimalEObjectImpl.Container implements 
 		switch (featureID) {
 			case ChangesPackage.MODEL_CHANGE_SET__CHANGES:
 				return changes != null && !changes.isEmpty();
+			case ChangesPackage.MODEL_CHANGE_SET__SOURCE_MODEL:
+				return sourceModel != null;
 		}
 		return super.eIsSet(featureID);
 	}
