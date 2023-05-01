@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -215,15 +216,23 @@ public class AttributePropertyChangeImpl extends AttributeChangeImpl implements 
 
 	@Override
 	public void apply() {
+		if (this.getAffectedElement().eIsProxy()) {
+			throw new IllegalStateException("Cannot apply a change on a proxy element");
+		}
+		if (this.getFeature().eIsProxy()) {
+			throw new IllegalStateException("Cannot apply a change on a proxy feature");
+		}
 		if (this.getNewValue() != null) {
 			switch (this.getFeature().getEType().getName()) {
 				case "EString":
 					this.getAffectedElement().eSet(this.getFeature(), this.getNewValue());
 					break;
 				case "EInt":
+				case "EIntegerObject":
 					this.getAffectedElement().eSet(this.getFeature(), Integer.parseInt(this.getNewValue()));
 					break;
 				case "EBoolean":
+				case "EBooleanObject":
 					this.getAffectedElement().eSet(this.getFeature(), Boolean.parseBoolean(this.getNewValue()));
 					break;
 				default:
