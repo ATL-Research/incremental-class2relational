@@ -11,6 +11,14 @@ The overall objective is to leverage this data set to better undertand whether G
 
 ## Contents of this repository
 
+- case description:  submitted TTC proposal
+- labeling:  examples of how to provide labels to a MTL (ATOL) and GPL (Java) solution
+- metamodels: source and target metamodel as well as the Change metamodel used for incremental updates of the input model
+- models: the source models
+- solutions: implementations of ATOL (incremental variant of ATL), and Java solutions
+- transformations: Ecore2Class transformation which can turn any Ecore model into an instance of the expected source model
+- utils: the SolutionDriver which executes the transformation, and Comparator which evaluates the outcome of batch and incremental transformations
+
 ## Using Github maven repository
 
 We provide two maven packages, the fuzzer / model comparator and the solution driver with metamodels, they are hosted on Github. They are published publicly but Github requires users to authenticate to access their maven repository.
