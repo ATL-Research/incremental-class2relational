@@ -33,8 +33,11 @@ dependencies {
 	implementation 'org.eclipse.m2m.atl:org.eclipse.m2m.atl.emftvm:4.6.0'
 	implementation 'org.eclipse.m2m.atl:org.eclipse.m2m.atl.emftvm.compiler:4.6.0'
 
-    implementation 'io.github.atlresearch.ttc2023:solutiondriver:0.3'
+    implementation 'io.github.atlresearch.ttc2023:solutiondriver:0.4'
 }
+
+sourceCompatibility = "11"
+targetCompatibility = "11"
 
 application {
     // Define the main class for the application.
