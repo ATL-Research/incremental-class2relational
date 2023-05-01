@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<changes:AddToRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:changes="http://nmf.codeplex.com/changes" newObject="//@newObject"/>
+<changes:ModelChangeSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:changes="http://nmf.codeplex.com/changes">
+  <changes xsi:type="changes:AddToRoot" newObject="//@changes.0/@newObject"/>
+  <sourceModel href="models/SampleClass.xmi#/0"/>
+</changes:ModelChangeSet>

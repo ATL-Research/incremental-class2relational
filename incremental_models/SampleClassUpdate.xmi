@@ -6,12 +6,8 @@
   </class_:Class>
   <class_:Class name="Member">
     <attr name="firstName" multiValued="true"/>
-    <attr name="closestFriend" type="/1"/>
     <attr name="emailAddresses" multiValued="false" type="/2"/>
-    <attr name="newMutliValuedAttribute" multiValued="false"/>
   </class_:Class>
   <class_:DataType name="String"/>
   <class_:DataType name="Integer"/>
-  <class_:Class name="House"/>
-  <class_:Attribute name="addresses" multiValued="true"/>
 </xmi:XMI>
