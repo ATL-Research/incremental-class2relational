@@ -8,7 +8,10 @@ import Changes.ChangesPackage;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -245,7 +248,6 @@ public class AttributePropertyChangeImpl extends AttributeChangeImpl implements 
 
 			else if (featureTypeName.contains("Boolean"))
 				this.getAffectedElement().eSet(this.getFeature(), Boolean.parseBoolean(this.getNewValue()));
-
 		} else {
 			this.getAffectedElement().eSet(this.getFeature(), null);
 		}

@@ -36,8 +36,9 @@ public class ReferenceSetNullImpl extends ElementaryChangeImpl implements Refere
 
 	@Override
 	public void apply() {
-		Object featSetToNull = getAffectedElement().eGet(feature);
-		featSetToNull  = null;
+//		Object featSetToNull = 
+				getAffectedElement().eSet(feature, null);
+//		featSetToNull  = null;
 	}
 
 } //ReferenceSetNullImpl
