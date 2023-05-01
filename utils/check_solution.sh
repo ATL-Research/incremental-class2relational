@@ -8,7 +8,8 @@ if [ $# -ge 1 ]; then
 fi
 
 INPUT_DIR="../../models/"
-OUTPUT_DIR="../../output/"
+OUTPUT_DIR="../../output/$(date +%Y-%m-%d_%H-%M)"
+globalReport="$OUTPUT_DIR/report.csv"
 
 function buildComparator() {
     pushd Comparator > /dev/null
@@ -22,7 +23,7 @@ function buildComparator() {
 
 function checkSolution() {
     local solution="$1"
-    local outputDir="$OUTPUT_DIR/$solution/$(date +%Y-%m-%d_%H-%M)/"
+    local outputDir="$OUTPUT_DIR/$solution/"
 
     pushd "../solutions/$solution" > /dev/null
 
@@ -95,15 +96,16 @@ function checkScenario() {
     ./gradlew -q run || error="error" && true
 
     local reportFile="$outputDir/../report.csv"
+    local message="$solution,$scenario,correctness,$error"
     
     if [ ! -f "$reportFile" ]; then
         echo "solution,scenario,test,status" > "$reportFile"
     fi
-    echo "$solution,$scenario,correctness,$error" >> "$reportFile"
+    echo "$message" >> "$reportFile"
+    echo "$message" >> "$globalReport"
 
     popd > /dev/null
 }
-
 
 
 buildComparator
