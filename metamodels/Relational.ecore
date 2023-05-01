@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
-  <ecore:EPackage name="Relational">
+  <ecore:EPackage name="relational_" nsURI="Relational" nsPrefix="relational_" >
     <eClassifiers xsi:type="ecore:EClass" name="Named" abstract="true">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1" eType="/1/String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Table" eSuperTypes="/0/Named">
       <eStructuralFeatures xsi:type="ecore:EReference" name="col" upperBound="-1" eType="/0/Column" containment="true" eOpposite="/0/Column/owner"/>
@@ -14,10 +14,5 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false" lowerBound="1" eType="/0/Type"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="/0/Named"/>
-  </ecore:EPackage>
-  <ecore:EPackage name="PrimitiveTypes">
-    <eClassifiers xsi:type="ecore:EDataType" name="Boolean"/>
-    <eClassifiers xsi:type="ecore:EDataType" name="Integer"/>
-    <eClassifiers xsi:type="ecore:EDataType" name="String"/>
   </ecore:EPackage>
 </xmi:XMI>

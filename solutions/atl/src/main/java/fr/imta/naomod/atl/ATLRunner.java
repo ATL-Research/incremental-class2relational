@@ -1,7 +1,5 @@
 package fr.imta.naomod.atl;
 
-import atl.research.AbstractDriver;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,8 +8,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.m2m.atl.core.emf.EMFInjector;
+import org.eclipse.m2m.atl.core.emf.EMFModelFactory;
+import org.eclipse.m2m.atl.core.emf.EMFReferenceModel;
 import org.eclipse.m2m.atl.emftvm.EmftvmFactory;
 import org.eclipse.m2m.atl.emftvm.ExecEnv;
 import org.eclipse.m2m.atl.emftvm.Metamodel;
@@ -21,12 +21,13 @@ import org.eclipse.m2m.atl.emftvm.impl.resource.EMFTVMResourceFactoryImpl;
 import org.eclipse.m2m.atl.emftvm.util.DefaultModuleResolver;
 import org.eclipse.m2m.atl.emftvm.util.ModuleResolver;
 
-import org.eclipse.m2m.atl.core.emf.EMFInjector;
-import org.eclipse.m2m.atl.core.emf.EMFModelFactory;
-import org.eclipse.m2m.atl.core.emf.EMFReferenceModel;
+import Changes.ChangesPackage;
+import atl.research.AbstractDriver;
 
 public class ATLRunner extends AbstractDriver {
-	private ResourceSet rs = new ResourceSetImpl();
+
+	private Resource classMetamodel;
+	private Resource relationalMetamodel;
 	public static void main(String[] args) throws IOException {
 		try {
 			ATLRunner solution = new ATLRunner();
@@ -46,7 +47,16 @@ public class ATLRunner extends AbstractDriver {
 		}
 	}
 
-	public ATLRunner() {
+
+	@Override
+	protected void setupResourceSet() {
+		ResourceSet rs = getResourceSet();
+
+		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put(
+            "xmi",
+            new XMIResourceFactoryImpl()
+        );
+
 		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put(
 			"emftvm",
 			new EMFTVMResourceFactoryImpl()
@@ -59,7 +69,30 @@ public class ATLRunner extends AbstractDriver {
 			EcorePackage.eNS_URI,
 			EcorePackage.eINSTANCE
 		);
+
+		// EMFTVM doesn't work with generated EPackage so we load metamodels from ecore file
+		classMetamodel = rs.getResource(URI.createURI("../../metamodels/Class.ecore"), true);
+		injectMetamodel(classMetamodel);
+
+		rs.getPackageRegistry().put(
+			"Class",
+			classMetamodel.getContents().get(0)
+		);
+
+		relationalMetamodel = rs.getResource(URI.createURI("../../metamodels/Relational.ecore"), true);
+		injectMetamodel(relationalMetamodel);
+
+		rs.getPackageRegistry().put(
+			"Relational",
+			relationalMetamodel.getContents().get(0)
+		);
+
+		rs.getPackageRegistry().put(
+			ChangesPackage.eNS_URI,
+			ChangesPackage.eINSTANCE
+		);
 	}
+
 
 	private void injectMetamodel(Resource resource) {
 		EMFModelFactory factory = new EMFModelFactory();
@@ -73,30 +106,18 @@ public class ATLRunner extends AbstractDriver {
 
 	@Override
 	protected void applyTransformation() {
-		
 		// create an execution environment
 		ExecEnv execEnv = EmftvmFactory.eINSTANCE.createExecEnv();
 
 
 		// register source and target metamodels in ExecEnv
-		Resource sourceMMResource = rs.getResource(URI.createFileURI("src/main/resources/Class.ecore"), true);
-		injectMetamodel(sourceMMResource);
-
-		rs.getPackageRegistry().put(
-			"Class",
-			sourceMMResource.getContents().get(1)
-		);
-
 		Metamodel sourceMM = EmftvmFactory.eINSTANCE.createMetamodel();
-		sourceMM.setResource(sourceMMResource);
-		execEnv.registerMetaModel("Class", sourceMM);
+		sourceMM.setResource(classMetamodel);
+		execEnv.registerMetaModel("class_", sourceMM);
 
-
-		Resource targetMMResource = rs.getResource(URI.createFileURI("src/main/resources/Relational.ecore"), true);
-		injectMetamodel(targetMMResource);
 
 		Metamodel targetMM = EmftvmFactory.eINSTANCE.createMetamodel();
-		targetMM.setResource(targetMMResource);
+		targetMM.setResource(relationalMetamodel);
 		execEnv.registerMetaModel("Relational", targetMM);
 		
 
@@ -106,9 +127,7 @@ public class ATLRunner extends AbstractDriver {
 		
 		
 		Model sourceModel = EmftvmFactory.eINSTANCE.createModel();
-		// EMFTVM doesn't like to use resources loaded from compiled classes, so we load the resource again
-		Resource source = rs.getResource(URI.createFileURI(System.getenv("SOURCE_PATH")), true);
-		sourceModel.setResource(source);
+		sourceModel.setResource(getSource());
 		// register source model as the IN model in ATL transformation
 		execEnv.registerInputModel("IN", sourceModel);
 
@@ -120,7 +139,7 @@ public class ATLRunner extends AbstractDriver {
 
 		// create a new ClassModuleResolver
 		// this is used resolve ATL modules
-		final ModuleResolver mr = new DefaultModuleResolver("./src/main/resources/", rs);
+		final ModuleResolver mr = new DefaultModuleResolver("./src/main/resources/", getResourceSet());
 		execEnv.loadModule(mr, "Class2Relational");
 
 		execEnv.run(null);

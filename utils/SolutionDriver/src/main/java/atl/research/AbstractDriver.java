@@ -7,6 +7,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import Changes.ChangesPackage;
@@ -31,11 +32,16 @@ public abstract class AbstractDriver {
         return target;
     }
 
+    protected ResourceSet getResourceSet() {
+        return resourceSet;
+    }
+
     public boolean isBatchMode() {
         return batchMode;
     }
 
     public void init() throws Exception {
+        batchMode = (System.getenv("BATCH_MODE") != null);
         setupResourceSet();
         loadModels();
     }
@@ -69,11 +75,11 @@ public abstract class AbstractDriver {
         else if (System.getenv("TARGET_PATH") == null) {
             throw new Exception("TARGET_PATH environment variable not set");
         }
-        batchMode = (System.getenv("BATCH_MODE") != null);
 
         source = loadModel(System.getenv("SOURCE_PATH"));
         changes = loadModel(System.getenv("CHANGE_PATH"));
         target = createModel(System.getenv("TARGET_PATH"));
+        EcoreUtil.resolveAll(resourceSet);
     }
 
     private Resource loadModel(String modelPath) {
@@ -90,7 +96,7 @@ public abstract class AbstractDriver {
         if (changes.getContents().size() > 0) {
             ModelChangeSet change = (ModelChangeSet) changes.getContents().get(0);
             for (ModelChange c : change.getChanges()) {
-                // System.out.println("Applying change " + c);
+                System.out.println("Applying change " + c);
                 c.apply();
             }
         }
