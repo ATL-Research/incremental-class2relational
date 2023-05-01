@@ -1,5 +1,5 @@
 module Class2Relational;
-create OUT : Relational from IN : Class;
+create OUT : Relational from IN : class_;
 
 uses strings;
 
@@ -17,11 +17,11 @@ uses strings;
 -- global variable
 -- context 
 helper def: objectIdType : Relational!Type =
-	Class!DataType.allInstances()->select(e | e.name = 'Integer')->first();
+	class_!DataType.allInstances()->select(e | e.name = 'Integer')->first();
 
 rule Class2Table {
 	from
-		c : Class!Class
+		c : class_!Class
 	to
 		out : Relational!Table (
 			name <- c.name,
@@ -37,7 +37,7 @@ rule Class2Table {
 
 rule DataType2Type {
 	from
-		dt : Class!DataType
+		dt : class_!DataType
 	to
 		out : Relational!Type (
 			name <- dt.name
@@ -46,8 +46,8 @@ rule DataType2Type {
 
 rule DataTypeAttribute2Column {
 	from
-		a : Class!Attribute (
-			a.type.oclIsKindOf(Class!DataType) and not a.multiValued
+		a : class_!Attribute (
+			a.type.oclIsKindOf(class_!DataType) and not a.multiValued
 		)
 	to
 		out : Relational!Column (
@@ -61,8 +61,8 @@ rule DataTypeAttribute2Column {
 
 rule MultiValuedDataTypeAttribute2Column {
 	from
-		a : Class!Attribute (
-			a.type.oclIsKindOf(Class!DataType) and a.multiValued
+		a : class_!Attribute (
+			a.type.oclIsKindOf(class_!DataType) and a.multiValued
 		)
 	to
 		out : Relational!Table (
@@ -81,8 +81,8 @@ rule MultiValuedDataTypeAttribute2Column {
 
 rule ClassAttribute2Column {
 	from
-		a : Class!Attribute (
-			a.type.oclIsKindOf(Class!Class) and not a.multiValued
+		a : class_!Attribute (
+			a.type.oclIsKindOf(class_!Class) and not a.multiValued
 		)
 	to
 		foreignKey : Relational!Column (
@@ -93,8 +93,8 @@ rule ClassAttribute2Column {
 
 rule MultiValuedClassAttribute2Column {
 	from
-		a : Class!Attribute (
-			a.type.oclIsKindOf(Class!Class) and a.multiValued
+		a : class_!Attribute (
+			a.type.oclIsKindOf(class_!Class) and a.multiValued
 		)
 	to
 		t : Relational!Table (
