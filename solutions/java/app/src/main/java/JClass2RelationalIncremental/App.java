@@ -3,33 +3,33 @@
  */
 package JClass2RelationalIncremental;
 
-import java.util.LinkedList;
-import java.util.stream.Collectors;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.common.notify.impl.NotifyingListImpl;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EContentAdapter;
-
+import Changes.ChangesPackage;
 import atl.research.AbstractDriver;
-import transformations.batch.Class2Relational;
 import transformations.incremental.Class2RelationalIncremental;
-import util.CONSTANTS;
-import util.IO;
-import metamodels.ClassDiagram.ClassDiagramPackage;
-import metamodels.ClassDiagram.Class;
+import metamodels.Relational.RelationalPackage;
+import metamodels.class_.Class_Package;
 
 public class App extends AbstractDriver {
 	
-	private static void registerPackages() {
-		ClassDiagramPackage.eINSTANCE.eClass();
+	@Override
+	public void setupResourceSet() {
+		Class_Package.eINSTANCE.eClass();
+		ChangesPackage.eINSTANCE.eClass();
+		RelationalPackage.eINSTANCE.eClass();
+		// register XMI
+        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
+        // register ecore
+        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
+        // register uml
+        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("uml", new XMIResourceFactoryImpl());
 	}
 	
 	public App() {
-		registerPackages();
+		setupResourceSet();
 	}
 	
 	// static run
@@ -56,10 +56,7 @@ public class App extends AbstractDriver {
 
 	// run via AbstractDriver
 	@Override
-	protected void applyTransformation() {
-		// register packages if this has not already happened
-		registerPackages();
-		
+	protected void applyTransformation() {		
 		Class2RelationalIncremental.start(this.getSource(), this.getTarget());
 	}
 
