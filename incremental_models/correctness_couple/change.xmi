@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<changes:ModelChangeSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:changes="http://nmf.codeplex.com/changes">
-  <changes xsi:type="changes:AddToRoot" newObject="//@changes.0/@newObject"/>
-  <changes xsi:type="changes:DeleteFromRoot">
-    <deletedElement href="models/correctness11/change.xmi#//@changes.0/@newObject"/>
-  </changes>
-  <sourceModel href="models/SampleClass.xmi#/0"/>
-</changes:ModelChangeSet>
