@@ -51,10 +51,25 @@
 		expected transformation behavior
 			create new Column
 	
-	10) add elements to root: Attribute
+	10) add elements to root: Attribute, single-valued, type:Person
 		expected transformation behavior
 			create Column 
 				- and dummy table or
 				- insert it in first table 
-	11+12) insert Class to root and delete it
-		
+
+	11) add elements to root: Attribute, multi-valued, type:Person
+	
+	12) add elements to root: Attribute, multi-valued, without type
+	
+		potential transformation result for 10-12
+			(1) do not create the object
+			(2) ignore missing link and create dangling columns (added to resource)
+			(3) add attribute to first table
+			
+	correctness_couple: insert Class to root and delete it
+
+## 3) Dangling References
+	13) delete Class Person
+		expected transformation behavior
+			(1) remove table and all links to table Person (i.e. columns of type Person)
+			(2) use a default type for columns referencing the table
