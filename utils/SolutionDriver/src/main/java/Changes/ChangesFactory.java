@@ -4,13 +4,12 @@ package Changes;
 
 import org.eclipse.emf.ecore.EFactory;
 
-
 /**
  * <!-- begin-user-doc -->
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see Changes.ChangesPackage
+ * @see changes_new.Changes.ChangesPackage
  * @generated
  */
 public interface ChangesFactory extends EFactory {
@@ -39,7 +38,7 @@ public interface ChangesFactory extends EFactory {
 	 * @generated
 	 */
 	ChangeTransaction createChangeTransaction();
-	
+
 	/**
 	 * Returns a new object of class '<em>Association Collection Deletion</em>'.
 	 * <!-- begin-user-doc -->

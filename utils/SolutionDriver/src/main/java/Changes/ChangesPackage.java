@@ -76,22 +76,13 @@ public interface ChangesPackage extends EPackage {
 	int MODEL_CHANGE_SET__CHANGES = 0;
 
 	/**
-	 * The feature id for the '<em><b>Source Model</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_CHANGE_SET__SOURCE_MODEL = 1;
-
-	/**
 	 * The number of structural features of the '<em>Model Change Set</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_CHANGE_SET_FEATURE_COUNT = 2;
+	int MODEL_CHANGE_SET_FEATURE_COUNT = 1;
 
 	/**
 	 * The number of operations of the '<em>Model Change Set</em>' class.
@@ -1831,70 +1822,6 @@ public interface ChangesPackage extends EPackage {
 	int COMPOSITION_MOVE_TO_COLLECTION_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link changes_new.Changes.impl.AttributeSetNullImpl <em>Attribute Set Null</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see changes_new.Changes.impl.AttributeSetNullImpl
-	 * @see changes_new.Changes.impl.ChangesPackageImpl#getAttributeSetNull()
-	 * @generated
-	 */
-	int ATTRIBUTE_SET_NULL = 28;
-
-	/**
-	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE_SET_NULL__CHANGE_SET = ELEMENTARY_CHANGE__CHANGE_SET;
-
-	/**
-	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE_SET_NULL__AFFECTED_ELEMENT = ELEMENTARY_CHANGE__AFFECTED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Feature</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE_SET_NULL__FEATURE = ELEMENTARY_CHANGE__FEATURE;
-
-	/**
-	 * The feature id for the '<em><b>New Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE_SET_NULL__NEW_VALUE = ELEMENTARY_CHANGE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Attribute Set Null</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE_SET_NULL_FEATURE_COUNT = ELEMENTARY_CHANGE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Attribute Set Null</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE_SET_NULL_OPERATION_COUNT = ELEMENTARY_CHANGE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link changes_new.Changes.impl.OperationCallImpl <em>Operation Call</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1902,7 +1829,7 @@ public interface ChangesPackage extends EPackage {
 	 * @see changes_new.Changes.impl.ChangesPackageImpl#getOperationCall()
 	 * @generated
 	 */
-	int OPERATION_CALL = 29;
+	int OPERATION_CALL = 28;
 
 	/**
 	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
@@ -1966,7 +1893,7 @@ public interface ChangesPackage extends EPackage {
 	 * @see changes_new.Changes.impl.ChangesPackageImpl#getOperationArgument()
 	 * @generated
 	 */
-	int OPERATION_ARGUMENT = 30;
+	int OPERATION_ARGUMENT = 29;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2003,7 +1930,7 @@ public interface ChangesPackage extends EPackage {
 	 * @see changes_new.Changes.impl.ChangesPackageImpl#getValueArgument()
 	 * @generated
 	 */
-	int VALUE_ARGUMENT = 31;
+	int VALUE_ARGUMENT = 30;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2049,7 +1976,7 @@ public interface ChangesPackage extends EPackage {
 	 * @see changes_new.Changes.impl.ChangesPackageImpl#getReferenceArgument()
 	 * @generated
 	 */
-	int REFERENCE_ARGUMENT = 32;
+	int REFERENCE_ARGUMENT = 31;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2095,7 +2022,7 @@ public interface ChangesPackage extends EPackage {
 	 * @see changes_new.Changes.impl.ChangesPackageImpl#getAddToRoot()
 	 * @generated
 	 */
-	int ADD_TO_ROOT = 33;
+	int ADD_TO_ROOT = 32;
 
 	/**
 	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
@@ -2125,7 +2052,7 @@ public interface ChangesPackage extends EPackage {
 	int ADD_TO_ROOT__FEATURE = ELEMENTARY_CHANGE__FEATURE;
 
 	/**
-	 * The feature id for the '<em><b>New Object</b></em>' reference.
+	 * The feature id for the '<em><b>New Object</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2160,7 +2087,7 @@ public interface ChangesPackage extends EPackage {
 	 * @see changes_new.Changes.impl.ChangesPackageImpl#getDeleteFromRoot()
 	 * @generated
 	 */
-	int DELETE_FROM_ROOT = 34;
+	int DELETE_FROM_ROOT = 33;
 
 	/**
 	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
@@ -2224,7 +2151,7 @@ public interface ChangesPackage extends EPackage {
 	 * @see changes_new.Changes.impl.ChangesPackageImpl#getReferenceSetNull()
 	 * @generated
 	 */
-	int REFERENCE_SET_NULL = 35;
+	int REFERENCE_SET_NULL = 34;
 
 	/**
 	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
@@ -2292,17 +2219,6 @@ public interface ChangesPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getModelChangeSet_Changes();
-
-	/**
-	 * Returns the meta object for the reference '{@link changes_new.Changes.ModelChangeSet#getSourceModel <em>Source Model</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Source Model</em>'.
-	 * @see changes_new.Changes.ModelChangeSet#getSourceModel()
-	 * @see #getModelChangeSet()
-	 * @generated
-	 */
-	EReference getModelChangeSet_SourceModel();
 
 	/**
 	 * Returns the meta object for class '{@link changes_new.Changes.ModelChange <em>Model Change</em>}'.
@@ -2982,27 +2898,6 @@ public interface ChangesPackage extends EPackage {
 	EReference getCompositionMoveToCollection_Origin();
 
 	/**
-	 * Returns the meta object for class '{@link changes_new.Changes.AttributeSetNull <em>Attribute Set Null</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Attribute Set Null</em>'.
-	 * @see changes_new.Changes.AttributeSetNull
-	 * @generated
-	 */
-	EClass getAttributeSetNull();
-
-	/**
-	 * Returns the meta object for the reference '{@link changes_new.Changes.AttributeSetNull#getNewValue <em>New Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>New Value</em>'.
-	 * @see changes_new.Changes.AttributeSetNull#getNewValue()
-	 * @see #getAttributeSetNull()
-	 * @generated
-	 */
-	EReference getAttributeSetNull_NewValue();
-
-	/**
 	 * Returns the meta object for class '{@link changes_new.Changes.OperationCall <em>Operation Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3119,10 +3014,10 @@ public interface ChangesPackage extends EPackage {
 	EClass getAddToRoot();
 
 	/**
-	 * Returns the meta object for the reference '{@link changes_new.Changes.AddToRoot#getNewObject <em>New Object</em>}'.
+	 * Returns the meta object for the containment reference '{@link changes_new.Changes.AddToRoot#getNewObject <em>New Object</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>New Object</em>'.
+	 * @return the meta object for the containment reference '<em>New Object</em>'.
 	 * @see changes_new.Changes.AddToRoot#getNewObject()
 	 * @see #getAddToRoot()
 	 * @generated
@@ -3200,14 +3095,6 @@ public interface ChangesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MODEL_CHANGE_SET__CHANGES = eINSTANCE.getModelChangeSet_Changes();
-
-		/**
-		 * The meta object literal for the '<em><b>Source Model</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MODEL_CHANGE_SET__SOURCE_MODEL = eINSTANCE.getModelChangeSet_SourceModel();
 
 		/**
 		 * The meta object literal for the '{@link changes_new.Changes.impl.ModelChangeImpl <em>Model Change</em>}' class.
@@ -3776,24 +3663,6 @@ public interface ChangesPackage extends EPackage {
 		EReference COMPOSITION_MOVE_TO_COLLECTION__ORIGIN = eINSTANCE.getCompositionMoveToCollection_Origin();
 
 		/**
-		 * The meta object literal for the '{@link changes_new.Changes.impl.AttributeSetNullImpl <em>Attribute Set Null</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see changes_new.Changes.impl.AttributeSetNullImpl
-		 * @see changes_new.Changes.impl.ChangesPackageImpl#getAttributeSetNull()
-		 * @generated
-		 */
-		EClass ATTRIBUTE_SET_NULL = eINSTANCE.getAttributeSetNull();
-
-		/**
-		 * The meta object literal for the '<em><b>New Value</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ATTRIBUTE_SET_NULL__NEW_VALUE = eINSTANCE.getAttributeSetNull_NewValue();
-
-		/**
 		 * The meta object literal for the '{@link changes_new.Changes.impl.OperationCallImpl <em>Operation Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3892,7 +3761,7 @@ public interface ChangesPackage extends EPackage {
 		EClass ADD_TO_ROOT = eINSTANCE.getAddToRoot();
 
 		/**
-		 * The meta object literal for the '<em><b>New Object</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>New Object</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

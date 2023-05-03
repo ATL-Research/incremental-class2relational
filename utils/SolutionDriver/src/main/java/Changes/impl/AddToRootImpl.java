@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 
 /**
  * <!-- begin-user-doc -->
@@ -174,10 +175,9 @@ public class AddToRootImpl extends ElementaryChangeImpl implements AddToRoot {
 
 	@Override
 	public void apply() {
-	
-		if (getChangeSet().getSourceModel().eResource() != null ) {
-			getChangeSet().getSourceModel().eResource().getContents().add(newObject); 
-		}
+		Resource srcModel = getAffectedElement().eResource();
+		if( srcModel != null)
+			srcModel.getContents().add(newObject); 
 	}
 
 } //AddToRootImpl

@@ -3,11 +3,6 @@
 package Changes.impl;
 
 import Changes.*;
-import Changes.AddToRoot;
-import Changes.ChangesPackage;
-import Changes.DeleteFromRoot;
-import Changes.ReferenceSetNull;
-
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -384,7 +379,7 @@ public class ChangesFactoryImpl extends EFactoryImpl implements ChangesFactory {
 		ReferenceSetNullImpl referenceSetNull = new ReferenceSetNullImpl();
 		return referenceSetNull;
 	}
-	
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -4,7 +4,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="ModelChangeSet">
     <eStructuralFeatures xsi:type="ecore:EReference" name="changes" upperBound="-1"
         eType="#//ModelChange" containment="true" eOpposite="#//ModelChange/changeSet"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ModelChange" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="changeSet" eType="#//ModelChangeSet"
@@ -23,7 +22,7 @@
         eType="#//ModelChange" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CompositionChange" abstract="true" eSuperTypes="#//ElementaryChange"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AssociationChange" eSuperTypes="#//ElementaryChange"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AssociationChange" abstract="true" eSuperTypes="#//ElementaryChange"/>
   <eClassifiers xsi:type="ecore:EClass" name="AttributeChange" abstract="true" eSuperTypes="#//ElementaryChange"/>
   <eClassifiers xsi:type="ecore:EClass" name="AssociationCollectionDeletion" eSuperTypes="#//AssociationChange">
     <eStructuralFeatures xsi:type="ecore:EReference" name="deletedElement" lowerBound="1"
@@ -110,9 +109,6 @@
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="origin" lowerBound="1"
         eType="#//ElementaryChange" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AttributeSetNull" eSuperTypes="#//ElementaryChange">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="newValue" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationCall" eSuperTypes="#//ModelChange">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"

@@ -14,6 +14,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -157,12 +159,13 @@ public class DeleteFromRootImpl extends ElementaryChangeImpl implements DeleteFr
 
 	@Override
 	public void apply() {
-		
-		if (getChangeSet().getSourceModel().eResource() != null ) {
-			List<EObject> contents = getChangeSet().getSourceModel().eResource().getContents();
+		Resource sourceModel = deletedElement.eResource();
+		if (sourceModel != null) {
+			List<EObject> contents = sourceModel.getContents();
 			
-			if (contents != null && contents.size() > 0)
-				getChangeSet().getSourceModel().eResource().getContents().remove(deletedElement);	
+			if (contents != null && contents.size() > 0) {
+				EcoreUtil.delete(deletedElement, true);
+			}
 		}
 	}
 
