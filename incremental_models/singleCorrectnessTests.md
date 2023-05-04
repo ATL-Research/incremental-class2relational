@@ -18,7 +18,8 @@
 	3) change firstname to multi-valued (setting it true)
 
 		expected transformation behavior:
-			delete column of table Person + create table for firstnames
+			delete column of table Person  
+			+ create table for firstnames with foreign keys
 
 	4) change emailAdresses to single-valued (setting it false)
 			expected transformation behavior:
