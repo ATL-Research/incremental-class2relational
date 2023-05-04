@@ -26,7 +26,7 @@ publishing {
         myLibrary(MavenPublication) {
             group = 'io.github.atlresearch.ttc2023'
             artifactId = 'solutiondriver'
-            version = '0.4'
+            version = '0.5'
 
             from components.java
         }
