@@ -40,7 +40,7 @@ public class AttributeImpl extends NamedEltImpl implements Attribute {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean MULTI_VALUED_EDEFAULT = null;
+	protected static final Boolean MULTI_VALUED_EDEFAULT = Boolean.FALSE;
 
 	/**
 	 * The cached value of the '{@link #getMultiValued() <em>Multi Valued</em>}' attribute.
