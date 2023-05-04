@@ -3,9 +3,35 @@
 # stop on errors
 set -e
 
+# cd to script directory
+cd "${0%/*}"
+
 if [ $# -ge 1 ]; then
-    solution="$1"
+    case $1 in
+        --help|-h)
+            echo "Usage: ./check_solution.sh [-h|--help|--solutions|solution]"
+            echo "      -h, --help: display this help"
+            echo "      --solutions: list available solutions"
+            echo "      solution: name of the solution to check (must be in solutions folder). If not provided, all solutions will be checked"
+            exit 0
+            ;;
+        --solutions)
+            echo "Available solutions:"
+            for solution in $(ls ../solutions); do
+                echo " - $solution"
+            done
+            exit 0
+            ;;
+        *)
+            solution="$1"
+            if [ ! -d "../solutions/$solution" ]; then
+                echo "Solution $solution not found"
+                exit 1
+            fi
+            ;;
+    esac
 fi
+
 
 INPUT_DIR="../../models/"
 OUTPUT_DIR="../../output/$(date +%Y-%m-%d_%H-%M)"
