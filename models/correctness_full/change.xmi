@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="ASCII"?>
 <changes:ModelChangeSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:changes="http://nmf.codeplex.com/changes" xmlns:class_="Class" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
   <changes xsi:type="changes:AttributePropertyChange" newValue="Member" oldValue="Person">
-    <affectedElement href="models/source.xmi#/1"/>
+    <affectedElement href="../../models/correctness_full/class.xmi#/1"/>
     <feature xsi:type="ecore:EAttribute" href="Class#//NamedElt/name"/>
   </changes>
   <changes xsi:type="changes:AttributePropertyChange" oldValue="Family">
-    <affectedElement href="models/source.xmi#/0"/>
+    <affectedElement href="../../models/correctness_full/class.xmi#/0"/>
     <feature xsi:type="ecore:EAttribute" href="Class#//NamedElt/name"/>
   </changes>
   <changes xsi:type="changes:AttributePropertyChange" newValue="true" oldValue="false">
-    <affectedElement href="models/source.xmi#/1/@attr.0"/>
+    <affectedElement href="../../models/correctness_full/class.xmi#/1/@attr.0"/>
     <feature xsi:type="ecore:EAttribute" href="Class#//Attribute/multiValued"/>
   </changes>
   <changes xsi:type="changes:AttributePropertyChange" newValue="false" oldValue="true">
-    <affectedElement href="models/source.xmi#/1/@attr.2"/>
+    <affectedElement href="../../models/correctness_full/class.xmi#/1/@attr.2"/>
     <feature xsi:type="ecore:EAttribute" href="Class#//Attribute/multiValued"/>
   </changes>
   <changes xsi:type="changes:ReferenceSetNull">
-    <affectedElement href="models/source.xmi#/1/@attr.0"/>
+    <affectedElement href="../../models/correctness_full/class.xmi#/1/@attr.0"/>
     <feature xsi:type="ecore:EReference" href="Class#//Attribute/type"/>
   </changes>
   <changes xsi:type="changes:ReferenceSetNull">
-    <affectedElement href="models/source.xmi#/1/@attr.1"/>
+    <affectedElement href="../../models/correctness_full/class.xmi#/1/@attr.1"/>
     <feature xsi:type="ecore:EReference" href="Class#//Attribute/type"/>
   </changes>
   <changes xsi:type="changes:ReferenceSetNull">
-    <affectedElement href="models/source.xmi#/1/@attr.1"/>
+    <affectedElement href="../../models/correctness_full/class.xmi#/1/@attr.1"/>
     <feature xsi:type="ecore:EReference" href="Class#//Attribute/owner"/>
   </changes>
   <changes xsi:type="changes:AddToRoot">
-    <affectedElement href="models/source.xmi#/1"/>
+    <affectedElement href="../../models/correctness_full/class.xmi#/1"/>
     <newObject xsi:type="class_:Class" name="House"/>
   </changes>
   <changes xsi:type="changes:CompositionCollectionInsertion">
-    <affectedElement href="models/source.xmi#/1"/>
+    <affectedElement href="../../models/correctness_full/class.xmi#/1"/>
     <feature xsi:type="ecore:EReference" href="Class#//Class/attr"/>
     <addedElement xsi:type="class_:Attribute" name="newMutliValuedAttribute" multiValued="false"/>
   </changes>
   <changes xsi:type="changes:AddToRoot">
-    <affectedElement href="models/source.xmi#/1"/>
+    <affectedElement href="../../models/correctness_full/class.xmi#/1"/>
     <newObject xsi:type="class_:Attribute" name="singleValuedAttribute" multiValued="false">
-      <type xsi:type="class_:Class" href="models/source.xmi#/1"/>
+      <type xsi:type="class_:Class" href="../../models/correctness_full/class.xmi#/1"/>
     </newObject>
   </changes>
   <changes xsi:type="changes:AddToRoot">
-    <affectedElement href="models/source.xmi#/1"/>
+    <affectedElement href="../../models/correctness_full/class.xmi#/1"/>
     <newObject xsi:type="class_:Attribute" name="marries" multiValued="true">
-      <type xsi:type="class_:Class" href="models/source.xmi#/1"/>
+      <type xsi:type="class_:Class" href="../../models/correctness_full/class.xmi#/1"/>
     </newObject>
   </changes>
   <changes xsi:type="changes:AddToRoot">
-    <affectedElement href="models/source.xmi#/1"/>
+    <affectedElement href="../../models/correctness_full/class.xmi#/1"/>
     <newObject xsi:type="class_:Attribute" name="addresses" multiValued="true"/>
   </changes>
   <changes xsi:type="changes:DeleteFromRoot">
-    <deletedElement href="models/source.xmi#/1"/>
+    <deletedElement href="../../models/correctness_full/class.xmi#/1"/>
   </changes>
 </changes:ModelChangeSet>
