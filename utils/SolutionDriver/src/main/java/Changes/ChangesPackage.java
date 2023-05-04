@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see Changes.ChangesFactory
+ * @see changes_new.Changes.ChangesFactory
  * @model kind="package"
  * @generated
  */
@@ -57,11 +57,11 @@ public interface ChangesPackage extends EPackage {
 	ChangesPackage eINSTANCE = Changes.impl.ChangesPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.ModelChangeSetImpl <em>Model Change Set</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.ModelChangeSetImpl <em>Model Change Set</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.ModelChangeSetImpl
-	 * @see Changes.impl.ChangesPackageImpl#getModelChangeSet()
+	 * @see changes_new.Changes.impl.ModelChangeSetImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getModelChangeSet()
 	 * @generated
 	 */
 	int MODEL_CHANGE_SET = 0;
@@ -94,14 +94,23 @@ public interface ChangesPackage extends EPackage {
 	int MODEL_CHANGE_SET_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.ModelChangeImpl <em>Model Change</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.ModelChangeImpl <em>Model Change</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.ModelChangeImpl
-	 * @see Changes.impl.ChangesPackageImpl#getModelChange()
+	 * @see changes_new.Changes.impl.ModelChangeImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getModelChange()
 	 * @generated
 	 */
 	int MODEL_CHANGE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_CHANGE__CHANGE_SET = 0;
 
 	/**
 	 * The number of structural features of the '<em>Model Change</em>' class.
@@ -110,7 +119,7 @@ public interface ChangesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_CHANGE_FEATURE_COUNT = 0;
+	int MODEL_CHANGE_FEATURE_COUNT = 1;
 
 	/**
 	 * The number of operations of the '<em>Model Change</em>' class.
@@ -122,14 +131,23 @@ public interface ChangesPackage extends EPackage {
 	int MODEL_CHANGE_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.ElementaryChangeImpl <em>Elementary Change</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.ElementaryChangeImpl <em>Elementary Change</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.ElementaryChangeImpl
-	 * @see Changes.impl.ChangesPackageImpl#getElementaryChange()
+	 * @see changes_new.Changes.impl.ElementaryChangeImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getElementaryChange()
 	 * @generated
 	 */
 	int ELEMENTARY_CHANGE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENTARY_CHANGE__CHANGE_SET = MODEL_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -168,14 +186,23 @@ public interface ChangesPackage extends EPackage {
 	int ELEMENTARY_CHANGE_OPERATION_COUNT = MODEL_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.ChangeTransactionImpl <em>Change Transaction</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.ChangeTransactionImpl <em>Change Transaction</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.ChangeTransactionImpl
-	 * @see Changes.impl.ChangesPackageImpl#getChangeTransaction()
+	 * @see changes_new.Changes.impl.ChangeTransactionImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getChangeTransaction()
 	 * @generated
 	 */
 	int CHANGE_TRANSACTION = 3;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHANGE_TRANSACTION__CHANGE_SET = MODEL_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Source Change</b></em>' containment reference.
@@ -214,14 +241,23 @@ public interface ChangesPackage extends EPackage {
 	int CHANGE_TRANSACTION_OPERATION_COUNT = MODEL_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.CompositionChangeImpl <em>Composition Change</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.CompositionChangeImpl <em>Composition Change</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.CompositionChangeImpl
-	 * @see Changes.impl.ChangesPackageImpl#getCompositionChange()
+	 * @see changes_new.Changes.impl.CompositionChangeImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionChange()
 	 * @generated
 	 */
 	int COMPOSITION_CHANGE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITION_CHANGE__CHANGE_SET = ELEMENTARY_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -260,14 +296,23 @@ public interface ChangesPackage extends EPackage {
 	int COMPOSITION_CHANGE_OPERATION_COUNT = ELEMENTARY_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.AssociationChangeImpl <em>Association Change</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.AssociationChangeImpl <em>Association Change</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.AssociationChangeImpl
-	 * @see Changes.impl.ChangesPackageImpl#getAssociationChange()
+	 * @see changes_new.Changes.impl.AssociationChangeImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getAssociationChange()
 	 * @generated
 	 */
 	int ASSOCIATION_CHANGE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_CHANGE__CHANGE_SET = ELEMENTARY_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -306,14 +351,23 @@ public interface ChangesPackage extends EPackage {
 	int ASSOCIATION_CHANGE_OPERATION_COUNT = ELEMENTARY_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.AttributeChangeImpl <em>Attribute Change</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.AttributeChangeImpl <em>Attribute Change</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.AttributeChangeImpl
-	 * @see Changes.impl.ChangesPackageImpl#getAttributeChange()
+	 * @see changes_new.Changes.impl.AttributeChangeImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getAttributeChange()
 	 * @generated
 	 */
 	int ATTRIBUTE_CHANGE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_CHANGE__CHANGE_SET = ELEMENTARY_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -352,14 +406,23 @@ public interface ChangesPackage extends EPackage {
 	int ATTRIBUTE_CHANGE_OPERATION_COUNT = ELEMENTARY_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.AssociationCollectionDeletionImpl <em>Association Collection Deletion</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.AssociationCollectionDeletionImpl <em>Association Collection Deletion</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.AssociationCollectionDeletionImpl
-	 * @see Changes.impl.ChangesPackageImpl#getAssociationCollectionDeletion()
+	 * @see changes_new.Changes.impl.AssociationCollectionDeletionImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getAssociationCollectionDeletion()
 	 * @generated
 	 */
 	int ASSOCIATION_COLLECTION_DELETION = 7;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_COLLECTION_DELETION__CHANGE_SET = ASSOCIATION_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -407,14 +470,23 @@ public interface ChangesPackage extends EPackage {
 	int ASSOCIATION_COLLECTION_DELETION_OPERATION_COUNT = ASSOCIATION_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.CompositionCollectionDeletionImpl <em>Composition Collection Deletion</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.CompositionCollectionDeletionImpl <em>Composition Collection Deletion</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.CompositionCollectionDeletionImpl
-	 * @see Changes.impl.ChangesPackageImpl#getCompositionCollectionDeletion()
+	 * @see changes_new.Changes.impl.CompositionCollectionDeletionImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionCollectionDeletion()
 	 * @generated
 	 */
 	int COMPOSITION_COLLECTION_DELETION = 8;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITION_COLLECTION_DELETION__CHANGE_SET = COMPOSITION_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -462,14 +534,23 @@ public interface ChangesPackage extends EPackage {
 	int COMPOSITION_COLLECTION_DELETION_OPERATION_COUNT = COMPOSITION_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.AttributeCollectionDeletionImpl <em>Attribute Collection Deletion</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.AttributeCollectionDeletionImpl <em>Attribute Collection Deletion</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.AttributeCollectionDeletionImpl
-	 * @see Changes.impl.ChangesPackageImpl#getAttributeCollectionDeletion()
+	 * @see changes_new.Changes.impl.AttributeCollectionDeletionImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getAttributeCollectionDeletion()
 	 * @generated
 	 */
 	int ATTRIBUTE_COLLECTION_DELETION = 9;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_COLLECTION_DELETION__CHANGE_SET = ATTRIBUTE_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -517,14 +598,23 @@ public interface ChangesPackage extends EPackage {
 	int ATTRIBUTE_COLLECTION_DELETION_OPERATION_COUNT = ATTRIBUTE_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.AssociationCollectionInsertionImpl <em>Association Collection Insertion</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.AssociationCollectionInsertionImpl <em>Association Collection Insertion</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.AssociationCollectionInsertionImpl
-	 * @see Changes.impl.ChangesPackageImpl#getAssociationCollectionInsertion()
+	 * @see changes_new.Changes.impl.AssociationCollectionInsertionImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getAssociationCollectionInsertion()
 	 * @generated
 	 */
 	int ASSOCIATION_COLLECTION_INSERTION = 10;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_COLLECTION_INSERTION__CHANGE_SET = ASSOCIATION_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -572,14 +662,23 @@ public interface ChangesPackage extends EPackage {
 	int ASSOCIATION_COLLECTION_INSERTION_OPERATION_COUNT = ASSOCIATION_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.CompositionCollectionInsertionImpl <em>Composition Collection Insertion</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.CompositionCollectionInsertionImpl <em>Composition Collection Insertion</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.CompositionCollectionInsertionImpl
-	 * @see Changes.impl.ChangesPackageImpl#getCompositionCollectionInsertion()
+	 * @see changes_new.Changes.impl.CompositionCollectionInsertionImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionCollectionInsertion()
 	 * @generated
 	 */
 	int COMPOSITION_COLLECTION_INSERTION = 11;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITION_COLLECTION_INSERTION__CHANGE_SET = COMPOSITION_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -627,14 +726,23 @@ public interface ChangesPackage extends EPackage {
 	int COMPOSITION_COLLECTION_INSERTION_OPERATION_COUNT = COMPOSITION_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.AttributeCollectionInsertionImpl <em>Attribute Collection Insertion</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.AttributeCollectionInsertionImpl <em>Attribute Collection Insertion</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.AttributeCollectionInsertionImpl
-	 * @see Changes.impl.ChangesPackageImpl#getAttributeCollectionInsertion()
+	 * @see changes_new.Changes.impl.AttributeCollectionInsertionImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getAttributeCollectionInsertion()
 	 * @generated
 	 */
 	int ATTRIBUTE_COLLECTION_INSERTION = 12;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_COLLECTION_INSERTION__CHANGE_SET = ATTRIBUTE_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -682,14 +790,23 @@ public interface ChangesPackage extends EPackage {
 	int ATTRIBUTE_COLLECTION_INSERTION_OPERATION_COUNT = ATTRIBUTE_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.AssociationCollectionResetImpl <em>Association Collection Reset</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.AssociationCollectionResetImpl <em>Association Collection Reset</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.AssociationCollectionResetImpl
-	 * @see Changes.impl.ChangesPackageImpl#getAssociationCollectionReset()
+	 * @see changes_new.Changes.impl.AssociationCollectionResetImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getAssociationCollectionReset()
 	 * @generated
 	 */
 	int ASSOCIATION_COLLECTION_RESET = 13;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_COLLECTION_RESET__CHANGE_SET = ASSOCIATION_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -728,14 +845,23 @@ public interface ChangesPackage extends EPackage {
 	int ASSOCIATION_COLLECTION_RESET_OPERATION_COUNT = ASSOCIATION_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.CompositionCollectionResetImpl <em>Composition Collection Reset</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.CompositionCollectionResetImpl <em>Composition Collection Reset</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.CompositionCollectionResetImpl
-	 * @see Changes.impl.ChangesPackageImpl#getCompositionCollectionReset()
+	 * @see changes_new.Changes.impl.CompositionCollectionResetImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionCollectionReset()
 	 * @generated
 	 */
 	int COMPOSITION_COLLECTION_RESET = 14;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITION_COLLECTION_RESET__CHANGE_SET = COMPOSITION_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -774,14 +900,23 @@ public interface ChangesPackage extends EPackage {
 	int COMPOSITION_COLLECTION_RESET_OPERATION_COUNT = COMPOSITION_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.AttributeCollectionResetImpl <em>Attribute Collection Reset</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.AttributeCollectionResetImpl <em>Attribute Collection Reset</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.AttributeCollectionResetImpl
-	 * @see Changes.impl.ChangesPackageImpl#getAttributeCollectionReset()
+	 * @see changes_new.Changes.impl.AttributeCollectionResetImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getAttributeCollectionReset()
 	 * @generated
 	 */
 	int ATTRIBUTE_COLLECTION_RESET = 15;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_COLLECTION_RESET__CHANGE_SET = ATTRIBUTE_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -820,14 +955,23 @@ public interface ChangesPackage extends EPackage {
 	int ATTRIBUTE_COLLECTION_RESET_OPERATION_COUNT = ATTRIBUTE_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.AssociationListDeletionImpl <em>Association List Deletion</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.AssociationListDeletionImpl <em>Association List Deletion</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.AssociationListDeletionImpl
-	 * @see Changes.impl.ChangesPackageImpl#getAssociationListDeletion()
+	 * @see changes_new.Changes.impl.AssociationListDeletionImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getAssociationListDeletion()
 	 * @generated
 	 */
 	int ASSOCIATION_LIST_DELETION = 16;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_LIST_DELETION__CHANGE_SET = ASSOCIATION_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -884,14 +1028,23 @@ public interface ChangesPackage extends EPackage {
 	int ASSOCIATION_LIST_DELETION_OPERATION_COUNT = ASSOCIATION_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.CompositionListDeletionImpl <em>Composition List Deletion</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.CompositionListDeletionImpl <em>Composition List Deletion</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.CompositionListDeletionImpl
-	 * @see Changes.impl.ChangesPackageImpl#getCompositionListDeletion()
+	 * @see changes_new.Changes.impl.CompositionListDeletionImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionListDeletion()
 	 * @generated
 	 */
 	int COMPOSITION_LIST_DELETION = 17;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITION_LIST_DELETION__CHANGE_SET = COMPOSITION_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -948,14 +1101,23 @@ public interface ChangesPackage extends EPackage {
 	int COMPOSITION_LIST_DELETION_OPERATION_COUNT = COMPOSITION_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.AttributeListDeletionImpl <em>Attribute List Deletion</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.AttributeListDeletionImpl <em>Attribute List Deletion</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.AttributeListDeletionImpl
-	 * @see Changes.impl.ChangesPackageImpl#getAttributeListDeletion()
+	 * @see changes_new.Changes.impl.AttributeListDeletionImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getAttributeListDeletion()
 	 * @generated
 	 */
 	int ATTRIBUTE_LIST_DELETION = 18;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_LIST_DELETION__CHANGE_SET = ATTRIBUTE_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -1012,14 +1174,23 @@ public interface ChangesPackage extends EPackage {
 	int ATTRIBUTE_LIST_DELETION_OPERATION_COUNT = ATTRIBUTE_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.AssociationListInsertionImpl <em>Association List Insertion</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.AssociationListInsertionImpl <em>Association List Insertion</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.AssociationListInsertionImpl
-	 * @see Changes.impl.ChangesPackageImpl#getAssociationListInsertion()
+	 * @see changes_new.Changes.impl.AssociationListInsertionImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getAssociationListInsertion()
 	 * @generated
 	 */
 	int ASSOCIATION_LIST_INSERTION = 19;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_LIST_INSERTION__CHANGE_SET = ASSOCIATION_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -1076,14 +1247,23 @@ public interface ChangesPackage extends EPackage {
 	int ASSOCIATION_LIST_INSERTION_OPERATION_COUNT = ASSOCIATION_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.CompositionListInsertionImpl <em>Composition List Insertion</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.CompositionListInsertionImpl <em>Composition List Insertion</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.CompositionListInsertionImpl
-	 * @see Changes.impl.ChangesPackageImpl#getCompositionListInsertion()
+	 * @see changes_new.Changes.impl.CompositionListInsertionImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionListInsertion()
 	 * @generated
 	 */
 	int COMPOSITION_LIST_INSERTION = 20;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITION_LIST_INSERTION__CHANGE_SET = COMPOSITION_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -1140,14 +1320,23 @@ public interface ChangesPackage extends EPackage {
 	int COMPOSITION_LIST_INSERTION_OPERATION_COUNT = COMPOSITION_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.AttributeListInsertionImpl <em>Attribute List Insertion</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.AttributeListInsertionImpl <em>Attribute List Insertion</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.AttributeListInsertionImpl
-	 * @see Changes.impl.ChangesPackageImpl#getAttributeListInsertion()
+	 * @see changes_new.Changes.impl.AttributeListInsertionImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getAttributeListInsertion()
 	 * @generated
 	 */
 	int ATTRIBUTE_LIST_INSERTION = 21;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_LIST_INSERTION__CHANGE_SET = ATTRIBUTE_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -1204,14 +1393,23 @@ public interface ChangesPackage extends EPackage {
 	int ATTRIBUTE_LIST_INSERTION_OPERATION_COUNT = ATTRIBUTE_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.AttributePropertyChangeImpl <em>Attribute Property Change</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.AttributePropertyChangeImpl <em>Attribute Property Change</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.AttributePropertyChangeImpl
-	 * @see Changes.impl.ChangesPackageImpl#getAttributePropertyChange()
+	 * @see changes_new.Changes.impl.AttributePropertyChangeImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getAttributePropertyChange()
 	 * @generated
 	 */
 	int ATTRIBUTE_PROPERTY_CHANGE = 22;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_PROPERTY_CHANGE__CHANGE_SET = ATTRIBUTE_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -1268,14 +1466,23 @@ public interface ChangesPackage extends EPackage {
 	int ATTRIBUTE_PROPERTY_CHANGE_OPERATION_COUNT = ATTRIBUTE_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.AssociationPropertyChangeImpl <em>Association Property Change</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.AssociationPropertyChangeImpl <em>Association Property Change</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.AssociationPropertyChangeImpl
-	 * @see Changes.impl.ChangesPackageImpl#getAssociationPropertyChange()
+	 * @see changes_new.Changes.impl.AssociationPropertyChangeImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getAssociationPropertyChange()
 	 * @generated
 	 */
 	int ASSOCIATION_PROPERTY_CHANGE = 23;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_PROPERTY_CHANGE__CHANGE_SET = ASSOCIATION_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -1332,14 +1539,23 @@ public interface ChangesPackage extends EPackage {
 	int ASSOCIATION_PROPERTY_CHANGE_OPERATION_COUNT = ASSOCIATION_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.CompositionPropertyChangeImpl <em>Composition Property Change</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.CompositionPropertyChangeImpl <em>Composition Property Change</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.CompositionPropertyChangeImpl
-	 * @see Changes.impl.ChangesPackageImpl#getCompositionPropertyChange()
+	 * @see changes_new.Changes.impl.CompositionPropertyChangeImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionPropertyChange()
 	 * @generated
 	 */
 	int COMPOSITION_PROPERTY_CHANGE = 24;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITION_PROPERTY_CHANGE__CHANGE_SET = COMPOSITION_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -1396,14 +1612,23 @@ public interface ChangesPackage extends EPackage {
 	int COMPOSITION_PROPERTY_CHANGE_OPERATION_COUNT = COMPOSITION_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.CompositionMoveIntoPropertyImpl <em>Composition Move Into Property</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.CompositionMoveIntoPropertyImpl <em>Composition Move Into Property</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.CompositionMoveIntoPropertyImpl
-	 * @see Changes.impl.ChangesPackageImpl#getCompositionMoveIntoProperty()
+	 * @see changes_new.Changes.impl.CompositionMoveIntoPropertyImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionMoveIntoProperty()
 	 * @generated
 	 */
 	int COMPOSITION_MOVE_INTO_PROPERTY = 25;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITION_MOVE_INTO_PROPERTY__CHANGE_SET = COMPOSITION_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -1469,14 +1694,23 @@ public interface ChangesPackage extends EPackage {
 	int COMPOSITION_MOVE_INTO_PROPERTY_OPERATION_COUNT = COMPOSITION_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.CompositionMoveToListImpl <em>Composition Move To List</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.CompositionMoveToListImpl <em>Composition Move To List</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.CompositionMoveToListImpl
-	 * @see Changes.impl.ChangesPackageImpl#getCompositionMoveToList()
+	 * @see changes_new.Changes.impl.CompositionMoveToListImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionMoveToList()
 	 * @generated
 	 */
 	int COMPOSITION_MOVE_TO_LIST = 26;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITION_MOVE_TO_LIST__CHANGE_SET = COMPOSITION_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
@@ -1542,11 +1776,11 @@ public interface ChangesPackage extends EPackage {
 	int COMPOSITION_MOVE_TO_LIST_OPERATION_COUNT = COMPOSITION_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.CompositionMoveToCollectionImpl <em>Composition Move To Collection</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.CompositionMoveToCollectionImpl <em>Composition Move To Collection</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.CompositionMoveToCollectionImpl
-	 * @see Changes.impl.ChangesPackageImpl#getCompositionMoveToCollection()
+	 * @see changes_new.Changes.impl.CompositionMoveToCollectionImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionMoveToCollection()
 	 * @generated
 	 */
 	int COMPOSITION_MOVE_TO_COLLECTION = 27;
@@ -1588,14 +1822,23 @@ public interface ChangesPackage extends EPackage {
 	int COMPOSITION_MOVE_TO_COLLECTION_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.OperationCallImpl <em>Operation Call</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.OperationCallImpl <em>Operation Call</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.OperationCallImpl
-	 * @see Changes.impl.ChangesPackageImpl#getOperationCall()
+	 * @see changes_new.Changes.impl.OperationCallImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getOperationCall()
 	 * @generated
 	 */
 	int OPERATION_CALL = 28;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CALL__CHANGE_SET = MODEL_CHANGE__CHANGE_SET;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -1643,11 +1886,11 @@ public interface ChangesPackage extends EPackage {
 	int OPERATION_CALL_OPERATION_COUNT = MODEL_CHANGE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.OperationArgumentImpl <em>Operation Argument</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.OperationArgumentImpl <em>Operation Argument</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.OperationArgumentImpl
-	 * @see Changes.impl.ChangesPackageImpl#getOperationArgument()
+	 * @see changes_new.Changes.impl.OperationArgumentImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getOperationArgument()
 	 * @generated
 	 */
 	int OPERATION_ARGUMENT = 29;
@@ -1680,11 +1923,11 @@ public interface ChangesPackage extends EPackage {
 	int OPERATION_ARGUMENT_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.ValueArgumentImpl <em>Value Argument</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.ValueArgumentImpl <em>Value Argument</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.ValueArgumentImpl
-	 * @see Changes.impl.ChangesPackageImpl#getValueArgument()
+	 * @see changes_new.Changes.impl.ValueArgumentImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getValueArgument()
 	 * @generated
 	 */
 	int VALUE_ARGUMENT = 30;
@@ -1726,11 +1969,11 @@ public interface ChangesPackage extends EPackage {
 	int VALUE_ARGUMENT_OPERATION_COUNT = OPERATION_ARGUMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link Changes.impl.ReferenceArgumentImpl <em>Reference Argument</em>}' class.
+	 * The meta object id for the '{@link changes_new.Changes.impl.ReferenceArgumentImpl <em>Reference Argument</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Changes.impl.ReferenceArgumentImpl
-	 * @see Changes.impl.ChangesPackageImpl#getReferenceArgument()
+	 * @see changes_new.Changes.impl.ReferenceArgumentImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getReferenceArgument()
 	 * @generated
 	 */
 	int REFERENCE_ARGUMENT = 31;
@@ -1771,799 +2014,1046 @@ public interface ChangesPackage extends EPackage {
 	 */
 	int REFERENCE_ARGUMENT_OPERATION_COUNT = OPERATION_ARGUMENT_OPERATION_COUNT + 0;
 
+	/**
+	 * The meta object id for the '{@link changes_new.Changes.impl.AddToRootImpl <em>Add To Root</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see changes_new.Changes.impl.AddToRootImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getAddToRoot()
+	 * @generated
+	 */
+	int ADD_TO_ROOT = 32;
 
 	/**
-	 * Returns the meta object for class '{@link Changes.ModelChangeSet <em>Model Change Set</em>}'.
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_TO_ROOT__CHANGE_SET = ELEMENTARY_CHANGE__CHANGE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_TO_ROOT__AFFECTED_ELEMENT = ELEMENTARY_CHANGE__AFFECTED_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_TO_ROOT__FEATURE = ELEMENTARY_CHANGE__FEATURE;
+
+	/**
+	 * The feature id for the '<em><b>New Object</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_TO_ROOT__NEW_OBJECT = ELEMENTARY_CHANGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Add To Root</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_TO_ROOT_FEATURE_COUNT = ELEMENTARY_CHANGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Add To Root</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_TO_ROOT_OPERATION_COUNT = ELEMENTARY_CHANGE_OPERATION_COUNT + 0;
+
+
+	/**
+	 * The meta object id for the '{@link changes_new.Changes.impl.DeleteFromRootImpl <em>Delete From Root</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see changes_new.Changes.impl.DeleteFromRootImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getDeleteFromRoot()
+	 * @generated
+	 */
+	int DELETE_FROM_ROOT = 33;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DELETE_FROM_ROOT__CHANGE_SET = ELEMENTARY_CHANGE__CHANGE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DELETE_FROM_ROOT__AFFECTED_ELEMENT = ELEMENTARY_CHANGE__AFFECTED_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DELETE_FROM_ROOT__FEATURE = ELEMENTARY_CHANGE__FEATURE;
+
+	/**
+	 * The feature id for the '<em><b>Deleted Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DELETE_FROM_ROOT__DELETED_ELEMENT = ELEMENTARY_CHANGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Delete From Root</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DELETE_FROM_ROOT_FEATURE_COUNT = ELEMENTARY_CHANGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Delete From Root</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DELETE_FROM_ROOT_OPERATION_COUNT = ELEMENTARY_CHANGE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link changes_new.Changes.impl.ReferenceSetNullImpl <em>Reference Set Null</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see changes_new.Changes.impl.ReferenceSetNullImpl
+	 * @see changes_new.Changes.impl.ChangesPackageImpl#getReferenceSetNull()
+	 * @generated
+	 */
+	int REFERENCE_SET_NULL = 34;
+
+	/**
+	 * The feature id for the '<em><b>Change Set</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_SET_NULL__CHANGE_SET = ELEMENTARY_CHANGE__CHANGE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Affected Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_SET_NULL__AFFECTED_ELEMENT = ELEMENTARY_CHANGE__AFFECTED_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_SET_NULL__FEATURE = ELEMENTARY_CHANGE__FEATURE;
+
+	/**
+	 * The number of structural features of the '<em>Reference Set Null</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_SET_NULL_FEATURE_COUNT = ELEMENTARY_CHANGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Reference Set Null</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_SET_NULL_OPERATION_COUNT = ELEMENTARY_CHANGE_OPERATION_COUNT + 0;
+
+
+	/**
+	 * Returns the meta object for class '{@link changes_new.Changes.ModelChangeSet <em>Model Change Set</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Model Change Set</em>'.
-	 * @see Changes.ModelChangeSet
+	 * @see changes_new.Changes.ModelChangeSet
 	 * @generated
 	 */
 	EClass getModelChangeSet();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link Changes.ModelChangeSet#getChanges <em>Changes</em>}'.
+	 * Returns the meta object for the containment reference list '{@link changes_new.Changes.ModelChangeSet#getChanges <em>Changes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Changes</em>'.
-	 * @see Changes.ModelChangeSet#getChanges()
+	 * @see changes_new.Changes.ModelChangeSet#getChanges()
 	 * @see #getModelChangeSet()
 	 * @generated
 	 */
 	EReference getModelChangeSet_Changes();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.ModelChange <em>Model Change</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.ModelChange <em>Model Change</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Model Change</em>'.
-	 * @see Changes.ModelChange
+	 * @see changes_new.Changes.ModelChange
 	 * @generated
 	 */
 	EClass getModelChange();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.ElementaryChange <em>Elementary Change</em>}'.
+	 * Returns the meta object for the container reference '{@link changes_new.Changes.ModelChange#getChangeSet <em>Change Set</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Change Set</em>'.
+	 * @see changes_new.Changes.ModelChange#getChangeSet()
+	 * @see #getModelChange()
+	 * @generated
+	 */
+	EReference getModelChange_ChangeSet();
+
+	/**
+	 * Returns the meta object for class '{@link changes_new.Changes.ElementaryChange <em>Elementary Change</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Elementary Change</em>'.
-	 * @see Changes.ElementaryChange
+	 * @see changes_new.Changes.ElementaryChange
 	 * @generated
 	 */
 	EClass getElementaryChange();
 
 	/**
-	 * Returns the meta object for the reference '{@link Changes.ElementaryChange#getAffectedElement <em>Affected Element</em>}'.
+	 * Returns the meta object for the reference '{@link changes_new.Changes.ElementaryChange#getAffectedElement <em>Affected Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Affected Element</em>'.
-	 * @see Changes.ElementaryChange#getAffectedElement()
+	 * @see changes_new.Changes.ElementaryChange#getAffectedElement()
 	 * @see #getElementaryChange()
 	 * @generated
 	 */
 	EReference getElementaryChange_AffectedElement();
 
 	/**
-	 * Returns the meta object for the reference '{@link Changes.ElementaryChange#getFeature <em>Feature</em>}'.
+	 * Returns the meta object for the reference '{@link changes_new.Changes.ElementaryChange#getFeature <em>Feature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Feature</em>'.
-	 * @see Changes.ElementaryChange#getFeature()
+	 * @see changes_new.Changes.ElementaryChange#getFeature()
 	 * @see #getElementaryChange()
 	 * @generated
 	 */
 	EReference getElementaryChange_Feature();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.ChangeTransaction <em>Change Transaction</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.ChangeTransaction <em>Change Transaction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Change Transaction</em>'.
-	 * @see Changes.ChangeTransaction
+	 * @see changes_new.Changes.ChangeTransaction
 	 * @generated
 	 */
 	EClass getChangeTransaction();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link Changes.ChangeTransaction#getSourceChange <em>Source Change</em>}'.
+	 * Returns the meta object for the containment reference '{@link changes_new.Changes.ChangeTransaction#getSourceChange <em>Source Change</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Source Change</em>'.
-	 * @see Changes.ChangeTransaction#getSourceChange()
+	 * @see changes_new.Changes.ChangeTransaction#getSourceChange()
 	 * @see #getChangeTransaction()
 	 * @generated
 	 */
 	EReference getChangeTransaction_SourceChange();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link Changes.ChangeTransaction#getNestedChanges <em>Nested Changes</em>}'.
+	 * Returns the meta object for the containment reference list '{@link changes_new.Changes.ChangeTransaction#getNestedChanges <em>Nested Changes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Nested Changes</em>'.
-	 * @see Changes.ChangeTransaction#getNestedChanges()
+	 * @see changes_new.Changes.ChangeTransaction#getNestedChanges()
 	 * @see #getChangeTransaction()
 	 * @generated
 	 */
 	EReference getChangeTransaction_NestedChanges();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.CompositionChange <em>Composition Change</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.CompositionChange <em>Composition Change</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Composition Change</em>'.
-	 * @see Changes.CompositionChange
+	 * @see changes_new.Changes.CompositionChange
 	 * @generated
 	 */
 	EClass getCompositionChange();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.AssociationChange <em>Association Change</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.AssociationChange <em>Association Change</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Association Change</em>'.
-	 * @see Changes.AssociationChange
+	 * @see changes_new.Changes.AssociationChange
 	 * @generated
 	 */
 	EClass getAssociationChange();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.AttributeChange <em>Attribute Change</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.AttributeChange <em>Attribute Change</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Attribute Change</em>'.
-	 * @see Changes.AttributeChange
+	 * @see changes_new.Changes.AttributeChange
 	 * @generated
 	 */
 	EClass getAttributeChange();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.AssociationCollectionDeletion <em>Association Collection Deletion</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.AssociationCollectionDeletion <em>Association Collection Deletion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Association Collection Deletion</em>'.
-	 * @see Changes.AssociationCollectionDeletion
+	 * @see changes_new.Changes.AssociationCollectionDeletion
 	 * @generated
 	 */
 	EClass getAssociationCollectionDeletion();
 
 	/**
-	 * Returns the meta object for the reference '{@link Changes.AssociationCollectionDeletion#getDeletedElement <em>Deleted Element</em>}'.
+	 * Returns the meta object for the reference '{@link changes_new.Changes.AssociationCollectionDeletion#getDeletedElement <em>Deleted Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Deleted Element</em>'.
-	 * @see Changes.AssociationCollectionDeletion#getDeletedElement()
+	 * @see changes_new.Changes.AssociationCollectionDeletion#getDeletedElement()
 	 * @see #getAssociationCollectionDeletion()
 	 * @generated
 	 */
 	EReference getAssociationCollectionDeletion_DeletedElement();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.CompositionCollectionDeletion <em>Composition Collection Deletion</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.CompositionCollectionDeletion <em>Composition Collection Deletion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Composition Collection Deletion</em>'.
-	 * @see Changes.CompositionCollectionDeletion
+	 * @see changes_new.Changes.CompositionCollectionDeletion
 	 * @generated
 	 */
 	EClass getCompositionCollectionDeletion();
 
 	/**
-	 * Returns the meta object for the reference '{@link Changes.CompositionCollectionDeletion#getDeletedElement <em>Deleted Element</em>}'.
+	 * Returns the meta object for the reference '{@link changes_new.Changes.CompositionCollectionDeletion#getDeletedElement <em>Deleted Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Deleted Element</em>'.
-	 * @see Changes.CompositionCollectionDeletion#getDeletedElement()
+	 * @see changes_new.Changes.CompositionCollectionDeletion#getDeletedElement()
 	 * @see #getCompositionCollectionDeletion()
 	 * @generated
 	 */
 	EReference getCompositionCollectionDeletion_DeletedElement();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.AttributeCollectionDeletion <em>Attribute Collection Deletion</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.AttributeCollectionDeletion <em>Attribute Collection Deletion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Attribute Collection Deletion</em>'.
-	 * @see Changes.AttributeCollectionDeletion
+	 * @see changes_new.Changes.AttributeCollectionDeletion
 	 * @generated
 	 */
 	EClass getAttributeCollectionDeletion();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Changes.AttributeCollectionDeletion#getDeletedValue <em>Deleted Value</em>}'.
+	 * Returns the meta object for the attribute '{@link changes_new.Changes.AttributeCollectionDeletion#getDeletedValue <em>Deleted Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Deleted Value</em>'.
-	 * @see Changes.AttributeCollectionDeletion#getDeletedValue()
+	 * @see changes_new.Changes.AttributeCollectionDeletion#getDeletedValue()
 	 * @see #getAttributeCollectionDeletion()
 	 * @generated
 	 */
 	EAttribute getAttributeCollectionDeletion_DeletedValue();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.AssociationCollectionInsertion <em>Association Collection Insertion</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.AssociationCollectionInsertion <em>Association Collection Insertion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Association Collection Insertion</em>'.
-	 * @see Changes.AssociationCollectionInsertion
+	 * @see changes_new.Changes.AssociationCollectionInsertion
 	 * @generated
 	 */
 	EClass getAssociationCollectionInsertion();
 
 	/**
-	 * Returns the meta object for the reference '{@link Changes.AssociationCollectionInsertion#getAddedElement <em>Added Element</em>}'.
+	 * Returns the meta object for the reference '{@link changes_new.Changes.AssociationCollectionInsertion#getAddedElement <em>Added Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Added Element</em>'.
-	 * @see Changes.AssociationCollectionInsertion#getAddedElement()
+	 * @see changes_new.Changes.AssociationCollectionInsertion#getAddedElement()
 	 * @see #getAssociationCollectionInsertion()
 	 * @generated
 	 */
 	EReference getAssociationCollectionInsertion_AddedElement();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.CompositionCollectionInsertion <em>Composition Collection Insertion</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.CompositionCollectionInsertion <em>Composition Collection Insertion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Composition Collection Insertion</em>'.
-	 * @see Changes.CompositionCollectionInsertion
+	 * @see changes_new.Changes.CompositionCollectionInsertion
 	 * @generated
 	 */
 	EClass getCompositionCollectionInsertion();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link Changes.CompositionCollectionInsertion#getAddedElement <em>Added Element</em>}'.
+	 * Returns the meta object for the containment reference '{@link changes_new.Changes.CompositionCollectionInsertion#getAddedElement <em>Added Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Added Element</em>'.
-	 * @see Changes.CompositionCollectionInsertion#getAddedElement()
+	 * @see changes_new.Changes.CompositionCollectionInsertion#getAddedElement()
 	 * @see #getCompositionCollectionInsertion()
 	 * @generated
 	 */
 	EReference getCompositionCollectionInsertion_AddedElement();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.AttributeCollectionInsertion <em>Attribute Collection Insertion</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.AttributeCollectionInsertion <em>Attribute Collection Insertion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Attribute Collection Insertion</em>'.
-	 * @see Changes.AttributeCollectionInsertion
+	 * @see changes_new.Changes.AttributeCollectionInsertion
 	 * @generated
 	 */
 	EClass getAttributeCollectionInsertion();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Changes.AttributeCollectionInsertion#getAddedValue <em>Added Value</em>}'.
+	 * Returns the meta object for the attribute '{@link changes_new.Changes.AttributeCollectionInsertion#getAddedValue <em>Added Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Added Value</em>'.
-	 * @see Changes.AttributeCollectionInsertion#getAddedValue()
+	 * @see changes_new.Changes.AttributeCollectionInsertion#getAddedValue()
 	 * @see #getAttributeCollectionInsertion()
 	 * @generated
 	 */
 	EAttribute getAttributeCollectionInsertion_AddedValue();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.AssociationCollectionReset <em>Association Collection Reset</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.AssociationCollectionReset <em>Association Collection Reset</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Association Collection Reset</em>'.
-	 * @see Changes.AssociationCollectionReset
+	 * @see changes_new.Changes.AssociationCollectionReset
 	 * @generated
 	 */
 	EClass getAssociationCollectionReset();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.CompositionCollectionReset <em>Composition Collection Reset</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.CompositionCollectionReset <em>Composition Collection Reset</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Composition Collection Reset</em>'.
-	 * @see Changes.CompositionCollectionReset
+	 * @see changes_new.Changes.CompositionCollectionReset
 	 * @generated
 	 */
 	EClass getCompositionCollectionReset();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.AttributeCollectionReset <em>Attribute Collection Reset</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.AttributeCollectionReset <em>Attribute Collection Reset</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Attribute Collection Reset</em>'.
-	 * @see Changes.AttributeCollectionReset
+	 * @see changes_new.Changes.AttributeCollectionReset
 	 * @generated
 	 */
 	EClass getAttributeCollectionReset();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.AssociationListDeletion <em>Association List Deletion</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.AssociationListDeletion <em>Association List Deletion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Association List Deletion</em>'.
-	 * @see Changes.AssociationListDeletion
+	 * @see changes_new.Changes.AssociationListDeletion
 	 * @generated
 	 */
 	EClass getAssociationListDeletion();
 
 	/**
-	 * Returns the meta object for the reference '{@link Changes.AssociationListDeletion#getDeletedElement <em>Deleted Element</em>}'.
+	 * Returns the meta object for the reference '{@link changes_new.Changes.AssociationListDeletion#getDeletedElement <em>Deleted Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Deleted Element</em>'.
-	 * @see Changes.AssociationListDeletion#getDeletedElement()
+	 * @see changes_new.Changes.AssociationListDeletion#getDeletedElement()
 	 * @see #getAssociationListDeletion()
 	 * @generated
 	 */
 	EReference getAssociationListDeletion_DeletedElement();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Changes.AssociationListDeletion#getIndex <em>Index</em>}'.
+	 * Returns the meta object for the attribute '{@link changes_new.Changes.AssociationListDeletion#getIndex <em>Index</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Index</em>'.
-	 * @see Changes.AssociationListDeletion#getIndex()
+	 * @see changes_new.Changes.AssociationListDeletion#getIndex()
 	 * @see #getAssociationListDeletion()
 	 * @generated
 	 */
 	EAttribute getAssociationListDeletion_Index();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.CompositionListDeletion <em>Composition List Deletion</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.CompositionListDeletion <em>Composition List Deletion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Composition List Deletion</em>'.
-	 * @see Changes.CompositionListDeletion
+	 * @see changes_new.Changes.CompositionListDeletion
 	 * @generated
 	 */
 	EClass getCompositionListDeletion();
 
 	/**
-	 * Returns the meta object for the reference '{@link Changes.CompositionListDeletion#getDeletedElement <em>Deleted Element</em>}'.
+	 * Returns the meta object for the reference '{@link changes_new.Changes.CompositionListDeletion#getDeletedElement <em>Deleted Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Deleted Element</em>'.
-	 * @see Changes.CompositionListDeletion#getDeletedElement()
+	 * @see changes_new.Changes.CompositionListDeletion#getDeletedElement()
 	 * @see #getCompositionListDeletion()
 	 * @generated
 	 */
 	EReference getCompositionListDeletion_DeletedElement();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Changes.CompositionListDeletion#getIndex <em>Index</em>}'.
+	 * Returns the meta object for the attribute '{@link changes_new.Changes.CompositionListDeletion#getIndex <em>Index</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Index</em>'.
-	 * @see Changes.CompositionListDeletion#getIndex()
+	 * @see changes_new.Changes.CompositionListDeletion#getIndex()
 	 * @see #getCompositionListDeletion()
 	 * @generated
 	 */
 	EAttribute getCompositionListDeletion_Index();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.AttributeListDeletion <em>Attribute List Deletion</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.AttributeListDeletion <em>Attribute List Deletion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Attribute List Deletion</em>'.
-	 * @see Changes.AttributeListDeletion
+	 * @see changes_new.Changes.AttributeListDeletion
 	 * @generated
 	 */
 	EClass getAttributeListDeletion();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Changes.AttributeListDeletion#getDeletedValue <em>Deleted Value</em>}'.
+	 * Returns the meta object for the attribute '{@link changes_new.Changes.AttributeListDeletion#getDeletedValue <em>Deleted Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Deleted Value</em>'.
-	 * @see Changes.AttributeListDeletion#getDeletedValue()
+	 * @see changes_new.Changes.AttributeListDeletion#getDeletedValue()
 	 * @see #getAttributeListDeletion()
 	 * @generated
 	 */
 	EAttribute getAttributeListDeletion_DeletedValue();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Changes.AttributeListDeletion#getIndex <em>Index</em>}'.
+	 * Returns the meta object for the attribute '{@link changes_new.Changes.AttributeListDeletion#getIndex <em>Index</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Index</em>'.
-	 * @see Changes.AttributeListDeletion#getIndex()
+	 * @see changes_new.Changes.AttributeListDeletion#getIndex()
 	 * @see #getAttributeListDeletion()
 	 * @generated
 	 */
 	EAttribute getAttributeListDeletion_Index();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.AssociationListInsertion <em>Association List Insertion</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.AssociationListInsertion <em>Association List Insertion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Association List Insertion</em>'.
-	 * @see Changes.AssociationListInsertion
+	 * @see changes_new.Changes.AssociationListInsertion
 	 * @generated
 	 */
 	EClass getAssociationListInsertion();
 
 	/**
-	 * Returns the meta object for the reference '{@link Changes.AssociationListInsertion#getAddedElement <em>Added Element</em>}'.
+	 * Returns the meta object for the reference '{@link changes_new.Changes.AssociationListInsertion#getAddedElement <em>Added Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Added Element</em>'.
-	 * @see Changes.AssociationListInsertion#getAddedElement()
+	 * @see changes_new.Changes.AssociationListInsertion#getAddedElement()
 	 * @see #getAssociationListInsertion()
 	 * @generated
 	 */
 	EReference getAssociationListInsertion_AddedElement();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Changes.AssociationListInsertion#getIndex <em>Index</em>}'.
+	 * Returns the meta object for the attribute '{@link changes_new.Changes.AssociationListInsertion#getIndex <em>Index</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Index</em>'.
-	 * @see Changes.AssociationListInsertion#getIndex()
+	 * @see changes_new.Changes.AssociationListInsertion#getIndex()
 	 * @see #getAssociationListInsertion()
 	 * @generated
 	 */
 	EAttribute getAssociationListInsertion_Index();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.CompositionListInsertion <em>Composition List Insertion</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.CompositionListInsertion <em>Composition List Insertion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Composition List Insertion</em>'.
-	 * @see Changes.CompositionListInsertion
+	 * @see changes_new.Changes.CompositionListInsertion
 	 * @generated
 	 */
 	EClass getCompositionListInsertion();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link Changes.CompositionListInsertion#getAddedElement <em>Added Element</em>}'.
+	 * Returns the meta object for the containment reference '{@link changes_new.Changes.CompositionListInsertion#getAddedElement <em>Added Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Added Element</em>'.
-	 * @see Changes.CompositionListInsertion#getAddedElement()
+	 * @see changes_new.Changes.CompositionListInsertion#getAddedElement()
 	 * @see #getCompositionListInsertion()
 	 * @generated
 	 */
 	EReference getCompositionListInsertion_AddedElement();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Changes.CompositionListInsertion#getIndex <em>Index</em>}'.
+	 * Returns the meta object for the attribute '{@link changes_new.Changes.CompositionListInsertion#getIndex <em>Index</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Index</em>'.
-	 * @see Changes.CompositionListInsertion#getIndex()
+	 * @see changes_new.Changes.CompositionListInsertion#getIndex()
 	 * @see #getCompositionListInsertion()
 	 * @generated
 	 */
 	EAttribute getCompositionListInsertion_Index();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.AttributeListInsertion <em>Attribute List Insertion</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.AttributeListInsertion <em>Attribute List Insertion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Attribute List Insertion</em>'.
-	 * @see Changes.AttributeListInsertion
+	 * @see changes_new.Changes.AttributeListInsertion
 	 * @generated
 	 */
 	EClass getAttributeListInsertion();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Changes.AttributeListInsertion#getAddedValue <em>Added Value</em>}'.
+	 * Returns the meta object for the attribute '{@link changes_new.Changes.AttributeListInsertion#getAddedValue <em>Added Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Added Value</em>'.
-	 * @see Changes.AttributeListInsertion#getAddedValue()
+	 * @see changes_new.Changes.AttributeListInsertion#getAddedValue()
 	 * @see #getAttributeListInsertion()
 	 * @generated
 	 */
 	EAttribute getAttributeListInsertion_AddedValue();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Changes.AttributeListInsertion#getIndex <em>Index</em>}'.
+	 * Returns the meta object for the attribute '{@link changes_new.Changes.AttributeListInsertion#getIndex <em>Index</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Index</em>'.
-	 * @see Changes.AttributeListInsertion#getIndex()
+	 * @see changes_new.Changes.AttributeListInsertion#getIndex()
 	 * @see #getAttributeListInsertion()
 	 * @generated
 	 */
 	EAttribute getAttributeListInsertion_Index();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.AttributePropertyChange <em>Attribute Property Change</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.AttributePropertyChange <em>Attribute Property Change</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Attribute Property Change</em>'.
-	 * @see Changes.AttributePropertyChange
+	 * @see changes_new.Changes.AttributePropertyChange
 	 * @generated
 	 */
 	EClass getAttributePropertyChange();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Changes.AttributePropertyChange#getNewValue <em>New Value</em>}'.
+	 * Returns the meta object for the attribute '{@link changes_new.Changes.AttributePropertyChange#getNewValue <em>New Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>New Value</em>'.
-	 * @see Changes.AttributePropertyChange#getNewValue()
+	 * @see changes_new.Changes.AttributePropertyChange#getNewValue()
 	 * @see #getAttributePropertyChange()
 	 * @generated
 	 */
 	EAttribute getAttributePropertyChange_NewValue();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Changes.AttributePropertyChange#getOldValue <em>Old Value</em>}'.
+	 * Returns the meta object for the attribute '{@link changes_new.Changes.AttributePropertyChange#getOldValue <em>Old Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Old Value</em>'.
-	 * @see Changes.AttributePropertyChange#getOldValue()
+	 * @see changes_new.Changes.AttributePropertyChange#getOldValue()
 	 * @see #getAttributePropertyChange()
 	 * @generated
 	 */
 	EAttribute getAttributePropertyChange_OldValue();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.AssociationPropertyChange <em>Association Property Change</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.AssociationPropertyChange <em>Association Property Change</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Association Property Change</em>'.
-	 * @see Changes.AssociationPropertyChange
+	 * @see changes_new.Changes.AssociationPropertyChange
 	 * @generated
 	 */
 	EClass getAssociationPropertyChange();
 
 	/**
-	 * Returns the meta object for the reference '{@link Changes.AssociationPropertyChange#getNewValue <em>New Value</em>}'.
+	 * Returns the meta object for the reference '{@link changes_new.Changes.AssociationPropertyChange#getNewValue <em>New Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>New Value</em>'.
-	 * @see Changes.AssociationPropertyChange#getNewValue()
+	 * @see changes_new.Changes.AssociationPropertyChange#getNewValue()
 	 * @see #getAssociationPropertyChange()
 	 * @generated
 	 */
 	EReference getAssociationPropertyChange_NewValue();
 
 	/**
-	 * Returns the meta object for the reference '{@link Changes.AssociationPropertyChange#getOldValue <em>Old Value</em>}'.
+	 * Returns the meta object for the reference '{@link changes_new.Changes.AssociationPropertyChange#getOldValue <em>Old Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Old Value</em>'.
-	 * @see Changes.AssociationPropertyChange#getOldValue()
+	 * @see changes_new.Changes.AssociationPropertyChange#getOldValue()
 	 * @see #getAssociationPropertyChange()
 	 * @generated
 	 */
 	EReference getAssociationPropertyChange_OldValue();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.CompositionPropertyChange <em>Composition Property Change</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.CompositionPropertyChange <em>Composition Property Change</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Composition Property Change</em>'.
-	 * @see Changes.CompositionPropertyChange
+	 * @see changes_new.Changes.CompositionPropertyChange
 	 * @generated
 	 */
 	EClass getCompositionPropertyChange();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link Changes.CompositionPropertyChange#getNewValue <em>New Value</em>}'.
+	 * Returns the meta object for the containment reference '{@link changes_new.Changes.CompositionPropertyChange#getNewValue <em>New Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>New Value</em>'.
-	 * @see Changes.CompositionPropertyChange#getNewValue()
+	 * @see changes_new.Changes.CompositionPropertyChange#getNewValue()
 	 * @see #getCompositionPropertyChange()
 	 * @generated
 	 */
 	EReference getCompositionPropertyChange_NewValue();
 
 	/**
-	 * Returns the meta object for the reference '{@link Changes.CompositionPropertyChange#getOldValue <em>Old Value</em>}'.
+	 * Returns the meta object for the reference '{@link changes_new.Changes.CompositionPropertyChange#getOldValue <em>Old Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Old Value</em>'.
-	 * @see Changes.CompositionPropertyChange#getOldValue()
+	 * @see changes_new.Changes.CompositionPropertyChange#getOldValue()
 	 * @see #getCompositionPropertyChange()
 	 * @generated
 	 */
 	EReference getCompositionPropertyChange_OldValue();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.CompositionMoveIntoProperty <em>Composition Move Into Property</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.CompositionMoveIntoProperty <em>Composition Move Into Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Composition Move Into Property</em>'.
-	 * @see Changes.CompositionMoveIntoProperty
+	 * @see changes_new.Changes.CompositionMoveIntoProperty
 	 * @generated
 	 */
 	EClass getCompositionMoveIntoProperty();
 
 	/**
-	 * Returns the meta object for the reference '{@link Changes.CompositionMoveIntoProperty#getNewValue <em>New Value</em>}'.
+	 * Returns the meta object for the reference '{@link changes_new.Changes.CompositionMoveIntoProperty#getNewValue <em>New Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>New Value</em>'.
-	 * @see Changes.CompositionMoveIntoProperty#getNewValue()
+	 * @see changes_new.Changes.CompositionMoveIntoProperty#getNewValue()
 	 * @see #getCompositionMoveIntoProperty()
 	 * @generated
 	 */
 	EReference getCompositionMoveIntoProperty_NewValue();
 
 	/**
-	 * Returns the meta object for the reference '{@link Changes.CompositionMoveIntoProperty#getOldValue <em>Old Value</em>}'.
+	 * Returns the meta object for the reference '{@link changes_new.Changes.CompositionMoveIntoProperty#getOldValue <em>Old Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Old Value</em>'.
-	 * @see Changes.CompositionMoveIntoProperty#getOldValue()
+	 * @see changes_new.Changes.CompositionMoveIntoProperty#getOldValue()
 	 * @see #getCompositionMoveIntoProperty()
 	 * @generated
 	 */
 	EReference getCompositionMoveIntoProperty_OldValue();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link Changes.CompositionMoveIntoProperty#getOrigin <em>Origin</em>}'.
+	 * Returns the meta object for the containment reference '{@link changes_new.Changes.CompositionMoveIntoProperty#getOrigin <em>Origin</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Origin</em>'.
-	 * @see Changes.CompositionMoveIntoProperty#getOrigin()
+	 * @see changes_new.Changes.CompositionMoveIntoProperty#getOrigin()
 	 * @see #getCompositionMoveIntoProperty()
 	 * @generated
 	 */
 	EReference getCompositionMoveIntoProperty_Origin();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.CompositionMoveToList <em>Composition Move To List</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.CompositionMoveToList <em>Composition Move To List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Composition Move To List</em>'.
-	 * @see Changes.CompositionMoveToList
+	 * @see changes_new.Changes.CompositionMoveToList
 	 * @generated
 	 */
 	EClass getCompositionMoveToList();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Changes.CompositionMoveToList#getIndex <em>Index</em>}'.
+	 * Returns the meta object for the attribute '{@link changes_new.Changes.CompositionMoveToList#getIndex <em>Index</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Index</em>'.
-	 * @see Changes.CompositionMoveToList#getIndex()
+	 * @see changes_new.Changes.CompositionMoveToList#getIndex()
 	 * @see #getCompositionMoveToList()
 	 * @generated
 	 */
 	EAttribute getCompositionMoveToList_Index();
 
 	/**
-	 * Returns the meta object for the reference '{@link Changes.CompositionMoveToList#getMovedElement <em>Moved Element</em>}'.
+	 * Returns the meta object for the reference '{@link changes_new.Changes.CompositionMoveToList#getMovedElement <em>Moved Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Moved Element</em>'.
-	 * @see Changes.CompositionMoveToList#getMovedElement()
+	 * @see changes_new.Changes.CompositionMoveToList#getMovedElement()
 	 * @see #getCompositionMoveToList()
 	 * @generated
 	 */
 	EReference getCompositionMoveToList_MovedElement();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link Changes.CompositionMoveToList#getOrigin <em>Origin</em>}'.
+	 * Returns the meta object for the containment reference '{@link changes_new.Changes.CompositionMoveToList#getOrigin <em>Origin</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Origin</em>'.
-	 * @see Changes.CompositionMoveToList#getOrigin()
+	 * @see changes_new.Changes.CompositionMoveToList#getOrigin()
 	 * @see #getCompositionMoveToList()
 	 * @generated
 	 */
 	EReference getCompositionMoveToList_Origin();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.CompositionMoveToCollection <em>Composition Move To Collection</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.CompositionMoveToCollection <em>Composition Move To Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Composition Move To Collection</em>'.
-	 * @see Changes.CompositionMoveToCollection
+	 * @see changes_new.Changes.CompositionMoveToCollection
 	 * @generated
 	 */
 	EClass getCompositionMoveToCollection();
 
 	/**
-	 * Returns the meta object for the reference '{@link Changes.CompositionMoveToCollection#getMovedElement <em>Moved Element</em>}'.
+	 * Returns the meta object for the reference '{@link changes_new.Changes.CompositionMoveToCollection#getMovedElement <em>Moved Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Moved Element</em>'.
-	 * @see Changes.CompositionMoveToCollection#getMovedElement()
+	 * @see changes_new.Changes.CompositionMoveToCollection#getMovedElement()
 	 * @see #getCompositionMoveToCollection()
 	 * @generated
 	 */
 	EReference getCompositionMoveToCollection_MovedElement();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link Changes.CompositionMoveToCollection#getOrigin <em>Origin</em>}'.
+	 * Returns the meta object for the containment reference '{@link changes_new.Changes.CompositionMoveToCollection#getOrigin <em>Origin</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Origin</em>'.
-	 * @see Changes.CompositionMoveToCollection#getOrigin()
+	 * @see changes_new.Changes.CompositionMoveToCollection#getOrigin()
 	 * @see #getCompositionMoveToCollection()
 	 * @generated
 	 */
 	EReference getCompositionMoveToCollection_Origin();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.OperationCall <em>Operation Call</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.OperationCall <em>Operation Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Operation Call</em>'.
-	 * @see Changes.OperationCall
+	 * @see changes_new.Changes.OperationCall
 	 * @generated
 	 */
 	EClass getOperationCall();
 
 	/**
-	 * Returns the meta object for the reference '{@link Changes.OperationCall#getOperation <em>Operation</em>}'.
+	 * Returns the meta object for the reference '{@link changes_new.Changes.OperationCall#getOperation <em>Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Operation</em>'.
-	 * @see Changes.OperationCall#getOperation()
+	 * @see changes_new.Changes.OperationCall#getOperation()
 	 * @see #getOperationCall()
 	 * @generated
 	 */
 	EReference getOperationCall_Operation();
 
 	/**
-	 * Returns the meta object for the reference '{@link Changes.OperationCall#getTargetElement <em>Target Element</em>}'.
+	 * Returns the meta object for the reference '{@link changes_new.Changes.OperationCall#getTargetElement <em>Target Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Target Element</em>'.
-	 * @see Changes.OperationCall#getTargetElement()
+	 * @see changes_new.Changes.OperationCall#getTargetElement()
 	 * @see #getOperationCall()
 	 * @generated
 	 */
 	EReference getOperationCall_TargetElement();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link Changes.OperationCall#getArguments <em>Arguments</em>}'.
+	 * Returns the meta object for the containment reference list '{@link changes_new.Changes.OperationCall#getArguments <em>Arguments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Arguments</em>'.
-	 * @see Changes.OperationCall#getArguments()
+	 * @see changes_new.Changes.OperationCall#getArguments()
 	 * @see #getOperationCall()
 	 * @generated
 	 */
 	EReference getOperationCall_Arguments();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.OperationArgument <em>Operation Argument</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.OperationArgument <em>Operation Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Operation Argument</em>'.
-	 * @see Changes.OperationArgument
+	 * @see changes_new.Changes.OperationArgument
 	 * @generated
 	 */
 	EClass getOperationArgument();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Changes.OperationArgument#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link changes_new.Changes.OperationArgument#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see Changes.OperationArgument#getName()
+	 * @see changes_new.Changes.OperationArgument#getName()
 	 * @see #getOperationArgument()
 	 * @generated
 	 */
 	EAttribute getOperationArgument_Name();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.ValueArgument <em>Value Argument</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.ValueArgument <em>Value Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Value Argument</em>'.
-	 * @see Changes.ValueArgument
+	 * @see changes_new.Changes.ValueArgument
 	 * @generated
 	 */
 	EClass getValueArgument();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Changes.ValueArgument#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link changes_new.Changes.ValueArgument#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see Changes.ValueArgument#getValue()
+	 * @see changes_new.Changes.ValueArgument#getValue()
 	 * @see #getValueArgument()
 	 * @generated
 	 */
 	EAttribute getValueArgument_Value();
 
 	/**
-	 * Returns the meta object for class '{@link Changes.ReferenceArgument <em>Reference Argument</em>}'.
+	 * Returns the meta object for class '{@link changes_new.Changes.ReferenceArgument <em>Reference Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Reference Argument</em>'.
-	 * @see Changes.ReferenceArgument
+	 * @see changes_new.Changes.ReferenceArgument
 	 * @generated
 	 */
 	EClass getReferenceArgument();
 
 	/**
-	 * Returns the meta object for the reference '{@link Changes.ReferenceArgument#getValue <em>Value</em>}'.
+	 * Returns the meta object for the reference '{@link changes_new.Changes.ReferenceArgument#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Value</em>'.
-	 * @see Changes.ReferenceArgument#getValue()
+	 * @see changes_new.Changes.ReferenceArgument#getValue()
 	 * @see #getReferenceArgument()
 	 * @generated
 	 */
 	EReference getReferenceArgument_Value();
+
+	/**
+	 * Returns the meta object for class '{@link changes_new.Changes.AddToRoot <em>Add To Root</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Add To Root</em>'.
+	 * @see changes_new.Changes.AddToRoot
+	 * @generated
+	 */
+	EClass getAddToRoot();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link changes_new.Changes.AddToRoot#getNewObject <em>New Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>New Object</em>'.
+	 * @see changes_new.Changes.AddToRoot#getNewObject()
+	 * @see #getAddToRoot()
+	 * @generated
+	 */
+	EReference getAddToRoot_NewObject();
+
+	/**
+	 * Returns the meta object for class '{@link changes_new.Changes.DeleteFromRoot <em>Delete From Root</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Delete From Root</em>'.
+	 * @see changes_new.Changes.DeleteFromRoot
+	 * @generated
+	 */
+	EClass getDeleteFromRoot();
+
+	/**
+	 * Returns the meta object for the reference '{@link changes_new.Changes.DeleteFromRoot#getDeletedElement <em>Deleted Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Deleted Element</em>'.
+	 * @see changes_new.Changes.DeleteFromRoot#getDeletedElement()
+	 * @see #getDeleteFromRoot()
+	 * @generated
+	 */
+	EReference getDeleteFromRoot_DeletedElement();
+
+	/**
+	 * Returns the meta object for class '{@link changes_new.Changes.ReferenceSetNull <em>Reference Set Null</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Reference Set Null</em>'.
+	 * @see changes_new.Changes.ReferenceSetNull
+	 * @generated
+	 */
+	EClass getReferenceSetNull();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -2589,11 +3079,11 @@ public interface ChangesPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link Changes.impl.ModelChangeSetImpl <em>Model Change Set</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.ModelChangeSetImpl <em>Model Change Set</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.ModelChangeSetImpl
-		 * @see Changes.impl.ChangesPackageImpl#getModelChangeSet()
+		 * @see changes_new.Changes.impl.ModelChangeSetImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getModelChangeSet()
 		 * @generated
 		 */
 		EClass MODEL_CHANGE_SET = eINSTANCE.getModelChangeSet();
@@ -2607,21 +3097,29 @@ public interface ChangesPackage extends EPackage {
 		EReference MODEL_CHANGE_SET__CHANGES = eINSTANCE.getModelChangeSet_Changes();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.ModelChangeImpl <em>Model Change</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.ModelChangeImpl <em>Model Change</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.ModelChangeImpl
-		 * @see Changes.impl.ChangesPackageImpl#getModelChange()
+		 * @see changes_new.Changes.impl.ModelChangeImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getModelChange()
 		 * @generated
 		 */
 		EClass MODEL_CHANGE = eINSTANCE.getModelChange();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.ElementaryChangeImpl <em>Elementary Change</em>}' class.
+		 * The meta object literal for the '<em><b>Change Set</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.ElementaryChangeImpl
-		 * @see Changes.impl.ChangesPackageImpl#getElementaryChange()
+		 * @generated
+		 */
+		EReference MODEL_CHANGE__CHANGE_SET = eINSTANCE.getModelChange_ChangeSet();
+
+		/**
+		 * The meta object literal for the '{@link changes_new.Changes.impl.ElementaryChangeImpl <em>Elementary Change</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see changes_new.Changes.impl.ElementaryChangeImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getElementaryChange()
 		 * @generated
 		 */
 		EClass ELEMENTARY_CHANGE = eINSTANCE.getElementaryChange();
@@ -2643,11 +3141,11 @@ public interface ChangesPackage extends EPackage {
 		EReference ELEMENTARY_CHANGE__FEATURE = eINSTANCE.getElementaryChange_Feature();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.ChangeTransactionImpl <em>Change Transaction</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.ChangeTransactionImpl <em>Change Transaction</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.ChangeTransactionImpl
-		 * @see Changes.impl.ChangesPackageImpl#getChangeTransaction()
+		 * @see changes_new.Changes.impl.ChangeTransactionImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getChangeTransaction()
 		 * @generated
 		 */
 		EClass CHANGE_TRANSACTION = eINSTANCE.getChangeTransaction();
@@ -2669,41 +3167,41 @@ public interface ChangesPackage extends EPackage {
 		EReference CHANGE_TRANSACTION__NESTED_CHANGES = eINSTANCE.getChangeTransaction_NestedChanges();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.CompositionChangeImpl <em>Composition Change</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.CompositionChangeImpl <em>Composition Change</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.CompositionChangeImpl
-		 * @see Changes.impl.ChangesPackageImpl#getCompositionChange()
+		 * @see changes_new.Changes.impl.CompositionChangeImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionChange()
 		 * @generated
 		 */
 		EClass COMPOSITION_CHANGE = eINSTANCE.getCompositionChange();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.AssociationChangeImpl <em>Association Change</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.AssociationChangeImpl <em>Association Change</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.AssociationChangeImpl
-		 * @see Changes.impl.ChangesPackageImpl#getAssociationChange()
+		 * @see changes_new.Changes.impl.AssociationChangeImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getAssociationChange()
 		 * @generated
 		 */
 		EClass ASSOCIATION_CHANGE = eINSTANCE.getAssociationChange();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.AttributeChangeImpl <em>Attribute Change</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.AttributeChangeImpl <em>Attribute Change</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.AttributeChangeImpl
-		 * @see Changes.impl.ChangesPackageImpl#getAttributeChange()
+		 * @see changes_new.Changes.impl.AttributeChangeImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getAttributeChange()
 		 * @generated
 		 */
 		EClass ATTRIBUTE_CHANGE = eINSTANCE.getAttributeChange();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.AssociationCollectionDeletionImpl <em>Association Collection Deletion</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.AssociationCollectionDeletionImpl <em>Association Collection Deletion</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.AssociationCollectionDeletionImpl
-		 * @see Changes.impl.ChangesPackageImpl#getAssociationCollectionDeletion()
+		 * @see changes_new.Changes.impl.AssociationCollectionDeletionImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getAssociationCollectionDeletion()
 		 * @generated
 		 */
 		EClass ASSOCIATION_COLLECTION_DELETION = eINSTANCE.getAssociationCollectionDeletion();
@@ -2717,11 +3215,11 @@ public interface ChangesPackage extends EPackage {
 		EReference ASSOCIATION_COLLECTION_DELETION__DELETED_ELEMENT = eINSTANCE.getAssociationCollectionDeletion_DeletedElement();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.CompositionCollectionDeletionImpl <em>Composition Collection Deletion</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.CompositionCollectionDeletionImpl <em>Composition Collection Deletion</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.CompositionCollectionDeletionImpl
-		 * @see Changes.impl.ChangesPackageImpl#getCompositionCollectionDeletion()
+		 * @see changes_new.Changes.impl.CompositionCollectionDeletionImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionCollectionDeletion()
 		 * @generated
 		 */
 		EClass COMPOSITION_COLLECTION_DELETION = eINSTANCE.getCompositionCollectionDeletion();
@@ -2735,11 +3233,11 @@ public interface ChangesPackage extends EPackage {
 		EReference COMPOSITION_COLLECTION_DELETION__DELETED_ELEMENT = eINSTANCE.getCompositionCollectionDeletion_DeletedElement();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.AttributeCollectionDeletionImpl <em>Attribute Collection Deletion</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.AttributeCollectionDeletionImpl <em>Attribute Collection Deletion</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.AttributeCollectionDeletionImpl
-		 * @see Changes.impl.ChangesPackageImpl#getAttributeCollectionDeletion()
+		 * @see changes_new.Changes.impl.AttributeCollectionDeletionImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getAttributeCollectionDeletion()
 		 * @generated
 		 */
 		EClass ATTRIBUTE_COLLECTION_DELETION = eINSTANCE.getAttributeCollectionDeletion();
@@ -2753,11 +3251,11 @@ public interface ChangesPackage extends EPackage {
 		EAttribute ATTRIBUTE_COLLECTION_DELETION__DELETED_VALUE = eINSTANCE.getAttributeCollectionDeletion_DeletedValue();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.AssociationCollectionInsertionImpl <em>Association Collection Insertion</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.AssociationCollectionInsertionImpl <em>Association Collection Insertion</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.AssociationCollectionInsertionImpl
-		 * @see Changes.impl.ChangesPackageImpl#getAssociationCollectionInsertion()
+		 * @see changes_new.Changes.impl.AssociationCollectionInsertionImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getAssociationCollectionInsertion()
 		 * @generated
 		 */
 		EClass ASSOCIATION_COLLECTION_INSERTION = eINSTANCE.getAssociationCollectionInsertion();
@@ -2771,11 +3269,11 @@ public interface ChangesPackage extends EPackage {
 		EReference ASSOCIATION_COLLECTION_INSERTION__ADDED_ELEMENT = eINSTANCE.getAssociationCollectionInsertion_AddedElement();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.CompositionCollectionInsertionImpl <em>Composition Collection Insertion</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.CompositionCollectionInsertionImpl <em>Composition Collection Insertion</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.CompositionCollectionInsertionImpl
-		 * @see Changes.impl.ChangesPackageImpl#getCompositionCollectionInsertion()
+		 * @see changes_new.Changes.impl.CompositionCollectionInsertionImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionCollectionInsertion()
 		 * @generated
 		 */
 		EClass COMPOSITION_COLLECTION_INSERTION = eINSTANCE.getCompositionCollectionInsertion();
@@ -2789,11 +3287,11 @@ public interface ChangesPackage extends EPackage {
 		EReference COMPOSITION_COLLECTION_INSERTION__ADDED_ELEMENT = eINSTANCE.getCompositionCollectionInsertion_AddedElement();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.AttributeCollectionInsertionImpl <em>Attribute Collection Insertion</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.AttributeCollectionInsertionImpl <em>Attribute Collection Insertion</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.AttributeCollectionInsertionImpl
-		 * @see Changes.impl.ChangesPackageImpl#getAttributeCollectionInsertion()
+		 * @see changes_new.Changes.impl.AttributeCollectionInsertionImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getAttributeCollectionInsertion()
 		 * @generated
 		 */
 		EClass ATTRIBUTE_COLLECTION_INSERTION = eINSTANCE.getAttributeCollectionInsertion();
@@ -2807,41 +3305,41 @@ public interface ChangesPackage extends EPackage {
 		EAttribute ATTRIBUTE_COLLECTION_INSERTION__ADDED_VALUE = eINSTANCE.getAttributeCollectionInsertion_AddedValue();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.AssociationCollectionResetImpl <em>Association Collection Reset</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.AssociationCollectionResetImpl <em>Association Collection Reset</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.AssociationCollectionResetImpl
-		 * @see Changes.impl.ChangesPackageImpl#getAssociationCollectionReset()
+		 * @see changes_new.Changes.impl.AssociationCollectionResetImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getAssociationCollectionReset()
 		 * @generated
 		 */
 		EClass ASSOCIATION_COLLECTION_RESET = eINSTANCE.getAssociationCollectionReset();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.CompositionCollectionResetImpl <em>Composition Collection Reset</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.CompositionCollectionResetImpl <em>Composition Collection Reset</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.CompositionCollectionResetImpl
-		 * @see Changes.impl.ChangesPackageImpl#getCompositionCollectionReset()
+		 * @see changes_new.Changes.impl.CompositionCollectionResetImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionCollectionReset()
 		 * @generated
 		 */
 		EClass COMPOSITION_COLLECTION_RESET = eINSTANCE.getCompositionCollectionReset();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.AttributeCollectionResetImpl <em>Attribute Collection Reset</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.AttributeCollectionResetImpl <em>Attribute Collection Reset</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.AttributeCollectionResetImpl
-		 * @see Changes.impl.ChangesPackageImpl#getAttributeCollectionReset()
+		 * @see changes_new.Changes.impl.AttributeCollectionResetImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getAttributeCollectionReset()
 		 * @generated
 		 */
 		EClass ATTRIBUTE_COLLECTION_RESET = eINSTANCE.getAttributeCollectionReset();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.AssociationListDeletionImpl <em>Association List Deletion</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.AssociationListDeletionImpl <em>Association List Deletion</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.AssociationListDeletionImpl
-		 * @see Changes.impl.ChangesPackageImpl#getAssociationListDeletion()
+		 * @see changes_new.Changes.impl.AssociationListDeletionImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getAssociationListDeletion()
 		 * @generated
 		 */
 		EClass ASSOCIATION_LIST_DELETION = eINSTANCE.getAssociationListDeletion();
@@ -2863,11 +3361,11 @@ public interface ChangesPackage extends EPackage {
 		EAttribute ASSOCIATION_LIST_DELETION__INDEX = eINSTANCE.getAssociationListDeletion_Index();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.CompositionListDeletionImpl <em>Composition List Deletion</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.CompositionListDeletionImpl <em>Composition List Deletion</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.CompositionListDeletionImpl
-		 * @see Changes.impl.ChangesPackageImpl#getCompositionListDeletion()
+		 * @see changes_new.Changes.impl.CompositionListDeletionImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionListDeletion()
 		 * @generated
 		 */
 		EClass COMPOSITION_LIST_DELETION = eINSTANCE.getCompositionListDeletion();
@@ -2889,11 +3387,11 @@ public interface ChangesPackage extends EPackage {
 		EAttribute COMPOSITION_LIST_DELETION__INDEX = eINSTANCE.getCompositionListDeletion_Index();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.AttributeListDeletionImpl <em>Attribute List Deletion</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.AttributeListDeletionImpl <em>Attribute List Deletion</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.AttributeListDeletionImpl
-		 * @see Changes.impl.ChangesPackageImpl#getAttributeListDeletion()
+		 * @see changes_new.Changes.impl.AttributeListDeletionImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getAttributeListDeletion()
 		 * @generated
 		 */
 		EClass ATTRIBUTE_LIST_DELETION = eINSTANCE.getAttributeListDeletion();
@@ -2915,11 +3413,11 @@ public interface ChangesPackage extends EPackage {
 		EAttribute ATTRIBUTE_LIST_DELETION__INDEX = eINSTANCE.getAttributeListDeletion_Index();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.AssociationListInsertionImpl <em>Association List Insertion</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.AssociationListInsertionImpl <em>Association List Insertion</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.AssociationListInsertionImpl
-		 * @see Changes.impl.ChangesPackageImpl#getAssociationListInsertion()
+		 * @see changes_new.Changes.impl.AssociationListInsertionImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getAssociationListInsertion()
 		 * @generated
 		 */
 		EClass ASSOCIATION_LIST_INSERTION = eINSTANCE.getAssociationListInsertion();
@@ -2941,11 +3439,11 @@ public interface ChangesPackage extends EPackage {
 		EAttribute ASSOCIATION_LIST_INSERTION__INDEX = eINSTANCE.getAssociationListInsertion_Index();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.CompositionListInsertionImpl <em>Composition List Insertion</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.CompositionListInsertionImpl <em>Composition List Insertion</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.CompositionListInsertionImpl
-		 * @see Changes.impl.ChangesPackageImpl#getCompositionListInsertion()
+		 * @see changes_new.Changes.impl.CompositionListInsertionImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionListInsertion()
 		 * @generated
 		 */
 		EClass COMPOSITION_LIST_INSERTION = eINSTANCE.getCompositionListInsertion();
@@ -2967,11 +3465,11 @@ public interface ChangesPackage extends EPackage {
 		EAttribute COMPOSITION_LIST_INSERTION__INDEX = eINSTANCE.getCompositionListInsertion_Index();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.AttributeListInsertionImpl <em>Attribute List Insertion</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.AttributeListInsertionImpl <em>Attribute List Insertion</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.AttributeListInsertionImpl
-		 * @see Changes.impl.ChangesPackageImpl#getAttributeListInsertion()
+		 * @see changes_new.Changes.impl.AttributeListInsertionImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getAttributeListInsertion()
 		 * @generated
 		 */
 		EClass ATTRIBUTE_LIST_INSERTION = eINSTANCE.getAttributeListInsertion();
@@ -2993,11 +3491,11 @@ public interface ChangesPackage extends EPackage {
 		EAttribute ATTRIBUTE_LIST_INSERTION__INDEX = eINSTANCE.getAttributeListInsertion_Index();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.AttributePropertyChangeImpl <em>Attribute Property Change</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.AttributePropertyChangeImpl <em>Attribute Property Change</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.AttributePropertyChangeImpl
-		 * @see Changes.impl.ChangesPackageImpl#getAttributePropertyChange()
+		 * @see changes_new.Changes.impl.AttributePropertyChangeImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getAttributePropertyChange()
 		 * @generated
 		 */
 		EClass ATTRIBUTE_PROPERTY_CHANGE = eINSTANCE.getAttributePropertyChange();
@@ -3019,11 +3517,11 @@ public interface ChangesPackage extends EPackage {
 		EAttribute ATTRIBUTE_PROPERTY_CHANGE__OLD_VALUE = eINSTANCE.getAttributePropertyChange_OldValue();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.AssociationPropertyChangeImpl <em>Association Property Change</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.AssociationPropertyChangeImpl <em>Association Property Change</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.AssociationPropertyChangeImpl
-		 * @see Changes.impl.ChangesPackageImpl#getAssociationPropertyChange()
+		 * @see changes_new.Changes.impl.AssociationPropertyChangeImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getAssociationPropertyChange()
 		 * @generated
 		 */
 		EClass ASSOCIATION_PROPERTY_CHANGE = eINSTANCE.getAssociationPropertyChange();
@@ -3045,11 +3543,11 @@ public interface ChangesPackage extends EPackage {
 		EReference ASSOCIATION_PROPERTY_CHANGE__OLD_VALUE = eINSTANCE.getAssociationPropertyChange_OldValue();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.CompositionPropertyChangeImpl <em>Composition Property Change</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.CompositionPropertyChangeImpl <em>Composition Property Change</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.CompositionPropertyChangeImpl
-		 * @see Changes.impl.ChangesPackageImpl#getCompositionPropertyChange()
+		 * @see changes_new.Changes.impl.CompositionPropertyChangeImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionPropertyChange()
 		 * @generated
 		 */
 		EClass COMPOSITION_PROPERTY_CHANGE = eINSTANCE.getCompositionPropertyChange();
@@ -3071,11 +3569,11 @@ public interface ChangesPackage extends EPackage {
 		EReference COMPOSITION_PROPERTY_CHANGE__OLD_VALUE = eINSTANCE.getCompositionPropertyChange_OldValue();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.CompositionMoveIntoPropertyImpl <em>Composition Move Into Property</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.CompositionMoveIntoPropertyImpl <em>Composition Move Into Property</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.CompositionMoveIntoPropertyImpl
-		 * @see Changes.impl.ChangesPackageImpl#getCompositionMoveIntoProperty()
+		 * @see changes_new.Changes.impl.CompositionMoveIntoPropertyImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionMoveIntoProperty()
 		 * @generated
 		 */
 		EClass COMPOSITION_MOVE_INTO_PROPERTY = eINSTANCE.getCompositionMoveIntoProperty();
@@ -3105,11 +3603,11 @@ public interface ChangesPackage extends EPackage {
 		EReference COMPOSITION_MOVE_INTO_PROPERTY__ORIGIN = eINSTANCE.getCompositionMoveIntoProperty_Origin();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.CompositionMoveToListImpl <em>Composition Move To List</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.CompositionMoveToListImpl <em>Composition Move To List</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.CompositionMoveToListImpl
-		 * @see Changes.impl.ChangesPackageImpl#getCompositionMoveToList()
+		 * @see changes_new.Changes.impl.CompositionMoveToListImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionMoveToList()
 		 * @generated
 		 */
 		EClass COMPOSITION_MOVE_TO_LIST = eINSTANCE.getCompositionMoveToList();
@@ -3139,11 +3637,11 @@ public interface ChangesPackage extends EPackage {
 		EReference COMPOSITION_MOVE_TO_LIST__ORIGIN = eINSTANCE.getCompositionMoveToList_Origin();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.CompositionMoveToCollectionImpl <em>Composition Move To Collection</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.CompositionMoveToCollectionImpl <em>Composition Move To Collection</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.CompositionMoveToCollectionImpl
-		 * @see Changes.impl.ChangesPackageImpl#getCompositionMoveToCollection()
+		 * @see changes_new.Changes.impl.CompositionMoveToCollectionImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getCompositionMoveToCollection()
 		 * @generated
 		 */
 		EClass COMPOSITION_MOVE_TO_COLLECTION = eINSTANCE.getCompositionMoveToCollection();
@@ -3165,11 +3663,11 @@ public interface ChangesPackage extends EPackage {
 		EReference COMPOSITION_MOVE_TO_COLLECTION__ORIGIN = eINSTANCE.getCompositionMoveToCollection_Origin();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.OperationCallImpl <em>Operation Call</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.OperationCallImpl <em>Operation Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.OperationCallImpl
-		 * @see Changes.impl.ChangesPackageImpl#getOperationCall()
+		 * @see changes_new.Changes.impl.OperationCallImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getOperationCall()
 		 * @generated
 		 */
 		EClass OPERATION_CALL = eINSTANCE.getOperationCall();
@@ -3199,11 +3697,11 @@ public interface ChangesPackage extends EPackage {
 		EReference OPERATION_CALL__ARGUMENTS = eINSTANCE.getOperationCall_Arguments();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.OperationArgumentImpl <em>Operation Argument</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.OperationArgumentImpl <em>Operation Argument</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.OperationArgumentImpl
-		 * @see Changes.impl.ChangesPackageImpl#getOperationArgument()
+		 * @see changes_new.Changes.impl.OperationArgumentImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getOperationArgument()
 		 * @generated
 		 */
 		EClass OPERATION_ARGUMENT = eINSTANCE.getOperationArgument();
@@ -3217,11 +3715,11 @@ public interface ChangesPackage extends EPackage {
 		EAttribute OPERATION_ARGUMENT__NAME = eINSTANCE.getOperationArgument_Name();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.ValueArgumentImpl <em>Value Argument</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.ValueArgumentImpl <em>Value Argument</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.ValueArgumentImpl
-		 * @see Changes.impl.ChangesPackageImpl#getValueArgument()
+		 * @see changes_new.Changes.impl.ValueArgumentImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getValueArgument()
 		 * @generated
 		 */
 		EClass VALUE_ARGUMENT = eINSTANCE.getValueArgument();
@@ -3235,11 +3733,11 @@ public interface ChangesPackage extends EPackage {
 		EAttribute VALUE_ARGUMENT__VALUE = eINSTANCE.getValueArgument_Value();
 
 		/**
-		 * The meta object literal for the '{@link Changes.impl.ReferenceArgumentImpl <em>Reference Argument</em>}' class.
+		 * The meta object literal for the '{@link changes_new.Changes.impl.ReferenceArgumentImpl <em>Reference Argument</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Changes.impl.ReferenceArgumentImpl
-		 * @see Changes.impl.ChangesPackageImpl#getReferenceArgument()
+		 * @see changes_new.Changes.impl.ReferenceArgumentImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getReferenceArgument()
 		 * @generated
 		 */
 		EClass REFERENCE_ARGUMENT = eINSTANCE.getReferenceArgument();
@@ -3251,6 +3749,52 @@ public interface ChangesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference REFERENCE_ARGUMENT__VALUE = eINSTANCE.getReferenceArgument_Value();
+
+		/**
+		 * The meta object literal for the '{@link changes_new.Changes.impl.AddToRootImpl <em>Add To Root</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see changes_new.Changes.impl.AddToRootImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getAddToRoot()
+		 * @generated
+		 */
+		EClass ADD_TO_ROOT = eINSTANCE.getAddToRoot();
+
+		/**
+		 * The meta object literal for the '<em><b>New Object</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ADD_TO_ROOT__NEW_OBJECT = eINSTANCE.getAddToRoot_NewObject();
+
+		/**
+		 * The meta object literal for the '{@link changes_new.Changes.impl.DeleteFromRootImpl <em>Delete From Root</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see changes_new.Changes.impl.DeleteFromRootImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getDeleteFromRoot()
+		 * @generated
+		 */
+		EClass DELETE_FROM_ROOT = eINSTANCE.getDeleteFromRoot();
+
+		/**
+		 * The meta object literal for the '<em><b>Deleted Element</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DELETE_FROM_ROOT__DELETED_ELEMENT = eINSTANCE.getDeleteFromRoot_DeletedElement();
+
+		/**
+		 * The meta object literal for the '{@link changes_new.Changes.impl.ReferenceSetNullImpl <em>Reference Set Null</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see changes_new.Changes.impl.ReferenceSetNullImpl
+		 * @see changes_new.Changes.impl.ChangesPackageImpl#getReferenceSetNull()
+		 * @generated
+		 */
+		EClass REFERENCE_SET_NULL = eINSTANCE.getReferenceSetNull();
 
 	}
 

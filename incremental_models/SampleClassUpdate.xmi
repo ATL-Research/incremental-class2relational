@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:class_="Class">
+  <class_:Class>
+    <attr name="name" type="/2"/>
+    <attr name="members" multiValued="true" type="/1"/>
+  </class_:Class>
+  <class_:Class name="Member">
+    <attr name="firstName" multiValued="true"/>
+    <attr name="emailAddresses" multiValued="false" type="/2"/>
+  </class_:Class>
+  <class_:DataType name="String"/>
+  <class_:DataType name="Integer"/>
+</xmi:XMI>

@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see Changes.ChangesPackage
+ * @see changes_new.Changes.ChangesPackage
  * @generated
  */
 public interface ChangesFactory extends EFactory {
@@ -38,7 +38,7 @@ public interface ChangesFactory extends EFactory {
 	 * @generated
 	 */
 	ChangeTransaction createChangeTransaction();
-	
+
 	/**
 	 * Returns a new object of class '<em>Association Collection Deletion</em>'.
 	 * <!-- begin-user-doc -->
@@ -254,6 +254,33 @@ public interface ChangesFactory extends EFactory {
 	 * @generated
 	 */
 	ReferenceArgument createReferenceArgument();
+
+	/**
+	 * Returns a new object of class '<em>Add To Root</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Add To Root</em>'.
+	 * @generated
+	 */
+	AddToRoot createAddToRoot();
+
+	/**
+	 * Returns a new object of class '<em>Delete From Root</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Delete From Root</em>'.
+	 * @generated
+	 */
+	DeleteFromRoot createDeleteFromRoot();
+
+	/**
+	 * Returns a new object of class '<em>Reference Set Null</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Reference Set Null</em>'.
+	 * @generated
+	 */
+	ReferenceSetNull createReferenceSetNull();
 
 	/**
 	 * Returns the package supported by this factory.

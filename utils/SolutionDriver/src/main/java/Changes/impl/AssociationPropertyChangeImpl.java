@@ -212,7 +212,6 @@ public class AssociationPropertyChangeImpl extends AssociationChangeImpl impleme
 		}
 		return super.eIsSet(featureID);
 	}
-
 	@Override
 	public void apply() {
 		this.getAffectedElement().eSet(this.getFeature(), this.getNewValue());

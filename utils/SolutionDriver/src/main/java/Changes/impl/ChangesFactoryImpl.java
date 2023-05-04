@@ -82,6 +82,9 @@ public class ChangesFactoryImpl extends EFactoryImpl implements ChangesFactory {
 			case ChangesPackage.OPERATION_CALL: return createOperationCall();
 			case ChangesPackage.VALUE_ARGUMENT: return createValueArgument();
 			case ChangesPackage.REFERENCE_ARGUMENT: return createReferenceArgument();
+			case ChangesPackage.ADD_TO_ROOT: return createAddToRoot();
+			case ChangesPackage.DELETE_FROM_ROOT: return createDeleteFromRoot();
+			case ChangesPackage.REFERENCE_SET_NULL: return createReferenceSetNull();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -345,6 +348,36 @@ public class ChangesFactoryImpl extends EFactoryImpl implements ChangesFactory {
 	public ReferenceArgument createReferenceArgument() {
 		ReferenceArgumentImpl referenceArgument = new ReferenceArgumentImpl();
 		return referenceArgument;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AddToRoot createAddToRoot() {
+		AddToRootImpl addToRoot = new AddToRootImpl();
+		return addToRoot;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DeleteFromRoot createDeleteFromRoot() {
+		DeleteFromRootImpl deleteFromRoot = new DeleteFromRootImpl();
+		return deleteFromRoot;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ReferenceSetNull createReferenceSetNull() {
+		ReferenceSetNullImpl referenceSetNull = new ReferenceSetNullImpl();
+		return referenceSetNull;
 	}
 
 	/**

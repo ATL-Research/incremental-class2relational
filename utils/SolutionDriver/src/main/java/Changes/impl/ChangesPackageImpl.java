@@ -2,6 +2,7 @@
  */
 package Changes.impl;
 
+import Changes.AddToRoot;
 import Changes.AssociationChange;
 import Changes.AssociationCollectionDeletion;
 import Changes.AssociationCollectionInsertion;
@@ -29,12 +30,14 @@ import Changes.CompositionMoveIntoProperty;
 import Changes.CompositionMoveToCollection;
 import Changes.CompositionMoveToList;
 import Changes.CompositionPropertyChange;
+import Changes.DeleteFromRoot;
 import Changes.ElementaryChange;
 import Changes.ModelChange;
 import Changes.ModelChangeSet;
 import Changes.OperationArgument;
 import Changes.OperationCall;
 import Changes.ReferenceArgument;
+import Changes.ReferenceSetNull;
 import Changes.ValueArgument;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -276,6 +279,27 @@ public class ChangesPackageImpl extends EPackageImpl implements ChangesPackage {
 	private EClass referenceArgumentEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass addToRootEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass deleteFromRootEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass referenceSetNullEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -293,7 +317,6 @@ public class ChangesPackageImpl extends EPackageImpl implements ChangesPackage {
 	private ChangesPackageImpl() {
 		super(eNS_URI, ChangesFactory.eINSTANCE);
 	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -303,7 +326,7 @@ public class ChangesPackageImpl extends EPackageImpl implements ChangesPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link ChangesPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -317,7 +340,8 @@ public class ChangesPackageImpl extends EPackageImpl implements ChangesPackage {
 		if (isInited) return (ChangesPackage)EPackage.Registry.INSTANCE.getEPackage(ChangesPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ChangesPackageImpl theChangesPackage = (ChangesPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ChangesPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ChangesPackageImpl());
+		Object registeredChangesPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		ChangesPackageImpl theChangesPackage = registeredChangesPackage instanceof ChangesPackageImpl ? (ChangesPackageImpl)registeredChangesPackage : new ChangesPackageImpl();
 
 		isInited = true;
 
@@ -330,7 +354,6 @@ public class ChangesPackageImpl extends EPackageImpl implements ChangesPackage {
 		// Mark meta-data to indicate it can't be changed
 		theChangesPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(ChangesPackage.eNS_URI, theChangesPackage);
 		return theChangesPackage;
@@ -361,6 +384,15 @@ public class ChangesPackageImpl extends EPackageImpl implements ChangesPackage {
 	 */
 	public EClass getModelChange() {
 		return modelChangeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelChange_ChangeSet() {
+		return (EReference)modelChangeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1016,6 +1048,51 @@ public class ChangesPackageImpl extends EPackageImpl implements ChangesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAddToRoot() {
+		return addToRootEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAddToRoot_NewObject() {
+		return (EReference)addToRootEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDeleteFromRoot() {
+		return deleteFromRootEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDeleteFromRoot_DeletedElement() {
+		return (EReference)deleteFromRootEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getReferenceSetNull() {
+		return referenceSetNullEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ChangesFactory getChangesFactory() {
 		return (ChangesFactory)getEFactoryInstance();
 	}
@@ -1043,6 +1120,7 @@ public class ChangesPackageImpl extends EPackageImpl implements ChangesPackage {
 		createEReference(modelChangeSetEClass, MODEL_CHANGE_SET__CHANGES);
 
 		modelChangeEClass = createEClass(MODEL_CHANGE);
+		createEReference(modelChangeEClass, MODEL_CHANGE__CHANGE_SET);
 
 		elementaryChangeEClass = createEClass(ELEMENTARY_CHANGE);
 		createEReference(elementaryChangeEClass, ELEMENTARY_CHANGE__AFFECTED_ELEMENT);
@@ -1145,6 +1223,14 @@ public class ChangesPackageImpl extends EPackageImpl implements ChangesPackage {
 
 		referenceArgumentEClass = createEClass(REFERENCE_ARGUMENT);
 		createEReference(referenceArgumentEClass, REFERENCE_ARGUMENT__VALUE);
+
+		addToRootEClass = createEClass(ADD_TO_ROOT);
+		createEReference(addToRootEClass, ADD_TO_ROOT__NEW_OBJECT);
+
+		deleteFromRootEClass = createEClass(DELETE_FROM_ROOT);
+		createEReference(deleteFromRootEClass, DELETE_FROM_ROOT__DELETED_ELEMENT);
+
+		referenceSetNullEClass = createEClass(REFERENCE_SET_NULL);
 	}
 
 	/**
@@ -1203,12 +1289,16 @@ public class ChangesPackageImpl extends EPackageImpl implements ChangesPackage {
 		operationCallEClass.getESuperTypes().add(this.getModelChange());
 		valueArgumentEClass.getESuperTypes().add(this.getOperationArgument());
 		referenceArgumentEClass.getESuperTypes().add(this.getOperationArgument());
+		addToRootEClass.getESuperTypes().add(this.getElementaryChange());
+		deleteFromRootEClass.getESuperTypes().add(this.getElementaryChange());
+		referenceSetNullEClass.getESuperTypes().add(this.getElementaryChange());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(modelChangeSetEClass, ModelChangeSet.class, "ModelChangeSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModelChangeSet_Changes(), this.getModelChange(), null, "changes", null, 0, -1, ModelChangeSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelChangeSet_Changes(), this.getModelChange(), this.getModelChange_ChangeSet(), "changes", null, 0, -1, ModelChangeSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelChangeEClass, ModelChange.class, "ModelChange", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModelChange_ChangeSet(), this.getModelChangeSet(), this.getModelChangeSet_Changes(), "changeSet", null, 0, 1, ModelChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(elementaryChangeEClass, ElementaryChange.class, "ElementaryChange", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getElementaryChange_AffectedElement(), ecorePackage.getEObject(), null, "affectedElement", null, 1, 1, ElementaryChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1218,11 +1308,11 @@ public class ChangesPackageImpl extends EPackageImpl implements ChangesPackage {
 		initEReference(getChangeTransaction_SourceChange(), this.getModelChange(), null, "sourceChange", null, 1, 1, ChangeTransaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getChangeTransaction_NestedChanges(), this.getModelChange(), null, "nestedChanges", null, 0, -1, ChangeTransaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(compositionChangeEClass, CompositionChange.class, "CompositionChange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(compositionChangeEClass, CompositionChange.class, "CompositionChange", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(associationChangeEClass, AssociationChange.class, "AssociationChange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(associationChangeEClass, AssociationChange.class, "AssociationChange", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(attributeChangeEClass, AttributeChange.class, "AttributeChange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(attributeChangeEClass, AttributeChange.class, "AttributeChange", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(associationCollectionDeletionEClass, AssociationCollectionDeletion.class, "AssociationCollectionDeletion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAssociationCollectionDeletion_DeletedElement(), ecorePackage.getEObject(), null, "deletedElement", null, 1, 1, AssociationCollectionDeletion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1311,6 +1401,14 @@ public class ChangesPackageImpl extends EPackageImpl implements ChangesPackage {
 
 		initEClass(referenceArgumentEClass, ReferenceArgument.class, "ReferenceArgument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getReferenceArgument_Value(), ecorePackage.getEObject(), null, "value", null, 1, 1, ReferenceArgument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(addToRootEClass, AddToRoot.class, "AddToRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAddToRoot_NewObject(), ecorePackage.getEObject(), null, "newObject", null, 0, 1, AddToRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(deleteFromRootEClass, DeleteFromRoot.class, "DeleteFromRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDeleteFromRoot_DeletedElement(), ecorePackage.getEObject(), null, "deletedElement", null, 0, 1, DeleteFromRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(referenceSetNullEClass, ReferenceSetNull.class, "ReferenceSetNull", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

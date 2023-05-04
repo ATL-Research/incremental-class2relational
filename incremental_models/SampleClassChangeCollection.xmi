@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ASCII"?>
+<changes:ModelChangeSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:changes="http://nmf.codeplex.com/changes" xmlns:class_="Class" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <changes xsi:type="changes:AttributePropertyChange" newValue="Member" oldValue="Person">
+    <affectedElement href="../../incremental_models/SampleClass.xmi#/1"/>
+    <feature xsi:type="ecore:EAttribute" href="Class#//NamedElt/name"/>
+  </changes>
+  <changes xsi:type="changes:AttributePropertyChange" oldValue="Family">
+    <affectedElement href="../../incremental_models/SampleClass.xmi#/0"/>
+    <feature xsi:type="ecore:EAttribute" href="Class#//NamedElt/name"/>
+  </changes>
+  <changes xsi:type="changes:AttributePropertyChange" newValue="true" oldValue="false">
+    <affectedElement href="../../incremental_models/SampleClass.xmi#/1/@attr.0"/>
+    <feature xsi:type="ecore:EAttribute" href="Class#//Attribute/multiValued"/>
+  </changes>
+  <changes xsi:type="changes:AttributePropertyChange" newValue="false" oldValue="true">
+    <affectedElement href="../../incremental_models/SampleClass.xmi#/1/@attr.2"/>
+    <feature xsi:type="ecore:EAttribute" href="Class#//Attribute/multiValued"/>
+  </changes>
+  <changes xsi:type="changes:CompositionCollectionInsertion">
+    <affectedElement href="../../incremental_models/SampleClass.xmi#/1"/>
+    <feature xsi:type="ecore:EReference" href="Class#//Class/attr"/>
+    <addedElement xsi:type="class_:Attribute" name="newMutliValuedAttribute" multiValued="false"/>
+  </changes>
+  <changes xsi:type="changes:AddToRoot" newObject="//@changes.5/@newObject"/>
+  <changes xsi:type="changes:AddToRoot" newObject="//@changes.6/@newObject"/>
+  <changes xsi:type="changes:AddToRoot" newObject="//@changes.7/@newObject"/>
+  <changes xsi:type="changes:DeleteFromRoot" deletedElement="//@changes.7/@newObject"/>
+  <changes xsi:type="changes:AttributePropertyChange" oldValue="String">
+    <affectedElement href="../../incremental_models/SampleClass.xmi#/1/@attr.0"/>
+    <feature xsi:type="ecore:EReference" href="Class#//Attribute/type"/>
+  </changes>
+  <sourceModel href="../../incremental_models/SampleClass.xmi#/0"/>
+</changes:ModelChangeSet>

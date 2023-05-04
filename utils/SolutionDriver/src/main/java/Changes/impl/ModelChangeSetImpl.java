@@ -7,17 +7,14 @@ import Changes.ModelChange;
 import Changes.ModelChangeSet;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -28,7 +25,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.ModelChangeSetImpl#getChanges <em>Changes</em>}</li>
+ *   <li>{@link changes_new.Changes.impl.ModelChangeSetImpl#getChanges <em>Changes</em>}</li>
  * </ul>
  *
  * @generated
@@ -70,9 +67,24 @@ public class ModelChangeSetImpl extends MinimalEObjectImpl.Container implements 
 	 */
 	public EList<ModelChange> getChanges() {
 		if (changes == null) {
-			changes = new EObjectContainmentEList<ModelChange>(ModelChange.class, this, ChangesPackage.MODEL_CHANGE_SET__CHANGES);
+			changes = new EObjectContainmentWithInverseEList<ModelChange>(ModelChange.class, this, ChangesPackage.MODEL_CHANGE_SET__CHANGES, ChangesPackage.MODEL_CHANGE__CHANGE_SET);
 		}
 		return changes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ChangesPackage.MODEL_CHANGE_SET__CHANGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getChanges()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
