@@ -103,7 +103,7 @@ function checkScenario() {
     eval "$run"
 
     # set target for batch run
-    local batchRunTarget="$outputDir/target_batchbatch.xmi"
+    local batchRunTarget="$outputDir/target_batch.xmi"
     export TARGET_PATH="$(realpath "$batchRunTarget")"
     export CURRENT_MODEL="$TARGET_PATH"
     export BATCH_MODE="1"
