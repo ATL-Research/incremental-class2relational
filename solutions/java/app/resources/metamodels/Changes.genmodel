@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/JClass2RelationalIncremental-app/src" modelPluginID="JClass2RelationalIncremental-app"
+    modelName="Changes" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>Changes.ecore</foreignModel>
+  <genPackages prefix="Changes" basePackage="metamodels" disposableProviderFactory="true"
+      ecorePackage="Changes.ecore#/">
+    <genClasses ecoreClass="Changes.ecore#//ModelChangeSet">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Changes.ecore#//ModelChangeSet/changes"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Changes.ecore#//ModelChange"/>
+    <genClasses image="false" ecoreClass="Changes.ecore#//ElementaryChange">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Changes.ecore#//ElementaryChange/affectedElement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Changes.ecore#//ElementaryChange/feature"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//ChangeTransaction">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Changes.ecore#//ChangeTransaction/sourceChange"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Changes.ecore#//ChangeTransaction/nestedChanges"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//CompositionChange"/>
+    <genClasses ecoreClass="Changes.ecore#//AssociationChange"/>
+    <genClasses ecoreClass="Changes.ecore#//AttributeChange"/>
+    <genClasses ecoreClass="Changes.ecore#//AssociationCollectionDeletion">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Changes.ecore#//AssociationCollectionDeletion/deletedElement"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//CompositionCollectionDeletion">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Changes.ecore#//CompositionCollectionDeletion/deletedElement"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//AttributeCollectionDeletion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Changes.ecore#//AttributeCollectionDeletion/deletedValue"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//AssociationCollectionInsertion">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Changes.ecore#//AssociationCollectionInsertion/addedElement"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//CompositionCollectionInsertion">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Changes.ecore#//CompositionCollectionInsertion/addedElement"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//AttributeCollectionInsertion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Changes.ecore#//AttributeCollectionInsertion/addedValue"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//AssociationCollectionReset"/>
+    <genClasses ecoreClass="Changes.ecore#//CompositionCollectionReset"/>
+    <genClasses ecoreClass="Changes.ecore#//AttributeCollectionReset"/>
+    <genClasses ecoreClass="Changes.ecore#//AssociationListDeletion">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Changes.ecore#//AssociationListDeletion/deletedElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Changes.ecore#//AssociationListDeletion/index"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//CompositionListDeletion">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Changes.ecore#//CompositionListDeletion/deletedElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Changes.ecore#//CompositionListDeletion/index"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//AttributeListDeletion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Changes.ecore#//AttributeListDeletion/deletedValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Changes.ecore#//AttributeListDeletion/index"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//AssociationListInsertion">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Changes.ecore#//AssociationListInsertion/addedElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Changes.ecore#//AssociationListInsertion/index"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//CompositionListInsertion">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Changes.ecore#//CompositionListInsertion/addedElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Changes.ecore#//CompositionListInsertion/index"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//AttributeListInsertion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Changes.ecore#//AttributeListInsertion/addedValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Changes.ecore#//AttributeListInsertion/index"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//AttributePropertyChange">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Changes.ecore#//AttributePropertyChange/newValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Changes.ecore#//AttributePropertyChange/oldValue"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//AssociationPropertyChange">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Changes.ecore#//AssociationPropertyChange/newValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Changes.ecore#//AssociationPropertyChange/oldValue"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//CompositionPropertyChange">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Changes.ecore#//CompositionPropertyChange/newValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Changes.ecore#//CompositionPropertyChange/oldValue"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//CompositionMoveIntoProperty">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Changes.ecore#//CompositionMoveIntoProperty/newValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Changes.ecore#//CompositionMoveIntoProperty/oldValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Changes.ecore#//CompositionMoveIntoProperty/origin"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//CompositionMoveToList">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Changes.ecore#//CompositionMoveToList/index"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Changes.ecore#//CompositionMoveToList/movedElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Changes.ecore#//CompositionMoveToList/origin"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//CompositionMoveToCollection">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Changes.ecore#//CompositionMoveToCollection/movedElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Changes.ecore#//CompositionMoveToCollection/origin"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//OperationCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Changes.ecore#//OperationCall/operation"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Changes.ecore#//OperationCall/targetElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Changes.ecore#//OperationCall/arguments"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Changes.ecore#//OperationArgument">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Changes.ecore#//OperationArgument/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//ValueArgument">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Changes.ecore#//ValueArgument/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Changes.ecore#//ReferenceArgument">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Changes.ecore#//ReferenceArgument/value"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

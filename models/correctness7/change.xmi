@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<changes:ModelChangeSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:changes="http://nmf.codeplex.com/changes" xmlns:class_="Class" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <changes xsi:type="changes:CompositionListDeletion">
+    <affectedElement href="../../models/correctness7/class.xmi#/1"/>
+    <feature xsi:type="ecore:EReference" href="Class#//Class/attr"/>
+    <deletedElement href="../../models/correctness7/class.xmi#/1/@attr.2"/>
+  </changes>
+</changes:ModelChangeSet>

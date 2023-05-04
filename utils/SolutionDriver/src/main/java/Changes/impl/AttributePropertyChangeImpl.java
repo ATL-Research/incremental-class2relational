@@ -222,30 +222,18 @@ public class AttributePropertyChangeImpl extends AttributeChangeImpl implements 
 
 	@Override
 	public void apply() {
+		if (this.getAffectedElement().eIsProxy()) {
+			throw new IllegalStateException("Cannot apply a change on a proxy element");
+		}
+		if (this.getFeature().eIsProxy()) {
+			throw new IllegalStateException("Cannot apply a change on a proxy feature");
+		}
 		if (this.getNewValue() != null) {
-//			System.out.println(featureTypeName);
-//			switch (this.getFeature().getEType().getName()) {
-//				case "EString":
-//					this.getAffectedElement().eSet(this.getFeature(), this.getNewValue());
-//					break;
-//				case "EInt":
-//					this.getAffectedElement().eSet(this.getFeature(), Integer.parseInt(this.getNewValue()));
-//					break;
-//				case "EBoolean":
-//					EStructuralFeature feat = this.getFeature();
-//					this.getAffectedElement().eSet(feat, Boolean.parseBoolean(this.getNewValue()));
-//					break;
-//				case "EDataType":
-//					this.getAffectedElement().eSet(this.getFeature(), this.getNewValue());			
-//				default:
-//					break;
-//			}
 			String featureTypeName = this.getFeature().getEType().getName();
 			if (featureTypeName.contains("String"))
 				this.getAffectedElement().eSet(this.getFeature(), this.getNewValue());
 			else if (featureTypeName.contains("Int"))
 				this.getAffectedElement().eSet(this.getFeature(), Integer.parseInt(this.getNewValue()));
-
 			else if (featureTypeName.contains("Boolean"))
 				this.getAffectedElement().eSet(this.getFeature(), Boolean.parseBoolean(this.getNewValue()));
 		} else {

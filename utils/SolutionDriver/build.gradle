@@ -4,6 +4,7 @@ plugins {
     id 'maven-publish'
 }
 
+sourceCompatibility = "11"
 targetCompatibility = "11"
 
 repositories {
@@ -25,7 +26,7 @@ publishing {
         myLibrary(MavenPublication) {
             group = 'io.github.atlresearch.ttc2023'
             artifactId = 'solutiondriver'
-            version = '0.3'
+            version = '0.4'
 
             from components.java
         }

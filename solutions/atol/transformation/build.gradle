@@ -40,7 +40,7 @@ dependencies {
 
     implementation 'io.github.atlresearch:emfmodelfuzzer:+'
 
-    implementation 'io.github.atlresearch.ttc2023:solutiondriver:0.3'
+    implementation 'io.github.atlresearch.ttc2023:solutiondriver:0.4'
 }
 
 application {
