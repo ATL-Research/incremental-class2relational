@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Collections;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -51,18 +52,12 @@ public abstract class AbstractDriver {
             "xmi",
             new XMIResourceFactoryImpl()
         );
-        resourceSet.getPackageRegistry().put(
-            ChangesPackage.eNS_URI,
-            ChangesPackage.eINSTANCE
-        );
-        resourceSet.getPackageRegistry().put(
-            Class_Package.eNS_URI, 
-            Class_Package.eINSTANCE
-        );
-        resourceSet.getPackageRegistry().put(
-            Relational_Package.eNS_URI, 
-            Relational_Package.eINSTANCE
-        );
+
+        // Register source, change and target metamodels in global registry
+        EPackage e;
+        e = Class_Package.eINSTANCE;
+        e = Relational_Package.eINSTANCE;
+        e = ChangesPackage.eINSTANCE;
     }
 
     protected void loadModels() throws Exception {
