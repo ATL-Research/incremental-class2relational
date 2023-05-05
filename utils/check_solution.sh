@@ -37,7 +37,7 @@ INPUT_DIR="../../models/"
 OUTPUT_DIR="../../output/$(date +%Y-%m-%d_%H-%M)"
 globalReport="$OUTPUT_DIR/report.csv"
 
-function buildComparator() {
+function buildComparator {
     pushd Comparator > /dev/null
 
     echo "Build Comparator"
@@ -47,7 +47,7 @@ function buildComparator() {
     popd > /dev/null
 }
 
-function checkSolution() {
+function checkSolution {
     local solution="$1"
     local outputDir="$OUTPUT_DIR/$solution/"
 
@@ -81,7 +81,7 @@ function checkSolution() {
     popd > /dev/null
 }
 
-function checkScenario() {
+function checkScenario {
     local solution="$1"
     local scenario="$2"
     local outputDir="$3/$scenario"
