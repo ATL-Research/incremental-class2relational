@@ -61,12 +61,16 @@
 
 	11) add elements to root: Attribute, multi-valued, type:Person
 	
-	12) add elements to root: Attribute, multi-valued, without type
-	
-		potential transformation result for 10-12
+	potential transformation result for 10-11
 			(1) do not create the object
 			(2) ignore missing link and create dangling columns (added to resource)
 			(3) add attribute to first table
+	
+	12) add elements to root: Attribute, multi-valued, without type
+		expected transformation behavior
+			(1) do not create the object (null value behavior 2)
+			(2) create a table with default name (null value behavior 3)
+		
 			
 	correctness_couple: insert Class to root and delete it
 
