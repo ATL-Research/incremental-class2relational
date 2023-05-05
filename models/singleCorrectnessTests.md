@@ -25,16 +25,17 @@
 			expected transformation behavior:
 				delete table for mailAdresses + create column
 	
-	5) set type of firstnames null
-		expected transformation behavior:
-			remove all column contents?
-			or set default type?
+	5) set type of firstname null
+		expected transformation behaviors:
+			(1) remove all column contents?
+			(2) set default type to column?
 			
 	- Affecting EReferences 
 
 	6) set type of closestFriend null
 			expected transformation behavior
-				change type of column to default type?
+				(1) remove all column contents?
+				(2) set default type to column?
 	7) set owner of closestFriend null (removes the reference from source model)
 		expected transformation behavior
 			delete the columns
@@ -72,5 +73,5 @@
 ## 3) Dangling References
 	13) delete Class Person
 		expected transformation behavior
-			(1) remove table and all links to table Person (i.e. columns of type Person)
+			(1) remove table and all links to table Person (i.e. columns of type Person, tables for multi-valued attributes owned by Person)
 			(2) use a default type for columns referencing the table
