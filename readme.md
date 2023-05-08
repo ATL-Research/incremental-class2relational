@@ -16,8 +16,11 @@ The overall objective is to leverage this data set to better undertand whether G
 - metamodels: source and target metamodel as well as the Change metamodel used for incremental updates of the input model
 - models: the source models
 - solutions: implementations of ATOL (incremental variant of ATL), and Java solutions
-- transformations: Ecore2Class transformation which can turn any Ecore model into an instance of the expected source model
-- utils: the SolutionDriver which executes the transformation, and Comparator which evaluates the outcome of batch and incremental transformations
+- utils: 
+    - the SolutionDriver which executes the transformation, 
+    - the Comparator which evaluates the outcome of batch and incremental transformations
+    - ecore2class: utility Ecore2Class transformation which can turn any Ecore model into an instance of the expected source model
+  
 
 ## Using Github maven repository
 
