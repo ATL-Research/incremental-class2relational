@@ -28,3 +28,12 @@ We provide two maven packages, the fuzzer / model comparator and the solution dr
 
 For a Gradle example you can read the repository declaration from [ATOL build.gradle file](solutions/atol/transformation/build.gradle). To generate your credentials you can read Github documentation [for maven](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry#authenticating-to-github-packages) or [Gradle](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry#authenticating-to-github-packages).
 
+## Checking the solutions
+
+Register the Github authentication information properly, as explained in the previous section (e.g., via the `GITHUB_ACTOR` and `GITHUB_TOKEN` environment variables, or in ~/.gradle/gradle.properties).
+From the `utils/` sub-directory, launch `check_solution.sh`.
+For instance:
+```
+	$ cd utils
+	$ ./check_solution.sh
+```
