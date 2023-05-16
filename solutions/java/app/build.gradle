@@ -40,7 +40,7 @@ dependencies {
     implementation 'org.eclipse.emf:org.eclipse.emf.ecore.xmi:2.18.0'
     
     // Solution Driver for TTC2023
-    implementation 'io.github.atlresearch.ttc2023:solutiondriver:0.3'
+    implementation 'io.github.atlresearch.ttc2023:solutiondriver:0.5'
 
 
 }
