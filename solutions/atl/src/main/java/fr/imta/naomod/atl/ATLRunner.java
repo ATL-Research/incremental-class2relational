@@ -22,14 +22,9 @@ public class ATLRunner extends AbstractDriver {
 		try {
 			ATLRunner solution = new ATLRunner();
 			solution.init();
-			if (solution.isBatchMode()) {
-				solution.applyChange();
-				solution.applyTransformation();
-			}
-			else {
-				solution.applyTransformation();
-				solution.applyChange();
-			}
+			// always do batch transformation because ATL is not incremental
+			solution.applyChange();
+			solution.applyTransformation();
 			solution.saveTarget();
 		}
 		catch (Exception e) {
