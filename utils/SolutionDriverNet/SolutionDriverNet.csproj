@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<RootNamespace>HSRM.TTC2023.ClassToRelational</RootNamespace>
+	<AssemblyName>HSRM.TTC2023.ClassToRelational.Shared</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Class.nmeta" />
+    <None Remove="Relational.nmeta" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Class.nmeta" />
+    <EmbeddedResource Include="Relational.nmeta" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NMF-Basics" Version="2.0.185" />
+  </ItemGroup>
+
+</Project>

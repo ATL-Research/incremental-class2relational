@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <RootNamespace>HSRM.TTC2023.ClassToRelational</RootNamespace>
+	  <AssemblyName>HSRM.TTC2023.ClassToRelational.Csharp</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NMF-Basics" Version="2.0.185" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\utils\SolutionDriverNet\SolutionDriverNet.csproj">
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+
+</Project>
