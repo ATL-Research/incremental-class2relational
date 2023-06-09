@@ -5,6 +5,7 @@ using NMF.Synchronizations;
 using NMF.Expressions.Linq;
 using Type = HSRM.TTC2023.ClassToRelational.Relational_.Type;
 using NMF.Utilities;
+using NMF.Expressions;
 
 namespace HSRM.TTC2023.ClassToRelational
 {
@@ -46,14 +47,8 @@ namespace HSRM.TTC2023.ClassToRelational
                 };
                 return new Table
                 {
-                    Col =
-                    {
-                        primaryKey
-                    },
-                    Key =
-                    {
-                        primaryKey
-                    }
+                    Col = { primaryKey },
+                    Key = { primaryKey }
                 };
             }
 
@@ -110,19 +105,16 @@ namespace HSRM.TTC2023.ClassToRelational
             protected override ITable CreateRightOutput(IAttribute input, IEnumerable<ITable> candidates, ISynchronizationContext context, out bool existing)
             {
                 existing = false;
-                var key = new Column { Name = input.Owner.Name.ToCamelCase() + "Id", Type = (IType)context.Data["Integer"] };
                 return new Table
                 {
-                    Col =
-                    {
-                        key
-                    }
+                    Col = { new Column { Type = (IType)context.Data["Integer"] } }
                 };
             }
 
             public override void DeclareSynchronization()
             {
                 SynchronizeLeftToRightOnly(a => a.Owner.Name + "_" + a.Name, t => t.Name);
+                SynchronizeLeftToRightOnly(a => a.Owner.Name.ToPascalCase() + "Id", t => t.Col[0].Name);
                 SynchronizeLeftToRightOnly(SyncRule<AttributeToColumn>(),
                     a => a,
                     t => t.Col.FirstOrDefault(col => IsNotTheFirst(col)));

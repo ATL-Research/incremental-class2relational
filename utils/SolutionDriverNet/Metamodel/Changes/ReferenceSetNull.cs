@@ -13,6 +13,7 @@ using NMF.Collections.ObjectModel;
 using NMF.Expressions;
 using NMF.Expressions.Linq;
 using NMF.Models;
+using NMF.Models.Changes;
 using NMF.Models.Collections;
 using NMF.Models.Expressions;
 using NMF.Models.Meta;
@@ -23,39 +24,35 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 
-namespace HSRM.TTC2023.ClassToRelational.Relational_
+namespace HSRM.TTC2023.ClassToRelational.Changes
 {
     
     
     /// <summary>
-    /// The default implementation of the Type class
+    /// The default implementation of the ReferenceSetNull class
     /// </summary>
-    [XmlNamespaceAttribute("Relational")]
-    [XmlNamespacePrefixAttribute("relational_")]
-    [ModelRepresentationClassAttribute("https://github.com/ATL-Research/incremental-class2relational/Relational.nmeta#//T" +
-        "ype")]
-    [DebuggerDisplayAttribute("Type {Name}")]
-    public partial class Type : Named, HSRM.TTC2023.ClassToRelational.Relational_.IType, IModelElement
+    [XmlNamespaceAttribute("http://nmf.codeplex.com/changes")]
+    [XmlNamespacePrefixAttribute("changes")]
+    [ModelRepresentationClassAttribute("https://github.com/ATL-Research/incremental-class2relational/Changes.nmeta#//ReferenceSetNull")]
+    public partial class ReferenceSetNull : NMF.Models.Changes.ElementaryChange, IReferenceSetNull, NMF.Models.IModelElement
     {
         
-        private static IClass _classInstance;
+        private static NMF.Models.Meta.IClass _classInstance;
         
         /// <summary>
         /// Gets the Class model for this type
         /// </summary>
-        public new static IClass ClassInstance
+        public new static NMF.Models.Meta.IClass ClassInstance
         {
             get
             {
                 if ((_classInstance == null))
                 {
-                    _classInstance = ((IClass)(MetaRepository.Instance.Resolve("https://github.com/ATL-Research/incremental-class2relational/Relational.nmeta#//T" +
-                            "ype")));
+                    _classInstance = ((NMF.Models.Meta.IClass)(MetaRepository.Instance.Resolve("http://nmf.codeplex.com/changes#//ReferenceSetNull")));
                 }
                 return _classInstance;
             }
@@ -64,12 +61,11 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Gets the Class for this model element
         /// </summary>
-        public override IClass GetClass()
+        public override NMF.Models.Meta.IClass GetClass()
         {
             if ((_classInstance == null))
             {
-                _classInstance = ((IClass)(MetaRepository.Instance.Resolve("https://github.com/ATL-Research/incremental-class2relational/Relational.nmeta#//T" +
-                        "ype")));
+                _classInstance = ((NMF.Models.Meta.IClass)(MetaRepository.Instance.Resolve("http://nmf.codeplex.com/changes#//ReferenceSetNull")));
             }
             return _classInstance;
         }

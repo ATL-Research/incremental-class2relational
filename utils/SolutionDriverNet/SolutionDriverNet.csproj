@@ -9,11 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Changes.nmeta" />
     <None Remove="Class.nmeta" />
     <None Remove="Relational.nmeta" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Changes.nmeta" />
     <EmbeddedResource Include="Class.nmeta" />
     <EmbeddedResource Include="Relational.nmeta" />
   </ItemGroup>

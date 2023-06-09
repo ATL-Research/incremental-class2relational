@@ -13,6 +13,7 @@ using NMF.Collections.ObjectModel;
 using NMF.Expressions;
 using NMF.Expressions.Linq;
 using NMF.Models;
+using NMF.Models.Changes;
 using NMF.Models.Collections;
 using NMF.Models.Expressions;
 using NMF.Models.Meta;
@@ -23,48 +24,45 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 
-namespace HSRM.TTC2023.ClassToRelational.Relational_
+namespace HSRM.TTC2023.ClassToRelational.Changes
 {
     
     
     /// <summary>
-    /// The public interface for Named
+    /// The public interface for AddToRoot
     /// </summary>
-    [DefaultImplementationTypeAttribute(typeof(Named))]
-    [XmlDefaultImplementationTypeAttribute(typeof(Named))]
-    [ModelRepresentationClassAttribute("https://github.com/ATL-Research/incremental-class2relational/Relational.nmeta#//N" +
-        "amed")]
-    public interface INamed : IModelElement
+    [DefaultImplementationTypeAttribute(typeof(AddToRoot))]
+    [XmlDefaultImplementationTypeAttribute(typeof(AddToRoot))]
+    [ModelRepresentationClassAttribute("https://github.com/ATL-Research/incremental-class2relational/Changes.nmeta#//AddToRoot")]
+    public interface IAddToRoot : NMF.Models.IModelElement, NMF.Models.Changes.IElementaryChange
     {
         
         /// <summary>
-        /// The name property
+        /// The newObject property
         /// </summary>
-        [DisplayNameAttribute("name")]
-        [CategoryAttribute("Named")]
-        [XmlElementNameAttribute("name")]
-        [IdAttribute()]
-        [XmlAttributeAttribute(true)]
-        string Name
+        [BrowsableAttribute(false)]
+        [XmlElementNameAttribute("newObject")]
+        [XmlAttributeAttribute(false)]
+        [ContainmentAttribute()]
+        NMF.Models.IModelElement NewObject
         {
             get;
             set;
         }
         
         /// <summary>
-        /// Gets fired before the Name property changes its value
+        /// Gets fired before the NewObject property changes its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> NameChanging;
+        event System.EventHandler<ValueChangedEventArgs> NewObjectChanging;
         
         /// <summary>
-        /// Gets fired when the Name property changed its value
+        /// Gets fired when the NewObject property changed its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> NameChanged;
+        event System.EventHandler<ValueChangedEventArgs> NewObjectChanged;
     }
 }
 

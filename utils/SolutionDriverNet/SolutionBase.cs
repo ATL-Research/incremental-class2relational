@@ -40,7 +40,7 @@ namespace HSRM.TTC2023.ClassToRelational
                 }
                 var changeModel = _modelRepository.Resolve(changePath);
 
-                var changeSet = changeModel.RootElements.FirstOrDefault() as ModelChangeSet;
+                var changeSet = changeModel.RootElements.FirstOrDefault() as ModelChangeSet ?? new ModelChangeSet();
 
                 if (changeSet == null)
                 {

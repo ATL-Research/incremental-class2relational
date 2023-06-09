@@ -13,6 +13,7 @@ using NMF.Collections.ObjectModel;
 using NMF.Expressions;
 using NMF.Expressions.Linq;
 using NMF.Models;
+using NMF.Models.Changes;
 using NMF.Models.Collections;
 using NMF.Models.Expressions;
 using NMF.Models.Meta;
@@ -23,23 +24,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 
-namespace HSRM.TTC2023.ClassToRelational.Class_
+namespace HSRM.TTC2023.ClassToRelational.Changes
 {
     
     
     /// <summary>
-    /// The public interface for Classifier
+    /// The public interface for ReferenceSetNull
     /// </summary>
-    [DefaultImplementationTypeAttribute(typeof(Classifier))]
-    [XmlDefaultImplementationTypeAttribute(typeof(Classifier))]
-    [ModelRepresentationClassAttribute("https://github.com/ATL-Research/incremental-class2relational/Class.nmeta#//Classi" +
-        "fier")]
-    public interface IClassifier : IModelElement, INamedElt
+    [DefaultImplementationTypeAttribute(typeof(ReferenceSetNull))]
+    [XmlDefaultImplementationTypeAttribute(typeof(ReferenceSetNull))]
+    [ModelRepresentationClassAttribute("https://github.com/ATL-Research/incremental-class2relational/Changes.nmeta#//ReferenceSetNull")]
+    public interface IReferenceSetNull : NMF.Models.IModelElement, NMF.Models.Changes.IElementaryChange
     {
     }
 }

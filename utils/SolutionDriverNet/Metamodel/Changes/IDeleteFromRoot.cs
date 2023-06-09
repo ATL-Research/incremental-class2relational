@@ -13,6 +13,7 @@ using NMF.Collections.ObjectModel;
 using NMF.Expressions;
 using NMF.Expressions.Linq;
 using NMF.Models;
+using NMF.Models.Changes;
 using NMF.Models.Collections;
 using NMF.Models.Expressions;
 using NMF.Models.Meta;
@@ -23,48 +24,45 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 
-namespace HSRM.TTC2023.ClassToRelational.Relational_
+namespace HSRM.TTC2023.ClassToRelational.Changes
 {
     
     
     /// <summary>
-    /// The public interface for Named
+    /// The public interface for DeleteFromRoot
     /// </summary>
-    [DefaultImplementationTypeAttribute(typeof(Named))]
-    [XmlDefaultImplementationTypeAttribute(typeof(Named))]
-    [ModelRepresentationClassAttribute("https://github.com/ATL-Research/incremental-class2relational/Relational.nmeta#//N" +
-        "amed")]
-    public interface INamed : IModelElement
+    [DefaultImplementationTypeAttribute(typeof(DeleteFromRoot))]
+    [XmlDefaultImplementationTypeAttribute(typeof(DeleteFromRoot))]
+    [ModelRepresentationClassAttribute("https://github.com/ATL-Research/incremental-class2relational/Changes.nmeta#//DeleteFromRoot")]
+    public interface IDeleteFromRoot : NMF.Models.IModelElement, NMF.Models.Changes.IElementaryChange
     {
         
         /// <summary>
-        /// The name property
+        /// The deletedElement property
         /// </summary>
-        [DisplayNameAttribute("name")]
-        [CategoryAttribute("Named")]
-        [XmlElementNameAttribute("name")]
-        [IdAttribute()]
+        [DisplayNameAttribute("deletedElement")]
+        [CategoryAttribute("DeleteFromRoot")]
+        [XmlElementNameAttribute("deletedElement")]
         [XmlAttributeAttribute(true)]
-        string Name
+        NMF.Models.IModelElement DeletedElement
         {
             get;
             set;
         }
         
         /// <summary>
-        /// Gets fired before the Name property changes its value
+        /// Gets fired before the DeletedElement property changes its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> NameChanging;
+        event System.EventHandler<ValueChangedEventArgs> DeletedElementChanging;
         
         /// <summary>
-        /// Gets fired when the Name property changed its value
+        /// Gets fired when the DeletedElement property changed its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> NameChanged;
+        event System.EventHandler<ValueChangedEventArgs> DeletedElementChanged;
     }
 }
 
