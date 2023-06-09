@@ -114,7 +114,7 @@ namespace HSRM.TTC2023.ClassToRelational
             public override void DeclareSynchronization()
             {
                 SynchronizeLeftToRightOnly(a => a.Owner.Name + "_" + a.Name, t => t.Name);
-                SynchronizeLeftToRightOnly(a => a.Owner.Name.ToPascalCase() + "Id", t => t.Col[0].Name);
+                SynchronizeLeftToRightOnly(a => a.Owner.Name.ToCamelCase() + "Id", t => t.Col[0].Name);
                 SynchronizeLeftToRightOnly(SyncRule<AttributeToColumn>(),
                     a => a,
                     t => t.Col.FirstOrDefault(col => IsNotTheFirst(col)));
