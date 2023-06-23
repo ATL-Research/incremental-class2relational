@@ -3,34 +3,10 @@
  */
 package JClass2RelationalIncremental;
 
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
-import Changes.ChangesPackage;
 import atl.research.AbstractDriver;
 import transformations.incremental.Class2RelationalIncremental;
-import metamodels.Relational.RelationalPackage;
-import metamodels.class_.Class_Package;
 
 public class App extends AbstractDriver {
-	
-	@Override
-	public void setupResourceSet() {
-		Class_Package.eINSTANCE.eClass();
-		ChangesPackage.eINSTANCE.eClass();
-		RelationalPackage.eINSTANCE.eClass();
-		// register XMI
-        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
-        // register ecore
-        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
-        // register uml
-        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("uml", new XMIResourceFactoryImpl());
-	}
-	
-	public App() {
-		setupResourceSet();
-	}
 	
 	// static run
 	public static void main(String[] args) {
