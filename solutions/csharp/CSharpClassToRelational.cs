@@ -1,5 +1,6 @@
 ﻿using HSRM.TTC2023.ClassToRelational.Class_;
 using HSRM.TTC2023.ClassToRelational.Relational_;
+using NMF.Expressions;
 using NMF.Models;
 using NMF.Utilities;
 using System;
@@ -16,6 +17,18 @@ namespace HSRM.TTC2023.ClassToRelational
     internal class CSharpClassToRelational
     {
         private Dictionary<object, IModelElement> _trace = new Dictionary<object, IModelElement>();
+        private dynamic TraceOrTransform(object item)
+        {
+            if (!_trace.TryGetValue(item, out var transformed))
+            {
+                transformed = Transform((dynamic)item);
+                _trace.Add(item, transformed);
+            }
+
+            return transformed;
+        }
+
+
         private Type _integerType = new Type { Name = "Integer" };
 
         public Model Transform(Model classModel)
@@ -23,12 +36,7 @@ namespace HSRM.TTC2023.ClassToRelational
             var result = new Model();
             foreach (var item in classModel.RootElements)
             {
-                if (!_trace.TryGetValue(item, out var transformed))
-                {
-                    transformed = Transform((dynamic)item);
-                    _trace.Add(item, transformed);
-                }
-                result.RootElements.Add(transformed);
+                result.RootElements.Add(TraceOrTransform(item));
             }
             foreach (var tableValuedAttribute in from cl in classModel.RootElements.OfType<IClass>()
                                                  from att in cl.Attr
@@ -39,6 +47,7 @@ namespace HSRM.TTC2023.ClassToRelational
             }
             return result;
         }
+
 
         private ITable Transform(IClass @class)
         {
@@ -58,22 +67,28 @@ namespace HSRM.TTC2023.ClassToRelational
 
             foreach (var attr in @class.Attr.Where(att => !att.MultiValued))
             {
-                table.Col.Add(Transform(attr));
+                table.Col.Add(TraceOrTransform(attr));
             }
             ((INotifyCollectionChanged)@class.Attr).CollectionChanged += (o, e) =>
             {
+                if (e.Action == NotifyCollectionChangedAction.Reset)
+                {
+                    table.Col.Clear();
+                    table.Col.Add(primaryKey);
+                    return;
+                }
                 if (e.OldItems != null)
                 {
                     foreach (var item in e.OldItems)
                     {
-
+                        table.Col.Remove((IColumn)_trace[item]);
                     }
                 }
                 if (e.NewItems != null)
                 {
                     foreach (var item in e.NewItems)
                     {
-
+                        table.Col.Add(TraceOrTransform(item));
                     }
                 }
             };
@@ -98,39 +113,51 @@ namespace HSRM.TTC2023.ClassToRelational
 
         private IColumn Transform(IAttribute attribute)
         {
-            var column = new Column
+            var column = new Column();
+            void UpdateNameAndType(object? sender, ValueChangedEventArgs? e)
             {
-                Name = attribute.Name,
-            };
-            if (attribute.Type is IClass)
-            {
-                column.Type = _integerType;
-                column.Name += "Id";
+                if (attribute.Type is IClass)
+                {
+                    column!.Type = _integerType;
+                    column.Name = attribute.Name + "Id";
+                }
+                else
+                {
+                    column!.Type = TraceOrTransform(attribute.Type);
+                    column.Name = attribute.Name;
+                }
             }
-            else if (_trace.TryGetValue(attribute.Type, out var type))
-            {
-                column.Type = (IType)type;
-            }
-            else
-            {
-                var transformedType = Transform((IDataType)attribute.Type);
-                column.Type = transformedType;
-                _trace.Add(attribute.Type, transformedType);
-            }
+            UpdateNameAndType(null, null);
+            attribute.TypeChanged += UpdateNameAndType;
+            attribute.NameChanged += UpdateNameAndType;
             return column;
         }
 
         private ITable CreateAttributeTable(IAttribute attribute)
         {
-            var key = new Column { Name = attribute.Owner.Name.ToCamelCase() + "Id", Type = _integerType };
-            return new Table
+            var key = new Column { Type = _integerType };
+            var table = new Table
             {
                 Col =
                 {
                     key,
-                    Transform(attribute)
+                    TraceOrTransform(attribute)
                 }
             };
+            void OnNameChanged(object? sender, ValueChangedEventArgs? e)
+            {
+                table.Name = attribute.Owner.Name + "_" + attribute.Name;
+                key.Name = attribute.Owner.Name.ToCamelCase() + "Id";
+            }
+            OnNameChanged(null, null);
+            attribute.Owner.NameChanged += OnNameChanged;
+            attribute.OwnerChanged += (o, e) =>
+            {
+                if (e.OldValue != null) ((IClass)e.OldValue).NameChanged -= OnNameChanged;
+                OnNameChanged(o, e);
+                if (e.NewValue != null) ((IClass)e.NewValue).NameChanged += OnNameChanged;
+            };
+            return table;
         }
     }
 }

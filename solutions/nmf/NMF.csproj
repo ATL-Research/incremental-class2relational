@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NMF-Synchronizations" Version="2.0.185" />
+    <PackageReference Include="NMF-Synchronizations" Version="2.0.188" />
   </ItemGroup>
 
   <ItemGroup>

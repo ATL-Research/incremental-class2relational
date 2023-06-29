@@ -17,7 +17,7 @@ namespace HSRM.TTC2023.ClassToRelational
 {
     public abstract class SolutionBase
     {
-        private readonly ModelRepository _modelRepository = new ModelRepository(MetaRepository.Instance, null, new FixedFileLocator());
+        private readonly ModelRepository _modelRepository = new ModelRepository();
 
         public void Run()  
         {
@@ -59,7 +59,7 @@ namespace HSRM.TTC2023.ClassToRelational
                     targetModel = Transform(sourceModel);
                     ApplyChanges(changeSet);
                 }
-
+                Model.FragmentPrefix = string.Empty;
                 SaveTarget(targetModel);
             }
             catch (Exception ex)

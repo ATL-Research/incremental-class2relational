@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NMF-Basics" Version="2.0.185" />
+    <PackageReference Include="NMF-Basics" Version="2.0.188" />
   </ItemGroup>
 
 </Project>
