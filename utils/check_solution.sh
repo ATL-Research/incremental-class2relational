@@ -116,16 +116,19 @@ function checkScenario {
     # compare results using comparator
     pushd ../../utils/Comparator > /dev/null
 
-    echo "Comparing both runs"
-    local error="ok"
+    echo "Checking correctness"
+    local correctness=$(checkCorrectness "$incrementalRunTarget" "$batchRunTarget")
+    echo "Correctness: $correctness"
 
-    ./gradlew -q run || error="error" && true
+    echo "Checking completeness"
+    local completeness=$(checkCompleteness "$scenario" "$incrementalRunTarget")
+    echo "Completeness: $completeness"
 
     local reportFile="$outputDir/../report.csv"
-    local message="$solution,$scenario,correctness,$error"
+    local message="$solution,$scenario,$correctness,$completeness"
     
     if [ ! -f "$reportFile" ]; then
-        echo "solution,scenario,test,status" > "$reportFile"
+        echo "solution,scenario,correctness,completeness" > "$reportFile"
     fi
     echo "$message" >> "$reportFile"
     echo "$message" >> "$globalReport"
@@ -133,8 +136,74 @@ function checkScenario {
     popd > /dev/null
 }
 
+function checkCompleteness() {
+    local scenario="$1"
+    local target="$2"
+    local scenarioDir="$INPUT_DIR/$scenario"
+
+    if [ ! -f "$target" ]; then
+        echo "no target"
+        return
+    fi
+
+    local nb_expected=$(ls $scenarioDir/expected*.xmi 2> /dev/null | wc -l)
+    if [ $nb_expected -eq 0 ]; then
+        echo "no expected"
+        return
+    fi
+
+    for expected in $scenarioDir/expected*.xmi
+    do
+        if [ ! -f "$expected" ]; then
+            continue
+        fi
+
+        local res=$(compareResults "$expected" "$target")
+        if [ "$res" == "ok" ]; then
+            echo "$(basename $expected)"
+            return
+        fi
+    done
+    echo "no match"
+}
+
+function checkCorrectness() {
+    local incremental="$1"
+    local batch="$2"
+
+    compareResults "$incremental" "$batch"
+}
+
+function compareResults() {
+    local left="$1"
+    local right="$2"
+    local error="ok"
+    local logs="$OUTPUT_DIR/comparisons_logs.txt"
+
+    pushd ../../utils/Comparator > /dev/null
+
+    export EXPECTED_MODEL="$left"
+    export CURRENT_MODEL="$right"
+
+    echo "Comparing $left and $right" >> "$logs"
+
+    ./gradlew -q run 2>> "$logs"  || error="error" && true
+
+    unset EXPECTED_MODEL
+    unset CURRENT_MODEL
+
+    popd > /dev/null
+
+    echo $error
+}
 
 buildComparator
+
+mkdir -p "$(dirname "$globalReport")"
+
+if [ ! -f "$globalReport" ]; then
+    echo "solution,scenario,correctness,completeness" > "$globalReport"
+fi
 
 if [ -z $solution ]
 then

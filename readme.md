@@ -16,8 +16,11 @@ The overall objective is to leverage this data set to better undertand whether G
 - metamodels: source and target metamodel as well as the Change metamodel used for incremental updates of the input model
 - models: the source models
 - solutions: implementations of ATOL (incremental variant of ATL), and Java solutions
-- transformations: Ecore2Class transformation which can turn any Ecore model into an instance of the expected source model
-- utils: the SolutionDriver which executes the transformation, and Comparator which evaluates the outcome of batch and incremental transformations
+- utils: 
+    - the SolutionDriver which executes the transformation, 
+    - the Comparator which evaluates the outcome of batch and incremental transformations
+    - ecore2class: utility Ecore2Class transformation which can turn any Ecore model into an instance of the expected source model
+  
 
 ## Using Github maven repository
 
@@ -25,3 +28,12 @@ We provide two maven packages, the fuzzer / model comparator and the solution dr
 
 For a Gradle example you can read the repository declaration from [ATOL build.gradle file](solutions/atol/transformation/build.gradle). To generate your credentials you can read Github documentation [for maven](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry#authenticating-to-github-packages) or [Gradle](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry#authenticating-to-github-packages).
 
+## Checking the solutions
+
+Register the Github authentication information properly, as explained in the previous section (e.g., via the `GITHUB_ACTOR` and `GITHUB_TOKEN` environment variables, or in ~/.gradle/gradle.properties).
+From the `utils/` sub-directory, launch `check_solution.sh`.
+For instance:
+```
+	$ cd utils
+	$ ./check_solution.sh
+```

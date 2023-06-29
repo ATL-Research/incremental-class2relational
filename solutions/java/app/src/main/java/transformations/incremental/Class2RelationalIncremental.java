@@ -13,23 +13,23 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 
-import metamodels.Relational.RelationalFactory;
-import metamodels.Relational.Named;
-import metamodels.Relational.Type;
-import metamodels.class_.Class;
-import metamodels.class_.DataType;
-import metamodels.class_.NamedElt;
-import metamodels.class_.impl.AttributeImpl;
-import metamodels.class_.impl.ClassImpl;
-import metamodels.class_.impl.DataTypeImpl;
-import metamodels.class_.Attribute;
+import atl.research.relational_.Relational_Factory;
+import atl.research.relational_.Named;
+import atl.research.relational_.Type;
+import atl.research.class_.Class;
+import atl.research.class_.DataType;
+import atl.research.class_.NamedElt;
+import atl.research.class_.impl.AttributeImpl;
+import atl.research.class_.impl.ClassImpl;
+import atl.research.class_.impl.DataTypeImpl;
+import atl.research.class_.Attribute;
 import transformations.util.trace.Tracer;
 import transformations.util.traverse.Traverser;
 import util.CONSTANTS;
 import util.IO;
 
 public class Class2RelationalIncremental {
-	private static final RelationalFactory RELATIONALFACTORY = RelationalFactory.eINSTANCE;
+	private static final Relational_Factory RELATIONALFACTORY = Relational_Factory.eINSTANCE;
 	private static final Tracer TRACER = new Tracer();
 	private static final List<DataType> allDataTypes = new LinkedList<>();
 	private static Traverser PRETRAVERSER;
@@ -205,11 +205,11 @@ public class Class2RelationalIncremental {
     	out.setName(c.getName());
     	out.getCol().clear();
     	out.getCol().add(key);
-    	out.getCol().addAll(c.getAttr().stream().filter(e -> !e.isMultiValued()).map($ -> TRACER.resolve($, RELATIONALFACTORY.createColumn())).filter($ -> $ != null).collect(Collectors.toList()));
-    	out.getCol().addAll(c.getAttr().stream().filter(e -> !e.isMultiValued()).map($ -> TRACER.resolve($, "key" ,RELATIONALFACTORY.createColumn())).filter($ -> $ != null).collect(Collectors.toList()));
-    	out.getCol().addAll(c.getAttr().stream().filter(e -> !e.isMultiValued()).map($ -> TRACER.resolve($, "id", RELATIONALFACTORY.createColumn())).filter($ -> $ != null).collect(Collectors.toList()));
-    	out.getCol().addAll(c.getAttr().stream().filter(e -> !e.isMultiValued()).map($ -> TRACER.resolve($, "value", RELATIONALFACTORY.createColumn())).filter($ -> $ != null).collect(Collectors.toList()));
-    	out.getCol().addAll(c.getAttr().stream().filter(e -> !e.isMultiValued()).map($ -> TRACER.resolve($, "foreignKey", RELATIONALFACTORY.createColumn())).filter($ -> $ != null).collect(Collectors.toList()));
+    	out.getCol().addAll(c.getAttr().stream().filter(e -> !e.getMultiValued()).map($ -> TRACER.resolve($, RELATIONALFACTORY.createColumn())).filter($ -> $ != null).collect(Collectors.toList()));
+    	out.getCol().addAll(c.getAttr().stream().filter(e -> !e.getMultiValued()).map($ -> TRACER.resolve($, "key" ,RELATIONALFACTORY.createColumn())).filter($ -> $ != null).collect(Collectors.toList()));
+    	out.getCol().addAll(c.getAttr().stream().filter(e -> !e.getMultiValued()).map($ -> TRACER.resolve($, "id", RELATIONALFACTORY.createColumn())).filter($ -> $ != null).collect(Collectors.toList()));
+    	out.getCol().addAll(c.getAttr().stream().filter(e -> !e.getMultiValued()).map($ -> TRACER.resolve($, "value", RELATIONALFACTORY.createColumn())).filter($ -> $ != null).collect(Collectors.toList()));
+    	out.getCol().addAll(c.getAttr().stream().filter(e -> !e.getMultiValued()).map($ -> TRACER.resolve($, "foreignKey", RELATIONALFACTORY.createColumn())).filter($ -> $ != null).collect(Collectors.toList()));
     	
     	out.getKey().clear();
     	out.getKey().add(key);
@@ -241,7 +241,7 @@ public class Class2RelationalIncremental {
     }
     
     public static void MultiValuedDataTypeAttribute2ColumnPre(Attribute a) {
-    	if(DataType.class.isAssignableFrom(a.getClass()) && a.isMultiValued()) {
+    	if(DataType.class.isAssignableFrom(a.getClass()) && a.getMultiValued()) {
     		TRACER.addTrace(a, RELATIONALFACTORY.createTable());
     		TRACER.addTrace(a, "id", RELATIONALFACTORY.createColumn());
     		TRACER.addTrace(a, "value", RELATIONALFACTORY.createColumn());
@@ -268,7 +268,7 @@ public class Class2RelationalIncremental {
     }
     
     public static void ClassAttribute2ColumnPre(Attribute a) {
-    	if(DataType.class.isAssignableFrom(a.getClass()) && !a.isMultiValued()) {
+    	if(DataType.class.isAssignableFrom(a.getClass()) && !a.getMultiValued()) {
     		TRACER.addTrace(a, RELATIONALFACTORY.createColumn());
     	}
     }
@@ -280,7 +280,7 @@ public class Class2RelationalIncremental {
     }
     
     public static void MultiValuedClassAttribute2ColumnPre(Attribute a) {
-    	if(Class.class.isAssignableFrom(a.getClass()) && a.isMultiValued()) {
+    	if(Class.class.isAssignableFrom(a.getClass()) && a.getMultiValued()) {
     		TRACER.addTrace(a, RELATIONALFACTORY.createTable());
     		TRACER.addTrace(a, "id", RELATIONALFACTORY.createColumn());
     		TRACER.addTrace(a, "foreignKey", RELATIONALFACTORY.createColumn());
