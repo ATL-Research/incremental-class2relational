@@ -28,6 +28,7 @@ namespace HSRM.TTC2023.ClassToRelational
 
                 _modelRepository.UnresolvedModelElement += HelpResolve;
 
+                // this dedicated serializer is necessary only because the class model does not have a proper URI
                 var classSerializer = new ModelSerializer(XmlSerializationSettings.Default, new[]
                 {
                     typeof(Class), typeof(Attribute), typeof(DataType), typeof(Model)
