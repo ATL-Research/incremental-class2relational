@@ -9,3 +9,8 @@ bin/
 
 output/
 reports/
+
+# usual dotnet files
+obj/
+.vs/
+launchSettings.json

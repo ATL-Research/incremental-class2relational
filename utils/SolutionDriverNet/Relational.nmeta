@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<nmeta:Namespace xmi:version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Uri="Relational" Prefix="relational_" Name="relational_" xmi:id="$0" xmlns:xmi="http://www.omg.org/XMI" xmlns:nmeta="http://nmf.codeplex.com/nmeta/">
+  <Types xsi:type="nmeta:Class" IsAbstract="true" IdentifierScope="Local" Identifier="#//Named/name" Name="Named" xmi:id="$1">
+    <Attributes IsUnique="true" LowerBound="1" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//String" Name="name" xmi:id="$2" />
+  </Types>
+  <Types xsi:type="nmeta:Class" BaseTypes="#//Named" Name="Table" xmi:id="$3">
+    <References IsContainment="true" Opposite="#//Column/owner" ReferenceType="nmeta:Class #//Column" IsOrdered="true" IsUnique="true" UpperBound="-1" Name="col" xmi:id="$4" />
+    <References Opposite="#//Column/keyOf" ReferenceType="nmeta:Class #//Column" IsUnique="true" UpperBound="-1" Name="key" xmi:id="$5" />
+  </Types>
+  <Types xsi:type="nmeta:Class" BaseTypes="#//Named" Name="Column" xmi:id="$6">
+    <References Opposite="#//Table/col" ReferenceType="nmeta:Class #//Table" IsUnique="true" LowerBound="1" Name="owner" xmi:id="$7" />
+    <References Opposite="#//Table/key" ReferenceType="nmeta:Class #//Table" IsUnique="true" Name="keyOf" xmi:id="$8" />
+    <References ReferenceType="nmeta:Class #//Type" IsUnique="true" LowerBound="1" Name="type" xmi:id="$9" />
+  </Types>
+  <Types xsi:type="nmeta:Class" BaseTypes="#//Named" Name="Type" xmi:id="$10" />
+</nmeta:Namespace>
