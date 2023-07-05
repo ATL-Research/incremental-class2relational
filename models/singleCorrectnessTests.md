@@ -11,19 +11,27 @@
 
 2. set the name of Family to null  
 *expected transformation behavior*  
-	- update Table name  
+	1. update Table name :new:with default values
 	(:question:) update all tables that use Table name (multi-valued attributes) with default value?
 
-3. change firstname to multi-valued (setting it true)  
+	:new:**OR**
+
+   	2. :new:ignore rule (no table created and no multivalued table created)
+  
+   	:new: problems -> objectid of Family table has no type
+
+   	:new: problems -> 
+
+4. change firstname to multi-valued (setting it true)  
 *expected transformation behavior*  
 	- delete column of table Person +  
 	- create table for firstnames with foreign keys
 
-4. change emailAdresses to single-valued (setting it to false)  
+5. change emailAdresses to single-valued (setting it to false)  
 *expected transformation behavior*  
 	- delete table for emailAdresses + create column in table
 	
-5. set type of firstname null  
+6. set type of firstname null  
 *expected transformation behaviors*  
 	1. remove column (null value behavior 2)  
 	**OR**  
