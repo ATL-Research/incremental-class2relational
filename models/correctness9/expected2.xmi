@@ -8,6 +8,7 @@
     <col name="objectId" keyOf="/1" type="/3"/>
     <col name="firstName" type="/2"/>
     <col name="closestFriendId" type="/3"/>
+    <col name="newMutliValuedAttributeId"/>
   </relational_:Table>
   <relational_:Type name="String"/>
   <relational_:Type name="Integer"/>

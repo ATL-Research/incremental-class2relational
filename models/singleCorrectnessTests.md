@@ -50,9 +50,11 @@
 *expected transformation behavior*  
 	- add a new table House in target model
 
-9. add attribute to class Person  
+9. add multivalued attribute to class Person  
 *expected transformation behavior*  
-	- create new column in table Person
+	1. create new column in table Person with no reference to corresponding table
+	**OR**
+	2. ignore the attribute
 
 10. add elements to root: Attribute, single-valued, type:Person  
 *expected transformation behaviors*  
