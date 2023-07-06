@@ -1,5 +1,8 @@
 package atl.research;
 
+import java.util.HashMap;
+
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -48,7 +51,11 @@ public class Comparator {
         final SimpleEMFModelComparator comparator = new SimpleEMFModelComparator();
 
         final StringBuffer messageBuffer = new StringBuffer();
-        comparator.compare(expectedResource, currentResource, messageBuffer);
+        comparator.compare("/contents", expectedResource.getContents(), currentResource.getContents(), new HashMap<>(), messageBuffer, (index, value) ->
+		value instanceof EObject eo
+		?	eo.eGet(eo.eClass().getEStructuralFeature("name"))
+		:	value
+	);
 
         if (messageBuffer.length() > 0) {
             System.err.println(messageBuffer.toString());

@@ -3,8 +3,8 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
-sourceCompatibility = "11"
-targetCompatibility = "11"
+sourceCompatibility = "17"
+targetCompatibility = "17"
 
 repositories {
     mavenCentral()
@@ -24,6 +24,9 @@ dependencies {
 
     implementation 'io.github.atlresearch:emfmodelfuzzer:+'
     implementation 'io.github.atlresearch.ttc2023:solutiondriver:+'
+
+    // to be able to specify custom localIdGetters
+    implementation "org.eclipse.xtend:org.eclipse.xtend.lib:2.25.0"
 }
 
 application {
