@@ -1,0 +1,762 @@
+
+model_id : atom_type.
+meta_class_id : atom_type.
+feature_id : atom_type.
+node_id : atom_type.
+
+% comp & cref could be encoded as values too, so that we would only need one pred for attr, cref & comp
+value : type.
+str string : value.
+boolean bool : value.
+nullv : value.
+
+%% node ModelId MetaClassId NodeId
+%% Represents an element with id `NodeId` belonging to model `ModelId`, and which meta-class has id `MetaClassId`.
+node model_id meta_class_id node_id : pred.
+
+%% attr NodeId FeatureId Value
+%% Represents a value `Value` of attribute `FeatureId` for model element `NodeId`.
+%% This predicate can be repeated in case the attribute is multivalued (order is not handled).
+attr node_id feature_id value : pred.
+
+%% cref NodeId FeatureId TargetId
+%% Represents a value `TargetId` of cross-reference `FeatureId` for model element `NodeId`.
+%% This predicate can be repeated in case the cross-reference is multivalued (order is not handled).
+cref node_id feature_id node_id : pred.
+
+%% comp NodeId FeatureId TargetId
+%% Represents a value `TargetId` of composition `FeatureId` for model element `NodeId`.
+%% This predicate can be repeated in case the composition is multivalued (order is not handled).
+comp node_id feature_id node_id : pred.
+
+%% link SourceElementId TargetElementId
+%% Represents a (simple) trace link.
+%% There is no need for more complex trace links in this transformation.
+link node_id node_id : pred.
+
+link_id : atom_type.
+
+%% nlink SourceElementId LinkId TargetElementId
+%% Represents a (slightly more complex) trace link (than pred link).
+nlink node_id link_id node_id : pred.
+
+apply : stage-desc.
+stage-transition-mode apply first.
+
+
+% stage idle is used to be able to load a context without automatically transforming it
+idle : stage-desc.
+stage-transition-mode idle interactive.
+
+stage idle -o stage apply.
+
+
+stage apply = {
+
+  %rule Class2Table {
+  %	from
+  %		c : Class!Class
+  %	to
+  %		out : Relational!Table (
+  %			name <- c.name,
+  %			col <- Sequence {key}->union(c.attr->select(e | not e.multiValued)),
+  %			key <- Set {key}
+  %		),
+  %		key : Relational!Column (
+  %			name <- 'objectId',
+  %			type <- thisModule.objectIdType
+  %		)
+  %}
+  % Transformation 1
+  class2Table
+    % Transformation 4
+    : $node 'IN 'Class C
+    % Tracing 5
+    *  try (link C _) == false
+
+    % get name
+    % Model Traversal 4
+    * $attr C 'name Name
+
+    % get already resolved objectIdType
+    % Transformation 4
+    * $node 'OUT 'Type ObjectIdType
+    % Transformation 5
+    * $attr ObjectIdType 'name (str "Integer")
+
+    % Transformation 2
+    *  fresh 'out
+    % Transformation 2
+    *  fresh 'key
+
+    % Transformation 4
+   -o  node 'OUT 'Table 'out
+    % Transformation 4
+    *  attr 'out 'name Name
+    % Transformation 4
+    *  comp 'out 'col 'key
+    % the rest of 'col is initialized in class2Table-out-col
+    % Transformation 4
+    *  cref 'out 'key 'key
+    % Tracing 3
+    *  link C 'out
+
+    % Transformation 4
+    *  node 'OUT 'Column 'key
+    % Transformation 5
+    *  attr 'key 'name (str "objectId")
+    % Transformation 4
+    *  cref 'key 'type ObjectIdType
+    % Tracing 3
+    *  link C 'key
+    .
+
+  % Transformation 1
+  class2Table-out-col
+    % Transformation 4
+    : $node 'IN 'Class C
+
+    % resolve source Class to target Table
+    % Tracing 3
+    * $link C OUT
+    % Tracing 4
+    * $node 'OUT 'Table OUT
+
+    % find an Attribute of Class C
+    % Model Traversal 4
+    * $comp C 'attr E
+
+    % check that not multiValued
+    % Model Traversal 4
+    * $attr E 'multiValued (boolean false)
+
+    % resolve source Attribute to target Column
+    % Tracing 3
+    * $link E COL
+    % Transformation 4
+   -o ?comp OUT 'col COL
+    .
+
+  %rule DataType2Type {
+  %	from
+  %		dt : Class!DataType
+  %	to
+  %		out : Relational!Type (
+  %			name <- dt.name
+  %		)
+  %}
+  % Transformation 1
+  dataType2Type
+    % Transformation 4
+    : $node 'IN 'DataType DT
+    % Model Traversal 4
+    * $attr DT 'name Name
+    % Transformation 2
+    *  fresh 'out
+    % Tracing 5
+    *  try (link DT _) == false
+    % Transformation 4
+   -o  node 'OUT 'Type 'out
+    % Transformation 4
+    *  attr 'out 'name Name
+    % Tracing 3
+    *  link DT 'out
+    .
+
+  %rule DataTypeAttribute2Column {
+  %	from
+  %		a : Class!Attribute (
+  %			a.type.oclIsKindOf(Class!DataType) and not a.multiValued
+  %		)
+  %	to
+  %		out : Relational!Column (
+  %			name <- a.name,
+  %			type <- a.type
+  %		)
+  %}
+  % Transformation 1
+  dataTypeAttribute2Column
+    % Transformation 4
+    : $node 'IN 'Attribute A
+    % Tracing 5
+    *  try (link A _) == false
+
+    % a.type
+    % Model Traversal 4
+    * $cref A 'type IType
+
+    % begin guard
+    % Model Traversal 4
+    * $node 'IN 'DataType IType		% more like oclIsTypeOf, which is equivalent here, because DataType has no subclass
+    % Model Traversal 5
+    * $attr A 'multiValued (boolean false)
+    % end guard
+
+    % a.name
+    % Model Traversal 3
+    * $attr A 'name Name
+
+    % resolve type
+    % Tracing 3
+    * $link IType OType
+
+    % Transformation 2
+    *  fresh 'out
+   -o  node 'OUT 'Column 'out
+    *  attr 'out 'name Name
+    *  cref 'out 'type OType
+    % Tracing 3
+    *  link A 'out
+    .
+
+  %rule MultiValuedDataTypeAttribute2Column {
+  %	from
+  %		a : Class!Attribute (
+  %			a.type.oclIsKindOf(Class!DataType) and a.multiValued
+  %		)
+  %	to
+  %		out : Relational!Table (
+  %			name <- a.owner.name + '_' + a.name,
+  %			col <- Sequence {id, value}
+  %		),
+  %		id : Relational!Column (
+  %			name <- a.owner.name.firstToLower() + 'Id',
+  %			type <- thisModule.objectIdType
+  %		),
+  %		value : Relational!Column (
+  %			name <- a.name,
+  %			type <- a.type
+  %		)
+  %}
+  % Transformation 1
+  multiValuedDataTypeAttribute2Column
+    % Transformation 4
+    : $node 'IN 'Attribute A
+    % Model Traversal 4
+    * $cref A 'type IType
+
+    % begin guard
+    % Model Traversal 4
+    * $node 'IN 'DataType IType		% more like oclIsTypeOf, which is equivalent here, because DataType has no subclass
+    % Model Traversal 5
+    * $attr A 'multiValued (boolean true)
+    % end guard
+
+    % Model Traversal 4
+    * $node 'IN 'Class Owner
+    % Model Traversal 4
+    * $comp Owner 'attr A
+    % Model Traversal 5
+    * $attr Owner 'name (str OwnerName)
+
+    % Model Traversal 5
+    * $attr A 'name (str Name)
+    % Tracing 3
+    * $link IType OType
+    % Transformation 2
+    *  fresh 'out
+    % Transformation 2
+    *  fresh 'id
+    % Transformation 2
+    *  fresh 'value
+    % Tracing 5
+    *  try (link A _) == false
+
+    % Transformation 4
+    * $node 'OUT 'Type ObjectIdType
+    % Transformation 5
+    * $attr ObjectIdType 'name (str "Integer")
+
+    % Transformation 4
+   -o  node 'OUT 'Table 'out
+    % Transformation 6
+    *  attr 'out 'name (str (fmt "#{OwnerName}_#{Name}"))
+    % Transformation 4
+    *  node 'OUT 'Column 'id
+    % Transformation 6
+    *  attr 'id 'name (str (fmt "°#{OwnerName}Id"))	% TODO: missing: firstToLower
+    % Transformation 4
+    *  cref 'id 'type ObjectIdType
+    % Transformation 4
+    *  comp 'out 'col 'id
+    % Transformation 4
+    *  node 'OUT 'Column 'value
+    % Transformation 5
+    *  attr 'value 'name (str Name)
+    % Transformation 4
+    *  cref 'value 'type OType
+    % Transformation 4
+    *  comp 'out 'col 'value
+    % Tracing 3
+    *  link A 'out
+    .
+ 
+  %rule ClassAttribute2Column {
+  %	from
+  %		a : Class!Attribute (
+  %			a.type.oclIsKindOf(Class!Class) and not a.multiValued
+  %		)
+  %	to
+  %		foreignKey : Relational!Column (
+  %			name <- a.name + 'Id',
+  %			type <- thisModule.objectIdType
+  %		)
+  %}
+  % Transformation 1
+  classAttribute2Column
+    % Transformation 4
+    : $node 'IN 'Attribute A
+    % Model Traversal 4
+    * $cref A 'type IType
+
+    % begin guard
+    % Model Traversal 4
+    * $node 'IN 'Class IType		% more like oclIsTypeOf, which is equivalent here, because Class has no subclass
+    % Model Traversal 5
+    * $attr A 'multiValued (boolean false)
+    % end guard
+
+    % Model Traversal 5
+    * $attr A 'name (str Name)
+    % Transformation 2
+    *  fresh 'out
+    % Tracing 5
+    *  try (link A _) == false
+
+    % Transformation 4
+    * $node 'OUT 'Type ObjectIdType
+    % Transformation 5
+    * $attr ObjectIdType 'name (str "Integer")
+
+    % Transformation 4
+   -o  node 'OUT 'Column 'out
+    % Transformation 6
+    *  attr 'out 'name (str (fmt "#{Name}Id"))
+    % Transformation 4
+    *  cref 'out 'type ObjectIdType
+    % Tracing 3
+    *  link A 'out
+    .
+ 
+  %rule MultiValuedClassAttribute2Column {
+  %	from
+  %		a : Class!Attribute (
+  %			a.type.oclIsKindOf(Class!Class) and a.multiValued
+  %		)
+  %	to
+  %		t : Relational!Table (
+  %			name <- a.owner.name + '_' + a.name,
+  %			col <- Sequence {id, foreignKey}
+  %		),
+  %		id : Relational!Column (
+  %			name <- a.owner.name.firstToLower() + 'Id',
+  %			type <- thisModule.objectIdType
+  %		),
+  %		foreignKey : Relational!Column (
+  %			name <- a.name + 'Id',
+  %			type <- thisModule.objectIdType
+  %		)
+  %}
+  % Transformation 1
+  multiValuedClassAttribute2Column
+    % Transformation 4
+    : $node 'IN 'Attribute A
+    % Model Traversal 4
+    * $cref A 'type IType
+
+    % begin guard
+    % Model Traversal 4
+    * $node 'IN 'Class IType		% more like oclIsTypeOf, which is equivalent here, because DataType has no subclass
+    % Model Traversal 5
+    * $attr A 'multiValued (boolean true)
+    % end guard
+
+    % Model Traversal 4
+    * $node 'IN 'Class Owner
+    % Model Traversal 4
+    * $comp Owner 'attr A
+    % Model Traversal 5
+    * $attr Owner 'name (str OwnerName)		% this will make this rule ignore columns when their table has no name
+
+    % Model Traversal 4
+    * $attr A 'name (str Name)
+%   * $link IType OType
+    % Transformation 2
+    *  fresh 'out
+    % Transformation 2
+    *  fresh 'id
+    % Transformation 2
+    *  fresh 'foreignKey
+    % Tracing 5
+    *  try (link A _) == false
+
+    % Transformation 4
+    * $node 'OUT 'Type ObjectIdType
+    % Transformation 5
+    * $attr ObjectIdType 'name (str "Integer")
+
+    % Transformation 4
+   -o  node 'OUT 'Table 'out
+    % Transformation 6
+    *  attr 'out 'name (str (fmt "#{OwnerName}_#{Name}"))
+    % Transformation 4
+    *  node 'OUT 'Column 'id
+    % Transformation 6
+    *  attr 'id 'name (str (fmt "°#{OwnerName}Id"))	% TODO: missing: firstToLower
+    % Transformation 4
+    *  cref 'id 'type ObjectIdType
+    % Transformation 4
+    *  comp 'out 'col 'id
+    % Transformation 4
+    *  node 'OUT 'Column 'foreignKey
+    % Transformation 6
+    *  attr 'foreignKey 'name (str (fmt "#{Name}Id"))
+    % Transformation 4
+    *  cref 'foreignKey 'type ObjectIdType
+    % Transformation 4
+    *  comp 'out 'col 'foreignKey
+    % Tracing 3
+    *  link A 'out
+    .
+
+}.
+
+% Alternative implementation
+apply2 : stage-desc.
+stage-transition-mode apply2 first.
+
+stage apply2 = {
+
+  %rule Class2Table {
+  %	from
+  %		c : Class!Class
+  %	to
+  %		out : Relational!Table (
+  %			name <- c.name,
+  %			col <- Sequence {key}->union(c.attr->select(e | not e.multiValued)),
+  %			key <- Set {key}
+  %		),
+  %		key : Relational!Column (
+  %			name <- 'objectId',
+  %			type <- thisModule.objectIdType
+  %		)
+  %}
+  class2Table-out
+    : $node 'IN 'Class C
+    *  try (nlink C 'Class2Table-out _) == false
+    *  fresh 'out
+   -o  node 'OUT 'Table 'out
+    *  nlink C 'Class2Table-out 'out
+    .
+
+  class2Table-out-name
+    : $nlink C 'Class2Table-out OUT
+    * $attr C 'name Name
+   -o ?attr OUT 'name Name
+    .
+
+  class2Table-out-col-key
+    : $nlink C 'Class2Table-out OUT
+    * $nlink C 'Class2Table-key KEY
+   -o ?comp OUT 'col KEY
+    .
+
+  class2Table-out-key
+    : $nlink C 'Class2Table-out OUT
+    * $nlink C 'Class2Table-key KEY
+   -o ?cref OUT 'key KEY
+    .
+
+  class2Table-key
+    : $node 'IN 'Class C
+    *  try (nlink C 'Class2Table-key _) == false
+    *  fresh 'key
+   -o  node 'OUT 'Column 'key
+    *  nlink C 'Class2Table-key 'key
+    .
+
+  class2Table-key-name
+    : $nlink C 'Class2Table-key KEY
+   -o ?attr KEY 'name (str "objectId")
+    .
+
+  class2Table-key-type
+    : $nlink C 'Class2Table-key KEY
+
+    % get already resolved objectIdType
+    * $node 'OUT 'Type ObjectIdType
+    * $attr ObjectIdType 'name (str "Integer")
+   -o ?cref KEY 'type ObjectIdType
+    .
+
+  class2Table-out-col
+    : $nlink C 'Class2Table-out OUT
+
+    % find an Attribute of Class C
+    * $comp C 'attr E
+
+    % check that not multiValued
+    * $attr E 'multiValued (boolean false)
+
+    % resolve source Attribute to target Column
+    * $link E COL
+   -o ?comp OUT 'col COL
+    .
+
+  %rule DataType2Type {
+  %	from
+  %		dt : Class!DataType
+  %	to
+  %		out : Relational!Type (
+  %			name <- dt.name
+  %		)
+  %}
+  dataType2Type-out
+    : $node 'IN 'DataType DT
+    * $attr DT 'name Name
+    *  fresh 'out
+    *  try (link DT _) == false
+   -o  node 'OUT 'Type 'out
+    *  attr 'out 'name Name
+    *  link DT 'out
+    .
+
+  %rule DataTypeAttribute2Column {
+  %	from
+  %		a : Class!Attribute (
+  %			a.type.oclIsKindOf(Class!DataType) and not a.multiValued
+  %		)
+  %	to
+  %		out : Relational!Column (
+  %			name <- a.name,
+  %			type <- a.type
+  %		)
+  %}
+  dataTypeAttribute2Column-out
+    : $node 'IN 'Attribute A
+    *  try (link A _) == false
+
+    % begin guard
+    * $cref A 'type IType
+    * $node 'IN 'DataType IType		% more like oclIsTypeOf, which is equivalent here, because DataType has no subclass
+    * $attr A 'multiValued (boolean false)
+    % end guard
+
+    *  fresh 'out
+   -o  node 'OUT 'Column 'out
+    *  link A 'out
+    .
+
+  dataTypeAttribute2Column-out-name
+    : $link A OUT
+    * $attr A 'name Name
+   -o ?attr OUT 'name Name
+    .
+
+  dataTypeAttribute2Column-out-type
+    : $link A OUT
+    * $cref A 'type IType
+    * $link IType OType
+   -o ?cref OUT 'type OType
+    .
+
+}.
+
+erase-in : stage-desc.
+stage-transition-mode erase-in first.
+
+wait-before-serialization : stage-desc.
+stage-transition-mode wait-before-serialization interactive.
+
+stage (qui apply) -o stage wait-before-serialization.
+stage (qui apply2) -o stage wait-before-serialization.
+
+%stage (qui wait-before-serialization) -o stage erase-in.
+%stage (qui wait-before-serialization) -o stage top-to-xml.
+
+stage wait-before-serialization -o stage erase-in.
+
+stage erase-in = {
+
+  remove-attr
+    : $node 'IN _ C
+    *  attr C X Y
+   -o  ()
+    .
+
+  remove-cref
+    : $node 'IN _ C
+    *  cref C X Y
+   -o  ()
+    .
+
+  remove-comp
+    : $node 'IN _ C
+    *  comp C X Y	% TODO: support multiple _ in ceptre.js
+   -o  ()
+    .
+
+  remove-node
+    :  node 'IN _ C
+    *  try (attr C X Y) == false
+    *  try (cref C X' Y') == false	% TODO: why does cheptre.hs complain if we reuse X & Y?
+    *  try (comp C X'' Y'') == false
+   -o  ()
+    .
+
+  remove-link
+    :  link X Y
+   -o  ()
+    .
+
+  remove-nlink
+    :  nlink X Y Z
+   -o  ()
+    .
+
+}.
+
+top-to-xml : stage-desc.
+stage-transition-mode top-to-xml first.
+stage (qui erase-in) -o stage top-to-xml.
+
+%% txt NodeId MetaClassId NodeString Closed
+txt model_id node_id meta_class_id string bool : pred.
+
+to-string value string : bwd.
+to-string (str S) S.
+to-string (boolean true) "true".
+to-string (boolean false) "false".
+
+stage top-to-xml = {	% rename to node-to-xml
+
+      node ModelId MetaClassId NodeId
+%  *  try (comp Parent _ NodeId) == false
+  -o  txt ModelId NodeId MetaClassId (fmt " xmi:id=\"#{NodeId}\"") false
+%  -o  txt NodeId (fmt "<#{MetaClassId}") false
+   .
+
+% TODO: correctly support multivalued attributes in the two following rules
+
+      attr NodeId FeatureId Value
+   *  to-string Value SValue
+   *  txt ModelId NodeId MetaClassId S false
+  -o  txt ModelId NodeId MetaClassId (fmt "#{S} #{FeatureId}¤=\"#{SValue}\"") false
+   .
+
+      cref NodeId FeatureId TargetId
+   *  txt ModelId NodeId MetaClassId S false
+  -o  txt ModelId NodeId MetaClassId (fmt "#{S} #{FeatureId}¤=\"#{TargetId}\"") false
+   .
+
+}.
+
+top-to-xml-close : stage-desc.
+stage-transition-mode top-to-xml-close first.
+stage (qui top-to-xml) -o stage top-to-xml-close.
+
+stage top-to-xml-close = {
+
+     txt ModelId NodeId MetaClassId S false
+ -o  txt ModelId NodeId MetaClassId (fmt "#{S}>\n") true
+  .
+
+}.
+
+children-to-xml : stage-desc.
+stage-transition-mode children-to-xml first.
+stage (qui top-to-xml-close) -o stage children-to-xml.
+
+output model_id string : pred.
+
+stage children-to-xml = {
+
+  concat-child
+    :  txt ModelId ParentId ParentMetaClassId ParentS true
+    *  txt ModelId ChildId ChildMetaClassId ChildS false
+    *  comp ParentId FeatureId ChildId
+   -o  txt ModelId ParentId ParentMetaClassId (fmt "#{ParentS}  <#{FeatureId}¤ xmi:type=\"#{ChildMetaClassId}¤\"#{ChildS}  </#{FeatureId}¤>\n") true	% TODO: investigate strange cheptre behavior when misspelling FeatureId
+    .
+
+  child-done
+    :  txt ModelId NodeId MetaClassId S true
+    * $comp ParentId FeatureId NodeId
+    *  try (comp NodeId _ _) == false
+   -o  txt ModelId NodeId MetaClassId S false
+    .
+
+  top-done
+    :  txt ModelId NodeId MetaClassId S true
+    *  try (comp Parent _ NodeId) == false
+   -o  txt ModelId NodeId MetaClassId (fmt "<#{MetaClassId}¤#{S}</#{MetaClassId}¤>\n") false
+    .
+
+  start
+    : $txt ModelId NodeIde MetaClassId S false
+    *  try (output ModelId _) == false
+   -o ?output ModelId ""
+    .
+
+  concat-tops
+    :  txt ModelId NodeId MetaClassId T false
+    *  output ModelId H
+   -o  output ModelId (fmt "#{H}#{T}")
+    .
+
+}.
+
+
+
+context init = {
+  % <Class name="Family">
+  node 'IN 'Class 'class-Family,
+    attr 'class-Family 'name (str "Family"),
+
+    % <attr name="name" multiValued="false" type="/2"/>
+    node 'IN 'Attribute 'attr-Family-name,
+      attr 'attr-Family-name 'name (str "name"),
+      attr 'attr-Family-name 'multiValued (boolean false),
+      cref 'attr-Family-name 'type 'type-String,
+    comp 'class-Family 'attr 'attr-Family-name,
+
+    % <attr name="members" multiValued="true" type="/1"/>
+    node 'IN 'Attribute 'attr-Family-members,
+      attr 'attr-Family-members 'name (str "members"),
+      attr 'attr-Family-members 'multiValued (boolean true),
+      cref 'attr-Family-members 'type 'class-Person,
+    comp 'class-Family 'attr 'attr-Family-members,
+
+  % <Class name="Person">
+  node 'IN 'Class 'class-Person,
+    attr 'class-Person 'name (str "Person"),
+
+    % <attr name="firstName" multiValued="false" type="/2"/>
+    node 'IN 'Attribute 'attr-Person-firstName,
+      attr 'attr-Person-firstName 'name (str "firstName"),
+      attr 'attr-Person-firstName 'multiValued (boolean false),
+      cref 'attr-Person-firstName 'type 'type-String,
+    comp 'class-Person 'attr 'attr-Person-firstName,
+
+    % <attr name="closestFriend" multiValued="false" type="/1"/>
+    node 'IN 'Attribute 'attr-Person-closestFriend,
+      attr 'attr-Person-closestFriend 'name (str "closestFriend"),
+      attr 'attr-Person-closestFriend 'multiValued (boolean false),
+      cref 'attr-Person-closestFriend 'type 'class-Person,
+    comp 'class-Person 'attr 'attr-Person-closestFriend,
+    % <attr name="emailAddresses" multiValued="true" type="/2"/>
+
+    node 'IN 'Attribute 'attr-Person-emailAddresses,
+      attr 'attr-Person-emailAddresses 'name (str "emailAddresses"),
+      attr 'attr-Person-emailAddresses 'multiValued (boolean true),
+      cref 'attr-Person-emailAddresses 'type 'type-String,
+    comp 'class-Person 'attr 'attr-Person-emailAddresses,
+
+  % <DataType name="String"/>
+  node 'IN 'DataType 'type-String,
+  attr 'type-String 'name (str "String"),
+
+  % <DataType name="Integer"/>
+  node 'IN 'DataType 'type-Integer,
+  attr 'type-Integer 'name (str "Integer"),
+}.
+
