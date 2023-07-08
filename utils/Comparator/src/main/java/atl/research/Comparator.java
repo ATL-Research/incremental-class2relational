@@ -51,11 +51,26 @@ public class Comparator {
         final SimpleEMFModelComparator comparator = new SimpleEMFModelComparator();
 
         final StringBuffer messageBuffer = new StringBuffer();
-        comparator.compare("/contents", expectedResource.getContents(), currentResource.getContents(), new HashMap<>(), messageBuffer, (index, value) ->
-		value instanceof EObject eo
-		?	eo.eGet(eo.eClass().getEStructuralFeature("name"))
-		:	value
-	);
+        comparator.compare("/contents", expectedResource.getContents(), currentResource.getContents(), new HashMap<>(), messageBuffer, (index, value) -> {
+		if(value instanceof EObject eo) {
+			Object ret = eo.eGet(eo.eClass().getEStructuralFeature("name"));
+			if(ret == null && !eo.eContents().isEmpty()) {
+				ret = "";
+				for(EObject eoc : eo.eContents()) {
+					Object name = (String)eoc.eGet(eoc.eClass().getEStructuralFeature("name"));
+					if(name != null) {
+						if(!ret.equals("")) {
+							ret += ",";
+						}
+						ret += "" + name;
+					}
+				}
+			}
+			return ret;
+		} else {
+			return value;
+		}
+	});
 
         if (messageBuffer.length() > 0) {
             System.err.println(messageBuffer.toString());
