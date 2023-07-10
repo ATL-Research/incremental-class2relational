@@ -29,9 +29,11 @@ namespace HSRM.TTC2023.ClassToRelational
             // Transformation 4
             public override void DeclareSynchronization()
             {
-                // Transformation 3, Model Traversal 11
+                // Transformation 3
+                // Model Traversal 11
                 SynchronizeManyLeftToRightOnly(SyncRule<DataTypeToType>(), m => m.RootElements.OfType<IDataType>(), rels => rels.RootElements.OfType<IModelElement, IType>());
-                // Transformation 3, Model Traversal 11
+                // Transformation 3
+                // Model Traversal 11
                 SynchronizeManyLeftToRightOnly(SyncRule<ClassToTable>(), m => m.RootElements.OfType<IClass>(), rels => rels.RootElements.OfType<IModelElement, ITable>());
                 // Transformation 3
                 SynchronizeManyLeftToRightOnly(SyncRule<AttributeToTable>(),
@@ -68,9 +70,11 @@ namespace HSRM.TTC2023.ClassToRelational
             // Transformation 4
             public override void DeclareSynchronization()
             {
-                // Transformation 1, Model Traversal 6
+                // Transformation 1
+                // Model Traversal 6
                 Synchronize(c => c.Name, t => t.Name);
-                // Transformation 3, Model Traversal 10
+                // Transformation 3
+                // Model Traversal 10
                 SynchronizeMany(SyncRule<AttributeToColumn>(), c => c.Attr.Where(a => !a.MultiValued), t => t.Col);
             }
         }
@@ -147,9 +151,11 @@ namespace HSRM.TTC2023.ClassToRelational
             // Transformation 4
             public override void DeclareSynchronization()
             {
-                // Transformation 1, Model Traversal 10
+                // Transformation 1
+                // Model Traversal 10
                 SynchronizeLeftToRightOnly(a => a.Owner.Name + "_" + a.Name, t => t.Name);
-                // Transformation 1, Model Traversal 11
+                // Transformation 1
+                // Model Traversal 11
                 SynchronizeLeftToRightOnly(a => a.Owner.Name.ToCamelCase() + "Id", t => t.Col[0].Name);
                 // Transformation 3
                 SynchronizeLeftToRightOnly(SyncRule<AttributeToColumn>(),
