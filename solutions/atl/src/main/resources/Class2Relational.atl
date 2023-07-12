@@ -1,6 +1,8 @@
 module Class2Relational;
+-- Setup 6
 create OUT : Relational from IN : class_;
 
+-- Setup 2
 uses strings;
 
 
@@ -16,9 +18,11 @@ uses strings;
 
 -- global variable
 -- context 
+-- Helper 22
 helper def: objectIdType : Relational!Type =
 	class_!DataType.allInstances()->select(e | e.name = 'Integer')->first();
 
+-- Transformation 47
 rule Class2Table {
 	from
 		c : class_!Class
@@ -35,6 +39,7 @@ rule Class2Table {
 		)
 }
 
+-- Transformation 16
 rule DataType2Type {
 	from
 		dt : class_!DataType
@@ -44,6 +49,7 @@ rule DataType2Type {
 		)
 }
 
+-- Transformation 31
 rule DataTypeAttribute2Column {
 	from
 		a : class_!Attribute (
@@ -59,6 +65,7 @@ rule DataTypeAttribute2Column {
 		)
 }
 
+-- Transformation 67
 rule MultiValuedDataTypeAttribute2Column {
 	from
 		a : class_!Attribute (
@@ -79,6 +86,7 @@ rule MultiValuedDataTypeAttribute2Column {
 		)
 }
 
+-- Transformation 33
 rule ClassAttribute2Column {
 	from
 		a : class_!Attribute (
@@ -91,6 +99,7 @@ rule ClassAttribute2Column {
 		)
 }
 
+-- Transformation 69
 rule MultiValuedClassAttribute2Column {
 	from
 		a : class_!Attribute (

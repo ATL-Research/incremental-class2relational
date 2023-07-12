@@ -42,6 +42,16 @@ createPlot <- function(data, title) {
 }
 
 # Read the CSV files
+## atl
+atl <- read.csv("atl/atl-metrics.csv", header = TRUE, , sep = ",", stringsAsFactors = FALSE)
+atl$Transformation.Aspect <- trimws(atl$Transformation.Aspect)
+atlPlot <- createPlot(atl, "atl")
+
+## atol
+atol <- read.csv("atol/atol-metrics.csv", header = TRUE, , sep = ",", stringsAsFactors = FALSE)
+atol$Transformation.Aspect <- trimws(atol$Transformation.Aspect)
+atolPlot <- createPlot(atol, "atol")
+
 ## cheptre
 cheptre <- read.csv("cheptre/cheptre-metrics.csv", header = TRUE, , sep = ",", stringsAsFactors = FALSE)
 cheptre$Transformation.Aspect <- trimws(cheptre$Transformation.Aspect)
@@ -58,6 +68,8 @@ nmf$Transformation.Aspect <- trimws(nmf$Transformation.Aspect)
 nmfPlot <- createPlot(nmf, "nmf")
 
 # Print the plots
+savePlot(atlPlot, "plots/atl.pdf")
+savePlot(atolPlot, "plots/atol.pdf")
 savePlot(cheptrePlot, "plots/cheptre.pdf")
 savePlot(csharpPlot, "plots/csharp.pdf")
 savePlot(nmfPlot, "plots/nmf.pdf")
