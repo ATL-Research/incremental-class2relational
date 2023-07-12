@@ -62,6 +62,11 @@ csharp <- read.csv("csharp/csharp-metrics.csv", header = TRUE, , sep = ",", stri
 csharp$Transformation.Aspect <- trimws(csharp$Transformation.Aspect)
 csharpPlot <- createPlot(csharp, "csharp")
 
+## java
+java <- read.csv("java/java-metrics.csv", header = TRUE, , sep = ",", stringsAsFactors = FALSE)
+java$Transformation.Aspect <- trimws(java$Transformation.Aspect)
+javaPlot <- createPlot(java, "java")
+
 ## nmf
 nmf <- read.csv("nmf/nmf-metrics.csv", header = TRUE, , sep = ",", stringsAsFactors = FALSE)
 nmf$Transformation.Aspect <- trimws(nmf$Transformation.Aspect)
@@ -72,6 +77,7 @@ savePlot(atlPlot, "plots/atl.pdf")
 savePlot(atolPlot, "plots/atol.pdf")
 savePlot(cheptrePlot, "plots/cheptre.pdf")
 savePlot(csharpPlot, "plots/csharp.pdf")
+savePlot(javaPlot, "plots/java.pdf")
 savePlot(nmfPlot, "plots/nmf.pdf")
 
 
