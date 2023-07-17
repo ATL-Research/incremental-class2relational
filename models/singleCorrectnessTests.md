@@ -22,7 +22,7 @@
    	   update all tables that use Table name with default value "" ☑️
   
 
-3. change firstname to multi-valued (setting it true) ☑️
+3. change firstname to multi-valued (setting it true) ☑️  
 *expected transformation behavior*  
 	- delete column of table Person +  
 	- create table for firstnames with foreign keys
@@ -35,7 +35,9 @@
 *expected transformation behaviors*  
 	1. remove column (null value behavior 2)  
 	**OR**  
-	2. set default type "Default" to column (null value behavior 3)
+	2. set default type "Default" to column (null value behavior 3)  
+    	**OR**
+    3. set column type to null (null value behavior 3)
 
 ### Affecting EReferences
 
