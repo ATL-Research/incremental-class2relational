@@ -11,18 +11,18 @@
 
 2. set the name of Family to null  
 *expected transformation behavior*  
-	1. update Table name with default value "" ☑️
-
-	update all tables that use Table name with default value "" ☑️
+	1. ignore binding (null value behavior 2)  ☑️
+ 
+ 	table created with no name and multivalued table created with no name ☑️
 
 	**OR**
 
-   	2. ignore binding ☑️
+   	2. update Table name with default value "" (null value behavior 3) ☑️
    	  
-   	   table created with no name and multivalued table created with no name ☑️
+   	   update all tables that use Table name with default value "" ☑️
   
 
-3. change firstname to multi-valued (setting it true)  
+3. change firstname to multi-valued (setting it true) ☑️
 *expected transformation behavior*  
 	- delete column of table Person +  
 	- create table for firstnames with foreign keys
@@ -35,7 +35,7 @@
 *expected transformation behaviors*  
 	1. remove column (null value behavior 2)  
 	**OR**  
-	2. set default type to column (null value behavior 3)
+	2. set default type "Default" to column (null value behavior 3)
 
 ### Affecting EReferences
 
