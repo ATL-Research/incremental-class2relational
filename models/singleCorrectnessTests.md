@@ -19,7 +19,13 @@
 
    	2. update Table name with default value "" (null value behavior 3) ☑️
    	  
-   	   update all tables that use Table name with default value "" ☑️
+   	   update all tables that use Table name with default value "" ☑
+
+    	**OR**
+
+       3. update Table name with null value (null value behavior 3) ☑️
+   	  
+   	   update all tables that use Table name with null ☑️
   
 
 3. change firstname to multi-valued (setting it true) ☑️  
@@ -78,9 +84,11 @@
 
 11. add elements to root: Attribute, multi-valued, type:Person, owner:null  
 *expected transformation behaviors*  
-	1. do not create the object (null value behavior 2)  
+	1. do not create the object (null value behavior 2) ☑️  
 	**OR**  
-	2. create a table with default name "" (null value behavior 3)
+	2. create a table with default name "" (null value behavior 3) ☑️  
+	**OR**  
+	3. create a table with name null (null value behavior 3) ☑️  
 
 12. add elements to root: Attribute, multi-valued, without type  
 *expected transformation behaviors*  
