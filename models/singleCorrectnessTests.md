@@ -41,7 +41,7 @@
 
 ### Affecting EReferences
 
-6. set type of closestFriend null
+6. set type of closestFriend null  
 *expected transformation behaviors*
 	1. remove column (null value behavior 2)  
 	**OR**  
@@ -76,17 +76,17 @@
 	**OR**  
 	4. create Column and dummy table and insert it in dummy table
 
-11. add elements to root: Attribute, multi-valued, type:Person, owner:null
+11. add elements to root: Attribute, multi-valued, type:Person, owner:null  
 *expected transformation behaviors*  
 	1. do not create the object (null value behavior 2)  
 	**OR**  
-	2. create a table with default name (null value behavior 3)
+	2. create a table with default name "" (null value behavior 3)
 
-12. add elements to root: Attribute, multi-valued, without type
+12. add elements to root: Attribute, multi-valued, without type  
 *expected transformation behaviors*  
 	1. do not create the object (null value behavior 2)  
 	**OR**  
-	2. create a table with default name (null value behavior 3)
+	2. create a table with default name "" (null value behavior 3)
 		
 14. (:question:)correctness_couple: insert Class to root and delete it
 
