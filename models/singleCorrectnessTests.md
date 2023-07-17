@@ -6,12 +6,13 @@
 
 1. change name of Person to Member  
 *expected transformation behavior*  
-	- update Table name +  
-	(:question:) update all tables that use Table name (multi-valued attributes)?
+	- update Table name ☑️
+ 	- update all tables that use Table name ☑️
 
-2. set the name of Family to null  
+3. set the name of Family to null  
 *expected transformation behavior*  
-	1. update Table name :new:with default values
+	1. update Table name :new:with default values ☑️
+
 	(:question:) update all tables that use Table name (multi-valued attributes) with default value?
 
 	:new:**OR**
@@ -22,16 +23,16 @@
 
    	:new: problems -> 
 
-4. change firstname to multi-valued (setting it true)  
+5. change firstname to multi-valued (setting it true)  
 *expected transformation behavior*  
 	- delete column of table Person +  
 	- create table for firstnames with foreign keys
 
-5. change emailAdresses to single-valued (setting it to false)  
+6. change emailAdresses to single-valued (setting it to false)  
 *expected transformation behavior*  
 	- delete table for emailAdresses + create column in table
 	
-6. set type of firstname null  
+7. set type of firstname null  
 *expected transformation behaviors*  
 	1. remove column (null value behavior 2)  
 	**OR**  
