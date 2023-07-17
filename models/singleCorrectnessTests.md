@@ -68,9 +68,12 @@
 
 9. add multivalued attribute to class Person  
 *expected transformation behavior*  
-	1. create new column in table Person with no reference to corresponding table
-	**OR**
-	2. ignore the attribute
+	1. ignore the attribute  
+	**OR**  
+	2. create new column in table Person with no type  
+    		i. no "id" suffix (attribute references a missing Class type)  
+    		**OR**  
+    		ii. with "id" suffix (attribute references a missing Datatype)   
 
 10. add elements to root: Attribute, single-valued, type:Person  
 *expected transformation behaviors*  
