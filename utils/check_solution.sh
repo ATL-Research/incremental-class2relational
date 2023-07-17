@@ -57,7 +57,8 @@ function checkSolution {
 
     if [ ! -f "launch.env" ]; then
         echo "launch.env not found"
-        exit 1
+	popd
+        return
     fi
     unset build
     unset run
