@@ -154,7 +154,7 @@ public class Runner extends AbstractDriver {
 		String transfoName = "Class2Relational.cep";
 		String transfoPath = new File("src/main/resources/").getAbsolutePath();
 		this.process = Runtime.getRuntime().exec(new String[] {
-			"docker", "run", "-i", "--mount", "type=bind,source=" + transfoPath + ",target=/examples", "ghcr.io/np/incremental-class2relational-ceptre-cheptre", "/bin/cheptre", "/examples/" + transfoName, "--omit-pointless-choices"
+			"docker", "run", "--rm", "-i", "--mount", "type=bind,source=" + transfoPath + ",target=/examples", "ghcr.io/np/incremental-class2relational-ceptre-cheptre", "/bin/cheptre", "/examples/" + transfoName, "--omit-pointless-choices"
 		});
 		new Thread(() -> {
 			try {
@@ -240,7 +240,7 @@ public class Runner extends AbstractDriver {
 				.replaceAll("\\\\n", "\n")
 				.replaceAll("\\\\\"", "\"")
 				// post processing around cheptre issue
-				.replaceAll("_[0-9]+¤", "")
+				.replaceAll("(_[0-9]+)?¤", "")
 			;
 			// implementing firstToLower with post-processing
 			output = toLowerPattern.matcher(output).replaceAll(match -> match.group(1).toLowerCase());

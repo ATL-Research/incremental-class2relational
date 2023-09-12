@@ -48,7 +48,9 @@ stage-transition-mode apply first.
 idle : stage-desc.
 stage-transition-mode idle interactive.
 
+% The variant of the transformation to execute can be selected by changing how the following lines are commented.
 stage idle -o stage apply.
+%stage idle -o stage apply2.
 
 
 stage apply = {
@@ -262,6 +264,7 @@ stage apply = {
     % Tracing 5
     *  try (link A _) == false
 
+    % get already resolved objectIdType
     % Transformation 4
     * $node 'OUT 'Type ObjectIdType
     % Transformation 5
@@ -319,23 +322,24 @@ stage apply = {
     % Model Traversal 5
     * $attr A 'name (str Name)
     % Transformation 2
-    *  fresh 'out
+    *  fresh 'foreignKey
     % Tracing 5
     *  try (link A _) == false
 
+    % get already resolved objectIdType
     % Transformation 4
     * $node 'OUT 'Type ObjectIdType
     % Transformation 5
     * $attr ObjectIdType 'name (str "Integer")
 
     % Transformation 4
-   -o  node 'OUT 'Column 'out
+   -o  node 'OUT 'Column 'foreignKey
     % Transformation 6
-    *  attr 'out 'name (str (fmt "#{Name}Id"))
+    *  attr 'foreignKey 'name (str (fmt "#{Name}Id"))
     % Transformation 4
-    *  cref 'out 'type ObjectIdType
+    *  cref 'foreignKey 'type ObjectIdType
     % Tracing 3
-    *  link A 'out
+    *  link A 'foreignKey
     .
  
   %rule MultiValuedClassAttribute2Column {
@@ -382,7 +386,7 @@ stage apply = {
     * $attr A 'name (str Name)
 %   * $link IType OType
     % Transformation 2
-    *  fresh 'out
+    *  fresh 't
     % Transformation 2
     *  fresh 'id
     % Transformation 2
@@ -390,15 +394,16 @@ stage apply = {
     % Tracing 5
     *  try (link A _) == false
 
+    % get already resolved objectIdType
     % Transformation 4
     * $node 'OUT 'Type ObjectIdType
     % Transformation 5
     * $attr ObjectIdType 'name (str "Integer")
 
     % Transformation 4
-   -o  node 'OUT 'Table 'out
+   -o  node 'OUT 'Table 't
     % Transformation 6
-    *  attr 'out 'name (str (fmt "#{OwnerName}_#{Name}"))
+    *  attr 't 'name (str (fmt "#{OwnerName}_#{Name}"))
     % Transformation 4
     *  node 'OUT 'Column 'id
     % Transformation 6
@@ -406,7 +411,7 @@ stage apply = {
     % Transformation 4
     *  cref 'id 'type ObjectIdType
     % Transformation 4
-    *  comp 'out 'col 'id
+    *  comp 't 'col 'id
     % Transformation 4
     *  node 'OUT 'Column 'foreignKey
     % Transformation 6
@@ -414,9 +419,9 @@ stage apply = {
     % Transformation 4
     *  cref 'foreignKey 'type ObjectIdType
     % Transformation 4
-    *  comp 'out 'col 'foreignKey
+    *  comp 't 'col 'foreignKey
     % Tracing 3
-    *  link A 'out
+    *  link A 't
     .
 
 }.
@@ -461,6 +466,20 @@ stage apply2 = {
    -o ?comp OUT 'col KEY
     .
 
+  class2Table-out-col-tail
+    : $nlink C 'Class2Table-out OUT
+
+    % find an Attribute of Class C
+    * $comp C 'attr E
+
+    % check that not multiValued
+    * $attr E 'multiValued (boolean false)
+
+    % resolve source Attribute to target Column
+    * $nlink E Rule COL
+   -o ?comp OUT 'col COL
+    .
+
   class2Table-out-key
     : $nlink C 'Class2Table-out OUT
     * $nlink C 'Class2Table-key KEY
@@ -468,7 +487,7 @@ stage apply2 = {
     .
 
   class2Table-key
-    : $node 'IN 'Class C
+    : $node 'IN 'Class C				% we could also match `nlink C 'Class2Table-out OUT`, but that would enforce class2Table-out to be executed first
     *  try (nlink C 'Class2Table-key _) == false
     *  fresh 'key
    -o  node 'OUT 'Column 'key
@@ -489,20 +508,6 @@ stage apply2 = {
    -o ?cref KEY 'type ObjectIdType
     .
 
-  class2Table-out-col
-    : $nlink C 'Class2Table-out OUT
-
-    % find an Attribute of Class C
-    * $comp C 'attr E
-
-    % check that not multiValued
-    * $attr E 'multiValued (boolean false)
-
-    % resolve source Attribute to target Column
-    * $link E COL
-   -o ?comp OUT 'col COL
-    .
-
   %rule DataType2Type {
   %	from
   %		dt : Class!DataType
@@ -513,12 +518,16 @@ stage apply2 = {
   %}
   dataType2Type-out
     : $node 'IN 'DataType DT
-    * $attr DT 'name Name
+    *  try (nlink DT 'DataType2Type-out _) == false
     *  fresh 'out
-    *  try (link DT _) == false
    -o  node 'OUT 'Type 'out
-    *  attr 'out 'name Name
-    *  link DT 'out
+    *  nlink DT 'DataType2Type-out 'out
+    .
+
+  dataType2Type-out-name
+    : $nlink DT 'DataType2Type-out OUT
+    * $attr DT 'name Name
+   -o ?attr OUT 'name Name
     .
 
   %rule DataTypeAttribute2Column {
@@ -534,7 +543,7 @@ stage apply2 = {
   %}
   dataTypeAttribute2Column-out
     : $node 'IN 'Attribute A
-    *  try (link A _) == false
+    *  try (nlink A 'dataTypeAttribute2Column-out _) == false
 
     % begin guard
     * $cref A 'type IType
@@ -544,20 +553,267 @@ stage apply2 = {
 
     *  fresh 'out
    -o  node 'OUT 'Column 'out
-    *  link A 'out
+    *  nlink A 'dataTypeAttribute2Column-out 'out
     .
 
   dataTypeAttribute2Column-out-name
-    : $link A OUT
+    : $nlink A 'dataTypeAttribute2Column-out OUT
     * $attr A 'name Name
    -o ?attr OUT 'name Name
     .
 
   dataTypeAttribute2Column-out-type
-    : $link A OUT
+    : $nlink A 'dataTypeAttribute2Column-out OUT
     * $cref A 'type IType
-    * $link IType OType
+    * $nlink IType 'DataType2Type-out OType		% second argument could be Rule, to ignore the specific rule that created the nlink, which would be closer to ATL semantics
    -o ?cref OUT 'type OType
+    .
+
+  %rule MultiValuedDataTypeAttribute2Column {
+  %	from
+  %		a : Class!Attribute (
+  %			a.type.oclIsKindOf(Class!DataType) and a.multiValued
+  %		)
+  %	to
+  %		out : Relational!Table (
+  %			name <- a.owner.name + '_' + a.name,
+  %			col <- Sequence {id, value}
+  %		),
+  %		id : Relational!Column (
+  %			name <- a.owner.name.firstToLower() + 'Id',
+  %			type <- thisModule.objectIdType
+  %		),
+  %		value : Relational!Column (
+  %			name <- a.name,
+  %			type <- a.type
+  %		)
+  %}
+  multiValuedDataTypeAttribute2Column-out
+    : $node 'IN 'Attribute A
+    *  try (nlink A 'multiValuedDataTypeAttribute2Column-out _) == false
+
+    % begin guard
+    * $cref A 'type IType
+    * $node 'IN 'DataType IType		% more like oclIsTypeOf, which is equivalent here, because DataType has no subclass
+    * $attr A 'multiValued (boolean true)
+    % end guard
+
+    *  fresh 'out
+   -o  node 'OUT 'Table 'out
+    *  nlink A 'multiValuedDataTypeAttribute2Column-out 'out
+    .
+
+  multiValuedDataTypeAttribute2Column-out-name
+    : $nlink A 'multiValuedDataTypeAttribute2Column-out OUT
+%   * $node 'IN 'Class Owner
+    * $comp Owner 'attr A
+    * $attr Owner 'name (str OwnerName)
+
+    * $attr A 'name (str Name)
+   -o ?attr OUT 'name (str (fmt "#{OwnerName}_#{Name}"))
+    .
+
+  multiValuedDataTypeAttribute2Column-out-col
+    : $nlink A 'multiValuedDataTypeAttribute2Column-out OUT
+    * $nlink A 'multiValuedDataTypeAttribute2Column-id Id
+    * $nlink A 'multiValuedDataTypeAttribute2Column-value Value
+   -o ?comp OUT 'col Id
+    * ?comp OUT 'col Value
+    .
+
+  multiValuedDataTypeAttribute2Column-id
+    : $nlink A 'multiValuedDataTypeAttribute2Column-out OUT			% we could also rematch the rule, to avoid enforcing -out execution before this rule, but that would be more expensive
+										% or we could use a separate pred to mean that the rule is matched (+ this separates matching from applying)
+    *  try (nlink A 'multiValuedDataTypeAttribute2Column-id _) == false
+    *  fresh 'id
+   -o  node 'OUT 'Column 'id
+    *  nlink A 'multiValuedDataTypeAttribute2Column-id 'id
+    .
+
+  multiValuedDataTypeAttribute2Column-id-name
+    : $nlink A 'multiValuedDataTypeAttribute2Column-id Id
+    * $comp Owner 'attr A
+    * $attr Owner 'name (str OwnerName)
+   -o ?attr Id 'name (str (fmt "°#{OwnerName}Id"))	% TODO: missing: firstToLower
+    .
+
+  multiValuedDataTypeAttribute2Column-id-type
+    : $nlink A 'multiValuedDataTypeAttribute2Column-id Id
+
+    % get already resolved objectIdType
+    * $node 'OUT 'Type ObjectIdType
+    * $attr ObjectIdType 'name (str "Integer")
+
+   -o ?cref Id 'type ObjectIdType
+    .
+
+  multiValuedDataTypeAttribute2Column-value
+    : $nlink A 'multiValuedDataTypeAttribute2Column-out OUT			% same remark as for multiValuedDataTypeAttribute2Column-id
+    *  try (nlink A 'multiValuedDataTypeAttribute2Column-value _) == false
+    *  fresh 'value
+   -o  node 'OUT 'Column 'value
+    *  nlink A 'multiValuedDataTypeAttribute2Column-value 'value
+    .
+
+  multiValuedDataTypeAttribute2Column-value-name
+    : $nlink A 'multiValuedDataTypeAttribute2Column-value Value
+    * $attr A 'name Name
+   -o ?attr Value 'name Name
+    .
+
+  multiValuedDataTypeAttribute2Column-value-type
+    : $nlink A 'multiValuedDataTypeAttribute2Column-value Value
+
+    * $cref A 'type IType
+    * $nlink IType 'DataType2Type-out OType
+   -o ?cref Value 'type OType
+    .
+
+  %rule ClassAttribute2Column {
+  %	from
+  %		a : Class!Attribute (
+  %			a.type.oclIsKindOf(Class!Class) and not a.multiValued
+  %		)
+  %	to
+  %		foreignKey : Relational!Column (
+  %			name <- a.name + 'Id',
+  %			type <- thisModule.objectIdType
+  %		)
+  %}
+  classAttribute2Column-foreignKey
+    : $node 'IN 'Attribute A
+    *  try (nlink A 'classAttribute2Column-foreignKey _) == false
+
+    % begin guard
+    * $cref A 'type IType
+    * $node 'IN 'Class IType		% more like oclIsTypeOf, which is equivalent here, because Class has no subclass
+    * $attr A 'multiValued (boolean false)
+    % end guard
+
+    *  fresh 'foreignKey
+   -o  node 'OUT 'Column 'foreignKey
+    *  nlink A 'classAttribute2Column-foreignKey 'foreignKey
+    .
+
+
+  classAttribute2Column-foreignKey-name
+    : $nlink A 'classAttribute2Column-foreignKey ForeignKey
+    * $attr A 'name (str Name)
+   -o ?attr ForeignKey 'name (str (fmt "#{Name}Id"))
+    .
+
+  classAttribute2Column-foreignKey-type
+    : $nlink A 'classAttribute2Column-foreignKey ForeignKey
+
+    % get already resolved objectIdType
+    * $node 'OUT 'Type ObjectIdType
+    * $attr ObjectIdType 'name (str "Integer")
+
+   -o ?cref ForeignKey 'type ObjectIdType
+    .
+ 
+  %rule MultiValuedClassAttribute2Column {
+  %	from
+  %		a : Class!Attribute (
+  %			a.type.oclIsKindOf(Class!Class) and a.multiValued
+  %		)
+  %	to
+  %		t : Relational!Table (
+  %			name <- a.owner.name + '_' + a.name,
+  %			col <- Sequence {id, foreignKey}
+  %		),
+  %		id : Relational!Column (
+  %			name <- a.owner.name.firstToLower() + 'Id',
+  %			type <- thisModule.objectIdType
+  %		),
+  %		foreignKey : Relational!Column (
+  %			name <- a.name + 'Id',
+  %			type <- thisModule.objectIdType
+  %		)
+  %}
+  multiValuedClassAttribute2Column-t
+    : $node 'IN 'Attribute A
+    *  try (nlink A 'multiValuedClassAttribute2Column-t _) == false
+
+    % begin guard
+    * $cref A 'type IType
+    * $node 'IN 'Class IType		% more like oclIsTypeOf, which is equivalent here, because DataType has no subclass
+    * $attr A 'multiValued (boolean true)
+    % end guard
+
+    *  fresh 't
+   -o  node 'OUT 'Table 't
+    *  nlink A 'multiValuedClassAttribute2Column-t 't
+    .
+
+  multiValuedClassAttribute2Column-t-name
+    : $nlink A 'multiValuedClassAttribute2Column-t T
+
+%   * $node 'IN 'Class Owner
+    * $comp Owner 'attr A
+    * $attr Owner 'name (str OwnerName)		% this will make this rule ignore columns when their table has no name
+
+    * $attr A 'name (str Name)
+   -o ?attr T 'name (str (fmt "#{OwnerName}_#{Name}"))
+    .
+
+  multiValuedClassAttribute2Column-t-col	% this rule could be separated in two
+    : $nlink A 'multiValuedClassAttribute2Column-t T
+    * $nlink A 'multiValuedClassAttribute2Column-id Id
+    * $nlink A 'multiValuedClassAttribute2Column-foreignKey ForeignKey
+   -o ?comp T 'col Id
+    * ?comp T 'col ForeignKey
+    .
+
+  multiValuedClassAttribute2Column-id
+    : $nlink A 'multiValuedClassAttribute2Column-t T
+    *  try (nlink A 'multiValuedClassAttribute2Column-id _) == false
+    *  fresh 'id
+   -o  node 'OUT 'Column 'id
+    *  nlink A 'multiValuedClassAttribute2Column-id 'id
+    .
+
+  multiValuedClassAttribute2Column-id-name
+    : $nlink A 'multiValuedClassAttribute2Column-id Id
+
+    * $node 'IN 'Class Owner
+    * $comp Owner 'attr A
+    * $attr Owner 'name (str OwnerName)		% this will make this rule ignore columns when their table has no name
+   -o ?attr Id 'name (str (fmt "°#{OwnerName}Id"))	% TODO: missing: firstToLower
+    .
+
+  multiValuedClassAttribute2Column-id-type
+    : $nlink A 'multiValuedClassAttribute2Column-id Id
+
+    % get already resolved objectIdType
+    * $node 'OUT 'Type ObjectIdType
+    * $attr ObjectIdType 'name (str "Integer")
+
+   -o ?cref Id 'type ObjectIdType
+    .
+
+  multiValuedClassAttribute2Column-foreignKey
+    : $nlink A 'multiValuedClassAttribute2Column-t T
+    *  try (nlink A 'multiValuedClassAttribute2Column-foreignKey _) == false
+    *  fresh 'foreignKey
+   -o  node 'OUT 'Column 'foreignKey
+    *  nlink A 'multiValuedClassAttribute2Column-foreignKey 'foreignKey
+    .
+
+  multiValuedClassAttribute2Column-foreignKey-name
+    : $nlink A 'multiValuedClassAttribute2Column-foreignKey ForeignKey
+    * $attr A 'name (str Name)
+   -o ?attr ForeignKey 'name (str (fmt "#{Name}Id"))
+    .
+
+  multiValuedClassAttribute2Column-foreignKey-type
+    : $nlink A 'multiValuedClassAttribute2Column-foreignKey ForeignKey
+
+    % get already resolved objectIdType
+    * $node 'OUT 'Type ObjectIdType
+    * $attr ObjectIdType 'name (str "Integer")
+
+   -o ?cref ForeignKey 'type ObjectIdType
     .
 
 }.
@@ -630,24 +886,27 @@ to-string (boolean false) "false".
 
 stage top-to-xml = {	% rename to node-to-xml
 
-      node ModelId MetaClassId NodeId
+  create-txt-for-node
+    :  node ModelId MetaClassId NodeId
 %  *  try (comp Parent _ NodeId) == false
-  -o  txt ModelId NodeId MetaClassId (fmt " xmi:id=\"#{NodeId}\"") false
+   -o  txt ModelId NodeId MetaClassId (fmt " xmi:id=\"#{NodeId}\"") false
 %  -o  txt NodeId (fmt "<#{MetaClassId}") false
-   .
+    .
 
 % TODO: correctly support multivalued attributes in the two following rules
 
-      attr NodeId FeatureId Value
-   *  to-string Value SValue
-   *  txt ModelId NodeId MetaClassId S false
-  -o  txt ModelId NodeId MetaClassId (fmt "#{S} #{FeatureId}¤=\"#{SValue}\"") false
-   .
+  append-attr-value
+    :  attr NodeId FeatureId Value
+    *  to-string Value SValue
+    *  txt ModelId NodeId MetaClassId S false
+   -o  txt ModelId NodeId MetaClassId (fmt "#{S} #{FeatureId}¤=\"#{SValue}\"") false
+    .
 
-      cref NodeId FeatureId TargetId
-   *  txt ModelId NodeId MetaClassId S false
-  -o  txt ModelId NodeId MetaClassId (fmt "#{S} #{FeatureId}¤=\"#{TargetId}\"") false
-   .
+  append-cref-value
+    :  cref NodeId FeatureId TargetId
+    *  txt ModelId NodeId MetaClassId S false
+   -o  txt ModelId NodeId MetaClassId (fmt "#{S} #{FeatureId}¤=\"#{TargetId}\"") false
+    .
 
 }.
 
@@ -657,9 +916,10 @@ stage (qui top-to-xml) -o stage top-to-xml-close.
 
 stage top-to-xml-close = {
 
-     txt ModelId NodeId MetaClassId S false
- -o  txt ModelId NodeId MetaClassId (fmt "#{S}>\n") true
-  .
+  close-tag
+    :  txt ModelId NodeId MetaClassId S false
+   -o  txt ModelId NodeId MetaClassId (fmt "#{S}>\n") true
+    .
 
 }.
 
@@ -706,7 +966,7 @@ stage children-to-xml = {
 }.
 
 
-
+% Sample model, for tests
 context init = {
   % <Class name="Family">
   node 'IN 'Class 'class-Family,
