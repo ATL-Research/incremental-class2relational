@@ -92,42 +92,6 @@ namespace HSRM.TTC2023.ClassToRelational
                 //  Transformation 6
                 table.Col.Add((IColumn)TraceOrTransform(attr));
             }
-            // Change Propagation 6
-            ((INotifyCollectionChanged)@class.Attr).CollectionChanged += (o, e) =>
-            {
-                // Change Propagation 4
-                if (e.Action == NotifyCollectionChangedAction.Reset)
-                {
-                    // Change Propagation 3
-                    table.Col.Clear();
-                    // Change Propagation 4
-                    table.Col.Add(primaryKey);
-                    // Change Propagation 1
-                    return;
-                }
-                // Change Propagation 4
-                if (e.OldItems != null)
-                {
-                    // Change Propagation 6
-                    foreach (var item in e.OldItems)
-                    {
-                        // Change Propagation 6
-                        table.Col.Remove((IColumn)_trace[item]);
-                    }
-                }
-                // Change Propagation 4
-                if (e.NewItems != null)
-                {
-                    // Change Propagation 6
-                    foreach (var item in e.NewItems)
-                    {
-                        // Change Propagation 6
-                        table.Col.Add((IColumn)TraceOrTransform(item));
-                    }
-                }
-            };
-            // Change Propagation 8
-            @class.NameChanged += (s, e) => { table.Name = @class.Name; };
             // Transformation 1
             return table;
         }
@@ -147,8 +111,6 @@ namespace HSRM.TTC2023.ClassToRelational
                 // Transformation 3
                 Name = dataType.Name
             };
-            // Change Propagation 8
-            dataType.NameChanged += (o, e) => type.Name = dataType.Name;
             // Transformation 2
             return type;
         }
@@ -158,31 +120,21 @@ namespace HSRM.TTC2023.ClassToRelational
         {
             // Transformation 4
             var column = new Column();
-            // Helper 6
-            void UpdateNameAndType(object? sender, ValueChangedEventArgs? e)
+            // Transformation 5
+            if (attribute.Type is IClass)
             {
+                // Transformation 3
+                column!.Type = _integerType;
                 // Transformation 5
-                if (attribute.Type is IClass)
-                {
-                    // Transformation 3
-                    column!.Type = _integerType;
-                    // Transformation 5
-                    column.Name = attribute.Name + "Id";
-                }
-                else
-                {
-                    // Transformation 6
-                    column!.Type = (IType)TraceOrTransform(attribute.Type)!;
-                    // Transformation 4
-                    column.Name = attribute.Name;
-                }
+                column.Name = attribute.Name + "Id";
             }
-            // Helper 3
-            UpdateNameAndType(null, null);
-            // Change Propagation 3
-            attribute.TypeChanged += UpdateNameAndType;
-            // Change Propagation 3
-            attribute.NameChanged += UpdateNameAndType;
+            else
+            {
+                // Transformation 6
+                column!.Type = (IType)TraceOrTransform(attribute.Type)!;
+                // Transformation 4
+                column.Name = attribute.Name;
+            }
             // Transformation 2
             return column;
         }
@@ -204,28 +156,11 @@ namespace HSRM.TTC2023.ClassToRelational
                     (IColumn)TraceOrTransform(attribute)!
                 }
             };
-            // Helper 6
-            void OnNameChanged(object? sender, ValueChangedEventArgs? e)
-            {
-                // Transformation 7
-                table.Name = attribute.Owner.Name + "_" + attribute.Name;
-                // Transformation 7
-                key.Name = attribute.Owner.Name.ToCamelCase() + "Id";
-            }
-            // Helper 3
-            OnNameChanged(null, null);
-            // Change Propagation 4
-            attribute.Owner.NameChanged += OnNameChanged;
-            // Change Propagation 4
-            attribute.OwnerChanged += (o, e) =>
-            {
-                // Change Propagation 9
-                if (e.OldValue != null) ((IClass)e.OldValue).NameChanged -= OnNameChanged;
-                // Change Propagation 3
-                OnNameChanged(o, e);
-                // Change Propagation 9
-                if (e.NewValue != null) ((IClass)e.NewValue).NameChanged += OnNameChanged;
-            };
+
+            // Transformation 7
+            table.Name = attribute.Owner.Name + "_" + attribute.Name;
+            // Transformation 7
+            key.Name = attribute.Owner.Name.ToCamelCase() + "Id";
             // Transformation 2
             return table;
         }
