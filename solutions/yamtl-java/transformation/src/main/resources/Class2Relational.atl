@@ -1,0 +1,170 @@
+-- Changes made for ATOL:
+-- - removed allInstances use
+-- - switched to unique lazy rules
+--	- + calls
+--	- + added abstract rule
+--	- accessed unique lazy rule target tuple (which does not exist in standard ATL)
+-- - renamed out into _out
+--	- ATOL's out should rather be renamed into something that is more likely to avoid name collisions
+module Class2Relational;
+create OUT : Relational from IN : Class;
+
+uses strings;
+
+
+-- if there is a configuration problem with the library string,
+-- delete the two firstToLower() operations and you no longer need the library "strings"
+-- the transfomarion will execute 
+
+
+-- inheritance not supported yet
+
+-- issue: choose an object-id Type (Integer, String?).
+-- We choose Integer here, assuming this type is defined in the source model.
+
+-- global variable
+-- context 
+--helper def: objectIdType : Relational!Type =
+--	Class!DataType.allInstances()->select(e | e.name = 'Integer')->first();
+
+-- Transformation 4
+unique lazy rule Class2Table {
+	from
+	-- Transformation 4
+		c : Class!Class
+	to
+	-- Transformation 4
+		_out : Relational!Table (
+			-- Transformation 5
+			name <- c.name,
+			-- Columns are generated from Attributes in another rule not explicitly called here !
+			-- Transformation 4
+			-- Model Traversal 30
+			col <- c.attr->select(e | not e.multiValued)->collect(e |
+				--thisModule.SingleValuedAttribute2Column(e)._out
+				if e.type.oclIsKindOf(Class!DataType) then
+					thisModule.DataTypeAttribute2Column(e)._out
+				else
+					thisModule.ClassAttribute2Column(e).foreignKey
+				endif
+			)->prepend(key),
+			-- Transformation 4
+			key <- Set {key}
+		),
+		-- Transformation 6
+		key : Relational!Column (
+			name <- 'objectId'
+			--type <- thisModule.objectIdType
+		)
+}
+
+-- Transformation 4
+unique lazy rule DataType2Type {
+	from
+		-- Transformation 4
+		dt : Class!DataType
+	to
+		-- Transformation 9
+		_out : Relational!Type (
+			name <- dt.name
+		)
+}
+
+--unique lazy abstract rule SingleValuedAttribute2Column {
+--	from
+--		a : Class!Attribute
+--	to
+--		_out : Relational!Column
+--}
+
+-- Transformation 4
+unique lazy rule DataTypeAttribute2Column {--extends SingleValuedAttribute2Column {
+	from
+		-- Transformation 15
+		a : Class!Attribute
+--		(
+--			a.type.oclIsKindOf(Class!DataType) and not a.multiValued
+--		)
+	to
+		-- Transformation 4
+		_out : Relational!Column (
+			-- Transformation 5
+			name <- a.name,
+			-- Transformation 13
+			type <- thisModule.DataType2Type(a.type.oclAsType(Class!DataType))._out
+-- explicit use of implicit tracking links (first expected syntax, then present actual syntax)
+			-- Transformation 8
+--			owner <- [Class2Type.key]a.owner
+			-- Transformation 9
+--			owner <- thisModule.resolveTemp(a.owner, 'key')
+		)
+}
+
+-- Transformation 4
+unique lazy rule MultiValuedDataTypeAttribute2Column {
+	from
+		-- Transformation 15
+		a : Class!Attribute
+--		(
+--			a.type.oclIsKindOf(Class!DataType) and a.multiValued
+--		)
+	to
+		-- Transformation 22
+		_out : Relational!Table (
+			name <- a.owner.name + '_' + a.name,
+			col <- Sequence {id, value}
+		),
+		-- Transformation 14
+		id : Relational!Column (
+			name <- a.owner.name.firstToLower() + 'Id'--,
+			--type <- thisModule.objectIdType
+		),
+		-- Transformation 22
+		value : Relational!Column (
+			name <- a.name,
+			type <- thisModule.DataType2Type(a.type.oclAsType(Class!DataType))._out
+		)
+}
+
+-- Transformation 4
+unique lazy rule ClassAttribute2Column {--extends SingleValuedAttribute2Column {
+	from
+		-- Transformation 15
+		a : Class!Attribute
+--		(
+--			a.type.oclIsKindOf(Class!Class) and not a.multiValued
+--		)
+	to
+		-- Transformation 11
+		foreignKey : Relational!Column (
+			name <- a.name + 'Id'--,
+			--type <- thisModule.objectIdType
+		)
+}
+
+-- Transformation 4
+unique lazy rule MultiValuedClassAttribute2Column {
+	from
+		-- Transformation 15
+		a : Class!Attribute
+--		(
+--			a.type.oclIsKindOf(Class!Class) and a.multiValued
+--		)
+	to
+		-- Transformation 22
+		t : Relational!Table (
+			name <- a.owner.name + '_' + a.name,
+			col <- Sequence {id, foreignKey}
+		),
+		-- Transformation 15
+		id : Relational!Column (
+			name <- a.owner.name.firstToLower() + 'Id'--,
+			--type <- thisModule.objectIdType
+		),
+		-- Transformation 11
+		foreignKey : Relational!Column (
+			name <- a.name + 'Id'--,
+			--type <- thisModule.objectIdType
+		)
+}
+
