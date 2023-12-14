@@ -1,0 +1,180 @@
+package c2r.version2
+
+import "Class"
+import "Relational" 
+import "Trace"
+import "http://www.eclipse.org/emf/2002/Ecore"
+
+/////////////////
+// Object mapping
+/////////////////
+
+/**
+ * Integer type is needed if 
+ * 	(a) the source model contains a class (id column is Integer), or
+ * 	(b) There is an Integer DataType
+ */
+pattern makeInteger(){
+	Class(_);
+} or {
+	DataType.name(_,"Integer");
+}
+
+/**
+ * Other DataTypes to be mapped to Type
+ */
+pattern fromDataType(dtype: DataType){
+	DataType.name(dtype,name);
+	name != "Integer";
+}
+
+/**
+ * Classes that need to be mapped
+ */
+pattern fromClass(named: NamedElt){
+	Class(named);
+}
+
+/**
+ * Multi-valued attributes to be mapped
+ */
+pattern fromAttribute2Table(named: Attribute) {
+	Attribute.multiValued(named,true);
+	Attribute.owner(named,_);
+	Attribute.type(named,_);
+}
+
+/**
+ * Single valued attributes to be mapped
+ */
+pattern fromAttribute2Column(named: Attribute) {
+	Attribute.multiValued(named,false);
+	Attribute.owner(named,_);
+	Attribute.type(named,_);
+}
+
+///////////////////
+// Property mapping
+///////////////////
+
+/**
+ * Determine the names of the mapped objects
+ */
+pattern namedMap(named: Named, name: java String){
+	//Names for mapped DataTypes
+	//NOTE: Integer is not mapped
+	DataType.name(dtype,name);
+	find traceMapping(dtype,_,0,named);
+} or {
+	//If a Class if mapped to a Table
+	//Table name
+	Class(class);
+	find traceMapping(class,_,0,named); //Index 0 is the table
+	Class.name(class,name);	
+} or {
+	//If a Class if mapped to a Table
+	//Id column name
+	Class(class);
+	find traceMapping(class,_,1,named); //Index 1 is the id column
+	Column(named);
+	name == "objectId";	
+} or {
+	//If an Attribute is mapped to a table
+	//Table name
+//	Attribute(attr);
+	Attribute.multiValued(attr,true);
+	find traceMapping(attr,_,0,named); //Index 0 is the table
+	Attribute.name(attr, aname);
+	Attribute.owner(attr,class);
+	Class.name(class,cname);
+	name == eval(cname+'_'+aname);
+} or {
+	//If an Attribute is mapped to a table
+	//owner column name
+//	Attribute(attr);
+	Attribute.multiValued(attr,true);
+	find traceMapping(attr,_,1,named); //Index 1 is the id-column
+	Attribute.owner(attr,class);
+	Class.name(class,cname);
+	name == eval(cname.toFirstLower+"Id");
+} or {
+	//If an Attribute is mapped to a table
+	//Value name
+//	Attribute(attr);
+	Attribute.multiValued(attr,true);
+	find traceMapping(attr,_,2,named); //Index 2 is the value column
+	Attribute.name(attr,aname);
+	find postName(attr,pname);
+	name == eval(aname.toFirstLower+pname);
+} or {
+	//If an Attribute is mapped to a Column
+	//Column name
+//	Attribute(attr);
+	Attribute.multiValued(attr,false);
+	find traceMapping(attr,_,0,named);
+	Attribute.name(attr, aname);
+	find postName(attr,pname);
+	name == eval(aname+pname);
+}
+
+/**
+ * Determine if column name for the attribute require Id suffix
+ */
+pattern postName(attr: Attribute, post: java String){
+	Attribute.type(attr, type);
+	Class(type);
+	post == "Id";
+} or {
+	Attribute.type(attr, type);
+	DataType(type);
+	post == "";
+}
+
+/**
+ * Helper to access trace info
+ */
+pattern traceMapping(source: EObject, trace: TraceEntry, idx: EInt, target: EObject){
+	TraceEntry.source(trace,source);
+	TraceEntry.target(trace,target);
+	TraceEntry.index(trace,idx);
+}
+
+/**
+ * Determine the type of the column
+ * 	(a) type is specified in the source model, or
+ * 	(b) type is inferred (Integer)
+ */
+pattern typeMapping(column: Column, type: Type){
+	find specifiedTypeMapping(column,type);
+} or {
+	Column(column);
+	neg find specifiedTypeMapping(column,_);
+	Type.name(type,"Integer");
+}
+
+/**
+ * Type is specified
+ * 	(a) objectId column has Integer type (for classes)
+ * 	(b) source model specified a type for the column
+ */
+pattern specifiedTypeMapping(column: Column, type: Type){
+	Column.name(column,"objectId");
+	Type.name(type,"Integer");
+} or {
+	find traceMapping(attr,_,index,column); //Traverse in reverse direction
+	index != 1; // single valued attribute (0), or value column (2)
+	Attribute.type(attr,stype);
+	DataType.name(stype,typename);
+	Type.name(type,typename);
+}
+
+/**
+ * Find traces and images that has no source.
+ * (Model change removes the source from the trace too)
+ */
+pattern sourcelessTrace(trace: TraceEntry, named: Named){
+	neg TraceEntry.source(trace, _);
+	TraceEntry.target(trace,named);
+}
+
+
