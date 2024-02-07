@@ -101,16 +101,17 @@ function checkScenario {
     export EXPECTED_MODEL="$TARGET_PATH"
 
     echo "Running $solution in incremental mode"
-    eval "$run"
+    eval "$run" || true # ignore errors
 
     # set target for batch run
     local batchRunTarget="$outputDir/target_batch.xmi"
+    touch "$batchRunTarget"
     export TARGET_PATH="$(realpath "$batchRunTarget")"
     export CURRENT_MODEL="$TARGET_PATH"
     export BATCH_MODE="1"
 
     echo "Running $solution in batch mode"
-    eval "$run"
+    eval "$run" || true # ignore errors
 
     unset BATCH_MODE
 
@@ -188,7 +189,7 @@ function compareResults() {
 
     echo "Comparing $left and $right" >> "$logs"
 
-    ./gradlew -q run 2>> "$logs"  || error="error" && true
+    java -jar build/libs/Comparator-all.jar 2>> "$logs"  || error="error" && true
 
     unset EXPECTED_MODEL
     unset CURRENT_MODEL
