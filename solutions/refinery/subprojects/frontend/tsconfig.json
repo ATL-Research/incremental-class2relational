@@ -1,0 +1,25 @@
+/*
+ * SPDX-FileCopyrightText: 2021-2023 The Refinery Authors <https://refinery.tools/>
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ */
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "types": ["vite/client", "vite-plugin-pwa/client"]
+  },
+  "include": [
+    "src",
+    "types"
+  ],
+  "exclude": [
+    "src/xtext/BackendConfig.ts",
+    "types/node"
+  ],
+  "references": [
+    { "path": "./tsconfig.node.json" },
+    { "path": "./tsconfig.shared.json" }
+  ]
+}
