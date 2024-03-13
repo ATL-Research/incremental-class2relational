@@ -8,8 +8,14 @@
 
 plugins {
     id 'application'
-    id "org.xtext.xtend" version '3.0.2'
+    id "org.xtext.xtend" version '4.0.0'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 repositories {
@@ -34,7 +40,7 @@ repositories {
 }
 
 dependencies {
-    implementation "org.eclipse.xtend:org.eclipse.xtend.lib:2.30.0"
+    implementation "org.eclipse.xtend:org.eclipse.xtend.lib:2.34.0"
 
     implementation 'fr.eseo.atol:fr.eseo.atol.gen:1.0'
 
