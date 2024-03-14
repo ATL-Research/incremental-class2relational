@@ -1,0 +1,306 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{url}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+
+\definecolor{dkpurple}{rgb}{0.81,0.1,0.8}
+\definecolor{dkgreen}{rgb}{0.21,0.5,0.37}
+\definecolor{dkblue}{rgb}{0.1,0.2,0.47}
+
+\lstdefinelanguage{ATL}{
+	keywords={lazy, rule, from, to, helper, context, def, self, do, for, if, endif, then, else, thisModule, and, not},
+	keywordstyle=\color{magenta}\bfseries,
+	ndkeywords={Sequence, Set, false, true},
+	ndkeywordstyle=\color{lightgreen},
+	sensitive=true,
+	morecomment=[l]{--},
+	morestring=[b]",
+	morestring=[b]',
+	morestring=[b]"""
+}
+
+ \lstdefinelanguage{MyJava}{ 
+    language=Java,
+	morecomment=[s]{/**}{*/},    
+	numbers=left,                   % where to put the line-numbers 
+	showspaces=false,               % show spaces adding particular underscores
+	showtabs=false,                 % show tabs within strings adding particular underscores
+	rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks 
+    captionpos=b,                   % sets the caption-position to bottom
+	breaklines=true,                % sets automatic line breaking
+	morestring=[b]",
+	morecomment=[l]{//}, 
+	morecomment=[s]{/**}{*/}
+}
+
+\lstset{
+	language=Java,
+	% escapechar=@,
+	showstringspaces=false,
+	columns=flexible,
+	stepnumber=1,
+	numbersep=0pt,
+	numberstyle=\ttfamily\tiny\color{gray}, 
+	%
+	%stringstyles
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{dkblue} \bfseries,
+	ndkeywordstyle=\color{dkred}\bfseries,
+	commentstyle=\color{dkgreen}\footnotesize\ttfamily,
+	stringstyle=\color{blue},
+	%
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=2,
+	numberbychapter=false,
+	% escapeinside={\%@}{@},	% comments within listing 
+	frame=lines
+}
+\lstdefinestyle{modernjava}{
+	language=Java,
+	tabsize=2,
+	breaklines=false,
+	basicstyle= \footnotesize \ttfamily,
+	keywordstyle=\color{blue}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	commentstyle=\color{dkgreen}\ttfamily,
+	showstringspaces=false,
+	columns=fullflexible
+}
+
+\begin{document}
+\section*{Labeling Cheatsheet} 
+    \subsection*{Preliminary Remarks}
+    We employ a similar labeling scheme as Stefan used for comparing the complexity of ATL and Java transformations\footnote{The original counting scheme which combines syntactic and computational complexity \url{https://www.jot.fm/issues/issue_2020_02/article12.pdf}}. In contrast to his work, we do not consider the AST (for the moment).
+
+    \subsection*{General Rules for Calculating Syntactic Complexity}
+    As we cannot assume to use the same rules for different transformation languages, we keep them at a simpler level and only look at the syntactic complexity first. 
+    There are some general counting rules:
+    
+    \begin{itemize}[noitemsep]
+        \item in general, we count each separate word
+        \item Any literal or identifier or keyword is counted as one, 
+        % \item (Assignment) symbols are counted as one, except for the parenthesis
+        \item Each method in a method chain is counted %(including the point)
+        \item (Java) annotations are treated like methods %, the '@' is counted
+        \item Nesting in lambdas is treated as if it were top-level
+    \end{itemize}
+     
+     Things that are \textbf{not} counted separately:
+     \begin{itemize}[noitemsep]
+        \item The points in qualified accesses of a member field or a method is not counted
+        \item any form of delimiter is \textbf{not} counted (e.g., brackets, semicolons)
+        \item assignment symbols if not declared as a word
+     \end{itemize}
+     
+     % Points to discuss
+     % \begin{itemize}[noitemsep]
+     %    \item  in more verbose language, for instance Xtend, shall we count keywords which are expressed with signs in other languages, such as typecasts with 'as' (it would just tell us how complex the language is) \\
+     %    $\rightarrow$ we count each word
+     %    % \item or shall we say: we count each keyword in the language?
+     %    \item what about qualified access to types: count as one or the entire path? \\ 
+     %        $\rightarrow$ we count each word (treat point as a white space)
+     %    \item are model traversal and model navigation the same? \\
+     %        $\rightarrow$ as long as we have no proper reason, we treat them similarly for the sake of simplicity
+     %    \end{itemize}
+
+    \subsection*{Labels}
+    To this end,  we distinguish the following categories:
+    % \begin{center}
+        {\it         
+        \begin{itemize}[noitemsep]
+            \item Setup \hspace{5pt} (e.g., loading, saving)
+            % \item Model Traversal, 
+            \item Model Navigation  \hspace{5pt} (i.e., any way of iterating the source or target model)
+            \item Transformation \hspace{5pt} (i.e., creation of target elements)
+            \item Trace \hspace{5pt} (i.e., use and create trace data structure)
+    
+            \item Incremental Change Recognition
+            \item Incremental Change Propagation
+            \item Helper \hspace{5pt} (e.g., Expression outsourcing, helper outside the transformation potentially in another language, reusable) 
+            
+            \item Wrapper \hspace{5pt} (i.e., things that just are necessary to get the source code running, not the transformation itself, e.g. a class in Java)
+        \end{itemize}}
+ 
+
+    \noindent
+    Please note: sometimes code fragments may be associated with more than one category, for instance, the trace is used in a transformation. 
+    In this case, either we have multiple annotations for a line with multiple purposes or separate each purpose in a single line. %may be stated for the respective code fragment.
+    In detail, they constitute as follows:
+     % \begin{itemize}
+     %     \item 
+         \paragraph{Setup Code} is used to set up the transformation environment\\ 
+         
+        \begin{lstlisting}[style=modernJava]
+        // Setup 7
+        private static final RelationalFactory RELATIONALFACTORY = RelationalFactory.eINSTANCE; 
+        \end{lstlisting}
+
+        \begin{lstlisting}[style=modernJava]
+         // Setup 8
+        public static Resource start(String inPath, String outPath) {
+            ...
+        }
+        \end{lstlisting}
+        
+        In the following ``@'' is not counted ($\rightarrow$ it is not a word but a symbol)
+      \begin{lstlisting}[language=myJava]
+        // Setup 2 
+        @AOFAccessors(Class_Package)
+        // Setup/Wrapper 2
+        class Class {
+       \end{lstlisting}
+
+        % \paragraph{Model Traversal}  allows to navigate the target model.  
+
+        \paragraph{Model Traversal} %In contrast to model traversal, 
+        Model navigation explores the input or output model in a statement. For instance, in graphical transformations this may be a pattern that is matched \\ In the example below: "@class'' is the identifier. 
+
+        \begin{lstlisting}[language=myJava]
+        // Model Traversal 6 
+        foreach (var attr in @class.Attr)
+        {
+            // Model Traversal 3
+            if (attr.MultiValued) {
+                //  Transformation 6
+                table.Col.Add((IColumn)TraceOrTransform(attr)!);
+            }
+            // Change Propagation 3
+            attr.MultiValuedChanged += OnMultiValuedChanged;
+        }
+        \end{lstlisting}
+        
+        \paragraph{Transformation} refers to source code which creates or updates elements in the target model 
+
+    % \begin{lstlisting}[language=Java, escapechar='$']
+    % // Transformation 6
+    % public static void Class2Table(Class c) {
+    %     // Tracing 8 or 10?
+    %     var out = TRACER.resolve(c, RELATIONALFACTORY.createTable());
+    %     ...
+    %     // Transformation 12
+    %     // Tracing 16
+    %     out.getCol().addAll( %$\label{lst:labeledJava_trafo_begin}$
+    %         c.getAttr().stream()
+    %             .filter(e -> !e.isMultiValued())
+    %             .map(a -> TRACER.resolve(a, RELATIONALFACTORY.createColumn()))
+    %             .filter(t -> t != null)
+    %         .collect(Collectors.toList())); % $\label{lst:labeledJava_trafo_end}$
+    % }
+    % \end{lstlisting
+    \begin{lstlisting}[language=myJava]
+    // Transformation 6
+    public static void Class2Table(Class c) {
+        // Tracing 7
+        var out = TRACER.resolve(c, RELATIONALFACTORY.createTable());
+        ...
+        // Transformation 12
+        // Tracing 16
+        out.getCol().addAll( 
+            c.getAttr().stream()
+                .filter(e -> !e.isMultiValued())
+                .map(a -> TRACER.resolve(a, RELATIONALFACTORY.createColumn()))
+                .filter(t -> t != null)
+            .collect(Collectors.toList())); 
+    }
+    \end{lstlisting}
+    In above example, Lines 8-13 %~\ref{lst:labeledJava_trafo_begin}-\ref{lst:labeledJava_trafo_end}
+(split into multiple lines for readability) implement transformation functionality as well as trace resolution.
+Thus, the syntactic complexity of the statement is given as $Transformation~12$ and $Tracing~16$ because $12$ words in the statement implement part of the transformation and $16$ words refer to trace resolution.
+
+        % \item \textit{Tracing}, 
+    \paragraph{Tracing} refers to source code which establishes or accesses a transformation trace (i.e., a mapping of source onto target elements) \\
+    \begin{lstlisting}[style=modernJava]
+    // Tracing 12
+    var obj = unwrap(t.corr.source.get(0) as SingleElem) as Attribute
+    \end{lstlisting}
+
+    \begin{lstlisting}
+    // Tracing 6
+    public static void Class2TablePre(Class c)  {
+        // Tracing 5
+        TRACER.addTrace(c, RELATIONALFACTORY.createTable());
+        ...
+    }
+    \end{lstlisting}
+        % \item \textit{Other Helper} 
+    \paragraph{Other Helper} Code (batch, general) refers to every other source code which can be used to implement recurring patterns (for instance, to search and return a specific element or map source elements onto specific target elements. \\
+        
+     \begin{lstlisting}[style=modernJava]
+    // Helper 4
+    private static Type objectIdType() {
+    ...
+        // Helper 2
+        return objectIdType;
+    }
+    \end{lstlisting}
+        % \item 
+\paragraph{{Incremental Change Recognition}} represents source code which can be used to determine changes from the previous model state to the current state (e.g., null checks)\\ 
+        
+        \begin{lstlisting}[style=modernJava]
+        // Change Recognition 5
+        Adapter adapterIn = new AdapterImpl() {
+            // Change Recognition 5
+            public void notifyChanged(Notification notification) 
+                ...
+        }
+        \end{lstlisting}
+        % \item 
+\paragraph{{Incremental Change Propagation}} refers to source code which integrates specific incremental changes\\ 
+        \begin{lstlisting}
+    // Change Recognition 7
+    if (obj.owner === null || obj.type === null)
+        // Change Propagation 2 
+        toDelete += c
+    \end{lstlisting}
+
+        % \item 
+\paragraph{{Wrapper}} anything that must be stated because of the chosen language but without any further effect on the transformation. To discuss: Is this part of the setup or post-processing? \\ 
+    \begin{lstlisting}
+    // Wrapper 3
+    public class Transformation { ... }
+    \end{lstlisting}
+
+      % \end{itemize}
+% %
+
+% %     \begin{lstlisting}[style=modernJava,  label=lst:advice]
+
+% %    
+% %     
+% %     // Traversal 8
+% %     public static List<Named> transform(List<EObject> input) {
+% %         // Traversal 5
+% %         for (EObject namedElt : input) {
+% %             ...
+% %         }
+% %     }
+% %     ...
+% %     // Tracing 6
+% %     public static void Class2TablePre(Class c)  {
+% %         // Tracing 5
+% %         TRACER.addTrace(c, RELATIONALFACTORY.createTable());
+% %         ...
+% %     }
+% %     // Transformation 6
+% %     public static void Class2Table(Class c) {
+% %         // Tracing 8
+% %         var out = TRACER.resolve(c, RELATIONALFACTORY.createTable());
+% %         ...
+% %         // Transformation 12
+% %         // Tracing 16
+% %         out.getCol().addAll( @\label{lst:labeledJava_trafo_begin}@
+% %             c.getAttr().stream()
+% %                 .filter(e -> !e.isMultiValued())
+% %                 .map($ -> TRACER.resolve($, RELATIONALFACTORY.createColumn()))
+% %                 .filter($ -> $ != null)
+% %             .collect(Collectors.toList())); @\label{lst:labeledJava_trafo_end}@
+% %     }
+% %     \end{lstlisting}
+
+\end{document}

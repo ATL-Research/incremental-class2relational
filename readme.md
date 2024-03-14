@@ -37,3 +37,26 @@ For instance:
 	$ cd utils
 	$ ./check_solution.sh
 ```
+
+## Requirements
+
+- ATL:
+    - java 11+
+- ATOL:
+    - build: java 17 & <21 
+        - fails to build with java 21 because xtend compiler is not compatible yet
+    - run: java 17+
+- bxtend:
+    - java 17+
+- cheptre:
+    - java 17+
+    - docker
+        - user must be able to start/stop containers
+- csharp, csharp_cp, nmf:
+    - dotnet 7
+- java:
+    - java 14+
+- Refinery:
+    - java 21+
+- yamtl-java:
+    - java 17+

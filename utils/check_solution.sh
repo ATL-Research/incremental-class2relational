@@ -6,13 +6,17 @@ set -e
 # cd to script directory
 cd "${0%/*}"
 
-if [ $# -ge 1 ]; then
+_VERBOSE=0
+solutions=""
+
+while [[ $# -gt 0 ]]; do
     case $1 in
         --help|-h)
             echo "Usage: ./check_solution.sh [-h|--help|--solutions|solution]"
             echo "      -h, --help: display this help"
+            echo "      -v, --verbose: increase verbosity"
             echo "      --solutions: list available solutions"
-            echo "      solution: name of the solution to check (must be in solutions folder). If not provided, all solutions will be checked"
+            echo "      solution: space separeted list of names of the solutions to check (must be in solutions folder). If not provided, all solutions will be checked"
             exit 0
             ;;
         --solutions)
@@ -22,25 +26,40 @@ if [ $# -ge 1 ]; then
             done
             exit 0
             ;;
+        --verbose|-v)
+            _VERBOSE=1
+            shift
+            ;;
         *)
-            solution="$1"
-            if [ ! -d "../solutions/$solution" ]; then
-                echo "Solution $solution not found"
+            solutions="${solutions} $1"
+            if [ ! -d "../solutions/$1" ]; then
+                echo "Solution $1 not found"
                 exit 1
             fi
+            shift
             ;;
     esac
-fi
+done
 
 
 INPUT_DIR="../../models/"
 OUTPUT_DIR="../../output/$(date +%Y-%m-%d_%H-%M)"
 globalReport="$OUTPUT_DIR/report.csv"
 
+function log {
+    if [[ $_VERBOSE -eq 1 ]]; then
+        echo "$@"
+    fi
+}
+
+function log_error {
+    echo "ERR: $@"
+}
+
 function buildComparator {
     pushd Comparator > /dev/null
 
-    echo "Build Comparator"
+    log "Build Comparator"
 
     ./gradlew -q build
 
@@ -56,7 +75,7 @@ function checkSolution {
     echo "Checking $solution"
 
     if [ ! -f "launch.env" ]; then
-        echo "launch.env not found"
+        log_error "launch.env not found"
 	popd
         return
     fi
@@ -70,10 +89,10 @@ function checkSolution {
     for scenario in $(ls "$INPUT_DIR")
     do
         if [ -f "$INPUT_DIR/$scenario/class.xmi" ]; then
-            echo "Checking $solution with $scenario"
+            log "Checking $solution with $scenario"
             checkScenario "$solution" "$scenario" "$outputDir"
         else
-            echo "Skipping $solution with $scenario"
+            log "Skipping $solution with $scenario"
             continue
         fi
     done
@@ -100,30 +119,31 @@ function checkScenario {
     export TARGET_PATH="$(realpath $incrementalRunTarget)"
     export EXPECTED_MODEL="$TARGET_PATH"
 
-    echo "Running $solution in incremental mode"
-    eval "$run"
+    log "Running $solution in incremental mode"
+    eval "$run" || true # ignore errors
 
     # set target for batch run
     local batchRunTarget="$outputDir/target_batch.xmi"
+    touch "$batchRunTarget"
     export TARGET_PATH="$(realpath "$batchRunTarget")"
     export CURRENT_MODEL="$TARGET_PATH"
     export BATCH_MODE="1"
 
-    echo "Running $solution in batch mode"
-    eval "$run"
+    log "Running $solution in batch mode"
+    eval "$run" || true # ignore errors
 
     unset BATCH_MODE
 
     # compare results using comparator
     pushd ../../utils/Comparator > /dev/null
 
-    echo "Checking correctness"
+    log "Checking correctness"
     local correctness=$(checkCorrectness "$incrementalRunTarget" "$batchRunTarget")
-    echo "Correctness: $correctness"
+    log "Correctness: $correctness"
 
-    echo "Checking completeness"
+    log "Checking completeness"
     local completeness=$(checkCompleteness "$scenario" "$incrementalRunTarget")
-    echo "Completeness: $completeness"
+    log "Completeness: $completeness"
 
     local reportFile="$outputDir/../report.csv"
     local message="$solution,$scenario,$correctness,$completeness"
@@ -188,7 +208,7 @@ function compareResults() {
 
     echo "Comparing $left and $right" >> "$logs"
 
-    ./gradlew -q run 2>> "$logs"  || error="error" && true
+    java -jar build/libs/Comparator-all.jar 2>> "$logs"  || error="error" && true
 
     unset EXPECTED_MODEL
     unset CURRENT_MODEL
@@ -206,12 +226,15 @@ if [ ! -f "$globalReport" ]; then
     echo "solution,scenario,correctness,completeness" > "$globalReport"
 fi
 
-if [ -z $solution ]
+if [ -z "$solutions" ]
 then
     for solution in $(ls ../solutions)
     do
         checkSolution "$solution"
     done
 else
-    checkSolution "$solution"
+    for s in $solutions;
+    do
+        checkSolution "$s"
+    done
 fi

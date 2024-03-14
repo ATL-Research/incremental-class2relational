@@ -1,0 +1,35 @@
+{
+  "//": [
+    "SPDX-FileCopyrightText: 2021-2023 The Refinery Authors <https://refinery.tools/>",
+    "",
+    "SPDX-License-Identifier: EPL-2.0"
+  ],
+  "name": "@refinery/root",
+  "version": "0.0.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graphs4value/refinery.git"
+  },
+  "author": "The Refinery Authors <https://refinery.tools/>",
+  "license": "EPL-2.0",
+  "bugs": {
+    "url": "https://github.com/graphs4value/refinery/issues"
+  },
+  "homepage": "https://refinery.tools",
+  "workspaces": [
+    "subprojects/frontend"
+  ],
+  "scripts": {
+    "frontend": "yarn workspace @refinery/frontend"
+  },
+  "packageManager": "yarn@4.0.2",
+  "devDependencies": {
+    "eslint": "^8.55.0",
+    "typescript": "5.3.2"
+  },
+  "resolutions": {
+    "d3-zoom@npm:^3.0.0": "patch:d3-zoom@npm%3A3.0.0#~/.yarn/patches/d3-zoom-npm-3.0.0-18f706a421.patch",
+    "d3-zoom@npm:3": "patch:d3-zoom@npm%3A3.0.0#~/.yarn/patches/d3-zoom-npm-3.0.0-18f706a421.patch"
+  }
+}

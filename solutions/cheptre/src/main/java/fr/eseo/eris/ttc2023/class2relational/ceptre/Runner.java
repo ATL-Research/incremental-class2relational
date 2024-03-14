@@ -147,6 +147,14 @@ public class Runner extends AbstractDriver {
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
 			System.out.println("Killing cheptre");
 			if(process != null) {
+				try {
+					Runtime.getRuntime().exec(new String[] {
+						"docker", "container", "kill", "cheptre_runner"
+					}).waitFor();
+				} catch (Exception e) {
+					System.out.println("Error killing cheptre container");
+					e.printStackTrace();
+				}
 				System.out.println("Killing cheptre");
 				process.destroyForcibly();
 			}
@@ -154,7 +162,7 @@ public class Runner extends AbstractDriver {
 		String transfoName = "Class2Relational.cep";
 		String transfoPath = new File("src/main/resources/").getAbsolutePath();
 		this.process = Runtime.getRuntime().exec(new String[] {
-			"docker", "run", "--rm", "-i", "--mount", "type=bind,source=" + transfoPath + ",target=/examples", "ghcr.io/np/incremental-class2relational-ceptre-cheptre", "/bin/cheptre", "/examples/" + transfoName, "--omit-pointless-choices"
+			"docker", "run", "--rm", "--name=cheptre_runner", "-i", "--mount", "type=bind,source=" + transfoPath + ",target=/examples", "ghcr.io/np/incremental-class2relational-ceptre-cheptre", "/bin/cheptre", "/examples/" + transfoName, "--omit-pointless-choices"
 		});
 		new Thread(() -> {
 			try {

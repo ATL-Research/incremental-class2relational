@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+  SPDX-FileCopyrightText: 2021-2023 The Refinery Authors <https://refinery.tools/>
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated problem -->
+      <package
+            uri="https://refinery.tools/emf/2021/Problem"
+            class="tools.refinery.language.model.problem.ProblemPackage"
+            genModel="src/main/resources/model/problem.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated problem -->
+      <parser
+            type="problem_xmi"
+            class="tools.refinery.language.model.problem.util.ProblemResourceFactoryImpl"/>
+   </extension>
+
+</plugin>

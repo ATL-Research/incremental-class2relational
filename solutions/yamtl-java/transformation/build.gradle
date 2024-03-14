@@ -34,7 +34,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-aop:3.1.0'
     
     implementation 'io.github.atlresearch:emfmodelfuzzer:+'
-    implementation 'io.github.atlresearch.ttc2023:solutiondriver:0.5'
+    implementation 'io.github.atlresearch.ttc2023:solutiondriver:0.6'
 //    implementation project(':SolutionDriver')
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'

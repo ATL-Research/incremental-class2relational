@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2021-2023 The Refinery Authors
+#
+# SPDX-License-Identifier: CC0-1.0
+
+*._trace
+.classpath
+.idea/
+.gradle/
+.launch
+.log/
+.node/
+.pnp.*
+.project
+.settings
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+bin/
+build/
+dev-dist/
+emf-gen/
+node_modules/
+*.typegen.ts
+xtend-gen/
+*.xtendbin
+xtext-gen/
