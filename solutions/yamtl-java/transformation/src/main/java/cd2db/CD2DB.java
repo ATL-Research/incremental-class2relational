@@ -33,10 +33,8 @@ import yamtl.core.YAMTLModule;
 // transformation
 public class CD2DB extends YAMTLModule {
 
-	// setup
-    static String inputModelPath = "C:\\Users\\ab373\\Documents\\git-repos\\git-yamtl\\incremental-class2relational\\models\\correctness5\\class.xmi";
-	// setup
-    static String changePath = "C:\\Users\\ab373\\Documents\\git-repos\\git-yamtl\\incremental-class2relational\\models\\correctness5\\change.xmi";
+    // static String inputModelPath = "C:\\Users\\ab373\\Documents\\git-repos\\git-yamtl\\incremental-class2relational\\models\\correctness5\\class.xmi";
+    // static String changePath = "C:\\Users\\ab373\\Documents\\git-repos\\git-yamtl\\incremental-class2relational\\models\\correctness5\\change.xmi";
 
     // setup
     public static void main(String[] args) {
@@ -118,8 +116,11 @@ public class CD2DB extends YAMTLModule {
                             		.filter(a -> !a.getMultiValued())
                             		// model navigation
                             		.collect(Collectors.toList());
-                            // transformation, trace
-                            t.getCol().addAll((List<Column>)fetch(list, "col" ));
+                            // transformation 
+                            t.getCol().addAll(
+                            		// trace
+                            		(List<Column>)fetch(list, "col" )
+                            );
                             // transformation	
                             t.getCol().add(key());
                             // transformation	
@@ -129,8 +130,11 @@ public class CD2DB extends YAMTLModule {
                         .out("key", db_Column(), () -> {
                         	// transformation	
                             key().setName("objectId");
-                            // transformation, trace
-                            key().setType((Type)fetch(fetch("objectIdType")));
+                            // transformation
+                            key().setType(
+                        		// trace
+                        		(Type)fetch(fetch("objectIdType"))
+                            );
                         }),
 
                 // transformation	
@@ -155,8 +159,11 @@ public class CD2DB extends YAMTLModule {
                         .out("col", db_Column(), () -> {
                         	// transformation
                             col().setName(att().getName());
-                            // transformation, trace
-                            col().setType((Type)fetch(att().getType()));
+                            // transformation
+                            col().setType(
+                            		// trace 
+                            		(Type)fetch(att().getType())
+                            );
                         }),
                 // transformation			
                 rule("MultiValuedDataTypeAttribute2Column")
@@ -188,15 +195,21 @@ public class CD2DB extends YAMTLModule {
                             var intDataType = fetch("objectIdType");
                             // transformation
                             if (intDataType != null)
-                            	// transformation, trace
-                                id().setType((Type)fetch(intDataType));
+                            	// transformation
+                                id().setType(
+                                		//trace
+                                		(Type)fetch(intDataType)
+                                );
                         })
                         // transformation
                         .out("col", db_Column(), () -> {
                         	// transformation
                             col().setName(att().getName());
-                            // transformation, trace
-                            col().setType((Type)fetch(att().getType()));
+                            // transformation
+                            col().setType(
+                            		// trace
+                            		(Type)fetch(att().getType())
+                            );
                         }),
 
                 // transformation
@@ -216,8 +229,11 @@ public class CD2DB extends YAMTLModule {
                             var intDataType = fetch("objectIdType");
                             // transformation
                             if (intDataType != null)
-                            	// transformation, trace
-                                col().setType((Type)fetch(intDataType));
+                            	// transformation
+                                col().setType(
+                                		// trace 
+                                		(Type)fetch(intDataType)
+                                );
                         }),
 
                 // transformation
@@ -250,8 +266,11 @@ public class CD2DB extends YAMTLModule {
                             var intDataType = fetch("objectIdType");
                             // transformation
                             if (intDataType != null)
-                            	// transformation, trace
-                                id().setType((Type)fetch(intDataType));
+                            	// transformation
+                                id().setType(
+                                		// trace 
+                                		(Type)fetch(intDataType)
+                                );
                         })
                         .out("col", db_Column(), () -> {
                         	// transformation
@@ -260,8 +279,11 @@ public class CD2DB extends YAMTLModule {
                             var intDataType = fetch("objectIdType");
                             // transformation
                             if (intDataType != null)
-                            	// transformation, trace
-                                col().setType((Type)fetch(intDataType));
+                            	// transformation, 
+                                col().setType(
+                                		// trace
+                                		(Type)fetch(intDataType)
+                                );
                         })
 
         ));
