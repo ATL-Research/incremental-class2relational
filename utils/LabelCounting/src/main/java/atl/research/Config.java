@@ -5,7 +5,7 @@ public class Config {
     public static final String COMMENT_SYMBOL = "//"; //lines starting with this sequence, will be marked as comment and not counted
     public static final String LIB_IMPORT = "using"; //lines starting with this word, will be skipped
     
-    public static final String IGNORED_TOKENS = ";|=|*|//|.";  // these tokens will be replaced by a whitespace
+    public static final String IGNORED_TOKENS = "[;|=|\\*| =>|. |::| \\( | \\)]";  // these tokens will be replaced by a whitespace
     public static final String IGNORED_DIRS = "src-gen";  //  directories with the specified names will be ignored when counting labels
     public static final String FILE_EXTENSIONS = "cs";  //  files for which the labels are provided
     

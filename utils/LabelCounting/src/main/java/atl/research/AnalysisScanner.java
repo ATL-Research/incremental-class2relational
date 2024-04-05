@@ -1,11 +1,8 @@
 package atl.research;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.FileVisitResult;
 import java.nio.file.FileVisitor;
@@ -61,6 +58,7 @@ public class AnalysisScanner {
         analysis.extractLabelsFormFiles(files);
 
         System.out.println("-------------------------------");
+        System.out.println ("analyzed " + analysis.wordCt + " words in " + analysis.lineCt + " lines of " + analysis.fileCt + " files" );
                 
     }
 
@@ -69,6 +67,7 @@ public class AnalysisScanner {
     
         for (String filePath : files) {
             if (filePath.endsWith(Config.FILE_EXTENSIONS)) {
+                fileCt++;
                 System.out.println("-------------------------------");
                 System.out.println("scanning file " + filePath);
                 try{
@@ -115,8 +114,7 @@ public class AnalysisScanner {
 
     public void processLine(Scanner in, String line, int lineNo) {
         line = line.stripLeading();
-        line = line.replaceAll("\\(", "").replaceAll("\\)", "");
-        line = line.replaceAll("[\\. | :: | == | =>]", " ");
+        line  = line.replaceAll(Config.IGNORED_TOKENS, " ");
         line = line.replaceAll("\\s+", " ");
         
         System.out.println("process line: " + line);
@@ -130,6 +128,7 @@ public class AnalysisScanner {
                     System.out.println(line + " \t consists of " + wordArray.length + " words");
                 }
                 Files.write(mappingFileAbsPath, (wordArray.length + "\n").getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                wordCt += wordArray.length;
             }
             if (isComment(line))
                 Files.write(mappingFileAbsPath, (lineNo+ ",COMMENT \n").getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
