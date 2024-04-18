@@ -1,7 +1,7 @@
-// All boiler plate, setup
-
+// Setup 2
 package org.eneo.class2relational
 
+// Setup 36 (18 * 2)
 import org.emoflon.neo.api.classtorelational.API_Common
 import org.emoflon.neo.api.classtorelational.metamodels.API_Class
 import org.emoflon.neo.api.classtorelational.metamodels.API_Relational
@@ -21,15 +21,21 @@ import org.emoflon.neo.api.classtorelational.models.correctness13.API_change13
 import java.util.ArrayList
 import org.emoflon.neo.emsl.eMSL.Model
 
+// Setup 2
 class ClassToRelationalApp {
 	
+// Setup 6
 def static void main(String[] args) {
+	// Setup 5
     try (val builder = API_Common.createBuilder) {
-      // Retrieve handles for APIs
+      // Setup 5
       val apiClass = new API_Class(builder)
+	  // Setup 5
       val apiRel = new API_Relational(builder)
-      var apiArray = new ArrayList<Model>()
+      // Setup 5
+	  var apiArray = new ArrayList<Model>()
       
+	  // Setup 78 (13*6)
       apiArray.add(new API_change1(builder).model_Class1)
       apiArray.add(new API_change2(builder).model_Class2)
       apiArray.add(new API_change3(builder).model_Class3)
@@ -44,19 +50,24 @@ def static void main(String[] args) {
       apiArray.add(new API_change12(builder).model_Class12)
       apiArray.add(new API_change13(builder).model_Class13)
       
-      // Empty database to ensure a clean state
+      // Setup 2
       builder.clearDataBase
                   
-      // Export metamodels and models
+      // Setup 4
       builder.exportEMSLEntityToNeo4j(apiClass.metamodel_Class_)
-      builder.exportEMSLEntityToNeo4j(apiRel.metamodel_Relational_)
+      // Setup 4
+	  builder.exportEMSLEntityToNeo4j(apiRel.metamodel_Relational_)
       
+	  // Setup 7
       for (var i=1; i<=13; i++) {
-		  builder.exportEMSLEntityToNeo4j(apiArray.get(i-1))
-		  
-		  val fwd = new ClassToRelational_FWD_OPT_Run_App("class"+i, "correctness"+i+"relational")
-		  var result = fwd.runForwardTransformation()
-		  print(result.determineInconsistentElements())
+		// Setup 7
+		builder.exportEMSLEntityToNeo4j(apiArray.get(i-1))
+		// Setup 13		
+		val fwd = new ClassToRelational_FWD_OPT_Run_App("class"+i, "correctness"+i+"relational")
+		// Setup 4
+		var result = fwd.runForwardTransformation()
+		// Setup 3
+		print(result.determineInconsistentElements())
    	  }
    }
  }

@@ -1,5 +1,3 @@
-// All boiler plate, setup
-
 // Setup 2
 package org.eneo.class2relational;
 
