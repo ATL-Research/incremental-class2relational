@@ -45,7 +45,9 @@ public class Class2relationalImperativeTransformation implements BXtendTransform
 		}
 		
 		// TODO: add your rules in the proper order to the 'rules' List
+		// Setup
 		rules.addAll(#[new DataType2Type(source, target, correspondence), new SingleAttribute2Column(source, target, correspondence),
+			// Setup
 			new MultiAttribute2Table(source, target, correspondence), new Class2Table(source, target, correspondence)])
 	}
 	
