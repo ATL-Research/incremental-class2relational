@@ -18,3 +18,7 @@ launchSettings.json
 # graphics and metrics
 *.pdf
 *.csv
+
+metamodels/*.emf
+
+.project
