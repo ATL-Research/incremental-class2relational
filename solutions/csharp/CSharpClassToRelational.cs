@@ -1,167 +1,160 @@
 ﻿using HSRM.TTC2023.ClassToRelational.Class_;
 using HSRM.TTC2023.ClassToRelational.Relational_;
-using NMF.Expressions;
 using NMF.Models;
 using NMF.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
 using Type = HSRM.TTC2023.ClassToRelational.Relational_.Type;
 
 namespace HSRM.TTC2023.ClassToRelational
 {
+    // Setup
     internal class CSharpClassToRelational
     {
-        // Tracing 6
+        // Tracing
         private Dictionary<object, IModelElement> _trace = new();
 
-        // Tracing 5
+        // Tracing
         private object? TraceOrTransform(object item)
         {
-            // Tracing 5
+            // Tracing
             if (item == null) return null;
-            // Tracing 7
+            // Tracing
             if (!_trace.TryGetValue(item, out var transformed))
             {
-                // Tracing 4
+                // Tracing
                 transformed = Transform((dynamic)item);
-                // Tracing 4
+                // Tracing
                 _trace.Add(item, transformed);
             }
-            // Tracing 2
+            // Tracing
             return transformed;
         }
 
-        // Transformation 7
+        // Transformation
         private Type _integerType = new Type { Name = "Integer" };
 
-        // Transformation 5
+        // Transformation
         public Model Transform(Model classModel)
         {
-            // Transformation 4
+            // Transformation
             var result = new Model();
-            // Model Navigation 6
+            // Model_Navigation
             foreach (var item in classModel.RootElements)
             {
-                // Transformation 6
+                // Transformation
                 result.RootElements.Add((IModelElement)TraceOrTransform(item));
             }
-            // Model Navigation 21
+            // Model_Navigation
             foreach (var tableValuedAttribute in from cl in classModel.RootElements.OfType<IClass>()
                                                  from att in cl.Attr
                                                  where att.MultiValued
                                                  select att)
             {
-                // Transformation 5
+                // Transformation
                 result.RootElements.Add(CreateAttributeTable(tableValuedAttribute));
             }
-            // Transformation 2
+            // Transformation
             return result;
         }
 
-        // Transformation 5
+        // Transformation
         private ITable Transform(IClass @class)
         {
-            // Transformation 4
+            // Transformation
             var primaryKey = new Column
             {
-                // Transformation 2
+                // Transformation
                 Name = "objectId",
-                // Transformation 2
+                // Transformation
                 Type = _integerType
             };
-            //  Transformation 4
+            // Transformation
             var table = new Table
             {
-                //  Transformation 3
+                // Transformation
                 Name = @class.Name,
-                //  Transformation 1
+                // Transformation
                 Col =
                 {
-                    //  Transformation 1
+                    // Transformation
                     primaryKey
                 }
             };
-            // Model Traversal 10
+            // Model Traversal
             foreach (var attr in @class.Attr.Where(att => !att.MultiValued))
             {
-                //  Transformation 6
+                //  Transformation
                 table.Col.Add((IColumn)TraceOrTransform(attr));
             }
-            // Transformation 1
+            // Transformation
             return table;
         }
 
-        // Transformation 5
+        // Transformation
         private IType Transform(IDataType dataType)
         {
-            // Tracing 4
+            // Tracing
             if (dataType.Name == "Integer")
             {
-                // Tracing 2
+                // Tracing
                 return _integerType;
             }
-            // Transformation 4
+            // Transformation
             var type = new Type
             {
-                // Transformation 3
+                // Transformation
                 Name = dataType.Name
             };
-            // Transformation 2
+            // Transformation
             return type;
         }
 
-        // Transformation 5
+        // Transformation
         private IColumn Transform(IAttribute attribute)
         {
-            // Transformation 4
+            // Transformation
             var column = new Column();
-            // Transformation 5
+            // Transformation
             if (attribute.Type is IClass)
             {
-                // Transformation 3
+                // Transformation
                 column!.Type = _integerType;
-                // Transformation 5
+                // Transformation
                 column.Name = attribute.Name + "Id";
             }
             else
             {
-                // Transformation 6
+                // Transformation
                 column!.Type = (IType)TraceOrTransform(attribute.Type)!;
-                // Transformation 4
+                // Transformation
                 column.Name = attribute.Name;
             }
-            // Transformation 2
+            // Transformation
             return column;
         }
 
-        // Transformation 5
+        // Transformation
         private ITable CreateAttributeTable(IAttribute attribute)
         {
-            // Transformation 6
+            // Transformation
             var key = new Column { Type = _integerType };
-            // Transformation 4
+            // Transformation
             var table = new Table
             {
-                // Transformation 1
+                // Transformation
                 Col =
                 {
-                    // Transformation 1
+                    // Transformation
                     key,
-                    // Transformation 3
+                    // Transformation
                     (IColumn)TraceOrTransform(attribute)!
                 }
             };
 
-            // Transformation 7
+            // Transformation
             table.Name = attribute.Owner.Name + "_" + attribute.Name;
-            // Transformation 7
+            // Transformation
             key.Name = attribute.Owner.Name.ToCamelCase() + "Id";
-            // Transformation 2
+            // Transformation
             return table;
         }
     }

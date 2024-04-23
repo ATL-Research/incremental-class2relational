@@ -1,10 +1,5 @@
 ﻿using NMF.Models.Changes;
 using NMF.Models.Meta;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HSRM.TTC2023.ClassToRelational.Changes
 {

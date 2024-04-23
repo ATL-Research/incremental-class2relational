@@ -1,20 +1,14 @@
 ﻿using HSRM.TTC2023.ClassToRelational.Class_;
-using HSRM.TTC2023.ClassToRelational.Relational_;
 using NMF.Models;
 using NMF.Models.Changes;
 using NMF.Models.Repository;
 using NMF.Models.Repository.Serialization;
 using NMF.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Attribute = HSRM.TTC2023.ClassToRelational.Class_.Attribute;
-using Type = HSRM.TTC2023.ClassToRelational.Relational_.Type;
 
 namespace HSRM.TTC2023.ClassToRelational
 {
+    // Setup
     public abstract class SolutionBase
     {
         private readonly ModelRepository _modelRepository = new ModelRepository();
