@@ -3,163 +3,157 @@ using HSRM.TTC2023.ClassToRelational.Relational_;
 using NMF.Expressions;
 using NMF.Models;
 using NMF.Utilities;
-using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
 using Type = HSRM.TTC2023.ClassToRelational.Relational_.Type;
 
 namespace HSRM.TTC2023.ClassToRelational
 {
-    // Setup 3
+    // Setup 
     internal class CSharpClassToRelational
     {
-        // Tracing 7
+        // Tracing 
         private Dictionary<object, IModelElement> _trace = new();
 
-        // Tracing 7
+        // Tracing 
         private Dictionary<IAttribute, ITable> _attributeTables = new();
         
-        // Tracing 6
+        // Tracing 
         private Model _result = new Model();
 
-        // Tracing 5
+        // Tracing 
         private object? TraceOrTransform(object item)
         {
-            // Tracing 6
+            // Tracing 
             if (item == null) return null;
-            // Tracing 7
+            // Tracing 
             if (!_trace.TryGetValue(item, out var transformed))
             {
-                // Tracing 5
+                // Tracing 
                 transformed = Transform((dynamic)item);
-                // Tracing 4
+                // Tracing 
                 _trace.Add(item, transformed);
             }
-            // Tracing 2
+            // Tracing 
             return transformed;
         }
 
-        // Incremental Change Propagation 8
+        // Change_Propagation 
         private void Remove<T>(object original, ICollection<T> targetCollection)
         {
-            // Incremental Change Propagation 16
+            // Change_Propagation 
             if (original != null && _trace.TryGetValue(original, out var transformed) && transformed is T target)
             {
-                // Change Propagation 3
+                // Change_Propagation 
                 targetCollection.Remove(target);
             }
         }
 
-        // Transformation 9
+        // Transformation 
         private Type _integerType = new Type { Name = "Integer" };
 
-        // Transformation 5
+        // Transformation 
         public Model Transform(Model classModel)
         {
-            // Transformation 4
+            // Transformation 
             _result = new Model();
-            // Model Navigation 6
+            // Model_Navigation  
             foreach (var item in classModel.RootElements)
             {
-                // Transformation 2
+                // Transformation 
                 AddElement(item);
             }
-            // Incremental Change Recognition 8
+            // Change_Identification 
             classModel.RootElements.AsNotifiable().CollectionChanged += (o, e) =>
             {
-                // Incremental Change Propagation 6
+                // Change_Propagation 
                 if (e.Action == NotifyCollectionChangedAction.Reset)
                 {
-                    // Incremental Change Propagation 3
+                    // Change_Propagation 
                     _result.RootElements.Clear();
-                    // Incremental Change Propagation 1
+                    // Change_Propagation 
                     return;
                 }
-                // Incremental Change Propagation 5
+                // Change_Propagation 
                 if (e.OldItems != null)
                 {
-                    // Incremental Change Propagation 6
+                    // Change_Propagation 
                     foreach (IModelElement item in e.OldItems)
                     {
-                        // Incremental Change Propagation 4
+                        // Change_Propagation 
                         Remove(item, _result.RootElements);
                     }
                 }
-                // Incremental Change Propagation 5
+                // Change_Propagation 
                 if (e.NewItems != null)
                 {
-                    // Incremental Change Propagation 6
+                    // Change_Propagation 
                     foreach (IModelElement item in e.NewItems)
                     {
-                        // Incremental Change Propagation 2
+                        // Change_Propagation 
                         AddElement(item);
                     }
                 }
             };
-            // Transformation 2
+            // Transformation 
             return _result;
         }
 
-        // Helper 5
+        // Helper 
         private void AddElement(IModelElement rootElement)
         {
-            // Transformation 6
+            // Transformation 
             _result.RootElements.Add((IModelElement)TraceOrTransform(rootElement)!);
 
-            // Transformation 5
+            // Transformation 
             if (rootElement is IClass @class)
             {
-                // Model Navigation 6
+                // Model_Navigation  
                 foreach (var att in @class.Attr)
                 {
-                    // Transformation 2
+                    // Transformation 
                     AddAttribute(att);
                 }
 
-                // Incremental Change Recognition 8
+                // Change_Identification 
                 @class.Attr.AsNotifiable().CollectionChanged += (o, e) =>
                 {
-                    // Incremental Change Propagation 6
+                    // Change_Propagation 
                     if (e.Action == NotifyCollectionChangedAction.Reset)
                     {
-                        // Incremental Change Propagation 5
+                        // Change_Propagation 
                         foreach (var att in _attributeTables)
                         {
-                            // Incremental Change Propagation 6
+                            // Change_Propagation 
                             if (att.Key.Owner == @class)
                             {
-                                // Incremental Change Propagation 5
+                                // Change_Propagation 
                                 _result.RootElements.Remove(att.Value);
                             }
                         }
                     }
-                    // Incremental Change Propagation 5
+                    // Change_Propagation 
                     if (e.OldItems != null)
                     {
-                        // Incremental Change Propagation 6
+                        // Change_Propagation 
                         foreach (IAttribute att in e.OldItems)
                         {
-                            // Incremental Change Propagation 3
+                            // Change_Propagation 
                             if (att.MultiValued)
                             {
-                                // Incremental Change Propagation 5
+                                // Change_Propagation 
                                 _result.RootElements.Remove(_attributeTables[att]);
                             }
-                            // Incremental Change Recognition 4
+                            // Change_Identification 
                             att.MultiValuedChanged -= AttMultiValuedChanged;
                         }
                     }
-                    // Incremental Change Propagation 5
+                    // Change_Propagation 
                     if (e.NewItems != null)
                     {
-                        // Incremental Change Propagation 6
+                        // Change_Propagation 
                         foreach (IAttribute att in e.NewItems)
                         {
-                            // Incremental Change Propagation 2
+                            // Change_Propagation 
                             AddAttribute(att);
                         }
                     }
@@ -167,242 +161,242 @@ namespace HSRM.TTC2023.ClassToRelational
             }
         }
 
-        // Helper 5
+        // Helper 
         private void AddAttribute(IAttribute att)
         {
-            // Model Navigation 3
+            // Model_Navigation  
             if (att.MultiValued)
             {
-                // Transformation 5
+                // Transformation 
                 _result.RootElements.Add(CreateAttributeTable(att));
             }
 
-            // Incremental Change Recognition 4
+            // Change_Identification 
             att.MultiValuedChanged += AttMultiValuedChanged;
         }
 
-        // Incremental Change Propagation 7
+        // Change_Propagation 
         private void AttMultiValuedChanged(object? sender, ValueChangedEventArgs e)
         {
-            // Incremental Change Propagation 6
+            // Change_Propagation 
             var att = sender as IAttribute;
-            // Incremental Change Propagation 3
+            // Change_Propagation 
             if (att!.MultiValued)
             {
-                // Incremental Change Propagation 5
+                // Change_Propagation 
                 _result.RootElements.Add(CreateAttributeTable(att));
             }
-            // Incremental Change Propagation 1
+            // Change_Propagation 
             else
             {
-                // Incremental Change Propagation 5
+                // Change_Propagation 
                 _result.RootElements.Remove(_attributeTables[att]);
             }
         }
 
-        // Transformation 5
+        // Transformation 
         private ITable Transform(IClass @class)
         {
-            // Transformation 5
+            // Transformation 
             var primaryKey = new Column
             {
-                // Transformation 3
+                // Transformation 
                 Name = "objectId",
-                // Transformation 3
+                // Transformation 
                 Type = _integerType
             };
-            //  Transformation 5
+            //  Transformation 
             var table = new Table
             {
-                //  Transformation 4
+                //  Transformation 
                 Name = @class.Name,
-                //  Transformation 2
+                //  Transformation 
                 Col =
                 {
-                    //  Transformation 1
+                    //  Transformation 
                     primaryKey
                 }
             };
-            // Incremental Change Propagation 6
+            // Change_Propagation 
             void OnMultiValuedChanged(object? sender, ValueChangedEventArgs e)
             {
-                // Incremental Change Propagation 5
+                // Change_Propagation 
                 var att = sender as IAttribute;
-                // Incremental Change Propagation 3
+                // Change_Propagation 
                 if (att!.MultiValued)
                 {
-                    // Incremental Change Propagation 6
+                    // Change_Propagation 
                     table!.Col.Add((IColumn)TraceOrTransform(att)!);
                 }
-                // Incremental Change Propagation 1
+                // Change_Propagation 
                 else
                 {
-                    // Incremental Change Propagation 6
+                    // Change_Propagation 
                     table!.Col.Remove((IColumn)_trace[att]);
                 }
             }
-            // Model Traversal 6
+            // Model Traversal 
             foreach (var attr in @class.Attr)
             {
-                // Model Traversal 3
+                // Model Traversal 
                 if (attr.MultiValued)
                 {
-                    //  Transformation 6
+                    //  Transformation 
                     table.Col.Add((IColumn)TraceOrTransform(attr)!);
                 }
-                // Incremental Change Recognition 4
+                // Change_Identification 
                 attr.MultiValuedChanged += OnMultiValuedChanged;
             }
-            // Incremental Change Propagation 8
+            // Change_Propagation 
             ((INotifyCollectionChanged)@class.Attr).CollectionChanged += (o, e) =>
             {
-                // Incremental Change Propagation 4
+                // Change_Propagation 
                 if (e.Action == NotifyCollectionChangedAction.Reset)
                 {
-                    // Incremental Change Propagation 3
+                    // Change_Propagation 
                     table.Col.Clear();
-                    // Incremental Change Propagation 4
+                    // Change_Propagation 
                     table.Col.Add(primaryKey);
-                    // Incremental Change Propagation 1
+                    // Change_Propagation 
                     return;
                 }
-                // Incremental Change Propagation 5
+                // Change_Propagation 
                 if (e.OldItems != null)
                 {
-                    // Incremental Change Propagation 6
+                    // Change_Propagation 
                     foreach (IAttribute item in e.OldItems)
                     {
-                        // Incremental Change Propagation 3
+                        // Change_Propagation 
                         if (!item.MultiValued)
                         {
-                            // Incremental Change Recognition 6
+                            // Change_Identification 
                             table.Col.Remove((IColumn)_trace[item]);
                         }
-                        // Incremental Change Recognition 4
+                        // Change_Identification 
                         item.MultiValuedChanged -= OnMultiValuedChanged;
                     }
                 }
-                // Incremental Change Propagation 5
+                // Change_Propagation 
                 if (e.NewItems != null)
                 {
-                    // Incremental Change Propagation 6
+                    // Change_Propagation 
                     foreach (IAttribute item in e.NewItems)
                     {
-                        // Incremental Change Propagation 3
+                        // Change_Propagation 
                         if (!item.MultiValued)
                         {
-                            // Incremental Change Propagation 6
+                            // Change_Propagation 
                             table.Col.Add((IColumn)TraceOrTransform(item)!);
                         }
-                        // Incremental Change Recognition 4
+                        // Change_Identification 
                         item.MultiValuedChanged += OnMultiValuedChanged;
                     }
                 }
             };
-            // Incremental Change Propagation 11
+            // Change_Propagation 
             @class.NameChanged += (s, e) => { table.Name = @class.Name; };
-            // Transformation 2
+            // Transformation 
             return table;
         }
 
-        // Transformation 5
+        // Transformation 
         private IType Transform(IDataType dataType)
         {
-            // Tracing 5
+            // Tracing 
             if (dataType.Name == "Integer")
             {
-                // Tracing 2
+                // Tracing 
                 return _integerType;
             }
-            // Transformation 5
+            // Transformation 
             var type = new Type
             {
-                // Transformation 4
+                // Transformation 
                 Name = dataType.Name
             };
-            // Incremental Change Propagation 11
+            // Change_Propagation 
             dataType.NameChanged += (o, e) => type.Name = dataType.Name;
-            // Transformation 2
+            // Transformation 
             return type;
         }
 
-        // Transformation 5
+        // Transformation 
         private IColumn Transform(IAttribute attribute)
         {
-            // Transformation 5
+            // Transformation 
             var column = new Column();
-            // Helper 6
+            // Helper 
             void UpdateNameAndType(object? sender, ValueChangedEventArgs? e)
             {
-                // Transformation 5
+                // Transformation 
                 if (attribute.Type is IClass)
                 {
-                    // Transformation 4
+                    // Transformation 
                     column!.Type = _integerType;
-                    // Transformation 6
+                    // Transformation 
                     column.Name = attribute.Name + "Id";
                 }
                 else
                 {
-                    // Transformation 7
+                    // Transformation 
                     column!.Type = (IType)TraceOrTransform(attribute.Type)!;
-                    // Transformation 5
+                    // Transformation 
                     column.Name = attribute.Name;
                 }
             }
-            // Helper 3
+            // Helper 
             UpdateNameAndType(null, null);
-            // Incremental Change Recognition 4
+            // Change_Identification 
             attribute.TypeChanged += UpdateNameAndType;
-            // Incremental Change Recognition 4
+            // Change_Identification 
             attribute.NameChanged += UpdateNameAndType;
-            // Transformation 2
+            // Transformation 
             return column;
         }
 
-        // Transformation 5
+        // Transformation 
         private ITable CreateAttributeTable(IAttribute attribute)
         {
-            // Transformation 8
+            // Transformation 
             var key = new Column { Type = _integerType };
-            // Transformation 5
+            // Transformation 
             var table = new Table
             {
-                // Transformation 2
+                // Transformation 
                 Col =
                 {
-                    // Transformation 1
+                    // Transformation 
                     key,
-                    // Transformation 3
+                    // Transformation 
                     (IColumn)TraceOrTransform(attribute)!
                 }
             };
-            // Helper 6
+            // Helper 
             void OnNameChanged(object? sender, ValueChangedEventArgs? e)
             {
-                // Transformation 8
+                // Transformation 
                 table.Name = attribute.Owner.Name + "_" + attribute.Name;
-                // Transformation 8
+                // Transformation 
                 key.Name = attribute.Owner.Name.ToCamelCase() + "Id";
             }
-            // Helper 3
+            // Helper 
             OnNameChanged(null, null);
-            // Incremental Change Recognition 5
+            // Change_Identification 
             attribute.Owner.NameChanged += OnNameChanged;
-            // Incremental Change Propagation 6
+            // Change_Propagation 
             attribute.OwnerChanged += (o, e) =>
             {
-                // Incremental Change Recognition 11
+                // Change_Identification 
                 if (e.OldValue != null) ((IClass)e.OldValue).NameChanged -= OnNameChanged;
-                // Incremental Change Propagation 3
+                // Change_Propagation 
                 OnNameChanged(o, e);
-                // Incremental Change Recognition 11
+                // Change_Identification 
                 if (e.NewValue != null) ((IClass)e.NewValue).NameChanged += OnNameChanged;
             };
 
-            // Tracing 4
+            // Tracing 
             _attributeTables[attribute] = table;
-            // Transformation 2
+            // Transformation 
             return table;
         }
     }

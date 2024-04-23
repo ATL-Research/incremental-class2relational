@@ -5,20 +5,19 @@ using NMF.Synchronizations;
 using NMF.Expressions.Linq;
 using Type = HSRM.TTC2023.ClassToRelational.Relational_.Type;
 using NMF.Utilities;
-using NMF.Expressions;
 
 namespace HSRM.TTC2023.ClassToRelational
 {
-    // Transformation 4
+    // Transformation
     public class ClassToRelational : ReflectiveSynchronization
     {
-        // Transformation 6
+        // Transformation
         public class MainRule : SynchronizationRule<Model, Model>
         {
-            // Transformation 14
+            // Transformation
             protected override Model CreateRightOutput(Model input, IEnumerable<Model> candidates, ISynchronizationContext context, out bool existing)
             {
-                // Tracing 29
+                // Tracing
                 var integerType = new Type { Name = "Integer" };
                 context.Data["Integer"] = integerType;
                 var model = base.CreateRightOutput(input, candidates, context, out existing);
@@ -26,34 +25,34 @@ namespace HSRM.TTC2023.ClassToRelational
                 return model;
             }
 
-            // Transformation 4
+            // Transformation
             public override void DeclareSynchronization()
             {
                 // Transformation 3
-                // Model Traversal 13
+                // Model_Navigation 11
                 SynchronizeManyLeftToRightOnly(SyncRule<DataTypeToType>(), m => m.RootElements.OfType<IDataType>(), rels => rels.RootElements.OfType<IModelElement, IType>());
                 // Transformation 3
-                // Model Traversal 13
+                // Model_Navigation 11
                 SynchronizeManyLeftToRightOnly(SyncRule<ClassToTable>(), m => m.RootElements.OfType<IClass>(), rels => rels.RootElements.OfType<IModelElement, ITable>());
-                // Transformation 3
+                // Transformation
                 SynchronizeManyLeftToRightOnly(SyncRule<AttributeToTable>(),
-                // Model Traversal 19
+                // Model_Navigation
                     m => from c in m.RootElements.OfType<IClass>()
                          from a in c.Attr
                          where a.MultiValued
                          select a, 
-                    // Model Traversal 7
+                    // Tranformation
                     rels => rels.RootElements.OfType<IModelElement, ITable>());
             }
         }
 
-        // Transformation 6
+        // Transformation
         public class ClassToTable : SynchronizationRule<IClass, ITable>
         {
-            // Transformation 14
+            // Transformation
             protected override ITable CreateRightOutput(IClass input, IEnumerable<ITable> candidates, ISynchronizationContext context, out bool existing)
             {
-                // Transformation 26
+                // Transformation
                 existing = false;
                 var primaryKey = new Column
                 {
@@ -67,32 +66,30 @@ namespace HSRM.TTC2023.ClassToRelational
                 };
             }
 
-            // Transformation 4
+            // Transformation
             public override void DeclareSynchronization()
             {
-                // Transformation 1
-                // Model Traversal 8
+                // Transformation
                 Synchronize(c => c.Name, t => t.Name);
-                // Transformation 3
-                // Model Traversal 13
+                // Transformation
                 SynchronizeMany(SyncRule<AttributeToColumn>(), c => c.Attr.Where(a => !a.MultiValued), t => t.Col);
             }
         }
 
-        // Transformation 6
+        // Transformation
         public class DataTypeToType : SynchronizationRule<IDataType, IType>
         {
-            // Transformation 4
+            // Transformation
             public override void DeclareSynchronization()
             {
-                // Transformation 9
+                // Transformation
                 Synchronize(dt => dt.Name, t => t.Name);
             }
 
-            // Transformation 14
+            // Transformation
             protected override IType CreateRightOutput(IDataType input, IEnumerable<IType> candidates, ISynchronizationContext context, out bool existing)
             {
-                // Transformation 16
+                // Transformation
                 existing = false;
                 if (input.Name == "Integer")
                 {
@@ -102,28 +99,25 @@ namespace HSRM.TTC2023.ClassToRelational
             }
         }
 
-        // Transformation 6
+        // Transformation
         public class AttributeToColumn : SynchronizationRule<IAttribute, IColumn>
         {
-            // Transformation 4
+            // Transformation
             public override void DeclareSynchronization()
             {
-                // Transformation 16
+                // Transformation
                 SynchronizeLeftToRightOnly(a => a.Type is IDataType ? a.Name : a.Name + "Id", c => c.Name);
-                // Transformation 3
+                // Transformation
                 Synchronize(SyncRule<DataTypeToType>(),
-                    // Model Traversal 5
                     a => (IDataType)a.Type,
-                    // Transformation 3
                     c => c.Type,
-                    // Model Traversal 7
                     (a, c) => a.Type is IDataType);
             }
 
             // Transformation 14
             protected override IColumn CreateRightOutput(IAttribute input, IEnumerable<IColumn> candidates, ISynchronizationContext context, out bool existing)
             {
-                // Transformation 22
+                // Transformation
                 existing = false;
                 var column = new Column();
                 if (input.Type is IClass)
@@ -134,13 +128,13 @@ namespace HSRM.TTC2023.ClassToRelational
             }
         }
 
-        // Transformation 6
+        // Transformation
         public class AttributeToTable : SynchronizationRule<IAttribute, ITable>
         {
-            // Transformation 14
+            // Transformation
             protected override ITable CreateRightOutput(IAttribute input, IEnumerable<ITable> candidates, ISynchronizationContext context, out bool existing)
             {
-                // Transformation 16
+                // Transformation
                 existing = false;
                 return new Table
                 {
@@ -148,25 +142,23 @@ namespace HSRM.TTC2023.ClassToRelational
                 };
             }
 
-            // Transformation 4
+            // Transformation
             public override void DeclareSynchronization()
             {
-                // Transformation 13
+                // Transformation
                 SynchronizeLeftToRightOnly(a => a.Owner.Name + "_" + a.Name, t => t.Name);
-                // Transformation 13
+                // Transformation
                 SynchronizeLeftToRightOnly(a => a.Owner.Name.ToCamelCase() + "Id", t => t.Col[0].Name);
-                // Transformation 3
+                // Transformation
                 SynchronizeLeftToRightOnly(SyncRule<AttributeToColumn>(),
-                    // Model Traversal 3
                     a => a,
-                    // Transformation 9
                     t => t.Col.FirstOrDefault(col => IsNotTheFirst(col)));
             }
 
-            // Helper 6
+            // Helper
             private static bool IsNotTheFirst(IColumn column)
             {
-                //  Helper 7
+                //  Helper
                 return column?.Owner.Col.IndexOf(column) != 0;
             }
         }
