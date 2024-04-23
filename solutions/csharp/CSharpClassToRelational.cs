@@ -14,20 +14,21 @@ using Type = HSRM.TTC2023.ClassToRelational.Relational_.Type;
 
 namespace HSRM.TTC2023.ClassToRelational
 {
+    // Setup 3
     internal class CSharpClassToRelational
     {
-        // Tracing 6
+        // Tracing 7
         private Dictionary<object, IModelElement> _trace = new();
 
         // Tracing 5
         private object? TraceOrTransform(object item)
         {
-            // Tracing 5
+            // Tracing 6
             if (item == null) return null;
             // Tracing 7
             if (!_trace.TryGetValue(item, out var transformed))
             {
-                // Tracing 4
+                // Tracing 5
                 transformed = Transform((dynamic)item);
                 // Tracing 4
                 _trace.Add(item, transformed);
@@ -36,13 +37,13 @@ namespace HSRM.TTC2023.ClassToRelational
             return transformed;
         }
 
-        // Transformation 7
+        // Transformation 9
         private Type _integerType = new Type { Name = "Integer" };
 
         // Transformation 5
         public Model Transform(Model classModel)
         {
-            // Transformation 4
+            // Transformation 5
             var result = new Model();
             // Model Navigation 6
             foreach (var item in classModel.RootElements)
@@ -66,49 +67,49 @@ namespace HSRM.TTC2023.ClassToRelational
         // Transformation 5
         private ITable Transform(IClass @class)
         {
-            // Transformation 4
+            // Transformation 5
             var primaryKey = new Column
             {
-                // Transformation 2
+                // Transformation 3
                 Name = "objectId",
-                // Transformation 2
+                // Transformation 3
                 Type = _integerType
             };
-            //  Transformation 4
+            //  Transformation 5
             var table = new Table
             {
-                //  Transformation 3
+                //  Transformation 4
                 Name = @class.Name,
-                //  Transformation 1
+                //  Transformation 2
                 Col =
                 {
                     //  Transformation 1
                     primaryKey
                 }
             };
-            // Model Traversal 10
+            // Model Traversal 11
             foreach (var attr in @class.Attr.Where(att => !att.MultiValued))
             {
                 //  Transformation 6
                 table.Col.Add((IColumn)TraceOrTransform(attr));
             }
-            // Transformation 1
+            // Transformation 2
             return table;
         }
 
         // Transformation 5
         private IType Transform(IDataType dataType)
         {
-            // Tracing 4
+            // Tracing 5
             if (dataType.Name == "Integer")
             {
                 // Tracing 2
                 return _integerType;
             }
-            // Transformation 4
+            // Transformation 5
             var type = new Type
             {
-                // Transformation 3
+                // Transformation 4
                 Name = dataType.Name
             };
             // Transformation 2
@@ -118,21 +119,21 @@ namespace HSRM.TTC2023.ClassToRelational
         // Transformation 5
         private IColumn Transform(IAttribute attribute)
         {
-            // Transformation 4
+            // Transformation 5
             var column = new Column();
             // Transformation 5
             if (attribute.Type is IClass)
             {
-                // Transformation 3
+                // Transformation 4
                 column!.Type = _integerType;
-                // Transformation 5
+                // Transformation 6
                 column.Name = attribute.Name + "Id";
             }
             else
             {
                 // Transformation 6
                 column!.Type = (IType)TraceOrTransform(attribute.Type)!;
-                // Transformation 4
+                // Transformation 5
                 column.Name = attribute.Name;
             }
             // Transformation 2
@@ -142,12 +143,12 @@ namespace HSRM.TTC2023.ClassToRelational
         // Transformation 5
         private ITable CreateAttributeTable(IAttribute attribute)
         {
-            // Transformation 6
+            // Transformation 8
             var key = new Column { Type = _integerType };
-            // Transformation 4
+            // Transformation 5
             var table = new Table
             {
-                // Transformation 1
+                // Transformation 2
                 Col =
                 {
                     // Transformation 1
@@ -157,9 +158,9 @@ namespace HSRM.TTC2023.ClassToRelational
                 }
             };
 
-            // Transformation 7
+            // Transformation 9
             table.Name = attribute.Owner.Name + "_" + attribute.Name;
-            // Transformation 7
+            // Transformation 8
             key.Name = attribute.Owner.Name.ToCamelCase() + "Id";
             // Transformation 2
             return table;

@@ -18,7 +18,7 @@ namespace HSRM.TTC2023.ClassToRelational
             // Transformation 14
             protected override Model CreateRightOutput(Model input, IEnumerable<Model> candidates, ISynchronizationContext context, out bool existing)
             {
-                // Tracing 25
+                // Tracing 29
                 var integerType = new Type { Name = "Integer" };
                 context.Data["Integer"] = integerType;
                 var model = base.CreateRightOutput(input, candidates, context, out existing);
@@ -30,19 +30,19 @@ namespace HSRM.TTC2023.ClassToRelational
             public override void DeclareSynchronization()
             {
                 // Transformation 3
-                // Model Traversal 11
+                // Model Traversal 13
                 SynchronizeManyLeftToRightOnly(SyncRule<DataTypeToType>(), m => m.RootElements.OfType<IDataType>(), rels => rels.RootElements.OfType<IModelElement, IType>());
                 // Transformation 3
-                // Model Traversal 11
+                // Model Traversal 13
                 SynchronizeManyLeftToRightOnly(SyncRule<ClassToTable>(), m => m.RootElements.OfType<IClass>(), rels => rels.RootElements.OfType<IModelElement, ITable>());
                 // Transformation 3
                 SynchronizeManyLeftToRightOnly(SyncRule<AttributeToTable>(),
-                // Model Traversal 18
+                // Model Traversal 19
                     m => from c in m.RootElements.OfType<IClass>()
                          from a in c.Attr
                          where a.MultiValued
                          select a, 
-                    // Model Traversal 6
+                    // Model Traversal 7
                     rels => rels.RootElements.OfType<IModelElement, ITable>());
             }
         }
@@ -53,7 +53,7 @@ namespace HSRM.TTC2023.ClassToRelational
             // Transformation 14
             protected override ITable CreateRightOutput(IClass input, IEnumerable<ITable> candidates, ISynchronizationContext context, out bool existing)
             {
-                // Transformation 20
+                // Transformation 26
                 existing = false;
                 var primaryKey = new Column
                 {
@@ -71,10 +71,10 @@ namespace HSRM.TTC2023.ClassToRelational
             public override void DeclareSynchronization()
             {
                 // Transformation 1
-                // Model Traversal 6
+                // Model Traversal 8
                 Synchronize(c => c.Name, t => t.Name);
                 // Transformation 3
-                // Model Traversal 10
+                // Model Traversal 13
                 SynchronizeMany(SyncRule<AttributeToColumn>(), c => c.Attr.Where(a => !a.MultiValued), t => t.Col);
             }
         }
@@ -85,14 +85,14 @@ namespace HSRM.TTC2023.ClassToRelational
             // Transformation 4
             public override void DeclareSynchronization()
             {
-                // Transformation 7
+                // Transformation 9
                 Synchronize(dt => dt.Name, t => t.Name);
             }
 
             // Transformation 14
             protected override IType CreateRightOutput(IDataType input, IEnumerable<IType> candidates, ISynchronizationContext context, out bool existing)
             {
-                // Transformation 13
+                // Transformation 16
                 existing = false;
                 if (input.Name == "Integer")
                 {
@@ -108,22 +108,22 @@ namespace HSRM.TTC2023.ClassToRelational
             // Transformation 4
             public override void DeclareSynchronization()
             {
-                // Transformation 14
+                // Transformation 16
                 SynchronizeLeftToRightOnly(a => a.Type is IDataType ? a.Name : a.Name + "Id", c => c.Name);
                 // Transformation 3
                 Synchronize(SyncRule<DataTypeToType>(),
-                    // Model Traversal 4
+                    // Model Traversal 5
                     a => (IDataType)a.Type,
                     // Transformation 3
                     c => c.Type,
-                    // Model Traversal 6
+                    // Model Traversal 7
                     (a, c) => a.Type is IDataType);
             }
 
             // Transformation 14
             protected override IColumn CreateRightOutput(IAttribute input, IEnumerable<IColumn> candidates, ISynchronizationContext context, out bool existing)
             {
-                // Transformation 19
+                // Transformation 22
                 existing = false;
                 var column = new Column();
                 if (input.Type is IClass)
@@ -140,7 +140,7 @@ namespace HSRM.TTC2023.ClassToRelational
             // Transformation 14
             protected override ITable CreateRightOutput(IAttribute input, IEnumerable<ITable> candidates, ISynchronizationContext context, out bool existing)
             {
-                // Transformation 13
+                // Transformation 16
                 existing = false;
                 return new Table
                 {
@@ -151,17 +151,15 @@ namespace HSRM.TTC2023.ClassToRelational
             // Transformation 4
             public override void DeclareSynchronization()
             {
-                // Transformation 1
-                // Model Traversal 10
+                // Transformation 13
                 SynchronizeLeftToRightOnly(a => a.Owner.Name + "_" + a.Name, t => t.Name);
-                // Transformation 1
-                // Model Traversal 11
+                // Transformation 13
                 SynchronizeLeftToRightOnly(a => a.Owner.Name.ToCamelCase() + "Id", t => t.Col[0].Name);
                 // Transformation 3
                 SynchronizeLeftToRightOnly(SyncRule<AttributeToColumn>(),
-                    // Model Traversal 2
+                    // Model Traversal 3
                     a => a,
-                    // Transformation 7
+                    // Transformation 9
                     t => t.Col.FirstOrDefault(col => IsNotTheFirst(col)));
             }
 
