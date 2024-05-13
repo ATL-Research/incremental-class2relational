@@ -21,7 +21,7 @@ import java.nio.file.FileVisitor;
  */
 public class AnalysisScanner {
 
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     
     // statistical data
     long fileCt = 0;
@@ -63,7 +63,7 @@ public class AnalysisScanner {
                labelCountFile.createNewFile();
 
                // create header
-               String header =  "File name, Label, Count, Lines\n";
+               String header =  "File name, Transformation Aspect, Value, Lines\n";
                Files.write(labelCountFileAbsPath, header.getBytes() , StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             }
             catch (IOException e) {
@@ -85,31 +85,31 @@ public class AnalysisScanner {
                 resetFileCounters();
                 // add name of file to csv for tracing/logging reasons
                 try{
-                    Files.write(labelCountFileAbsPath, (fileString + ",,\n").getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-                    scanTrafoFile(filePath.toString());
+                    // Files.write(labelCountFileAbsPath, (fileString + ",,\n").getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                    scanTrafoFile(filePath);
                 } catch(IOException e ) {
                     System.out.println("couldnt append the file name of " + fileString);
                 }
         }
     }
 
-    public void scanTrafoFile(String filepath) throws IOException {
+    public void scanTrafoFile(Path filepath) throws IOException {
         currentLine = 1;
         Scanner in;
         try {
-            in = new Scanner(new File(filepath));
+            in = new Scanner(new File(filepath.toString()));
             while (in.hasNextLine()) {
                 String line = in.nextLine();
                 if (line.length() > 0) {
                     lineCt++;
-                    processLine(in, line);
+                    processLine(in, line, filepath.getFileName().toString());
                     currentLine++;
                 }
             }
             in.close();
 
             // add analysis of last line
-            String csvLine = "," + currentLabel + "," + currentLabelCount + "," + labelStartLine + "-" + currentLine + "\n";
+            String csvLine = filepath.getFileName().toString() + "," + currentLabel + "," + currentLabelCount + "," + labelStartLine + "-" + currentLine + "\n";
             Files.write(labelCountFileAbsPath, csvLine.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);        
         } catch (FileNotFoundException e) {
      
@@ -118,10 +118,14 @@ public class AnalysisScanner {
             
     }
 
-    public void processLine(Scanner in, String line) throws IOException {
+    public void processLine(Scanner in, String line, String filepath) throws IOException {
         if (!line.isEmpty()) {
             // preprocessing of String for counting
             line = line.stripLeading();
+            System.out.println(line);
+            line = line.replaceAll("\"([^\"]|\\\")*\"", "a");
+            System.out.println(line);
+
             line  = line.replaceAll(skippedSymbolsRegex, " ");
             line = line.replaceAll("\\s+", " ");
             String preprocessed = line; 
@@ -139,42 +143,42 @@ public class AnalysisScanner {
                     switch (wordArray[1].toUpperCase()) {
                         case Labels.TRANSFORMATION_LABEL: 
                             if (currentLabel != Labels.TRANSFORMATION_LABEL) {
-                                updateLabels(Labels.TRANSFORMATION_LABEL);
+                                updateLabels(Labels.TRANSFORMATION_LABEL,filepath);
                             } 
                             break;
                         case Labels.TRAVERSAL_LABEL: 
                         case Labels.NAVIGATION_LABEL:
                             if (currentLabel != Labels.TRAVERSAL_LABEL) {
-                                updateLabels(Labels.TRAVERSAL_LABEL);
+                                updateLabels(Labels.TRAVERSAL_LABEL,filepath);
                             } 
                             break;
                         
                         
                         case Labels.SETUP_LABEL: 
                             if (currentLabel != Labels.SETUP_LABEL) {
-                                updateLabels(Labels.SETUP_LABEL);
+                                updateLabels(Labels.SETUP_LABEL,filepath);
                             } break;
                         
                         
                         case Labels.TRACING_LABEL: 
                         if (currentLabel!= Labels.TRACING_LABEL) {
-                        updateLabels(Labels. TRACING_LABEL); 
+                        updateLabels(Labels. TRACING_LABEL,filepath); 
                         }
                         break;
                         
                         case Labels.CHANGE_IDENTIFICATION: 
                             if (currentLabel != Labels.CHANGE_IDENTIFICATION) {
-                                updateLabels(Labels.CHANGE_IDENTIFICATION);
+                                updateLabels(Labels.CHANGE_IDENTIFICATION,filepath);
                             } break;
                         
                         case Labels.HELPER_LABEL: {
                             if (currentLabel != Labels.HELPER_LABEL) {
-                                updateLabels(Labels.HELPER_LABEL);
+                                updateLabels(Labels.HELPER_LABEL,filepath);
                             } break;
                         }
                         case Labels.WRAPPER_LABEL: {
                             if (currentLabel != Labels.WRAPPER_LABEL) {
-                                updateLabels(Labels.WRAPPER_LABEL);
+                                updateLabels(Labels.WRAPPER_LABEL,filepath);
                             } break;
                         }
                     }
@@ -186,8 +190,8 @@ public class AnalysisScanner {
         }
     }
 
-    private void updateLabels(String newLabel) throws IOException {
-        String csvLine = "," + currentLabel + "," + currentLabelCount + "," + labelStartLine + "-"+ currentLine + "\n";
+    private void updateLabels(String newLabel, String filepath) throws IOException {
+        String csvLine = filepath +"," + currentLabel + "," + currentLabelCount + "," + labelStartLine + "-"+ currentLine + "\n";
         Files.write(labelCountFileAbsPath, csvLine.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
         currentLabel= newLabel;
         currentLabelCount = 0;
@@ -238,10 +242,9 @@ public class AnalysisScanner {
         analysis.extractLabelsFromFiles();
         System.out.println("-------------------------------");
         System.out.println ("analyzed in emoflon " + analysis.wordCt + " words in " + analysis.lineCt + " lines of " + analysis.fileCt + " files" );
-
     
     }
-    
+
     /**
      * resets the counters for each file -> move the state of the scanning to the beginning 
      * (Empty label, currentLine =1, no counts yet)
