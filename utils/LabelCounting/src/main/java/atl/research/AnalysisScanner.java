@@ -100,11 +100,11 @@ public class AnalysisScanner {
             in = new Scanner(new File(filepath.toString()));
             while (in.hasNextLine()) {
                 String line = in.nextLine();
+                lineCt++;
                 if (line.length() > 0) {
-                    lineCt++;
                     processLine(in, line, filepath.getFileName().toString());
-                    currentLine++;
                 }
+                currentLine++;
             }
             in.close();
 
