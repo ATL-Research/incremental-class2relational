@@ -10,7 +10,7 @@ savePlot <- function(plot, name) {
 createPlot <- function(data, title) {
 
 	# Define the order of types for stacking
-	type_order <- c("Setup", "Model Traversal", "Model Navigation", "Change Propagation", "Helper", "Tracing", "Incrementality", "Transformation")
+	type_order <- c("SETUP", "MODEL_TRAVERSAL", "CHANGE_PROPAGATION", "HELPER", "TRACING", "CHANGE_IDENTIFICATION", "TRANSFORMATION", "EMPTY", "WRAPPER")
 
 	# Fill missing types with 0 values
 	missing_types <- setdiff(type_order, unique(data$Transformation.Aspect))
