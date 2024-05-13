@@ -41,7 +41,6 @@ createPlot <- function(data, title) {
             position = position_stack(vjust = 0.5), size = 3)
 }
 
-options(echo=TRUE)
 args <- commandArgs(trailingOnly = TRUE)
 print(args)
 
