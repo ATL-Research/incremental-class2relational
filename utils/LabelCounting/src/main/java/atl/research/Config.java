@@ -1,25 +1,57 @@
-package atl.research;
+ package atl.research;
+ 
+ import java.io.IOException;
+ import java.io.Reader;
+ import java.nio.file.Files;
+ import java.nio.file.Path;
+ import java.util.Properties;
 
-public class Config {
+ public class Config {
     
-    public static final String COMMENT_SYMBOL = "//"; // lines starting with this sequence are marked as comment and not counted
+    public static final String ANALYSIS_DIR = "solution.analysis-dir";  // these tokens will be replaced by a whitespace
+    public static final String ANALYSIS_RESULT = "solution.analysis-result";  // these tokens will be replaced by a whitespace
+    public static final String SKIPPED_SYMBOLS_REGEX = "solution.skipped-symbols-regex";  // these tokens will be replaced by a whitespace
+    public static final String COMMENT_SYMBOL = "solution.comment-symbol";  // these tokens will be replaced by a whitespace
+    public static final String FILES_TO_SCAN = "solution.files-to-scan";  // these tokens will be replaced by a whitespace
+     
+    private final Properties properties;
+    
+    public Config(Path pathToProperties) {
+        properties = new Properties();
 
+        try (final Reader reader = Files.newBufferedReader(pathToProperties)) {
+            properties.load(reader);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     
-    public static final String IGNORED_TOKENS = "[;|=|\\*|=>|.|::| \\( | \\) | \\{ | \\} | \\[| \\]]";  // these tokens will be replaced by a whitespace
-    public static final String ALLOWED_DIRS = "nmf";  //  directories with the specified names will be ignored when counting labels
-    
-    
-    public static final String EMPTY_LABEL = "EMPTY";    //starting state
-    
-    public static final String SETUP_LABEL = "SETUP";
-    public static final String TRAVERSAL_LABEL = "MODEL_NAVIGATION";     
-    public static final String TRANSFORMATION_LABEL ="TRANSFORMATION";
-    public static final String TRACING_LABEL = "TRACING";
-    public static final String HELPER_LABEL = "HELPER";
-    public static final String CHANGE_IDENTIFICATION = "CHANGE_IDENTIFICATION"; 
-    public static final String CHANGE_PROPAGATION = "CHANGE_PROPAGATION";
-    public static final String WRAPPER_LABEL = "WRAPPER";
+    public String skippedSymbolsRegex() {
+        return (this.properties.getProperty(SKIPPED_SYMBOLS_REGEX));
+    }
 
-   // TODO may not be necessary anymore, if we enumerate files
-    public static final String LIB_IMPORT = "using"; // lines starting with this word, will be skipped
- }
+    public Path getAnalysisDir() {
+        return Path.of(this.properties.getProperty(ANALYSIS_DIR));
+    }
+    public String getAnalysisResult() {
+        // return Path.of(this.properties.getProperty(ANALYSIS_RESULT));
+        return properties.getProperty(ANALYSIS_RESULT);
+    }
+    
+    public String getCommentSymbol() {
+        return this.properties.getProperty(COMMENT_SYMBOL);
+    }
+
+    public String[] getFilesToScan() {
+        return parseListString(this.properties.getProperty(FILES_TO_SCAN));
+    }
+
+        private static String[] parseListString(String str) {
+            return str.substring(1, str.length() - 1).split(",");
+            // String[] result = new String[tokens.length];
+            // for (int i = 0; i < tokens.length; i++) {
+            //     result[i] = Double.parseDouble(tokens[i].trim());
+            // }
+            // return result;
+        }
+}
