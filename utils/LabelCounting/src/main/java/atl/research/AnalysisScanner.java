@@ -72,7 +72,6 @@ public class AnalysisScanner {
     }
 
     public void extractLabelsFromFiles() {
-        // System.out.println("number of input files (initially) " + filesToScan.size());
         for (String fileString : filesToScan) {
              Path filePath  = Paths.get(System.getProperty("user.dir") + "/" + analyzedDirectory + "/" + fileString);
                 if (Files.isDirectory(filePath)) {
@@ -85,7 +84,6 @@ public class AnalysisScanner {
                 resetFileCounters();
                 // add name of file to csv for tracing/logging reasons
                 try{
-                    // Files.write(labelCountFileAbsPath, (fileString + ",,\n").getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
                     scanTrafoFile(filePath);
                 } catch(IOException e ) {
                     System.out.println("couldnt append the file name of " + fileString);
@@ -122,10 +120,8 @@ public class AnalysisScanner {
         if (!line.isEmpty()) {
             // preprocessing of String for counting
             line = line.stripLeading();
-            System.out.println(line);
-            line = line.replaceAll("\"([^\"]|\\\")*\"", "a");
-            System.out.println(line);
-
+            line = line.replaceAll("\"([^\"]|\\\")*\"", "a"); //TODO replace by configurable comments
+  
             line  = line.replaceAll(skippedSymbolsRegex, " ");
             line = line.replaceAll("\\s+", " ");
             String preprocessed = line; 
