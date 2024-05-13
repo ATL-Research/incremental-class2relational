@@ -40,14 +40,14 @@ public class AnalysisScanner {
     protected final File labelCountFile;
     protected final Path labelCountFileAbsPath; 
     protected String skippedSymbolsRegex = "";
-    protected String commentSymbol = "";
+    protected List<String> commentSymbols = new LinkedList<String>();
     protected List<String> filesToScan = new LinkedList<String>();
 
 
     public AnalysisScanner(Config config) {
         analyzedDirectory = config.getAnalysisDir();
         skippedSymbolsRegex = config.skippedSymbolsRegex();
-        commentSymbol = config.getCommentSymbol();
+        commentSymbols = Arrays.asList(config.getCommentSymbols());
         filesToScan = Arrays.asList(config.getFilesToScan());
         labelCountFile = new File(config.getAnalysisResult());
         labelCountFileAbsPath = Paths.get(labelCountFile.getAbsolutePath());
@@ -199,7 +199,7 @@ public class AnalysisScanner {
     }
 
     private boolean isComment(String line) {
-        return line.startsWith(commentSymbol)? true :false;
+        return commentSymbols.stream().anyMatch((s) -> line.startsWith(s));
     }
     
 
@@ -223,8 +223,15 @@ public class AnalysisScanner {
 
     public static void main(String[] args) {
 
-        System.out.println("Starting evaluation of solutions...");
-        Path properties = Path.of(System.getProperty("user.dir") + "/data/csharp.properties");
+        if (args.length != 1) {
+            System.out.println("Usage: java AnalysisScanner <solution>");
+            System.exit(1);
+        }
+
+        String solution = args[0];
+
+        System.out.println("Starting evaluation of " + solution + "...");
+        Path properties = Path.of(System.getProperty("user.dir") + "/data/" + solution + ".properties");
         Config config = new Config(properties);
 
         AnalysisScanner analysis = new AnalysisScanner(config);
@@ -233,16 +240,6 @@ public class AnalysisScanner {
 
         System.out.println("-------------------------------");
         System.out.println ("analyzed " + analysis.wordCt + " words in " + analysis.lineCt + " lines of " + analysis.fileCt + " files" );
-    
-        properties = Path.of(System.getProperty("user.dir") + "/data/neo-emoflon.properties");
-        config = new Config(properties);
-
-        analysis = new AnalysisScanner(config);
-
-        analysis.extractLabelsFromFiles();
-        System.out.println("-------------------------------");
-        System.out.println ("analyzed in emoflon " + analysis.wordCt + " words in " + analysis.lineCt + " lines of " + analysis.fileCt + " files" );
-    
     }
 
     /**

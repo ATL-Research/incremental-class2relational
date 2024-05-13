@@ -38,8 +38,14 @@
         return properties.getProperty(ANALYSIS_RESULT);
     }
     
-    public String getCommentSymbol() {
-        return this.properties.getProperty(COMMENT_SYMBOL);
+    public String[] getCommentSymbols() {
+        String symbolString = this.properties.getProperty(COMMENT_SYMBOL);
+        if (symbolString.startsWith("[")) {
+            return parseListString(symbolString);
+        }
+        else {
+            return new String[] {symbolString};
+        }
     }
 
     public String[] getFilesToScan() {
