@@ -5,29 +5,17 @@ import "Relational"
 import "Trace"
 import "http://www.eclipse.org/emf/2002/Ecore"
 
-/////////////////
-// Object mapping
-/////////////////
-
-/**
- * Integer type is needed if 
- * 	(a) the source model contains a class (id column is Integer), or
- * 	(b) There is an Integer DataType
- */
-// model navigation
+// MODEL_NAVIGATION
 pattern makeInteger(){
-	// model navigation
+	// MODEL_NAVIGATION
 	Class(_);
-// model navigation
+// MODEL_NAVIGATION
 } or {
-	// model navigation
+	// MODEL_NAVIGATION
 	DataType.name(_,"Integer");
 }
 
-/**
- * Other DataTypes to be mapped to Type
- */
-// model navigation
+// MODEL_NAVIGATION
 pattern fromDataType(dtype: DataType){
 	// model navigation
 	DataType.name(dtype,name);
@@ -35,229 +23,178 @@ pattern fromDataType(dtype: DataType){
 	name != "Integer";
 }
 
-/**
- * Classes that need to be mapped
- */
-// model navigation
+// MODEL_NAVIGATION
 pattern fromClass(named: NamedElt){
-	// model navigation
+	// MODEL_NAVIGATION
 	Class(named);
 }
 
-/**
- * Multi-valued attributes to be mapped
- */
-// model navigation
+// MODEL_NAVIGATION
 pattern fromAttribute2Table(named: Attribute) {
-	// model navigation
+	// MODEL_NAVIGATION
 	Attribute.multiValued(named,true);
-	// model navigation
+	// MODEL_NAVIGATION
 	Attribute.owner(named,_);
-	// model navigation
+	// MODEL_NAVIGATION
 	Attribute.type(named,_);
 }
 
-/**
- * Single valued attributes to be mapped
- */	
-// model navigation
+// MODEL_NAVIGATION
 pattern fromAttribute2Column(named: Attribute) {
-	// model navigation
+	// MODEL_NAVIGATION
 	Attribute.multiValued(named,false);
-	// model navigation
+	// MODEL_NAVIGATION
 	Attribute.owner(named,_);
-	// model navigation
+	// MODEL_NAVIGATION
 	Attribute.type(named,_);
 }
 
-///////////////////
-// Property mapping
-///////////////////
-
-/**
- * Determine the names of the mapped objects
- */
 // transformation
 pattern namedMap(named: Named, name: java String){
-	//Names for mapped DataTypes
-	//NOTE: Integer is not mapped
-	// model navigation
+	// MODEL_NAVIGATION
 	DataType.name(dtype,name);
-	// trace
+	// TRACING
 	find traceMapping(dtype,_,0,named);
 // transformation
 } or {
-	//If a Class if mapped to a Table
-	//Table name
-	// model navigation
+
+	// MODEL_NAVIGATION
 	Class(class);
-	// trace
+	// TRACING
 	find traceMapping(class,_,0,named); //Index 0 is the table
-	// model navigation
+	// MODEL_NAVIGATION
 	Class.name(class,name);
 // transformation	
 } or {
-	//If a Class if mapped to a Table
-	//Id column name
-	// model navigation
+	// MODEL_NAVIGATION
 	Class(class);
-	// trace
+	// TRACING
 	find traceMapping(class,_,1,named); //Index 1 is the id column
-	// model navigation
+	// MODEL_NAVIGATION
 	Column(named);
 	// transformation
 	name == "objectId";
 //transformation	
 } or {
-	//If an Attribute is mapped to a table
-	//Table name
-//	Attribute(attr);
-	// model navigation
+	// MODEL_NAVIGATION
 	Attribute.multiValued(attr,true);
-	// trace
+	// TRACING
 	find traceMapping(attr,_,0,named); //Index 0 is the table
-	// model navigation
+	// MODEL_NAVIGATION
 	Attribute.name(attr, aname);
-	// model navigation
+	// MODEL_NAVIGATION
 	Attribute.owner(attr,class);
-	// model navigation
+	// MODEL_NAVIGATION
 	Class.name(class,cname);
 	// transformation
 	name == eval(cname+'_'+aname);
 // transformation
 } or {
-	//If an Attribute is mapped to a table
-	//owner column name
-//	Attribute(attr);
-	// model navigation
+	// MODEL_NAVIGATION
 	Attribute.multiValued(attr,true);
-	// trace
+	// TRACING
 	find traceMapping(attr,_,1,named); //Index 1 is the id-column
-	// model navigation
+	// MODEL_NAVIGATION
 	Attribute.owner(attr,class);
-	// model navigation
+	// MODEL_NAVIGATION
 	Class.name(class,cname);
 	// transformation
 	name == eval(cname.toFirstLower+"Id");
 // transformation
 } or {
-	//If an Attribute is mapped to a table
-	//Value name
-//	Attribute(attr);
-	// model navigation
+	// MODEL_NAVIGATION
 	Attribute.multiValued(attr,true);
-	// trace
+	// TRACING
 	find traceMapping(attr,_,2,named); //Index 2 is the value column
-	// model navigation
+	// MODEL_NAVIGATION
 	Attribute.name(attr,aname);
-	// helper?
+	// Helper
 	find postName(attr,pname);
 	//transformation
 	name == eval(aname.toFirstLower+pname);
 //transformation
 } or {
-	//If an Attribute is mapped to a Column
-	//Column name
-//	Attribute(attr);
-	// model navigation
+
+	// MODEL_NAVIGATION
 	Attribute.multiValued(attr,false);
-	// trace
+	// TRACING
 	find traceMapping(attr,_,0,named);
-	// model navigation
+	// MODEL_NAVIGATION
 	Attribute.name(attr, aname);
-	// helper?
+	// helper
 	find postName(attr,pname);
 	// transformation
 	name == eval(aname+pname);
 }
 
-/**
- * Determine if column name for the attribute require Id suffix
- */
 // helper
 pattern postName(attr: Attribute, post: java String){
-	// model navigation
+	// MODEL_NAVIGATION
 	Attribute.type(attr, type);
-	// model navigation
+	// MODEL_NAVIGATION
 	Class(type);
-	// transformation, helper
+	// Transformation
 	post == "Id";
 // transformation
 } or {
-	// model navigation
+	// MODEL_NAVIGATION
 	Attribute.type(attr, type);
-	// model navigation
+	// MODEL_NAVIGATION
 	DataType(type);
-	// transformation, helper
+	// transformation 
 	post == "";
 }
 
-/**
- * Helper to access trace info
- */
- // helper
+// helper
 pattern traceMapping(source: EObject, trace: TraceEntry, idx: EInt, target: EObject){
-	// trace
+	// TRACING
 	TraceEntry.source(trace,source);
-	// trace
+	// TRACING
 	TraceEntry.target(trace,target);
-	// trace
+	// TRACING
 	TraceEntry.index(trace,idx);
 }
 
-/**
- * Determine the type of the column
- * 	(a) type is specified in the source model, or
- * 	(b) type is inferred (Integer)
- */
 // transformation
 pattern typeMapping(column: Column, type: Type){
 	// transformation
 	find specifiedTypeMapping(column,type);
 // transformation
 } or {
-	// model navigation
+	// MODEL_NAVIGATION
 	Column(column);
 	// transformation
 	neg find specifiedTypeMapping(column,_);
-	// model navigation
+	// MODEL_NAVIGATION
 	Type.name(type,"Integer");
 }
 
-/**
- * Type is specified
- * 	(a) objectId column has Integer type (for classes)
- * 	(b) source model specified a type for the column
- */
 // transformation
 pattern specifiedTypeMapping(column: Column, type: Type){
-	// model navigation
+	// MODEL_NAVIGATION
 	Column.name(column,"objectId");
-	// model navigation
+	// MODEL_NAVIGATION
 	Type.name(type,"Integer");
 // transformation
 } or {
-	// trace
-	find traceMapping(attr,_,index,column); //Traverse in reverse direction
-	// trace
-	index != 1; // single valued attribute (0), or value column (2)
-	// model navigation
+	// TRACING
+	find traceMapping(attr,_,index,column);
+	// TRACING
+	index != 1;
+	// MODEL_NAVIGATION
 	Attribute.type(attr,stype);
-	// model navigation
+	// MODEL_NAVIGATION
 	DataType.name(stype,typename);
-	// model navigation
+	// MODEL_NAVIGATION
 	Type.name(type,typename);
 }
 
-/**
- * Find traces and images that has no source.
- * (Model change removes the source from the trace too)
- */
-// trace
+
+// TRACING
 pattern sourcelessTrace(trace: TraceEntry, named: Named){
-	// trace
+	// TRACING
 	neg TraceEntry.source(trace, _);
-	// trace
+	// TRACING
 	TraceEntry.target(trace,named);
 }
 
