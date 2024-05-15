@@ -14,42 +14,59 @@ import "http://www.eclipse.org/emf/2002/Ecore"
  * 	(a) the source model contains a class (id column is Integer), or
  * 	(b) There is an Integer DataType
  */
+// model navigation
 pattern makeInteger(){
+	// model navigation
 	Class(_);
+// model navigation
 } or {
+	// model navigation
 	DataType.name(_,"Integer");
 }
 
 /**
  * Other DataTypes to be mapped to Type
  */
+// model navigation
 pattern fromDataType(dtype: DataType){
+	// model navigation
 	DataType.name(dtype,name);
+	// model navigation
 	name != "Integer";
 }
 
 /**
  * Classes that need to be mapped
  */
+// model navigation
 pattern fromClass(named: NamedElt){
+	// model navigation
 	Class(named);
 }
 
 /**
  * Multi-valued attributes to be mapped
  */
+// model navigation
 pattern fromAttribute2Table(named: Attribute) {
+	// model navigation
 	Attribute.multiValued(named,true);
+	// model navigation
 	Attribute.owner(named,_);
+	// model navigation
 	Attribute.type(named,_);
 }
 
 /**
  * Single valued attributes to be mapped
- */
+ */	
+// model navigation
 pattern fromAttribute2Column(named: Attribute) {
+	// model navigation
 	Attribute.multiValued(named,false);
+	// model navigation
 	Attribute.owner(named,_);
+	// model navigation
 	Attribute.type(named,_);
 }
 
@@ -60,82 +77,131 @@ pattern fromAttribute2Column(named: Attribute) {
 /**
  * Determine the names of the mapped objects
  */
+// transformation
 pattern namedMap(named: Named, name: java String){
 	//Names for mapped DataTypes
 	//NOTE: Integer is not mapped
+	// model navigation
 	DataType.name(dtype,name);
+	// trace
 	find traceMapping(dtype,_,0,named);
+// transformation
 } or {
 	//If a Class if mapped to a Table
 	//Table name
+	// model navigation
 	Class(class);
+	// trace
 	find traceMapping(class,_,0,named); //Index 0 is the table
-	Class.name(class,name);	
+	// model navigation
+	Class.name(class,name);
+// transformation	
 } or {
 	//If a Class if mapped to a Table
 	//Id column name
+	// model navigation
 	Class(class);
+	// trace
 	find traceMapping(class,_,1,named); //Index 1 is the id column
+	// model navigation
 	Column(named);
-	name == "objectId";	
+	// transformation
+	name == "objectId";
+//transformation	
 } or {
 	//If an Attribute is mapped to a table
 	//Table name
 //	Attribute(attr);
+	// model navigation
 	Attribute.multiValued(attr,true);
+	// trace
 	find traceMapping(attr,_,0,named); //Index 0 is the table
+	// model navigation
 	Attribute.name(attr, aname);
+	// model navigation
 	Attribute.owner(attr,class);
+	// model navigation
 	Class.name(class,cname);
+	// transformation
 	name == eval(cname+'_'+aname);
+// transformation
 } or {
 	//If an Attribute is mapped to a table
 	//owner column name
 //	Attribute(attr);
+	// model navigation
 	Attribute.multiValued(attr,true);
+	// trace
 	find traceMapping(attr,_,1,named); //Index 1 is the id-column
+	// model navigation
 	Attribute.owner(attr,class);
+	// model navigation
 	Class.name(class,cname);
+	// transformation
 	name == eval(cname.toFirstLower+"Id");
+// transformation
 } or {
 	//If an Attribute is mapped to a table
 	//Value name
 //	Attribute(attr);
+	// model navigation
 	Attribute.multiValued(attr,true);
+	// trace
 	find traceMapping(attr,_,2,named); //Index 2 is the value column
+	// model navigation
 	Attribute.name(attr,aname);
+	// helper?
 	find postName(attr,pname);
+	//transformation
 	name == eval(aname.toFirstLower+pname);
+//transformation
 } or {
 	//If an Attribute is mapped to a Column
 	//Column name
 //	Attribute(attr);
+	// model navigation
 	Attribute.multiValued(attr,false);
+	// trace
 	find traceMapping(attr,_,0,named);
+	// model navigation
 	Attribute.name(attr, aname);
+	// helper?
 	find postName(attr,pname);
+	// transformation
 	name == eval(aname+pname);
 }
 
 /**
  * Determine if column name for the attribute require Id suffix
  */
+// helper
 pattern postName(attr: Attribute, post: java String){
+	// model navigation
 	Attribute.type(attr, type);
+	// model navigation
 	Class(type);
+	// transformation, helper
 	post == "Id";
+// transformation
 } or {
+	// model navigation
 	Attribute.type(attr, type);
+	// model navigation
 	DataType(type);
+	// transformation, helper
 	post == "";
 }
 
 /**
  * Helper to access trace info
  */
+ // helper
 pattern traceMapping(source: EObject, trace: TraceEntry, idx: EInt, target: EObject){
+	// trace
 	TraceEntry.source(trace,source);
+	// trace
 	TraceEntry.target(trace,target);
+	// trace
 	TraceEntry.index(trace,idx);
 }
 
@@ -144,11 +210,17 @@ pattern traceMapping(source: EObject, trace: TraceEntry, idx: EInt, target: EObj
  * 	(a) type is specified in the source model, or
  * 	(b) type is inferred (Integer)
  */
+// transformation
 pattern typeMapping(column: Column, type: Type){
+	// transformation
 	find specifiedTypeMapping(column,type);
+// transformation
 } or {
+	// model navigation
 	Column(column);
+	// transformation
 	neg find specifiedTypeMapping(column,_);
+	// model navigation
 	Type.name(type,"Integer");
 }
 
@@ -157,14 +229,23 @@ pattern typeMapping(column: Column, type: Type){
  * 	(a) objectId column has Integer type (for classes)
  * 	(b) source model specified a type for the column
  */
+// transformation
 pattern specifiedTypeMapping(column: Column, type: Type){
+	// model navigation
 	Column.name(column,"objectId");
+	// model navigation
 	Type.name(type,"Integer");
+// transformation
 } or {
+	// trace
 	find traceMapping(attr,_,index,column); //Traverse in reverse direction
+	// trace
 	index != 1; // single valued attribute (0), or value column (2)
+	// model navigation
 	Attribute.type(attr,stype);
+	// model navigation
 	DataType.name(stype,typename);
+	// model navigation
 	Type.name(type,typename);
 }
 
@@ -172,8 +253,11 @@ pattern specifiedTypeMapping(column: Column, type: Type){
  * Find traces and images that has no source.
  * (Model change removes the source from the trace too)
  */
+// trace
 pattern sourcelessTrace(trace: TraceEntry, named: Named){
+	// trace
 	neg TraceEntry.source(trace, _);
+	// trace
 	TraceEntry.target(trace,named);
 }
 
