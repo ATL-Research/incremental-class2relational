@@ -4,8 +4,10 @@ import org.eclipse.emf.ecore.EObject;
 
 import c2r.version2.IncrementalC2R_v2;
 
+// Wrapper
 public class ViatraIncrementalSolution extends AbstractDriver {
     public static void main(String[] args) throws Exception {
+    	// SETUP
     	ViatraIncrementalSolution solution = new ViatraIncrementalSolution();
 
         solution.init();
