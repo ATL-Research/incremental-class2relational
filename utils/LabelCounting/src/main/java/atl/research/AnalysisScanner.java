@@ -3,9 +3,6 @@ package atl.research;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
-import java.nio.file.FileVisitResult;
-import java.nio.file.FileVisitor;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,97 +11,104 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Pattern;
+import java.util.Arrays;
+
+import java.nio.file.FileVisitResult;
+import java.nio.file.FileVisitor;
 
 /**
  * 
  */
 public class AnalysisScanner {
 
-    // statitical data
+    public static final boolean DEBUG = false;
+    
+    // statistical data
     long fileCt = 0;
     long lineCt = 0;
     long wordCt = 0;
     int chars = 0;
-    public static final boolean DEBUG = true;
-    public static final boolean DIRECT_FILE_MANIPULATION = false;
-    protected final File mappingFile;
-    protected final Path mappingFileAbsPath; 
 
-    public static final String NUMBER_REGEX = "\\[0..9]+.?[0..9]*";
+    // states of file analysis
+    protected int currentLine = 1;
+    protected String currentLabel = Labels.EMPTY_LABEL;
+    protected int currentLabelCount = 0;
+    protected int labelStartLine = 1;
+    
+    // solution-specific properties
+    protected static Path analyzedDirectory;
+    protected final File labelCountFile;
+    protected final Path labelCountFileAbsPath; 
+    protected String skippedSymbolsRegex = "";
+    protected List<String> commentSymbols = new LinkedList<String>();
+    protected List<String> filesToScan = new LinkedList<String>();
 
-    public AnalysisScanner(String mappingFilePath) {
-        mappingFile = new File(mappingFilePath);
-        mappingFileAbsPath = Paths.get(mappingFile.getAbsolutePath());
-        if (mappingFile.exists())
-            mappingFile.delete();
+
+    public AnalysisScanner(Config config) {
+        analyzedDirectory = config.getAnalysisDir();
+        skippedSymbolsRegex = config.skippedSymbolsRegex();
+        commentSymbols = Arrays.asList(config.getCommentSymbols());
+        filesToScan = Arrays.asList(config.getFilesToScan());
+        labelCountFile = new File(config.getAnalysisResult());
+        labelCountFileAbsPath = Paths.get(labelCountFile.getAbsolutePath());
+        setupLabelCountFile();
+    }
+
+    private void setupLabelCountFile() {
+        if (labelCountFile.exists())
+            labelCountFile.delete();
         
            try{
-                mappingFile.getParentFile().mkdirs();
-                mappingFile.createNewFile();
+               labelCountFile.getParentFile().mkdirs();
+               labelCountFile.createNewFile();
+
+               // create header
+               String header =  "File name, Transformation Aspect, Value, Lines\n";
+               Files.write(labelCountFileAbsPath, header.getBytes() , StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             }
             catch (IOException e) {
-                System.out.println("Could not create file " + mappingFilePath);
+                System.out.println("Could not create label-count file " + e);
             }
-        
     }
 
-    public static void main(String[] args) {
-
-        System.out.println("Starting evaluation of solutions...");
-        // solution folder
-        AnalysisScanner analysis = new AnalysisScanner("../../labels/nmf.csv");
-        List<String> files = analysis.extractFilesFromPath("../../solutions/nmf");
-        analysis.extractLabelsFormFiles(files);
-
-        System.out.println("-------------------------------");
-        System.out.println ("analyzed " + analysis.wordCt + " words in " + analysis.lineCt + " lines of " + analysis.fileCt + " files" );
-                
-    }
-
-    public void extractLabelsFormFiles(List<String> files) {
-        System.out.println("inputFile size " + files.size());
-    
-        for (String filePath : files) {
-            if (filePath.endsWith(Config.FILE_EXTENSIONS)) {
+    public void extractLabelsFromFiles() {
+        for (String fileString : filesToScan) {
+             Path filePath  = Paths.get(System.getProperty("user.dir") + "/" + analyzedDirectory + "/" + fileString);
+                if (Files.isDirectory(filePath)) {
+                    // iterate directory and add each file (!) to the list of filesToscan
+                    continue;
+                }
                 fileCt++;
                 System.out.println("-------------------------------");
-                System.out.println("scanning file " + filePath);
+                System.out.println("scanning file " + fileString);
+                resetFileCounters();
+                // add name of file to csv for tracing/logging reasons
                 try{
-                    Files.write(mappingFileAbsPath, (filePath + "\n").getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                    scanTrafoFile(filePath);
                 } catch(IOException e ) {
-                    System.out.println("couldnt append the file name of " + filePath);
+                    System.out.println("couldnt append the file name of " + fileString);
                 }
-                scanTrafoFile(filePath);
-            }
         }
     }
 
-    public void scanTrafoFile(String filepath) {
+    public void scanTrafoFile(Path filepath) throws IOException {
+        currentLine = 1;
         Scanner in;
         try {
-            in = new Scanner(new File(filepath));
-            
-            if (DIRECT_FILE_MANIPULATION) {
-                String previousLine = "";
-                for (int i = 1; in.hasNextLine(); i++) {
-                    String line = in.nextLine();
-                    if (line.length() > 0)
-                    lineCt++;				
-                 //   processLine(in, line, previousLine);
-                    previousLine = line;
+            in = new Scanner(new File(filepath.toString()));
+            while (in.hasNextLine()) {
+                String line = in.nextLine();
+                lineCt++;
+                if (line.length() > 0) {
+                    processLine(in, line, filepath.getFileName().toString());
                 }
-            }
-            else {
-                for (int i = 1; in.hasNextLine(); i++) {
-                    String line = in.nextLine();
-                    if (line.length() > 0){
-                        lineCt++;
-                        processLine(in, line, i);
-                    }
-                }
+                currentLine++;
             }
             in.close();
+
+            // add analysis of last line
+            String csvLine = filepath.getFileName().toString() + "," + currentLabel + "," + currentLabelCount + "," + labelStartLine + "-" + currentLine + "\n";
+            Files.write(labelCountFileAbsPath, csvLine.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);        
         } catch (FileNotFoundException e) {
      
             e.printStackTrace();
@@ -112,60 +116,92 @@ public class AnalysisScanner {
             
     }
 
-    public void processLine(Scanner in, String line, int lineNo) {
-        line = line.stripLeading();
-        line  = line.replaceAll(Config.IGNORED_TOKENS, " ");
-        line = line.replaceAll("\\s+", " ");
-        
-        System.out.println("process line: " + line);
-        
-        try{
-            if (!isComment(line) && !isLibImport(line)) {
-                Files.write(mappingFileAbsPath, (lineNo + ",").getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-                String[] wordArray = line.split(" ");
-        
-                if (DEBUG) {
-                    System.out.println(line + " \t consists of " + wordArray.length + " words");
-                }
-                Files.write(mappingFileAbsPath, (wordArray.length + "\n").getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-                wordCt += wordArray.length;
-            }
-            if (isComment(line))
-                Files.write(mappingFileAbsPath, (lineNo+ ",COMMENT \n").getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+    public void processLine(Scanner in, String line, String filepath) throws IOException {
+        if (!line.isEmpty()) {
+            // preprocessing of String for counting
+            line = line.stripLeading();
+            line = line.replaceAll("\"([^\"]|\\\")*\"", "a"); //TODO replace by configurable comments
+  
+            line  = line.replaceAll(skippedSymbolsRegex, " ");
+            line = line.replaceAll("\\s+", " ");
+            String preprocessed = line; 
             
+            try{
+                String[] wordArray = preprocessed.split(" ");
+                if (!isComment(preprocessed)) {
+                    if (DEBUG) {
+                        System.out.println(line + " \t consists of " + wordArray.length + " words");
+                    }
+                    currentLabelCount += wordArray.length; 
+                    wordCt += wordArray.length;
+                }
+                if (isComment(preprocessed) && wordArray.length > 1 ) {
+                    switch (wordArray[1].toUpperCase()) {
+                        case Labels.TRANSFORMATION_LABEL: 
+                            if (currentLabel != Labels.TRANSFORMATION_LABEL) {
+                                updateLabels(Labels.TRANSFORMATION_LABEL,filepath);
+                            } 
+                            break;
+                        case Labels.TRAVERSAL_LABEL: 
+                        case Labels.NAVIGATION_LABEL:
+                            if (currentLabel != Labels.TRAVERSAL_LABEL) {
+                                updateLabels(Labels.TRAVERSAL_LABEL,filepath);
+                            } 
+                            break;
+                        
+                        
+                        case Labels.SETUP_LABEL: 
+                            if (currentLabel != Labels.SETUP_LABEL) {
+                                updateLabels(Labels.SETUP_LABEL,filepath);
+                            } break;
+                        
+                        
+                        case Labels.TRACING_LABEL: 
+                        if (currentLabel!= Labels.TRACING_LABEL) {
+                        updateLabels(Labels. TRACING_LABEL,filepath); 
+                        }
+                        break;
+                        
+                        case Labels.CHANGE_IDENTIFICATION: 
+                            if (currentLabel != Labels.CHANGE_IDENTIFICATION) {
+                                updateLabels(Labels.CHANGE_IDENTIFICATION,filepath);
+                            } break;
+                        
+                        case Labels.HELPER_LABEL: {
+                            if (currentLabel != Labels.HELPER_LABEL) {
+                                updateLabels(Labels.HELPER_LABEL,filepath);
+                            } break;
+                        }
+                        case Labels.WRAPPER_LABEL: {
+                            if (currentLabel != Labels.WRAPPER_LABEL) {
+                                updateLabels(Labels.WRAPPER_LABEL,filepath);
+                            } break;
+                        }
+                    }
+                }
+            }
+            catch (IOException e) {
+                System.out.println("couldnt append numbers of " + line);
+            }
         }
-        catch(IOException e ) {
-            System.out.println("couldnt append numbers of " + line);
-        }
+    }
+
+    private void updateLabels(String newLabel, String filepath) throws IOException {
+        String csvLine = filepath +"," + currentLabel + "," + currentLabelCount + "," + labelStartLine + "-"+ currentLine + "\n";
+        Files.write(labelCountFileAbsPath, csvLine.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        currentLabel= newLabel;
+        currentLabelCount = 0;
+        labelStartLine = currentLine + 1;
     }
 
     private boolean isComment(String line) {
-        if (line.startsWith(Config.COMMENT_SYMBOL))
-            System.out.println("Line is a comment " + line);
-        return line.startsWith(Config.COMMENT_SYMBOL)? true :false;
+        return commentSymbols.stream().anyMatch((s) -> line.startsWith(s));
     }
     
-    private boolean isLibImport(String line) {
-        if (line.startsWith(Config.LIB_IMPORT))
-            System.out.println("Line is a lib import " + line);
-        return line.startsWith(Config.LIB_IMPORT)? true :false;
-    }
-
-    // private boolean isLabeled(String prevLine) {
-    //     if (Pattern.matches(Config.LABELS, prevLine.toUpperCase()))
-    //         System.out.println("Line is labeled " + prevLine);
-    //     return Pattern.matches(Config.LABELS, prevLine.toUpperCase());
-    // }
-
-    private boolean hasNoLabelCount(String prevLine) {
-        if (!prevLine.endsWith(NUMBER_REGEX))
-            System.out.println("Has no label " + prevLine);
-        return prevLine.endsWith(NUMBER_REGEX)? true :false;
-    }
 
     public List<String> extractFilesFromPath(String path) {
 
-        List<String> mvFiles = new LinkedList<String>();
+        List<String> filesToScan = new LinkedList<String>();
         // get all files in directory
         FileIterator<Path> fiMV = new FileIterator<Path>();
         try {
@@ -175,11 +211,42 @@ public class AnalysisScanner {
         }
         // store the files
         for (Path srcFile : fiMV.getRegFiles()) {
-            String fileName = srcFile.getFileName().toString();
-                mvFiles.add(srcFile.toString());
-            // }
+            System.out.println(srcFile.toString());
+            filesToScan.add(srcFile.toString());
         }
-        return mvFiles;
+        return filesToScan;
+    }
+
+    public static void main(String[] args) {
+
+        if (args.length != 1) {
+            System.out.println("Usage: java AnalysisScanner <solution>");
+            System.exit(1);
+        }
+
+        String solution = args[0];
+
+        System.out.println("Starting evaluation of " + solution + "...");
+        Path properties = Path.of(System.getProperty("user.dir") + "/data/" + solution + ".properties");
+        Config config = new Config(properties);
+
+        AnalysisScanner analysis = new AnalysisScanner(config);
+
+        analysis.extractLabelsFromFiles();
+
+        System.out.println("-------------------------------");
+        System.out.println ("analyzed " + analysis.wordCt + " words in " + analysis.lineCt + " lines of " + analysis.fileCt + " files" );
+    }
+
+    /**
+     * resets the counters for each file -> move the state of the scanning to the beginning 
+     * (Empty label, currentLine =1, no counts yet)
+     */
+    protected void resetFileCounters() {
+        currentLine = 1;
+        currentLabel = Labels.EMPTY_LABEL;
+        currentLabelCount = 0;
+        labelStartLine = 1;
     }
 }
 
@@ -207,8 +274,6 @@ class FileIterator<Path> implements FileVisitor<Path> {
     public List<Path> getRegFiles() {
         return regFiles;
     }
-
-
 
     @Override
     public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {

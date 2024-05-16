@@ -1,24 +1,63 @@
-package atl.research;
+ package atl.research;
+ 
+ import java.io.IOException;
+ import java.io.Reader;
+ import java.nio.file.Files;
+ import java.nio.file.Path;
+ import java.util.Properties;
 
-public class Config {
+ public class Config {
     
-    public static final String COMMENT_SYMBOL = "//"; //lines starting with this sequence, will be marked as comment and not counted
-    public static final String LIB_IMPORT = "using"; //lines starting with this word, will be skipped
+    public static final String ANALYSIS_DIR = "solution.analysis-dir";  // these tokens will be replaced by a whitespace
+    public static final String ANALYSIS_RESULT = "solution.analysis-result";  // these tokens will be replaced by a whitespace
+    public static final String SKIPPED_SYMBOLS_REGEX = "solution.skipped-symbols-regex";  // these tokens will be replaced by a whitespace
+    public static final String COMMENT_SYMBOL = "solution.comment-symbol";  // these tokens will be replaced by a whitespace
+    public static final String FILES_TO_SCAN = "solution.files-to-scan";  // these tokens will be replaced by a whitespace
+     
+    private final Properties properties;
     
-    public static final String IGNORED_TOKENS = "[;|=|\\*| =>|. |::| \\( | \\)]";  // these tokens will be replaced by a whitespace
-    public static final String IGNORED_DIRS = "src-gen";  //  directories with the specified names will be ignored when counting labels
-    public static final String FILE_EXTENSIONS = "cs";  //  files for which the labels are provided
-    
-    // labels ->not needed currently
+    public Config(Path pathToProperties) {
+        properties = new Properties();
 
-    // public static final String LABELS = "TRANSFORMATION|LABEL|HELPER"; 
-    // public static final String TRANSFORMATION_LABEL ="Transformation";
-    // public static final String TRAVERSAL_LABEL ="Model Traversal";
-    // public static final String HELPER_LABEL ="Helper";
-    // public static final String TRACING_LABEL = "Tracing";
-    // public static final String CHANGE_IDENTIFICATION = "Change Identification";
-    // public static final String CHANGE_PROPAGATION = "Change Propagation";
+        try (final Reader reader = Files.newBufferedReader(pathToProperties)) {
+            properties.load(reader);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     
+    public String skippedSymbolsRegex() {
+        return (this.properties.getProperty(SKIPPED_SYMBOLS_REGEX));
+    }
+
+    public Path getAnalysisDir() {
+        return Path.of(this.properties.getProperty(ANALYSIS_DIR));
+    }
+    public String getAnalysisResult() {
+        // return Path.of(this.properties.getProperty(ANALYSIS_RESULT));
+        return properties.getProperty(ANALYSIS_RESULT);
+    }
     
+    public String[] getCommentSymbols() {
+        String symbolString = this.properties.getProperty(COMMENT_SYMBOL);
+        if (symbolString.startsWith("[")) {
+            return parseListString(symbolString);
+        }
+        else {
+            return new String[] {symbolString};
+        }
+    }
+
+    public String[] getFilesToScan() {
+        return parseListString(this.properties.getProperty(FILES_TO_SCAN));
+    }
+
+        private static String[] parseListString(String str) {
+            return str.substring(1, str.length() - 1).split(",");
+            // String[] result = new String[tokens.length];
+            // for (int i = 0; i < tokens.length; i++) {
+            //     result[i] = Double.parseDouble(tokens[i].trim());
+            // }
+            // return result;
+        }
 }
-    

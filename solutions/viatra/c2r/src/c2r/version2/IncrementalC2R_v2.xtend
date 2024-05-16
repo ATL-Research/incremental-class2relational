@@ -23,205 +23,263 @@ import c2r.version2.TraceMapping.Match
 import org.eclipse.viatra.transformation.runtime.emf.rules.eventdriven.EventDrivenTransformationRule
 import java.util.List
 
+// Wrapper
 class IncrementalC2R_v2 {
+	// Setup
 	extension Relational_Factory = Relational_Factory.eINSTANCE
 
-	/* Transformation-related extensions */
+	// Helper
 	extension EventDrivenTransformation transformation
 
-	/* Transformation rule-related extensions */
+	// Helper
 	extension EventDrivenTransformationRuleFactory = new EventDrivenTransformationRuleFactory
+	
+	// Helper
 	extension IModelManipulations manipulation
 
+	// Helper
 	protected ViatraQueryEngine engine
+	
+	// Setup
 	protected Resource target
+	// Setup
 	protected Resource trace
-
+	// Setup
 	new(ResourceSet set, Resource target) {
+		// TRACING
 		TracePackage.eINSTANCE.class
-
+		// Setup
 		this.target = target
+		// TRACING
 		this.trace = set.createResource(URI.createFileURI("Trace.tmp.xmi"))
-
+		// Setup
 		engine = ViatraQueryEngine.on(new EMFScope(set));
-		
+		// Transformation
 		intType = createType()
+		// Transformation
 		intType.name = "Integer"
-		
+		// Setup
 		createTransformation
 	}
-
+	// Helper
 	val Type intType
 
+	// Setup
 	private def createTransformation() {
-		// Initialize model manipulation API
+		// Setup
 		this.manipulation = new SimpleModelManipulations(engine)
 		
-		// List of rules, in order of priority (from most important to least)
+		// Helper
 		val List<EventDrivenTransformationRule<?, ?>> rules = #[
+			// Setup
 			createCleanupRule,
+			// Setup
 			createMakeIntegerRule,
+			// Setup
 			createDataTypeMappingRule,
+			// Setup
 			createClassMappingRule,
+			// Setup
 			createAttribute2ColumnMappingRule,
+			// Setup
 			createAttribute2TableMappingRule,
+			// Setup
 			createNameChangeRule,
+			// Setup
 			createTypeChangeRule
+		// Helper
 		]
 		
-		/**
-		 * Set priorities for execution
-		 * Lower (number) priority first
-		 * disappearing rules are inverted (i.e. negative) 
-		 */
+		// Setup
 		val fixedPriorityResolver = new InvertedDisappearancePriorityConflictResolver
-		rules.forEach[rule, index| 
+		// Setup
+		rules.forEach[rule, index|
+			// Setup 
 			fixedPriorityResolver.setPriority(rule.ruleSpecification,index+1);
+		// Setup
 		]
 		
-		// Initialize event-driven transformation
+		// Setup
 		transformation = rules.fold(
+			// Setup
 			EventDrivenTransformation.forEngine(engine)
+			// Setup
 				.setConflictResolver(fixedPriorityResolver),
+				// Setup
 			[builder, rule | 
+				// Setup
 				builder.addRule(rule)
+				// Setup
 			]
+		// Setup
 		).build
-		
+		// Setup
 		transformation.executionSchema.startUnscheduledExecution
 	}
-
-	/**
-	 * 
-	 */
+	
+	// Transformation
 	def createCleanupRule() {
+		// CHANGE_IDENTIFICATION
 		return createRule(SourcelessTrace.Matcher.querySpecification).action(CRUDActivationStateEnum.CREATED) [
-			println("sourcelessTrace[create]: " + it.trace)
+			// TRACING
 			it.trace.remove
+			// TRANSFORMATION
 			it.named.remove
+		// Setup
 		].addLifeCycle(Lifecycles.getDefault(true, true)).build
 	}
-	
+	// transformation
 	def createNameChangeRule() {
+		// CHANGE_IDENTIFICATION
 		return createRule(NamedMap.Matcher.querySpecification).action(CRUDActivationStateEnum.CREATED) [
-			println("nameRule[set]: " + named.name + " <--- " + name)
+			// TRANSFORMATION
 			named.name = name
+		// CHANGE_IDENTIFICATION
 		].action(CRUDActivationStateEnum.DELETED) [
-			println("nameRule[unset]: " + named.name + " <--- null")
+			// TRANSFORMATION
 			named.name = null
+		//SETUP
 		].addLifeCycle(Lifecycles.getDefault(true, true)).build
 	}
-
+	// transformation
 	def createTypeChangeRule() {
+		// CHANGE_IDENTIFICATION
 		return createRule(TypeMapping.Matcher.querySpecification).action(CRUDActivationStateEnum.CREATED) [
-			println("typeRule[set]: " + column.name + " <--- " + type.name)
+			// TRANSFORMATION
 			column.type = type
+		// Setup
 		].addLifeCycle(Lifecycles.getDefault(true, true)).build
 	}
-
+	// transformation
 	def createMakeIntegerRule() {
+		// CHANGE_IDENTIFICATION
 		return createRule(MakeInteger.Matcher.querySpecification).action(CRUDActivationStateEnum.CREATED) [
-			println("makeIntRule[create]")
+			// TRANSFORMATION
 			target.contents.add(intType)
+		// CHANGE_IDENTIFICATION
 		].action(CRUDActivationStateEnum.DELETED) [
-			println("makeIntRule[remove]")
-			target.contents.remove(intType)//FIXME potential error
+			// TRANSFORMATION
+			target.contents.remove(intType)
+		// Setup
 		].addLifeCycle(Lifecycles.getDefault(true, true)).build
 	}
-
+	// transformation
 	def createDataTypeMappingRule() {
+		// CHANGE_IDENTIFICATION
 		return createRule(FromDataType.Matcher.querySpecification).action(CRUDActivationStateEnum.CREATED) [
-			println("fromDataTypeRule[create] " + dtype.name)
+			// TRANSFORMATION
 			val type = createType
-
+			// TRACING
 			makeTrace(dtype, type, 0)
-
+			// TRANSFORMATION
 			target.contents.add(type)
-
-//		].action(CRUDActivationStateEnum.DELETED) [
-//			println("fromDataTypeRule[remove] " + dtype.name)
-//			dtype.removeImages
+		// Setup
 		].addLifeCycle(Lifecycles.getDefault(true, true)).build
 	}
-
+	// transformation
 	def createClassMappingRule() {
+		// CHANGE_IDENTIFICATION
 		return createRule(FromClass.Matcher.querySpecification).action(CRUDActivationStateEnum.CREATED) [
-			println("FromClassRule[create] " + named.name)
+			// TRANSFORMATION
 			val table = createTable
+			// TRANSFORMATION
 			val idcolumn = createColumn
-
+			// TRACING
 			makeTrace(named, idcolumn, 1)
+			// TRACING
 			makeTrace(named, table, 0)
-
+			// TRANSFORMATION
 			addColumnToTable(table, idcolumn)
+			// TRANSFORMATION
 			table.key.add(idcolumn)
-
+			// TRANSFORMATION
 			target.contents.add(table)
-//		].action(CRUDActivationStateEnum.DELETED) [
-//			println("FromClassRule[remove] " + named.name)
-//			named.removeImages
+		// Setup
 		].addLifeCycle(Lifecycles.getDefault(true, true)).build
 	}
-
+	// transformation
 	def createAttribute2TableMappingRule() {
+		// CHANGE_IDENTIFICATION
 		return createRule(FromAttribute2Table.Matcher.querySpecification).action(CRUDActivationStateEnum.CREATED) [
-			println("fromAttribute2TableRule[create] " + named.name)
+			// TRANSFORMATION
 			val table = createTable
+			// TRANSFORMATION
 			val idcolumn = createColumn
+			// TRANSFORMATION
 			val valuecolumn = createColumn
-
+			// TRACING
 			makeTrace(named, idcolumn, 1)
+			// TRACING
 			makeTrace(named, valuecolumn, 2)
+			// TRACING
 			makeTrace(named, table, 0)
-
+			// TRANSFORMATION
 			addColumnToTable(table, idcolumn)
+			// TRANSFORMATION
 			addColumnToTable(table, valuecolumn)
-
+			// TRANSFORMATION
 			target.contents.add(table)
+		// CHANGE_IDENTIFICATION
 		].action(CRUDActivationStateEnum.DELETED) [
-			println("fromAttribute2TableRule[remove] " + named.name)
+			// TRANSFORMATION
 			named.removeTraceQueryImages
+		// Setup
 		].addLifeCycle(Lifecycles.getDefault(true, true)).build
 	}
-
+	// transformation
 	def createAttribute2ColumnMappingRule() {
+		// CHANGE_IDENTIFICATION
 		return createRule(FromAttribute2Column.Matcher.querySpecification).action(CRUDActivationStateEnum.CREATED) [
-			println("fromAttribute2ColumnRule[create] " + named.name)
+			// TRANSFORMATION
 			val column = createColumn
-
+			// TRACING
 			makeTrace(named, column, 0)
-
+			// MODEL_NAVIGATION
 			val table = named.owner.traceQueryImage.findFirst[it.target instanceof Table].target as Table 
-
+			// TRANSFORMATION
 			addColumnToTable(table, column)
+		// CHANGE_IDENTIFICATION
 		].action(CRUDActivationStateEnum.DELETED) [
-			println("fromAttribute2ColumnRule[remove] " + named.name)
+			// TRANSFORMATION
 			named.removeTraceQueryImages
+		// Setup
 		].addLifeCycle(Lifecycles.getDefault(true, true)).build
 	}
-	
+	// helper
 	def traceQueryImage(EObject source) {
+		// helper
 		val matcher = TraceMapping.Matcher.on(engine)
+		// TRACING
 		return matcher.getAllMatches(matcher.newMatch(source, null, null, null))
 	}
-	
+	// helper
 	def removeTraceQueryImages(EObject source) {
+		// TRACING
 		source.traceQueryImage.forEach([match | 
+			// TRACING
 			match.target.remove
+			//TRACING
 			match.trace.remove
 		])
 	}
-	
+	// Helper
 	def makeTrace(EObject source, EObject target, int index) {
+		// TRACING
 		val traceEntry = TraceFactory.eINSTANCE.createTraceEntry
+		// TRACING
 		traceEntry.source = source
+		// TRACING
 		traceEntry.target = target
+		// TRACING
 		traceEntry.index = index
+		// TRACING
 		trace.contents.add(traceEntry)
 	}
-
+	// TRANSFORMATION
 	def addColumnToTable(Table table, Column column) {
+		// TRANSFORMATION
 		table.col.add(column)
+		// TRANSFORMATION
 		column.owner = table
 	}
 }

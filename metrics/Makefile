@@ -1,21 +1,20 @@
-FOLDERS := $(wildcard */)
-SCRIPTS := $(addsuffix -extract-metric-data.sh,$(notdir $(FOLDERS:/=)))
+FOLDERS := $(wildcard ../solutions/*/)
+FIGURES := $(addprefix plots/, $(addsuffix .pdf,$(notdir $(FOLDERS:/=))))
 
 .PHONY: all
 
-all: $(SCRIPTS)
-	@echo "Executing R script"
-	R -f generate-plots.r BATCH
+all: $(FIGURES)
 
-%-extract-metric-data.sh:
-	@if [ -f $(subst -extract-metric-data.sh,,$@)/$@ ]; then \
-		echo "Executing script in $(subst -extract-metric-data.sh,,$@)/$@"; \
-		cd $(subst -extract-metric-data.sh,,$@) && sh $@; \
-	else \
-		echo "Script $(subst -extract-metric-data.sh,,$@)/$@ not found. Skipping."; \
-	fi
+plots/%.pdf: ../labels/%.csv
+	@echo "Generating figure for $(subst plots/,,$*).."
+	@Rscript generate-plots.r $(subst plots/,,$*)	
+
+../labels/%.csv:
+	@echo "Generating labels for $(subst ../labels/,,$*).."
+	@cd ../utils/LabelCounting && ./gradlew -q run --args='$(subst ../labels/,,$*)'
 
 clean:
 	@echo "Cleaning up..."
 	rm -f plots/*
+	rm -f ../labels/*
 	find . -name '*.csv' -delete

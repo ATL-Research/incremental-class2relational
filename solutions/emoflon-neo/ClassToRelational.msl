@@ -14,13 +14,13 @@ tripleGrammar ClassToRelational {
 		// Setup 1
 		class_
 	}
-	
+
 	// Setup 1
 	target {
 		// Setup 1
 		relational_
 	}
-	
+
 	// Setup 1
 	correspondence {
 		// Tracing 3
@@ -34,7 +34,7 @@ tripleGrammar ClassToRelational {
 		// Tracing 3
 		Class <- ClassToType -> Type
 	}
-	
+
 	// Setup 1
 	rules {
 		// Setup 1
@@ -67,14 +67,14 @@ tripleRule ClassToTable : ClassToRelational {
 			// Transformation 2
 			.name := <className>
 		}
-		
+
 		// Model Traversal 2
 		integerType : DataType {
 			// Model Traversal 2
 			.name : "Integer"
 		}
 	}
-	
+
 	// Setup 1
 	target {
 		// Transformation 3
@@ -97,14 +97,14 @@ tripleRule ClassToTable : ClassToRelational {
 			// Transformation 3
 			++-keyOf->table
 		}
-		
+
 		// Model Traversal 2
 		integer : Type {
 			// Model Traversal 2
 			.name : "Integer"
 		}
 	}
-	
+
 	// Setup 1
 	correspondence {
 		// Tracing 4
@@ -124,7 +124,7 @@ tripleRule DataTypeToType : ClassToRelational {
 			.name := <typeName>
 		}
 	}
-	
+
 	// Setup 1
 	target {
 		// Transformation 3
@@ -133,7 +133,7 @@ tripleRule DataTypeToType : ClassToRelational {
 			.name := <typeName>
 		}
 	}
-	
+
 	// Setup 1
 	correspondence {
 		// Tracing 4 
@@ -150,7 +150,7 @@ tripleRule PrimitiveAttributeToColumn : ClassToRelational {
 			// Transformation 3
 			++-attr->attribute
 		}
-		
+
 		// Transformation 3
 		++ attribute : Attribute {
 			// Transformation 2
@@ -162,11 +162,11 @@ tripleRule PrimitiveAttributeToColumn : ClassToRelational {
 			// Transformation 3
 			++-type->attrType
 		}
-		
+
 		// Model Traversal 2
 		attrType : DataType
 	}
-	
+
 	// Setup 1
 	target { 
 		// Model Traversal 2
@@ -174,7 +174,7 @@ tripleRule PrimitiveAttributeToColumn : ClassToRelational {
 			// Transformation 3
 			++-col-> column
 		}
-		
+
 		// Transformation 3
 		++ column : Column {
 			// Transformation 2
@@ -188,7 +188,7 @@ tripleRule PrimitiveAttributeToColumn : ClassToRelational {
 		// Model Traversal 2
 		colType : Type
 	}
-	
+
 	// Setup 1
 	correspondence {
 		// Tracing 3
@@ -209,7 +209,7 @@ tripleRule ClassAttributeToColumn : ClassToRelational {
 			// Transformation 3
 			++-attr->attribute
 		}
-		
+
 		// Transformation 3
 		++ attribute : Attribute {
 			// Transformation 2
@@ -221,11 +221,11 @@ tripleRule ClassAttributeToColumn : ClassToRelational {
 			// Transformation 3
 			++-type->attrType
 		}
-		
+
 		// Model Traversal 2
 		attrType : Class
 	}
-	
+
 	// Setup 1
 	target { 
 		// Model Traversal 2
@@ -233,7 +233,7 @@ tripleRule ClassAttributeToColumn : ClassToRelational {
 			// Transformation 3
 			++-col-> column
 		}
-		
+
 		// Transformation 3
 		++ column : Column {
 			// Transformation 2
@@ -243,14 +243,14 @@ tripleRule ClassAttributeToColumn : ClassToRelational {
 			// Transformation 3
 			++-owner->table
 		}
-		
+
 		// Model Traversal 2
 		integer : Type {
 			// Model Traversal 2
 			.name : "Integer"
 		}
 	}
-	
+
 	// Setup 1
 	correspondence {
 		// Tracing 3
@@ -258,7 +258,7 @@ tripleRule ClassAttributeToColumn : ClassToRelational {
 		// Tracing 4
 		++attribute <-:AttributeToColumn->column
 	}
-	
+
 	// Setup 1
 	attributeConstraints {
 		// Tracing 1
@@ -282,7 +282,7 @@ tripleRule ClassAttributeToColumnNonInjective : ClassToRelational {
 			// Transformation 3
 			++-attr->attribute
 		}
-		
+
 		// Transformation 3
 		++ attribute : Attribute {
 			// Transformation 2
@@ -295,7 +295,7 @@ tripleRule ClassAttributeToColumnNonInjective : ClassToRelational {
 			++-type->class
 		}		
 	}
-	
+
 	// Setup 1
 	target { 
 		// Model Traversal 2
@@ -303,7 +303,7 @@ tripleRule ClassAttributeToColumnNonInjective : ClassToRelational {
 			// Transformation 3
 			++-col-> column
 		}
-		
+
 		// Transformation 3
 		++ column : Column {
 			// Transformation 2
@@ -313,14 +313,14 @@ tripleRule ClassAttributeToColumnNonInjective : ClassToRelational {
 			// Transformation 3
 			++-owner->table
 		}
-		
+
 		// Model Traversal 2
 		integer : Type {
 			// Model Traversal 2
 			.name : "Integer"
 		}
 	}
-	
+
 	// Setup 1
 	correspondence {
 		// Tracing 3
@@ -328,7 +328,7 @@ tripleRule ClassAttributeToColumnNonInjective : ClassToRelational {
 		// Tracing 4
 		++attribute <-:AttributeToColumn->column
 	}
-	
+
 	// Setup 1
 	attributeConstraints {
 		// Tracing 1
@@ -353,7 +353,7 @@ tripleRule PrimitiveAttributeToTable : ClassToRelational {
 			.name : <className>
 			++-attr->attribute
 		}
-		
+
 		// Transformation 3
 		++ attribute : Attribute {
 			// Transformation 2
@@ -365,11 +365,11 @@ tripleRule PrimitiveAttributeToTable : ClassToRelational {
 			// Transformation 3
 			++-type->attrType
 		}
-		
+
 		// Model Traversal 2
 		attrType : DataType
 	}
-	
+
 	// Setup 1
 	target {
 		// Transformation 3
@@ -381,7 +381,7 @@ tripleRule PrimitiveAttributeToTable : ClassToRelational {
 			// Transformation 3
 			++-col->id
 		}
-		
+
 		// Transformation 3
 		++ id : Column {
 			// Transformation 2
@@ -391,7 +391,7 @@ tripleRule PrimitiveAttributeToTable : ClassToRelational {
 			// Transformation 3
 			++-owner->table
 		}
-		
+
 		// Transformation 3
 		++ column : Column {
 			// Transformation 2
@@ -401,17 +401,17 @@ tripleRule PrimitiveAttributeToTable : ClassToRelational {
 			// Transformation 3
 			++-type->colType
 		}
-		
+
 		// Model Traversal 2
 		colType : Type
-		
+
 		// Model Traversal 2
 		integer : Type {
 			// Model Traversal 2
 			.name : "Integer"
 		}
 	}
-	
+
 	// Setup 1
 	correspondence {
 		// Tracing 4
@@ -420,7 +420,7 @@ tripleRule PrimitiveAttributeToTable : ClassToRelational {
 		attrType <-:DateTypeToType->colType
 		
 	}
-	
+
 	// Setup 1
 	attributeConstraints {
 		// Tracing 1
@@ -434,7 +434,7 @@ tripleRule PrimitiveAttributeToTable : ClassToRelational {
 			// Tracing 2
 			combined=<tableName>
 		)
-		
+
 		// Tracing 1
 		firstToLowerCase(
 			// Tracing 2
@@ -442,7 +442,7 @@ tripleRule PrimitiveAttributeToTable : ClassToRelational {
 			// Tracing 2
 			lowerCase=<lower>
 		)
-		
+
 		// Tracing 1
 		addSuffix(
 			// Tracing 2
@@ -465,7 +465,7 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 			.name : <className>
 			++-attr->attribute
 		}
-		
+
 		// Transformation 3
 		++ attribute : Attribute {
 			.name := <attrName>
@@ -476,17 +476,17 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 			// Transformation 3
 			++-type->attrType
 		}
-		
+
 		// Model Traversal 2
 		attrType : Class
-		
+
 		// Model Traversal 2
 		integerType : DataType {
 			// Model Traversal 2
 			.name : "Integer"
 		}
 	}
-	
+
 	// Setup 1
 	target { 	
 		// Transformation 3
@@ -498,7 +498,7 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 			// Transformation 3
 			++-col->id
 		}
-		
+
 		// Transformation 3
 		++ id : Column {
 			// Transformation 2
@@ -508,7 +508,7 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 			// Transformation 3
 			++-owner->table
 		}
-		
+
 		// Transformation 3
 		++ column : Column {
 			// Transformation 2
@@ -518,14 +518,14 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 			// Transformation 3
 			++-type->integer
 		}
-		
+
 		// Model Traversal 2
 		integer : Type {
 			// Model Traversal 2
 			.name : "Integer"
 		}
 	}
-	
+
 	// Setup 1
 	correspondence {
 		// Tracing 4
@@ -533,7 +533,7 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 		// Tracing 3
 		integerType <-:DateTypeToType-> integer
 	}
-	
+
 	// Setup 1
 	attributeConstraints {
 		// Tracing 1
@@ -547,7 +547,7 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 			// Tracing 2
 			combined=<tableName>
 		)
-		
+
 		// Tracing 1
 		firstToLowerCase(
 			// Tracing 2
@@ -555,7 +555,7 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 			// Tracing 2
 			lowerCase=<lower>
 		)
-		
+
 		// Tracing 1
 		addSuffix(
 			// Tracing 2
@@ -565,7 +565,7 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 			// Tracing 2
 			result=<idName>
 		)
-		
+
 		// Tracing 1
 		addSuffix(
 			// Tracing 2
@@ -588,7 +588,7 @@ tripleRule ClassAttributeToTableNonInjective : ClassToRelational {
 			.name : <className>
 			++-attr->attribute
 		}
-		
+
 		// Transformation 3
 		++ attribute : Attribute {
 			// Transformation 2
@@ -601,7 +601,7 @@ tripleRule ClassAttributeToTableNonInjective : ClassToRelational {
 			++-type->class
 		}
 	}
-	
+
 	// Setup 1
 	target { 	
 		// Transformation 3
@@ -613,7 +613,7 @@ tripleRule ClassAttributeToTableNonInjective : ClassToRelational {
 			// Transformation 3
 			++-col->id
 		}
-		
+
 		// Transformation 3
 		++ id : Column {
 			// Transformation 2
@@ -623,7 +623,7 @@ tripleRule ClassAttributeToTableNonInjective : ClassToRelational {
 			// Transformation 3
 			++-owner->table
 		}
-		
+
 		// Transformation 3
 		++ column : Column {
 			// Transformation 2
@@ -633,20 +633,20 @@ tripleRule ClassAttributeToTableNonInjective : ClassToRelational {
 			// Transformation 3
 			++-type->integer
 		}
-		
+
 		// Model Traversal 2
 		integer : Type {
 			// Model Traversal 2
 			.name : "Integer"
 		}
 	}
-	
+
 	// Setup 1
 	correspondence {
 		// Tracing 4
 		++attribute <-:AttributeToTable->table
 	}
-	
+
 	// Setup 1
 	attributeConstraints {
 		// Tracing 1
@@ -660,7 +660,7 @@ tripleRule ClassAttributeToTableNonInjective : ClassToRelational {
 			// Tracing 2
 			combined=<tableName>
 		)
-		
+
 		// Tracing 1
 		firstToLowerCase(
 			// Tracing 2
@@ -668,7 +668,7 @@ tripleRule ClassAttributeToTableNonInjective : ClassToRelational {
 			// Tracing 2
 			lowerCase=<lower>
 		)
-		
+
 		// Tracing 1
 		addSuffix(
 			// Tracing 2
