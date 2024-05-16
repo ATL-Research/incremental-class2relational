@@ -36,109 +36,73 @@ import yamtl.core.YAMTLModule;
 
 // transformation
 public class CD2DB extends YAMTLModule {
-
-    static String inputModelPath = "C:\\Users\\ab373\\Documents\\git-repos\\git-yamtl\\incremental-class2relational\\models\\correctness5\\class.xmi";
-    static String changePath = "C:\\Users\\ab373\\Documents\\git-repos\\git-yamtl\\incremental-class2relational\\models\\correctness5\\change.xmi";
-
-    // setup
-	public static void main(String[] args) {
-	    ResourceSet resourceSet = new ResourceSetImpl()
-	    resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(
-	            "xmi",
-	            new XMIResourceFactoryImpl()
-	    )
-	
-	    // Register source, change, and target metamodels in global registry
-	    def CH = ChangesPackage.eINSTANCE
-		def CD = Class_Package.eINSTANCE;
-		def DB = Relational_Package.eINSTANCE;
-	
-	    def source = resourceSet.getResource(URI.createFileURI(inputModelPath), true)
-	    def changes = resourceSet.getResource(URI.createFileURI(changePath), true)
-	    EcoreUtil.resolveAll(resourceSet)
-	
-	    def xform = new CD2DB(CD, DB)
-		YAMTLGroovyExtensions.init(xform)
-		
-	    xform.adviseWithinThisNamespaceExpressions(["atl.research.class_..*"])
-	    xform.setExecutionMode(YAMTLModule.ExecutionMode.INCREMENTAL)
-	
-	    xform.loadInputResources(["cd": source])
-	    xform.execute()
-	
-	    xform.saveOutputModels(["db": "src/main/java/cd2db/out/out_after_batch.xmi"], ["Table", "Type"])
-	    xform.adaptInputModel("cd")
-	
-	    if (changes.contents.size() > 0) {
-	        def change = changes.contents.get(0) as ModelChangeSet
-	        change.changes.each { c ->
-	            println("Applying change $c")
-	            c.apply()
-	        }
-	    }
-	
-	    xform.propagateDelta("cd")
-	
-	    xform.saveOutputModels(["db": "src/main/java/cd2db/out/out_after_prop.xmi"], ["Table", "Type"])
-	}
-
-	def EPackage CD = Class_Package.eINSTANCE;
-    def EPackage DB = Relational_Package.eINSTANCE;
+	// setup
+	public EPackage CD = Class_Package.eINSTANCE;
+    public EPackage DB = Relational_Package.eINSTANCE;
 
     // transformation
     CD2DB() {
+		// setup
         YAMTLGroovyExtensions_dynamicEMF.init(this)
 
-        // def resourceSet = new ResourceSetImpl()
-        // resourceSet.resourceFactoryRegistry.extensionToFactoryMap.put('xmi', new XMIResourceFactoryImpl())
-
-        // EPackage e
-        // e = Class_Package.eINSTANCE
-        // e = Relational_Package.eINSTANCE
-        // e = ChangesPackage.eINSTANCE
-
-        // def source = resourceSet.getResource(URI.createFileURI(inputModelPath), true)
-        // def changes = resourceSet.getResource(URI.createFileURI(changePath), true)
-        // EcoreUtil.resolveAll(resourceSet)
-
+		// transformation
         header().in('cd', CD).out('db', DB)
 
 		ruleStore([
 			rule('ClassToTable')
+				// model navigation
 				.in('c', CD.Class)
+				// transformation
 				.out('t', DB.Table, {
 					t.name = c.name
-		
-					def list = c.attr.findAll{ !it.multiValued }
-					t.col.addAll(fetch(list, 'col'))
-		
 					t.col.add(key)
 					t.key.add(key)
+					// model navigation
+					def list = c.attr.findAll{ !it.multiValued }
+					// transformation
+					t.col.addAll(
+						// trace
+						fetch(list, 'col')
+					)
 				})
+				// transformation
 				.out('key', DB.Column, {
 					key.name = 'objectId'
-					key.type = fetch(fetch('objectIdType'))
+					key.type = 
+						// trace
+						fetch(
+							// model navigation
+							fetch('objectIdType')
+						)
 				}),
-		
+			// transformation
 			rule('DataType2Type')
+				// model navigation
 				.in('dt', CD.DataType)
+				// transformation
 				.out('type', DB.Type, {
 					type.name = dt.name
 				}),
-		
+			// transformation
 			rule('DataTypeAttribute2Column')
+				// model navigation
 				.in('att', CD.Attribute).filter({
 					att.type instanceof DataType && !att.multiValued
 				})
+				// transformation
 				.out('col', DB.Column, {
 					col.name = att.name
-					col.type = fetch(att.type)
+					col.type = 
+						//trace 
+						fetch(att.type)
 				}),
-		
+			// transformation
 			rule('MultiValuedDataTypeAttribute2Column')
+				// model navigation
 				.in('att', CD.Attribute).filter({
 					att.type instanceof DataType && att.multiValued
 				})
+				// transformation
 				.out('t', DB.Table, {
 					if (att.owner != null && att.owner.name != null)
 						t.name = "${att.owner.name}_${att.name}"
@@ -148,26 +112,42 @@ public class CD2DB extends YAMTLModule {
 				.out('id', DB.Column, {
 					if (att.owner != null && att.owner.name != null)
 						id.name = "${att.owner.name.toLowerCase()}Id"
-					id.type = fetch(fetch('objectIdType'))
+					id.type = 
+						// trace
+						fetch(
+							// model navigation
+							fetch('objectIdType')
+						)
 				})
 				.out('col', DB.Column, {
 					col.name = att.name
-					col.type = fetch(att.type)
+					col.type = 
+						// trace
+						fetch(att.type)
 				}),
-		
+			// transformation
 			rule('ClassAttribute2Column')
+				// model navigation
 				.in('att', CD.Attribute).filter({
 					att.type instanceof Class && !att.multiValued
 				})
+				// transformation
 				.out('col', DB.Column, {
 					col.name = "${att.name}Id"
-					col.type = fetch(fetch('objectIdType'))
+					col.type = 
+						// trace
+						fetch(
+							// model navigation
+							fetch('objectIdType')
+						)
 				}),
-		
+			// transformation
 			rule('MultiValuedClassAttribute2Column')
+				// model navigation
 				.in('att', CD.Attribute).filter({
 					att.type instanceof Class && att.multiValued
 				})
+				// transformation
 				.out('t', DB.Table, {
 					if (att.owner != null && att.owner.name != null)
 						t.name = "${att.owner.name}_${att.name}"
@@ -177,14 +157,24 @@ public class CD2DB extends YAMTLModule {
 				.out('id', DB.Column, {
 					if (att.owner != null && att.owner.name != null)
 						id.name = "${att.owner.name.toLowerCase()}Id"
-					id.type = fetch(fetch('objectIdType'))
+					id.type = 
+						// trace 
+						fetch(
+							// model navigation
+							fetch('objectIdType')
+						)
 				})
 				.out('col', DB.Column, {
 					col.name = "${att.name}Id"
-					col.type = fetch(fetch('objectIdType'))
+					col.type = 
+						// trace 
+						fetch(
+							// model navigation
+							fetch('objectIdType')
+						)
 				})
 		])
-			
+		// helper
         helperStore([
             staticAttribute('objectIdType', {
                 allInstances(CD.DataType).find{ it instanceof DataType && it.name == 'Integer' }

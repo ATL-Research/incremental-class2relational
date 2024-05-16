@@ -7,7 +7,7 @@
  */
 
 plugins {
-    // id 'application'
+    id 'application'
     id 'groovy'
     id 'idea'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
@@ -44,15 +44,15 @@ dependencies {
 }
 
 
-//  application {
-//      // Define the main class for the application.
-//      mainClass = 'cd2db.Solution'
-//  }
+ application {
+     // Define the main class for the application.
+     mainClass = 'cd2db.Solution'
+ }
 
 
 jar {
     manifest {
-        // attributes "Main-Class": application.mainClass
-        attributes "Main-Class": "cd2db.Solution"
+        attributes "Main-Class": application.mainClass
+        // attributes "Main-Class": "cd2db.Solution"
     }
 }

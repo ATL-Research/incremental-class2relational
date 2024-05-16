@@ -33,50 +33,6 @@ import yamtl.core.YAMTLModule;
 // transformation
 public class CD2DB extends YAMTLModule {
 
-    static String inputModelPath = "C:\\Users\\ab373\\Documents\\git-repos\\git-yamtl\\incremental-class2relational\\models\\correctness5\\class.xmi";
-    static String changePath = "C:\\Users\\ab373\\Documents\\git-repos\\git-yamtl\\incremental-class2relational\\models\\correctness5\\change.xmi";
-
-    // setup
-    public static void main(String[] args) {
-    	// setup
-        ResourceSet resourceSet = new ResourceSetImpl();
-        resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
-
-        EPackage e = Class_Package.eINSTANCE;
-        e = Relational_Package.eINSTANCE;
-        e = ChangesPackage.eINSTANCE;
-
-        var source = resourceSet.getResource(URI.createFileURI(inputModelPath), true);
-        var changes = resourceSet.getResource(URI.createFileURI(changePath), true);
-        EcoreUtil.resolveAll(resourceSet);
-
-        CD2DB xform = new CD2DB();
-        // incremental change recognition
-        xform.adviseWithinThisNamespaceExpressions(List.of("atl.research.class_..*"));
-        // setup
-        xform.setExecutionMode(YAMTLModule.ExecutionMode.INCREMENTAL);
-        xform.loadInputResources(Map.of("cd", source));
-        // transformation
-        xform.execute();
-        // setup
-        xform.saveOutputModels(Map.of("db", "transformation/src/main/java/cd2db/java/out_after_batch.xmi"), List.of("Table", "Type"));
-        // incremental change recognition
-        xform.adaptInputModel("cd");
-
-        // setup
-        if (changes.getContents().size() > 0) {
-            ModelChangeSet change = (ModelChangeSet) changes.getContents().get(0);
-            for (ModelChange c : change.getChanges()) {
-                c.apply();
-            }
-        }
-        //  incremental change propagation
-        xform.propagateDelta("cd");
-        // setup
-        xform.saveOutputModels(Map.of("db", "transformation/src/main/java/cd2db/java/out_after_prop.xmi"), List.of("Table", "Type"));
-    }
-
-    // transformation
     public CD2DB() {
         header().in("cd", CD).out("db", DB);
         ruleStore(List.of(
@@ -108,7 +64,10 @@ public class CD2DB extends YAMTLModule {
                             key().setName("objectId");
                             key().setType(
                         		// trace
-                        		(Type)fetch(fetch("objectIdType"))
+                        		(Type)fetch(
+                                    // model navigation
+                                    fetch("objectIdType")
+                                )
                             );
                         }),
 
@@ -153,7 +112,9 @@ public class CD2DB extends YAMTLModule {
                         .out("id", db_Column(), () -> {
                             if (att().getOwner() != null && att().getOwner().getName() != null)
                                 id().setName(firstToLower(att().getOwner().getName()) + "Id");
+                            // model navigation
                             var intDataType = fetch("objectIdType");
+                            // transformation
                             if (intDataType != null)
                                 id().setType(
                                 		//trace
@@ -209,7 +170,9 @@ public class CD2DB extends YAMTLModule {
                                 id().setName(firstToLower(att().getOwner().getName()) + "Id");
                             else 
                                 id().setName("tableId");
+                            // model navigation
                             var intDataType = fetch("objectIdType");
+                            // transformation
                             if (intDataType != null)
                                 id().setType(
                                 		// trace 
@@ -219,7 +182,9 @@ public class CD2DB extends YAMTLModule {
                         // transformation
                         .out("col", db_Column(), () -> {
                             col().setName(att().getName() + "Id");
+                            // model navigation
                             var intDataType = fetch("objectIdType");
+                            // transformation
                             if (intDataType != null)
                                 col().setType(
                                 		// trace
@@ -228,7 +193,7 @@ public class CD2DB extends YAMTLModule {
                         })
 
         ));
-
+        // helper
         helperStore( List.of(
             staticAttribute("objectIdType", () -> {
                 return allInstances(cd_DataType())
@@ -240,13 +205,6 @@ public class CD2DB extends YAMTLModule {
     }
 
     // helper
-    public List<Attribute> incomingReferences(Class c) {
-        return allInstances(cd_Attribute()).stream()
-                .map(instance -> (Attribute) instance) // casting to Attribute
-                .filter(attribute -> attribute.getType().equals(c) && attribute.getMultiValued())
-                .collect(Collectors.toList());
-    }
-
     public static String firstToLower(String input) {
         return input.isEmpty() ? input : Character.toLowerCase(input.charAt(0)) + input.substring(1);
     }
