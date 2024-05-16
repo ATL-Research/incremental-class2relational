@@ -70,10 +70,7 @@ public class CD2DB extends YAMTLModule {
 					key.name = 'objectId'
 					key.type = 
 						// trace
-						fetch(
-							// model navigation
-							fetch('objectIdType')
-						)
+						fetch(objectIdType)
 				}),
 			// transformation
 			rule('DataType2Type')
@@ -114,10 +111,7 @@ public class CD2DB extends YAMTLModule {
 						id.name = "${att.owner.name.toLowerCase()}Id"
 					id.type = 
 						// trace
-						fetch(
-							// model navigation
-							fetch('objectIdType')
-						)
+						fetch(objectIdType)
 				})
 				.out('col', DB.Column, {
 					col.name = att.name
@@ -136,10 +130,7 @@ public class CD2DB extends YAMTLModule {
 					col.name = "${att.name}Id"
 					col.type = 
 						// trace
-						fetch(
-							// model navigation
-							fetch('objectIdType')
-						)
+						fetch(objectIdType)
 				}),
 			// transformation
 			rule('MultiValuedClassAttribute2Column')
@@ -159,19 +150,13 @@ public class CD2DB extends YAMTLModule {
 						id.name = "${att.owner.name.toLowerCase()}Id"
 					id.type = 
 						// trace 
-						fetch(
-							// model navigation
-							fetch('objectIdType')
-						)
+						fetch(objectIdType)
 				})
 				.out('col', DB.Column, {
 					col.name = "${att.name}Id"
 					col.type = 
 						// trace 
-						fetch(
-							// model navigation
-							fetch('objectIdType')
-						)
+						fetch(objectIdType)
 				})
 		])
 		// helper
