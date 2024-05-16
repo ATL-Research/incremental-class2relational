@@ -49,6 +49,6 @@ dependencies {
 
 jar {
     manifest {
-        attributes "Main-Class": cd2db.Solution
+        attributes "Main-Class": application.mainClass
     }
 }
