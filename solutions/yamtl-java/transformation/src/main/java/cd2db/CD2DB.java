@@ -108,6 +108,8 @@ public class CD2DB extends YAMTLModule {
                             Table t = t();
                             // transformation
                             t.setName(c.getName());
+                            // transformation	
+                            t.getCol().add(key());
                             // model navigation
                             List<Attribute> list = c.getAttr()
                             		// model navigation
@@ -121,8 +123,6 @@ public class CD2DB extends YAMTLModule {
                             		// trace
                             		(List<Column>)fetch(list, "col" )
                             );
-                            // transformation	
-                            t.getCol().add(key());
                             // transformation	
                             t.getKey().add(key());
                         })
