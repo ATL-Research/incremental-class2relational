@@ -13,6 +13,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 
+import yamtl.core.YAMTLModule
+import yamtl.groovy.YAMTLGroovyExtensions
+import yamtl.groovy.YAMTLGroovyExtensions_dynamicEMF
+
 import static yamtl.dsl.Helper.*;
 import static yamtl.dsl.Rule.*;
 
