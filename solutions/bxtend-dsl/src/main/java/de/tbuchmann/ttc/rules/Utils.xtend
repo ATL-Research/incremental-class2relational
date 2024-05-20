@@ -4,7 +4,7 @@ import atl.research.class_.Classifier
 import de.tbuchmann.ttc.corrmodel.SingleElem
 import atl.research.relational_.Type
 
-// Helper/Utility class
+// Helper 
 class Utils {
 	// Helper 
 	def static getType(Classifier type) {
