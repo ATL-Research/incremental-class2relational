@@ -113,6 +113,7 @@ public class CD2DB extends YAMTLModule {
 						// tracing
 						fetch(objectIdType)
 				})
+				// transformation
 				.out('col', DB.Column, {
 					col.name = att.name
 					col.type = 
@@ -152,6 +153,7 @@ public class CD2DB extends YAMTLModule {
 						// tracing
 						fetch(objectIdType)
 				})
+				// transformation
 				.out('col', DB.Column, {
 					col.name = "${att.name}Id"
 					col.type = 
