@@ -17,6 +17,7 @@ import atl.research.AbstractDriver;
 import atl.research.class_.Class_Package;
 import atl.research.relational_.Relational_Package;
 
+// Setup
 public class ATLRunner extends AbstractDriver {
 	public static void main(String[] args) throws IOException {
 		try {

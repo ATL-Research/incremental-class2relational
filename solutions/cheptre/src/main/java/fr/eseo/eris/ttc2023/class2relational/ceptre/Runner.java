@@ -25,6 +25,7 @@ import java.io.PrintStream;
 import java.io.InputStreamReader;
 import java.io.FileOutputStream;
 
+// Setup
 public class Runner extends AbstractDriver {
 	private static final boolean debug = false;
 	private static final boolean engineOutput = false;

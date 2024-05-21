@@ -17,6 +17,8 @@ import Changes.ModelChangeSet;
 import atl.research.class_.Class_Package;
 import atl.research.relational_.Relational_Package;
 
+
+// Setup
 public abstract class AbstractDriver {
     ResourceSet resourceSet = new ResourceSetImpl();
     Resource source;
