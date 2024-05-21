@@ -79,7 +79,7 @@ namespace HSRM.TTC2023.ClassToRelational
                     primaryKey
                 }
             };
-            // Model Traversal
+            // Model_Navigation
             foreach (var attr in @class.Attr.Where(att => !att.MultiValued))
             {
                 //  Transformation
