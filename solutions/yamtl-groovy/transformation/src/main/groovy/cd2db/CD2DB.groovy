@@ -50,18 +50,18 @@ public class CD2DB extends YAMTLModule {
 
 		ruleStore([
 			rule('ClassToTable')
-				// model navigation
+				// model_navigation
 				.in('c', CD.Class)
 				// transformation
 				.out('t', DB.Table, {
 					t.name = c.name
 					t.col.add(key)
 					t.key.add(key)
-					// model navigation
+					// model_navigation
 					def list = c.attr.findAll{ !it.multiValued }
 					// transformation
 					t.col.addAll(
-						// trace
+						// tracing
 						fetch(list, 'col')
 					)
 				})
@@ -69,12 +69,12 @@ public class CD2DB extends YAMTLModule {
 				.out('key', DB.Column, {
 					key.name = 'objectId'
 					key.type = 
-						// trace
+						// tracing
 						fetch(objectIdType)
 				}),
 			// transformation
 			rule('DataType2Type')
-				// model navigation
+				// model_navigation
 				.in('dt', CD.DataType)
 				// transformation
 				.out('type', DB.Type, {
@@ -82,7 +82,7 @@ public class CD2DB extends YAMTLModule {
 				}),
 			// transformation
 			rule('DataTypeAttribute2Column')
-				// model navigation
+				// model_navigation
 				.in('att', CD.Attribute).filter({
 					att.type instanceof DataType && !att.multiValued
 				})
@@ -90,12 +90,12 @@ public class CD2DB extends YAMTLModule {
 				.out('col', DB.Column, {
 					col.name = att.name
 					col.type = 
-						//trace 
+						// tracing
 						fetch(att.type)
 				}),
 			// transformation
 			rule('MultiValuedDataTypeAttribute2Column')
-				// model navigation
+				// model_navigation
 				.in('att', CD.Attribute).filter({
 					att.type instanceof DataType && att.multiValued
 				})
@@ -110,18 +110,18 @@ public class CD2DB extends YAMTLModule {
 					if (att.owner != null && att.owner.name != null)
 						id.name = "${att.owner.name.toLowerCase()}Id"
 					id.type = 
-						// trace
+						// tracing
 						fetch(objectIdType)
 				})
 				.out('col', DB.Column, {
 					col.name = att.name
 					col.type = 
-						// trace
+						// tracing
 						fetch(att.type)
 				}),
 			// transformation
 			rule('ClassAttribute2Column')
-				// model navigation
+				// model_navigation
 				.in('att', CD.Attribute).filter({
 					att.type instanceof Class && !att.multiValued
 				})
@@ -129,12 +129,12 @@ public class CD2DB extends YAMTLModule {
 				.out('col', DB.Column, {
 					col.name = "${att.name}Id"
 					col.type = 
-						// trace
+						// tracing
 						fetch(objectIdType)
 				}),
 			// transformation
 			rule('MultiValuedClassAttribute2Column')
-				// model navigation
+				// model_navigation
 				.in('att', CD.Attribute).filter({
 					att.type instanceof Class && att.multiValued
 				})
@@ -149,13 +149,13 @@ public class CD2DB extends YAMTLModule {
 					if (att.owner != null && att.owner.name != null)
 						id.name = "${att.owner.name.toLowerCase()}Id"
 					id.type = 
-						// trace 
+						// tracing
 						fetch(objectIdType)
 				})
 				.out('col', DB.Column, {
 					col.name = "${att.name}Id"
 					col.type = 
-						// trace 
+						// tracing 
 						fetch(objectIdType)
 				})
 		])
