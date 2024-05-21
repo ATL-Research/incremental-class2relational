@@ -21,13 +21,14 @@ import java.nio.file.FileVisitor;
  */
 public class AnalysisScanner {
 
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
     
     // statistical data
     long fileCt = 0;
     long lineCt = 0;
     long wordCt = 0;
     int chars = 0;
+    int importLineCt = 0;
 
     // states of file analysis
     protected int currentLine = 1;
@@ -41,6 +42,7 @@ public class AnalysisScanner {
     protected final Path labelCountFileAbsPath; 
     protected String skippedSymbolsRegex = "";
     protected List<String> commentSymbols = new LinkedList<String>();
+    protected List<String> importTokens = new LinkedList<String>();
     protected List<String> filesToScan = new LinkedList<String>();
 
 
@@ -48,6 +50,7 @@ public class AnalysisScanner {
         analyzedDirectory = config.getAnalysisDir();
         skippedSymbolsRegex = config.skippedSymbolsRegex();
         commentSymbols = Arrays.asList(config.getCommentSymbols());
+        importTokens = Arrays.asList(config.getImportTokens());
         filesToScan = Arrays.asList(config.getFilesToScan());
         labelCountFile = new File(config.getAnalysisResult());
         labelCountFileAbsPath = Paths.get(labelCountFile.getAbsolutePath());
@@ -116,6 +119,15 @@ public class AnalysisScanner {
             
     }
 
+    private boolean isImport(String line) {
+        for (String token : importTokens) {
+            if (line.startsWith(token)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void processLine(Scanner in, String line, String filepath) throws IOException {
         if (!line.isEmpty()) {
             // preprocessing of String for counting
@@ -126,6 +138,12 @@ public class AnalysisScanner {
             line = line.replaceAll("\\s+", " ");
             String preprocessed = line; 
             
+            if (isImport(preprocessed)) {
+                importLineCt++;
+                labelStartLine = currentLine + 1;
+                return; //skip process
+            }
+
             try{
                 String[] wordArray = preprocessed.split(" ");
                 if (!isComment(preprocessed)) {
@@ -219,15 +237,18 @@ public class AnalysisScanner {
 
     public static void main(String[] args) {
 
-        if (args.length != 1) {
-            System.out.println("Usage: java AnalysisScanner <solution>");
-            System.exit(1);
-        }
+        // if (args.length != 1) {
+        //     System.out.println("Usage: java AnalysisScanner <solution>");
+        //     System.exit(1);
+        // }
 
-        String solution = args[0];
+        // String solution = args[0];
 
-        System.out.println("Starting evaluation of " + solution + "...");
-        Path properties = Path.of(System.getProperty("user.dir") + "/data/" + solution + ".properties");
+        // System.out.println("Starting evaluation of " + solution + "...");
+        Path properties = Path.of(System.getProperty("user.dir") + "/data/" + 
+        // solution 
+        "yamtl-groovy"
+        + ".properties");
         Config config = new Config(properties);
 
         AnalysisScanner analysis = new AnalysisScanner(config);
@@ -235,7 +256,7 @@ public class AnalysisScanner {
         analysis.extractLabelsFromFiles();
 
         System.out.println("-------------------------------");
-        System.out.println ("analyzed " + analysis.wordCt + " words in " + analysis.lineCt + " lines of " + analysis.fileCt + " files" );
+        System.out.println ("analyzed " + analysis.wordCt + " words in " + analysis.lineCt + " lines of " + analysis.fileCt + " files with " + analysis.importLineCt + " import statements." );
     }
 
     /**

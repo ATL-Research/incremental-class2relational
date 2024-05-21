@@ -12,7 +12,9 @@
     public static final String ANALYSIS_RESULT = "solution.analysis-result";  // these tokens will be replaced by a whitespace
     public static final String SKIPPED_SYMBOLS_REGEX = "solution.skipped-symbols-regex";  // these tokens will be replaced by a whitespace
     public static final String COMMENT_SYMBOL = "solution.comment-symbol";  // these tokens will be replaced by a whitespace
-    public static final String FILES_TO_SCAN = "solution.files-to-scan";  // these tokens will be replaced by a whitespace
+    public static final String STRING_SYMBOL = "solution.string-symbol";  // list of files and directories to be scanned
+    public static final String IMPORT_TOKENS = "solution.import-tokens";  // these tokens initiate import-statements,
+    public static final String FILES_TO_SCAN = "solution.files-to-scan";  // list of files and directories to be scanned
      
     private final Properties properties;
     
@@ -48,16 +50,22 @@
         }
     }
 
+    public String[] getStringSymbols() {
+        String symbolString = this.properties.getProperty(STRING_SYMBOL);
+        return parseListString(symbolString);
+        
+    }
+
+    public String[] getImportTokens() {
+        String symbolString = this.properties.getProperty(IMPORT_TOKENS);
+            return parseListString(symbolString);
+    }
+
     public String[] getFilesToScan() {
         return parseListString(this.properties.getProperty(FILES_TO_SCAN));
     }
 
-        private static String[] parseListString(String str) {
-            return str.substring(1, str.length() - 1).split(",");
-            // String[] result = new String[tokens.length];
-            // for (int i = 0; i < tokens.length; i++) {
-            //     result[i] = Double.parseDouble(tokens[i].trim());
-            // }
-            // return result;
-        }
+    private static String[] parseListString(String str) {
+        return str.substring(1, str.length() - 1).split(",");
+    }
 }
