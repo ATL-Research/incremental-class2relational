@@ -45,7 +45,12 @@ public class CD2DB extends YAMTLModule {
                         	Class c = c();
                             Table t = t();
                             // transformation
-                            t.setName(c.getName());
+                            if (c.getName() != null)
+                                // transformation
+                                t.setName(c.getName());
+                            else
+                                // transformation
+                                t.setName("");
                             t.getCol().add(key());
                             t.getKey().add(key());
                             // model navigation
@@ -160,7 +165,7 @@ public class CD2DB extends YAMTLModule {
                             if (att().getOwner() != null  && att().getOwner().getName() != null)
                                 t().setName(att().getOwner().getName() + "_" + att().getName());
                             else
-                                t().setName("Table_" + att().getName());
+                                t().setName("_" + att().getName());
                             t().getCol().add(id());
                             t().getCol().add(col());
                         })
@@ -169,7 +174,7 @@ public class CD2DB extends YAMTLModule {
                             if (att().getOwner() != null && att().getOwner().getName() != null)
                                 id().setName(firstToLower(att().getOwner().getName()) + "Id");
                             else 
-                                id().setName("tableId");
+                                id().setName("Id");
                             // model navigation
                             var intDataType = fetch("objectIdType");
                             // transformation
