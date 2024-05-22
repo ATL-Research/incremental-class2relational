@@ -236,19 +236,18 @@ public class AnalysisScanner {
     }
 
     public static void main(String[] args) {
+        String solution;
 
-        // if (args.length != 1) {
-        //     System.out.println("Usage: java AnalysisScanner <solution>");
-        //     System.exit(1);
-        // }
+        if (args.length != 1) {
+            System.out.println("Usage: java AnalysisScanner <solution>");
+            solution = "yamtl-groovy"; // set default value so that you can use the LabelCounting directly from your IDE
+        }
+        else {
+            solution = args[0];
+        }
 
-        // String solution = args[0];
-
-        // System.out.println("Starting evaluation of " + solution + "...");
-        Path properties = Path.of(System.getProperty("user.dir") + "/data/" + 
-        // solution 
-        "yamtl-groovy"
-        + ".properties");
+        System.out.println("Starting evaluation of " + solution + "...");
+        Path properties = Path.of(System.getProperty("user.dir") + "/data/" + solution  + ".properties");
         Config config = new Config(properties);
 
         AnalysisScanner analysis = new AnalysisScanner(config);
