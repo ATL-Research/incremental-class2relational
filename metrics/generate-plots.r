@@ -46,8 +46,8 @@ print(args)
 
 solution <- args[1]
 
-values <- read.csv(paste0("../labels/", solution, ".csv"), header = TRUE, , sep = ",", stringsAsFactors = FALSE)
+values <- read.csv(paste0(solution, ".csv"), header = TRUE, , sep = ",", stringsAsFactors = FALSE)
 values$Transformation.Aspect <- trimws(values$Transformation.Aspect)
 valuesPlot <- createPlot(values, solution)
-savePlot(valuesPlot, paste0("plots/", solution, ".pdf"))
+savePlot(valuesPlot, paste0(solution, ".pdf"))
 
