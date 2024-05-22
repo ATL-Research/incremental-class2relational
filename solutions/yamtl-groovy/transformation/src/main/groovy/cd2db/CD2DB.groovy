@@ -54,16 +54,15 @@ public class CD2DB extends YAMTLModule {
 				.in('c', CD.Class)
 				// transformation
 				.out('t', DB.Table, {
-					t.name = c.name
-					t.col.add(key)
-					t.key.add(key)
+					t.name = c.name ?: ''
+					t.col += key
+					t.key += key
 					// model_navigation
 					def list = c.attr.findAll{ !it.multiValued }
 					// transformation
-					t.col.addAll(
+					t.col += 
 						// tracing
 						fetch(list, 'col')
-					)
 				})
 				// transformation
 				.out('key', DB.Column, {
@@ -101,14 +100,12 @@ public class CD2DB extends YAMTLModule {
 				})
 				// transformation
 				.out('t', DB.Table, {
-					if (att.owner != null && att.owner.name != null)
-						t.name = "${att.owner.name}_${att.name}"
-					t.col.add(id)
-					t.col.add(col)
+					t.name = "${att.owner?.name?:''}_${att.name?:''}"
+					t.col += id
+					t.col += col
 				})
 				.out('id', DB.Column, {
-					if (att.owner != null && att.owner.name != null)
-						id.name = "${att.owner.name.toLowerCase()}Id"
+					id.name = "${att.owner?.name?.toLowerCase()?:''}Id"
 					id.type = 
 						// tracing
 						fetch(objectIdType)
@@ -141,14 +138,12 @@ public class CD2DB extends YAMTLModule {
 				})
 				// transformation
 				.out('t', DB.Table, {
-					if (att.owner != null && att.owner.name != null)
-						t.name = "${att.owner.name}_${att.name}"
-					t.col.add(id)
-					t.col.add(col)
+					t.name = "${att.owner?.name?:''}_${att.name}"
+					t.col += id
+					t.col += col
 				})
 				.out('id', DB.Column, {
-					if (att.owner != null && att.owner.name != null)
-						id.name = "${att.owner.name.toLowerCase()}Id"
+					id.name = "${att.owner?.name?.toLowerCase()?:''}Id"						
 					id.type = 
 						// tracing
 						fetch(objectIdType)
