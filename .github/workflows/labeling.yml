@@ -17,9 +17,6 @@ jobs:
         with:
           java-version: 17
           distribution: 'temurin'
-          
-      - name: Install docker
-        uses: papodaca/install-docker-action@main
         
       - run: |
           cd metrics
