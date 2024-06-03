@@ -25,6 +25,7 @@ import java.io.PrintStream;
 import java.io.InputStreamReader;
 import java.io.FileOutputStream;
 
+// Setup
 public class Runner extends AbstractDriver {
 	private static final boolean debug = false;
 	private static final boolean engineOutput = false;
@@ -147,6 +148,14 @@ public class Runner extends AbstractDriver {
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
 			System.out.println("Killing cheptre");
 			if(process != null) {
+				try {
+					Runtime.getRuntime().exec(new String[] {
+						"docker", "container", "kill", "cheptre_runner"
+					}).waitFor();
+				} catch (Exception e) {
+					System.out.println("Error killing cheptre container");
+					e.printStackTrace();
+				}
 				System.out.println("Killing cheptre");
 				process.destroyForcibly();
 			}
@@ -154,7 +163,7 @@ public class Runner extends AbstractDriver {
 		String transfoName = "Class2Relational.cep";
 		String transfoPath = new File("src/main/resources/").getAbsolutePath();
 		this.process = Runtime.getRuntime().exec(new String[] {
-			"docker", "run", "-i", "--mount", "type=bind,source=" + transfoPath + ",target=/examples", "ghcr.io/np/incremental-class2relational-ceptre-cheptre", "/bin/cheptre", "/examples/" + transfoName, "--omit-pointless-choices"
+			"docker", "run", "--rm", "--name=cheptre_runner", "-i", "--mount", "type=bind,source=" + transfoPath + ",target=/examples", "ghcr.io/np/incremental-class2relational-ceptre-cheptre", "/bin/cheptre", "/examples/" + transfoName, "--omit-pointless-choices"
 		});
 		new Thread(() -> {
 			try {
@@ -240,7 +249,7 @@ public class Runner extends AbstractDriver {
 				.replaceAll("\\\\n", "\n")
 				.replaceAll("\\\\\"", "\"")
 				// post processing around cheptre issue
-				.replaceAll("_[0-9]+¤", "")
+				.replaceAll("(_[0-9]+)?¤", "")
 			;
 			// implementing firstToLower with post-processing
 			output = toLowerPattern.matcher(output).replaceAll(match -> match.group(1).toLowerCase());

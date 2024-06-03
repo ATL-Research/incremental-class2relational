@@ -17,6 +17,8 @@ import Changes.ModelChangeSet;
 import atl.research.class_.Class_Package;
 import atl.research.relational_.Relational_Package;
 
+
+// Setup
 public abstract class AbstractDriver {
     ResourceSet resourceSet = new ResourceSetImpl();
     Resource source;
@@ -24,6 +26,7 @@ public abstract class AbstractDriver {
     Resource changes;
 
     boolean batchMode = false;
+    public final static boolean DEBUG = false;
 
     public Resource getSource() {
         return source;
@@ -78,7 +81,8 @@ public abstract class AbstractDriver {
     }
 
     private Resource loadModel(String modelPath) {
-        System.out.println("Loading model from " + modelPath);
+        if (DEBUG)
+            System.out.println("Loading model from " + modelPath);
         return resourceSet.getResource(URI.createFileURI(modelPath), true);
     }
 
@@ -91,7 +95,8 @@ public abstract class AbstractDriver {
         if (changes.getContents().size() > 0) {
             ModelChangeSet change = (ModelChangeSet) changes.getContents().get(0);
             for (ModelChange c : change.getChanges()) {
-                System.out.println("Applying change " + c);
+                if (DEBUG)
+                    System.out.println("Applying change " + c);
                 c.apply();
             }
         }

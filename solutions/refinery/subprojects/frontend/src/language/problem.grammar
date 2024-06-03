@@ -1,0 +1,230 @@
+/*
+ * SPDX-FileCopyrightText: 2021-2023 The Refinery Authors <https://refinery.tools/>
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ */
+
+@detectDelim
+
+@external prop implicitCompletion from './props'
+
+@precedence {
+  prefix,
+  exponential @right,
+  multiplicative @left,
+  additive @left,
+  range @left,
+  lattice @left,
+  comparison @left,
+  feature @cut
+}
+
+@top Problem { statement* }
+
+statement {
+  Assertion {
+    kw<"default">? (NotOp | UnknownOp)? RelationName
+    ParameterList<AssertionArgument>
+    (":" Expr)? "."
+  } |
+  ProblemDeclaration {
+    kw<"problem"> QualifiedName "."
+  } |
+  ClassDefinition {
+    kw<"abstract">? kw<"class"> RelationName
+    (kw<"extends"> sep<",", RelationName>)?
+    (ClassBody {  "{" FeatureDeclaration* "}" } | ".")
+  } |
+  EnumDefinition {
+    kw<"enum"> RelationName
+    (EnumBody { "{" sep<",", IndividualNodeName> "}" } | ".")
+  } |
+  PredicateDefinition {
+    (
+      (kw<"error"> | ckw<"contained"> | kw<"containment">)? kw<"pred"> |
+      kw<"error">
+    )
+    RelationName ParameterList<Parameter>?
+    PredicateBody { ("<->" sep<OrOp, Conjunction>)? "." }
+  } |
+  FunctionDefinition {
+    kw<"fn"> PrimitiveType RelationName ParameterList<Parameter>?
+    FunctionBody { ("=" sep<OrOp, Case>)? "." }
+  } |
+  //RuleDefinition {
+  //  kw<"rule">
+  //  RuleName ParameterList<Parameter>?
+  //  RuleBody { ":" sep<OrOp, Conjunction> "==>" sep<OrOp, Consequent> "." }
+  //} |
+  IndividualDeclaration {
+    kw<"indiv"> sep<",", IndividualNodeName> "."
+  } |
+  ScopeDeclaration {
+    kw<"scope"> sep<",", ScopeElement> "."
+  }
+}
+
+FeatureDeclaration {
+  // Prefer parsing `contains` as a contextual keyword.
+  (
+    FeatureDeclarationHeadWithKind[@dynamicPrecedence=1] {
+      ReferenceKind !feature ~featureHead
+    } |
+    FeatureDeclarationHeadWithoutKind {
+      (PrimitiveType | kw<"bool">)? ~featureHead
+    }
+  )
+  RelationName
+  ("[" Multiplicity? "]")?
+  RelationName
+  (kw<"opposite"> RelationName)?
+  ";"?
+}
+
+Parameter { Modality? RelationName? VariableName }
+
+// Use @dynamicPrecedence to prevent a(b) from being parsed as Expr { a } Expr { b }
+// instead of Atom { a(b) }
+// Being looser with token sequencing enables more consistent syntactic highlighting.
+Conjunction { ("," | NextConjunction[@dynamicPrecedence=-10] { Expr })+ }
+
+Case { Conjunction ("->" Expr)? }
+
+OrOp { ";" }
+
+Expr {
+  UnaryExpr | BinaryExpr | Aggregation | VariableName | Atom | Constant | "(" Expr ")"
+}
+
+BinaryExpr {
+  Expr !comparison ComparisonOp Expr |
+  Expr !lattice (LatticeMeet | "\\/") Expr |
+  Expr !range ".." Expr |
+  Expr !additive ("+" | "-") Expr |
+  Expr !multiplicative (StarMult | Divide) Expr |
+  Expr !exponential "**" Expr
+}
+
+UnaryExpr {
+  !prefix ("+" | "-" | "!" | kw<"count"> | Modality) Expr
+}
+
+Aggregation {
+  AggregationOp "{" Expr "|" Expr "}"
+}
+
+Atom { RelationName "+"? ParameterList<Expr> }
+
+//Consequent { ("," | Action)+ }
+
+//Action {
+//   ckw<"new"> VariableName ("<:" VariableName)? |
+//   kw<"delete"> VariableName |
+//   Literal
+//}
+
+AssertionArgument { NodeName | StarArgument }
+
+Constant { Real | String | StarMult | LogicValue }
+
+ReferenceKind {
+  kw<"refers"> | ckw<"contains"> | kw<"container">
+}
+
+PrimitiveType {
+  kw<"int"> | kw<"real"> | kw<"string">
+}
+
+LogicValue {
+  kw<"true"> | kw<"false"> | kw<"unknown"> | kw<"error">
+}
+
+Modality {
+  kw<"must"> | kw<"may"> | kw<"current">
+}
+
+AggregationOp {
+  ckw<"sum"> | ckw<"prod"> | ckw<"min"> | ckw<"max">
+}
+
+ComparisonOp { SymbolicComparisonOp | kw<"in"> }
+
+ScopeElement { RelationName ("=" | "+=") Multiplicity }
+
+Multiplicity { (IntMult "..")? (IntMult | StarMult)}
+
+// The ~name handles the ambiguity between transitve closure a+(b, c) and addition a+(b)
+// in the grammar. We prefer the addition interpretation by applying @dynamicPrecedence=1
+// to the VariableName rule,
+// but will go with the transtive closure (and highlight `a` as a relation) if forced.
+RelationName { QualifiedName ~name }
+
+//RuleName { QualifiedName }
+
+IndividualNodeName { QualifiedName }
+
+VariableName[@dynamicPrecedence=10] { QualifiedName ~name }
+
+NodeName { QualifiedName }
+
+QualifiedName[implicitCompletion=true] { identifier ("::" identifier)* }
+
+kw<term> { @specialize[@name={term},implicitCompletion=true]<identifier, term> }
+
+ckw<term> { @extend[@name={term},implicitCompletion=true]<identifier, term> }
+
+ParameterList<content> { "(" sep<",", content> ")" }
+
+sep<separator, content> { sep1<separator, content>? }
+
+sep1<separator, content> { content (separator content)* }
+
+@skip { LineComment | BlockComment | whitespace }
+
+@tokens {
+  whitespace { std.whitespace+ }
+
+  LineComment { ("//" | "%") ![\n]* }
+
+  BlockComment { "/*" blockCommentRest }
+
+  blockCommentRest { ![*] blockCommentRest | "*" blockCommentAfterStar }
+
+  blockCommentAfterStar { "/" | "*" blockCommentAfterStar | ![/*] blockCommentRest }
+
+  Divide { "/" }
+
+  LatticeMeet { "/\\" }
+
+  @precedence { BlockComment, LineComment, LatticeMeet, Divide }
+
+  identifier { $[A-Za-z_] $[a-zA-Z0-9_]* }
+
+  int { $[0-9]+ }
+
+  IntMult { int }
+
+  StarMult { "*" }
+
+  Real { (exponential | int ("." (int | exponential))?) }
+
+  exponential { int ("e" | "E") ("+" | "-")? int }
+
+  String {
+    "'" (![\\'\n] | "\\" ![\n] | "\\\n")+ "'" |
+    "\"" (![\\"\n] | "\\" (![\n] | "\n"))* "\""
+  }
+
+  SymbolicComparisonOp {
+    ">" | ">=" | "<" | "<=" | "==" | "!=" |
+    "<:" | ":>" | "===" | "!=="
+  }
+
+  NotOp { "!" }
+
+  UnknownOp { "?" }
+
+  StarArgument { "*" }
+
+  "{" "}" "(" ")" "[" "]" "." ".." "," ":" "->" "<->" "+" "-" "**" "=" "+="
+}

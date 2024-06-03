@@ -10,11 +10,11 @@ savePlot <- function(plot, name) {
 createPlot <- function(data, title) {
 
 	# Define the order of types for stacking
-	type_order <- c("Setup", "Model Traversal", "Model Navigation", "Change Propagation", "Helper", "Tracing", "Incrementality", "Transformation")
+	type_order <- c("SETUP", "MODEL_TRAVERSAL", "CHANGE_PROPAGATION", "HELPER", "TRACING", "CHANGE_IDENTIFICATION", "TRANSFORMATION", "EMPTY", "WRAPPER")
 
 	# Fill missing types with 0 values
 	missing_types <- setdiff(type_order, unique(data$Transformation.Aspect))
-	missing_data <- data.frame(Transformation.Aspect = missing_types, Value = 0)
+	missing_data <- data.frame(File.name=0,Transformation.Aspect = missing_types, Value = 0, Lines=0)
 	data <- rbind(data, missing_data)
 	
 	# Calculate the total value for each type
@@ -30,7 +30,7 @@ createPlot <- function(data, title) {
 	# Create the stacked bar plot
 	plot <- ggplot(data_summary, aes(x = "", y = Value, fill = Transformation.Aspect)) +
 	  geom_bar(stat = "identity") +
-  	  scale_fill_manual(values = c("#F8766D", "#C49A00", "#53B400", "#00C094", "#00B5EB", "#619CFF", "#ABABAB", "#FF00FF")) +
+  	  scale_fill_manual(values = c("#F8766D", "#C49A00", "#53B400", "#00C094", "#00B5EB", "#619CFF", "#ABABAB", "#FF00FF", "#EFEFEF")) +
 	  xlab("Transformation Aspect") +
 	  ylab("Word Count") +
 	  ggtitle(title) +
@@ -41,44 +41,13 @@ createPlot <- function(data, title) {
             position = position_stack(vjust = 0.5), size = 3)
 }
 
-# Read the CSV files
-## atl
-atl <- read.csv("atl/atl-metrics.csv", header = TRUE, , sep = ",", stringsAsFactors = FALSE)
-atl$Transformation.Aspect <- trimws(atl$Transformation.Aspect)
-atlPlot <- createPlot(atl, "atl")
+args <- commandArgs(trailingOnly = TRUE)
+print(args)
 
-## atol
-atol <- read.csv("atol/atol-metrics.csv", header = TRUE, , sep = ",", stringsAsFactors = FALSE)
-atol$Transformation.Aspect <- trimws(atol$Transformation.Aspect)
-atolPlot <- createPlot(atol, "atol")
+solution <- args[1]
 
-## cheptre
-cheptre <- read.csv("cheptre/cheptre-metrics.csv", header = TRUE, , sep = ",", stringsAsFactors = FALSE)
-cheptre$Transformation.Aspect <- trimws(cheptre$Transformation.Aspect)
-cheptrePlot <- createPlot(cheptre, "Cheptre")
+values <- read.csv(paste0(solution, ".csv"), header = TRUE, , sep = ",", stringsAsFactors = FALSE)
+values$Transformation.Aspect <- trimws(values$Transformation.Aspect)
+valuesPlot <- createPlot(values, solution)
+savePlot(valuesPlot, paste0(solution, ".pdf"))
 
-## csharp
-csharp <- read.csv("csharp/csharp-metrics.csv", header = TRUE, , sep = ",", stringsAsFactors = FALSE)
-csharp$Transformation.Aspect <- trimws(csharp$Transformation.Aspect)
-csharpPlot <- createPlot(csharp, "csharp")
-
-## java
-java <- read.csv("java/java-metrics.csv", header = TRUE, , sep = ",", stringsAsFactors = FALSE)
-java$Transformation.Aspect <- trimws(java$Transformation.Aspect)
-javaPlot <- createPlot(java, "java")
-
-## nmf
-nmf <- read.csv("nmf/nmf-metrics.csv", header = TRUE, , sep = ",", stringsAsFactors = FALSE)
-nmf$Transformation.Aspect <- trimws(nmf$Transformation.Aspect)
-nmfPlot <- createPlot(nmf, "nmf")
-
-# Print the plots
-savePlot(atlPlot, "plots/atl.pdf")
-savePlot(atolPlot, "plots/atol.pdf")
-savePlot(cheptrePlot, "plots/cheptre.pdf")
-savePlot(csharpPlot, "plots/csharp.pdf")
-savePlot(javaPlot, "plots/java.pdf")
-savePlot(nmfPlot, "plots/nmf.pdf")
-
-
-#savePlot(cheptrePlot, "plots/cheptre.pdf")

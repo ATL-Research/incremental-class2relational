@@ -1,0 +1,23 @@
+@namespace(uri="Class", prefix="class_")
+package class_;
+
+abstract class NamedElt {
+	!ordered attr String[1] name = "";
+}
+
+abstract class Classifier extends NamedElt {
+}
+
+class DataType extends Classifier {
+}
+
+class Class extends Classifier {
+	val Attribute[*]#owner ~attr;
+}
+
+class Attribute extends NamedElt {
+	!ordered attr boolean[1] multiValued = false;
+	!ordered ref Classifier[1] type;
+	!ordered ref Class[1]#~attr owner;
+}
+

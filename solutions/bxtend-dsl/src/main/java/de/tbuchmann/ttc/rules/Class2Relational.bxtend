@@ -1,0 +1,74 @@
+// Setup
+sourcemodel "Class"
+// Setup
+targetmodel "Relational"
+
+// Transformation 
+rule DataType2Type
+	// Transformation 
+	src DataType dt;
+	// Transformation 
+	trg Type t;
+	// Transformation 
+	dt.name --> t.name;
+
+// Transformation 
+rule SingleAttribute2Column
+	// Transformation 
+	src Attribute att | filter;
+	// Transformation 
+	trg Column col;
+	// Transformation 
+	att.name --> col.name;
+	// Transformation 
+	{att.type : DataType2Type} --> {col.type : DataType2Type};
+
+// Transformation 
+rule MultiAttribute2Table
+	// Transformation 
+	src Attribute att | filter;
+	// Transformation 
+	trg Table tbl;
+	// Transformation 
+	att.name att.owner --> tbl.name;
+	// Transformation 
+	att.name att.type att.owner --> tbl.col;
+	
+// Transformation 
+rule SingleClassAttribute2Column
+	// Transformation 
+	src Attribute att | filter;
+	// Transformation 
+	trg Column col;
+	// Transformation 
+	att.name att.type --> col.name;
+	// Transformation 
+	att.name att.type --> col.type;
+	
+// Transformation 
+rule MultiClassAttribute2Column
+	// Transformation 
+	src Attribute att | filter;
+	// Transformation 
+	trg Table t;
+		// Transformation 
+		Column id | creation;
+		// Transformation 
+		Column fk | creation;
+	// Transformation 
+	att.name att.owner att.type --> t.name;
+	// Transformation 
+	att.name att.owner --> id.name;
+	// Transformation 
+	att.name att.owner --> fk.name;
+
+// Transformation 
+rule Class2Table
+	// Transformation 
+	src Class clz;
+	// Transformation 
+	trg Table tbl | creation;
+	// Transformation 
+	clz.name --> tbl.name;
+	// Transformation 
+	{clz.attr : SingleAttribute2Column, SingleClassAttribute2Column, MultiAttribute2Table} --> tbl.col;

@@ -19,8 +19,8 @@
     <col name="familyId" type="/3"/>
     <col name="membersId" type="/3"/>
   </relational_:Table>
-  <relational_:Table name="Table_marries">
-    <col name="tableId" type="/3"/>
+  <relational_:Table name="_marries">
+    <col name="Id" type="/3"/>
     <col name="marriesId" type="/3"/>
   </relational_:Table>
 </xmi:XMI>

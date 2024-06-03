@@ -9,6 +9,7 @@ import io.github.atlresearch.emfmodelfuzzer.SimpleEMFModelFuzzer
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.papyrus.aof.core.impl.utils.DefaultObserver
 
+// Setup
 class Run extends AbstractDriver implements AOFExtensions {
 	var Class2Relational transformation
 

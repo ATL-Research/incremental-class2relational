@@ -1,21 +1,35 @@
-FOLDERS := $(wildcard */)
-SCRIPTS := $(addsuffix -extract-metric-data.sh,$(notdir $(FOLDERS:/=)))
+FOLDERS := $(wildcard ../solutions/*/)
+FIGURES := $(addprefix plots/, $(addsuffix .pdf,$(notdir $(FOLDERS:/=))))
+LABELS := $(addprefix ../labels/, $(addsuffix .csv,$(notdir $(FOLDERS:/=))))
 
-.PHONY: all
+.PHONY: all clean 
 
-all: $(SCRIPTS)
-	@echo "Executing R script"
-	R -f generate-plots.r BATCH
+all: docker $(FIGURES) #$(LABELS) ## uncomment so that make keeps CSV files with labels
 
-%-extract-metric-data.sh:
-	@if [ -f $(subst -extract-metric-data.sh,,$@)/$@ ]; then \
-		echo "Executing script in $(subst -extract-metric-data.sh,,$@)/$@"; \
-		cd $(subst -extract-metric-data.sh,,$@) && sh $@; \
-	else \
-		echo "Script $(subst -extract-metric-data.sh,,$@)/$@ not found. Skipping."; \
-	fi
+plots/%.pdf: ../labels/label-%.csv
+	@echo "Generating figure for $*.."
+	touch plots/$*.pdf
+	docker run --rm -it \
+			-v $(shell pwd)/../labels/label-$*.csv:/$*.csv \
+			-v $(shell pwd)/plots/$*.pdf:/$*.pdf \
+			incr-c2r-plot:latest /usr/bin/Rscript generate-plots.r $*
+
+../labels/label-%.csv: FORCE
+	@echo "Generating labels for $*.."
+	cd ../utils/LabelCounting && ./gradlew -q run --args='$*'
+
+docker: Dockerfile generate-plots.r
+	@echo "Building docker image..."
+	docker build -t incr-c2r-plot .
 
 clean:
 	@echo "Cleaning up..."
 	rm -f plots/*
+	rm -f ../labels/*
 	find . -name '*.csv' -delete
+
+docker-clean:
+	@echo "Removing docker image..."
+	docker rmi incr-c2r-plot
+	
+FORCE:

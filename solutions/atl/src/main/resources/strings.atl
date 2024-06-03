@@ -1,4 +1,6 @@
+-- Setup
 library strings;
 
+-- Helper
 helper context String def: firstToLower() : String =
         self.substring(1, 1).toLower() + self.substring(2, self.size());

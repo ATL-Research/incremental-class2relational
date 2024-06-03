@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: class2relationalImperative
+Bundle-SymbolicName: class2relationalImperative; singleton:=true
+Bundle-Version: 1.0.0
+Require-Bundle: org.eclipse.emf.ecore,
+ ClassDiagram,
+ Relational,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro,
+ de.ubt.ai1.m2m.bxtend;bundle-version="1.0.0"
+Export-Package: class2relationalImperative.rules
