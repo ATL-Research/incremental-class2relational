@@ -1,10 +1,11 @@
 FOLDERS := $(wildcard ../solutions/*/)
 FIGURES := $(addprefix plots/, $(addsuffix .pdf,$(notdir $(FOLDERS:/=))))
-LABELS := $(addprefix ../labels/, $(addsuffix .csv,$(notdir $(FOLDERS:/=))))
+LABELS := $(addprefix ../labels/label-, $(addsuffix .csv,$(notdir $(FOLDERS:/=))))
+
 
 .PHONY: all clean 
 
-all: docker $(FIGURES) #$(LABELS) ## uncomment so that make keeps CSV files with labels
+all: docker $(FIGURES) $(LABELS) ## uncomment so that make keeps CSV files with labels
 
 plots/%.pdf: ../labels/label-%.csv
 	@echo "Generating figure for $*.."
