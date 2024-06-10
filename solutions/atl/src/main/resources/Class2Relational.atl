@@ -18,17 +18,26 @@ uses strings;
 
 -- global variable
 -- context 
+
 -- Helper 22
 helper def: objectIdType : Relational!Type =
 	class_!DataType.allInstances()->select(e | e.name = 'Integer')->first();
 
--- Transformation 47
+-- Helper
+helper context OclAny def: orDefault : String =
+	if self.oclIsUndefined() then
+		''
+	else
+		self
+	endif;
+
+-- Transformation
 rule Class2Table {
 	from
 		c : class_!Class
 	to
 		out : Relational!Table (
-			name <- c.name,
+			name <- c.name.orDefault,
 			-- Columns are generated from Attributes in another rule not explicitly called here !
 			col <- Sequence {key}->union(c.attr->select(e | not e.multiValued)),
 			key <- Set {key}
@@ -39,25 +48,25 @@ rule Class2Table {
 		)
 }
 
--- Transformation 16
+-- Transformation
 rule DataType2Type {
 	from
 		dt : class_!DataType
 	to
 		out : Relational!Type (
-			name <- dt.name
+			name <- dt.name.orDefault
 		)
 }
 
--- Transformation 31
+-- Transformation
 rule DataTypeAttribute2Column {
 	from
 		a : class_!Attribute (
-			a.type.oclIsKindOf(class_!DataType) and not a.multiValued
+			a.type.oclIsKindOf(class_!DataType) and not a.multiValued and a.owner <> OclUndefined
 		)
 	to
 		out : Relational!Column (
-			name <- a.name,
+			name <- a.name.orDefault,
 			type <- a.type
 -- explicit use of implicit tracking links (first expected syntax, then present actual syntax)
 --			owner <- [Class2Type.key]a.owner
@@ -65,57 +74,57 @@ rule DataTypeAttribute2Column {
 		)
 }
 
--- Transformation 67
+-- Transformation
 rule MultiValuedDataTypeAttribute2Column {
 	from
 		a : class_!Attribute (
-			a.type.oclIsKindOf(class_!DataType) and a.multiValued
+			a.type.oclIsKindOf(class_!DataType) and a.multiValued and a.owner <> OclUndefined
 		)
 	to
 		out : Relational!Table (
-			name <- a.owner.name + '_' + a.name,
+			name <- a.owner.name.orDefault + '_' + a.name,
 			col <- Sequence {id, value}
 		),
 		id : Relational!Column (
-			name <- a.owner.name.firstToLower() + 'Id',
+			name <- a.owner.name.orDefault.firstToLower() + 'Id',
 			type <- thisModule.objectIdType
 		),
 		value : Relational!Column (
-			name <- a.name,
+			name <- a.name.orDefault,
 			type <- a.type
 		)
 }
 
--- Transformation 33
+-- Transformation
 rule ClassAttribute2Column {
 	from
 		a : class_!Attribute (
-			a.type.oclIsKindOf(class_!Class) and not a.multiValued
+			a.type.oclIsKindOf(class_!Class) and not a.multiValued and a.owner <> OclUndefined
 		)
 	to
 		foreignKey : Relational!Column (
-			name <- a.name + 'Id',
+			name <- a.name.orDefault + 'Id',
 			type <- thisModule.objectIdType
 		)
 }
 
--- Transformation 69
+-- Transformation
 rule MultiValuedClassAttribute2Column {
 	from
 		a : class_!Attribute (
-			a.type.oclIsKindOf(class_!Class) and a.multiValued
+			a.type.oclIsKindOf(class_!Class) and a.multiValued and a.owner <> OclUndefined
 		)
 	to
 		t : Relational!Table (
-			name <- a.owner.name + '_' + a.name,
+			name <- a.owner.name.orDefault + '_' + a.name,
 			col <- Sequence {id, foreignKey}
 		),
 		id : Relational!Column (
-			name <- a.owner.name.firstToLower() + 'Id',
+			name <- a.owner.name.orDefault.firstToLower() + 'Id',
 			type <- thisModule.objectIdType
 		),
 		foreignKey : Relational!Column (
-			name <- a.name + 'Id',
+			name <- a.name.orDefault + 'Id',
 			type <- thisModule.objectIdType
 		)
 }
