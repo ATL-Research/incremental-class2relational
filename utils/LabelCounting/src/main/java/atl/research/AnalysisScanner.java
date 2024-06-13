@@ -157,42 +157,46 @@ public class AnalysisScanner {
                     switch (wordArray[1].toUpperCase()) {
                         case Labels.TRANSFORMATION_LABEL: 
                             if (currentLabel != Labels.TRANSFORMATION_LABEL) {
-                                updateLabels(Labels.TRANSFORMATION_LABEL,filepath);
+                                updateLabels(Labels.TRANSFORMATION_LABEL, filepath);
                             } 
                             break;
                         case Labels.TRAVERSAL_LABEL: 
                         case Labels.NAVIGATION_LABEL:
                             if (currentLabel != Labels.TRAVERSAL_LABEL) {
-                                updateLabels(Labels.TRAVERSAL_LABEL,filepath);
+                                updateLabels(Labels.TRAVERSAL_LABEL, filepath);
                             } 
                             break;
                         
                         
                         case Labels.SETUP_LABEL: 
                             if (currentLabel != Labels.SETUP_LABEL) {
-                                updateLabels(Labels.SETUP_LABEL,filepath);
+                                updateLabels(Labels.SETUP_LABEL, filepath);
                             } break;
                         
                         
                         case Labels.TRACING_LABEL: 
-                        if (currentLabel!= Labels.TRACING_LABEL) {
-                        updateLabels(Labels. TRACING_LABEL,filepath); 
-                        }
+                            if (currentLabel!= Labels.TRACING_LABEL) {
+                                updateLabels(Labels. TRACING_LABEL, filepath); 
+                            }
                         break;
                         
                         case Labels.CHANGE_IDENTIFICATION: 
                             if (currentLabel != Labels.CHANGE_IDENTIFICATION) {
-                                updateLabels(Labels.CHANGE_IDENTIFICATION,filepath);
+                                updateLabels(Labels.CHANGE_IDENTIFICATION, filepath);
                             } break;
                         
+                        case Labels.CHANGE_PROPAGATION: 
+                            if (currentLabel != Labels.CHANGE_PROPAGATION) {
+                                updateLabels(Labels.CHANGE_PROPAGATION, filepath);
+                            } break;
                         case Labels.HELPER_LABEL: {
                             if (currentLabel != Labels.HELPER_LABEL) {
-                                updateLabels(Labels.HELPER_LABEL,filepath);
+                                updateLabels(Labels.HELPER_LABEL, filepath);
                             } break;
                         }
                         case Labels.WRAPPER_LABEL: {
                             if (currentLabel != Labels.WRAPPER_LABEL) {
-                                updateLabels(Labels.WRAPPER_LABEL,filepath);
+                                updateLabels(Labels.WRAPPER_LABEL, filepath);
                             } break;
                         }
                     }
