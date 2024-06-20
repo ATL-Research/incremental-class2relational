@@ -35,7 +35,7 @@ public class Class2RelationalIncremental {
 	private static final Tracer TRACER = new Tracer();
 	// Helper
 	private static final List<DataType> allDataTypes = new LinkedList<>();
-	// Traversal
+	// Model_Traversal
 	private static Traverser PRETRAVERSER;
 	private static Traverser TRAVERSER;
 
@@ -106,7 +106,7 @@ public class Class2RelationalIncremental {
 		return start(class2relationalIN, class2relationalOUT);
 	}
 
-	// Traversal
+	// Model_Traversal
 	private static List<Named> transform(List<EObject> input) {
 
 		for (EObject namedElt : input) {
@@ -119,7 +119,7 @@ public class Class2RelationalIncremental {
 		return actualTransform(input);
 	}
 
-	// Traversal
+	// Model_Traversal
     private static void preTransform(List<EObject> input) {
     	var iterator = input.iterator();
         PRETRAVERSER = new Traverser(TRACER);
@@ -134,7 +134,7 @@ public class Class2RelationalIncremental {
         PRETRAVERSER.traverseAndAcceptPre(iterator);
     }
 
-    // Traversal
+    // Model_Traversal
     private static List<Named> actualTransform(List<EObject> input) {
     	var newRoot = Classes2List(input);
 
@@ -153,7 +153,7 @@ public class Class2RelationalIncremental {
 			// CHANGE_IDENTIFICATION
     		x.eAdapters().add(adapter);
         });
-        // Traversal
+        // Model_Traversal
         TRAVERSER.addFunction(DataTypeImpl.class, x -> {
         	DataType2Type((DataType) x);
         	// CHANGE_IDENTIFICATION
@@ -167,7 +167,7 @@ public class Class2RelationalIncremental {
 			// CHANGE_IDENTIFICATION
     		x.eAdapters().add(adapter);
         });
-        // Traversal
+        // Model_Traversal
         TRAVERSER.addFunction(AttributeImpl.class, x -> {
         	DataTypeAttribute2Column((Attribute) x);
 			MultiValuedDataTypeAttribute2Column((Attribute) x);
@@ -188,7 +188,7 @@ public class Class2RelationalIncremental {
     		x.eAdapters().add(adapter);
 		});
 
-        // Traversal
+        // Model_Traversal
         TRAVERSER.traverseAndAccept(iterator);
 
         return newRoot;
