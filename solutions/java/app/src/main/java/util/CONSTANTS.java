@@ -6,6 +6,7 @@ package util;
  * @author stefan
  *
  */
+// SETUP
 public final class CONSTANTS {
     public static final String METAMODEL_DIR = "./resources/metamodels/";
     public static final String MODEL_DIR = "./resources/models/";

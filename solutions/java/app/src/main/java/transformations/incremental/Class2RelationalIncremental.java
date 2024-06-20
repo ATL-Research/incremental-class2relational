@@ -56,7 +56,7 @@ public class Class2RelationalIncremental {
 		IO.persist(class2relationalOUT);
 
 
-		// Incrementality
+		// CHANGE_IDENTIFICATION
 		Adapter adapterIn = new AdapterImpl() {
 			public void notifyChanged(Notification notification) {
 				var notificationType = notification.getEventType();
@@ -142,25 +142,29 @@ public class Class2RelationalIncremental {
         TRAVERSER = new Traverser(TRACER);
         TRAVERSER.addFunction(ClassImpl.class, x -> {
         	Class2Table((Class)x );
-        	// Incrementality
+        	// CHANGE_IDENTIFICATION
         	var adapter = new EContentAdapter() {
     			public void notifyChanged(Notification notification) {
     				System.out.println("Notfication received from the data model. Data model of Class has changed!!!" + notification.getEventType());
-    				Class2Table((Class) notification.getNotifier());
+    				// CHANGE_PROPAGATION
+					Class2Table((Class) notification.getNotifier());
     			}
     		};
+			// CHANGE_IDENTIFICATION
     		x.eAdapters().add(adapter);
         });
         // Traversal
         TRAVERSER.addFunction(DataTypeImpl.class, x -> {
         	DataType2Type((DataType) x);
-        	// Incrementality
+        	// CHANGE_IDENTIFICATION
         	var adapter = new EContentAdapter() {
     			public void notifyChanged(Notification notification) {
     				System.out.println("Notfication received from the data model. Data model of Class has changed!!!" + notification.getEventType());
-    				DataType2Type((DataType) notification.getNotifier());
+    				// CHANGE_PROPAGATION
+					DataType2Type((DataType) notification.getNotifier());
     			}
     		};
+			// CHANGE_IDENTIFICATION
     		x.eAdapters().add(adapter);
         });
         // Traversal
@@ -169,16 +173,18 @@ public class Class2RelationalIncremental {
 			MultiValuedDataTypeAttribute2Column((Attribute) x);
 			ClassAttribute2Column((Attribute) x);
 			MultiValuedClassAttribute2Column((Attribute) x);
-			// Incrementality
+			// CHANGE_IDENTIFICATION
 			var adapter = new EContentAdapter() {
     			public void notifyChanged(Notification notification) {
     				System.out.println("Notfication received from the data model. Data model of Class has changed!!!" + notification.getEventType());
-    				DataTypeAttribute2Column((Attribute) notification.getNotifier());
+    				// CHANGE_PROPAGATION
+					DataTypeAttribute2Column((Attribute) notification.getNotifier());
     				MultiValuedDataTypeAttribute2Column((Attribute) notification.getNotifier());
     				ClassAttribute2Column((Attribute) notification.getNotifier());
     				MultiValuedClassAttribute2Column((Attribute) notification.getNotifier());
     			}
     		};
+			// CHANGE_IDENTIFICATION
     		x.eAdapters().add(adapter);
 		});
 

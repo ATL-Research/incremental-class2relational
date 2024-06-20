@@ -8,7 +8,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
 import transformations.util.trace.Tracer;
-
+// MODEL_TRAVERSAL
 public class Traverser {
     private HashMap<Class<?>, Consumer<EObject>> functions = new HashMap<>();
     private Tracer tracer;
