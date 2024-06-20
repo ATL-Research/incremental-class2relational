@@ -199,8 +199,11 @@ public class Class2RelationalIncremental {
     	var nameds = new LinkedList<Named>();
 
     	for (EObject eObject : input) {
+            // Transformation 4
+            // Tracing 10
 			nameds.addAll(TRACER.resolveAll(eObject).stream().map($ -> (Named) $).collect(Collectors.toList()));
 		}
+		// Transformation
     	nameds.add(objectIdType());
 
     	return nameds;
@@ -253,9 +256,9 @@ public class Class2RelationalIncremental {
 
     // Transformation
     public static void DataType2Type(DataType dt) {
-        // Transformation
+        // Tracing
     	var out = TRACER.resolve(dt, RELATIONALFACTORY.createType());
-    	// Tracing
+    	// Transformation
     	out.setName(dt.getName());
     }
 
