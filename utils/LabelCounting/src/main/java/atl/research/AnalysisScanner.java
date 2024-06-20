@@ -35,6 +35,7 @@ public class AnalysisScanner {
     protected String currentLabel = Labels.EMPTY_LABEL;
     protected int currentLabelCount = 0;
     protected int labelStartLine = 1;
+    protected boolean skipLinesWithManualAnnotation = false;
     
     // solution-specific properties
     protected static Path analyzedDirectory;
@@ -110,10 +111,9 @@ public class AnalysisScanner {
             in.close();
 
             // add analysis of last line
-            String csvLine = filepath.getFileName().toString() + "," + currentLabel + "," + currentLabelCount + "," + labelStartLine + "-" + currentLine + "\n";
-            Files.write(labelCountFileAbsPath, csvLine.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);        
+            writeLabelCount(filepath.getFileName().toString());   
+
         } catch (FileNotFoundException e) {
-     
             e.printStackTrace();
         }
             
@@ -146,59 +146,67 @@ public class AnalysisScanner {
 
             try{
                 String[] wordArray = preprocessed.split(" ");
-                if (!isComment(preprocessed)) {
+                if (!isComment(preprocessed) && !skipLinesWithManualAnnotation) {
                     if (DEBUG) {
-                        System.out.println(line + " \t consists of " + wordArray.length + " words");
+                        System.out.println(line + " \t consists of " + wordArray.length + " words associated with label: " + currentLabel);
                     }
                     currentLabelCount += wordArray.length; 
                     wordCt += wordArray.length;
                 }
-                if (isComment(preprocessed) && wordArray.length > 1 ) {
+                else if (isComment(preprocessed) && wordArray.length > 1 ) {
+                    int manualLabelCt = getCustomLabelCount(wordArray);
+
                     switch (wordArray[1].toUpperCase()) {
                         case Labels.TRANSFORMATION_LABEL: 
                             if (currentLabel != Labels.TRANSFORMATION_LABEL) {
                                 updateLabels(Labels.TRANSFORMATION_LABEL, filepath);
                             } 
                             break;
+
                         case Labels.TRAVERSAL_LABEL: 
                         case Labels.NAVIGATION_LABEL:
                             if (currentLabel != Labels.TRAVERSAL_LABEL) {
                                 updateLabels(Labels.TRAVERSAL_LABEL, filepath);
                             } 
                             break;
-                        
-                        
+                                                
                         case Labels.SETUP_LABEL: 
                             if (currentLabel != Labels.SETUP_LABEL) {
                                 updateLabels(Labels.SETUP_LABEL, filepath);
-                            } break;
-                        
+                            } 
+                            break;
                         
                         case Labels.TRACING_LABEL: 
                             if (currentLabel!= Labels.TRACING_LABEL) {
                                 updateLabels(Labels. TRACING_LABEL, filepath); 
                             }
-                        break;
+                            break;
                         
                         case Labels.CHANGE_IDENTIFICATION: 
                             if (currentLabel != Labels.CHANGE_IDENTIFICATION) {
                                 updateLabels(Labels.CHANGE_IDENTIFICATION, filepath);
-                            } break;
+                            } 
+                            break;
                         
                         case Labels.CHANGE_PROPAGATION: 
                             if (currentLabel != Labels.CHANGE_PROPAGATION) {
                                 updateLabels(Labels.CHANGE_PROPAGATION, filepath);
-                            } break;
-                        case Labels.HELPER_LABEL: {
+                            } 
+                            break;
+                        case Labels.HELPER_LABEL: 
                             if (currentLabel != Labels.HELPER_LABEL) {
                                 updateLabels(Labels.HELPER_LABEL, filepath);
-                            } break;
-                        }
-                        case Labels.WRAPPER_LABEL: {
+                            } 
+                            break;
+                        
+                        case Labels.WRAPPER_LABEL: 
                             if (currentLabel != Labels.WRAPPER_LABEL) {
                                 updateLabels(Labels.WRAPPER_LABEL, filepath);
-                            } break;
-                        }
+                            } 
+                            break;                        
+                    }
+                    if (manualLabelCt != -1) {
+                        currentLabelCount += manualLabelCt;
                     }
                 }
             }
@@ -209,8 +217,16 @@ public class AnalysisScanner {
     }
 
     private void updateLabels(String newLabel, String filepath) throws IOException {
-        String csvLine = filepath +"," + currentLabel + "," + currentLabelCount + "," + labelStartLine + "-"+ currentLine + "\n";
+        writeLabelCount(filepath);
+        updateForNewLabelType(newLabel);
+    }
+
+    private void writeLabelCount(String filePath) throws IOException {
+        String csvLine = filePath +"," + currentLabel + "," + currentLabelCount + "," + labelStartLine + "-"+ currentLine + "\n";
         Files.write(labelCountFileAbsPath, csvLine.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+    }
+   
+    private void updateForNewLabelType(String newLabel) {
         currentLabel= newLabel;
         currentLabelCount = 0;
         labelStartLine = currentLine + 1;
@@ -219,7 +235,22 @@ public class AnalysisScanner {
     private boolean isComment(String line) {
         return commentSymbols.stream().anyMatch((s) -> line.startsWith(s));
     }
-    
+
+    private int getCustomLabelCount(String[] wordArray) {
+        if (wordArray.length > 2) {
+            String secondEntry = wordArray[2];
+            if (secondEntry.matches("\\d+")) {
+                System.out.println("second entry " + secondEntry + " current label " + currentLabel);
+                skipLinesWithManualAnnotation = true;
+                return Integer.parseInt(secondEntry);
+            }
+            else
+                skipLinesWithManualAnnotation = false;
+        }
+        else 
+            skipLinesWithManualAnnotation = false;
+        return -1;
+    }
 
     public List<String> extractFilesFromPath(String path) {
 
@@ -244,7 +275,8 @@ public class AnalysisScanner {
 
         if (args.length != 1) {
             System.out.println("Usage: java AnalysisScanner <solution>");
-            solution = "yamtl-groovy"; // set default value so that you can use the LabelCounting directly from your IDE
+            // set default value so that you can use the LabelCounting directly from your IDE:
+            solution = "java"; 
         }
         else {
             solution = args[0];
