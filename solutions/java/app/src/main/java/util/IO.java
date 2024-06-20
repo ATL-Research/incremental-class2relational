@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
  * @author stefan
  *
  */
+// SETUP
 public class IO {
 
     static {
