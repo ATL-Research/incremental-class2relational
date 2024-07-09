@@ -47,7 +47,7 @@ public class BXtendDSLSolution extends AbstractDriver {
     		trafo.sourceToTarget();
     }
     
-    
+    // TODO is this trafo or setup?
     public static void main(String[] args) throws Exception {
     	BXtendDSLSolution solution = new BXtendDSLSolution();
 

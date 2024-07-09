@@ -33,7 +33,7 @@ rule MultiAttribute2Table
 	att.name att.owner --> tbl.name;
 	// Transformation 
 	att.name att.type att.owner --> tbl.col;
-	
+
 // Transformation 
 rule SingleClassAttribute2Column
 	// Transformation 
@@ -44,7 +44,7 @@ rule SingleClassAttribute2Column
 	att.name att.type --> col.name;
 	// Transformation 
 	att.name att.type --> col.type;
-	
+
 // Transformation 
 rule MultiClassAttribute2Column
 	// Transformation 

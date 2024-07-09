@@ -13,7 +13,7 @@ class MultiClassAttribute2ColumnImpl extends MultiClassAttribute2Column {
 		// Setup
 		super(trafo)
 	}
-	
+
 	// Transformation 
 	override protected onIdCreation(Column id) {
 		// Transformation 
@@ -21,7 +21,7 @@ class MultiClassAttribute2ColumnImpl extends MultiClassAttribute2Column {
 		// Transformation 
 		id.corr.target().t.col += id
 	}
-	
+
 	// Transformation 
 	override protected onFkCreation(Column fk) {
 		// Transformation 
@@ -29,35 +29,35 @@ class MultiClassAttribute2ColumnImpl extends MultiClassAttribute2Column {
 		// Transformation 
 		fk.corr.target().t.col += fk
 	}
-	
-	// Model Traversal 
+
+	// Model_Traversal 
 	override protected filterAtt(Attribute att) {		
-		// Model Traversal
+		// Model_Traversal
 		(att.multiValued) && (att.type instanceof Class)
 	}
-	
+
 	// Transformation 
 	override protected tNameFrom(String attName, Class owner, Classifier attType) {
 		// Transformation 
-		var tblName = (owner !== null && owner.name !== null && owner.name !== "")? owner.name : "Table" 
+		var tblName = (owner !== null && owner.name !== null && owner.name !== "")? owner.name : "" 
 		// Transformation 
 		new Type4tName(tblName + "_" + attName)
 	}
-	
+
 	// Transformation 
 	override protected idNameFrom(String attName, Class attOwner) {
 		// Transformation 
-		var name = (attOwner === null || attOwner.name === null || attOwner.name === "")? "tableId" : attOwner.name.toFirstLower + "Id"
+		var name = (attOwner === null || attOwner.name === null || attOwner.name === "")? "Id" : attOwner.name.toFirstLower + "Id"
 		// Transformation 
 		new Type4idName(name)
 	}
-	
+
 	// Transformation 
 	override protected fkNameFrom(String attName, Class attOwner) {
 		// Transformation 
 		new Type4fkName(attName + "Id")
 	}
-	
+
 	// Helper 
 	def findIntegerDatatype() {
 		// Model Traversal
@@ -65,5 +65,4 @@ class MultiClassAttribute2ColumnImpl extends MultiClassAttribute2Column {
 		// Helper
 		datatype
 	}	
-	
 }

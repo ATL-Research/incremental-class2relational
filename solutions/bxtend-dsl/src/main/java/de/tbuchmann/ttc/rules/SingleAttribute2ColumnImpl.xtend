@@ -9,11 +9,11 @@ class SingleAttribute2ColumnImpl extends SingleAttribute2Column {
 		// Setup
 		super(trafo)
 	}
-	
-	// Model Traversal 
+
+	// Model_Traversal 
 	override protected filterAtt(Attribute att) {	
-		// Model Traversal
+		// Model_Traversal
 		!(att.multiValued) && !(att.type instanceof atl.research.class_.Class) && (att.type !== null)
 	}
-	
+
 }
