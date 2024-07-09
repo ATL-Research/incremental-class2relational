@@ -49,7 +49,7 @@ public abstract class AbstractDriver {
         setupResourceSet();
         loadModels();
     }
-    
+
     protected void setupResourceSet() {
         resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(
             "xmi",
@@ -101,7 +101,7 @@ public abstract class AbstractDriver {
             }
         }
     }
-
+    // Setup
     protected void saveTarget() throws IOException {
         target.save(Collections.emptyMap());
     }
