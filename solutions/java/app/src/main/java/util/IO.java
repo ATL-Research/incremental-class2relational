@@ -13,12 +13,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-/**
- * Class with static methods to read metamodels and read/write models from .xmi and .ecore files.
- * 
- * @author stefan
- *
- */
+
 // SETUP
 public class IO {
 
@@ -73,17 +68,6 @@ public class IO {
         persist(resource);
     }
 
-    /**
-     * Reads all models from a file.
-     * 
-     * IMPORTANT: the EPackacke containing the MM to which the read model conforms to has to be loaded
-     * in EPackage.Registry.INSTANCE.
-     * 
-     * for instance by calling MMPackage.eINSTANCE.eClass();
-     * 
-     * @param uri Path to xmi file containing the models to be read
-     * @return list of model root objects for each model contained within the xmi file
-     */
     public static List<EObject> readModels(String uri) {
         // have to somehow register the families metamodel
         ResourceSet resSet = new ResourceSetImpl();
@@ -100,5 +84,4 @@ public class IO {
 
         return resSet.getResource(URI.createURI(uri), true);
     }
-    
 }
