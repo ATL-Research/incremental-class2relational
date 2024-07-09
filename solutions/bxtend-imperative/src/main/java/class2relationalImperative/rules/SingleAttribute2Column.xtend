@@ -13,10 +13,10 @@ class SingleAttribute2Column extends Elem2Elem {
 		// Setup
 		super(src, trgt, corr)
 	}
-	
+
 	// Transformation
 	override sourceToTarget() {
-		// Model Traversal
+		// Model_Traversal
 		sourceModel.allContents.filter(typeof(Attribute)).filter[att | !att.multiValued].forEach[ attribute |
 			// Transformation
 			val corr = attribute.getOrCreateCorrModelElement("SingleAttribute2Column")
@@ -43,6 +43,5 @@ class SingleAttribute2Column extends Elem2Elem {
 				target.type = DataType2Type.getType(sourceModel.contents.filter(typeof(DataType)).findFirst[name == "Integer"])
 			}
 		]
-	}
-	
+	}	
 }

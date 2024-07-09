@@ -35,15 +35,15 @@ public class BXtendSolution extends AbstractDriver {
     	corr =  getResourceSet().createResource(URI.createFileURI(System.getenv("SOURCE_PATH") + ".corr.xmi"));
         EcoreUtil.resolveAll(getResourceSet());
     }
-    
+
     protected void applyChange() {
     	super.applyChange();
     	if (!isBatchMode())
     		// Transformation
     		trafo.sourceToTarget();
     }
-    
-    
+
+
     public static void main(String[] args) throws Exception {
     	BXtendSolution solution = new BXtendSolution();
 
@@ -62,7 +62,6 @@ public class BXtendSolution extends AbstractDriver {
     protected void applyTransformation() {
     	// Transformation
     	trafo.sourceToTarget();
-    }    
-        
+    }
 
 }
