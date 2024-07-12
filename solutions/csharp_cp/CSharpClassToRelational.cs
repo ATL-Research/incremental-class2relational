@@ -239,7 +239,7 @@ namespace HSRM.TTC2023.ClassToRelational
             foreach (var attr in @class.Attr)
             {
                 // Model Traversal 
-                if (attr.MultiValued)
+                if (!attr.MultiValued)
                 {
                     //  Transformation 
                     table.Col.Add((IColumn)TraceOrTransform(attr)!);
