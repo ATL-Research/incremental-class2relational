@@ -75,7 +75,10 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
                     this._newObject = value;
                     if ((old != null))
                     {
-                        old.Parent = null;
+                        if ((old.Parent == this))
+                        {
+                            old.Parent = null;
+                        }
                         old.ParentChanged -= this.OnResetNewObject;
                     }
                     if ((value != null))

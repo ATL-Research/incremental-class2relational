@@ -375,9 +375,9 @@ namespace HSRM.TTC2023.ClassToRelational
             void OnNameChanged(object? sender, ValueChangedEventArgs? e)
             {
                 // Transformation 
-                table.Name = attribute.Owner.Name + "_" + attribute.Name;
+                table.Name = attribute.Owner?.Name + "_" + attribute.Name;
                 // Transformation 
-                key.Name = attribute.Owner.Name.ToCamelCase() + "Id";
+                key.Name = attribute.Owner?.Name.ToCamelCase() + "Id";
             }
             // Helper 
             OnNameChanged(null, null);
