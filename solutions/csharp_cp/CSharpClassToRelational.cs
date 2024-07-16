@@ -46,6 +46,13 @@ namespace HSRM.TTC2023.ClassToRelational
                 // Change_Propagation 
                 targetCollection.Remove(target);
             }
+            if (original is IClass cl)
+            {
+                foreach (var att in cl.Attr.Where(a => a.MultiValued))
+                {
+                    targetCollection.Remove((T)_attributeTables[att]);
+                }
+            }
         }
 
         // Transformation 
@@ -223,7 +230,7 @@ namespace HSRM.TTC2023.ClassToRelational
                 // Change_Propagation 
                 var att = sender as IAttribute;
                 // Change_Propagation 
-                if (att!.MultiValued)
+                if (!att!.MultiValued)
                 {
                     // Change_Propagation 
                     table!.Col.Add((IColumn)TraceOrTransform(att)!);
@@ -239,7 +246,7 @@ namespace HSRM.TTC2023.ClassToRelational
             foreach (var attr in @class.Attr)
             {
                 // Model Traversal 
-                if (attr.MultiValued)
+                if (!attr.MultiValued)
                 {
                     //  Transformation 
                     table.Col.Add((IColumn)TraceOrTransform(attr)!);
@@ -375,9 +382,9 @@ namespace HSRM.TTC2023.ClassToRelational
             void OnNameChanged(object? sender, ValueChangedEventArgs? e)
             {
                 // Transformation 
-                table.Name = attribute.Owner.Name + "_" + attribute.Name;
+                table.Name = attribute.Owner?.Name + "_" + attribute.Name;
                 // Transformation 
-                key.Name = attribute.Owner.Name.ToCamelCase() + "Id";
+                key.Name = attribute.Owner?.Name.ToCamelCase() + "Id";
             }
             // Helper 
             OnNameChanged(null, null);
