@@ -22,7 +22,7 @@
     <feature xsi:type="ecore:EReference" href="Class#//Class/attr"/>
     <deletedElement href="../../models/scale1/class.xmi#/1/@attr.2"/>
   </changes>
-  <changes xsi:type="changes:AttributePropertyChange" oldValue="String">
+  <changes xsi:type="changes:ReferenceSetNull">
     <affectedElement href="../../models/scale1/class.xmi#/1/@attr.0"/>
     <feature xsi:type="ecore:EReference" href="Class#//Attribute/type"/>
   </changes>
