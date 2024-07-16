@@ -46,6 +46,13 @@ namespace HSRM.TTC2023.ClassToRelational
                 // Change_Propagation 
                 targetCollection.Remove(target);
             }
+            if (original is IClass cl)
+            {
+                foreach (var att in cl.Attr.Where(a => a.MultiValued))
+                {
+                    targetCollection.Remove((T)_attributeTables[att]);
+                }
+            }
         }
 
         // Transformation 
@@ -223,7 +230,7 @@ namespace HSRM.TTC2023.ClassToRelational
                 // Change_Propagation 
                 var att = sender as IAttribute;
                 // Change_Propagation 
-                if (att!.MultiValued)
+                if (!att!.MultiValued)
                 {
                     // Change_Propagation 
                     table!.Col.Add((IColumn)TraceOrTransform(att)!);
