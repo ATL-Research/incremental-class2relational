@@ -48,7 +48,7 @@ pdf(output_pdf)
 ggplot(results, aes(x = File, y = Sum, fill = File)) +
   geom_bar(stat = "identity") +
   labs(title = "Total word count per solution", x = "Solution", y = "Word count") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none")  # Rotate x-axis labels for better readability and get rid of the legend on the right
 
 # Close the PDF device
 dev.off()
