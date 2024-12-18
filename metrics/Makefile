@@ -13,6 +13,11 @@ plots/summary.pdf: $(LABELS)
 			-v $(shell pwd)/../labels/:/labels \
 			-v $(shell pwd)/plots/summary.pdf:/plots/summary.pdf \
 			incr-c2r-plot:latest /usr/bin/Rscript generate-summary.r /labels
+	@echo "Generating the summary plot per aspects"
+	docker run --rm \
+			-v $(shell pwd)/../labels/:/labels \
+			-v $(shell pwd)/plots/:/plots/ \
+			incr-c2r-plot:latest /usr/bin/Rscript generate-summary-per-aspect.r /labels
 
 plots/%.pdf: ../labels/label-%.csv
 	@echo "Generating figure for $*.."
