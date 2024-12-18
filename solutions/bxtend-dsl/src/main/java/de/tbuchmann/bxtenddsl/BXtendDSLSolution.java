@@ -12,11 +12,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import atl.research.AbstractDriver;
 import de.tbuchmann.ttc.trafo.Class2Relational;
 
+// Setup
 public class BXtendDSLSolution extends AbstractDriver {
 	private Class2Relational trafo;
     protected Resource corr;    
 
-    // Setup
     @Override
     public void init() {
     	try {

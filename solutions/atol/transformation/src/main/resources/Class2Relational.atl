@@ -6,6 +6,7 @@
 --	- accessed unique lazy rule target tuple (which does not exist in standard ATL)
 -- - renamed out into _out
 --	- ATOL's out should rather be renamed into something that is more likely to avoid name collisions
+-- Setup
 module Class2Relational;
 create OUT : Relational from IN : Class;
 

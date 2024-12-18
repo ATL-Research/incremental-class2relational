@@ -18,7 +18,7 @@ import class_.Class_Package;
 import relational_.Relational_Package;
 
 
-// EMPTY
+// Setup
 public abstract class AbstractDriver {
     ResourceSet resourceSet = new ResourceSetImpl();
     Resource source;

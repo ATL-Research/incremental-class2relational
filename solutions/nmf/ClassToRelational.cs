@@ -6,6 +6,7 @@ using NMF.Expressions.Linq;
 using Type = HSRM.TTC2023.ClassToRelational.Relational_.Type;
 using NMF.Utilities;
 
+// Setup
 namespace HSRM.TTC2023.ClassToRelational
 {
     // Transformation

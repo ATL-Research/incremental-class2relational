@@ -1,11 +1,11 @@
 package util;
 
-/**
- * Class containing the most important constants for this project.
- * 
- * @author stefan
- *
- */
+//
+// Class containing the most important constants for this project.
+// 
+// @author stefan
+//
+//
 // SETUP
 public final class CONSTANTS {
     public static final String METAMODEL_DIR = "./resources/metamodels/";

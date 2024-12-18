@@ -7,8 +7,8 @@ import atl.research.relational_.Table
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.util.EcoreUtil
 
+// Setup
 class SingleAttribute2Column extends Elem2Elem {
-	// Setup
 	new(Resource src, Resource trgt, Resource corr) {
 		// Setup
 		super(src, trgt, corr)

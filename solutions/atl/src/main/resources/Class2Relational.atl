@@ -1,3 +1,4 @@
+-- Setup 2
 module Class2Relational;
 -- Setup 6
 create OUT : Relational from IN : class_;

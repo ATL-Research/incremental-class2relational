@@ -10,8 +10,8 @@ import java.util.List
 import org.eclipse.emf.ecore.util.EcoreUtil
 import atl.research.relational_.Relational_Factory
 
+// Setup
 class Class2TableImpl extends Class2Table {	
-	// Setup
 	new(Class2Relational trafo) {
 		// Setup
 		super(trafo)

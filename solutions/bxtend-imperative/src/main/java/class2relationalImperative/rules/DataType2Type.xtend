@@ -7,6 +7,7 @@ import java.util.Map
 import java.util.HashMap
 import atl.research.class_.Classifier
 
+// Setup
 class DataType2Type extends Elem2Elem {
 	// Helper
 	static Map<DataType, Type> typeMap = new HashMap<DataType, Type>()

@@ -8,11 +8,11 @@ import atl.research.AbstractDriver;
 import class2relationalImperative.rules.Class2relationalImperativeTransformation;
 
 
+// Setup
 public class BXtendSolution extends AbstractDriver {
 	private Class2relationalImperativeTransformation trafo;
-    protected Resource corr;    
+    protected Resource corr;
 
-    // Setup
     @Override
     public void init() {
     	try {

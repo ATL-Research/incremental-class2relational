@@ -5,8 +5,8 @@ import atl.research.class_.Attribute
 import atl.research.class_.Classifier
 import atl.research.class_.DataType
 
+// Setup
 class SingleClassAttribute2ColumnImpl extends SingleClassAttribute2Column {	
-	// Setup
 	new(Class2Relational trafo) {
 		// Setup
 		super(trafo)

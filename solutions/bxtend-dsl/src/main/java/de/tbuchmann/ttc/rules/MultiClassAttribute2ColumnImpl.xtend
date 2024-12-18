@@ -7,8 +7,8 @@ import atl.research.class_.Class
 import atl.research.class_.Classifier
 import atl.research.class_.DataType
 
+// Setup
 class MultiClassAttribute2ColumnImpl extends MultiClassAttribute2Column {	
-	// Setup
 	new(Class2Relational trafo) {
 		// Setup
 		super(trafo)

@@ -2,6 +2,7 @@
 using NMF.Synchronizations;
 using NMF.Transformations;
 
+// Setup
 namespace HSRM.TTC2023.ClassToRelational
 {
     // Setup

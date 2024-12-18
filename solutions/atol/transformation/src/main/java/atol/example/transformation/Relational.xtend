@@ -5,7 +5,7 @@ import atl.research.relational_.Relational_Package
 
 //import static fr.eseo.atol.gen.MetamodelUtils.*
 
-
+// Helper
 @AOFAccessors(Relational_Package)
 class Relational {
 /*

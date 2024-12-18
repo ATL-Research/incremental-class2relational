@@ -7,8 +7,8 @@ import atl.research.class_.DataType
 import atl.research.relational_.Column
 import org.eclipse.emf.ecore.util.EcoreUtil
 
+// Setup
 class MultiAttribute2Table extends Elem2Elem {
-	// Setup
 	new(Resource src, Resource trgt, Resource corr) {
 		// Setup
 		super(src, trgt, corr)
