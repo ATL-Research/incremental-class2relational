@@ -16,7 +16,7 @@ namespace HSRM.TTC2023.ClassToRelational
 
         // Tracing 
         private Dictionary<IAttribute, ITable> _attributeTables = new();
-        
+
         // Tracing 
         private Model _result = new Model();
 
