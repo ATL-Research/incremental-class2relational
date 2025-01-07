@@ -39,14 +39,14 @@ public class BXtendDSLSolution extends AbstractDriver {
     	corr =  getResourceSet().createResource(URI.createFileURI(System.getenv("SOURCE_PATH") + ".corr.xmi"));
         EcoreUtil.resolveAll(getResourceSet());
     }
-    
+
     protected void applyChange() {
     	super.applyChange();
     	if (!isBatchMode())
     		// Transformation
     		trafo.sourceToTarget();
     }
-    
+
     // TODO is this trafo or setup?
     public static void main(String[] args) throws Exception {
     	BXtendDSLSolution solution = new BXtendDSLSolution();
@@ -66,6 +66,6 @@ public class BXtendDSLSolution extends AbstractDriver {
     protected void applyTransformation() {
     	// Transformation
     	trafo.sourceToTarget();
-    }    
-        
+    }
+
 }
