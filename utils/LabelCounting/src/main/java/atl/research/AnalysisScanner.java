@@ -136,6 +136,7 @@ public class AnalysisScanner {
   
             line  = line.replaceAll(skippedSymbolsRegex, " ");
             line = line.replaceAll("\\s+", " ");
+
             String preprocessed = line; 
             
             if (isImport(preprocessed)) {
@@ -145,7 +146,7 @@ public class AnalysisScanner {
             }
 
             try{
-                String[] wordArray = preprocessed.split(" ");
+                String[] wordArray = getCleanedArray(preprocessed);
                 if (!isComment(preprocessed) && !skipLinesWithManualAnnotation) {
                     if (DEBUG) {
                         System.out.println(line + " \t consists of " + wordArray.length + " words associated with label: " + currentLabel);
@@ -215,6 +216,15 @@ public class AnalysisScanner {
             }
         }
     }
+    String[] getCleanedArray(String preprocessed) {
+        String[] array = preprocessed.split(" ");
+        List<String> arraylist = new LinkedList<>();
+        for (String a : array) {
+            if (!a.equals(""))
+                arraylist.add(a);
+        }
+        return arraylist.toArray(new String[0]);
+    }
 
     private void updateLabels(String newLabel, String filepath) throws IOException {
         writeLabelCount(filepath);
@@ -276,7 +286,7 @@ public class AnalysisScanner {
         if (args.length != 1) {
             System.out.println("Usage: java AnalysisScanner <solution>");
             // set default value so that you can use the LabelCounting directly from your IDE:
-            solution = "java"; 
+            solution = "bxtend-dsl"; 
         }
         else {
             solution = args[0];
