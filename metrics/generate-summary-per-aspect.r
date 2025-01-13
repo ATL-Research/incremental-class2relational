@@ -73,8 +73,9 @@ for (aspect in unique_aspects) {
   pdf(output_pdf)
   
   # Generate the plot
-  p <- ggplot(aspect_data, aes(x = File, y = Value, fill = File)) +
+  p <- ggplot(aspect_data, aes(x = File, y = Value, label = Value, fill = File)) +
     geom_bar(stat = "identity") +
+    geom_text() +
     labs(
       title = paste("Total Word Count for Transformation Aspect:", aspect),
       x = "File",
