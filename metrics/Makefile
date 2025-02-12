@@ -1,5 +1,5 @@
 FOLDERS := $(wildcard ../solutions/*/)
-FIGURES := $(addprefix plots/, $(addsuffix .pdf,$(notdir $(FOLDERS:/=)))) plots/summary.pdf
+FIGURES := $(addprefix plots/, $(addsuffix .pdf,$(notdir $(FOLDERS:/=)))) plots/javaEMF-batch.pdf plots/summary.pdf
 LABELS := $(addprefix ../labels/label-, $(addsuffix .csv,$(notdir $(FOLDERS:/=))))
 
 .PHONY: all clean 
