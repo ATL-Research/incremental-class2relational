@@ -10,13 +10,13 @@ import java.util.List
 import org.eclipse.emf.ecore.util.EcoreUtil
 import atl.research.relational_.Relational_Factory
 
+// Setup
 class Class2TableImpl extends Class2Table {	
-	// Setup
 	new(Class2Relational trafo) {
 		// Setup
 		super(trafo)
 	}
-	
+
 	// Transformation 
 	override protected onTblCreation(Table tbl) {
 		// Transformation 
@@ -28,7 +28,7 @@ class Class2TableImpl extends Class2Table {
 		// Transformation 
 		tbl.key += key
 	}
-	
+
 	// Transformation 
 	override protected colFrom(List<Column> attSinCol, List<Column> attSinCol_2, List<Table> attMulTbl,
 		Table parent
@@ -49,7 +49,7 @@ class Class2TableImpl extends Class2Table {
 				}
 			}
 		}
-		
+
 		// Helper 
 		val columnsList = newArrayList
 		// Helper 
@@ -65,7 +65,7 @@ class Class2TableImpl extends Class2Table {
 		allColumns.addAll(attSinCol)
 		// Helper 
 		allColumns.addAll(attSinCol_2)
-		
+
 		// Transformation 	
 		for (Column c : allColumns) {
 			// Tracing 
@@ -82,7 +82,7 @@ class Class2TableImpl extends Class2Table {
 		}
 		// Transformation 
 		spareElems.addAll(toDelete)
-		
+
 		// Transformation 
 		val tblToDelete = newArrayList
 		// Transformation 
@@ -96,11 +96,11 @@ class Class2TableImpl extends Class2Table {
 		}
 		// Transformation 
 		EcoreUtil.deleteAll(tblToDelete, true)
-		
+
 		// Transformation 	
 		new Type4col(columnsList)
 	}
-	
+
 	// Helper 
 	def findIntegerDatatype() {
 		// Helper 
@@ -108,5 +108,5 @@ class Class2TableImpl extends Class2Table {
 		// Helper 
 		datatype
 	}	
-	
+
 }

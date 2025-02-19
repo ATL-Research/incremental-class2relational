@@ -15,17 +15,17 @@ abstract class Elem2Elem {
 	protected Resource sourceModel
 	protected Resource targetModel
 	protected Resource corrModel
-	
+
 	protected val sourceFactory = Class_Factory::eINSTANCE
 	protected val targetFactory = atl.research.relational_.Relational_Factory::eINSTANCE
 	protected val corrFactory = Class2relationalImperativeFactory::eINSTANCE
 	protected val sourcePackage = Class_Package::eINSTANCE
 	protected val targetPackage = atl.research.relational_.Relational_Package::eINSTANCE
-	
+
 	protected var String ruleID
-	
+
 	protected static Map<EObject, Corr> elementsToCorr = newHashMap
-	
+
 	new(Resource src, Resource trgt, Resource corr) {
 		sourceModel = src
 		targetModel = trgt

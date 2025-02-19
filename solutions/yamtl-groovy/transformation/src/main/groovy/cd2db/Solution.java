@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+// Setup
 public class Solution extends AbstractDriver {
     CD2DB xform;
 

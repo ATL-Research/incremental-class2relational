@@ -8,14 +8,14 @@ import atl.research.class_.Attribute
 import atl.research.relational_.Column
 import atl.research.class_.DataType
 
+// Setup
 class Class2Table extends Elem2Elem {
-	
-	// Setup
+
 	new(Resource src, Resource trgt, Resource corr) {
 		// Setup
 		super(src, trgt, corr)
 	}
-	
+
 	// Transformation
 	override sourceToTarget() {
 		// Model Traversal

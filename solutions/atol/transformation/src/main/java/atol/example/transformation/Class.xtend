@@ -5,6 +5,7 @@ import atl.research.class_.Class_Package
 
 import static fr.eseo.atol.gen.MetamodelUtils.*
 
+// Helper
 @AOFAccessors(Class_Package)
 class Class {
 	//public val __multiValued = boolOneDefault[_multiValued]

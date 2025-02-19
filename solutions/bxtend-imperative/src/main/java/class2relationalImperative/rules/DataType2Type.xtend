@@ -7,16 +7,17 @@ import java.util.Map
 import java.util.HashMap
 import atl.research.class_.Classifier
 
+// Setup
 class DataType2Type extends Elem2Elem {
 	// Helper
 	static Map<DataType, Type> typeMap = new HashMap<DataType, Type>()
-		
+
 	// Setup
 	new(Resource src, Resource trgt, Resource corr) {
 		// Setup
 		super(src, trgt, corr)
 	}
-	
+
 	// Transformation
 	override sourceToTarget() {
 		// Model Traversal
@@ -34,11 +35,11 @@ class DataType2Type extends Elem2Elem {
 			typeMap.put(datatype, targetElem)
 		]		
 	}
-	
+
 	// Helper
 	public def static getType(DataType t) {
 		// Helper
 		return typeMap.get(t)
 	}
-	
+
 }

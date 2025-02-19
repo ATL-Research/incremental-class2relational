@@ -35,7 +35,7 @@ public class Class2RelationalIncremental {
 	private static final Tracer TRACER = new Tracer();
 	// Helper
 	private static final List<DataType> allDataTypes = new LinkedList<>();
-	// Traversal
+	// Model_Traversal
 	private static Traverser PRETRAVERSER;
 	private static Traverser TRAVERSER;
 
@@ -56,7 +56,7 @@ public class Class2RelationalIncremental {
 		IO.persist(class2relationalOUT);
 
 
-		// Incrementality
+		// CHANGE_IDENTIFICATION
 		Adapter adapterIn = new AdapterImpl() {
 			public void notifyChanged(Notification notification) {
 				var notificationType = notification.getEventType();
@@ -106,7 +106,7 @@ public class Class2RelationalIncremental {
 		return start(class2relationalIN, class2relationalOUT);
 	}
 
-	// Traversal
+	// Model_Traversal
 	private static List<Named> transform(List<EObject> input) {
 
 		for (EObject namedElt : input) {
@@ -119,7 +119,7 @@ public class Class2RelationalIncremental {
 		return actualTransform(input);
 	}
 
-	// Traversal
+	// Model_Traversal
     private static void preTransform(List<EObject> input) {
     	var iterator = input.iterator();
         PRETRAVERSER = new Traverser(TRACER);
@@ -134,7 +134,7 @@ public class Class2RelationalIncremental {
         PRETRAVERSER.traverseAndAcceptPre(iterator);
     }
 
-    // Traversal
+    // Model_Traversal
     private static List<Named> actualTransform(List<EObject> input) {
     	var newRoot = Classes2List(input);
 
@@ -142,47 +142,53 @@ public class Class2RelationalIncremental {
         TRAVERSER = new Traverser(TRACER);
         TRAVERSER.addFunction(ClassImpl.class, x -> {
         	Class2Table((Class)x );
-        	// Incrementality
+        	// CHANGE_IDENTIFICATION
         	var adapter = new EContentAdapter() {
     			public void notifyChanged(Notification notification) {
     				System.out.println("Notfication received from the data model. Data model of Class has changed!!!" + notification.getEventType());
-    				Class2Table((Class) notification.getNotifier());
+    				// CHANGE_PROPAGATION
+					Class2Table((Class) notification.getNotifier());
     			}
     		};
+			// CHANGE_IDENTIFICATION
     		x.eAdapters().add(adapter);
         });
-        // Traversal
+        // Model_Traversal
         TRAVERSER.addFunction(DataTypeImpl.class, x -> {
         	DataType2Type((DataType) x);
-        	// Incrementality
+        	// CHANGE_IDENTIFICATION
         	var adapter = new EContentAdapter() {
     			public void notifyChanged(Notification notification) {
     				System.out.println("Notfication received from the data model. Data model of Class has changed!!!" + notification.getEventType());
-    				DataType2Type((DataType) notification.getNotifier());
+    				// CHANGE_PROPAGATION
+					DataType2Type((DataType) notification.getNotifier());
     			}
     		};
+			// CHANGE_IDENTIFICATION
     		x.eAdapters().add(adapter);
         });
-        // Traversal
+        // Model_Traversal
         TRAVERSER.addFunction(AttributeImpl.class, x -> {
         	DataTypeAttribute2Column((Attribute) x);
 			MultiValuedDataTypeAttribute2Column((Attribute) x);
 			ClassAttribute2Column((Attribute) x);
 			MultiValuedClassAttribute2Column((Attribute) x);
-			// Incrementality
+			// CHANGE_IDENTIFICATION
 			var adapter = new EContentAdapter() {
     			public void notifyChanged(Notification notification) {
     				System.out.println("Notfication received from the data model. Data model of Class has changed!!!" + notification.getEventType());
-    				DataTypeAttribute2Column((Attribute) notification.getNotifier());
+    				// CHANGE_PROPAGATION
+					DataTypeAttribute2Column((Attribute) notification.getNotifier());
     				MultiValuedDataTypeAttribute2Column((Attribute) notification.getNotifier());
     				ClassAttribute2Column((Attribute) notification.getNotifier());
     				MultiValuedClassAttribute2Column((Attribute) notification.getNotifier());
     			}
     		};
+			// CHANGE_IDENTIFICATION
     		x.eAdapters().add(adapter);
 		});
 
-        // Traversal
+        // Model_Traversal
         TRAVERSER.traverseAndAccept(iterator);
 
         return newRoot;
@@ -193,8 +199,11 @@ public class Class2RelationalIncremental {
     	var nameds = new LinkedList<Named>();
 
     	for (EObject eObject : input) {
+            // Transformation 4
+            // Tracing 10
 			nameds.addAll(TRACER.resolveAll(eObject).stream().map($ -> (Named) $).collect(Collectors.toList()));
 		}
+		// Transformation
     	nameds.add(objectIdType());
 
     	return nameds;
@@ -247,9 +256,9 @@ public class Class2RelationalIncremental {
 
     // Transformation
     public static void DataType2Type(DataType dt) {
-        // Transformation
+        // Tracing
     	var out = TRACER.resolve(dt, RELATIONALFACTORY.createType());
-    	// Tracing
+    	// Transformation
     	out.setName(dt.getName());
     }
 

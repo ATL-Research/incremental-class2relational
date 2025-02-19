@@ -6,9 +6,9 @@ using NMF.Models.Repository.Serialization;
 using NMF.Serialization;
 using Attribute = HSRM.TTC2023.ClassToRelational.Class_.Attribute;
 
+// Setup
 namespace HSRM.TTC2023.ClassToRelational
 {
-    // Setup
     public abstract class SolutionBase
     {
         private readonly ModelRepository _modelRepository = new ModelRepository();

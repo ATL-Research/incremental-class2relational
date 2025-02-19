@@ -4,9 +4,9 @@ using NMF.Models;
 using NMF.Utilities;
 using Type = HSRM.TTC2023.ClassToRelational.Relational_.Type;
 
+// Setup
 namespace HSRM.TTC2023.ClassToRelational
 {
-    // Setup
     internal class CSharpClassToRelational
     {
         // Tracing

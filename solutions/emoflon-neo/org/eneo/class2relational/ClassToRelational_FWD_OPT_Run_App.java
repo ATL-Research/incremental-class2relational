@@ -1,7 +1,6 @@
-// Setup 2
 package org.eneo.class2relational;
 
-// Setup 34 (17 * 2)
+
 import java.util.List;
 import org.emoflon.neo.api.classtorelational.API_ClassToRelational;
 import org.emoflon.neo.api.classtorelational.run.ClassToRelational_FWD_OPT_Run;

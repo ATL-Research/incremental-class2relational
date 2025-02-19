@@ -1,8 +1,8 @@
 ﻿using NMF.Models;
 
+// Setup
 namespace HSRM.TTC2023.ClassToRelational
 {
-    // Setup
     internal class CSharpSolution : SolutionBase
     {
         protected override Model Transform(Model inputModel)

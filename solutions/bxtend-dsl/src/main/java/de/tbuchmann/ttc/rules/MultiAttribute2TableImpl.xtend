@@ -7,33 +7,33 @@ import atl.research.class_.Classifier
 import atl.research.relational_.Relational_Factory
 import atl.research.class_.DataType
 
+// Setup
 class MultiAttribute2TableImpl extends MultiAttribute2Table {	
-	// Setup
 	new(Class2Relational trafo) {
 		// Setup
 		super(trafo)
 	}
-	
-	// Model Traversal 
+
+	// Model_Traversal 
 	override protected filterAtt(Attribute att) {	
 		// Model Traversal 
 		(att.multiValued) && !(att.type instanceof Class)
 	}
-	
+
 	// Transformation 
 	override protected tblNameFrom(String attName, Class owner) {
 		// Transformation
-		var tblName = (owner !== null && owner.name !== null && owner.name !== "")? owner.name : "Table" 	
+		var tblName = (owner !== null && owner.name !== null && owner.name !== "")? owner.name : "" 	
 		// Transformation		
 		new Type4tblName(tblName + "_" + attName)
 	}
-	
+
 	// Transformation 
 	override protected colFrom(String attName, Classifier type, Class owner) {
 		// Transformation 
 		val colList = newArrayList
 		// Transformation 
-		val columnName = (owner === null || owner.name === null || owner.name === "")? "tableId" : owner.name.toFirstLower + "Id"
+		val columnName = (owner === null || owner.name === null || owner.name === "")? "Id" : owner.name.toFirstLower + "Id"
 		// Transformation 
 		val idCol = Relational_Factory.eINSTANCE.createColumn() => [name = columnName
 			// Transformation 
@@ -51,7 +51,7 @@ class MultiAttribute2TableImpl extends MultiAttribute2Table {
 		// Transformation 
 		return new Type4col(colList)
 	}
-	
+
 	// Helper 
 	def findIntegerDatatype() {
 		// Helper 
@@ -59,5 +59,5 @@ class MultiAttribute2TableImpl extends MultiAttribute2Table {
 		// Helper 
 		datatype
 	}
-	
+
 }

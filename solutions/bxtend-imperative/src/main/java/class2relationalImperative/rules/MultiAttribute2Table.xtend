@@ -7,13 +7,13 @@ import atl.research.class_.DataType
 import atl.research.relational_.Column
 import org.eclipse.emf.ecore.util.EcoreUtil
 
+// Setup
 class MultiAttribute2Table extends Elem2Elem {
-	// Setup
 	new(Resource src, Resource trgt, Resource corr) {
 		// Setup
 		super(src, trgt, corr)
 	}
-	
+
 	// Transformation
 	override sourceToTarget() {
 		// Model Traversal
@@ -41,7 +41,7 @@ class MultiAttribute2Table extends Elem2Elem {
 			]
 			// Transformation
 			idCol.name = (owner === null || owner.name === null || owner.name === "")? "tableId" : owner.name.toFirstLower + "Id"
-			
+
 			// Transformation
 			if (attribute.type instanceof DataType) {															
 				// Transformation
@@ -90,5 +90,4 @@ class MultiAttribute2Table extends Elem2Elem {
 			targetModel.contents += targetTable
 		]
 	}
-	
 }

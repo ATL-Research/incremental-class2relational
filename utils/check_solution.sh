@@ -169,7 +169,7 @@ function checkCompleteness() {
 
     local nb_expected=$(ls $scenarioDir/expected*.xmi 2> /dev/null | wc -l)
     if [ $nb_expected -eq 0 ]; then
-        echo "no expected"
+        echo "OK"
         return
     fi
 

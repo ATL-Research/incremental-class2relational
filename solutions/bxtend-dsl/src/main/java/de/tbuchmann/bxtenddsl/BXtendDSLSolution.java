@@ -12,11 +12,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import atl.research.AbstractDriver;
 import de.tbuchmann.ttc.trafo.Class2Relational;
 
+// Setup
 public class BXtendDSLSolution extends AbstractDriver {
 	private Class2Relational trafo;
     protected Resource corr;    
 
-    // Setup
     @Override
     public void init() {
     	try {
@@ -39,15 +39,15 @@ public class BXtendDSLSolution extends AbstractDriver {
     	corr =  getResourceSet().createResource(URI.createFileURI(System.getenv("SOURCE_PATH") + ".corr.xmi"));
         EcoreUtil.resolveAll(getResourceSet());
     }
-    
+
     protected void applyChange() {
     	super.applyChange();
     	if (!isBatchMode())
     		// Transformation
     		trafo.sourceToTarget();
     }
-    
-    
+
+    // TODO is this trafo or setup?
     public static void main(String[] args) throws Exception {
     	BXtendDSLSolution solution = new BXtendDSLSolution();
 
@@ -66,6 +66,6 @@ public class BXtendDSLSolution extends AbstractDriver {
     protected void applyTransformation() {
     	// Transformation
     	trafo.sourceToTarget();
-    }    
-        
+    }
+
 }

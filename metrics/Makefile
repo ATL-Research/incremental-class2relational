@@ -1,10 +1,23 @@
 FOLDERS := $(wildcard ../solutions/*/)
-FIGURES := $(addprefix plots/, $(addsuffix .pdf,$(notdir $(FOLDERS:/=))))
+FIGURES := $(addprefix plots/, $(addsuffix .pdf,$(notdir $(FOLDERS:/=)))) plots/javaEMF-batch.pdf plots/summary.pdf
 LABELS := $(addprefix ../labels/label-, $(addsuffix .csv,$(notdir $(FOLDERS:/=))))
 
 .PHONY: all clean 
 
 all: docker ../utils/LabelCounting/build/libs/LabelCounting-all.jar $(FIGURES) $(LABELS) ## uncomment so that make keeps CSV files with labels
+
+plots/summary.pdf: $(LABELS)
+	@echo "Generating the summary plot"
+	touch plots/summary.pdf
+	docker run --rm \
+			-v $(shell pwd)/../labels/:/labels \
+			-v $(shell pwd)/plots/summary.pdf:/plots/summary.pdf \
+			incr-c2r-plot:latest /usr/bin/Rscript generate-summary.r /labels
+	@echo "Generating the summary plot per aspects"
+	docker run --rm \
+			-v $(shell pwd)/../labels/:/labels \
+			-v $(shell pwd)/plots/:/plots/ \
+			incr-c2r-plot:latest /usr/bin/Rscript generate-summary-per-aspect.r /labels
 
 plots/%.pdf: ../labels/label-%.csv
 	@echo "Generating figure for $*.."

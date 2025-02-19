@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 import org.eclipse.emf.ecore.EObject;
 
+// TRACING
 public class Tracer {
     private final HashMap<TraceSource, EObject> traces = new HashMap<>();
     private final HashMap<TraceSource, List<? extends EObject>> multiTraces = new HashMap<>();

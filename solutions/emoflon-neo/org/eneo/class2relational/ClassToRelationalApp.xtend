@@ -1,7 +1,6 @@
-// Setup 2
 package org.eneo.class2relational
 
-// Setup 36 (18 * 2)
+
 import org.emoflon.neo.api.classtorelational.API_Common
 import org.emoflon.neo.api.classtorelational.metamodels.API_Class
 import org.emoflon.neo.api.classtorelational.metamodels.API_Relational
