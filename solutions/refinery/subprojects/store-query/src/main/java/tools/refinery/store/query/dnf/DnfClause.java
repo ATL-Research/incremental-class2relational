@@ -13,7 +13,7 @@ import tools.refinery.store.query.term.Variable;
 import java.util.List;
 import java.util.Set;
 
-public record DnfClause(Set <Variable> positiveVariables, List <Literal> literals) {
+public record DnfClause(Set<Variable> positiveVariables, List<Literal> literals) {
 	public boolean equalsWithSubstitution(LiteralEqualityHelper helper, DnfClause other) {
 		int size = literals.size();
 		if (size != other.literals.size()) {

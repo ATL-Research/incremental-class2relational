@@ -10,7 +10,7 @@ import org.hamcrest.TypeSafeMatcher;
 import tools.refinery.store.query.dnf.Dnf;
 import tools.refinery.store.query.equality.DeepDnfEqualityChecker;
 
-public class StructurallyEqualTo extends TypeSafeMatcher <Dnf> {
+public class StructurallyEqualTo extends TypeSafeMatcher<Dnf> {
 	private final Dnf expected;
 
 	public StructurallyEqualTo(Dnf expected) {

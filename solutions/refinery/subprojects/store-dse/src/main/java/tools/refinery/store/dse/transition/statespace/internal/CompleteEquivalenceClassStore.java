@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public abstract class CompleteEquivalenceClassStore extends AbstractEquivalenceClassStore implements EquivalenceClassStore {
 
-	static class SymmetryStoreArray extends ArrayList <VersionWithObjectiveValue> {
+	static class SymmetryStoreArray extends ArrayList<VersionWithObjectiveValue> {
 		final int[] activationSizes;
 		final boolean accept;
 
@@ -28,7 +28,7 @@ public abstract class CompleteEquivalenceClassStore extends AbstractEquivalenceC
 		}
 	}
 
-	private final MutableIntObjectMap <Object> modelCode2Versions = IntObjectMaps.mutable.empty();
+	private final MutableIntObjectMap<Object> modelCode2Versions = IntObjectMaps.mutable.empty();
 
 	protected CompleteEquivalenceClassStore(StateCoderStoreAdapter stateCoderStoreAdapter) {
 		super(stateCoderStoreAdapter);

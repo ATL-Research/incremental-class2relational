@@ -11,10 +11,10 @@ import tools.refinery.store.query.dnf.Query;
 import tools.refinery.store.query.resultset.AbstractResultSet;
 import tools.refinery.store.query.interpreter.internal.QueryInterpreterAdapterImpl;
 
-public abstract class AbstractInterpretedMatcher <T> extends AbstractResultSet <T> implements IUpdateable {
+public abstract class AbstractInterpretedMatcher<T> extends AbstractResultSet<T> implements IUpdateable {
 	protected final IQueryResultProvider backend;
 
-	protected AbstractInterpretedMatcher(QueryInterpreterAdapterImpl adapter, Query <T> query,
+	protected AbstractInterpretedMatcher(QueryInterpreterAdapterImpl adapter, Query<T> query,
 										 RawPatternMatcher rawPatternMatcher) {
 		super(adapter, query);
 		backend = rawPatternMatcher.getBackend();

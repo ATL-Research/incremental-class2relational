@@ -28,7 +28,7 @@ public abstract class AbstractQueryMetaContext implements IQueryMetaContext {
      * @since 2.0
      */
     @Override
-    public Map <InputKeyImplication, Set <InputKeyImplication>> getConditionalImplications(IInputKey implyingKey) {
+    public Map<InputKeyImplication, Set<InputKeyImplication>> getConditionalImplications(IInputKey implyingKey) {
         return new HashMap<>();
     }
 
@@ -44,7 +44,7 @@ public abstract class AbstractQueryMetaContext implements IQueryMetaContext {
      * @since 1.6
      */
     @Override
-    public Comparator <IInputKey> getSuggestedEliminationOrdering() {
+    public Comparator<IInputKey> getSuggestedEliminationOrdering() {
         return (o1, o2) -> 0;
     }
 
@@ -52,7 +52,7 @@ public abstract class AbstractQueryMetaContext implements IQueryMetaContext {
      * @since 1.6
      */
     @Override
-    public Collection <InputKeyImplication> getWeakenedAlternatives(IInputKey implyingKey) {
+    public Collection<InputKeyImplication> getWeakenedAlternatives(IInputKey implyingKey) {
         return Collections.emptySet();
     }
 
@@ -62,7 +62,7 @@ public abstract class AbstractQueryMetaContext implements IQueryMetaContext {
     }
 
     @Override
-    public IPosetComparator getPosetComparator(Iterable <IInputKey> key) {
+    public IPosetComparator getPosetComparator(Iterable<IInputKey> key) {
         return null;
     }
 

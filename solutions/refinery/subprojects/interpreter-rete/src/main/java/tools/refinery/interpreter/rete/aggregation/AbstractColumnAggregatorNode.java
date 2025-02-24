@@ -42,13 +42,13 @@ import tools.refinery.interpreter.rete.single.SingleInputNode;
  * @since 2.2
  *
  */
-public abstract class AbstractColumnAggregatorNode <Domain, Accumulator, AggregateResult> extends SingleInputNode
+public abstract class AbstractColumnAggregatorNode<Domain, Accumulator, AggregateResult> extends SingleInputNode
         implements Clearable, IAggregatorNode {
 
     /**
      * @since 1.6
      */
-    protected final IMultisetAggregationOperator <Domain, Accumulator, AggregateResult> operator;
+    protected final IMultisetAggregationOperator<Domain, Accumulator, AggregateResult> operator;
 
     /**
      * @since 1.6
@@ -95,7 +95,7 @@ public abstract class AbstractColumnAggregatorNode <Domain, Accumulator, Aggrega
      * @since 1.6
      */
     public AbstractColumnAggregatorNode(final ReteContainer reteContainer,
-            final IMultisetAggregationOperator <Domain, Accumulator, AggregateResult> operator,
+            final IMultisetAggregationOperator<Domain, Accumulator, AggregateResult> operator,
             final TupleMask groupMask, final TupleMask columnMask) {
         super(reteContainer);
         this.operator = operator;
@@ -120,7 +120,7 @@ public abstract class AbstractColumnAggregatorNode <Domain, Accumulator, Aggrega
      *            the index of the column that the aggregator node is aggregating over
      */
     public AbstractColumnAggregatorNode(final ReteContainer reteContainer,
-            final IMultisetAggregationOperator <Domain, Accumulator, AggregateResult> operator,
+            final IMultisetAggregationOperator<Domain, Accumulator, AggregateResult> operator,
             final TupleMask groupMask, final int aggregatedColumn) {
         this(reteContainer, operator, groupMask, TupleMask.selectSingle(aggregatedColumn, groupMask.sourceWidth));
     }
@@ -131,13 +131,13 @@ public abstract class AbstractColumnAggregatorNode <Domain, Accumulator, Aggrega
     }
 
     @Override
-    public void pullInto(Collection <Tuple> collector, boolean flush) {
+    public void pullInto(Collection<Tuple> collector, boolean flush) {
         // DIRECT CHILDREN NOT SUPPORTED
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void pullIntoWithTimeline(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush) {
+    public void pullIntoWithTimeline(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush) {
         // DIRECT CHILDREN NOT SUPPORTED
         throw new UnsupportedOperationException();
     }
@@ -208,14 +208,14 @@ public abstract class AbstractColumnAggregatorNode <Domain, Accumulator, Aggrega
     /**
      * @since 2.4
      */
-    public abstract Map <Tuple, Timeline <Timestamp>> getAggregateTupleTimeline(final Tuple key);
+    public abstract Map<Tuple, Timeline<Timestamp>> getAggregateTupleTimeline(final Tuple key);
 
     public abstract AggregateResult getAggregateResult(final Tuple key);
 
     /**
      * @since 2.4
      */
-    public abstract Map <AggregateResult, Timeline <Timestamp>> getAggregateResultTimeline(final Tuple key);
+    public abstract Map<AggregateResult, Timeline<Timestamp>> getAggregateResultTimeline(final Tuple key);
 
     protected Tuple tupleFromAggregateResult(final Tuple groupTuple, final AggregateResult aggregateResult) {
         if (aggregateResult == null) {
@@ -253,12 +253,12 @@ public abstract class AbstractColumnAggregatorNode <Domain, Accumulator, Aggrega
         }
 
         @Override
-        public Collection <Tuple> get(final Tuple signature) {
+        public Collection<Tuple> get(final Tuple signature) {
             return this.logic.get(signature);
         }
 
         @Override
-        public Map <Tuple, Timeline <Timestamp>> getTimeline(final Tuple signature) {
+        public Map<Tuple, Timeline<Timestamp>> getTimeline(final Tuple signature) {
             return this.logic.getTimeline(signature);
         }
 
@@ -292,7 +292,7 @@ public abstract class AbstractColumnAggregatorNode <Domain, Accumulator, Aggrega
         private final NetworkStructureChangeSensitiveLogic TIMELESS = new NetworkStructureChangeSensitiveLogic() {
 
             @Override
-            public Collection <Tuple> get(final Tuple signature) {
+            public Collection<Tuple> get(final Tuple signature) {
                 final Tuple aggregateTuple = getAggregateTuple(signature);
                 if (aggregateTuple == null) {
                     return null;
@@ -302,7 +302,7 @@ public abstract class AbstractColumnAggregatorNode <Domain, Accumulator, Aggrega
             }
 
             @Override
-            public Map <Tuple, Timeline <Timestamp>> getTimeline(final Tuple signature) {
+            public Map<Tuple, Timeline<Timestamp>> getTimeline(final Tuple signature) {
                 throw new UnsupportedOperationException();
             }
 
@@ -311,13 +311,13 @@ public abstract class AbstractColumnAggregatorNode <Domain, Accumulator, Aggrega
         private final NetworkStructureChangeSensitiveLogic TIMELY = new NetworkStructureChangeSensitiveLogic() {
 
             @Override
-            public Collection <Tuple> get(final Tuple signatureWithResult) {
+            public Collection<Tuple> get(final Tuple signatureWithResult) {
                 return TIMELESS.get(signatureWithResult);
             }
 
             @Override
-            public Map <Tuple, Timeline <Timestamp>> getTimeline(final Tuple signature) {
-                final Map <Tuple, Timeline <Timestamp>> aggregateTuples = getAggregateTupleTimeline(signature);
+            public Map<Tuple, Timeline<Timestamp>> getTimeline(final Tuple signature) {
+                final Map<Tuple, Timeline<Timestamp>> aggregateTuples = getAggregateTupleTimeline(signature);
                 if (aggregateTuples.isEmpty()) {
                     return null;
                 } else {
@@ -368,7 +368,7 @@ public abstract class AbstractColumnAggregatorNode <Domain, Accumulator, Aggrega
         }
 
         @Override
-        public Collection <Tuple> get(final Tuple signatureWithResult) {
+        public Collection<Tuple> get(final Tuple signatureWithResult) {
             return this.logic.get(signatureWithResult);
         }
 
@@ -376,7 +376,7 @@ public abstract class AbstractColumnAggregatorNode <Domain, Accumulator, Aggrega
          * @since 2.4
          */
         @Override
-        public Map <Tuple, Timeline <Timestamp>> getTimeline(final Tuple signature) {
+        public Map<Tuple, Timeline<Timestamp>> getTimeline(final Tuple signature) {
             return this.logic.getTimeline(signature);
         }
 
@@ -420,7 +420,7 @@ public abstract class AbstractColumnAggregatorNode <Domain, Accumulator, Aggrega
         private final NetworkStructureChangeSensitiveLogic TIMELESS = new NetworkStructureChangeSensitiveLogic() {
 
             @Override
-            public Collection <Tuple> get(final Tuple signatureWithResult) {
+            public Collection<Tuple> get(final Tuple signatureWithResult) {
                 final Tuple prunedSignature = pruneResult.transform(signatureWithResult);
                 final AggregateResult result = getAggregateResult(prunedSignature);
                 if (result != null && Objects.equals(signatureWithResult.get(resultPositionInSignature), result)) {
@@ -431,7 +431,7 @@ public abstract class AbstractColumnAggregatorNode <Domain, Accumulator, Aggrega
             }
 
             @Override
-            public Map <Tuple, Timeline <Timestamp>> getTimeline(final Tuple signature) {
+            public Map<Tuple, Timeline<Timestamp>> getTimeline(final Tuple signature) {
                 throw new UnsupportedOperationException();
             }
 
@@ -440,15 +440,15 @@ public abstract class AbstractColumnAggregatorNode <Domain, Accumulator, Aggrega
         private final NetworkStructureChangeSensitiveLogic TIMELY = new NetworkStructureChangeSensitiveLogic() {
 
             @Override
-            public Collection <Tuple> get(final Tuple signatureWithResult) {
+            public Collection<Tuple> get(final Tuple signatureWithResult) {
                 return TIMELESS.get(signatureWithResult);
             }
 
             @Override
-            public Map <Tuple, Timeline <Timestamp>> getTimeline(final Tuple signatureWithResult) {
+            public Map<Tuple, Timeline<Timestamp>> getTimeline(final Tuple signatureWithResult) {
                 final Tuple prunedSignature = pruneResult.transform(signatureWithResult);
-                final Map <AggregateResult, Timeline <Timestamp>> result = getAggregateResultTimeline(prunedSignature);
-                for (final Entry <AggregateResult, Timeline <Timestamp>> entry : result.entrySet()) {
+                final Map<AggregateResult, Timeline<Timestamp>> result = getAggregateResultTimeline(prunedSignature);
+                for (final Entry<AggregateResult, Timeline<Timestamp>> entry : result.entrySet()) {
                     if (Objects.equals(signatureWithResult.get(resultPositionInSignature), entry.getKey())) {
                         return Collections.singletonMap(signatureWithResult, entry.getValue());
                     }
@@ -465,9 +465,9 @@ public abstract class AbstractColumnAggregatorNode <Domain, Accumulator, Aggrega
      */
     protected static abstract class NetworkStructureChangeSensitiveLogic {
 
-        public abstract Collection <Tuple> get(final Tuple signatureWithResult);
+        public abstract Collection<Tuple> get(final Tuple signatureWithResult);
 
-        public abstract Map <Tuple, Timeline <Timestamp>> getTimeline(final Tuple signature);
+        public abstract Map<Tuple, Timeline<Timestamp>> getTimeline(final Tuple signature);
 
     }
 

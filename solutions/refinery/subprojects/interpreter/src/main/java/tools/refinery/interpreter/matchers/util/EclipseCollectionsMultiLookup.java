@@ -28,13 +28,13 @@ class EclipseCollectionsMultiLookup {
 
     private EclipseCollectionsMultiLookup() {/* Hidden utility class constructor */}
 
-    private static class MarkedSetImpl <Value> extends EclipseCollectionsSetMemory <Value> implements MarkedMemory.MarkedSet <Value> {}
-    private static class MarkedMultisetImpl <Value> extends EclipseCollectionsMultiset <Value> implements MarkedMemory.MarkedMultiset <Value> {}
-    private static class MarkedLongSetImpl extends EclipseCollectionsLongSetMemory implements MarkedMemory.MarkedSet <Long> {}
-    private static class MarkedLongMultisetImpl extends EclipseCollectionsLongMultiset implements MarkedMemory.MarkedMultiset <Long> {}
+    private static class MarkedSetImpl<Value> extends EclipseCollectionsSetMemory<Value> implements MarkedMemory.MarkedSet<Value> {}
+    private static class MarkedMultisetImpl<Value> extends EclipseCollectionsMultiset<Value> implements MarkedMemory.MarkedMultiset<Value> {}
+    private static class MarkedLongSetImpl extends EclipseCollectionsLongSetMemory implements MarkedMemory.MarkedSet<Long> {}
+    private static class MarkedLongMultisetImpl extends EclipseCollectionsLongMultiset implements MarkedMemory.MarkedMultiset<Long> {}
 
-    public abstract static class FromObjects <Key, Value, Bucket extends MarkedMemory <Value>>
-        extends UnifiedMap <Key, Object> implements IMultiLookupAbstract <Key, Value, Bucket> {
+    public abstract static class FromObjects<Key, Value, Bucket extends MarkedMemory<Value>>
+        extends UnifiedMap<Key, Object> implements IMultiLookupAbstract<Key, Value, Bucket> {
 
         @Override
         public boolean equals(Object obj) {
@@ -71,11 +71,11 @@ class EclipseCollectionsMultiLookup {
             super.put(key, valueOrBucket);
         }
         @Override
-        public Iterable <Object> lowLevelValues() {
+        public Iterable<Object> lowLevelValues() {
             return super.values();
         }
         @Override
-        public Set <Key> lowLevelKeySet() {
+        public Set<Key> lowLevelKeySet() {
             return super.keySet();
         }
         @Override
@@ -84,43 +84,43 @@ class EclipseCollectionsMultiLookup {
         }
 
         @Override
-        public Stream <Key> distinctKeysStream() {
+        public Stream<Key> distinctKeysStream() {
             // may be more efficient than the default spliterator
             return super.keySet().stream();
         }
 
-        public abstract static class ToSets <Key, Value> extends FromObjects <Key, Value, MarkedSet <Value>>
-            implements IMultiLookupAbstract.ToSetsAbstract <Key, Value>
+        public abstract static class ToSets<Key, Value> extends FromObjects<Key, Value, MarkedSet<Value>>
+            implements IMultiLookupAbstract.ToSetsAbstract<Key, Value>
         {
-            public static class OfObjects <Key, Value> extends ToSets <Key, Value> {
+            public static class OfObjects<Key, Value> extends ToSets<Key, Value> {
                 @Override
-                public MarkedSet <Value> createMarkedSet() {
-                    return new MarkedSetImpl <Value>();
+                public MarkedSet<Value> createMarkedSet() {
+                    return new MarkedSetImpl<Value>();
                 }
             }
 
-            public static class OfLongs <Key> extends ToSets <Key, Long> {
+            public static class OfLongs<Key> extends ToSets<Key, Long> {
                 @Override
-                public MarkedSet <Long> createMarkedSet() {
+                public MarkedSet<Long> createMarkedSet() {
                     return new MarkedLongSetImpl();
                 }
             }
 
         }
 
-        public abstract static class ToMultisets <Key, Value> extends FromObjects <Key, Value, MarkedMultiset <Value>>
-            implements IMultiLookupAbstract.ToMultisetsAbstract <Key, Value>
+        public abstract static class ToMultisets<Key, Value> extends FromObjects<Key, Value, MarkedMultiset<Value>>
+            implements IMultiLookupAbstract.ToMultisetsAbstract<Key, Value>
         {
-            public static class OfObjects <Key, Value> extends ToMultisets <Key, Value> {
+            public static class OfObjects<Key, Value> extends ToMultisets<Key, Value> {
                 @Override
-                public MarkedMultiset <Value> createMarkedMultiset() {
-                    return new MarkedMultisetImpl <Value>();
+                public MarkedMultiset<Value> createMarkedMultiset() {
+                    return new MarkedMultisetImpl<Value>();
                 }
             }
 
-            public static class OfLongs <Key> extends ToMultisets <Key, Long> {
+            public static class OfLongs<Key> extends ToMultisets<Key, Long> {
                 @Override
-                public MarkedMultiset <Long> createMarkedMultiset() {
+                public MarkedMultiset<Long> createMarkedMultiset() {
                     return new MarkedLongMultisetImpl();
                 }
             }
@@ -129,8 +129,8 @@ class EclipseCollectionsMultiLookup {
 
     }
 
-    public abstract static class FromLongs <Value, Bucket extends MarkedMemory <Value>>
-    extends LongObjectHashMap <Object> implements IMultiLookupAbstract <Long, Value, Bucket> {
+    public abstract static class FromLongs<Value, Bucket extends MarkedMemory<Value>>
+    extends LongObjectHashMap<Object> implements IMultiLookupAbstract<Long, Value, Bucket> {
 
         @Override
         public boolean equals(Object obj) {
@@ -168,7 +168,7 @@ class EclipseCollectionsMultiLookup {
             super.put(key, valueOrBucket);
         }
         @Override
-        public Iterable <Object> lowLevelValues() {
+        public Iterable<Object> lowLevelValues() {
             return super.values();
         }
         @Override
@@ -176,42 +176,42 @@ class EclipseCollectionsMultiLookup {
             return super.size();
         }
         @Override
-        public Iterable <Long> lowLevelKeySet() {
+        public Iterable<Long> lowLevelKeySet() {
             return () -> EclipseCollectionsLongSetMemory.iteratorOf(FromLongs.super.keysView());
         }
 
-    public abstract static class ToSets <Value> extends FromLongs <Value, MarkedSet <Value>>
-        implements IMultiLookupAbstract.ToSetsAbstract <Long, Value>
+    public abstract static class ToSets<Value> extends FromLongs<Value, MarkedSet<Value>>
+        implements IMultiLookupAbstract.ToSetsAbstract<Long, Value>
     {
-        public static class OfObjects <Value> extends ToSets <Value> {
+        public static class OfObjects<Value> extends ToSets<Value> {
             @Override
-            public MarkedSet <Value> createMarkedSet() {
-                return new MarkedSetImpl <Value>();
+            public MarkedSet<Value> createMarkedSet() {
+                return new MarkedSetImpl<Value>();
             }
         }
 
-        public static class OfLongs extends ToSets <Long> {
+        public static class OfLongs extends ToSets<Long> {
             @Override
-            public MarkedSet <Long> createMarkedSet() {
+            public MarkedSet<Long> createMarkedSet() {
                 return new MarkedLongSetImpl();
             }
         }
 
     }
 
-    public abstract static class ToMultisets <Value> extends FromLongs <Value, MarkedMultiset <Value>>
-        implements IMultiLookupAbstract.ToMultisetsAbstract <Long, Value>
+    public abstract static class ToMultisets<Value> extends FromLongs<Value, MarkedMultiset<Value>>
+        implements IMultiLookupAbstract.ToMultisetsAbstract<Long, Value>
     {
-        public static class OfObjects <Value> extends ToMultisets <Value> {
+        public static class OfObjects<Value> extends ToMultisets<Value> {
             @Override
-            public MarkedMultiset <Value> createMarkedMultiset() {
-                return new MarkedMultisetImpl <Value>();
+            public MarkedMultiset<Value> createMarkedMultiset() {
+                return new MarkedMultisetImpl<Value>();
             }
         }
 
-        public static class OfLongs extends ToMultisets <Long> {
+        public static class OfLongs extends ToMultisets<Long> {
             @Override
-            public MarkedMultiset <Long> createMarkedMultiset() {
+            public MarkedMultiset<Long> createMarkedMultiset() {
                 return new MarkedLongMultisetImpl();
             }
         }

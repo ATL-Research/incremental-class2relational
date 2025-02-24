@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class ProblemLoader {
 	@Inject
-	private Provider <XtextResourceSet> resourceSetProvider;
+	private Provider<XtextResourceSet> resourceSetProvider;
 
 	@Inject
 	private IResourceFactory resourceFactory;

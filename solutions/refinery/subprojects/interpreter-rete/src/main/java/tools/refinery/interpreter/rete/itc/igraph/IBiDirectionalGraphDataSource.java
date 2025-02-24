@@ -20,7 +20,7 @@ import tools.refinery.interpreter.matchers.util.IMultiset;
  *
  * @param <V> the type of the nodes in the graph
  */
-public interface IBiDirectionalGraphDataSource <V> extends IGraphDataSource <V> {
+public interface IBiDirectionalGraphDataSource<V> extends IGraphDataSource<V> {
 
     /**
      * Returns the source nodes for the given target node.
@@ -32,6 +32,6 @@ public interface IBiDirectionalGraphDataSource <V> extends IGraphDataSource <V> 
      * @return the multiset of source nodes
      * @since 2.0
      */
-    public IMemoryView <V> getSourceNodes(V target);
+    public IMemoryView<V> getSourceNodes(V target);
 
 }

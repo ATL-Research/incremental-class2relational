@@ -20,7 +20,7 @@ import java.util.Objects;
 
 public class StateCoderStoreAdapterImpl implements StateCoderStoreAdapter {
 	final ModelStore store;
-	final Collection <Symbol<?>> symbols;
+	final Collection<Symbol<?>> symbols;
 	final IntSet individuals;
 
 	final StateEquivalenceChecker equivalenceChecker;
@@ -29,7 +29,7 @@ public class StateCoderStoreAdapterImpl implements StateCoderStoreAdapter {
 	StateCoderStoreAdapterImpl(ModelStore store,
 							   StateCodeCalculatorFactory codeCalculatorFactory,
 							   StateEquivalenceChecker equivalenceChecker,
-							   Collection <Symbol<?>> symbols,
+							   Collection<Symbol<?>> symbols,
 							   IntSet individuals)
 	{
 		this.codeCalculatorFactory = codeCalculatorFactory;

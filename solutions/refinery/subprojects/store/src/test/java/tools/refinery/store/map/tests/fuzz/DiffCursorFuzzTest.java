@@ -25,25 +25,25 @@ import static tools.refinery.store.map.tests.fuzz.utils.FuzzTestCollections.*;
 class DiffCursorFuzzTest {
 	private void runFuzzTest(String scenario, int seed, int steps, int maxKey, int maxValue, boolean nullDefault,
 							 int commitFrequency, boolean commitBeforeDiffCursor,
-							 VersionedMapStoreFactoryBuilder <Integer, String> builder) {
+							 VersionedMapStoreFactoryBuilder<Integer, String> builder) {
 		String[] values = MapTestEnvironment.prepareValues(maxValue, nullDefault);
 
-		VersionedMapStore <Integer, String> store = builder.defaultValue(values[0]).build().createOne();
+		VersionedMapStore<Integer, String> store = builder.defaultValue(values[0]).build().createOne();
 		iterativeRandomPutsAndCommitsThenDiffCursor(scenario, store, steps, maxKey, values, seed, commitFrequency,
 				commitBeforeDiffCursor);
 	}
 
-	private void iterativeRandomPutsAndCommitsThenDiffCursor(String scenario, VersionedMapStore <Integer, String> store,
+	private void iterativeRandomPutsAndCommitsThenDiffCursor(String scenario, VersionedMapStore<Integer, String> store,
 															 int steps, int maxKey, String[] values, int seed,
 															 int commitFrequency, boolean commitBeforeDiffCursor) {
 
 		int largestCommit = -1;
-		Map <Integer,Version> index2Version = new HashMap<>();
+		Map<Integer,Version> index2Version = new HashMap<>();
 
 		{
 			// 1. build a map with versions
 			Random r = new Random(seed);
-			VersionedMap <Integer, String> versioned = store.createMap();
+			VersionedMap<Integer, String> versioned = store.createMap();
 			for (int i = 0; i < steps; i++) {
 				int index = i + 1;
 				int nextKey = r.nextInt(maxKey);
@@ -66,7 +66,7 @@ class DiffCursorFuzzTest {
 
 		{
 			// 2. create a non-versioned map,
-			VersionedMap <Integer, String> moving = store.createMap();
+			VersionedMap<Integer, String> moving = store.createMap();
 			Random r2 = new Random(seed + 1);
 
 			final int diffTravelFrequency = commitFrequency * 2;
@@ -76,12 +76,12 @@ class DiffCursorFuzzTest {
 					// diff-travel
 					int travelToVersion = r2.nextInt(largestCommit + 1);
 
-					VersionedMap <Integer, String> oracle = store.createMap(index2Version.get(travelToVersion));
+					VersionedMap<Integer, String> oracle = store.createMap(index2Version.get(travelToVersion));
 
 					if(commitBeforeDiffCursor) {
 						moving.commit();
 					}
-					DiffCursor <Integer, String> diffCursor = moving.getDiffCursor(index2Version.get(travelToVersion));
+					DiffCursor<Integer, String> diffCursor = moving.getDiffCursor(index2Version.get(travelToVersion));
 					moving.putAll(diffCursor);
 					moving.commit();
 
@@ -115,12 +115,12 @@ class DiffCursorFuzzTest {
 	@Tag("fuzz")
 	void parametrizedFuzz(int ignoredTests, int steps, int noKeys, int noValues, boolean nullDefault,
 						  int commitFrequency, int seed, boolean commitBeforeDiffCursor,
-						  VersionedMapStoreFactoryBuilder <Integer, String> builder) {
+						  VersionedMapStoreFactoryBuilder<Integer, String> builder) {
 		runFuzzTest("DiffCursorS" + steps + "K" + noKeys + "V" + noValues + "s" + seed, seed, steps,
 				noKeys, noValues, nullDefault, commitFrequency, commitBeforeDiffCursor, builder);
 	}
 
-	static Stream <Arguments> parametrizedFuzz() {
+	static Stream<Arguments> parametrizedFuzz() {
 		return FuzzTestUtils.permutationWithSize(new Object[]{100}, keyCounts, valueCounts, nullDefaultOptions,
 				commitFrequencyOptions, randomSeedOptions, new Object[]{false,true}, storeConfigs);
 	}
@@ -130,12 +130,12 @@ class DiffCursorFuzzTest {
 	@Tag("fuzz")
 	@Tag("slow")
 	void parametrizedSlowFuzz(int ignoredTests, int steps, int noKeys, int noValues, boolean nullDefault, int commitFrequency,
-			int seed, boolean commitBeforeDiffCursor, VersionedMapStoreFactoryBuilder <Integer, String> builder) {
+			int seed, boolean commitBeforeDiffCursor, VersionedMapStoreFactoryBuilder<Integer, String> builder) {
 		runFuzzTest("DiffCursorS" + steps + "K" + noKeys + "V" + noValues + "s" + seed, seed, steps, noKeys, noValues,
 				nullDefault, commitFrequency, commitBeforeDiffCursor, builder);
 	}
 
-	static Stream <Arguments> parametrizedSlowFuzz() {
+	static Stream<Arguments> parametrizedSlowFuzz() {
 		return FuzzTestUtils.changeStepCount(parametrizedFuzz(), 1);
 	}
 }

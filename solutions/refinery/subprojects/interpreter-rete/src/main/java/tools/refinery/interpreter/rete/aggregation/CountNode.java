@@ -26,12 +26,12 @@ public class CountNode extends IndexerBasedAggregatorNode {
         super(reteContainer);
     }
 
-    int sizeOf(Collection <Tuple> group) {
+    int sizeOf(Collection<Tuple> group) {
         return group == null ? 0 : group.size();
     }
 
     @Override
-    public Object aggregateGroup(Tuple signature, Collection <Tuple> group) {
+    public Object aggregateGroup(Tuple signature, Collection<Tuple> group) {
         return sizeOf(group);
     }
 

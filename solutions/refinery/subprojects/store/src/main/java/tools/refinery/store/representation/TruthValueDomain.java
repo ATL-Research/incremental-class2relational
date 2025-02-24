@@ -9,19 +9,19 @@ import java.util.Optional;
 
 // Singleton pattern, because there is only one domain for truth values.
 @SuppressWarnings("squid:S6548")
-public final class TruthValueDomain implements AbstractDomain <TruthValue, Boolean> {
+public final class TruthValueDomain implements AbstractDomain<TruthValue, Boolean> {
 	public static final TruthValueDomain INSTANCE = new TruthValueDomain();
 
 	private TruthValueDomain() {
 	}
 
 	@Override
-	public Class <TruthValue> abstractType() {
+	public Class<TruthValue> abstractType() {
 		return TruthValue.class;
 	}
 
 	@Override
-	public Class <Boolean> concreteType() {
+	public Class<Boolean> concreteType() {
 		return Boolean.class;
 	}
 
@@ -31,7 +31,7 @@ public final class TruthValueDomain implements AbstractDomain <TruthValue, Boole
 	}
 
 	@Override
-	public Optional <Boolean> toConcrete(TruthValue abstractValue) {
+	public Optional<Boolean> toConcrete(TruthValue abstractValue) {
 		return switch (abstractValue) {
 			case TRUE -> Optional.of(true);
 			case FALSE -> Optional.of(false);

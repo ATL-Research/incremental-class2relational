@@ -30,20 +30,20 @@ import tools.refinery.interpreter.matchers.psystem.IExpressionEvaluator;
  */
 public class ExpressionEval implements ISearchOperation {
 
-    private class Executor extends SingleValueExtendOperationExecutor <Object> {
+    private class Executor extends SingleValueExtendOperationExecutor<Object> {
 
         public Executor(int position) {
             super(position);
         }
 
         @Override
-        public Iterator <?> getIterator(MatchingFrame frame, ISearchContext context) {
+        public Iterator<?> getIterator(MatchingFrame frame, ISearchContext context) {
             try {
                 Object result = evaluator.evaluateExpression(new MatchingFrameValueProvider(frame, nameMap));
                 if (!unwind && result != null){
                     return Collections.singletonList(result).iterator();
-                } else if (unwind && result instanceof Set <?>) {
-                    return ((Set <?>)result).iterator();
+                } else if (unwind && result instanceof Set<?>) {
+                    return ((Set<?>)result).iterator();
                 } else {
                     return Collections.emptyIterator();
                 }
@@ -61,17 +61,17 @@ public class ExpressionEval implements ISearchOperation {
 
     private final IExpressionEvaluator evaluator;
     private final boolean unwind;
-    private final Map <String, Integer> nameMap;
+    private final Map<String, Integer> nameMap;
     private final int position;
 
-    public ExpressionEval(IExpressionEvaluator evaluator, Map <String, Integer> nameMap, int position) {
+    public ExpressionEval(IExpressionEvaluator evaluator, Map<String, Integer> nameMap, int position) {
         this(evaluator, nameMap, false, position);
     }
 
     /**
      * @since 2.7
      */
-    public ExpressionEval(IExpressionEvaluator evaluator, Map <String, Integer> nameMap, boolean unwind, int position) {
+    public ExpressionEval(IExpressionEvaluator evaluator, Map<String, Integer> nameMap, boolean unwind, int position) {
         this.evaluator = evaluator;
         this.nameMap = nameMap;
         this.unwind = unwind;
@@ -84,7 +84,7 @@ public class ExpressionEval implements ISearchOperation {
     }
 
     @Override
-    public String toString(Function <Integer, String> variableMapping) {
+    public String toString(Function<Integer, String> variableMapping) {
         return "extend    -"+variableMapping.apply(position)+" = expression "+evaluator.getShortDescription();
     }
 
@@ -94,9 +94,9 @@ public class ExpressionEval implements ISearchOperation {
     }
 
     @Override
-    public List <Integer> getVariablePositions() {
+    public List<Integer> getVariablePositions() {
         // XXX not sure if this is the correct implementation to get the affected variable indicies
-        List <Integer> variables = new ArrayList<>();
+        List<Integer> variables = new ArrayList<>();
         variables.addAll(nameMap.values());
         return variables;
     }

@@ -36,12 +36,12 @@ class JoinCandidate {
     SubPlan primary;
     SubPlan secondary;
 
-    Set <PVariable> varPrimary;
-    Set <PVariable> varSecondary;
-    Set <PVariable> varCommon;
+    Set<PVariable> varPrimary;
+    Set<PVariable> varSecondary;
+    Set<PVariable> varCommon;
 
-    List <PConstraint> consPrimary;
-    List <PConstraint> consSecondary;
+    List<PConstraint> consPrimary;
+    List<PConstraint> consSecondary;
 
 
     JoinCandidate(SubPlan primary, SubPlan secondary, QueryAnalyzer analyzer) {
@@ -55,9 +55,9 @@ class JoinCandidate {
         varCommon = CollectionsFactory.createSet(varPrimary);
         varCommon.retainAll(varSecondary);
 
-        consPrimary = new ArrayList <PConstraint>(primary.getAllEnforcedConstraints());
+        consPrimary = new ArrayList<PConstraint>(primary.getAllEnforcedConstraints());
         Collections.sort(consPrimary, TieBreaker.CONSTRAINT_COMPARATOR);
-        consSecondary = new ArrayList <PConstraint>(secondary.getAllEnforcedConstraints());
+        consSecondary = new ArrayList<PConstraint>(secondary.getAllEnforcedConstraints());
         Collections.sort(consSecondary, TieBreaker.CONSTRAINT_COMPARATOR);
     }
 
@@ -98,27 +98,27 @@ class JoinCandidate {
     /**
      * @return the varPrimary
      */
-    public Set <PVariable> getVarPrimary() {
+    public Set<PVariable> getVarPrimary() {
         return varPrimary;
     }
 
     /**
      * @return the varSecondary
      */
-    public Set <PVariable> getVarSecondary() {
+    public Set<PVariable> getVarSecondary() {
         return varSecondary;
     }
 
     /**
      * @return constraints of primary, sorted according to {@link TieBreaker#CONSTRAINT_COMPARATOR}.
      */
-    public List <PConstraint> getConsPrimary() {
+    public List<PConstraint> getConsPrimary() {
         return consPrimary;
     }
     /**
      * @return constraints of secondary, sorted according to {@link TieBreaker#CONSTRAINT_COMPARATOR}.
      */
-    public List <PConstraint> getConsSecondary() {
+    public List<PConstraint> getConsSecondary() {
         return consSecondary;
     }
 
@@ -145,14 +145,14 @@ class JoinCandidate {
     // it is a Heath-join iff common variables functionally determine either all primary or all secondary variables
     public boolean isHeath() {
         if (heath == null) {
-            Set <PConstraint> union = Stream.concat(
+            Set<PConstraint> union = Stream.concat(
                     primary.getAllEnforcedConstraints().stream(),
                     secondary.getAllEnforcedConstraints().stream()
             ).collect(Collectors.toSet());
-            Map <Set<PVariable>, Set <PVariable>> dependencies =
+            Map<Set<PVariable>, Set<PVariable>> dependencies =
                     analyzer.getFunctionalDependencies(union, false);
             // does varCommon determine either varPrimary or varSecondary?
-            Set <PVariable> varCommonClosure = FunctionalDependencyHelper.closureOf(varCommon, dependencies);
+            Set<PVariable> varCommonClosure = FunctionalDependencyHelper.closureOf(varCommon, dependencies);
 
             heath = varCommonClosure.containsAll(varPrimary) || varCommonClosure.containsAll(varSecondary);
         }

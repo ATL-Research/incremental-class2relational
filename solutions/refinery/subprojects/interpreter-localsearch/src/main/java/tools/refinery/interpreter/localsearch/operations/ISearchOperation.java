@@ -74,7 +74,7 @@ public interface ISearchOperation {
      *
      * @return the ordered list of the variable numbers that are affected by the search operation
      */
-    List <Integer> getVariablePositions();
+    List<Integer> getVariablePositions();
 
     /**
      * Creates a string representation of the search operation by replacing the variable numbers according to the
@@ -84,5 +84,5 @@ public interface ISearchOperation {
      *
      * @since 2.0
      */
-    String toString(Function <Integer, String> variableMapping);
+    String toString(Function<Integer, String> variableMapping);
 }

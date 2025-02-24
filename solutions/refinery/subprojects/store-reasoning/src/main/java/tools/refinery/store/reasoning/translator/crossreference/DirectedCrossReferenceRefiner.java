@@ -14,13 +14,13 @@ import tools.refinery.store.representation.Symbol;
 import tools.refinery.store.representation.TruthValue;
 import tools.refinery.store.tuple.Tuple;
 
-class DirectedCrossReferenceRefiner extends ConcreteSymbolRefiner <TruthValue, Boolean> {
+class DirectedCrossReferenceRefiner extends ConcreteSymbolRefiner<TruthValue, Boolean> {
 	private final PartialRelation targetType;
-	private final PartialInterpretationRefiner <TruthValue, Boolean> sourceRefiner;
-	private PartialInterpretationRefiner <TruthValue, Boolean> targetRefiner;
+	private final PartialInterpretationRefiner<TruthValue, Boolean> sourceRefiner;
+	private PartialInterpretationRefiner<TruthValue, Boolean> targetRefiner;
 
-	public DirectedCrossReferenceRefiner(ReasoningAdapter adapter, PartialSymbol <TruthValue, Boolean> partialSymbol,
-										 Symbol <TruthValue> concreteSymbol, PartialRelation sourceType,
+	public DirectedCrossReferenceRefiner(ReasoningAdapter adapter, PartialSymbol<TruthValue, Boolean> partialSymbol,
+										 Symbol<TruthValue> concreteSymbol, PartialRelation sourceType,
 										 PartialRelation targetType) {
 		super(adapter, partialSymbol, concreteSymbol);
 		this.targetType = targetType;
@@ -44,7 +44,7 @@ class DirectedCrossReferenceRefiner extends ConcreteSymbolRefiner <TruthValue, B
 		return true;
 	}
 
-	public static Factory <TruthValue, Boolean> of(Symbol <TruthValue> concreteSymbol, PartialRelation sourceType,
+	public static Factory<TruthValue, Boolean> of(Symbol<TruthValue> concreteSymbol, PartialRelation sourceType,
 												  PartialRelation targetType) {
 		return (adapter, partialSymbol) -> new DirectedCrossReferenceRefiner(adapter, partialSymbol, concreteSymbol,
 				sourceType, targetType);

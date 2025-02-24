@@ -12,13 +12,13 @@ import tools.refinery.store.map.VersionedMap;
 
 import java.util.*;
 
-public class InOrderMapCursor <K, V> implements Cursor <K, V> {
+public class InOrderMapCursor<K, V> implements Cursor<K, V> {
 	// Constants
 	static final int INDEX_START = -1;
 
 	// Tree stack
-	ArrayDeque <Node<K, V>> nodeStack;
-	ArrayDeque <Integer> nodeIndexStack;
+	ArrayDeque<Node<K, V>> nodeStack;
+	ArrayDeque<Integer> nodeIndexStack;
 
 
 	// Values
@@ -26,10 +26,10 @@ public class InOrderMapCursor <K, V> implements Cursor <K, V> {
 	V value;
 
 	// Hash code for checking concurrent modifications
-	final VersionedMap <K, V> map;
+	final VersionedMap<K, V> map;
 	final int creationHash;
 
-	public InOrderMapCursor(VersionedMapStateImpl <K, V> map) {
+	public InOrderMapCursor(VersionedMapStateImpl<K, V> map) {
 		// Initializing tree stack
 		super();
 		this.nodeStack = new ArrayDeque<>();
@@ -90,13 +90,13 @@ public class InOrderMapCursor <K, V> implements Cursor <K, V> {
 	}
 
 	@Override
-	public Set <AnyVersionedMap> getDependingMaps() {
+	public Set<AnyVersionedMap> getDependingMaps() {
 		return Set.of(this.map);
 	}
 
-	public static <K, V> boolean sameSubNode(InOrderMapCursor <K, V> cursor1, InOrderMapCursor <K, V> cursor2) {
-		Node <K, V> nodeOfCursor1 = cursor1.nodeStack.peek();
-		Node <K, V> nodeOfCursor2 = cursor2.nodeStack.peek();
+	public static <K, V> boolean sameSubNode(InOrderMapCursor<K, V> cursor1, InOrderMapCursor<K, V> cursor2) {
+		Node<K, V> nodeOfCursor1 = cursor1.nodeStack.peek();
+		Node<K, V> nodeOfCursor2 = cursor2.nodeStack.peek();
 		return Objects.equals(nodeOfCursor1, nodeOfCursor2);
 	}
 
@@ -110,10 +110,10 @@ public class InOrderMapCursor <K, V> implements Cursor <K, V> {
 	 * @return Positive number if cursor 1 is behind, negative number if cursor 2 is behind, and 0 if they are at the
 	 * same position.
 	 */
-	public static <K, V> int comparePosition(InOrderMapCursor <K, V> cursor1, InOrderMapCursor <K, V> cursor2) {
+	public static <K, V> int comparePosition(InOrderMapCursor<K, V> cursor1, InOrderMapCursor<K, V> cursor2) {
 		// If the state does not determine the order, then compare @nodeIndexStack.
-		Iterator <Integer> nodeIndexStack1 = cursor1.nodeIndexStack.descendingIterator();
-		Iterator <Integer> nodeIndexStack2 = cursor2.nodeIndexStack.descendingIterator();
+		Iterator<Integer> nodeIndexStack1 = cursor1.nodeIndexStack.descendingIterator();
+		Iterator<Integer> nodeIndexStack2 = cursor2.nodeIndexStack.descendingIterator();
 
 		while(nodeIndexStack1.hasNext() && nodeIndexStack2.hasNext()){
 			final int index1 = nodeIndexStack1.next();
@@ -138,7 +138,7 @@ public class InOrderMapCursor <K, V> implements Cursor <K, V> {
 	 * @return Positive number if cursor 1 is deeper, negative number if cursor 2 is deeper, and 0 if they are at the
 	 *  same depth.
 	 */
-	public static <K, V> int compareDepth(InOrderMapCursor <K, V> cursor1, InOrderMapCursor <K, V> cursor2) {
+	public static <K, V> int compareDepth(InOrderMapCursor<K, V> cursor1, InOrderMapCursor<K, V> cursor2) {
 		int d1 = cursor1.nodeIndexStack.size();
 		int d2 = cursor2.nodeIndexStack.size();
 		return Integer.compare(d1, d2);

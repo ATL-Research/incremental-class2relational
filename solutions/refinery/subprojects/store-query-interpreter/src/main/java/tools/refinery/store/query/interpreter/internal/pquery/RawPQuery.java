@@ -22,8 +22,8 @@ import java.util.Set;
 
 public class RawPQuery extends BasePQuery {
 	private final String fullyQualifiedName;
-	private List <PParameter> parameters;
-	private final LinkedHashSet <PBody> bodies = new LinkedHashSet<>();
+	private List<PParameter> parameters;
+	private final LinkedHashSet<PBody> bodies = new LinkedHashSet<>();
 
 	public RawPQuery(String name, PVisibility visibility) {
 		super(visibility);
@@ -39,7 +39,7 @@ public class RawPQuery extends BasePQuery {
 		return fullyQualifiedName;
 	}
 
-	public void setParameters(List <PParameter> parameters) {
+	public void setParameters(List<PParameter> parameters) {
 		this.parameters = parameters;
 	}
 
@@ -49,7 +49,7 @@ public class RawPQuery extends BasePQuery {
 	}
 
 	@Override
-	public List <PParameter> getParameters() {
+	public List<PParameter> getParameters() {
 		return parameters;
 	}
 
@@ -58,14 +58,14 @@ public class RawPQuery extends BasePQuery {
 	}
 
 	@Override
-	protected Set <PBody> doGetContainedBodies() {
+	protected Set<PBody> doGetContainedBodies() {
 		return bodies;
 	}
 
-	public GenericQuerySpecification <RawPatternMatcher> build() {
+	public GenericQuerySpecification<RawPatternMatcher> build() {
 		return new GenericQuerySpecification<>(this) {
 			@Override
-			public Class <? extends QueryScope> getPreferredScopeClass() {
+			public Class<? extends QueryScope> getPreferredScopeClass() {
 				return RelationalScope.class;
 			}
 

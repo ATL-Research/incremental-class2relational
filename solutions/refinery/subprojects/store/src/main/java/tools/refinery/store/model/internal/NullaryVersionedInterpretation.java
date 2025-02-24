@@ -10,13 +10,13 @@ import tools.refinery.store.map.VersionedMap;
 import tools.refinery.store.representation.Symbol;
 import tools.refinery.store.tuple.Tuple;
 
-class NullaryVersionedInterpretation <T> extends VersionedInterpretation <T> {
-	public NullaryVersionedInterpretation(ModelImpl model, Symbol <T> symbol, VersionedMap <Tuple, T> map) {
+class NullaryVersionedInterpretation<T> extends VersionedInterpretation<T> {
+	public NullaryVersionedInterpretation(ModelImpl model, Symbol<T> symbol, VersionedMap<Tuple, T> map) {
 		super(model, symbol, map);
 	}
 
 	@Override
-	public Cursor <Tuple, T> getAdjacent(int slot, int node) {
+	public Cursor<Tuple, T> getAdjacent(int slot, int node) {
 		throw new IllegalArgumentException("Invalid index: " + slot);
 	}
 

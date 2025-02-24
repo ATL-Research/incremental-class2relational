@@ -48,11 +48,11 @@ import tools.refinery.interpreter.rete.index.ProjectionIndexer;
 public class UniquenessEnforcerNode extends AbstractUniquenessEnforcerNode
         implements RederivableNode, PosetAwareReceiver {
 
-    protected IMultiset <Tuple> memory;
+    protected IMultiset<Tuple> memory;
     /**
      * @since 1.6
      */
-    protected IMultiset <Tuple> rederivableMemory;
+    protected IMultiset<Tuple> rederivableMemory;
     /**
      * @since 1.6
      */
@@ -114,7 +114,7 @@ public class UniquenessEnforcerNode extends AbstractUniquenessEnforcerNode
     }
 
     @Override
-    public void pullInto(final Collection <Tuple> collector, final boolean flush) {
+    public void pullInto(final Collection<Tuple> collector, final boolean flush) {
         for (final Tuple tuple : this.memory.distinctValues()) {
             collector.add(tuple);
         }
@@ -124,7 +124,7 @@ public class UniquenessEnforcerNode extends AbstractUniquenessEnforcerNode
      * @since 2.8
      */
     @Override
-    public Set <Tuple> getTuples() {
+    public Set<Tuple> getTuples() {
         return this.memory.distinctValues();
     }
 
@@ -149,7 +149,7 @@ public class UniquenessEnforcerNode extends AbstractUniquenessEnforcerNode
     }
 
     @Override
-    public void pullIntoWithTimeline(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush) {
+    public void pullIntoWithTimeline(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush) {
         throw new UnsupportedOperationException("Use the timely version of this node!");
     }
 

@@ -19,9 +19,9 @@ import java.util.function.Function;
 
 public class TypeHierarchyInitializer implements PartialModelInitializer {
 	private final TypeHierarchy typeHierarchy;
-	private final Symbol <InferredType> typeSymbol;
+	private final Symbol<InferredType> typeSymbol;
 
-	public TypeHierarchyInitializer(TypeHierarchy typeHierarchy, Symbol <InferredType> typeSymbol) {
+	public TypeHierarchyInitializer(TypeHierarchy typeHierarchy, Symbol<InferredType> typeSymbol) {
 		this.typeHierarchy = typeHierarchy;
 		this.typeSymbol = typeSymbol;
 	}
@@ -35,7 +35,7 @@ public class TypeHierarchyInitializer implements PartialModelInitializer {
 			initializeType(type, inferredTypes, model, modelSeed);
 		}
 		var typeInterpretation = model.getInterpretation(typeSymbol);
-		var uniqueTable = new HashMap <InferredType, InferredType>();
+		var uniqueTable = new HashMap<InferredType, InferredType>();
 		for (int i = 0; i < inferredTypes.length; i++) {
 			model.checkCancelled();
 			var uniqueType = uniqueTable.computeIfAbsent(inferredTypes[i], Function.identity());

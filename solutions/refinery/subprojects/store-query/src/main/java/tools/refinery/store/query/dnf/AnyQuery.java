@@ -10,7 +10,7 @@ public sealed interface AnyQuery permits Query {
 
 	int arity();
 
-	Class <?> valueType();
+	Class<?> valueType();
 
 	Dnf getDnf();
 }

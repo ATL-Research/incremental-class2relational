@@ -27,8 +27,8 @@ import tools.refinery.interpreter.matchers.util.SingletonInstanceProvider;
  */
 public class SurrogateQueryRegistry {
 
-    private Map <IInputKey, IProvider <PQuery>> registeredSurrogateQueryMap = new HashMap<>();
-    private Map <IInputKey, IProvider <PQuery>> dynamicSurrogateQueryMap = new HashMap<>();
+    private Map<IInputKey, IProvider<PQuery>> registeredSurrogateQueryMap = new HashMap<>();
+    private Map<IInputKey, IProvider<PQuery>> dynamicSurrogateQueryMap = new HashMap<>();
 
     /**
      * Hidden constructor
@@ -49,9 +49,9 @@ public class SurrogateQueryRegistry {
      * @return the previous surrogate query associated with feature, or null if there was no such query FQN registered
      * @throws IllegalArgumentException if feature or surrogateQuery is null
      */
-    public IProvider <PQuery> registerSurrogateQueryForFeature(IInputKey feature, PQuery surrogateQuery) {
+    public IProvider<PQuery> registerSurrogateQueryForFeature(IInputKey feature, PQuery surrogateQuery) {
         Preconditions.checkArgument(surrogateQuery != null, "Surrogate query must not be null!");
-        return registerSurrogateQueryForFeature(feature, new SingletonInstanceProvider <PQuery>(surrogateQuery));
+        return registerSurrogateQueryForFeature(feature, new SingletonInstanceProvider<PQuery>(surrogateQuery));
     }
 
     /**
@@ -63,24 +63,24 @@ public class SurrogateQueryRegistry {
      * @throws IllegalArgumentException
      *             if feature or surrogateQuery is null
      */
-    public IProvider <PQuery> registerSurrogateQueryForFeature(IInputKey feature, IProvider <PQuery> surrogateQueryProvider) {
+    public IProvider<PQuery> registerSurrogateQueryForFeature(IInputKey feature, IProvider<PQuery> surrogateQueryProvider) {
         Preconditions.checkArgument(feature != null, "Feature must not be null!");
         Preconditions.checkArgument(surrogateQueryProvider != null, "Surrogate query must not be null!");
         return registeredSurrogateQueryMap.put(feature, surrogateQueryProvider);
     }
 
-    public IProvider <PQuery> addDynamicSurrogateQueryForFeature(IInputKey feature, PQuery surrogateQuery) {
+    public IProvider<PQuery> addDynamicSurrogateQueryForFeature(IInputKey feature, PQuery surrogateQuery) {
         Preconditions.checkArgument(surrogateQuery != null, "Surrogate query FQN must not be null!");
-        return addDynamicSurrogateQueryForFeature(feature, new SingletonInstanceProvider <PQuery>(surrogateQuery));
+        return addDynamicSurrogateQueryForFeature(feature, new SingletonInstanceProvider<PQuery>(surrogateQuery));
     }
 
-    public IProvider <PQuery> addDynamicSurrogateQueryForFeature(IInputKey feature, IProvider <PQuery> surrogateQuery) {
+    public IProvider<PQuery> addDynamicSurrogateQueryForFeature(IInputKey feature, IProvider<PQuery> surrogateQuery) {
         Preconditions.checkArgument(feature != null, "Feature must not be null!");
         Preconditions.checkArgument(surrogateQuery != null, "Surrogate query FQN must not be null!");
         return dynamicSurrogateQueryMap.put(feature, surrogateQuery);
     }
 
-    public IProvider <PQuery> removeDynamicSurrogateQueryForFeature(IInputKey feature) {
+    public IProvider<PQuery> removeDynamicSurrogateQueryForFeature(IInputKey feature) {
         Preconditions.checkArgument(feature != null, "Feature must not be null!");
         return dynamicSurrogateQueryMap.remove(feature);
     }
@@ -109,7 +109,7 @@ public class SurrogateQueryRegistry {
      */
     public PQuery getSurrogateQuery(IInputKey feature) {
         Preconditions.checkArgument(feature != null, "Feature must not be null!");
-        IProvider <PQuery> surrogate = dynamicSurrogateQueryMap.get(feature);
+        IProvider<PQuery> surrogate = dynamicSurrogateQueryMap.get(feature);
         if(surrogate == null) {
             surrogate = registeredSurrogateQueryMap.get(feature);
         }
@@ -123,30 +123,30 @@ public class SurrogateQueryRegistry {
     /**
      * @return an unmodifiable set of features with registered surrogate queries
      */
-    public Set <IInputKey> getRegisteredSurrogateQueries() {
+    public Set<IInputKey> getRegisteredSurrogateQueries() {
         return Collections.unmodifiableSet(getRegisteredSurrogateQueriesInternal());
     }
 
-    private Set <IInputKey> getRegisteredSurrogateQueriesInternal() {
+    private Set<IInputKey> getRegisteredSurrogateQueriesInternal() {
         return registeredSurrogateQueryMap.keySet();
     }
 
     /**
      * @return an unmodifiable set of features with dynamically added surrogate queries
      */
-    public Set <IInputKey> getDynamicSurrogateQueries() {
+    public Set<IInputKey> getDynamicSurrogateQueries() {
         return Collections.unmodifiableSet(getDynamicSurrogateQueriesInternal());
     }
 
-    private Set <IInputKey> getDynamicSurrogateQueriesInternal() {
+    private Set<IInputKey> getDynamicSurrogateQueriesInternal() {
         return dynamicSurrogateQueryMap.keySet();
     }
 
     /**
      * @return an unmodifiable set that contains all features with surrogate queries.
      */
-    public Set <IInputKey> getAllSurrogateQueries() {
-        Set <IInputKey> results = new HashSet<>(getRegisteredSurrogateQueriesInternal());
+    public Set<IInputKey> getAllSurrogateQueries() {
+        Set<IInputKey> results = new HashSet<>(getRegisteredSurrogateQueriesInternal());
         results.addAll(getDynamicSurrogateQueriesInternal());
         return results;
     }

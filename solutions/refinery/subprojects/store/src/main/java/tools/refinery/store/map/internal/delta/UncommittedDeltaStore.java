@@ -5,15 +5,15 @@
  */
 package tools.refinery.store.map.internal.delta;
 
-public interface UncommittedDeltaStore <K, V> {
+public interface UncommittedDeltaStore<K, V> {
 	void processChange(K key, V oldValue, V newValue);
 
-	MapDelta <K, V>[] extractDeltas();
+	MapDelta<K, V>[] extractDeltas();
 
-	MapDelta <K, V>[] extractAndDeleteDeltas();
+	MapDelta<K, V>[] extractAndDeleteDeltas();
 
 	default void checkIntegrity() {
-		MapDelta <K, V>[] extractedDeltas = extractDeltas();
+		MapDelta<K, V>[] extractedDeltas = extractDeltas();
 		if(extractedDeltas != null) {
 			for(var uncommittedOldValue : extractedDeltas) {
 				if(uncommittedOldValue == null) {

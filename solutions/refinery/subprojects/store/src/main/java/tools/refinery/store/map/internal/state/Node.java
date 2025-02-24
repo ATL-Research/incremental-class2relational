@@ -9,7 +9,7 @@ import java.util.Map;
 
 import tools.refinery.store.map.ContinuousHashProvider;
 
-public abstract class Node <K, V> {
+public abstract class Node<K, V> {
 	public static final int BRANCHING_FACTOR_BITS = 5;
 	public static final int FACTOR = 1 << BRANCHING_FACTOR_BITS;
 	protected static final int NUMBER_OF_FACTORS = Integer.SIZE / BRANCHING_FACTOR_BITS;
@@ -77,7 +77,7 @@ public abstract class Node <K, V> {
 	 * @param depth The depth.
 	 * @return The new hash code.
 	 */
-	protected int newHash(final ContinuousHashProvider <? super K> hashProvider, K key, int hash, int depth) {
+	protected int newHash(final ContinuousHashProvider<? super K> hashProvider, K key, int hash, int depth) {
 		final int shiftDepth = shiftDepth(depth);
 		if (shiftDepth == 0) {
 			final int hashDepth = hashDepth(depth);
@@ -92,19 +92,19 @@ public abstract class Node <K, V> {
 		}
 	}
 
-	public abstract V getValue(K key, ContinuousHashProvider <? super K> hashProvider, V defaultValue, int hash,
+	public abstract V getValue(K key, ContinuousHashProvider<? super K> hashProvider, V defaultValue, int hash,
 							   int depth);
 
-	public abstract Node <K, V> putValue(K key, V value, OldValueBox <V> old,
-										ContinuousHashProvider <? super K> hashProvider, V defaultValue, int hash, int depth);
+	public abstract Node<K, V> putValue(K key, V value, OldValueBox<V> old,
+										ContinuousHashProvider<? super K> hashProvider, V defaultValue, int hash, int depth);
 
 	public abstract long getSize();
 
-	abstract MutableNode <K, V> toMutable();
+	abstract MutableNode<K, V> toMutable();
 
-	public abstract ImmutableNode <K, V> toImmutable(Map <Node<K, V>, ImmutableNode <K, V>> cache);
+	public abstract ImmutableNode<K, V> toImmutable(Map<Node<K, V>, ImmutableNode<K, V>> cache);
 
-	protected abstract MutableNode <K, V> isMutable();
+	protected abstract MutableNode<K, V> isMutable();
 
 	/**
 	 * Moves a {@link MapCursor} to its next position.
@@ -112,8 +112,8 @@ public abstract class Node <K, V> {
 	 * @param cursor the cursor
 	 * @return Whether there was a next value to move on.
 	 */
-	abstract boolean moveToNext(MapCursor <K, V> cursor);
-	abstract boolean moveToNextInorder(InOrderMapCursor <K, V> cursor);
+	abstract boolean moveToNext(MapCursor<K, V> cursor);
+	abstract boolean moveToNextInorder(InOrderMapCursor<K, V> cursor);
 
 	///////// FOR printing
 	public abstract void prettyPrint(StringBuilder builder, int depth, int code);
@@ -126,6 +126,6 @@ public abstract class Node <K, V> {
 		return stringBuilder.toString();
 	}
 
-	public void checkIntegrity(ContinuousHashProvider <? super K> hashProvider, V defaultValue, int depth) {
+	public void checkIntegrity(ContinuousHashProvider<? super K> hashProvider, V defaultValue, int depth) {
 	}
 }

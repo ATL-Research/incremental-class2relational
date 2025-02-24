@@ -29,7 +29,7 @@ import static tools.refinery.store.query.literal.CallPolarity.NEGATIVE;
 import static tools.refinery.store.query.literal.Literals.check;
 
 public class C2RRules extends C2RRefineryMain{
-	public static final FunctionalQuery <String> postfix = Query.of("postfix", String.class,
+	public static final FunctionalQuery<String> postfix = Query.of("postfix", String.class,
 			(builder, att, postfix) -> builder
 					.clause((type) -> List.of(
 									class_typeView.call(att,type),

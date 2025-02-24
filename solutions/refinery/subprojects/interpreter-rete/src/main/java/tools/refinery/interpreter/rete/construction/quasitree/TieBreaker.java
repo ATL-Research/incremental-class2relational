@@ -22,9 +22,9 @@ public class TieBreaker {
 
     private TieBreaker() {/*Utility class constructor*/}
 
-    public static final Comparator <PConstraint> CONSTRAINT_COMPARATOR = (arg0, arg1) -> arg0.getMonotonousID() - arg1.getMonotonousID();
+    public static final Comparator<PConstraint> CONSTRAINT_COMPARATOR = (arg0, arg1) -> arg0.getMonotonousID() - arg1.getMonotonousID();
 
-    public static final Comparator <Iterable<? extends PConstraint>> CONSTRAINT_LIST_COMPARATOR =
-            new LexicographicComparator <PConstraint>(CONSTRAINT_COMPARATOR);
+    public static final Comparator<Iterable<? extends PConstraint>> CONSTRAINT_LIST_COMPARATOR =
+            new LexicographicComparator<PConstraint>(CONSTRAINT_COMPARATOR);
 
 }

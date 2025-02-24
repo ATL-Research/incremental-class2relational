@@ -10,11 +10,11 @@ import java.util.Map.Entry;
 
 import tools.refinery.store.map.VersionedMap;
 
-public class UncommittedDeltaMapStore <K, V> implements UncommittedDeltaStore <K, V> {
-	final VersionedMap <K, V> source;
-	final Map <K, V> uncommittedOldValues = new HashMap<>();
+public class UncommittedDeltaMapStore<K, V> implements UncommittedDeltaStore<K, V> {
+	final VersionedMap<K, V> source;
+	final Map<K, V> uncommittedOldValues = new HashMap<>();
 
-	public UncommittedDeltaMapStore(VersionedMap <K, V> source) {
+	public UncommittedDeltaMapStore(VersionedMap<K, V> source) {
 		this.source = source;
 	}
 
@@ -26,14 +26,14 @@ public class UncommittedDeltaMapStore <K, V> implements UncommittedDeltaStore <K
 	}
 
 	@Override
-	public MapDelta <K, V>[] extractDeltas() {
+	public MapDelta<K, V>[] extractDeltas() {
 		if (uncommittedOldValues.isEmpty()) {
 			return null;
 		} else {
 			@SuppressWarnings("unchecked")
-			MapDelta <K,V>[] deltas = new MapDelta[uncommittedOldValues.size()];
+			MapDelta<K,V>[] deltas = new MapDelta[uncommittedOldValues.size()];
 			int i = 0;
-			for (Entry <K, V> entry : uncommittedOldValues.entrySet()) {
+			for (Entry<K, V> entry : uncommittedOldValues.entrySet()) {
 				final K key = entry.getKey();
 				final V oldValue = entry.getValue();
 				final V newValue = source.get(key);
@@ -45,8 +45,8 @@ public class UncommittedDeltaMapStore <K, V> implements UncommittedDeltaStore <K
 	}
 
 	@Override
-	public MapDelta <K, V>[] extractAndDeleteDeltas() {
-		MapDelta <K, V>[] res = extractDeltas();
+	public MapDelta<K, V>[] extractAndDeleteDeltas() {
+		MapDelta<K, V>[] res = extractDeltas();
 		this.uncommittedOldValues.clear();
 		return res;
 	}

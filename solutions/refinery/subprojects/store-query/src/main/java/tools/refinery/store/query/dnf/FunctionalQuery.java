@@ -16,10 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public final class FunctionalQuery <T> extends Query <T> {
-	private final Class <T> type;
+public final class FunctionalQuery<T> extends Query<T> {
+	private final Class<T> type;
 
-	FunctionalQuery(Dnf dnf, Class <T> type) {
+	FunctionalQuery(Dnf dnf, Class<T> type) {
 		super(dnf);
 		var parameters = dnf.getSymbolicParameters();
 		int outputIndex = dnf.arity() - 1;
@@ -46,7 +46,7 @@ public final class FunctionalQuery <T> extends Query <T> {
 	}
 
 	@Override
-	public Class <T> valueType() {
+	public Class<T> valueType() {
 		return type;
 	}
 
@@ -56,32 +56,32 @@ public final class FunctionalQuery <T> extends Query <T> {
 	}
 
 	@Override
-	protected FunctionalQuery <T> withDnfInternal(Dnf newDnf) {
+	protected FunctionalQuery<T> withDnfInternal(Dnf newDnf) {
 		return newDnf.asFunction(type);
 	}
 
 	@Override
-	public FunctionalQuery <T> withDnf(Dnf newDnf) {
-		return (FunctionalQuery <T>) super.withDnf(newDnf);
+	public FunctionalQuery<T> withDnf(Dnf newDnf) {
+		return (FunctionalQuery<T>) super.withDnf(newDnf);
 	}
 
-	public AssignedValue <T> call(List <NodeVariable> arguments) {
+	public AssignedValue<T> call(List<NodeVariable> arguments) {
 		return targetVariable -> {
-			var argumentsWithTarget = new ArrayList <Variable>(arguments.size() + 1);
+			var argumentsWithTarget = new ArrayList<Variable>(arguments.size() + 1);
 			argumentsWithTarget.addAll(arguments);
 			argumentsWithTarget.add(targetVariable);
 			return getDnf().call(CallPolarity.POSITIVE, argumentsWithTarget);
 		};
 	}
 
-	public AssignedValue <T> call(NodeVariable... arguments) {
+	public AssignedValue<T> call(NodeVariable... arguments) {
 		return call(List.of(arguments));
 	}
 
-	public <R> AssignedValue <R> aggregate(Aggregator <R, T> aggregator, List <NodeVariable> arguments) {
+	public <R> AssignedValue<R> aggregate(Aggregator<R, T> aggregator, List<NodeVariable> arguments) {
 		return targetVariable -> {
 			var placeholderVariable = Variable.of(type);
-			var argumentsWithPlaceholder = new ArrayList <Variable>(arguments.size() + 1);
+			var argumentsWithPlaceholder = new ArrayList<Variable>(arguments.size() + 1);
 			argumentsWithPlaceholder.addAll(arguments);
 			argumentsWithPlaceholder.add(placeholderVariable);
 			return getDnf()
@@ -90,7 +90,7 @@ public final class FunctionalQuery <T> extends Query <T> {
 		};
 	}
 
-	public <R> AssignedValue <R> aggregate(Aggregator <R, T> aggregator, NodeVariable... arguments) {
+	public <R> AssignedValue<R> aggregate(Aggregator<R, T> aggregator, NodeVariable... arguments) {
 		return aggregate(aggregator, List.of(arguments));
 	}
 
@@ -99,7 +99,7 @@ public final class FunctionalQuery <T> extends Query <T> {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		if (!super.equals(o)) return false;
-		FunctionalQuery <?> that = (FunctionalQuery <?>) o;
+		FunctionalQuery<?> that = (FunctionalQuery<?>) o;
 		return Objects.equals(type, that.type);
 	}
 

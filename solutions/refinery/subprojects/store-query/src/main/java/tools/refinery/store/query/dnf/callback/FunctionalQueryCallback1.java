@@ -10,6 +10,6 @@ import tools.refinery.store.query.term.DataVariable;
 import tools.refinery.store.query.term.NodeVariable;
 
 @FunctionalInterface
-public interface FunctionalQueryCallback1 <T> {
-	void accept(FunctionalQueryBuilder <T> builder, NodeVariable p1, DataVariable <T> output);
+public interface FunctionalQueryCallback1<T> {
+	void accept(FunctionalQueryBuilder<T> builder, NodeVariable p1, DataVariable<T> output);
 }

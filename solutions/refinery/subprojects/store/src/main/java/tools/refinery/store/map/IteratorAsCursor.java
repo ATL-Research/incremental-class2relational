@@ -10,15 +10,15 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class IteratorAsCursor <K, V> implements Cursor <K, V> {
-	final Iterator <Entry<K, V>> iterator;
-	final VersionedMap <K, V> source;
+public class IteratorAsCursor<K, V> implements Cursor<K, V> {
+	final Iterator<Entry<K, V>> iterator;
+	final VersionedMap<K, V> source;
 
 	private boolean terminated;
 	private K key;
 	private V value;
 
-	public IteratorAsCursor(VersionedMap <K, V> source, Map <K, V> current) {
+	public IteratorAsCursor(VersionedMap<K, V> source, Map<K, V> current) {
 		this.iterator = current.entrySet().iterator();
 		this.source = source;
 	}
@@ -45,7 +45,7 @@ public class IteratorAsCursor <K, V> implements Cursor <K, V> {
 			this.key = null;
 			this.value = null;
 		} else {
-			Entry <K, V> next = iterator.next();
+			Entry<K, V> next = iterator.next();
 			this.key = next.getKey();
 			this.value = next.getValue();
 		}
@@ -58,7 +58,7 @@ public class IteratorAsCursor <K, V> implements Cursor <K, V> {
 	}
 
 	@Override
-	public Set <AnyVersionedMap> getDependingMaps() {
+	public Set<AnyVersionedMap> getDependingMaps() {
 		return Set.of(this.source);
 	}
 }

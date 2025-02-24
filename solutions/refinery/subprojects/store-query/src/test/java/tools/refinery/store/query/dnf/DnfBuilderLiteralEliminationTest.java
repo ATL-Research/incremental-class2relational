@@ -25,8 +25,8 @@ import static tools.refinery.store.query.literal.Literals.not;
 import static tools.refinery.store.query.tests.QueryMatchers.structurallyEqualTo;
 
 class DnfBuilderLiteralEliminationTest {
-	private final Symbol <Boolean> friend = Symbol.of("friend", 2);
-	private final SymbolView <Boolean> friendView = new KeyOnlyView<>(friend);
+	private final Symbol<Boolean> friend = Symbol.of("friend", 2);
+	private final SymbolView<Boolean> friendView = new KeyOnlyView<>(friend);
 	private final NodeVariable p = Variable.of("p");
 	private final NodeVariable q = Variable.of("q");
 	private final Dnf trueDnf = Dnf.builder().parameter(p, ParameterDirection.IN).clause().build();

@@ -42,12 +42,12 @@ public interface IQueryRuntimeContext {
      * <p> Calls may be nested. A single coalesced traversal will happen at the end of the outermost call.
      *
      * <p> <b>Caution: </b> results returned by the runtime context may be incomplete during the coalescing period, to be corrected by notifications sent during the final coalesced traversal.
-     * For example, if a certain input key is not cached yet, an empty relation may be reported during <code>callable.call() </code>; the cache will be constructed after the call terminates and notifications will deliver the entire content of the relation.
+     * For example, if a certain input key is not cached yet, an empty relation may be reported during <code>callable.call()</code>; the cache will be constructed after the call terminates and notifications will deliver the entire content of the relation.
      * Non-incremental query backends should therefore never enumerate input keys while coalesced (verify using {@link #isCoalescing()}).
      *
      * @param callable
      */
-    public abstract <V> V coalesceTraversals(Callable <V> callable) throws InvocationTargetException;
+    public abstract <V> V coalesceTraversals(Callable<V> callable) throws InvocationTargetException;
     /**
      * @return true iff currently within a coalescing section (i.e. within the callable of a call to {@link #coalesceTraversals(Callable)}).
      */
@@ -66,10 +66,10 @@ public interface IQueryRuntimeContext {
      * so that the index can be built. It is possible that the base indexer will select a higher indexing level merging
      * multiple indexing requests to an appropriate level.
      *
-     * <p> <b>Postcondition: </b> After invoking this method, {@link #getIndexed(IInputKey, IndexingService)} for the same key
+     * <p><b>Postcondition:</b> After invoking this method, {@link #getIndexed(IInputKey, IndexingService)} for the same key
      * and service will be guaranteed to return the requested or a highing indexing level as soon as {@link #isCoalescing()} first returns false.
      *
-     * <p> <b>Precondition: </b> the given key is enumerable, see {@link IQueryMetaContext#isEnumerable(IInputKey)}.
+     * <p><b>Precondition:</b> the given key is enumerable, see {@link IQueryMetaContext#isEnumerable(IInputKey)}.
      * @throws IllegalArgumentException if key is not enumerable or an unknown type, see {@link IQueryMetaContext#isEnumerable(IInputKey)}.
      * @since 1.4
      */
@@ -81,7 +81,7 @@ public interface IQueryRuntimeContext {
      * @param key an input key
      * @param seedMask
      *            a mask that extracts those parameters of the input key (from the entire parameter list) that should be
-     *            bound to a fixed value;  must not be null. <strong>Note </strong>: any given index must occur at most once in seedMask.
+     *            bound to a fixed value;  must not be null. <strong>Note</strong>: any given index must occur at most once in seedMask.
      * @param seed
      *            the tuple of fixed values restricting the match set to be considered, in the same order as given in
      *            parameterSeedMask, so that for each considered match tuple,
@@ -89,7 +89,7 @@ public interface IQueryRuntimeContext {
      *
      * @return the number of tuples in the model for the given key and seed
      *
-     * <p> <b>Precondition: </b> the given key is enumerable, see {@link IQueryMetaContext#isEnumerable(IInputKey)}.
+     * <p><b>Precondition:</b> the given key is enumerable, see {@link IQueryMetaContext#isEnumerable(IInputKey)}.
      * @throws IllegalArgumentException if key is not enumerable, see {@link IQueryMetaContext#isEnumerable(IInputKey)}.
      * @since 1.7
      */
@@ -109,7 +109,7 @@ public interface IQueryRuntimeContext {
      *
      * @since 2.1
      */
-    public Optional <Long> estimateCardinality(IInputKey key, TupleMask groupMask, Accuracy requiredAccuracy);
+    public Optional<Long> estimateCardinality(IInputKey key, TupleMask groupMask, Accuracy requiredAccuracy);
 
 
     /**
@@ -128,7 +128,7 @@ public interface IQueryRuntimeContext {
      *
      * @since 2.1
      */
-    public default Optional <Double> estimateAverageBucketSize(IInputKey key, TupleMask groupMask, Accuracy requiredAccuracy) {
+    public default Optional<Double> estimateAverageBucketSize(IInputKey key, TupleMask groupMask, Accuracy requiredAccuracy) {
         if (key.isEnumerable()) {
             return StatisticsHelper.estimateAverageBucketSize(groupMask, requiredAccuracy,
                 (mask, accuracy) -> this.estimateCardinality(key, mask, accuracy));
@@ -142,18 +142,18 @@ public interface IQueryRuntimeContext {
      * @param key an input key
      * @param seedMask
      *            a mask that extracts those parameters of the input key (from the entire parameter list) that should be
-     *            bound to a fixed value;  must not be null. <strong>Note </strong>: any given index must occur at most once in seedMask.
+     *            bound to a fixed value;  must not be null. <strong>Note</strong>: any given index must occur at most once in seedMask.
      * @param seed
      *            the tuple of fixed values restricting the match set to be considered, in the same order as given in
      *            parameterSeedMask, so that for each considered match tuple,
      *            projectedParameterSeed.equals(parameterSeedMask.transform(match)) should hold. Must not be null.
      * @return the tuples in the model for the given key and seed
      *
-     * <p> <b>Precondition: </b> the given key is enumerable, see {@link IQueryMetaContext#isEnumerable(IInputKey)}.
+     * <p><b>Precondition:</b> the given key is enumerable, see {@link IQueryMetaContext#isEnumerable(IInputKey)}.
      * @throws IllegalArgumentException if key is not enumerable, see {@link IQueryMetaContext#isEnumerable(IInputKey)}.
      * @since 1.7
      */
-    public Iterable <Tuple> enumerateTuples(IInputKey key, TupleMask seedMask, ITuple seed);
+    public Iterable<Tuple> enumerateTuples(IInputKey key, TupleMask seedMask, ITuple seed);
 
     /**
      * Simpler form of {@link #enumerateTuples(IInputKey, TupleMask, Tuple)} in the case where all values of the tuples
@@ -167,7 +167,7 @@ public interface IQueryRuntimeContext {
      *            an input key
      * @param seedMask
      *            a mask that extracts those parameters of the input key (from the entire parameter list) that should be
-     *            bound to a fixed value; must not be null. <strong>Note </strong>: any given index must occur at most
+     *            bound to a fixed value; must not be null. <strong>Note</strong>: any given index must occur at most
      *            once in seedMask, and seedMask must include all parameters in any arbitrary order except one.
      * @param seed
      *            the tuple of fixed values restricting the match set to be considered, in the same order as given in
@@ -176,12 +176,12 @@ public interface IQueryRuntimeContext {
      * @return the objects in the model for the given key and seed
      *
      *         <p>
-     *         <b>Precondition: </b> the given key is enumerable, see {@link IQueryMetaContext#isEnumerable(IInputKey)}.
+     *         <b>Precondition:</b> the given key is enumerable, see {@link IQueryMetaContext#isEnumerable(IInputKey)}.
      * @throws IllegalArgumentException
      *             if key is not enumerable, see {@link IQueryMetaContext#isEnumerable(IInputKey)}.
      * @since 1.7
      */
-    public Iterable <? extends Object> enumerateValues(IInputKey key, TupleMask seedMask, ITuple seed);
+    public Iterable<? extends Object> enumerateValues(IInputKey key, TupleMask seedMask, ITuple seed);
 
     /**
      * Simpler form of {@link #enumerateTuples(IInputKey, TupleMask, Tuple)} in the case where all values of the tuples
@@ -215,7 +215,7 @@ public interface IQueryRuntimeContext {
      * 	that match the seed at positions where the seed is non-null.
      * @param listener will be notified of future changes
      *
-     * <p> <b>Precondition: </b> the given key is enumerable, see {@link IQueryMetaContext#isEnumerable(IInputKey)}.
+     * <p><b>Precondition:</b> the given key is enumerable, see {@link IQueryMetaContext#isEnumerable(IInputKey)}.
      * @throws IllegalArgumentException if key is not enumerable, see {@link IQueryMetaContext#isEnumerable(IInputKey)}.
      */
     public void addUpdateListener(IInputKey key, Tuple seed, IQueryRuntimeContextListener listener);
@@ -229,7 +229,7 @@ public interface IQueryRuntimeContext {
      * 	that match the seed at positions where the seed is non-null.
      * @param listener will no longer be notified of future changes
      *
-     * <p> <b>Precondition: </b> the given key is enumerable, see {@link IQueryMetaContext#isEnumerable(IInputKey)}.
+     * <p><b>Precondition:</b> the given key is enumerable, see {@link IQueryMetaContext#isEnumerable(IInputKey)}.
      * @throws IllegalArgumentException if key is not enumerable, see {@link IQueryMetaContext#isEnumerable(IInputKey)}.
      */
     public void removeUpdateListener(IInputKey key, Tuple seed, IQueryRuntimeContextListener listener);

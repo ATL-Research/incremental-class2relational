@@ -12,11 +12,11 @@ import java.util.*;
 
 public final class TypeAnalysisResult {
 	private final ExtendedTypeInfo extendedTypeInfo;
-	private final List <PartialRelation> directSubtypes;
-	private final List <ExtendedTypeInfo> allExternalTypeInfoList;
+	private final List<PartialRelation> directSubtypes;
+	private final List<ExtendedTypeInfo> allExternalTypeInfoList;
 	private final InferredType inferredType;
 
-	public TypeAnalysisResult(ExtendedTypeInfo extendedTypeInfo, List <ExtendedTypeInfo> allExternalTypeInfoList) {
+	public TypeAnalysisResult(ExtendedTypeInfo extendedTypeInfo, List<ExtendedTypeInfo> allExternalTypeInfoList) {
 		this.extendedTypeInfo = extendedTypeInfo;
 		directSubtypes = List.copyOf(extendedTypeInfo.getDirectSubtypes());
 		this.allExternalTypeInfoList = allExternalTypeInfoList;
@@ -28,7 +28,7 @@ public final class TypeAnalysisResult {
 		return extendedTypeInfo.getType();
 	}
 
-	public List <PartialRelation> getDirectSubtypes() {
+	public List<PartialRelation> getDirectSubtypes() {
 		return directSubtypes;
 	}
 
@@ -66,7 +66,7 @@ public final class TypeAnalysisResult {
 		extendedTypeInfo.addMust(mustTypes);
 		var originalMayConcreteTypes = inferredType.mayConcreteTypes();
 		var mayConcreteTypes = new LinkedHashSet<>(originalMayConcreteTypes);
-		Set <PartialRelation> mayConcreteTypesResult;
+		Set<PartialRelation> mayConcreteTypesResult;
 		if (mayConcreteTypes.retainAll(extendedTypeInfo.getConcreteSubtypesAndSelf())) {
 			mayConcreteTypesResult = mayConcreteTypes;
 		} else {
@@ -97,8 +97,8 @@ public final class TypeAnalysisResult {
 		return new InferredType(mustTypes, Set.of(), null);
 	}
 
-	private InferredType propagateMust(Set <PartialRelation> originalMustTypes,
-									   Set <PartialRelation> mayConcreteTypes) {
+	private InferredType propagateMust(Set<PartialRelation> originalMustTypes,
+									   Set<PartialRelation> mayConcreteTypes) {
 		// It is possible that there is not type at all, do not force one by propagation.
 		var maybeUntyped = originalMustTypes.isEmpty();
 		// Para-consistent case, do not propagate must types to avoid logical explosion.
@@ -126,20 +126,20 @@ public final class TypeAnalysisResult {
 	}
 
 	/**
-	 * Returns a concrete type that is allowed by a (consistent, i.e., nonempty) set of <b>may </b> concrete types.
+	 * Returns a concrete type that is allowed by a (consistent, i.e., nonempty) set of <b>may</b> concrete types.
 	 *
 	 * @param mayConcreteTypes The set of allowed concrete types. Must not be empty.
 	 * @return The first concrete type that is allowed by {@code matConcreteTypes}.
 	 */
-	private PartialRelation computeCurrentType(Set <PartialRelation> mayConcreteTypes) {
+	private PartialRelation computeCurrentType(Set<PartialRelation> mayConcreteTypes) {
 		for (var concreteExtendedTypeInfo : allExternalTypeInfoList) {
 			var concreteType = concreteExtendedTypeInfo.getType();
 			if (!concreteExtendedTypeInfo.isAbstractType() && mayConcreteTypes.contains(concreteType)) {
 				return concreteType;
 			}
 		}
-		// We have already filtered out the para-consistent case in {@link #propagateMust(Set <PartialRelation>,
-		// Set <PartialRelation>}.
+		// We have already filtered out the para-consistent case in {@link #propagateMust(Set<PartialRelation>,
+		// Set<PartialRelation>}.
 		throw new AssertionError("No concrete type in %s".formatted(mayConcreteTypes));
 	}
 }

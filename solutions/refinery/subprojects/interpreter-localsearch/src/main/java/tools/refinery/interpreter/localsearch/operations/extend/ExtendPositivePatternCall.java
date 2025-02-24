@@ -30,7 +30,7 @@ import tools.refinery.interpreter.matchers.tuple.VolatileModifiableMaskedTuple;
  */
 public class ExtendPositivePatternCall implements ISearchOperation, IPatternMatcherOperation {
 
-    private class Executor extends ExtendOperationExecutor <Tuple> {
+    private class Executor extends ExtendOperationExecutor<Tuple> {
         private final VolatileModifiableMaskedTuple maskedTuple;
 
         public Executor() {
@@ -38,7 +38,7 @@ public class ExtendPositivePatternCall implements ISearchOperation, IPatternMatc
         }
 
         @Override
-        protected Iterator <? extends Tuple> getIterator(MatchingFrame frame, ISearchContext context) {
+        protected Iterator<? extends Tuple> getIterator(MatchingFrame frame, ISearchContext context) {
             maskedTuple.updateTuple(frame);
             IQueryResultProvider matcher = context.getMatcher(information.getCallWithAdornment());
             return matcher.getAllMatches(information.getParameterMask(), maskedTuple).iterator();
@@ -97,7 +97,7 @@ public class ExtendPositivePatternCall implements ISearchOperation, IPatternMatc
     }
 
     @Override
-    public List <Integer> getVariablePositions() {
+    public List<Integer> getVariablePositions() {
         return information.getVariablePositions();
     }
 
@@ -107,7 +107,7 @@ public class ExtendPositivePatternCall implements ISearchOperation, IPatternMatc
     }
 
     @Override
-    public String toString(Function <Integer, String> variableMapping) {
+    public String toString(Function<Integer, String> variableMapping) {
         return "extend find " + information.toString(variableMapping);
     }
 

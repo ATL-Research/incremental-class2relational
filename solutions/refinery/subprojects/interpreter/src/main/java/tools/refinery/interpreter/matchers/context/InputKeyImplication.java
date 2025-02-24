@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Data object representing the implication of an input key, in use cases including edge supertypes, edge opposites, node type constraints, etc.
  *
- * <p> Each instance tuple of the <i>implying input key </i> (if given) implies the presence of an instance tuple of the <i>implied input key </i> consisting of elements of the original tuple at given positions.
+ * <p> Each instance tuple of the <i>implying input key</i> (if given) implies the presence of an instance tuple of the <i>implied input key</i> consisting of elements of the original tuple at given positions.
  * When the input key is null, it is not an input constraint but some other source that implies input keys.
  *
  * <p> The implication is an immutable data object.
@@ -26,7 +26,7 @@ import java.util.List;
 public final class InputKeyImplication {
     private IInputKey implyingKey;
     private IInputKey impliedKey;
-    private List <Integer> impliedIndices;
+    private List<Integer> impliedIndices;
 
     /**
      * Optional. Instance tuples of this input key imply an instance tuple of another key.
@@ -44,7 +44,7 @@ public final class InputKeyImplication {
     /**
      * The implied instance tuple consists of the values in the implying tuple at these indices.
      */
-    public List <Integer> getImpliedIndices() {
+    public List<Integer> getImpliedIndices() {
         return impliedIndices;
     }
     /**
@@ -53,7 +53,7 @@ public final class InputKeyImplication {
      * @param implyingIndices the implied instance tuple consists of the values in the implying tuple at these indices.
      */
     public InputKeyImplication(IInputKey implyingKey, IInputKey impliedKey,
-            List <Integer> implyingIndices) {
+            List<Integer> implyingIndices) {
         super();
         this.implyingKey = implyingKey;
         this.impliedKey = impliedKey;

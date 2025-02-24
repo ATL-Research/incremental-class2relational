@@ -27,12 +27,12 @@ public final class Dnf implements Constraint {
 
 	private final String name;
 	private final String uniqueName;
-	private final List <SymbolicParameter> symbolicParameters;
-	private final List <FunctionalDependency<Variable>> functionalDependencies;
-	private final List <DnfClause> clauses;
+	private final List<SymbolicParameter> symbolicParameters;
+	private final List<FunctionalDependency<Variable>> functionalDependencies;
+	private final List<DnfClause> clauses;
 
-	Dnf(String name, List <SymbolicParameter> symbolicParameters,
-		List <FunctionalDependency<Variable>> functionalDependencies, List <DnfClause> clauses) {
+	Dnf(String name, List<SymbolicParameter> symbolicParameters,
+		List<FunctionalDependency<Variable>> functionalDependencies, List<DnfClause> clauses) {
 		validateFunctionalDependencies(symbolicParameters, functionalDependencies);
 		this.name = name;
 		this.uniqueName = DnfUtils.generateUniqueName(name);
@@ -42,8 +42,8 @@ public final class Dnf implements Constraint {
 	}
 
 	private static void validateFunctionalDependencies(
-			Collection <SymbolicParameter> symbolicParameters,
-			Collection <FunctionalDependency<Variable>> functionalDependencies) {
+			Collection<SymbolicParameter> symbolicParameters,
+			Collection<FunctionalDependency<Variable>> functionalDependencies) {
 		var parameterSet = symbolicParameters.stream().map(SymbolicParameter::getVariable).collect(Collectors.toSet());
 		for (var functionalDependency : functionalDependencies) {
 			validateParameters(symbolicParameters, parameterSet, functionalDependency.forEach(), functionalDependency);
@@ -51,9 +51,9 @@ public final class Dnf implements Constraint {
 		}
 	}
 
-	private static void validateParameters(Collection <SymbolicParameter> symbolicParameters,
-										   Set <Variable> parameterSet, Collection <Variable> toValidate,
-										   FunctionalDependency <Variable> functionalDependency) {
+	private static void validateParameters(Collection<SymbolicParameter> symbolicParameters,
+										   Set<Variable> parameterSet, Collection<Variable> toValidate,
+										   FunctionalDependency<Variable> functionalDependency) {
 		for (var variable : toValidate) {
 			if (!parameterSet.contains(variable)) {
 				throw new InvalidQueryException(
@@ -76,15 +76,15 @@ public final class Dnf implements Constraint {
 		return uniqueName;
 	}
 
-	public List <SymbolicParameter> getSymbolicParameters() {
+	public List<SymbolicParameter> getSymbolicParameters() {
 		return symbolicParameters;
 	}
 
-	public List <Parameter> getParameters() {
+	public List<Parameter> getParameters() {
 		return Collections.unmodifiableList(symbolicParameters);
 	}
 
-	public List <FunctionalDependency<Variable>> getFunctionalDependencies() {
+	public List<FunctionalDependency<Variable>> getFunctionalDependencies() {
 		return functionalDependencies;
 	}
 
@@ -93,7 +93,7 @@ public final class Dnf implements Constraint {
 		return symbolicParameters.size();
 	}
 
-	public List <DnfClause> getClauses() {
+	public List<DnfClause> getClauses() {
 		return clauses;
 	}
 
@@ -101,7 +101,7 @@ public final class Dnf implements Constraint {
 		return new RelationalQuery(this);
 	}
 
-	public <T> FunctionalQuery <T> asFunction(Class <T> type) {
+	public <T> FunctionalQuery<T> asFunction(Class<T> type) {
 		return new FunctionalQuery<>(this, type);
 	}
 
@@ -190,7 +190,7 @@ public final class Dnf implements Constraint {
 				appendClause(clauseIterator.next(), builder);
 			}
 		} else {
-			builder.append("\n").append(INDENTATION).append(" <no clauses>");
+			builder.append("\n").append(INDENTATION).append("<no clauses>");
 		}
 		builder.append(".\n");
 		return builder.toString();
@@ -199,7 +199,7 @@ public final class Dnf implements Constraint {
 	private static void appendClause(DnfClause clause, StringBuilder builder) {
 		var iterator = clause.literals().iterator();
 		if (!iterator.hasNext()) {
-			builder.append("\n").append(INDENTATION).append(" <empty>");
+			builder.append("\n").append(INDENTATION).append("<empty>");
 			return;
 		}
 		builder.append("\n").append(INDENTATION).append(iterator.next());
@@ -223,11 +223,11 @@ public final class Dnf implements Constraint {
 		return builder;
 	}
 
-	public static Dnf of(Consumer <DnfBuilder> callback) {
+	public static Dnf of(Consumer<DnfBuilder> callback) {
 		return of(null, callback);
 	}
 
-	public static Dnf of(String name, Consumer <DnfBuilder> callback) {
+	public static Dnf of(String name, Consumer<DnfBuilder> callback) {
 		var builder = builder(name);
 		callback.accept(builder);
 		return builder.build();

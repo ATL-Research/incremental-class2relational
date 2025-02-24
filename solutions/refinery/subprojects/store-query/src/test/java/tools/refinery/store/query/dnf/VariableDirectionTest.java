@@ -32,28 +32,28 @@ import static tools.refinery.store.query.literal.Literals.not;
 import static tools.refinery.store.query.term.int_.IntTerms.INT_SUM;
 
 class VariableDirectionTest {
-	private static final Symbol <Boolean> person = Symbol.of("Person", 1);
-	private static final Symbol <Boolean> friend = Symbol.of("friend", 2);
-	private static final Symbol <Integer> age = Symbol.of("age", 1, Integer.class);
+	private static final Symbol<Boolean> person = Symbol.of("Person", 1);
+	private static final Symbol<Boolean> friend = Symbol.of("friend", 2);
+	private static final Symbol<Integer> age = Symbol.of("age", 1, Integer.class);
 	private static final AnySymbolView personView = new KeyOnlyView<>(person);
 	private static final AnySymbolView friendView = new KeyOnlyView<>(friend);
-	private static final FunctionView <Integer> ageView = new FunctionView<>(age);
+	private static final FunctionView<Integer> ageView = new FunctionView<>(age);
 	private static final NodeVariable p = Variable.of("p");
 	private static final NodeVariable q = Variable.of("q");
-	private static final DataVariable <Integer> x = Variable.of("x", Integer.class);
-	private static final DataVariable <Integer> y = Variable.of("y", Integer.class);
-	private static final DataVariable <Integer> z = Variable.of("z", Integer.class);
+	private static final DataVariable<Integer> x = Variable.of("x", Integer.class);
+	private static final DataVariable<Integer> y = Variable.of("y", Integer.class);
+	private static final DataVariable<Integer> z = Variable.of("z", Integer.class);
 
 	@ParameterizedTest
 	@MethodSource("clausesWithVariableInput")
-	void unboundOutVariableTest(List <? extends Literal> clause) {
+	void unboundOutVariableTest(List<? extends Literal> clause) {
 		var builder = Dnf.builder().parameter(p, ParameterDirection.OUT).clause(clause);
 		assertThrows(InvalidClauseException.class, builder::build);
 	}
 
 	@ParameterizedTest
 	@MethodSource("clausesWithVariableInput")
-	void unboundInVariableTest(List <? extends Literal> clause) {
+	void unboundInVariableTest(List<? extends Literal> clause) {
 		var builder = Dnf.builder().parameter(p, ParameterDirection.IN).clause(clause);
 		var dnf = assertDoesNotThrow(builder::build);
 		var clauses = dnf.getClauses();
@@ -64,8 +64,8 @@ class VariableDirectionTest {
 
 	@ParameterizedTest
 	@MethodSource("clausesWithVariableInput")
-	void boundPrivateVariableTest(List <? extends Literal> clause) {
-		var clauseWithBinding = new ArrayList <Literal>(clause);
+	void boundPrivateVariableTest(List<? extends Literal> clause) {
+		var clauseWithBinding = new ArrayList<Literal>(clause);
 		clauseWithBinding.add(personView.call(p));
 		var builder = Dnf.builder().clause(clauseWithBinding);
 		var dnf = assertDoesNotThrow(builder::build);
@@ -75,7 +75,7 @@ class VariableDirectionTest {
 		}
 	}
 
-	static Stream <Arguments> clausesWithVariableInput() {
+	static Stream<Arguments> clausesWithVariableInput() {
 		return Stream.concat(
 				clausesNotBindingVariable(),
 				literalToClauseArgumentStream(literalsWithRequiredVariableInput())
@@ -84,7 +84,7 @@ class VariableDirectionTest {
 
 	@ParameterizedTest
 	@MethodSource("clausesNotBindingVariable")
-	void unboundPrivateVariableTest(List <? extends Literal> clause) {
+	void unboundPrivateVariableTest(List<? extends Literal> clause) {
 		var builder = Dnf.builder().clause(clause);
 		var dnf = assertDoesNotThrow(builder::build);
 		var clauses = dnf.getClauses();
@@ -95,15 +95,15 @@ class VariableDirectionTest {
 
 	@ParameterizedTest
 	@MethodSource("clausesNotBindingVariable")
-	void unboundByEquivalencePrivateVariableTest(List <? extends Literal> clause) {
+	void unboundByEquivalencePrivateVariableTest(List<? extends Literal> clause) {
 		var r = Variable.of("r");
-		var clauseWithEquivalence = new ArrayList <Literal>(clause);
+		var clauseWithEquivalence = new ArrayList<Literal>(clause);
 		clauseWithEquivalence.add(r.isEquivalent(p));
 		var builder = Dnf.builder().clause(clauseWithEquivalence);
 		assertThrows(InvalidClauseException.class, builder::build);
 	}
 
-	static Stream <Arguments> clausesNotBindingVariable() {
+	static Stream<Arguments> clausesNotBindingVariable() {
 		return Stream.concat(
 				Stream.of(
 					Arguments.of(List.of()),
@@ -129,7 +129,7 @@ class VariableDirectionTest {
 		assertThrows(InvalidClauseException.class, builder::build);
 	}
 
-	static Stream <Arguments> literalsWithPrivateVariable() {
+	static Stream<Arguments> literalsWithPrivateVariable() {
 		var dnfWithOutput = Dnf.builder("WithOutput")
 				.parameter(p, ParameterDirection.OUT)
 				.parameter(q, ParameterDirection.OUT)
@@ -170,7 +170,7 @@ class VariableDirectionTest {
 		assertThat(dnf.getClauses().get(0).positiveVariables(), hasItem(p));
 	}
 
-	static Stream <Arguments> literalsWithRequiredVariableInput() {
+	static Stream<Arguments> literalsWithRequiredVariableInput() {
 		var dnfWithInput = Dnf.builder("WithInput")
 				.parameter(p, ParameterDirection.IN)
 				.parameter(q, ParameterDirection.OUT)
@@ -232,7 +232,7 @@ class VariableDirectionTest {
 		assertThat(dnf.getClauses().get(0).positiveVariables(), hasItem(p));
 	}
 
-	static Stream <Arguments> literalsWithVariableOutput() {
+	static Stream<Arguments> literalsWithVariableOutput() {
 		var dnfWithOutput = Dnf.builder("WithOutput")
 				.parameter(p, ParameterDirection.OUT)
 				.parameter(q, ParameterDirection.OUT)
@@ -245,7 +245,7 @@ class VariableDirectionTest {
 		);
 	}
 
-	private static Stream <Arguments> literalToClauseArgumentStream(Stream <Arguments> literalArgumentsStream) {
+	private static Stream<Arguments> literalToClauseArgumentStream(Stream<Arguments> literalArgumentsStream) {
 		return literalArgumentsStream.map(arguments -> Arguments.of(List.of(arguments.get()[0])));
 	}
 }

@@ -65,7 +65,7 @@ public record NonEmptyCardinalityInterval(int lowerBound, UpperCardinality upper
 	}
 
 	private CardinalityInterval lift(CardinalityInterval other, IntBinaryOperator lowerOperator,
-									 BinaryOperator <UpperCardinality> upperOperator,
+									 BinaryOperator<UpperCardinality> upperOperator,
 									 CardinalityInterval whenEmpty) {
 		if (other instanceof NonEmptyCardinalityInterval nonEmptyOther) {
 			return CardinalityIntervals.between(lowerOperator.applyAsInt(lowerBound, nonEmptyOther.lowerBound),
@@ -78,7 +78,7 @@ public record NonEmptyCardinalityInterval(int lowerBound, UpperCardinality upper
 	}
 
 	private CardinalityInterval lift(CardinalityInterval other, IntBinaryOperator lowerOperator,
-									 BinaryOperator <UpperCardinality> upperOperator) {
+									 BinaryOperator<UpperCardinality> upperOperator) {
 		return lift(other, lowerOperator, upperOperator, CardinalityIntervals.ERROR);
 	}
 

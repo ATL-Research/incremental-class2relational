@@ -62,7 +62,7 @@ public class ModelGenerator extends ModelFacade {
 	}
 
 	@Override
-	public <A, C> PartialInterpretation <A, C> getPartialInterpretation(PartialSymbol <A, C> partialSymbol) {
+	public <A, C> PartialInterpretation<A, C> getPartialInterpretation(PartialSymbol<A, C> partialSymbol) {
 		if (!lastGenerationSuccessful) {
 			throw new IllegalStateException("No generated model is available");
 		}

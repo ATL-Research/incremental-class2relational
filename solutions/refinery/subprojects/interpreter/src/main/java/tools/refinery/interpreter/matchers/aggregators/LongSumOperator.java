@@ -17,7 +17,7 @@ import tools.refinery.interpreter.matchers.psystem.aggregations.AbstractMemoryle
  * @author Gabor Bergmann
  * @since 1.4
  */
-public class LongSumOperator extends AbstractMemorylessAggregationOperator <Long, Long> {
+public class LongSumOperator extends AbstractMemorylessAggregationOperator<Long, Long> {
     public static final LongSumOperator INSTANCE = new LongSumOperator();
 
     private LongSumOperator() {
@@ -26,11 +26,11 @@ public class LongSumOperator extends AbstractMemorylessAggregationOperator <Long
 
     @Override
     public String getShortDescription() {
-        return "sum <Long> incrementally computes the sum of java.lang.Long values";
+        return "sum<Long> incrementally computes the sum of java.lang.Long values";
     }
     @Override
     public String getName() {
-        return "sum <Long>";
+        return "sum<Long>";
     }
 
     @Override
@@ -54,7 +54,7 @@ public class LongSumOperator extends AbstractMemorylessAggregationOperator <Long
      * @since 2.0
      */
     @Override
-    public Long aggregateStream(Stream <Long> stream) {
+    public Long aggregateStream(Stream<Long> stream) {
         return stream.mapToLong(Long::longValue).sum();
     }
 

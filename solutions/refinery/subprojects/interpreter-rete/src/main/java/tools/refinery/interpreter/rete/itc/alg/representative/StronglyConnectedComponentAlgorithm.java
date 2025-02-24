@@ -13,8 +13,8 @@ import tools.refinery.interpreter.rete.itc.alg.misc.scc.SCC;
 import java.util.Collection;
 import java.util.Set;
 
-public class StronglyConnectedComponentAlgorithm <T> extends RepresentativeElectionAlgorithm <T> {
-	public StronglyConnectedComponentAlgorithm(Graph <T> graph) {
+public class StronglyConnectedComponentAlgorithm<T> extends RepresentativeElectionAlgorithm<T> {
+	public StronglyConnectedComponentAlgorithm(Graph<T> graph) {
 		super(graph);
 	}
 
@@ -57,7 +57,7 @@ public class StronglyConnectedComponentAlgorithm <T> extends RepresentativeElect
 		}
 	}
 
-	private void split(T preservedRepresentative, Collection <? extends Set <T>> sets) {
+	private void split(T preservedRepresentative, Collection<? extends Set<T>> sets) {
 		for (var set : sets) {
 			if (set.contains(preservedRepresentative)) {
 				components.put(preservedRepresentative, set);

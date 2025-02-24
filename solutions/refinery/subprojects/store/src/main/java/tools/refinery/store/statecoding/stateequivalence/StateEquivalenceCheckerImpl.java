@@ -29,12 +29,12 @@ public class StateEquivalenceCheckerImpl implements StateEquivalenceChecker {
 
 	@Override
 	public EquivalenceResult constructMorphism(IntSet individuals,
-											   List <? extends AnyInterpretation> interpretations1,
+											   List<? extends AnyInterpretation> interpretations1,
 											   ObjectCode code1,
-											   List <? extends AnyInterpretation> interpretations2,
+											   List<? extends AnyInterpretation> interpretations2,
 											   ObjectCode code2) {
 		MutableIntIntMap object2PermutationGroup = IntIntMaps.mutable.empty();
-		List <List<IntIntMap>> permutationsGroups = new ArrayList<>();
+		List<List<IntIntMap>> permutationsGroups = new ArrayList<>();
 
 		final EquivalenceResult permutations = constructPermutationNavigation(individuals,
 				indexByHash(code1, individuals), indexByHash(code2, individuals),
@@ -67,8 +67,8 @@ public class StateEquivalenceCheckerImpl implements StateEquivalenceChecker {
 		}
 	}
 
-	private MutableLongObjectMap <MutableIntSet> indexByHash(ObjectCode code, IntSet individuals) {
-		MutableLongObjectMap <MutableIntSet> result = LongObjectMaps.mutable.empty();
+	private MutableLongObjectMap<MutableIntSet> indexByHash(ObjectCode code, IntSet individuals) {
+		MutableLongObjectMap<MutableIntSet> result = LongObjectMaps.mutable.empty();
 		for (int o = 0; o < code.getSize(); o++) {
 			if (!individuals.contains(o)) {
 				long hash = code.get(o);
@@ -86,8 +86,8 @@ public class StateEquivalenceCheckerImpl implements StateEquivalenceChecker {
 	}
 
 	private EquivalenceResult constructPermutationNavigation(
-			IntSet individuals, MutableLongObjectMap <MutableIntSet> map1, MutableLongObjectMap <MutableIntSet> map2,
-			MutableIntIntMap object2OptionIndex, List <List<IntIntMap>> listOfOptions) {
+			IntSet individuals, MutableLongObjectMap<MutableIntSet> map1, MutableLongObjectMap<MutableIntSet> map2,
+			MutableIntIntMap object2OptionIndex, List<List<IntIntMap>> listOfOptions) {
 		if (map1.size() != map2.size()) {
 			return EquivalenceResult.DIFFERENT;
 		}
@@ -125,19 +125,19 @@ public class StateEquivalenceCheckerImpl implements StateEquivalenceChecker {
 		}
 	}
 
-	private boolean testMorphism(List <? extends AnyInterpretation> s, List <? extends AnyInterpretation> t,
+	private boolean testMorphism(List<? extends AnyInterpretation> s, List<? extends AnyInterpretation> t,
 								 Morphism m) {
 		for (int interpretationIndex = 0; interpretationIndex < s.size(); interpretationIndex++) {
 			var sI = s.get(interpretationIndex);
 			var tI = t.get(interpretationIndex);
 
-			var cursor = ((Interpretation <?>) sI).getAll();
+			var cursor = ((Interpretation<?>) sI).getAll();
 			while (cursor.move()) {
 				final Tuple sTuple = cursor.getKey();
 				final Object sValue = cursor.getValue();
 
 				final Tuple tTuple = apply(sTuple, m);
-				final Object tValue = ((Interpretation <?>) tI).get(tTuple);
+				final Object tValue = ((Interpretation<?>) tI).get(tTuple);
 
 				if (!Objects.equals(sValue, tValue)) {
 					return false;

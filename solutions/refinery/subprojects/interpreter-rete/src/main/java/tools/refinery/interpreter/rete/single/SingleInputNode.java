@@ -92,7 +92,7 @@ public abstract class SingleInputNode extends StandardNode implements Tunnel {
     /**
      * To be called by derived classes and ReteContainer.
      */
-    public void propagatePullInto(final Collection <Tuple> collector, final boolean flush) {
+    public void propagatePullInto(final Collection<Tuple> collector, final boolean flush) {
         if (parent != null) {
             parent.pullInto(collector, flush);
         }
@@ -101,14 +101,14 @@ public abstract class SingleInputNode extends StandardNode implements Tunnel {
     /**
      * To be called by derived classes and ReteContainer.
      */
-    public void propagatePullIntoWithTimestamp(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush) {
+    public void propagatePullIntoWithTimestamp(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush) {
         if (parent != null) {
             parent.pullIntoWithTimeline(collector, flush);
         }
     }
 
     @Override
-    public Collection <Supplier> getParents() {
+    public Collection<Supplier> getParents() {
         if (parent == null)
             return Collections.emptySet();
         else

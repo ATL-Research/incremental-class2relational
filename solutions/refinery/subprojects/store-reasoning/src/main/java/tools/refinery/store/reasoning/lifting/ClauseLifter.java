@@ -24,8 +24,8 @@ class ClauseLifter {
 	private final Modality modality;
 	private final Concreteness concreteness;
 	private final DnfClause clause;
-	private final Set <NodeVariable> quantifiedVariables;
-	private final Set <NodeVariable> existentialQuantifiersToAdd;
+	private final Set<NodeVariable> quantifiedVariables;
+	private final Set<NodeVariable> existentialQuantifiersToAdd;
 
 	public ClauseLifter(Modality modality, Concreteness concreteness, Dnf dnf, DnfClause clause) {
 		this.modality = modality;
@@ -35,7 +35,7 @@ class ClauseLifter {
 		existentialQuantifiersToAdd = new LinkedHashSet<>(quantifiedVariables);
 	}
 
-	private static Set <NodeVariable> getQuantifiedNodeVariables(Dnf dnf, DnfClause clause) {
+	private static Set<NodeVariable> getQuantifiedNodeVariables(Dnf dnf, DnfClause clause) {
 		var quantifiedVariables = clause.positiveVariables().stream()
 				.filter(Variable::isNodeVariable)
 				.map(Variable::asNodeVariable)
@@ -48,8 +48,8 @@ class ClauseLifter {
 		return Collections.unmodifiableSet(quantifiedVariables);
 	}
 
-	public List <Literal> liftClause() {
-		var liftedLiterals = new ArrayList <Literal>();
+	public List<Literal> liftClause() {
+		var liftedLiterals = new ArrayList<Literal>();
 		for (var literal : clause.literals()) {
 			var liftedLiteral = liftLiteral(literal);
 			liftedLiterals.add(liftedLiteral);
@@ -67,12 +67,12 @@ class ClauseLifter {
 		} else if (literal instanceof EquivalenceLiteral equivalenceLiteral) {
 			return liftEquivalenceLiteral(equivalenceLiteral);
 		} else if (literal instanceof ConstantLiteral ||
-				literal instanceof AssignLiteral <?> ||
+				literal instanceof AssignLiteral<?> ||
 				literal instanceof CheckLiteral) {
 			return literal;
-		} else if (literal instanceof AbstractCountLiteral <?>) {
+		} else if (literal instanceof AbstractCountLiteral<?>) {
 			throw new IllegalArgumentException("Count literal %s cannot be lifted".formatted(literal));
-		} else if (literal instanceof AggregationLiteral <?, ?>) {
+		} else if (literal instanceof AggregationLiteral<?, ?>) {
 			throw new IllegalArgumentException("Aggregation literal %s cannot be lifted".formatted(literal));
 		} else if (literal instanceof RepresentativeElectionLiteral) {
 			throw new IllegalArgumentException("SCC literal %s cannot be lifted".formatted(literal));
@@ -115,7 +115,7 @@ class ClauseLifter {
 			builder.parameter(variable, direction);
 		}
 
-		var literals = new ArrayList <Literal>();
+		var literals = new ArrayList<Literal>();
 		var liftedConstraint = ModalConstraint.of(negatedModality, concreteness, target);
 		literals.add(liftedConstraint.call(CallPolarity.POSITIVE, originalArguments));
 

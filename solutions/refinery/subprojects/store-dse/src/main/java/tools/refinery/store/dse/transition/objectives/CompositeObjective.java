@@ -15,10 +15,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class CompositeObjective implements Objective {
-	private final List <Objective> objectives;
+	private final List<Objective> objectives;
 
-	CompositeObjective(Collection <? extends Objective> objectives) {
-		var unwrappedObjectives = new ArrayList <Objective>();
+	CompositeObjective(Collection<? extends Objective> objectives) {
+		var unwrappedObjectives = new ArrayList<Objective>();
 		for (var objective : objectives) {
 			if (objective instanceof CompositeObjective compositeObjective) {
 				unwrappedObjectives.addAll(compositeObjective.getObjectives());
@@ -29,7 +29,7 @@ public class CompositeObjective implements Objective {
 		this.objectives = Collections.unmodifiableList(unwrappedObjectives);
 	}
 
-	public List <Objective> getObjectives() {
+	public List<Objective> getObjectives() {
 		return objectives;
 	}
 
@@ -45,7 +45,7 @@ public class CompositeObjective implements Objective {
 
 	@Override
 	public ObjectiveCalculator createCalculator(Model model) {
-		var calculators = new ArrayList <ObjectiveCalculator>();
+		var calculators = new ArrayList<ObjectiveCalculator>();
 		for (var objective : objectives) {
 			if (!objective.isAlwaysZero(model.getStore())) {
 				calculators.add(objective.createCalculator(model));

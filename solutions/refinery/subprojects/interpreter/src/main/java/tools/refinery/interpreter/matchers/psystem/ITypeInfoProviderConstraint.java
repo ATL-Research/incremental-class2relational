@@ -23,6 +23,6 @@ public interface ITypeInfoProviderConstraint extends PConstraint {
      * Returns type information implied by this constraint.
      *
      */
-    public Set <TypeJudgement> getImpliedJudgements(IQueryMetaContext context);
+    public Set<TypeJudgement> getImpliedJudgements(IQueryMetaContext context);
 
 }

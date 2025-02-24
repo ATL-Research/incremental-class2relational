@@ -36,7 +36,7 @@ public interface IQueryBackendFactory {
     /**
      * The backend instances created by this factory are guaranteed to conform to the returned class.
      */
-    public Class <? extends IQueryBackend> getBackendClass();
+    public Class<? extends IQueryBackend> getBackendClass();
 
     /**
      * Calculate the required capabilities, which are needed to execute the given pattern

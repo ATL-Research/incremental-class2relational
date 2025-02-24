@@ -25,16 +25,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("UnusedReturnValue")
-public abstract sealed class PartialSymbolTranslator <A, C> implements AnyPartialSymbolTranslator
+public abstract sealed class PartialSymbolTranslator<A, C> implements AnyPartialSymbolTranslator
 		permits PartialRelationTranslator {
-	private final PartialSymbol <A, C> partialSymbol;
+	private final PartialSymbol<A, C> partialSymbol;
 	private boolean configured = false;
-	protected PartialInterpretationRefiner.Factory <A, C> interpretationRefiner;
+	protected PartialInterpretationRefiner.Factory<A, C> interpretationRefiner;
 	protected AnySymbol storageSymbol;
-	protected StorageRefiner.Factory <?> storageRefiner;
-	protected PartialInterpretation.Factory <A, C> interpretationFactory;
+	protected StorageRefiner.Factory<?> storageRefiner;
+	protected PartialInterpretation.Factory<A, C> interpretationFactory;
 	protected PartialModelInitializer initializer;
-	protected List <Rule> decisionRules = new ArrayList<>();
+	protected List<Rule> decisionRules = new ArrayList<>();
 	protected boolean acceptWasSet;
 	protected @Nullable Criterion accept;
 	protected boolean excludeWasSet;
@@ -42,12 +42,12 @@ public abstract sealed class PartialSymbolTranslator <A, C> implements AnyPartia
 	protected boolean objectiveWasSet;
 	protected @Nullable Objective objective;
 
-	PartialSymbolTranslator(PartialSymbol <A, C> partialSymbol) {
+	PartialSymbolTranslator(PartialSymbol<A, C> partialSymbol) {
 		this.partialSymbol = partialSymbol;
 	}
 
 	@Override
-	public PartialSymbol <A, C> getPartialSymbol() {
+	public PartialSymbol<A, C> getPartialSymbol() {
 		return partialSymbol;
 	}
 
@@ -72,12 +72,12 @@ public abstract sealed class PartialSymbolTranslator <A, C> implements AnyPartia
 		}
 	}
 
-	public PartialSymbolTranslator <A, C> symbol(AnySymbol storageSymbol) {
-		return symbol((Symbol <?>) storageSymbol, null);
+	public PartialSymbolTranslator<A, C> symbol(AnySymbol storageSymbol) {
+		return symbol((Symbol<?>) storageSymbol, null);
 	}
 
-	public <T> PartialSymbolTranslator <A, C> symbol(Symbol <T> storageSymbol,
-													StorageRefiner.Factory <T> storageRefiner) {
+	public <T> PartialSymbolTranslator<A, C> symbol(Symbol<T> storageSymbol,
+													StorageRefiner.Factory<T> storageRefiner) {
 		checkNotConfigured();
 		if (this.storageSymbol != null) {
 			throw new IllegalStateException("Representation symbol was already set");
@@ -87,7 +87,7 @@ public abstract sealed class PartialSymbolTranslator <A, C> implements AnyPartia
 		return this;
 	}
 
-	public PartialSymbolTranslator <A, C> interpretation(PartialInterpretation.Factory <A, C> interpretationFactory) {
+	public PartialSymbolTranslator<A, C> interpretation(PartialInterpretation.Factory<A, C> interpretationFactory) {
 		checkNotConfigured();
 		if (this.interpretationFactory != null) {
 			throw new IllegalStateException("Interpretation factory was already set");
@@ -96,7 +96,7 @@ public abstract sealed class PartialSymbolTranslator <A, C> implements AnyPartia
 		return this;
 	}
 
-	public PartialSymbolTranslator <A, C> refiner(PartialInterpretationRefiner.Factory <A, C> interpretationRefiner) {
+	public PartialSymbolTranslator<A, C> refiner(PartialInterpretationRefiner.Factory<A, C> interpretationRefiner) {
 		checkNotConfigured();
 		if (this.interpretationRefiner != null) {
 			throw new IllegalStateException("Interpretation refiner was already set");
@@ -105,7 +105,7 @@ public abstract sealed class PartialSymbolTranslator <A, C> implements AnyPartia
 		return this;
 	}
 
-	public PartialSymbolTranslator <A, C> initializer(PartialModelInitializer initializer) {
+	public PartialSymbolTranslator<A, C> initializer(PartialModelInitializer initializer) {
 		checkNotConfigured();
 		if (this.initializer != null) {
 			throw new IllegalStateException("Initializer was already set");
@@ -114,12 +114,12 @@ public abstract sealed class PartialSymbolTranslator <A, C> implements AnyPartia
 		return this;
 	}
 
-	public PartialSymbolTranslator <A, C> decision(Rule decisionRule) {
+	public PartialSymbolTranslator<A, C> decision(Rule decisionRule) {
 		decisionRules.add(decisionRule);
 		return this;
 	}
 
-	public PartialSymbolTranslator <A, C> accept(@Nullable Criterion acceptanceCriterion) {
+	public PartialSymbolTranslator<A, C> accept(@Nullable Criterion acceptanceCriterion) {
 		if (acceptWasSet) {
 			throw new IllegalStateException("Accept was already set");
 		}
@@ -128,7 +128,7 @@ public abstract sealed class PartialSymbolTranslator <A, C> implements AnyPartia
 		return this;
 	}
 
-	public PartialSymbolTranslator <A, C> exclude(@Nullable Criterion exclusionCriterion) {
+	public PartialSymbolTranslator<A, C> exclude(@Nullable Criterion exclusionCriterion) {
 		if (excludeWasSet) {
 			throw new IllegalStateException("Exclude was already set");
 		}
@@ -137,7 +137,7 @@ public abstract sealed class PartialSymbolTranslator <A, C> implements AnyPartia
 		return this;
 	}
 
-	public PartialSymbolTranslator <A, C> objective(Objective objective) {
+	public PartialSymbolTranslator<A, C> objective(Objective objective) {
 		if (objectiveWasSet) {
 			throw new IllegalStateException("Objective was already set");
 		}
@@ -182,10 +182,10 @@ public abstract sealed class PartialSymbolTranslator <A, C> implements AnyPartia
 		}
 	}
 
-	private <T> void registerStorageRefiner(ReasoningBuilder reasoningBuilder, StorageRefiner.Factory <T> factory) {
+	private <T> void registerStorageRefiner(ReasoningBuilder reasoningBuilder, StorageRefiner.Factory<T> factory) {
 		// The builder only allows setting a well-typed representation refiner.
 		@SuppressWarnings("unchecked")
-		var typedStorageSymbol = (Symbol <T>) storageSymbol;
+		var typedStorageSymbol = (Symbol<T>) storageSymbol;
 		reasoningBuilder.storageRefiner(typedStorageSymbol, factory);
 	}
 
@@ -195,17 +195,17 @@ public abstract sealed class PartialSymbolTranslator <A, C> implements AnyPartia
 				storageSymbol.valueType().equals(partialSymbol.abstractDomain().abstractType())) {
 			// The guard clause makes this safe.
 			@SuppressWarnings("unchecked")
-			var typedStorageSymbol = (Symbol <A>) storageSymbol;
+			var typedStorageSymbol = (Symbol<A>) storageSymbol;
 			initializer = new SeedInitializer<>(typedStorageSymbol, partialSymbol);
 		}
 	}
 
-	public PartialInterpretation.Factory <A, C> getInterpretationFactory() {
+	public PartialInterpretation.Factory<A, C> getInterpretationFactory() {
 		checkConfigured();
 		return interpretationFactory;
 	}
 
-	public PartialInterpretationRefiner.Factory <A, C> getInterpretationRefiner() {
+	public PartialInterpretationRefiner.Factory<A, C> getInterpretationRefiner() {
 		checkConfigured();
 		return interpretationRefiner;
 	}

@@ -32,14 +32,14 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class Network {
     final int threads;
 
-    protected ArrayList <ReteContainer> containers;
+    protected ArrayList<ReteContainer> containers;
     ReteContainer headContainer;
     private int firstContainer = 0;
     private int nextContainer = 0;
 
     // the following fields exist only if threads > 0
-    protected final Map <ReteContainer, Long> globalTerminationCriteria;
-    protected Map <ReteContainer, Long> reportedClocks = null;
+    protected final Map<ReteContainer, Long> globalTerminationCriteria;
+    protected Map<ReteContainer, Long> reportedClocks = null;
     protected Lock updateLock = null; // grab during normal update operations
     protected Lock structuralChangeLock = null; // grab if the network structure
                                                 // is to
@@ -53,15 +53,15 @@ public class Network {
     // Node and recipe administration
     // incl. addresses for existing nodes by recipe (where available)
     // Maintained by NodeProvisioner of each container
-    Map <ReteNodeRecipe, Address <? extends Node>> nodesByRecipe = CollectionsFactory.createMap();
-    Set <RecipeTraceInfo> recipeTraces = CollectionsFactory.createSet();
+    Map<ReteNodeRecipe, Address<? extends Node>> nodesByRecipe = CollectionsFactory.createMap();
+    Set<RecipeTraceInfo> recipeTraces = CollectionsFactory.createSet();
 
     /**
      * @throws IllegalStateException
      *             if no node has been constructed for the recipe
      */
-    public synchronized Address <? extends Node> getExistingNodeByRecipe(ReteNodeRecipe recipe) {
-        final Address <? extends Node> node = nodesByRecipe.get(recipe);
+    public synchronized Address<? extends Node> getExistingNodeByRecipe(ReteNodeRecipe recipe) {
+        final Address<? extends Node> node = nodesByRecipe.get(recipe);
         if (node == null)
             throw new IllegalStateException(String.format("Rete node for recipe %s not constructed yet.", recipe));
         return node;
@@ -70,8 +70,8 @@ public class Network {
     /**
      * @return null if no node has been constructed for the recipe
      */
-    public synchronized Address <? extends Node> getNodeByRecipeIfExists(ReteNodeRecipe recipe) {
-        final Address <? extends Node> node = nodesByRecipe.get(recipe);
+    public synchronized Address<? extends Node> getNodeByRecipeIfExists(ReteNodeRecipe recipe) {
+        final Address<? extends Node> node = nodesByRecipe.get(recipe);
         return node;
     }
 
@@ -87,7 +87,7 @@ public class Network {
         this.inputConnector = new InputConnector(this);
         this.nodeFactory = new NodeFactory(engine.getLogger());
 
-        containers = new ArrayList <ReteContainer>();
+        containers = new ArrayList<ReteContainer>();
         firstContainer = (threads > 1) ? Options.firstFreeContainer : 0; // NOPMD
         nextContainer = firstContainer;
 
@@ -137,7 +137,7 @@ public class Network {
      *
      * @pre threads > 0
      */
-    private void sendUpdate(Address <? extends Receiver> receiver, Direction direction, Tuple updateElement) {
+    private void sendUpdate(Address<? extends Receiver> receiver, Direction direction, Tuple updateElement) {
         ReteContainer affectedContainer = receiver.getContainer();
         synchronized (globalTerminationCriteria) {
             long newCriterion = affectedContainer.sendUpdateToLocalAddress(receiver, direction, updateElement);
@@ -150,7 +150,7 @@ public class Network {
      *
      * @pre threads == 0
      */
-    private void sendUpdateSingleThreaded(Address <? extends Receiver> receiver, Direction direction,
+    private void sendUpdateSingleThreaded(Address<? extends Receiver> receiver, Direction direction,
             Tuple updateElement) {
         ReteContainer affectedContainer = receiver.getContainer();
         affectedContainer.sendUpdateToLocalAddressSingleThreaded(receiver, direction, updateElement);
@@ -161,8 +161,8 @@ public class Network {
      *
      * @pre threads > 0
      */
-    private void sendUpdates(Address <? extends Receiver> receiver, Direction direction,
-            Collection <Tuple> updateElements) {
+    private void sendUpdates(Address<? extends Receiver> receiver, Direction direction,
+            Collection<Tuple> updateElements) {
         if (updateElements.isEmpty())
             return;
         ReteContainer affectedContainer = receiver.getContainer();
@@ -179,7 +179,7 @@ public class Network {
      *
      * @since 2.4
      */
-    public void sendExternalUpdate(Address <? extends Receiver> receiver, Direction direction, Tuple updateElement) {
+    public void sendExternalUpdate(Address<? extends Receiver> receiver, Direction direction, Tuple updateElement) {
         if (threads > 0) {
             try {
                 updateLock.lock();
@@ -205,7 +205,7 @@ public class Network {
      *         queue
      * @since 2.4
      */
-    public void sendConstructionUpdate(Address <? extends Receiver> receiver, Direction direction, Tuple updateElement) {
+    public void sendConstructionUpdate(Address<? extends Receiver> receiver, Direction direction, Tuple updateElement) {
         // structuralChangeLock.lock();
         if (threads > 0)
             sendUpdate(receiver, direction, updateElement);
@@ -224,8 +224,8 @@ public class Network {
      *
      * @since 2.4
      */
-    public void sendConstructionUpdates(Address <? extends Receiver> receiver, Direction direction,
-            Collection <Tuple> updateElements) {
+    public void sendConstructionUpdates(Address<? extends Receiver> receiver, Direction direction,
+            Collection<Tuple> updateElements) {
         // structuralChangeLock.lock();
         if (threads > 0)
             sendUpdates(receiver, direction, updateElements);
@@ -243,7 +243,7 @@ public class Network {
      * @param synchronise
      *            indicates whether the receiver should be synchronised to the current contents of the supplier
      */
-    public void connectRemoteNodes(Address <? extends Supplier> supplier, Address <? extends Receiver> receiver,
+    public void connectRemoteNodes(Address<? extends Supplier> supplier, Address<? extends Receiver> receiver,
             boolean synchronise) {
         try {
             if (threads > 0)
@@ -264,7 +264,7 @@ public class Network {
      * @param desynchronise
      *            indicates whether the current contents of the supplier should be subtracted from the receiver
      */
-    public void disconnectRemoteNodes(Address <? extends Supplier> supplier, Address <? extends Receiver> receiver,
+    public void disconnectRemoteNodes(Address<? extends Supplier> supplier, Address<? extends Receiver> receiver,
             boolean desynchronise) {
         try {
             if (threads > 0)
@@ -291,9 +291,9 @@ public class Network {
      *            reported termination.
      */
     void reportLocalUpdateTermination(ReteContainer reportingContainer, long clock,
-            Map <ReteContainer, Long> localTerminationCriteria) {
+            Map<ReteContainer, Long> localTerminationCriteria) {
         synchronized (globalTerminationCriteria) {
-            for (Entry <ReteContainer, Long> criterion : localTerminationCriteria.entrySet()) {
+            for (Entry<ReteContainer, Long> criterion : localTerminationCriteria.entrySet()) {
                 terminationCriterion(criterion.getKey(), criterion.getValue());
             }
 
@@ -374,14 +374,14 @@ public class Network {
     /**
      * @return an unmodifiable set of known recipe traces
      */
-    public Set <RecipeTraceInfo> getRecipeTraces() {
+    public Set<RecipeTraceInfo> getRecipeTraces() {
         return Collections.unmodifiableSet(recipeTraces);
     }
 
     /**
      * @return an unmodifiable list of containers
      */
-    public List <ReteContainer> getContainers() {
+    public List<ReteContainer> getContainers() {
         return Collections.unmodifiableList(containers);
     }
 

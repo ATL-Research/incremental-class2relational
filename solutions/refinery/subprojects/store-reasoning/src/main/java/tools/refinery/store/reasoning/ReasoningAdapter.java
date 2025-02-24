@@ -27,17 +27,17 @@ public interface ReasoningAdapter extends ModelAdapter {
 
 	default AnyPartialInterpretation getPartialInterpretation(Concreteness concreteness,
 															  AnyPartialSymbol partialSymbol) {
-		return getPartialInterpretation(concreteness, (PartialSymbol <?, ?>) partialSymbol);
+		return getPartialInterpretation(concreteness, (PartialSymbol<?, ?>) partialSymbol);
 	}
 
-	 <A, C> PartialInterpretation <A, C> getPartialInterpretation(Concreteness concreteness,
-																PartialSymbol <A, C> partialSymbol);
+	<A, C> PartialInterpretation<A, C> getPartialInterpretation(Concreteness concreteness,
+																PartialSymbol<A, C> partialSymbol);
 
 	default AnyPartialInterpretationRefiner getRefiner(AnyPartialSymbol partialSymbol) {
-		return getRefiner((PartialSymbol <?, ?>) partialSymbol);
+		return getRefiner((PartialSymbol<?, ?>) partialSymbol);
 	}
 
-	 <A, C> PartialInterpretationRefiner <A, C> getRefiner(PartialSymbol <A, C> partialSymbol);
+	<A, C> PartialInterpretationRefiner<A, C> getRefiner(PartialSymbol<A, C> partialSymbol);
 
 	@Nullable
 	Tuple1 split(int parentMultiObject);

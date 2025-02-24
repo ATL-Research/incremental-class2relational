@@ -15,11 +15,11 @@ import java.util.Collection;
 import java.util.Set;
 
 public interface ReasoningStoreAdapter extends ModelStoreAdapter {
-	Collection <AnyPartialSymbol> getPartialSymbols();
+	Collection<AnyPartialSymbol> getPartialSymbols();
 
-	Collection <AnyPartialSymbol> getRefinablePartialSymbols();
+	Collection<AnyPartialSymbol> getRefinablePartialSymbols();
 
-	Set <Concreteness> getSupportedInterpretations();
+	Set<Concreteness> getSupportedInterpretations();
 
 	Model createInitialModel(ModelSeed modelSeed);
 

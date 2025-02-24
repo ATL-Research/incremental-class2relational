@@ -17,7 +17,7 @@ import tools.refinery.interpreter.matchers.psystem.PConstraint;
 /**
  * Represents a base relation defined by the instance set of an enumerable PConstraint; there are no parent SubPlans.
  *
- * <p> <b>WARNING </b>: if there are coinciding variables in the variable tuple of the enumerable constraint,
+ * <p> <b>WARNING</b>: if there are coinciding variables in the variable tuple of the enumerable constraint,
  *   it is the responsibility of the compiler to check them for equality.
  * @author Bergmann Gabor
  *
@@ -35,7 +35,7 @@ public class PEnumerate extends POperation {
     }
 
     @Override
-    public Set <? extends PConstraint> getDeltaConstraints() {
+    public Set<? extends PConstraint> getDeltaConstraints() {
         return Collections.singleton(enumerablePConstraint);
     }
     @Override

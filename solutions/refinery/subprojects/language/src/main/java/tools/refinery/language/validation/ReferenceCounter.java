@@ -30,7 +30,7 @@ public class ReferenceCounter {
 		return count;
 	}
 
-	protected Map <EObject, Integer> getReferenceCounts(Problem problem) {
+	protected Map<EObject, Integer> getReferenceCounts(Problem problem) {
 		var resource = problem.eResource();
 		if (resource == null) {
 			return doGetReferenceCounts(problem);
@@ -38,8 +38,8 @@ public class ReferenceCounter {
 		return cache.get(Tuples.create(problem, "referenceCounts"), resource, () -> doGetReferenceCounts(problem));
 	}
 
-	protected Map <EObject, Integer> doGetReferenceCounts(Problem problem) {
-		var map = new HashMap <EObject, Integer>();
+	protected Map<EObject, Integer> doGetReferenceCounts(Problem problem) {
+		var map = new HashMap<EObject, Integer>();
 		countCrossReferences(problem, map);
 		var iterator = problem.eAllContents();
 		while (iterator.hasNext()) {
@@ -49,7 +49,7 @@ public class ReferenceCounter {
 		return map;
 	}
 
-	protected void countCrossReferences(EObject eObject, Map <EObject, Integer> map) {
+	protected void countCrossReferences(EObject eObject, Map<EObject, Integer> map) {
 		for (var referencedObject : eObject.eCrossReferences()) {
 			map.compute(referencedObject, (key, currentValue) -> currentValue == null ? 1 : currentValue + 1);
 		}

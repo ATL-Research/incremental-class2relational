@@ -28,11 +28,11 @@ class MutableImmutableCompareFuzzTest {
 	private void runFuzzTest(String scenario, int seed, int steps, int maxKey, int maxValue,
 							 boolean nullDefault, int commitFrequency, boolean evilHash) {
 		String[] values = MapTestEnvironment.prepareValues(maxValue, nullDefault);
-		ContinuousHashProvider <Integer> chp = MapTestEnvironment.prepareHashProvider(evilHash);
+		ContinuousHashProvider<Integer> chp = MapTestEnvironment.prepareHashProvider(evilHash);
 
-		VersionedMapStore <Integer, String> store = new VersionedMapStoreStateImpl<>(chp, values[0]);
-		VersionedMapStateImpl <Integer, String> immutable = (VersionedMapStateImpl <Integer, String>) store.createMap();
-		VersionedMapStateImpl <Integer, String> mutable = (VersionedMapStateImpl <Integer, String>) store.createMap();
+		VersionedMapStore<Integer, String> store = new VersionedMapStoreStateImpl<>(chp, values[0]);
+		VersionedMapStateImpl<Integer, String> immutable = (VersionedMapStateImpl<Integer, String>) store.createMap();
+		VersionedMapStateImpl<Integer, String> mutable = (VersionedMapStateImpl<Integer, String>) store.createMap();
 
 		Random r = new Random(seed);
 
@@ -40,8 +40,8 @@ class MutableImmutableCompareFuzzTest {
 				commitFrequency);
 	}
 
-	private void iterativeRandomPutsAndCommitsAndCompare(String scenario, VersionedMapStateImpl <Integer, String> immutable,
-														 VersionedMapStateImpl <Integer, String> mutable, int steps, int maxKey, String[] values, Random r,
+	private void iterativeRandomPutsAndCommitsAndCompare(String scenario, VersionedMapStateImpl<Integer, String> immutable,
+														 VersionedMapStateImpl<Integer, String> mutable, int steps, int maxKey, String[] values, Random r,
 														 int commitFrequency) {
 		for (int i = 0; i < steps; i++) {
 			int index = i + 1;
@@ -74,7 +74,7 @@ class MutableImmutableCompareFuzzTest {
 				noKeys, noValues, nullDefault, commitFrequency, evilHash);
 	}
 
-	static Stream <Arguments> parametrizedFastFuzz() {
+	static Stream<Arguments> parametrizedFastFuzz() {
 		return FuzzTestUtils.permutationWithSize(stepCounts, keyCounts, valueCounts, nullDefaultOptions,
 				commitFrequencyOptions, randomSeedOptions, new Object[]{false, true});
 	}
@@ -90,7 +90,7 @@ class MutableImmutableCompareFuzzTest {
 				noKeys, noValues, nullDefault, commitFrequency, evilHash);
 	}
 
-	static Stream <Arguments> parametrizedSlowFuzz() {
+	static Stream<Arguments> parametrizedSlowFuzz() {
 		return FuzzTestUtils.changeStepCount(MutableImmutableCompareFuzzTest.parametrizedFastFuzz(), 1);
 	}
 }

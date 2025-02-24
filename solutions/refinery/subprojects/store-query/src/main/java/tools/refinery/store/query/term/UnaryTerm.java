@@ -16,11 +16,11 @@ import java.util.Set;
 
 // {@link Object#equals(Object)} is implemented by {@link AbstractTerm}.
 @SuppressWarnings("squid:S2160")
-public abstract class UnaryTerm <R, T> extends AbstractTerm <R> {
-	private final Class <T> bodyType;
-	private final Term <T> body;
+public abstract class UnaryTerm<R, T> extends AbstractTerm<R> {
+	private final Class<T> bodyType;
+	private final Term<T> body;
 
-	protected UnaryTerm(Class <R> type, Class <T> bodyType, Term <T> body) {
+	protected UnaryTerm(Class<R> type, Class<T> bodyType, Term<T> body) {
 		super(type);
 		if (!body.getType().equals(bodyType)) {
 			throw new InvalidQueryException("Expected body %s to be of type %s, got %s instead".formatted(body,
@@ -30,11 +30,11 @@ public abstract class UnaryTerm <R, T> extends AbstractTerm <R> {
 		this.body = body;
 	}
 
-	public Class <T> getBodyType() {
+	public Class<T> getBodyType() {
 		return bodyType;
 	}
 
-	public Term <T> getBody() {
+	public Term<T> getBody() {
 		return body;
 	}
 
@@ -51,7 +51,7 @@ public abstract class UnaryTerm <R, T> extends AbstractTerm <R> {
 		if (!super.equalsWithSubstitution(helper, other)) {
 			return false;
 		}
-		var otherUnaryTerm = (UnaryTerm <?, ?>) other;
+		var otherUnaryTerm = (UnaryTerm<?, ?>) other;
 		return bodyType.equals(otherUnaryTerm.bodyType) && body.equalsWithSubstitution(helper, otherUnaryTerm.body);
 	}
 
@@ -61,14 +61,14 @@ public abstract class UnaryTerm <R, T> extends AbstractTerm <R> {
 	}
 
 	@Override
-	public Term <R> substitute(Substitution substitution) {
+	public Term<R> substitute(Substitution substitution) {
 		return doSubstitute(substitution, body.substitute(substitution));
 	}
 
-	protected abstract Term <R> doSubstitute(Substitution substitution, Term <T> substitutedBody);
+	protected abstract Term<R> doSubstitute(Substitution substitution, Term<T> substitutedBody);
 
 	@Override
-	public Set <AnyDataVariable> getInputVariables() {
+	public Set<AnyDataVariable> getInputVariables() {
 		return body.getInputVariables();
 	}
 }

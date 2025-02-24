@@ -74,7 +74,7 @@ public final class Tuple1 implements Tuple {
 	/**
 	 * This class uses safe double-checked locking, see
 	 * <a href="https://shipilev.net/blog/2014/safe-public-construction/">Safe Publication and Safe Initialization in
-	 * Java </a> for details.
+	 * Java</a> for details.
 	 * <p>
 	 * This class implements the singleton pattern to ensure only a single cache exists. This is thread-safe because
 	 * of the locking of the cache.

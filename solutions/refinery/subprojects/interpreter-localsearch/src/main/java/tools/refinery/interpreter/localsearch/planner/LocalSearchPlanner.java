@@ -87,7 +87,7 @@ public class LocalSearchPlanner implements ILocalSearchPlanner {
 
     /**
      * Creates executable plans for the provided query. It is required to call one of the
-     * <code>initializePlanner() </code> methods before calling this method.
+     * <code>initializePlanner()</code> methods before calling this method.
      *
      * @param querySpec
      * @param boundParameters
@@ -96,22 +96,22 @@ public class LocalSearchPlanner implements ILocalSearchPlanner {
      *         list of ISearchOperations
      */
     @Override
-    public Collection <SearchPlanForBody> plan(PQuery querySpec, Set <PParameter> boundParameters) {
+    public Collection<SearchPlanForBody> plan(PQuery querySpec, Set<PParameter> boundParameters) {
         // 1. Preparation
         preprocessor.setTraceCollector(configuration.getTraceCollector());
-        Set <PBody> normalizedBodies = preprocessor.rewrite(querySpec.getDisjunctBodies()).getBodies();
+        Set<PBody> normalizedBodies = preprocessor.rewrite(querySpec.getDisjunctBodies()).getBodies();
 
-        List <SearchPlanForBody> plansForBodies = new ArrayList<>(normalizedBodies.size());
+        List<SearchPlanForBody> plansForBodies = new ArrayList<>(normalizedBodies.size());
 
         for (PBody normalizedBody : normalizedBodies) {
             // 2. Plan creation
             // Context has matchers for the referred Queries (IQuerySpecifications)
-            Set <PVariable> boundVariables = calculatePatternAdornmentForPlanner(boundParameters, normalizedBody);
+            Set<PVariable> boundVariables = calculatePatternAdornmentForPlanner(boundParameters, normalizedBody);
             PlanState searchPlanInternal = plannerStrategy.plan(normalizedBody, boundVariables, context, resultRequestor, configuration);
             SubPlan plan = plannerStrategy.convertPlan(boundVariables, searchPlanInternal);
             // 3. PConstraint -> POperation compilation step
             // * Pay extra caution to extend operations, when more than one variables are unbound
-            List <ISearchOperation> compiledOperations = operationCompiler.compile(plan, boundParameters);
+            List<ISearchOperation> compiledOperations = operationCompiler.compile(plan, boundParameters);
             // Store the variable mappings for the plans for debug purposes (traceability information)
             SearchPlanForBody compiledPlan = new SearchPlanForBody(normalizedBody,
                     operationCompiler.getVariableMappings(), plan, compiledOperations,
@@ -124,12 +124,12 @@ public class LocalSearchPlanner implements ILocalSearchPlanner {
         return plansForBodies;
     }
 
-    private Set <PVariable> calculatePatternAdornmentForPlanner(Set <PParameter> boundParameters, PBody normalizedBody) {
-        Map <PParameter, PVariable> parameterMapping = new HashMap<>();
+    private Set<PVariable> calculatePatternAdornmentForPlanner(Set<PParameter> boundParameters, PBody normalizedBody) {
+        Map<PParameter, PVariable> parameterMapping = new HashMap<>();
         for (ExportedParameter constraint : normalizedBody.getSymbolicParameters()) {
             parameterMapping.put(constraint.getPatternParameter(), constraint.getParameterVariable());
         }
-        Set <PVariable> boundVariables = new HashSet<>();
+        Set<PVariable> boundVariables = new HashSet<>();
         for (PParameter parameter : boundParameters) {
             PVariable mappedParameter = parameterMapping.get(parameter);
             boundVariables.add(mappedParameter);

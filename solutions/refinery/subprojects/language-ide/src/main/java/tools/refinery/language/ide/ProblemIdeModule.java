@@ -25,24 +25,24 @@ import tools.refinery.language.ide.syntaxcoloring.ProblemSemanticHighlightingCal
  */
 public class ProblemIdeModule extends AbstractProblemIdeModule {
 	@Override
-	public Class <? extends IContentAssistParser> bindIContentAssistParser() {
+	public Class<? extends IContentAssistParser> bindIContentAssistParser() {
 		return TokenSourceInjectingProblemParser.class;
 	}
 
-	public Class <? extends IPartialEditingContentAssistParser> bindIPartialEditingContentAssistParser() {
+	public Class<? extends IPartialEditingContentAssistParser> bindIPartialEditingContentAssistParser() {
 		return TokenSourceInjectingPartialProblemContentAssistParser.class;
 	}
 
-	public Class <? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
 		return ProblemSemanticHighlightingCalculator.class;
 	}
 
 	@Override
-	public Class <? extends IPrefixMatcher> bindIPrefixMatcher() {
+	public Class<? extends IPrefixMatcher> bindIPrefixMatcher() {
 		return FuzzyMatcher.class;
 	}
 
-	public Class <? extends IdeCrossrefProposalProvider> bindIdeCrossrefProposalProvider() {
+	public Class<? extends IdeCrossrefProposalProvider> bindIdeCrossrefProposalProvider() {
 		return ProblemCrossrefProposalProvider.class;
 	}
 }

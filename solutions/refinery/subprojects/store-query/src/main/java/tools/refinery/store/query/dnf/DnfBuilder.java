@@ -15,10 +15,10 @@ import java.util.*;
 @SuppressWarnings("UnusedReturnValue")
 public final class DnfBuilder {
 	private final String name;
-	private final Set <Variable> parameterVariables = new LinkedHashSet<>();
-	private final List <SymbolicParameter> parameters = new ArrayList<>();
-	private final List <FunctionalDependency<Variable>> functionalDependencies = new ArrayList<>();
-	private final List <List<Literal>> clauses = new ArrayList<>();
+	private final Set<Variable> parameterVariables = new LinkedHashSet<>();
+	private final List<SymbolicParameter> parameters = new ArrayList<>();
+	private final List<FunctionalDependency<Variable>> functionalDependencies = new ArrayList<>();
+	private final List<List<Literal>> clauses = new ArrayList<>();
 
 	DnfBuilder(String name) {
 		this.name = name;
@@ -42,19 +42,19 @@ public final class DnfBuilder {
 		return variable;
 	}
 
-	public <T> DataVariable <T> parameter(Class <T> type) {
+	public <T> DataVariable<T> parameter(Class<T> type) {
 		return parameter(null, type);
 	}
 
-	public <T> DataVariable <T> parameter(String name, Class <T> type) {
+	public <T> DataVariable<T> parameter(String name, Class<T> type) {
 		return parameter(name, type, ParameterDirection.OUT);
 	}
 
-	public <T> DataVariable <T> parameter(Class <T> type, ParameterDirection direction) {
+	public <T> DataVariable<T> parameter(Class<T> type, ParameterDirection direction) {
 		return parameter(null, type, direction);
 	}
 
-	public <T> DataVariable <T> parameter(String name, Class <T> type, ParameterDirection direction) {
+	public <T> DataVariable<T> parameter(String name, Class<T> type, ParameterDirection direction) {
 		var variable = Variable.of(name, type);
 		parameter(variable, direction);
 		return variable;
@@ -84,11 +84,11 @@ public final class DnfBuilder {
 		return parameters(List.of(variables));
 	}
 
-	public DnfBuilder parameters(Collection <? extends Variable> variables) {
+	public DnfBuilder parameters(Collection<? extends Variable> variables) {
 		return parameters(variables, ParameterDirection.OUT);
 	}
 
-	public DnfBuilder parameters(Collection <? extends Variable> variables, ParameterDirection direction) {
+	public DnfBuilder parameters(Collection<? extends Variable> variables, ParameterDirection direction) {
 		for (var variable : variables) {
 			parameter(variable, direction);
 		}
@@ -109,24 +109,24 @@ public final class DnfBuilder {
 		return symbolicParameters(List.of(symbolicParameters));
 	}
 
-	public DnfBuilder symbolicParameters(Collection <SymbolicParameter> symbolicParameters) {
+	public DnfBuilder symbolicParameters(Collection<SymbolicParameter> symbolicParameters) {
 		for (var symbolicParameter : symbolicParameters) {
 			symbolicParameter(symbolicParameter);
 		}
 		return this;
 	}
 
-	public DnfBuilder functionalDependencies(Collection <FunctionalDependency<Variable>> functionalDependencies) {
+	public DnfBuilder functionalDependencies(Collection<FunctionalDependency<Variable>> functionalDependencies) {
 		this.functionalDependencies.addAll(functionalDependencies);
 		return this;
 	}
 
-	public DnfBuilder functionalDependency(FunctionalDependency <Variable> functionalDependency) {
+	public DnfBuilder functionalDependency(FunctionalDependency<Variable> functionalDependency) {
 		functionalDependencies.add(functionalDependency);
 		return this;
 	}
 
-	public DnfBuilder functionalDependency(Set <? extends Variable> forEach, Set <? extends Variable> unique) {
+	public DnfBuilder functionalDependency(Set<? extends Variable> forEach, Set<? extends Variable> unique) {
 		return functionalDependency(new FunctionalDependency<>(Set.copyOf(forEach), Set.copyOf(unique)));
 	}
 
@@ -138,7 +138,7 @@ public final class DnfBuilder {
 		return clause(callback.toLiterals(Variable.of("v1")));
 	}
 
-	public <T> DnfBuilder clause(Class <T> type1, ClauseCallback1Data1 <T> callback) {
+	public <T> DnfBuilder clause(Class<T> type1, ClauseCallback1Data1<T> callback) {
 		return clause(callback.toLiterals(Variable.of("d1", type1)));
 	}
 
@@ -146,11 +146,11 @@ public final class DnfBuilder {
 		return clause(callback.toLiterals(Variable.of("v1"), Variable.of("v2")));
 	}
 
-	public <T> DnfBuilder clause(Class <T> type1, ClauseCallback2Data1 <T> callback) {
+	public <T> DnfBuilder clause(Class<T> type1, ClauseCallback2Data1<T> callback) {
 		return clause(callback.toLiterals(Variable.of("v1"), Variable.of("d1", type1)));
 	}
 
-	public <T1, T2> DnfBuilder clause(Class <T1> type1, Class <T2> type2, ClauseCallback2Data2 <T1, T2> callback) {
+	public <T1, T2> DnfBuilder clause(Class<T1> type1, Class<T2> type2, ClauseCallback2Data2<T1, T2> callback) {
 		return clause(callback.toLiterals(Variable.of("d1", type1), Variable.of("d2", type2)));
 	}
 
@@ -158,16 +158,16 @@ public final class DnfBuilder {
 		return clause(callback.toLiterals(Variable.of("v1"), Variable.of("v2"), Variable.of("v3")));
 	}
 
-	public <T> DnfBuilder clause(Class <T> type1, ClauseCallback3Data1 <T> callback) {
+	public <T> DnfBuilder clause(Class<T> type1, ClauseCallback3Data1<T> callback) {
 		return clause(callback.toLiterals(Variable.of("v1"), Variable.of("v2"), Variable.of("d1", type1)));
 	}
 
-	public <T1, T2> DnfBuilder clause(Class <T1> type1, Class <T2> type2, ClauseCallback3Data2 <T1, T2> callback) {
+	public <T1, T2> DnfBuilder clause(Class<T1> type1, Class<T2> type2, ClauseCallback3Data2<T1, T2> callback) {
 		return clause(callback.toLiterals(Variable.of("v1"), Variable.of("d1", type1), Variable.of("d2", type2)));
 	}
 
-	public <T1, T2, T3> DnfBuilder clause(Class <T1> type1, Class <T2> type2, Class <T3> type3,
-										  ClauseCallback3Data3 <T1, T2, T3> callback) {
+	public <T1, T2, T3> DnfBuilder clause(Class<T1> type1, Class<T2> type2, Class<T3> type3,
+										  ClauseCallback3Data3<T1, T2, T3> callback) {
 		return clause(callback.toLiterals(Variable.of("d1", type1), Variable.of("d2", type2),
 				Variable.of("d3", type3)));
 	}
@@ -176,24 +176,24 @@ public final class DnfBuilder {
 		return clause(callback.toLiterals(Variable.of("v1"), Variable.of("v2"), Variable.of("v3"), Variable.of("v4")));
 	}
 
-	public <T> DnfBuilder clause(Class <T> type1, ClauseCallback4Data1 <T> callback) {
+	public <T> DnfBuilder clause(Class<T> type1, ClauseCallback4Data1<T> callback) {
 		return clause(callback.toLiterals(Variable.of("v1"), Variable.of("v2"), Variable.of("v3"), Variable.of("d1",
 				type1)));
 	}
 
-	public <T1, T2> DnfBuilder clause(Class <T1> type1, Class <T2> type2, ClauseCallback4Data2 <T1, T2> callback) {
+	public <T1, T2> DnfBuilder clause(Class<T1> type1, Class<T2> type2, ClauseCallback4Data2<T1, T2> callback) {
 		return clause(callback.toLiterals(Variable.of("v1"), Variable.of("v2"), Variable.of("d1", type1),
 				Variable.of("d2", type2)));
 	}
 
-	public <T1, T2, T3> DnfBuilder clause(Class <T1> type1, Class <T2> type2, Class <T3> type3,
-										  ClauseCallback4Data3 <T1, T2, T3> callback) {
+	public <T1, T2, T3> DnfBuilder clause(Class<T1> type1, Class<T2> type2, Class<T3> type3,
+										  ClauseCallback4Data3<T1, T2, T3> callback) {
 		return clause(callback.toLiterals(Variable.of("v1"), Variable.of("d1", type1), Variable.of("d2", type2),
 				Variable.of("d3", type3)));
 	}
 
-	public <T1, T2, T3, T4> DnfBuilder clause(Class <T1> type1, Class <T2> type2, Class <T3> type3, Class <T4> type4,
-											  ClauseCallback4Data4 <T1, T2, T3, T4> callback) {
+	public <T1, T2, T3, T4> DnfBuilder clause(Class<T1> type1, Class<T2> type2, Class<T3> type3, Class<T4> type4,
+											  ClauseCallback4Data4<T1, T2, T3, T4> callback) {
 		return clause(callback.toLiterals(Variable.of("d1", type1), Variable.of("d2", type2),
 				Variable.of("d3", type3), Variable.of("d4", type4)));
 	}
@@ -203,12 +203,12 @@ public final class DnfBuilder {
 		return this;
 	}
 
-	public DnfBuilder clause(Collection <? extends Literal> literals) {
+	public DnfBuilder clause(Collection<? extends Literal> literals) {
 		clauses.add(List.copyOf(literals));
 		return this;
 	}
 
-	 <T> void output(DataVariable <T> outputVariable) {
+	<T> void output(DataVariable<T> outputVariable) {
 		// Copy parameter variables to exclude the newly added {@code outputVariable}.
 		var fromParameters = Set.copyOf(parameterVariables);
 		parameter(outputVariable, ParameterDirection.OUT);

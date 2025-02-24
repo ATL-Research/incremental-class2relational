@@ -9,22 +9,22 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class CycleDetectingMapper <T, R> {
+public class CycleDetectingMapper<T, R> {
 	private static final String SEPARATOR = " -> ";
 
-	private final Function <T, String> getName;
+	private final Function<T, String> getName;
 
-	private final Function <T, R> doMap;
+	private final Function<T, R> doMap;
 
-	private final Set <T> inProgress = new LinkedHashSet<>();
+	private final Set<T> inProgress = new LinkedHashSet<>();
 
-	private final Map <T, R> results = new HashMap<>();
+	private final Map<T, R> results = new HashMap<>();
 
-	public CycleDetectingMapper(Function <T, R> doMap) {
+	public CycleDetectingMapper(Function<T, R> doMap) {
 		this(Objects::toString, doMap);
 	}
 
-	public CycleDetectingMapper(Function <T, String> getName, Function <T, R> doMap) {
+	public CycleDetectingMapper(Function<T, String> getName, Function<T, R> doMap) {
 		this.getName = getName;
 		this.doMap = doMap;
 	}
@@ -51,7 +51,7 @@ public class CycleDetectingMapper <T, R> {
 		return result;
 	}
 
-	public List <T> getInProgress() {
+	public List<T> getInProgress() {
 		return List.copyOf(inProgress);
 	}
 

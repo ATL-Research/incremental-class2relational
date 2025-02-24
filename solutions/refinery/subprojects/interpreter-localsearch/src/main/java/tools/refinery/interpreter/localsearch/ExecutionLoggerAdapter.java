@@ -23,9 +23,9 @@ import java.util.function.Consumer;
 public final class ExecutionLoggerAdapter implements ILocalSearchAdapter {
 
     volatile String indentation = "";
-    private final Consumer <String> outputConsumer;
+    private final Consumer<String> outputConsumer;
 
-    public ExecutionLoggerAdapter(Consumer <String> outputConsumer) {
+    public ExecutionLoggerAdapter(Consumer<String> outputConsumer) {
         this.outputConsumer = outputConsumer;
     }
 
@@ -48,7 +48,7 @@ public final class ExecutionLoggerAdapter implements ILocalSearchAdapter {
     }
 
     @Override
-    public void planChanged(Optional <SearchPlan> oldPlan, Optional <SearchPlan> newPlan) {
+    public void planChanged(Optional<SearchPlan> oldPlan, Optional<SearchPlan> newPlan) {
         logMessage(indentation + "[  PLAN] " + newPlan.map(p -> p.getSourceBody().getPattern().getFullyQualifiedName()).orElse(""));
         logMessage(indentation + newPlan.map(SearchPlan::toString).map(s -> s.replace("\n", "\n" + indentation)).orElse(""));
     }

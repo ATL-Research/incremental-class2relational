@@ -18,13 +18,13 @@ import java.util.Set;
  * @since 2.0
  *
  */
-public class EmptyMemory <T> implements IMemoryView <T> {
+public class EmptyMemory<T> implements IMemoryView<T> {
 
     @SuppressWarnings("rawtypes")
     private static final EmptyMemory INSTANCE = new EmptyMemory();
 
     @SuppressWarnings("unchecked")
-    public static <T> EmptyMemory <T> instance() {
+    public static <T> EmptyMemory<T> instance() {
         return INSTANCE;
     }
 
@@ -38,7 +38,7 @@ public class EmptyMemory <T> implements IMemoryView <T> {
     }
 
     @Override
-    public Iterator <T> iterator() {
+    public Iterator<T> iterator() {
         return Collections.<T>emptySet().iterator();
     }
 
@@ -73,7 +73,7 @@ public class EmptyMemory <T> implements IMemoryView <T> {
     }
 
     @Override
-    public Set <T> distinctValues() {
+    public Set<T> distinctValues() {
         return Collections.emptySet();
     }
 

@@ -15,7 +15,7 @@ public class ProblemParseHelper {
 	@Inject
 	private IResourceValidator resourceValidator;
 	@Inject
-	private ParseHelper <Problem> parseHelper;
+	private ParseHelper<Problem> parseHelper;
 
 	public WrappedProblem parse(String text) {
 		Problem problem;

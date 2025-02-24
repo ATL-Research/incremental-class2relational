@@ -19,30 +19,30 @@ import tools.refinery.store.tuple.Tuple;
 import java.util.*;
 
 public class RelationalDomain {
-	public static final Symbol <Boolean> relational_Named;
+	public static final Symbol<Boolean> relational_Named;
 	public static final AnySymbolView relational_NamedView;
-	public final Interpretation <Boolean> Named;
-	public static final Symbol <String> relational_name;
-	public static final FunctionView <String> relational_nameView;
-	public final Interpretation <String> name;
-	public static final Symbol <Boolean> relational_Table;
+	public final Interpretation<Boolean> Named;
+	public static final Symbol<String> relational_name;
+	public static final FunctionView<String> relational_nameView;
+	public final Interpretation<String> name;
+	public static final Symbol<Boolean> relational_Table;
 	public static final AnySymbolView relational_TableView;
-	public final Interpretation <Boolean> Table;
-	public static final Symbol <Boolean> relational_Column;
+	public final Interpretation<Boolean> Table;
+	public static final Symbol<Boolean> relational_Column;
 	public static final AnySymbolView relational_ColumnView;
-	public final Interpretation <Boolean> Column;
-	public static final Symbol <Boolean> relational_Type;
+	public final Interpretation<Boolean> Column;
+	public static final Symbol<Boolean> relational_Type;
 	public static final AnySymbolView relational_TypeView;
-	public final Interpretation <Boolean> Type;
-	public static final Symbol <Boolean> relational_col;
+	public final Interpretation<Boolean> Type;
+	public static final Symbol<Boolean> relational_col;
 	public static final AnySymbolView relational_colView;
-	public final Interpretation <Boolean> col;
-	public static final Symbol <Boolean> relational_key;
+	public final Interpretation<Boolean> col;
+	public static final Symbol<Boolean> relational_key;
 	public static final AnySymbolView relational_keyView;
-	public final Interpretation <Boolean> key;
-	public static final Symbol <Boolean> relational_type;
+	public final Interpretation<Boolean> key;
+	public static final Symbol<Boolean> relational_type;
 	public static final AnySymbolView relational_typeView;
-	public final Interpretation <Boolean> type;
+	public final Interpretation<Boolean> type;
 	static {
 		relational_Named = Symbol.of("relational.Named",1);
 		relational_NamedView = new KeyOnlyView<>(relational_Named);
@@ -85,7 +85,7 @@ public class RelationalDomain {
 	}
 
 	public void toResource(Resource resource){
-		var trace = new HashMap <Tuple, EObject>();
+		var trace = new HashMap<Tuple, EObject>();
 		var factory = Relational_Factory.eINSTANCE;
 
 		var typeCursor = Type.getAll();
@@ -170,9 +170,9 @@ public class RelationalDomain {
 		}
 		return b.toString();
 	}
-	public ResultSetListener <String> makeNameListener(){
+	public ResultSetListener<String> makeNameListener(){
 		return new ResultSetListener<>() {
-			private final Queue <Triple<Tuple,String,String>> queue = new LinkedList<>();
+			private final Queue<Triple<Tuple,String,String>> queue = new LinkedList<>();
 			@Override
 			public void put(Tuple key, String fromValue, String toValue) {
 				var params = Tuples.create(key,fromValue,toValue);
@@ -183,7 +183,7 @@ public class RelationalDomain {
 					queue.add(params);
 
 			}
-			private boolean execute(Triple <Tuple,String,String> tuple){
+			private boolean execute(Triple<Tuple,String,String> tuple){
 				if(Objects.equals(name.get(tuple.getFirst()),tuple.getSecond())){
 					name.put(tuple.getFirst(),tuple.getThird());
 					return true;

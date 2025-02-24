@@ -31,7 +31,7 @@ public class SurrogateQueryRewriter extends PDisjunctionRewriter {
 
     @Override
     public PDisjunction rewrite(PDisjunction disjunction) {
-        Set <PBody> replacedBodies = new LinkedHashSet<>();
+        Set<PBody> replacedBodies = new LinkedHashSet<>();
         for (PBody body : disjunction.getBodies()) {
             PBodyCopier copier = new PBodyCopier(body, getTraceCollector()) {
 

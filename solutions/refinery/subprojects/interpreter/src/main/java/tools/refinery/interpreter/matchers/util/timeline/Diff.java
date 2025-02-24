@@ -21,7 +21,7 @@ import tools.refinery.interpreter.matchers.util.Signed;
  * @param <Timestamp>
  *            the type representing the timestamps
  */
-public class Diff <Timestamp extends Comparable <Timestamp>> extends ArrayList <Signed<Timestamp>> {
+public class Diff<Timestamp extends Comparable<Timestamp>> extends ArrayList<Signed<Timestamp>> {
 
     private static final long serialVersionUID = 3853460426655994160L;
 
@@ -29,11 +29,11 @@ public class Diff <Timestamp extends Comparable <Timestamp>> extends ArrayList <
 
     }
 
-    public void appendWithCancellation(Signed <Timestamp> item) {
+    public void appendWithCancellation(Signed<Timestamp> item) {
         if (this.isEmpty()) {
             this.add(item);
         } else {
-            final Signed <Timestamp> last = this.get(this.size() - 1);
+            final Signed<Timestamp> last = this.get(this.size() - 1);
             final int lastMinusItem = last.getPayload().compareTo(item.getPayload());
             if (lastMinusItem == 0) {
                 if (last.getDirection() != item.getDirection()) {

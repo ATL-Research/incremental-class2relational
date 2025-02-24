@@ -20,13 +20,13 @@ import tools.refinery.interpreter.matchers.util.CollectionsFactory;
  */
 public class DefaultMessageIndexer implements MessageIndexer {
 
-	protected final Map <Tuple, Integer> indexer;
+	protected final Map<Tuple, Integer> indexer;
 
 	public DefaultMessageIndexer() {
 		this.indexer = CollectionsFactory.createMap();
 	}
 
-	public Map <Tuple, Integer> getTuples() {
+	public Map<Tuple, Integer> getTuples() {
 		return Collections.unmodifiableMap(this.indexer);
 	}
 

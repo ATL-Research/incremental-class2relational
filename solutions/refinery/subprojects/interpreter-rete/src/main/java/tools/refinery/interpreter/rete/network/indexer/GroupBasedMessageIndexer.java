@@ -22,7 +22,7 @@ import tools.refinery.interpreter.matchers.util.CollectionsFactory;
  */
 public class GroupBasedMessageIndexer implements MessageIndexer {
 
-	protected final Map <Tuple, DefaultMessageIndexer> indexer;
+	protected final Map<Tuple, DefaultMessageIndexer> indexer;
 	protected final TupleMask groupMask;
 
 	public GroupBasedMessageIndexer(final TupleMask groupMask) {
@@ -30,7 +30,7 @@ public class GroupBasedMessageIndexer implements MessageIndexer {
 		this.groupMask = groupMask;
 	}
 
-	public Map <Tuple, Integer> getTuplesByGroup(final Tuple group) {
+	public Map<Tuple, Integer> getTuplesByGroup(final Tuple group) {
 		final DefaultMessageIndexer values = this.indexer.get(group);
 		if (values == null) {
 			return Collections.emptyMap();
@@ -50,7 +50,7 @@ public class GroupBasedMessageIndexer implements MessageIndexer {
 		}
 	}
 
-	public Set <Tuple> getGroups() {
+	public Set<Tuple> getGroups() {
 		return Collections.unmodifiableSet(this.indexer.keySet());
 	}
 

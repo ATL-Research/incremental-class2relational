@@ -58,7 +58,7 @@ public abstract class CommunicationTracker {
     /**
      * The dependency graph of the communications in the RETE network
      */
-    protected final Graph <Node> dependencyGraph;
+    protected final Graph<Node> dependencyGraph;
 
     /**
      * Incremental SCC information about the dependency graph
@@ -68,24 +68,24 @@ public abstract class CommunicationTracker {
     /**
      * Precomputed node -> communication group map
      */
-    protected final Map <Node, CommunicationGroup> groupMap;
+    protected final Map<Node, CommunicationGroup> groupMap;
 
     /**
      * Priority queue of active communication groups
      */
-    protected final Queue <CommunicationGroup> groupQueue;
+    protected final Queue<CommunicationGroup> groupQueue;
 
     // groups should have a simple integer flag which represents its position in a priority queue
     // priority queue only contains the ACTIVE groups
 
     public CommunicationTracker(Logger logger) {
-        this.dependencyGraph = new Graph <Node>();
+        this.dependencyGraph = new Graph<Node>();
 		this.componentDetector = new NetworkComponentDetector(logger, dependencyGraph);
-        this.groupQueue = new PriorityQueue <CommunicationGroup>();
-        this.groupMap = new HashMap <Node, CommunicationGroup>();
+        this.groupQueue = new PriorityQueue<CommunicationGroup>();
+        this.groupMap = new HashMap<Node, CommunicationGroup>();
     }
 
-    public Graph <Node> getDependencyGraph() {
+    public Graph<Node> getDependencyGraph() {
         return dependencyGraph;
     }
 
@@ -94,7 +94,7 @@ public abstract class CommunicationTracker {
     }
 
 	@Nullable
-	protected Set <Node> getPartition(Node node) {
+	protected Set<Node> getPartition(Node node) {
 		return componentDetector.getPartition(node);
 	}
 
@@ -111,7 +111,7 @@ public abstract class CommunicationTracker {
 		return componentDetector.hasOutgoingEdges(representative);
 	}
 
-	protected Graph <Node> getReducedGraph() {
+	protected Graph<Node> getReducedGraph() {
 		return componentDetector.getReducedGraph();
 	}
 
@@ -119,8 +119,8 @@ public abstract class CommunicationTracker {
         groupMap.clear();
 
         // reconstruct group map from dependency graph
-        final Graph <Node> reducedGraph = getReducedGraph();
-        final List <Node> representatives = TopologicalSorting.compute(reducedGraph);
+        final Graph<Node> reducedGraph = getReducedGraph();
+        final List<Node> representatives = TopologicalSorting.compute(reducedGraph);
 
         for (int i = 0; i < representatives.size(); i++) { // groups for SCC representatives
             final Node representative = representatives.get(i);
@@ -147,7 +147,7 @@ public abstract class CommunicationTracker {
 
         // reconstruct new queue contents based on new group map
         if (!groupQueue.isEmpty()) {
-            final Set <CommunicationGroup> oldActiveGroups = new HashSet <CommunicationGroup>(groupQueue);
+            final Set<CommunicationGroup> oldActiveGroups = new HashSet<CommunicationGroup>(groupQueue);
             groupQueue.clear();
             reconstructQueueContents(oldActiveGroups);
         }
@@ -163,7 +163,7 @@ public abstract class CommunicationTracker {
      * It it defined as abstract because the reconstruction logic is specific to each {@link CommunicationTracker}.
      * @since 2.4
      */
-    protected abstract void reconstructQueueContents(final Set <CommunicationGroup> oldActiveGroups);
+    protected abstract void reconstructQueueContents(final Set<CommunicationGroup> oldActiveGroups);
 
     private void addToGroup(final Node node, final CommunicationGroup group) {
         groupMap.put(node, group);
@@ -183,7 +183,7 @@ public abstract class CommunicationTracker {
         if (node instanceof Receiver) {
             IGroupable mailbox = ((Receiver) node).getMailbox();
             if (mailbox instanceof FallThroughCapableMailbox) {
-                Set <Node> directParents = dependencyGraph.getSourceNodes(node).distinctValues();
+                Set<Node> directParents = dependencyGraph.getSourceNodes(node).distinctValues();
                 // decide between using quick&cheap fall-through, or allowing for update cancellation
                 boolean fallThrough =
                         // disallow fallthrough: updates at production nodes should cancel, if they can be trimmed or
@@ -206,7 +206,7 @@ public abstract class CommunicationTracker {
                     // aggregator and transitive closure parent nodes also generate excess updates that should be
                     // cancelled
                     directParentLoop: for (Node directParent : directParents) {
-                        Set <Node> parentsToCheck = new HashSet<>();
+                        Set<Node> parentsToCheck = new HashSet<>();
                         // check the case where a direct parent is the reason for mailbox usage
                         parentsToCheck.add(directParent);
                         // check the case where an indirect parent (join slot) is the reason for mailbox usage

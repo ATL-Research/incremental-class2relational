@@ -14,7 +14,7 @@ import tools.refinery.store.tuple.Tuple;
 
 public class Transformation {
 	private final Rule definition;
-	private final OrderedResultSet <Boolean> activations;
+	private final OrderedResultSet<Boolean> activations;
 	private final BoundAction action;
 
 	public Transformation(Model model, Rule definition) {
@@ -29,7 +29,7 @@ public class Transformation {
 		return definition;
 	}
 
-	public ResultSet <Boolean> getAllActivationsAsResultSet() {
+	public ResultSet<Boolean> getAllActivationsAsResultSet() {
 		return activations;
 	}
 

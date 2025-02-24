@@ -61,7 +61,7 @@ public class ReteBackendFactory implements IQueryBackendFactory {
     }
 
     @Override
-    public Class <? extends IQueryBackend> getBackendClass() {
+    public Class<? extends IQueryBackend> getBackendClass() {
         return ReteEngine.class;
     }
 

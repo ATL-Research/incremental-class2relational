@@ -9,12 +9,12 @@ import tools.refinery.store.query.substitution.Substitution;
 import tools.refinery.store.query.term.Term;
 
 public class RealMinusTerm extends RealUnaryTerm {
-	public RealMinusTerm(Term <Double> body) {
+	public RealMinusTerm(Term<Double> body) {
 		super(body);
 	}
 
 	@Override
-	protected Term <Double> doSubstitute(Substitution substitution, Term <Double> substitutedBody) {
+	protected Term<Double> doSubstitute(Substitution substitution, Term<Double> substitutedBody) {
 		return new RealMinusTerm(substitutedBody);
 	}
 

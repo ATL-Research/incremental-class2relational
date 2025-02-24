@@ -20,7 +20,7 @@ import tools.refinery.store.tuple.Tuple;
 import java.util.List;
 
 public class LazyNeighbourhoodCalculator extends AbstractNeighbourhoodCalculator implements StateCodeCalculator {
-	public LazyNeighbourhoodCalculator(Model model, List <? extends AnyInterpretation> interpretations,
+	public LazyNeighbourhoodCalculator(Model model, List<? extends AnyInterpretation> interpretations,
 									   IntSet individuals) {
 		super(model, interpretations, individuals);
 	}
@@ -88,7 +88,7 @@ public class LazyNeighbourhoodCalculator extends AbstractNeighbourhoodCalculator
 
 	private void constructNextObjectCodes(ObjectCodeImpl previous, ObjectCodeImpl next, LongIntMap hash2Amount) {
 		for (var impactValueEntry : this.impactValues.entrySet()) {
-			Interpretation <?> interpretation = (Interpretation <?>) impactValueEntry.getKey();
+			Interpretation<?> interpretation = (Interpretation<?>) impactValueEntry.getKey();
 			var cursor = interpretation.getAll();
 			int arity = interpretation.getSymbol().arity();
 			long[] impactValue = impactValueEntry.getValue();
@@ -119,7 +119,7 @@ public class LazyNeighbourhoodCalculator extends AbstractNeighbourhoodCalculator
 	}
 
 	private void lazyImpactCalculation1(LongIntMap hash2Amount, ObjectCodeImpl previous, ObjectCodeImpl next,
-										long[] impactValues, Cursor <Tuple, ?> cursor) {
+										long[] impactValues, Cursor<Tuple, ?> cursor) {
 
 		Tuple tuple = cursor.getKey();
 		int o = tuple.get(0);
@@ -135,7 +135,7 @@ public class LazyNeighbourhoodCalculator extends AbstractNeighbourhoodCalculator
 	}
 
 	private void lazyImpactCalculation2(LongIntMap hash2Amount, ObjectCodeImpl previous, ObjectCodeImpl next,
-										long[] impactValues, Cursor <Tuple, ?> cursor) {
+										long[] impactValues, Cursor<Tuple, ?> cursor) {
 		final Tuple tuple = cursor.getKey();
 		final int o1 = tuple.get(0);
 		final int o2 = tuple.get(1);
@@ -162,7 +162,7 @@ public class LazyNeighbourhoodCalculator extends AbstractNeighbourhoodCalculator
 	}
 
 	private void lazyImpactCalculationN(LongIntMap hash2Amount, ObjectCodeImpl previous, ObjectCodeImpl next,
-										long[] impactValues, Cursor <Tuple, ?> cursor) {
+										long[] impactValues, Cursor<Tuple, ?> cursor) {
 		final Tuple tuple = cursor.getKey();
 
 		final boolean[] uniques = new boolean[tuple.getSize()];

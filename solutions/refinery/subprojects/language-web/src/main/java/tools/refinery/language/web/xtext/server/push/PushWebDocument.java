@@ -22,7 +22,7 @@ import java.util.List;
 public class PushWebDocument extends XtextWebDocument {
 	private static final Logger LOG = LoggerFactory.getLogger(PushWebDocument.class);
 
-	private final List <PrecomputationListener> precomputationListeners = new ArrayList<>();
+	private final List<PrecomputationListener> precomputationListeners = new ArrayList<>();
 
 	private final ModelGenerationManager modelGenerationManager = new ModelGenerationManager();
 
@@ -53,7 +53,7 @@ public class PushWebDocument extends XtextWebDocument {
 		}
 	}
 
-	public <T extends IServiceResult> void precomputeServiceResult(AbstractCachedService <T> service, String serviceName,
+	public <T extends IServiceResult> void precomputeServiceResult(AbstractCachedService<T> service, String serviceName,
 			CancelIndicator cancelIndicator, boolean logCacheMiss) {
 		var result = getCachedServiceResult(service, cancelIndicator, logCacheMiss);
 		if (result != null) {
@@ -67,11 +67,11 @@ public class PushWebDocument extends XtextWebDocument {
 			return;
 		}
 		var stateId = getStateId();
-		List <PrecomputationListener> copyOfListeners;
+		List<PrecomputationListener> copyOfListeners;
 		synchronized (precomputationListeners) {
 			copyOfListeners = ImmutableList.copyOf(precomputationListeners);
 		}
-		var toRemove = new ArrayList <PrecomputationListener>();
+		var toRemove = new ArrayList<PrecomputationListener>();
 		for (var listener : copyOfListeners) {
 			try {
 				listener.onPrecomputedServiceResult(resourceId, stateId, serviceName, result);

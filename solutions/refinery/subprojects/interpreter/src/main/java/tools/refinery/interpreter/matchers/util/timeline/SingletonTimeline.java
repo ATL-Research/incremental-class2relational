@@ -20,7 +20,7 @@ import tools.refinery.interpreter.matchers.util.Signed;
  * @author Tamas Szabo
  * @since 2.4
  */
-public class SingletonTimeline <Timestamp extends Comparable <Timestamp>> extends Timeline <Timestamp> {
+public class SingletonTimeline<Timestamp extends Comparable<Timestamp>> extends Timeline<Timestamp> {
 
     protected final Timestamp start;
 
@@ -28,7 +28,7 @@ public class SingletonTimeline <Timestamp extends Comparable <Timestamp>> extend
         this.start = timestamp;
     }
 
-    SingletonTimeline(final Diff <Timestamp> diff) {
+    SingletonTimeline(final Diff<Timestamp> diff) {
         if (diff.size() != 1 || diff.get(0).getDirection() == Direction.DELETE) {
             throw new IllegalArgumentException("There is only a single (insert) timestamp in the singleton timestamp!");
         } else {
@@ -37,7 +37,7 @@ public class SingletonTimeline <Timestamp extends Comparable <Timestamp>> extend
     }
 
     @Override
-    public Signed <Timestamp> getSigned(final int index) {
+    public Signed<Timestamp> getSigned(final int index) {
         return new Signed<>(Direction.INSERT, this.getUnsigned(index));
     }
 
@@ -61,7 +61,7 @@ public class SingletonTimeline <Timestamp extends Comparable <Timestamp>> extend
     }
 
     @Override
-    public Iterable <Signed<Timestamp>> asChangeSequence() {
+    public Iterable<Signed<Timestamp>> asChangeSequence() {
         return Collections.singletonList(this.getSigned(0));
     }
 

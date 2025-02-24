@@ -24,15 +24,15 @@ import java.util.Set;
  * @author Gabor Bergmann
  * @since 2.0
  */
-public class MemoryViewBackedMapView <T> implements Map <T, Integer> {
+public class MemoryViewBackedMapView<T> implements Map<T, Integer> {
 
     private static final String READ_ONLY = "Read only";
-    private final IMemoryView <T> wrapped;
+    private final IMemoryView<T> wrapped;
 
     /**
      * @param wrapped a memory view whose contents are to be exposed as an element-to-integer map.
      */
-    protected MemoryViewBackedMapView(IMemoryView <T> wrapped) {
+    protected MemoryViewBackedMapView(IMemoryView<T> wrapped) {
         super();
         this.wrapped = wrapped;
     }
@@ -55,7 +55,7 @@ public class MemoryViewBackedMapView <T> implements Map <T, Integer> {
     @Override
     public boolean containsValue(Object value) {
         if (value instanceof Integer) {
-            for (Entry <T, Integer> entry : wrapped.entriesWithMultiplicities()) {
+            for (Entry<T, Integer> entry : wrapped.entriesWithMultiplicities()) {
                 if (entry.getValue().equals(value)) return true;
             }
         }
@@ -79,7 +79,7 @@ public class MemoryViewBackedMapView <T> implements Map <T, Integer> {
     }
 
     @Override
-    public void putAll(Map <? extends T, ? extends Integer> m) {
+    public void putAll(Map<? extends T, ? extends Integer> m) {
         throw new UnsupportedOperationException(READ_ONLY);
     }
 
@@ -89,21 +89,21 @@ public class MemoryViewBackedMapView <T> implements Map <T, Integer> {
     }
 
     @Override
-    public Set <T> keySet() {
+    public Set<T> keySet() {
         return wrapped.distinctValues();
     }
 
     @Override
-    public Collection <Integer> values() {
-        Collection <Integer> result = new ArrayList<>();
+    public Collection<Integer> values() {
+        Collection<Integer> result = new ArrayList<>();
         wrapped.forEachEntryWithMultiplicities((value, count) -> result.add(count));
         return result;
     }
 
     @Override
-    public Set <Entry<T, Integer>> entrySet() {
-        Set <Entry<T, Integer>> result = new HashSet<>();
-        for (Entry <T, Integer> entry : wrapped.entriesWithMultiplicities()) {
+    public Set<Entry<T, Integer>> entrySet() {
+        Set<Entry<T, Integer>> result = new HashSet<>();
+        for (Entry<T, Integer> entry : wrapped.entriesWithMultiplicities()) {
             result.add(entry);
         }
         return result;

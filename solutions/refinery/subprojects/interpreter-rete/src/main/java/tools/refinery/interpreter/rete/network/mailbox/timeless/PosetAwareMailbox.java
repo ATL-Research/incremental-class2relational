@@ -31,7 +31,7 @@ import tools.refinery.interpreter.rete.network.indexer.GroupBasedMessageIndexer;
  * @author Tamas Szabo
  * @since 2.0
  */
-public class PosetAwareMailbox extends AbstractUpdateSplittingMailbox <GroupBasedMessageIndexer, PosetAwareReceiver> {
+public class PosetAwareMailbox extends AbstractUpdateSplittingMailbox<GroupBasedMessageIndexer, PosetAwareReceiver> {
 
     protected final TupleMask groupMask;
 
@@ -62,7 +62,7 @@ public class PosetAwareMailbox extends AbstractUpdateSplittingMailbox <GroupBase
                 // if it was not present in the monotone queue before, then
                 // we need to check whether it makes REVOKE updates monotone
                 if (!wasPresentAsMonotone) {
-                    final Set <Tuple> counterParts = tryFindCounterPart(update, false, true);
+                    final Set<Tuple> counterParts = tryFindCounterPart(update, false, true);
                     for (final Tuple counterPart : counterParts) {
                         final int count = antiMonotoneQueue.getCount(counterPart);
                         assert count < 0;
@@ -81,12 +81,12 @@ public class PosetAwareMailbox extends AbstractUpdateSplittingMailbox <GroupBase
 
                 // and we need to check whether the monotone REVOKE updates
                 // still have a reinforcing counterpart
-                final Set <Tuple> candidates = new HashSet <Tuple>();
+                final Set<Tuple> candidates = new HashSet<Tuple>();
                 final Tuple key = coreMask.transform(update);
-                for (final Entry <Tuple, Integer> entry : monotoneQueue.getTuplesByGroup(key).entrySet()) {
+                for (final Entry<Tuple, Integer> entry : monotoneQueue.getTuplesByGroup(key).entrySet()) {
                     if (entry.getValue() < 0) {
                         final Tuple candidate = entry.getKey();
-                        final Set <Tuple> counterParts = tryFindCounterPart(candidate, true, false);
+                        final Set<Tuple> counterParts = tryFindCounterPart(candidate, true, false);
                         if (counterParts.isEmpty()) {
                             // all of them are gone
                             candidates.add(candidate);
@@ -105,7 +105,7 @@ public class PosetAwareMailbox extends AbstractUpdateSplittingMailbox <GroupBase
                 }
             } else {
                 // it did not exist before
-                final Set <Tuple> counterParts = tryFindCounterPart(update, true, false);
+                final Set<Tuple> counterParts = tryFindCounterPart(update, true, false);
                 if (counterParts.isEmpty()) {
                     // there is no tuple that would make this update monotone
                     antiMonotoneQueue.delete(update);
@@ -129,19 +129,19 @@ public class PosetAwareMailbox extends AbstractUpdateSplittingMailbox <GroupBase
         }
     }
 
-    protected Set <Tuple> tryFindCounterPart(final Tuple first, final boolean findPositiveCounterPart,
+    protected Set<Tuple> tryFindCounterPart(final Tuple first, final boolean findPositiveCounterPart,
             final boolean findAllCounterParts) {
         final GroupBasedMessageIndexer monotoneQueue = getActiveMonotoneQueue();
         final GroupBasedMessageIndexer antiMonotoneQueue = getActiveAntiMonotoneQueue();
         final TupleMask coreMask = this.receiver.getCoreMask();
         final TupleMask posetMask = this.receiver.getPosetMask();
         final IPosetComparator posetComparator = this.receiver.getPosetComparator();
-        final Set <Tuple> result = CollectionsFactory.createSet();
+        final Set<Tuple> result = CollectionsFactory.createSet();
         final Tuple firstKey = coreMask.transform(first);
         final Tuple firstValue = posetMask.transform(first);
 
         if (findPositiveCounterPart) {
-            for (final Entry <Tuple, Integer> entry : monotoneQueue.getTuplesByGroup(firstKey).entrySet()) {
+            for (final Entry<Tuple, Integer> entry : monotoneQueue.getTuplesByGroup(firstKey).entrySet()) {
                 final Tuple secondValue = posetMask.transform(entry.getKey());
                 if (entry.getValue() > 0 && posetComparator.isLessOrEqual(firstValue, secondValue)) {
                     result.add(entry.getKey());
@@ -151,7 +151,7 @@ public class PosetAwareMailbox extends AbstractUpdateSplittingMailbox <GroupBase
                 }
             }
         } else {
-            for (final Entry <Tuple, Integer> entry : antiMonotoneQueue.getTuplesByGroup(firstKey).entrySet()) {
+            for (final Entry<Tuple, Integer> entry : antiMonotoneQueue.getTuplesByGroup(firstKey).entrySet()) {
                 final Tuple secondValue = posetMask.transform(entry.getKey());
                 if (posetComparator.isLessOrEqual(secondValue, firstValue)) {
                     result.add(entry.getKey());
@@ -173,7 +173,7 @@ public class PosetAwareMailbox extends AbstractUpdateSplittingMailbox <GroupBase
             this.deliveringAntiMonotone = true;
 
             for (final Tuple group : this.antiMonotoneQueue.getGroups()) {
-                for (final Entry <Tuple, Integer> entry : this.antiMonotoneQueue.getTuplesByGroup(group).entrySet()) {
+                for (final Entry<Tuple, Integer> entry : this.antiMonotoneQueue.getTuplesByGroup(group).entrySet()) {
                     final Tuple update = entry.getKey();
                     final int count = entry.getValue();
                     assert count < 0;
@@ -191,7 +191,7 @@ public class PosetAwareMailbox extends AbstractUpdateSplittingMailbox <GroupBase
             this.deliveringMonotone = true;
 
             for (final Tuple group : this.monotoneQueue.getGroups()) {
-                for (final Entry <Tuple, Integer> entry : this.monotoneQueue.getTuplesByGroup(group).entrySet()) {
+                for (final Entry<Tuple, Integer> entry : this.monotoneQueue.getTuplesByGroup(group).entrySet()) {
                     final Tuple update = entry.getKey();
                     final int count = entry.getValue();
                     assert count != 0;

@@ -11,8 +11,8 @@ import tools.refinery.store.query.term.StatefulAggregator;
 
 import java.util.stream.Stream;
 
-record StatefulMultisetAggregator <R, T>(StatefulAggregator <R, T> aggregator)
-	implements IMultisetAggregationOperator <T, StatefulAggregate <R, T>, R> {
+record StatefulMultisetAggregator<R, T>(StatefulAggregator<R, T> aggregator)
+	implements IMultisetAggregationOperator<T, StatefulAggregate<R, T>, R> {
 	@Override
 	public String getShortDescription() {
 		return getName();
@@ -24,17 +24,17 @@ record StatefulMultisetAggregator <R, T>(StatefulAggregator <R, T> aggregator)
 	}
 
 	@Override
-	public StatefulAggregate <R, T> createNeutral() {
+	public StatefulAggregate<R, T> createNeutral() {
 		return aggregator.createEmptyAggregate();
 	}
 
 	@Override
-	public boolean isNeutral(StatefulAggregate <R, T> result) {
+	public boolean isNeutral(StatefulAggregate<R, T> result) {
 		return result.isEmpty();
 	}
 
 	@Override
-	public StatefulAggregate <R, T> update(StatefulAggregate <R, T> oldResult, T updateValue, boolean isInsertion) {
+	public StatefulAggregate<R, T> update(StatefulAggregate<R, T> oldResult, T updateValue, boolean isInsertion) {
 		if (isInsertion) {
 			oldResult.add(updateValue);
 		} else {
@@ -44,22 +44,22 @@ record StatefulMultisetAggregator <R, T>(StatefulAggregator <R, T> aggregator)
 	}
 
 	@Override
-	public R getAggregate(StatefulAggregate <R, T> result) {
+	public R getAggregate(StatefulAggregate<R, T> result) {
 		return result.getResult();
 	}
 
 	@Override
-	public R aggregateStream(Stream <T> stream) {
+	public R aggregateStream(Stream<T> stream) {
 		return aggregator.aggregateStream(stream);
 	}
 
 	@Override
-	public StatefulAggregate <R, T> clone(StatefulAggregate <R, T> original) {
+	public StatefulAggregate<R, T> clone(StatefulAggregate<R, T> original) {
 		return original.deepCopy();
 	}
 
 	@Override
-	public boolean contains(T value, StatefulAggregate <R, T> accumulator) {
+	public boolean contains(T value, StatefulAggregate<R, T> accumulator) {
 		return accumulator.contains(value);
 	}
 }

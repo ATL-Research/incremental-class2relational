@@ -12,7 +12,7 @@ import java.util.*;
 
 @SuppressWarnings("UnusedReturnValue")
 public class TypeHierarchyBuilder {
-	protected final Map <PartialRelation, TypeInfo> typeInfoMap = new LinkedHashMap<>();
+	protected final Map<PartialRelation, TypeInfo> typeInfoMap = new LinkedHashMap<>();
 
 	protected TypeHierarchyBuilder() {
 	}
@@ -37,7 +37,7 @@ public class TypeHierarchyBuilder {
 	}
 
 	public TypeHierarchyBuilder type(PartialRelation partialRelation, boolean abstractType,
-									 Collection <PartialRelation> supertypes) {
+									 Collection<PartialRelation> supertypes) {
 		return type(partialRelation, new TypeInfo(supertypes, abstractType));
 	}
 
@@ -45,18 +45,18 @@ public class TypeHierarchyBuilder {
 		return type(partialRelation, List.of(supertypes));
 	}
 
-	public TypeHierarchyBuilder type(PartialRelation partialRelation, Collection <PartialRelation> supertypes) {
+	public TypeHierarchyBuilder type(PartialRelation partialRelation, Collection<PartialRelation> supertypes) {
 		return type(partialRelation, false, supertypes);
 	}
 
-	public TypeHierarchyBuilder types(Collection <Map.Entry<PartialRelation, TypeInfo>> entries) {
+	public TypeHierarchyBuilder types(Collection<Map.Entry<PartialRelation, TypeInfo>> entries) {
 		for (var entry : entries) {
 			type(entry.getKey(), entry.getValue());
 		}
 		return this;
 	}
 
-	public TypeHierarchyBuilder types(Map <PartialRelation, TypeInfo> map) {
+	public TypeHierarchyBuilder types(Map<PartialRelation, TypeInfo> map) {
 		return types(map.entrySet());
 	}
 

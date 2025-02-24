@@ -51,8 +51,8 @@ class ExperimentalSetupTest {
 	static int MAX = 100000;
 
 	public static ExperimentalSetupResult generate(int size, boolean permuteTypes) {
-		Symbol <Boolean> person = new Symbol<>("Person", 1, Boolean.class, false);
-		Symbol <Boolean> friend = new Symbol<>("friend", 2, Boolean.class, false);
+		Symbol<Boolean> person = new Symbol<>("Person", 1, Boolean.class, false);
+		Symbol<Boolean> friend = new Symbol<>("friend", 2, Boolean.class, false);
 
 		var store = ModelStore.builder()
 				.symbols(person, friend)
@@ -60,8 +60,8 @@ class ExperimentalSetupTest {
 						.builder())
 				.build();
 
-		Set <Version> versions = new HashSet<>();
-		MutableIntObjectMap <List<Version>> codes = IntObjectMaps.mutable.empty();
+		Set<Version> versions = new HashSet<>();
+		MutableIntObjectMap<List<Version>> codes = IntObjectMaps.mutable.empty();
 
 		var empty = store.createEmptyModel();
 		if (!permuteTypes) {
@@ -73,7 +73,7 @@ class ExperimentalSetupTest {
 		var emptyVersion = empty.commit();
 		versions.add(emptyVersion);
 		var emptyCode = empty.getAdapter(StateCoderAdapter.class).calculateModelCode();
-		List <Version> emptyList = new ArrayList<>();
+		List<Version> emptyList = new ArrayList<>();
 		emptyList.add(emptyVersion);
 		codes.put(emptyCode, emptyList);
 
@@ -123,7 +123,7 @@ class ExperimentalSetupTest {
 		return result;
 	}
 
-	private static void saveAsNewVersion(Set <Version> versions, MutableIntObjectMap <List<Version>> codes,
+	private static void saveAsNewVersion(Set<Version> versions, MutableIntObjectMap<List<Version>> codes,
 										 StateCoderStoreAdapter storeAdapter, ExperimentalSetupResult result,
 										 Model model) {
 		Version version1 = model.commit();
@@ -144,7 +144,7 @@ class ExperimentalSetupTest {
 		} else {
 			versions.add(version1);
 
-			List <Version> newList = new ArrayList<>();
+			List<Version> newList = new ArrayList<>();
 			newList.add(version1);
 			codes.put(code, newList);
 		}

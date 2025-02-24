@@ -26,7 +26,7 @@ public final class CollectionsFactory
      * Instantiates a new empty map.
      * @since 1.7
      */
-    public static <K, V> Map <K, V> createMap() {
+    public static <K, V> Map<K, V> createMap() {
         return FRAMEWORK.createMap();
     }
 
@@ -34,7 +34,7 @@ public final class CollectionsFactory
      * Instantiates a new map with the given initial contents.
      * @since 1.7
      */
-    public static <K, V> Map <K, V> createMap(Map <K, V> initial) {
+    public static <K, V> Map<K, V> createMap(Map<K, V> initial) {
         return FRAMEWORK.createMap(initial);
     }
 
@@ -42,7 +42,7 @@ public final class CollectionsFactory
      * Instantiates a new tree map.
      * @since 2.3
      */
-    public static <K, V> TreeMap <K, V> createTreeMap() {
+    public static <K, V> TreeMap<K, V> createTreeMap() {
         return FRAMEWORK.createTreeMap();
     }
 
@@ -50,7 +50,7 @@ public final class CollectionsFactory
      * Instantiates a new empty set.
      * @since 1.7
      */
-    public static <E> Set <E> createSet() {
+    public static <E> Set<E> createSet() {
         return FRAMEWORK.createSet();
     }
 
@@ -58,7 +58,7 @@ public final class CollectionsFactory
      * Instantiates a new set with the given initial contents.
      * @since 1.7
      */
-    public static <E> Set <E> createSet(Collection <E> initial) {
+    public static <E> Set<E> createSet(Collection<E> initial) {
         return FRAMEWORK.createSet(initial);
     }
 
@@ -70,7 +70,7 @@ public final class CollectionsFactory
      *            the value of this parameter is ignored
      * @since 2.0
      */
-    public static <T> Set <T> emptySet(Object key) {
+    public static <T> Set<T> emptySet(Object key) {
         return FRAMEWORK.createSet();
     }
 
@@ -78,7 +78,7 @@ public final class CollectionsFactory
      * Instantiates a new empty multiset.
      * @since 1.7
      */
-    public static <T> IMultiset <T> createMultiset() {
+    public static <T> IMultiset<T> createMultiset() {
         return FRAMEWORK.createMultiset();
     }
 
@@ -90,7 +90,7 @@ public final class CollectionsFactory
      *            the value of this parameter is ignored
      * @since 2.0
      */
-    public static <T> IMultiset <T> emptyMultiset(Object key) {
+    public static <T> IMultiset<T> emptyMultiset(Object key) {
         return FRAMEWORK.createMultiset();
     }
 
@@ -98,7 +98,7 @@ public final class CollectionsFactory
      * Instantiates a new empty delta bag.
      * @since 1.7
      */
-    public static <T> IDeltaBag <T> createDeltaBag() {
+    public static <T> IDeltaBag<T> createDeltaBag() {
         return FRAMEWORK.createDeltaBag();
     }
 
@@ -106,7 +106,7 @@ public final class CollectionsFactory
      * Instantiates a new list that is optimized for registering observers / callbacks.
      * @since 1.7
      */
-    public static <O> List <O> createObserverList() {
+    public static <O> List<O> createObserverList() {
         return FRAMEWORK.createObserverList();
     }
 
@@ -117,8 +117,8 @@ public final class CollectionsFactory
      *  currently Object.class and Long.class are supported.
      * @since 2.0
      */
-    public static <K, V> IMultiLookup <K, V> createMultiLookup(
-            Class <? super K> fromKeys, MemoryType toBuckets, Class <? super V> ofValues) {
+    public static <K, V> IMultiLookup<K, V> createMultiLookup(
+            Class<? super K> fromKeys, MemoryType toBuckets, Class<? super V> ofValues) {
         return FRAMEWORK.createMultiLookup(fromKeys, toBuckets, ofValues);
     }
 
@@ -129,8 +129,8 @@ public final class CollectionsFactory
      *  currently Object.class and Long.class are supported.
      * @since 2.0
      */
-    public static <T> IMemory <T> createMemory(
-            Class <? super T> values, MemoryType memoryType) {
+    public static <T> IMemory<T> createMemory(
+            Class<? super T> values, MemoryType memoryType) {
         return FRAMEWORK.createMemory(values, memoryType);
     }
 
@@ -162,27 +162,27 @@ public final class CollectionsFactory
      */
     public static interface ICollectionsFramework {
 
-        public abstract <K,V> Map <K,V> createMap();
-        public abstract <K,V> Map <K,V> createMap(Map <K,V> initial);
+        public abstract <K,V> Map<K,V> createMap();
+        public abstract <K,V> Map<K,V> createMap(Map<K,V> initial);
         /**
          * @since 2.3
          */
-        public abstract <K, V> TreeMap <K, V> createTreeMap();
-        public abstract <E> Set <E> createSet();
-        public abstract <E> Set <E> createSet(Collection <E> initial);
-        public abstract <T> IMultiset <T> createMultiset();
-        public abstract <T> IDeltaBag <T> createDeltaBag();
-        public abstract <O> List <O> createObserverList();
+        public abstract <K, V> TreeMap<K, V> createTreeMap();
+        public abstract <E> Set<E> createSet();
+        public abstract <E> Set<E> createSet(Collection<E> initial);
+        public abstract <T> IMultiset<T> createMultiset();
+        public abstract <T> IDeltaBag<T> createDeltaBag();
+        public abstract <O> List<O> createObserverList();
 
         /**
          * @since 2.0
          */
-        public abstract <K, V> IMultiLookup <K, V> createMultiLookup(
-                Class <? super K> fromKeys, MemoryType toBuckets, Class <? super V> ofValues);
+        public abstract <K, V> IMultiLookup<K, V> createMultiLookup(
+                Class<? super K> fromKeys, MemoryType toBuckets, Class<? super V> ofValues);
         /**
          * @since 2.0
          */
-        public abstract <T> IMemory <T> createMemory(Class <? super T> values, MemoryType memoryType);
+        public abstract <T> IMemory<T> createMemory(Class<? super T> values, MemoryType memoryType);
     }
 
 }

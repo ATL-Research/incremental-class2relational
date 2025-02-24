@@ -46,7 +46,7 @@ public class OutputCachingEvaluatorNode extends AbstractEvaluatorNode implements
     /**
      * @since 2.4
      */
-    protected Map <Tuple, Iterable <Tuple>> outputCache;
+    protected Map<Tuple, Iterable<Tuple>> outputCache;
 
     /**
      * Maps input tuples to timestamps. It is wrong to map evaluation result to timestamps because the different input
@@ -54,7 +54,7 @@ public class OutputCachingEvaluatorNode extends AbstractEvaluatorNode implements
      *
      * @since 2.4
      */
-    protected TimelyMemory <Timestamp> memory;
+    protected TimelyMemory<Timestamp> memory;
 
     /**
      * @since 2.4
@@ -102,7 +102,7 @@ public class OutputCachingEvaluatorNode extends AbstractEvaluatorNode implements
         if (this.reteContainer.isTimelyEvaluation()
                 && this.reteContainer.getCommunicationTracker().isInRecursiveGroup(this)) {
             if (this.memory == null) {
-                this.memory = new TimelyMemory <Timestamp>(reteContainer.isTimelyEvaluation() && reteContainer
+                this.memory = new TimelyMemory<Timestamp>(reteContainer.isTimelyEvaluation() && reteContainer
                         .getTimelyConfiguration().getTimelineRepresentation() == TimelyConfiguration.TimelineRepresentation.FAITHFUL);
             }
             return TIMELY;
@@ -112,12 +112,12 @@ public class OutputCachingEvaluatorNode extends AbstractEvaluatorNode implements
     }
 
     @Override
-    public void pullInto(final Collection <Tuple> collector, final boolean flush) {
+    public void pullInto(final Collection<Tuple> collector, final boolean flush) {
         this.logic.pullInto(collector, flush);
     }
 
     @Override
-    public void pullIntoWithTimeline(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush) {
+    public void pullIntoWithTimeline(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush) {
         this.logic.pullIntoWithTimeline(collector, flush);
     }
 
@@ -156,12 +156,12 @@ public class OutputCachingEvaluatorNode extends AbstractEvaluatorNode implements
          */
         public abstract void update(final Direction direction, final Tuple input, final Timestamp timestamp);
 
-        public abstract void pullInto(final Collection <Tuple> collector, final boolean flush);
+        public abstract void pullInto(final Collection<Tuple> collector, final boolean flush);
 
         /**
          * @since 2.4
          */
-        public abstract void pullIntoWithTimeline(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush);
+        public abstract void pullIntoWithTimeline(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush);
 
         /**
          * @since 2.4
@@ -178,15 +178,15 @@ public class OutputCachingEvaluatorNode extends AbstractEvaluatorNode implements
         }
 
         @Override
-        public void pullIntoWithTimeline(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush) {
+        public void pullIntoWithTimeline(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush) {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public void pullInto(final Collection <Tuple> collector, final boolean flush) {
-            for (final Iterable <Tuple> output : outputCache.values()) {
+        public void pullInto(final Collection<Tuple> collector, final boolean flush) {
+            for (final Iterable<Tuple> output : outputCache.values()) {
                 if (output != NORESULT) {
-                    final Iterator <Tuple> itr = output.iterator();
+                    final Iterator<Tuple> itr = output.iterator();
                     while (itr.hasNext()) {
                         collector.add(itr.next());
                     }
@@ -197,9 +197,9 @@ public class OutputCachingEvaluatorNode extends AbstractEvaluatorNode implements
         @Override
         public void update(final Direction direction, final Tuple input, final Timestamp timestamp) {
             if (direction == Direction.INSERT) {
-                final Iterable <Tuple> output = core.performEvaluation(input);
+                final Iterable<Tuple> output = core.performEvaluation(input);
                 if (output != null) {
-                    final Iterable <Tuple> previous = outputCache.put(input, output);
+                    final Iterable<Tuple> previous = outputCache.put(input, output);
                     if (previous != null) {
                         throw new IllegalStateException(
                                 String.format("Duplicate insertion of tuple %s into node %s", input, this));
@@ -207,7 +207,7 @@ public class OutputCachingEvaluatorNode extends AbstractEvaluatorNode implements
                     propagateIterableUpdate(direction, output, timestamp);
                 }
             } else {
-                final Iterable <Tuple> output = outputCache.remove(input);
+                final Iterable<Tuple> output = outputCache.remove(input);
                 if (output != null) {
                     // may be null if no result was yielded
                     propagateIterableUpdate(direction, output, timestamp);
@@ -220,13 +220,13 @@ public class OutputCachingEvaluatorNode extends AbstractEvaluatorNode implements
 
         @Override
         public void resumeAt(final Timestamp timestamp) {
-            final Map <Tuple, Diff <Timestamp>> diffMap = memory.resumeAt(timestamp);
+            final Map<Tuple, Diff<Timestamp>> diffMap = memory.resumeAt(timestamp);
 
-            for (final Entry <Tuple, Diff <Timestamp>> entry : diffMap.entrySet()) {
+            for (final Entry<Tuple, Diff<Timestamp>> entry : diffMap.entrySet()) {
                 final Tuple input = entry.getKey();
-                final Iterable <Tuple> output = outputCache.get(input);
+                final Iterable<Tuple> output = outputCache.get(input);
                 if (output != NORESULT) {
-                    for (final Signed <Timestamp> signed : entry.getValue()) {
+                    for (final Signed<Timestamp> signed : entry.getValue()) {
                         propagateIterableUpdate(signed.getDirection(), output, signed.getPayload());
                     }
                 }
@@ -243,13 +243,13 @@ public class OutputCachingEvaluatorNode extends AbstractEvaluatorNode implements
         }
 
         @Override
-        public void pullIntoWithTimeline(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush) {
-            for (final Entry <Tuple, Timeline <Timestamp>> entry : memory.asMap().entrySet()) {
+        public void pullIntoWithTimeline(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush) {
+            for (final Entry<Tuple, Timeline<Timestamp>> entry : memory.asMap().entrySet()) {
                 final Tuple input = entry.getKey();
-                final Iterable <Tuple> output = outputCache.get(input);
+                final Iterable<Tuple> output = outputCache.get(input);
                 if (output != NORESULT) {
-                    final Timeline <Timestamp> timestamp = entry.getValue();
-                    final Iterator <Tuple> itr = output.iterator();
+                    final Timeline<Timestamp> timestamp = entry.getValue();
+                    final Iterator<Tuple> itr = output.iterator();
                     while (itr.hasNext()) {
                         collector.put(itr.next(), timestamp);
                     }
@@ -258,14 +258,14 @@ public class OutputCachingEvaluatorNode extends AbstractEvaluatorNode implements
         }
 
         @Override
-        public void pullInto(final Collection <Tuple> collector, final boolean flush) {
+        public void pullInto(final Collection<Tuple> collector, final boolean flush) {
             TIMELESS.pullInto(collector, flush);
         }
 
         @Override
         public void update(final Direction direction, final Tuple input, final Timestamp timestamp) {
             if (direction == Direction.INSERT) {
-                Iterable <Tuple> output = outputCache.get(input);
+                Iterable<Tuple> output = outputCache.get(input);
                 if (output == null) {
                     output = core.performEvaluation(input);
                     if (output == null) {
@@ -274,20 +274,20 @@ public class OutputCachingEvaluatorNode extends AbstractEvaluatorNode implements
                     }
                     outputCache.put(input, output);
                 }
-                final Diff <Timestamp> diff = memory.put(input, timestamp);
+                final Diff<Timestamp> diff = memory.put(input, timestamp);
                 if (output != NORESULT) {
-                    for (final Signed <Timestamp> signed : diff) {
+                    for (final Signed<Timestamp> signed : diff) {
                         propagateIterableUpdate(signed.getDirection(), output, signed.getPayload());
                     }
                 }
             } else {
-                final Iterable <Tuple> output = outputCache.get(input);
-                final Diff <Timestamp> diff = memory.remove(input, timestamp);
+                final Iterable<Tuple> output = outputCache.get(input);
+                final Diff<Timestamp> diff = memory.remove(input, timestamp);
                 if (memory.get(input) == null) {
                     outputCache.remove(input);
                 }
                 if (output != NORESULT) {
-                    for (final Signed <Timestamp> signed : diff) {
+                    for (final Signed<Timestamp> signed : diff) {
                         propagateIterableUpdate(signed.getDirection(), output, signed.getPayload());
                     }
                 }
@@ -301,7 +301,7 @@ public class OutputCachingEvaluatorNode extends AbstractEvaluatorNode implements
      * something evaluated to null (instead of just forgetting about the previously computed result), thus avoiding the
      * need to re-run a potentially expensive evaluation.
      */
-    private static final Iterable <Tuple> NORESULT = Collections
+    private static final Iterable<Tuple> NORESULT = Collections
             .singleton(Tuples.staticArityFlatTupleOf(NoResult.INSTANCE));
 
     private enum NoResult {

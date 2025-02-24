@@ -34,12 +34,12 @@ public interface Supplier extends Node {
      * @param flush if true, flushing of messages is allowed during the pull, otherwise flushing is not allowed
      * @since 2.3
      */
-    public void pullInto(Collection <Tuple> collector, boolean flush);
+    public void pullInto(Collection<Tuple> collector, boolean flush);
 
     /**
      * @since 2.4
      */
-    public void pullIntoWithTimeline(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush);
+    public void pullIntoWithTimeline(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush);
 
     /**
      * Returns the contents of this object in this particular moment.
@@ -51,9 +51,9 @@ public interface Supplier extends Node {
      *  During runtime, flushing may be preferred; see {@link ReteContainer#pullContents(Supplier)}
      * @since 2.3
      */
-    public Set <Tuple> getPulledContents(boolean flush);
+    public Set<Tuple> getPulledContents(boolean flush);
 
-    default public Set <Tuple> getPulledContents() {
+    default public Set<Tuple> getPulledContents() {
         return getPulledContents(true);
     }
 
@@ -77,6 +77,6 @@ public interface Supplier extends Node {
     /**
      * lists receivers
      */
-    Collection <Receiver> getReceivers();
+    Collection<Receiver> getReceivers();
 
 }

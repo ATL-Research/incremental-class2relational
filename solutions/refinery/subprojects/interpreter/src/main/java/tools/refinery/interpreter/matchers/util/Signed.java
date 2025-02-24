@@ -16,7 +16,7 @@ import java.util.Objects;
  * @author Tamas Szabo
  * @since 2.4
  */
-public class Signed <Payload extends Comparable <Payload>> {
+public class Signed<Payload extends Comparable<Payload>> {
 
     private final Payload payload;
     private final Direction direction;

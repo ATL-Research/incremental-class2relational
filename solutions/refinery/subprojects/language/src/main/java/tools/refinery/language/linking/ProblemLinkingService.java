@@ -30,7 +30,7 @@ public class ProblemLinkingService extends DefaultLinkingService {
 	private static final Logger logger = Logger.getLogger(ProblemLinkingService.class);
 
 	@Override
-	public List <EObject> getLinkedObjects(EObject context, EReference ref, INode node) throws IllegalNodeException {
+	public List<EObject> getLinkedObjects(EObject context, EReference ref, INode node) throws IllegalNodeException {
 		final EClass requiredType = ref.getEReferenceType();
 		if (requiredType == null) {
 			return List.of();
@@ -48,9 +48,9 @@ public class ProblemLinkingService extends DefaultLinkingService {
 					" return IScope.NULLSCOPE instead.").formatted(context, ref));
 		}
 		final QualifiedName qualifiedLinkName = qualifiedNameConverter.toQualifiedName(crossRefString);
-		final Iterator <IEObjectDescription> iterator = scope.getElements(qualifiedLinkName).iterator();
+		final Iterator<IEObjectDescription> iterator = scope.getElements(qualifiedLinkName).iterator();
 		StringBuilder debug = null;
-		final Set <EObject> result = new LinkedHashSet<>();
+		final Set<EObject> result = new LinkedHashSet<>();
 		if (logger.isDebugEnabled()) {
 			debug = new StringBuilder()
 					.append("after getLinkedObjects: node: '")

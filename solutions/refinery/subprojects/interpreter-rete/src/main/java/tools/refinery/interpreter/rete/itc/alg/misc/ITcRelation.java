@@ -11,14 +11,14 @@ package tools.refinery.interpreter.rete.itc.alg.misc;
 
 import java.util.Set;
 
-public interface ITcRelation <V> {
+public interface ITcRelation<V> {
 
     /**
      * Returns the starting nodes from a transitive closure relation.
      *
      * @return the set of starting nodes
      */
-    public Set <V> getTupleStarts();
+    public Set<V> getTupleStarts();
 
     /**
      * Returns the set of nodes that are reachable from the given node.
@@ -27,5 +27,5 @@ public interface ITcRelation <V> {
      *            the starting node
      * @return the set of reachable nodes
      */
-    public Set <V> getTupleEnds(V start);
+    public Set<V> getTupleEnds(V start);
 }

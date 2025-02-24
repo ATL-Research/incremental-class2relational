@@ -28,13 +28,13 @@ public abstract class WebSocketIntegrationTestClient {
 
 	private int closeStatusCode;
 
-	private final List <String> responses = new ArrayList<>();
+	private final List<String> responses = new ArrayList<>();
 
 	public int getCloseStatusCode() {
 		return closeStatusCode;
 	}
 
-	public List <String> getResponses() {
+	public List<String> getResponses() {
 		return responses;
 	}
 

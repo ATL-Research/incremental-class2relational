@@ -18,11 +18,11 @@ import tools.refinery.interpreter.matchers.tuple.Tuple;
  *
  * @author Gabor Bergmann
  */
-public interface ProductionNode extends Tunnel, Iterable <Tuple> {
+public interface ProductionNode extends Tunnel, Iterable<Tuple> {
 
     /**
      * @return the position mapping of this particular pattern that maps members of the tuple type to their positions
      */
-    Map <String, Integer> getPosMapping();
+    Map<String, Integer> getPosMapping();
 
 }

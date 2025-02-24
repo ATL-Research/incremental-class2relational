@@ -9,14 +9,14 @@ import tools.refinery.store.query.valuation.Valuation;
 
 import java.util.Set;
 
-public class StringToFirstLowerTerm extends AbstractTerm <String> {
-	private final Term <String> term;
-	public StringToFirstLowerTerm(Term <String> arg){
+public class StringToFirstLowerTerm extends AbstractTerm<String> {
+	private final Term<String> term;
+	public StringToFirstLowerTerm(Term<String> arg){
 		super(String.class);
 		term = arg;
 	}
 	@Override
-	public Set <AnyDataVariable> getInputVariables() {
+	public Set<AnyDataVariable> getInputVariables() {
 		return term.getInputVariables();
 	}
 
@@ -26,7 +26,7 @@ public class StringToFirstLowerTerm extends AbstractTerm <String> {
 	}
 
 	@Override
-	public Term <String> substitute(Substitution substitution) {
+	public Term<String> substitute(Substitution substitution) {
 		return null;
 	}
 }

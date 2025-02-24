@@ -9,17 +9,17 @@ import tools.refinery.store.map.*;
 
 import java.util.*;
 
-public class VersionedMapDeltaImpl <K, V> implements VersionedMap <K, V> {
-	protected final VersionedMapStoreDeltaImpl <K, V> store;
+public class VersionedMapDeltaImpl<K, V> implements VersionedMap<K, V> {
+	protected final VersionedMapStoreDeltaImpl<K, V> store;
 
-	final Map <K, V> current;
+	final Map<K, V> current;
 
-	final UncommittedDeltaStore <K, V> uncommittedStore;
-	MapTransaction <K, V> previous;
+	final UncommittedDeltaStore<K, V> uncommittedStore;
+	MapTransaction<K, V> previous;
 
 	protected final V defaultValue;
 
-	public VersionedMapDeltaImpl(VersionedMapStoreDeltaImpl <K, V> store, boolean summarizeChanges, V defaultValue) {
+	public VersionedMapDeltaImpl(VersionedMapStoreDeltaImpl<K, V> store, boolean summarizeChanges, V defaultValue) {
 		this.store = store;
 		this.defaultValue = defaultValue;
 
@@ -38,8 +38,8 @@ public class VersionedMapDeltaImpl <K, V> implements VersionedMap <K, V> {
 
 	@Override
 	public Version commit() {
-		MapDelta <K, V>[] deltas = uncommittedStore.extractAndDeleteDeltas();
-		final MapTransaction <K,V> committedTransaction = this.store.appendTransaction(deltas, previous);
+		MapDelta<K, V>[] deltas = uncommittedStore.extractAndDeleteDeltas();
+		final MapTransaction<K,V> committedTransaction = this.store.appendTransaction(deltas, previous);
 		this.previous = committedTransaction;
 		return committedTransaction;
 	}
@@ -47,19 +47,19 @@ public class VersionedMapDeltaImpl <K, V> implements VersionedMap <K, V> {
 	@Override
 	public void restore(Version state) {
 		// 1. restore uncommitted states
-		MapDelta <K, V>[] uncommitted = this.uncommittedStore.extractAndDeleteDeltas();
+		MapDelta<K, V>[] uncommitted = this.uncommittedStore.extractAndDeleteDeltas();
 		if (uncommitted != null) {
 			backward(uncommitted);
 		}
 
 		// 2. get common ancestor
-		final MapTransaction <K,V> parent;
-		List <MapDelta<K, V>[]> forward = new ArrayList<>();
+		final MapTransaction<K,V> parent;
+		List<MapDelta<K, V>[]> forward = new ArrayList<>();
 		if (this.previous == null) {
 			parent = this.store.getPath(state, forward);
 			this.forward(forward);
 		} else {
-			List <MapDelta<K, V>[]> backward = new ArrayList<>();
+			List<MapDelta<K, V>[]> backward = new ArrayList<>();
 			parent = this.store.getPath(this.previous, state, backward, forward);
 			this.backward(backward);
 			this.forward(forward);
@@ -67,13 +67,13 @@ public class VersionedMapDeltaImpl <K, V> implements VersionedMap <K, V> {
 		this.previous = parent;
 	}
 
-	protected void forward(List <MapDelta<K, V>[]> changes) {
+	protected void forward(List<MapDelta<K, V>[]> changes) {
 		for (int i = changes.size() - 1; i >= 0; i--) {
 			forward(changes.get(i));
 		}
 	}
 
-	protected void backward(List <MapDelta<K, V>[]> changes) {
+	protected void backward(List<MapDelta<K, V>[]> changes) {
 		//Currently, this loop statement is faster.
 		//noinspection ForLoopReplaceableByForEach
 		for (int i = 0; i < changes.size(); i++) {
@@ -81,11 +81,11 @@ public class VersionedMapDeltaImpl <K, V> implements VersionedMap <K, V> {
 		}
 	}
 
-	protected void forward(MapDelta <K, V>[] changes) {
+	protected void forward(MapDelta<K, V>[] changes) {
 		//Currently, this loop statement is faster.
 		//noinspection ForLoopReplaceableByForEach
 		for (int i = 0; i < changes.length; i++) {
-			final MapDelta <K, V> change = changes[i];
+			final MapDelta<K, V> change = changes[i];
 			K key = change.getKey();
 			V newValue = change.getNewValue();
 
@@ -97,9 +97,9 @@ public class VersionedMapDeltaImpl <K, V> implements VersionedMap <K, V> {
 		}
 	}
 
-	protected void backward(MapDelta <K, V>[] changes) {
+	protected void backward(MapDelta<K, V>[] changes) {
 		for (int i = changes.length - 1; i >= 0; i--) {
-			final MapDelta <K, V> change = changes[i];
+			final MapDelta<K, V> change = changes[i];
 			K key = change.getKey();
 			V oldValue = change.oldValue();
 
@@ -117,7 +117,7 @@ public class VersionedMapDeltaImpl <K, V> implements VersionedMap <K, V> {
 	}
 
 	@Override
-	public Cursor <K, V> getAll() {
+	public Cursor<K, V> getAll() {
 		return new IteratorAsCursor<>(this, current);
 	}
 
@@ -147,10 +147,10 @@ public class VersionedMapDeltaImpl <K, V> implements VersionedMap <K, V> {
 	}
 
 	@Override
-	public void putAll(Cursor <K, V> cursor) {
+	public void putAll(Cursor<K, V> cursor) {
 		if (cursor.getDependingMaps().contains(this)) {
-			List <K> keys = new ArrayList<>();
-			List <V> values = new ArrayList<>();
+			List<K> keys = new ArrayList<>();
+			List<V> values = new ArrayList<>();
 			while (cursor.move()) {
 				keys.add(cursor.getKey());
 				values.add(cursor.getValue());
@@ -171,10 +171,10 @@ public class VersionedMapDeltaImpl <K, V> implements VersionedMap <K, V> {
 	}
 
 	@Override
-	public DiffCursor <K, V> getDiffCursor(Version state) {
-		MapDelta <K, V>[] backward = this.uncommittedStore.extractDeltas();
-		List <MapDelta<K, V>[]> backwardTransactions = new ArrayList<>();
-		List <MapDelta<K, V>[]> forwardTransactions = new ArrayList<>();
+	public DiffCursor<K, V> getDiffCursor(Version state) {
+		MapDelta<K, V>[] backward = this.uncommittedStore.extractDeltas();
+		List<MapDelta<K, V>[]> backwardTransactions = new ArrayList<>();
+		List<MapDelta<K, V>[]> forwardTransactions = new ArrayList<>();
 
 		if (backward != null) {
 			backwardTransactions.add(backward);
@@ -196,7 +196,7 @@ public class VersionedMapDeltaImpl <K, V> implements VersionedMap <K, V> {
 
 	@Override
 	public boolean contentEquals(AnyVersionedMap other) {
-		if (other instanceof VersionedMapDeltaImpl <?, ?> versioned) {
+		if (other instanceof VersionedMapDeltaImpl<?, ?> versioned) {
 			if (versioned == this) {
 				return true;
 			} else {
@@ -219,9 +219,9 @@ public class VersionedMapDeltaImpl <K, V> implements VersionedMap <K, V> {
 				throw new IllegalStateException("null value stored in map!");
 			}
 		}
-		MapTransaction <K,V> transaction = this.previous;
+		MapTransaction<K,V> transaction = this.previous;
 		while(transaction != null) {
-			MapTransaction <K,V> parent = transaction.parent();
+			MapTransaction<K,V> parent = transaction.parent();
 			if(parent != null) {
 				if(parent.depth() != transaction.depth()-1) {
 					throw new IllegalStateException("Parent depths are inconsistent!");

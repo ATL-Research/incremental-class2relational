@@ -7,8 +7,8 @@ package tools.refinery.store.reasoning.representation;
 
 import tools.refinery.store.representation.AbstractDomain;
 
-public record PartialFunction <A, C>(String name, int arity, AbstractDomain <A, C> abstractDomain)
-		implements AnyPartialFunction, PartialSymbol <A, C> {
+public record PartialFunction<A, C>(String name, int arity, AbstractDomain<A, C> abstractDomain)
+		implements AnyPartialFunction, PartialSymbol<A, C> {
 	@Override
 	public A defaultValue() {
 		return null;

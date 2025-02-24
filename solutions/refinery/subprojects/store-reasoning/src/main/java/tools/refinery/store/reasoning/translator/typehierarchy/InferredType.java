@@ -13,12 +13,12 @@ import java.util.Set;
 
 public final class InferredType {
 	public static final InferredType UNTYPED = new InferredType(Set.of(), Set.of(), null);
-	private final Set <PartialRelation> mustTypes;
-	private final Set <PartialRelation> mayConcreteTypes;
+	private final Set<PartialRelation> mustTypes;
+	private final Set<PartialRelation> mayConcreteTypes;
 	private final PartialRelation candidateType;
 	private final int hashCode;
 
-	public InferredType(Set <PartialRelation> mustTypes, Set <PartialRelation> mayConcreteTypes,
+	public InferredType(Set<PartialRelation> mustTypes, Set<PartialRelation> mayConcreteTypes,
 						PartialRelation candidateType) {
 		this.mustTypes = Collections.unmodifiableSet(mustTypes);
 		this.mayConcreteTypes = Collections.unmodifiableSet(mayConcreteTypes);
@@ -39,11 +39,11 @@ public final class InferredType {
 	}
 
 
-	public Set <PartialRelation> mustTypes() {
+	public Set<PartialRelation> mustTypes() {
 		return mustTypes;
 	}
 
-	public Set <PartialRelation> mayConcreteTypes() {
+	public Set<PartialRelation> mayConcreteTypes() {
 		return mayConcreteTypes;
 	}
 

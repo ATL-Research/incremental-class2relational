@@ -30,11 +30,11 @@ import tools.refinery.interpreter.matchers.psystem.queries.PQuery;
 public class PlanDescriptor implements IPlanDescriptor {
 
     private final PQuery pquery;
-    private final List <SearchPlanForBody> plan;
-    private final Set <PParameter> adornment;
-    private Set <IInputKey> iteratedKeys = null;
+    private final List<SearchPlanForBody> plan;
+    private final Set<PParameter> adornment;
+    private Set<IInputKey> iteratedKeys = null;
 
-    public PlanDescriptor(PQuery pquery, Collection <SearchPlanForBody> plan, Set <PParameter> adornment) {
+    public PlanDescriptor(PQuery pquery, Collection<SearchPlanForBody> plan, Set<PParameter> adornment) {
         this.pquery = pquery;
         this.plan = new ArrayList<>(plan);
         this.adornment = adornment;
@@ -46,19 +46,19 @@ public class PlanDescriptor implements IPlanDescriptor {
     }
 
     @Override
-    public Collection <SearchPlanForBody> getPlan() {
+    public Collection<SearchPlanForBody> getPlan() {
         return plan;
     }
 
     @Override
-    public Set <PParameter> getAdornment() {
+    public Set<PParameter> getAdornment() {
         return adornment;
     }
 
     @Override
-    public Set <IInputKey> getIteratedKeys() {
+    public Set<IInputKey> getIteratedKeys() {
         if (iteratedKeys == null){
-            Set <IInputKey> keys = new HashSet<>();
+            Set<IInputKey> keys = new HashSet<>();
             for(SearchPlanForBody bodyPlan : plan){
                 for(ISearchOperation operation : bodyPlan.getCompiledOperations()){
                     if (operation instanceof IIteratingSearchOperation){

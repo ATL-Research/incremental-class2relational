@@ -23,7 +23,7 @@ class CardinalityIntervalTest {
 		assertThat(a.min(b), equalTo(expected));
 	}
 
-	static Stream <Arguments> minTest() {
+	static Stream<Arguments> minTest() {
 		return Stream.of(
 				Arguments.of(atMost(1), atMost(1), atMost(1)),
 				Arguments.of(atMost(1), between(2, 3), atMost(1)),
@@ -42,7 +42,7 @@ class CardinalityIntervalTest {
 		assertThat(a.max(b), equalTo(expected));
 	}
 
-	static Stream <Arguments> maxTest() {
+	static Stream<Arguments> maxTest() {
 		return Stream.of(
 				Arguments.of(atMost(1), atMost(1), atMost(1)),
 				Arguments.of(atMost(1), between(2, 3), between(2, 3)),
@@ -61,7 +61,7 @@ class CardinalityIntervalTest {
 		assertThat(a.add(b), equalTo(expected));
 	}
 
-	static Stream <Arguments> addTest() {
+	static Stream<Arguments> addTest() {
 		return Stream.of(
 				Arguments.of(atMost(1), atMost(1), atMost(2)),
 				Arguments.of(atMost(1), between(2, 3), between(2, 4)),
@@ -80,7 +80,7 @@ class CardinalityIntervalTest {
 		assertThat(a.multiply(b), equalTo(expected));
 	}
 
-	static Stream <Arguments> multiplyTest() {
+	static Stream<Arguments> multiplyTest() {
 		return Stream.of(
 				Arguments.of(between(2, 3), between(4, 5), between(8, 15)),
 				Arguments.of(atLeast(2), between(4, 5), atLeast(8)),
@@ -97,7 +97,7 @@ class CardinalityIntervalTest {
 		assertThat(a.meet(b), equalTo(expected));
 	}
 
-	static Stream <Arguments> meetTest() {
+	static Stream<Arguments> meetTest() {
 		return Stream.of(
 				Arguments.of(atMost(1), atMost(2), atMost(1)),
 				Arguments.of(atMost(2), between(1, 3), between(1, 2)),
@@ -115,7 +115,7 @@ class CardinalityIntervalTest {
 		assertThat(a.join(b), equalTo(expected));
 	}
 
-	static Stream <Arguments> joinTest() {
+	static Stream<Arguments> joinTest() {
 		return Stream.of(
 				Arguments.of(atMost(1), atMost(2), atMost(2)),
 				Arguments.of(atMost(2), between(1, 3), atMost(3)),

@@ -38,9 +38,9 @@ import tools.refinery.interpreter.rete.util.Options;
 public class TimelyCommunicationGroup extends CommunicationGroup {
 
     private final boolean isSingleton;
-    private final TreeMap <Timestamp, Set <Mailbox>> mailboxQueue;
+    private final TreeMap<Timestamp, Set<Mailbox>> mailboxQueue;
     // may be null - only used in the scattered case where we need to take care of mailboxes and resumables too
-    private Comparator <Node> nodeComparator;
+    private Comparator<Node> nodeComparator;
     private boolean currentlyDelivering;
     private Timestamp currentlyDeliveredTimestamp;
 
@@ -57,12 +57,12 @@ public class TimelyCommunicationGroup extends CommunicationGroup {
      * queue. Additionally, reorders already queued {@link Mailbox}es to reflect the new comparator. The comparator may
      * be null, in this case, no set ordering will be enforced among the {@link Mailbox}es.
      */
-    public void setComparatorAndReorderMailboxes(final Comparator <Node> nodeComparator) {
+    public void setComparatorAndReorderMailboxes(final Comparator<Node> nodeComparator) {
         this.nodeComparator = nodeComparator;
         if (!this.mailboxQueue.isEmpty()) {
-            final HashMap <Timestamp, Set <Mailbox>> queueCopy = new HashMap <Timestamp, Set <Mailbox>>(this.mailboxQueue);
+            final HashMap<Timestamp, Set<Mailbox>> queueCopy = new HashMap<Timestamp, Set<Mailbox>>(this.mailboxQueue);
             this.mailboxQueue.clear();
-            for (final Entry <Timestamp, Set <Mailbox>> entry : queueCopy.entrySet()) {
+            for (final Entry<Timestamp, Set<Mailbox>> entry : queueCopy.entrySet()) {
                 for (final Mailbox mailbox : entry.getValue()) {
                     this.notifyHasMessage(mailbox, entry.getKey());
                 }
@@ -78,9 +78,9 @@ public class TimelyCommunicationGroup extends CommunicationGroup {
             // it is not okay to loop over the mailboxes at once because a mailbox may disappear from the collection as
             // a result of delivering messages from another mailboxes under the same timestamp
             // because of this, it is crucial that we pick the mailboxes one by one
-            final Entry <Timestamp, Set <Mailbox>> entry = this.mailboxQueue.firstEntry();
+            final Entry<Timestamp, Set<Mailbox>> entry = this.mailboxQueue.firstEntry();
             final Timestamp timestamp = entry.getKey();
-            final Set <Mailbox> mailboxes = entry.getValue();
+            final Set<Mailbox> mailboxes = entry.getValue();
             final Mailbox mailbox = mailboxes.iterator().next();
             mailboxes.remove(mailbox);
             if (mailboxes.isEmpty()) {
@@ -111,11 +111,11 @@ public class TimelyCommunicationGroup extends CommunicationGroup {
                                     + this.representative + " observed decreasing timestamp during message delivery!");
                 }
             }
-            final Set <Mailbox> mailboxes = this.mailboxQueue.computeIfAbsent(timestamp, k -> {
+            final Set<Mailbox> mailboxes = this.mailboxQueue.computeIfAbsent(timestamp, k -> {
                 if (this.nodeComparator == null) {
                     return CollectionsFactory.createSet();
                 } else {
-                    return new TreeSet <Mailbox>(new Comparator <Mailbox>() {
+                    return new TreeSet<Mailbox>(new Comparator<Mailbox>() {
                         @Override
                         public int compare(final Mailbox left, final Mailbox right) {
                             return nodeComparator.compare(left.getReceiver(), right.getReceiver());
@@ -159,7 +159,7 @@ public class TimelyCommunicationGroup extends CommunicationGroup {
     }
 
     @Override
-    public Map <MessageSelector, Collection <Mailbox>> getMailboxes() {
+    public Map<MessageSelector, Collection<Mailbox>> getMailboxes() {
         return Collections.unmodifiableMap(this.mailboxQueue);
     }
 

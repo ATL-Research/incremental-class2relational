@@ -21,6 +21,6 @@ import tools.refinery.interpreter.matchers.psystem.queries.PQuery;
  */
 public interface IMultiQueryReference {
 
-    Collection <PQuery> getReferredQueries();
+    Collection<PQuery> getReferredQueries();
 
 }

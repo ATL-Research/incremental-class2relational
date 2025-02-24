@@ -32,7 +32,7 @@ public class ThreadPoolExecutorServiceProvider extends ExecutorServiceProvider {
 	private static final String DOCUMENT_LOCK_EXECUTOR;
 	private static final AtomicInteger POOL_ID = new AtomicInteger(1);
 
-	private final Map <String, ScheduledExecutorService> scheduledInstanceCache =
+	private final Map<String, ScheduledExecutorService> scheduledInstanceCache =
 			Collections.synchronizedMap(new HashMap<>());
 	private final int executorThreadCount;
 	private final int lockExecutorThreadCount;
@@ -76,7 +76,7 @@ public class ThreadPoolExecutorServiceProvider extends ExecutorServiceProvider {
 		generatorExecutorThreadCount = getCount("REFINERY_MODEL_GENERATION_THREAD_COUNT").orElse(executorThreadCount);
 	}
 
-	private static Optional <Integer> getCount(String name) {
+	private static Optional<Integer> getCount(String name) {
 		return Optional.ofNullable(System.getenv(name)).map(Integer::parseUnsignedInt);
 	}
 

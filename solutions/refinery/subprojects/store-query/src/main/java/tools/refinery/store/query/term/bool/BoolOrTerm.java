@@ -9,13 +9,13 @@ import tools.refinery.store.query.substitution.Substitution;
 import tools.refinery.store.query.term.Term;
 
 public class BoolOrTerm extends BoolBinaryTerm {
-	public BoolOrTerm(Term <Boolean> left, Term <Boolean> right) {
+	public BoolOrTerm(Term<Boolean> left, Term<Boolean> right) {
 		super(left, right);
 	}
 
 	@Override
-	public Term <Boolean> doSubstitute(Substitution substitution, Term <Boolean> substitutedLeft,
-									  Term <Boolean> substitutedRight) {
+	public Term<Boolean> doSubstitute(Substitution substitution, Term<Boolean> substitutedLeft,
+									  Term<Boolean> substitutedRight) {
 		return new BoolOrTerm(substitutedLeft, substitutedRight);
 	}
 

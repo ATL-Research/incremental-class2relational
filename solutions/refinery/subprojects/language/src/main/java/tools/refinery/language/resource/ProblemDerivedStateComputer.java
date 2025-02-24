@@ -32,7 +32,7 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 	private String languageName;
 
 	@Inject
-	private Provider <NodeNameCollector> nodeNameCollectorProvider;
+	private Provider<NodeNameCollector> nodeNameCollectorProvider;
 
 	@Inject
 	private DerivedVariableComputer derivedVariableComputer;
@@ -47,7 +47,7 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 	}
 
 	protected Problem getProblem(Resource resource) {
-		List <EObject> contents = resource.getContents();
+		List<EObject> contents = resource.getContents();
 		if (contents.isEmpty()) {
 			return null;
 		}
@@ -63,7 +63,7 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 		if (preLinkingPhase) {
 			return;
 		}
-		Set <String> nodeNames = installDerivedNodes(problem);
+		Set<String> nodeNames = installDerivedNodes(problem);
 		derivedVariableComputer.installDerivedVariables(problem, nodeNames);
 	}
 
@@ -120,11 +120,11 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 		}
 	}
 
-	protected Set <String> installDerivedNodes(Problem problem) {
+	protected Set<String> installDerivedNodes(Problem problem) {
 		var collector = nodeNameCollectorProvider.get();
 		collector.collectNodeNames(problem);
-		Set <String> nodeNames = collector.getNodeNames();
-		List <Node> graphNodes = problem.getNodes();
+		Set<String> nodeNames = collector.getNodeNames();
+		List<Node> graphNodes = problem.getNodes();
 		for (String nodeName : nodeNames) {
 			var graphNode = createNode(nodeName);
 			graphNodes.add(graphNode);
@@ -148,8 +148,8 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 	}
 
 	protected void discardDerivedProblemState(Problem problem, Adapter adapter) {
-		var abstractClassDeclarations = new HashSet <ClassDeclaration>();
-		var referenceDeclarationsWithMultiplicity = new HashSet <ReferenceDeclaration>();
+		var abstractClassDeclarations = new HashSet<ClassDeclaration>();
+		var referenceDeclarationsWithMultiplicity = new HashSet<ReferenceDeclaration>();
 		problem.getNodes().clear();
 		for (var statement : problem.getStatements()) {
 			if (statement instanceof ClassDeclaration classDeclaration) {
@@ -186,11 +186,11 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 	}
 
 	protected static class Adapter extends AdapterImpl {
-		private final Map <ClassDeclaration, Node> newNodes = new HashMap<>();
-		private final Map <ReferenceDeclaration, PredicateDefinition> invalidMultiplicityPredicates = new HashMap<>();
+		private final Map<ClassDeclaration, Node> newNodes = new HashMap<>();
+		private final Map<ReferenceDeclaration, PredicateDefinition> invalidMultiplicityPredicates = new HashMap<>();
 
 		public Node createNewNodeIfAbsent(ClassDeclaration classDeclaration,
-										  Function <ClassDeclaration, Node> createNode) {
+										  Function<ClassDeclaration, Node> createNode) {
 			return newNodes.computeIfAbsent(classDeclaration, createNode);
 		}
 
@@ -200,7 +200,7 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 
 		public PredicateDefinition createInvalidMultiplicityPredicateIfAbsent(
 				ReferenceDeclaration referenceDeclaration,
-				Function <ReferenceDeclaration, PredicateDefinition> createPredicate) {
+				Function<ReferenceDeclaration, PredicateDefinition> createPredicate) {
 			return invalidMultiplicityPredicates.computeIfAbsent(referenceDeclaration, createPredicate);
 		}
 
@@ -208,8 +208,8 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 			invalidMultiplicityPredicates.remove(referenceDeclaration);
 		}
 
-		public void retainAll(Collection <ClassDeclaration> abstractClassDeclarations,
-							  Collection <ReferenceDeclaration> referenceDeclarationsWithMultiplicity) {
+		public void retainAll(Collection<ClassDeclaration> abstractClassDeclarations,
+							  Collection<ReferenceDeclaration> referenceDeclarationsWithMultiplicity) {
 			newNodes.keySet().retainAll(abstractClassDeclarations);
 			invalidMultiplicityPredicates.keySet().retainAll(referenceDeclarationsWithMultiplicity);
 		}

@@ -23,7 +23,7 @@ class UpperCardinalityTest {
 		assertThat(a.min(b), equalTo(expected));
 	}
 
-	static Stream <Arguments> minTest() {
+	static Stream<Arguments> minTest() {
 		return Stream.of(
 				Arguments.of(UpperCardinality.of(0), UpperCardinality.of(0), UpperCardinality.of(0)),
 				Arguments.of(UpperCardinality.of(0), UpperCardinality.of(1), UpperCardinality.of(0)),
@@ -40,7 +40,7 @@ class UpperCardinalityTest {
 		assertThat(a.max(b), equalTo(expected));
 	}
 
-	static Stream <Arguments> maxTest() {
+	static Stream<Arguments> maxTest() {
 		return Stream.of(
 				Arguments.of(UpperCardinality.of(0), UpperCardinality.of(0), UpperCardinality.of(0)),
 				Arguments.of(UpperCardinality.of(0), UpperCardinality.of(1), UpperCardinality.of(1)),
@@ -57,7 +57,7 @@ class UpperCardinalityTest {
 		assertThat(a.add(b), equalTo(expected));
 	}
 
-	static Stream <Arguments> addTest() {
+	static Stream<Arguments> addTest() {
 		return Stream.of(
 				Arguments.of(UpperCardinality.of(2), UpperCardinality.of(3), UpperCardinality.of(5)),
 				Arguments.of(UpperCardinality.of(2), UpperCardinalities.UNBOUNDED, UpperCardinalities.UNBOUNDED),
@@ -72,7 +72,7 @@ class UpperCardinalityTest {
 		assertThat(a.multiply(b), equalTo(expected));
 	}
 
-	static Stream <Arguments> multiplyTest() {
+	static Stream<Arguments> multiplyTest() {
 		return Stream.of(
 				Arguments.of(UpperCardinality.of(2), UpperCardinality.of(3), UpperCardinality.of(6)),
 				Arguments.of(UpperCardinality.of(2), UpperCardinalities.UNBOUNDED, UpperCardinalities.UNBOUNDED),
@@ -87,7 +87,7 @@ class UpperCardinalityTest {
 		assertThat(a.compareTo(b), equalTo(expected));
 	}
 
-	static Stream <Arguments> compareToTest() {
+	static Stream<Arguments> compareToTest() {
 		return Stream.of(
 				Arguments.of(UpperCardinality.of(0), UpperCardinality.of(0), 0),
 				Arguments.of(UpperCardinality.of(0), UpperCardinality.of(1), -1),
@@ -104,7 +104,7 @@ class UpperCardinalityTest {
 		assertThat(a.compareToInt(b), equalTo(expected));
 	}
 
-	static Stream <Arguments> compareToIntTest() {
+	static Stream<Arguments> compareToIntTest() {
 		return Stream.of(
 				Arguments.of(UpperCardinality.of(3), -1, 1),
 				Arguments.of(UpperCardinality.of(3), 2, 1),

@@ -16,17 +16,17 @@ import tools.refinery.store.query.term.Variable;
 import java.util.*;
 
 class DnfPostProcessor {
-	private final List <SymbolicParameter> parameters;
-	private final List <List<Literal>> clauses;
+	private final List<SymbolicParameter> parameters;
+	private final List<List<Literal>> clauses;
 
-	public DnfPostProcessor(List <SymbolicParameter> parameters, List <List<Literal>> clauses) {
+	public DnfPostProcessor(List<SymbolicParameter> parameters, List<List<Literal>> clauses) {
 		this.parameters = parameters;
 		this.clauses = clauses;
 	}
 
-	public List <DnfClause> postProcessClauses() {
+	public List<DnfClause> postProcessClauses() {
 		var parameterInfoMap = getParameterInfoMap();
-		var postProcessedClauses = new LinkedHashSet <CanonicalClause>(clauses.size());
+		var postProcessedClauses = new LinkedHashSet<CanonicalClause>(clauses.size());
 		int index = 0;
 		for (var literals : clauses) {
 			var postProcessor = new ClausePostProcessor(parameterInfoMap, literals);
@@ -58,8 +58,8 @@ class DnfPostProcessor {
 		return postProcessedClauses.stream().map(CanonicalClause::getDnfClause).toList();
 	}
 
-	private Map <Variable, ClausePostProcessor.ParameterInfo> getParameterInfoMap() {
-		var mutableParameterInfoMap = new LinkedHashMap <Variable, ClausePostProcessor.ParameterInfo>();
+	private Map<Variable, ClausePostProcessor.ParameterInfo> getParameterInfoMap() {
+		var mutableParameterInfoMap = new LinkedHashMap<Variable, ClausePostProcessor.ParameterInfo>();
 		int arity = parameters.size();
 		for (int i = 0; i < arity; i++) {
 			var parameter = parameters.get(i);
@@ -69,8 +69,8 @@ class DnfPostProcessor {
 		return Collections.unmodifiableMap(mutableParameterInfoMap);
 	}
 
-	private Set <Variable> getInputVariables() {
-		var inputParameters = new LinkedHashSet <Variable>();
+	private Set<Variable> getInputVariables() {
+		var inputParameters = new LinkedHashSet<Variable>();
 		for (var parameter : parameters) {
 			if (parameter.getDirection() == ParameterDirection.IN) {
 				inputParameters.add(parameter.getVariable());

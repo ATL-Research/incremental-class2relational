@@ -32,7 +32,7 @@ class CrossReferenceUtils {
 												  Multiplicity multiplicity, boolean inverse) {
 		String name;
 		NodeVariable variable;
-		List <Variable> arguments;
+		List<Variable> arguments;
 		if (inverse) {
 			name = "Target";
 			variable = Variable.of("target");
@@ -44,7 +44,7 @@ class CrossReferenceUtils {
 		}
 		var builder = Query.builder(linkType.name() + "#mayNew" + name);
 		builder.parameter(variable);
-		var literals = new ArrayList <Literal>();
+		var literals = new ArrayList<Literal>();
 		literals.add(may(type.call(variable)));
 		if (multiplicity.multiplicity().upperBound() instanceof FiniteUpperCardinality finiteUpperCardinality) {
 			var existingLinks = Variable.of("existingLinks", Integer.class);

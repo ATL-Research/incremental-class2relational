@@ -29,7 +29,7 @@ public interface InterpreterEngineLifecycleListener {
      *
      * @param matcher the new matcher
      */
-    void matcherInstantiated(InterpreterMatcher <? extends IPatternMatch> matcher);
+    void matcherInstantiated(InterpreterMatcher<? extends IPatternMatch> matcher);
 
     // -------------------------------------------------------------------------
     // HEALTH (methods notifying on changes that affect the health of the engine

@@ -20,7 +20,7 @@ public class ContainedTypeHierarchyBuilder extends TypeHierarchyBuilder {
 		return !typeInfoMap.containsKey(type);
 	}
 
-	void setContainedTypes(Collection <PartialRelation> containedTypes) {
+	void setContainedTypes(Collection<PartialRelation> containedTypes) {
 		for (var containedType : containedTypes) {
 			var currentInfo = typeInfoMap.get(containedType);
 			if (currentInfo == null) {

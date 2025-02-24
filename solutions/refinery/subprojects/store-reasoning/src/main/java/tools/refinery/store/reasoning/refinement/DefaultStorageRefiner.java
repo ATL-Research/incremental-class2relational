@@ -10,12 +10,12 @@ import tools.refinery.store.model.Model;
 import tools.refinery.store.representation.Symbol;
 import tools.refinery.store.tuple.Tuple;
 
-public class DefaultStorageRefiner <T> implements StorageRefiner {
-	private static final StorageRefiner.Factory <Object> FACTORY = DefaultStorageRefiner::new;
+public class DefaultStorageRefiner<T> implements StorageRefiner {
+	private static final StorageRefiner.Factory<Object> FACTORY = DefaultStorageRefiner::new;
 
-	private final Interpretation <T> interpretation;
+	private final Interpretation<T> interpretation;
 
-	public DefaultStorageRefiner(Symbol <T> symbol, Model model) {
+	public DefaultStorageRefiner(Symbol<T> symbol, Model model) {
 		interpretation = model.getInterpretation(symbol);
 	}
 
@@ -70,10 +70,10 @@ public class DefaultStorageRefiner <T> implements StorageRefiner {
 		return true;
 	}
 
-	public static <T> StorageRefiner.Factory <T> factory() {
+	public static <T> StorageRefiner.Factory<T> factory() {
 		// This is safe, because {@code FACTORY} doesn't depend on {@code T} at all.
 		@SuppressWarnings("unchecked")
-		var typedFactory = (StorageRefiner.Factory <T>) FACTORY;
+		var typedFactory = (StorageRefiner.Factory<T>) FACTORY;
 		return typedFactory;
 	}
 }

@@ -42,8 +42,8 @@ import java.util.Map.Entry;
  * @author Tamas Szabo
  * @since 1.4
  */
-public class ColumnAggregatorNode <Domain, Accumulator, AggregateResult>
-		extends AbstractColumnAggregatorNode <Domain, Accumulator, AggregateResult>
+public class ColumnAggregatorNode<Domain, Accumulator, AggregateResult>
+		extends AbstractColumnAggregatorNode<Domain, Accumulator, AggregateResult>
 		implements RederivableNode, PosetAwareReceiver {
 
 	/**
@@ -60,11 +60,11 @@ public class ColumnAggregatorNode <Domain, Accumulator, AggregateResult>
 	/**
 	 * @since 1.6
 	 */
-	protected final Map <Tuple, Accumulator> memory;
+	protected final Map<Tuple, Accumulator> memory;
 	/**
 	 * @since 1.6
 	 */
-	protected final Map <Tuple, Accumulator> rederivableMemory;
+	protected final Map<Tuple, Accumulator> rederivableMemory;
 
 	/**
 	 * @since 1.7
@@ -84,7 +84,7 @@ public class ColumnAggregatorNode <Domain, Accumulator, AggregateResult>
 	 * @since 1.6
 	 */
 	public ColumnAggregatorNode(final ReteContainer reteContainer,
-								final IMultisetAggregationOperator <Domain, Accumulator, AggregateResult> operator,
+								final IMultisetAggregationOperator<Domain, Accumulator, AggregateResult> operator,
 								final boolean deleteRederiveEvaluation, final TupleMask groupMask,
 								final TupleMask columnMask,
 								final IPosetComparator posetComparator) {
@@ -106,7 +106,7 @@ public class ColumnAggregatorNode <Domain, Accumulator, AggregateResult>
 	 * @param aggregatedColumn the index of the column that the aggregator node is aggregating over
 	 */
 	public ColumnAggregatorNode(final ReteContainer reteContainer,
-								final IMultisetAggregationOperator <Domain, Accumulator, AggregateResult> operator,
+								final IMultisetAggregationOperator<Domain, Accumulator, AggregateResult> operator,
 								final TupleMask groupMask, final int aggregatedColumn) {
 		this(reteContainer, operator, false, groupMask, TupleMask.selectSingle(aggregatedColumn,
 						groupMask.sourceWidth),
@@ -147,7 +147,7 @@ public class ColumnAggregatorNode <Domain, Accumulator, AggregateResult>
 
 	@Override
 	public void rederiveOne() {
-		final Entry <Tuple, Accumulator> entry = rederivableMemory.entrySet().iterator().next();
+		final Entry<Tuple, Accumulator> entry = rederivableMemory.entrySet().iterator().next();
 		final Tuple group = entry.getKey();
 		final Accumulator accumulator = entry.getValue();
 		rederivableMemory.remove(group);
@@ -285,7 +285,7 @@ public class ColumnAggregatorNode <Domain, Accumulator, AggregateResult>
 	}
 
 	@Override
-	public void batchUpdate(Collection <Entry<Tuple, Integer>> updates, Timestamp timestamp) {
+	public void batchUpdate(Collection<Entry<Tuple, Integer>> updates, Timestamp timestamp) {
 		if (!Timestamp.ZERO.equals(timestamp)) {
 			throw new IllegalArgumentException("Timely operation is not supported");
 		}
@@ -296,7 +296,7 @@ public class ColumnAggregatorNode <Domain, Accumulator, AggregateResult>
 		propagateBatchUpdate(updates, timestamp);
 	}
 
-	private void propagateBatchUpdate(Collection <Entry<Tuple, Integer>> updates, Timestamp timestamp) {
+	private void propagateBatchUpdate(Collection<Entry<Tuple, Integer>> updates, Timestamp timestamp) {
 		if (updates.isEmpty()) {
 			return;
 		}
@@ -346,7 +346,7 @@ public class ColumnAggregatorNode <Domain, Accumulator, AggregateResult>
 	 * @since 1.6
 	 */
 	protected boolean storeIfNotNeutral(final Tuple key, final Accumulator accumulator,
-										final Map <Tuple, Accumulator> memory) {
+										final Map<Tuple, Accumulator> memory) {
 		if (operator.isNeutral(accumulator)) {
 			memory.remove(key);
 			return false;
@@ -370,12 +370,12 @@ public class ColumnAggregatorNode <Domain, Accumulator, AggregateResult>
 	}
 
 	@Override
-	public Map <AggregateResult, Timeline <Timestamp>> getAggregateResultTimeline(Tuple key) {
+	public Map<AggregateResult, Timeline<Timestamp>> getAggregateResultTimeline(Tuple key) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Map <Tuple, Timeline <Timestamp>> getAggregateTupleTimeline(Tuple key) {
+	public Map<Tuple, Timeline<Timestamp>> getAggregateTupleTimeline(Tuple key) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -396,7 +396,7 @@ public class ColumnAggregatorNode <Domain, Accumulator, AggregateResult>
 	/**
 	 * @since 1.6
 	 */
-	protected Accumulator getAccumulator(final Tuple key, final Map <Tuple, Accumulator> memory) {
+	protected Accumulator getAccumulator(final Tuple key, final Map<Tuple, Accumulator> memory) {
 		Accumulator accumulator = memory.get(key);
 		if (accumulator == null) {
 			return operator.createNeutral();

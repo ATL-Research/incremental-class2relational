@@ -85,7 +85,7 @@ public final class Preconditions {
      * @throws IllegalArgumentException
      *             if {@code expression} is false
      */
-    public static void checkArgument(boolean expression, Supplier <String> messageSupplier) {
+    public static void checkArgument(boolean expression, Supplier<String> messageSupplier) {
         if (!expression) {
             throw new IllegalArgumentException(messageSupplier.get());
         }
@@ -152,7 +152,7 @@ public final class Preconditions {
      * @throws IllegalStateException
      *             if {@code expression} is false
      */
-    public static void checkState(boolean expression, Supplier <String> messageSupplier) {
+    public static void checkState(boolean expression, Supplier<String> messageSupplier) {
         if (!expression) {
             throw new IllegalStateException(messageSupplier.get());
         }
@@ -200,7 +200,7 @@ public final class Preconditions {
      * @throws IndexOutOfBoundsException
      *             if index is negative or is greater or equal to size
      */
-    public static void checkElementIndex(int index, int size, Supplier <String> messageSupplier) {
+    public static void checkElementIndex(int index, int size, Supplier<String> messageSupplier) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException(messageSupplier.get());
         }

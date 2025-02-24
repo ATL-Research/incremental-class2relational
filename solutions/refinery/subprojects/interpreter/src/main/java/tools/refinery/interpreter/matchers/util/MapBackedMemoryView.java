@@ -15,25 +15,25 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 
 /**
- * Wraps a Map <T, Integer> (mapping elements to non-zero multiplicities) into an {@link IMemoryView}.
+ * Wraps a Map<T, Integer> (mapping elements to non-zero multiplicities) into an {@link IMemoryView}.
  *
  * @author Gabor Bergmann
  * @since 2.0
  */
-public class MapBackedMemoryView <T> implements IMemoryView <T> {
+public class MapBackedMemoryView<T> implements IMemoryView<T> {
 
-    private Map <T, Integer> wrapped;
+    private Map<T, Integer> wrapped;
 
     /**
      * @param wrapped an equivalent map from contained objects to multiplicities
      */
-    protected MapBackedMemoryView(Map <T, Integer> wrapped) {
+    protected MapBackedMemoryView(Map<T, Integer> wrapped) {
         super();
         this.wrapped = wrapped;
     }
 
     @Override
-    public Iterator <T> iterator() {
+    public Iterator<T> iterator() {
         return wrapped.keySet().iterator();
     }
 
@@ -69,20 +69,20 @@ public class MapBackedMemoryView <T> implements IMemoryView <T> {
     }
 
     @Override
-    public Set <T> distinctValues() {
+    public Set<T> distinctValues() {
         return wrapped.keySet();
     }
 
 
     @Override
-    public void forEachEntryWithMultiplicities(BiConsumer <T, Integer> entryConsumer) {
-        for (Entry <T, Integer> entry : wrapped.entrySet()) {
+    public void forEachEntryWithMultiplicities(BiConsumer<T, Integer> entryConsumer) {
+        for (Entry<T, Integer> entry : wrapped.entrySet()) {
             entryConsumer.accept(entry.getKey(), entry.getValue());
         }
     }
 
     @Override
-    public Iterable <Entry<T, Integer>> entriesWithMultiplicities() {
+    public Iterable<Entry<T, Integer>> entriesWithMultiplicities() {
         return wrapped.entrySet();
     }
 

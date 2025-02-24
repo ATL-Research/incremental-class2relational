@@ -23,7 +23,7 @@ import tools.refinery.interpreter.matchers.util.Direction;
  * acknowledged by the client. Match tuples are represented by a type MatchType.
  *
  * <p>
- * <b>Usage </b>. If a new matching is found, it appears in the matchFoundEvents collection, and disappears when that
+ * <b>Usage</b>. If a new matching is found, it appears in the matchFoundEvents collection, and disappears when that
  * particular matching cannot be found anymore. If the event of finding a match has been processed by the client, it can
  * be removed manually. In this case, when a previously found matching is lost, the Tuple will appear in the
  * matchLostEvents collection, and disappear upon finding the same matching again. "Matching lost" events can also be
@@ -31,7 +31,7 @@ import tools.refinery.interpreter.matchers.util.Direction;
  * matchFoundEvents.
  *
  * <p>
- * <b>Technical notes </b>. Does NOT propagate updates!
+ * <b>Technical notes</b>. Does NOT propagate updates!
  *
  * By overriding statelessConvert(), results can be stored to a MatchType. MatchType must provide equals() and
  * hashCode() reflecting its contents. The default implementation (DefaultDeltaMonitor) uses Tuple as MatchType.
@@ -41,24 +41,24 @@ import tools.refinery.interpreter.matchers.util.Direction;
  * @author Gabor Bergmann
  *
  */
-public abstract class DeltaMonitor <MatchType> extends SimpleReceiver implements Clearable {
+public abstract class DeltaMonitor<MatchType> extends SimpleReceiver implements Clearable {
 
     /**
      * matches that are newly found
      */
-    public Collection <MatchType> matchFoundEvents;
+    public Collection<MatchType> matchFoundEvents;
     /**
      * matches that are newly lost
      */
-    public Collection <MatchType> matchLostEvents;
+    public Collection<MatchType> matchLostEvents;
 
     /**
      * @param reteContainer
      */
     public DeltaMonitor(ReteContainer reteContainer) {
         super(reteContainer);
-        matchFoundEvents = new LinkedHashSet <MatchType>();
-        matchLostEvents = new LinkedHashSet <MatchType>();
+        matchFoundEvents = new LinkedHashSet<MatchType>();
+        matchLostEvents = new LinkedHashSet<MatchType>();
         reteContainer.registerClearable(this);
     }
 

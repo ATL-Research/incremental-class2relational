@@ -18,13 +18,13 @@ import tools.refinery.store.tuple.Tuple;
 import java.util.ArrayList;
 import java.util.Set;
 
-class ContainmentLinkRefiner extends AbstractPartialInterpretationRefiner <TruthValue, Boolean> {
+class ContainmentLinkRefiner extends AbstractPartialInterpretationRefiner<TruthValue, Boolean> {
 	private final Factory factory;
-	private final Interpretation <InferredContainment> interpretation;
-	private final PartialInterpretationRefiner <TruthValue, Boolean> sourceRefiner;
-	private final PartialInterpretationRefiner <TruthValue, Boolean> targetRefiner;
+	private final Interpretation<InferredContainment> interpretation;
+	private final PartialInterpretationRefiner<TruthValue, Boolean> sourceRefiner;
+	private final PartialInterpretationRefiner<TruthValue, Boolean> targetRefiner;
 
-	private ContainmentLinkRefiner(ReasoningAdapter adapter, PartialSymbol <TruthValue, Boolean> partialSymbol,
+	private ContainmentLinkRefiner(ReasoningAdapter adapter, PartialSymbol<TruthValue, Boolean> partialSymbol,
 								   Factory factory) {
 		super(adapter, partialSymbol);
 		this.factory = factory;
@@ -85,31 +85,31 @@ class ContainmentLinkRefiner extends AbstractPartialInterpretationRefiner <Truth
 				addToSet(oldValue.forbiddenLinks(), factory.linkType));
 	}
 
-	private static Set <PartialRelation> addToSet(Set <PartialRelation> oldSet, PartialRelation linkType) {
+	private static Set<PartialRelation> addToSet(Set<PartialRelation> oldSet, PartialRelation linkType) {
 		if (oldSet.isEmpty()) {
 			return Set.of(linkType);
 		}
-		var newElements = new ArrayList <PartialRelation>(oldSet.size() + 1);
+		var newElements = new ArrayList<PartialRelation>(oldSet.size() + 1);
 		newElements.addAll(oldSet);
 		newElements.add(linkType);
 		return Set.copyOf(newElements);
 	}
 
-	public static PartialInterpretationRefiner.Factory <TruthValue, Boolean> of(
-			PartialRelation linkType, Symbol <InferredContainment> symbol, PartialRelation sourceType,
+	public static PartialInterpretationRefiner.Factory<TruthValue, Boolean> of(
+			PartialRelation linkType, Symbol<InferredContainment> symbol, PartialRelation sourceType,
 			PartialRelation targetType) {
 		return new Factory(linkType, symbol, sourceType, targetType);
 	}
 
-	private static class Factory implements PartialInterpretationRefiner.Factory <TruthValue, Boolean> {
+	private static class Factory implements PartialInterpretationRefiner.Factory<TruthValue, Boolean> {
 		public final PartialRelation linkType;
-		public final Symbol <InferredContainment> symbol;
+		public final Symbol<InferredContainment> symbol;
 		public final PartialRelation targetType;
 		public final PartialRelation sourceType;
 		public final InferredContainment trueLink;
 		public final InferredContainment falseLinkUnknownContains;
 
-		public Factory(PartialRelation linkType, Symbol <InferredContainment> symbol, PartialRelation sourceType,
+		public Factory(PartialRelation linkType, Symbol<InferredContainment> symbol, PartialRelation sourceType,
 					   PartialRelation targetType) {
 			this.linkType = linkType;
 			this.symbol = symbol;
@@ -120,8 +120,8 @@ class ContainmentLinkRefiner extends AbstractPartialInterpretationRefiner <Truth
 		}
 
 		@Override
-		public PartialInterpretationRefiner <TruthValue, Boolean> create(
-				ReasoningAdapter adapter, PartialSymbol <TruthValue, Boolean> partialSymbol) {
+		public PartialInterpretationRefiner<TruthValue, Boolean> create(
+				ReasoningAdapter adapter, PartialSymbol<TruthValue, Boolean> partialSymbol) {
 			return new ContainmentLinkRefiner(adapter, partialSymbol, this);
 		}
 	}

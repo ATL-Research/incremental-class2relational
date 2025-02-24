@@ -27,22 +27,22 @@ public class RecipeTraceInfo implements TraceInfo {
      * For cloning in case of recursion cut-off points, use {@link #getParentRecipeTracesForCloning()} instead.
      * @return an unmodifiable view on parent traces, to be constructed before this node (or alongside, in case of recursion)
      */
-    public List <RecipeTraceInfo> getParentRecipeTraces() {return Collections.unmodifiableList(new ArrayList<>(parentRecipeTraces));}
+    public List<RecipeTraceInfo> getParentRecipeTraces() {return Collections.unmodifiableList(new ArrayList<>(parentRecipeTraces));}
     /**
      * Directly return the underlying collection so that changes to it will be transparent. Use only for recursion-tolerant cloning.
      * @noreference This method is not intended to be referenced by clients.
      */
-    public Collection <? extends RecipeTraceInfo> getParentRecipeTracesForCloning() {return parentRecipeTraces;}
+    public Collection<? extends RecipeTraceInfo> getParentRecipeTracesForCloning() {return parentRecipeTraces;}
     @Override
     public Node getNode() {return node;}
 
     private Node node;
     ReteNodeRecipe recipe;
     ReteNodeRecipe shadowedRecipe;
-    Collection <? extends RecipeTraceInfo> parentRecipeTraces;
+    Collection<? extends RecipeTraceInfo> parentRecipeTraces;
 
 
-    public RecipeTraceInfo(ReteNodeRecipe recipe, Collection <? extends RecipeTraceInfo> parentRecipeTraces) {
+    public RecipeTraceInfo(ReteNodeRecipe recipe, Collection<? extends RecipeTraceInfo> parentRecipeTraces) {
         super();
         this.recipe = recipe;
         this.parentRecipeTraces = parentRecipeTraces; //ParentTraceList.from(parentRecipeTraces);

@@ -62,7 +62,7 @@ import java.util.Map;
  *     Shape bottomShape;
  *     Shape topShape;
  *   }
- * } </pre>
+ * }</pre>
  * <p>Without additional type information, the serialized JSON is ambiguous. Is
  * the bottom shape in this drawing a rectangle or a diamond? <pre>   {@code
  *   {
@@ -77,7 +77,7 @@ import java.util.Map;
  *       "x": 4,
  *       "y": 1
  *     }
- *   }} </pre>
+ *   }}</pre>
  * This class addresses this problem by adding type information to the
  * serialized JSON and honoring that type information when the JSON is
  * deserialized: <pre>   {@code
@@ -95,17 +95,17 @@ import java.util.Map;
  *       "x": 4,
  *       "y": 1
  *     }
- *   }} </pre>
+ *   }}</pre>
  * Both the type field name ({@code "type"}) and the type labels ({@code
  * "Rectangle"}) are configurable.
  *
- * <h2>Registering Types </h2>
+ * <h2>Registering Types</h2>
  * Create a {@code RuntimeTypeAdapterFactory} by passing the base type and type field
  * name to the {@link #of} factory method. If you don't supply an explicit type
  * field name, {@code "type"} will be used. <pre>   {@code
- *   RuntimeTypeAdapterFactory <Shape> shapeAdapterFactory
+ *   RuntimeTypeAdapterFactory<Shape> shapeAdapterFactory
  *       = RuntimeTypeAdapterFactory.of(Shape.class, "type");
- * } </pre>
+ * }</pre>
  * Next register all of your subtypes. Every subtype must be explicitly
  * registered. This protects your application from injection attacks. If you
  * don't supply an explicit type label, the type's simple name will be used.
@@ -113,42 +113,42 @@ import java.util.Map;
  *   shapeAdapterFactory.registerSubtype(Rectangle.class, "Rectangle");
  *   shapeAdapterFactory.registerSubtype(Circle.class, "Circle");
  *   shapeAdapterFactory.registerSubtype(Diamond.class, "Diamond");
- * } </pre>
+ * }</pre>
  * Finally, register the type adapter factory in your application's GSON builder:
  * <pre>   {@code
  *   Gson gson = new GsonBuilder()
  *       .registerTypeAdapterFactory(shapeAdapterFactory)
  *       .create();
- * } </pre>
+ * }</pre>
  * Like {@code GsonBuilder}, this API supports chaining: <pre>   {@code
- *   RuntimeTypeAdapterFactory <Shape> shapeAdapterFactory = RuntimeTypeAdapterFactory.of(Shape.class)
+ *   RuntimeTypeAdapterFactory<Shape> shapeAdapterFactory = RuntimeTypeAdapterFactory.of(Shape.class)
  *       .registerSubtype(Rectangle.class)
  *       .registerSubtype(Circle.class)
  *       .registerSubtype(Diamond.class);
- * } </pre>
+ * }</pre>
  *
- * <h2>Serialization and deserialization </h2>
+ * <h2>Serialization and deserialization</h2>
  * In order to serialize and deserialize a polymorphic object,
  * you must specify the base type explicitly.
  * <pre>   {@code
  *   Diamond diamond = new Diamond();
  *   String json = gson.toJson(diamond, Shape.class);
- * } </pre>
+ * }</pre>
  * And then:
  * <pre>   {@code
  *   Shape shape = gson.fromJson(json, Shape.class);
- * } </pre>
+ * }</pre>
  */
-public final class RuntimeTypeAdapterFactory <T> implements TypeAdapterFactory {
-	private final Class <?> baseType;
+public final class RuntimeTypeAdapterFactory<T> implements TypeAdapterFactory {
+	private final Class<?> baseType;
 	private final String typeFieldName;
-	private final Map <String, Class <?>> labelToSubtype = new LinkedHashMap<>();
-	private final Map <Class<?>, String> subtypeToLabel = new LinkedHashMap<>();
+	private final Map<String, Class<?>> labelToSubtype = new LinkedHashMap<>();
+	private final Map<Class<?>, String> subtypeToLabel = new LinkedHashMap<>();
 	private final boolean maintainType;
 	private boolean recognizeSubtypes;
 
 	private RuntimeTypeAdapterFactory(
-			Class <?> baseType, String typeFieldName, boolean maintainType) {
+			Class<?> baseType, String typeFieldName, boolean maintainType) {
 		if (typeFieldName == null || baseType == null) {
 			throw new NullPointerException();
 		}
@@ -163,7 +163,7 @@ public final class RuntimeTypeAdapterFactory <T> implements TypeAdapterFactory {
 	 *
 	 * @param maintainType true if the type field should be included in deserialized objects
 	 */
-	public static <T> RuntimeTypeAdapterFactory <T> of(Class <T> baseType, String typeFieldName, boolean maintainType) {
+	public static <T> RuntimeTypeAdapterFactory<T> of(Class<T> baseType, String typeFieldName, boolean maintainType) {
 		return new RuntimeTypeAdapterFactory<>(baseType, typeFieldName, maintainType);
 	}
 
@@ -171,7 +171,7 @@ public final class RuntimeTypeAdapterFactory <T> implements TypeAdapterFactory {
 	 * Creates a new runtime type adapter using for {@code baseType} using {@code
 	 * typeFieldName} as the type field name. Type field names are case sensitive.
 	 */
-	public static <T> RuntimeTypeAdapterFactory <T> of(Class <T> baseType, String typeFieldName) {
+	public static <T> RuntimeTypeAdapterFactory<T> of(Class<T> baseType, String typeFieldName) {
 		return new RuntimeTypeAdapterFactory<>(baseType, typeFieldName, false);
 	}
 
@@ -179,7 +179,7 @@ public final class RuntimeTypeAdapterFactory <T> implements TypeAdapterFactory {
 	 * Creates a new runtime type adapter for {@code baseType} using {@code "type"} as
 	 * the type field name.
 	 */
-	public static <T> RuntimeTypeAdapterFactory <T> of(Class <T> baseType) {
+	public static <T> RuntimeTypeAdapterFactory<T> of(Class<T> baseType) {
 		return new RuntimeTypeAdapterFactory<>(baseType, "type", false);
 	}
 
@@ -188,7 +188,7 @@ public final class RuntimeTypeAdapterFactory <T> implements TypeAdapterFactory {
 	 * of that type.
 	 */
 	@CanIgnoreReturnValue
-	public RuntimeTypeAdapterFactory <T> recognizeSubtypes() {
+	public RuntimeTypeAdapterFactory<T> recognizeSubtypes() {
 		this.recognizeSubtypes = true;
 		return this;
 	}
@@ -201,7 +201,7 @@ public final class RuntimeTypeAdapterFactory <T> implements TypeAdapterFactory {
 	 *     have already been registered on this type adapter.
 	 */
 	@CanIgnoreReturnValue
-	public RuntimeTypeAdapterFactory <T> registerSubtype(Class <? extends T> type, String label) {
+	public RuntimeTypeAdapterFactory<T> registerSubtype(Class<? extends T> type, String label) {
 		if (type == null || label == null) {
 			throw new NullPointerException();
 		}
@@ -221,32 +221,32 @@ public final class RuntimeTypeAdapterFactory <T> implements TypeAdapterFactory {
 	 *     have already been registered on this type adapter.
 	 */
 	@CanIgnoreReturnValue
-	public RuntimeTypeAdapterFactory <T> registerSubtype(Class <? extends T> type) {
+	public RuntimeTypeAdapterFactory<T> registerSubtype(Class<? extends T> type) {
 		return registerSubtype(type, type.getSimpleName());
 	}
 
 	@Override
-	public <R> TypeAdapter <R> create(Gson gson, TypeToken <R> type) {
+	public <R> TypeAdapter<R> create(Gson gson, TypeToken<R> type) {
 		if (type == null) {
 			return null;
 		}
-		Class <?> rawType = type.getRawType();
+		Class<?> rawType = type.getRawType();
 		boolean handle =
 				recognizeSubtypes ? baseType.isAssignableFrom(rawType) : baseType.equals(rawType);
 		if (!handle) {
 			return null;
 		}
 
-		final TypeAdapter <JsonElement> jsonElementAdapter = gson.getAdapter(JsonElement.class);
-		final Map <String, TypeAdapter <?>> labelToDelegate = new LinkedHashMap<>();
-		final Map <Class<?>, TypeAdapter <?>> subtypeToDelegate = new LinkedHashMap<>();
-		for (Map.Entry <String, Class <?>> entry : labelToSubtype.entrySet()) {
-			TypeAdapter <?> delegate = gson.getDelegateAdapter(this, TypeToken.get(entry.getValue()));
+		final TypeAdapter<JsonElement> jsonElementAdapter = gson.getAdapter(JsonElement.class);
+		final Map<String, TypeAdapter<?>> labelToDelegate = new LinkedHashMap<>();
+		final Map<Class<?>, TypeAdapter<?>> subtypeToDelegate = new LinkedHashMap<>();
+		for (Map.Entry<String, Class<?>> entry : labelToSubtype.entrySet()) {
+			TypeAdapter<?> delegate = gson.getDelegateAdapter(this, TypeToken.get(entry.getValue()));
 			labelToDelegate.put(entry.getKey(), delegate);
 			subtypeToDelegate.put(entry.getValue(), delegate);
 		}
 
-		return new TypeAdapter <R>() {
+		return new TypeAdapter<R>() {
 			@Override public R read(JsonReader in) throws IOException {
 				JsonElement jsonElement = jsonElementAdapter.read(in);
 				JsonElement labelJsonElement;
@@ -262,7 +262,7 @@ public final class RuntimeTypeAdapterFactory <T> implements TypeAdapterFactory {
 				}
 				String label = labelJsonElement.getAsString();
 				@SuppressWarnings("unchecked") // registration requires that subtype extends T
-				TypeAdapter <R> delegate = (TypeAdapter <R>) labelToDelegate.get(label);
+				TypeAdapter<R> delegate = (TypeAdapter<R>) labelToDelegate.get(label);
 				if (delegate == null) {
 					throw new JsonParseException("cannot deserialize " + baseType + " subtype named "
 							+ label + "; did you forget to register a subtype?");
@@ -271,10 +271,10 @@ public final class RuntimeTypeAdapterFactory <T> implements TypeAdapterFactory {
 			}
 
 			@Override public void write(JsonWriter out, R value) throws IOException {
-				Class <?> srcType = value.getClass();
+				Class<?> srcType = value.getClass();
 				String label = subtypeToLabel.get(srcType);
 				@SuppressWarnings("unchecked") // registration requires that subtype extends T
-				TypeAdapter <R> delegate = (TypeAdapter <R>) subtypeToDelegate.get(srcType);
+				TypeAdapter<R> delegate = (TypeAdapter<R>) subtypeToDelegate.get(srcType);
 				if (delegate == null) {
 					throw new JsonParseException("cannot serialize " + srcType.getName()
 							+ "; did you forget to register a subtype?");
@@ -294,7 +294,7 @@ public final class RuntimeTypeAdapterFactory <T> implements TypeAdapterFactory {
 				}
 				clone.add(typeFieldName, new JsonPrimitive(label));
 
-				for (Map.Entry <String, JsonElement> e : jsonObject.entrySet()) {
+				for (Map.Entry<String, JsonElement> e : jsonObject.entrySet()) {
 					clone.add(e.getKey(), e.getValue());
 				}
 				jsonElementAdapter.write(out, clone);

@@ -20,14 +20,14 @@ import java.util.List;
 public class DesignSpaceExplorationStoreAdapterImpl implements DesignSpaceExplorationStoreAdapter {
 	protected final ModelStore store;
 
-	protected final List <Rule> ruleDefinitions;
-	protected final List <Criterion> accepts;
-	protected final List <Criterion> excludes;
-	protected final List <Objective> objectives;
+	protected final List<Rule> ruleDefinitions;
+	protected final List<Criterion> accepts;
+	protected final List<Criterion> excludes;
+	protected final List<Objective> objectives;
 
 	public DesignSpaceExplorationStoreAdapterImpl(
-			ModelStore store, List <Rule> ruleDefinitions, List <Criterion> accepts, List <Criterion> excludes,
-			List <Objective> objectives) {
+			ModelStore store, List<Rule> ruleDefinitions, List<Criterion> accepts, List<Criterion> excludes,
+			List<Objective> objectives) {
 		this.store = store;
 		this.ruleDefinitions = ruleDefinitions;
 		this.accepts = accepts;
@@ -42,33 +42,33 @@ public class DesignSpaceExplorationStoreAdapterImpl implements DesignSpaceExplor
 
 	@Override
 	public DesignSpaceExplorationAdapterImpl createModelAdapter(Model model) {
-		final List <Transformation> t = this.ruleDefinitions.stream()
+		final List<Transformation> t = this.ruleDefinitions.stream()
 				.map(x -> new Transformation(model, x))
 				.toList();
-		final List <CriterionCalculator> a = this.accepts.stream().map(x -> x.createCalculator(model)).toList();
-		final List <CriterionCalculator> e = this.excludes.stream().map(x -> x.createCalculator(model)).toList();
-		final List <ObjectiveCalculator> o = this.objectives.stream().map(x -> x.createCalculator(model)).toList();
+		final List<CriterionCalculator> a = this.accepts.stream().map(x -> x.createCalculator(model)).toList();
+		final List<CriterionCalculator> e = this.excludes.stream().map(x -> x.createCalculator(model)).toList();
+		final List<ObjectiveCalculator> o = this.objectives.stream().map(x -> x.createCalculator(model)).toList();
 
 		return new DesignSpaceExplorationAdapterImpl(model, this, t, a, e, o);
 	}
 
 	@Override
-	public List <Rule> getTransformations() {
+	public List<Rule> getTransformations() {
 		return ruleDefinitions;
 	}
 
 	@Override
-	public List <Criterion> getAccepts() {
+	public List<Criterion> getAccepts() {
 		return accepts;
 	}
 
 	@Override
-	public List <Criterion> getExcludes() {
+	public List<Criterion> getExcludes() {
 		return excludes;
 	}
 
 	@Override
-	public List <Objective> getObjectives() {
+	public List<Objective> getObjectives() {
 		return objectives;
 	}
 }

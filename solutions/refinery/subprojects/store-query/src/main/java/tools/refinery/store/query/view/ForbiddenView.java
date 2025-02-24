@@ -9,8 +9,8 @@ import tools.refinery.store.representation.Symbol;
 import tools.refinery.store.representation.TruthValue;
 import tools.refinery.store.tuple.Tuple;
 
-public class ForbiddenView extends TuplePreservingView <TruthValue> {
-	public ForbiddenView(Symbol <TruthValue> symbol) {
+public class ForbiddenView extends TuplePreservingView<TruthValue> {
+	public ForbiddenView(Symbol<TruthValue> symbol) {
 		super(symbol, "forbidden");
 	}
 

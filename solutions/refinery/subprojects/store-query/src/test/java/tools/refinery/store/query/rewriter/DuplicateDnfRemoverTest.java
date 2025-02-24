@@ -23,7 +23,7 @@ import static org.hamcrest.Matchers.not;
 import static tools.refinery.store.query.literal.Literals.not;
 
 class DuplicateDnfRemoverTest {
-	private final static Symbol <Boolean> friend = Symbol.of("friend", 2);
+	private final static Symbol<Boolean> friend = Symbol.of("friend", 2);
 	private final static AnySymbolView friendView = new KeyOnlyView<>(friend);
 
 	private DuplicateDnfRemover sut;

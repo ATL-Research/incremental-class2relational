@@ -27,7 +27,7 @@ public final class Criteria {
 		return and(List.of(criteria));
 	}
 
-	public static Criterion and(Collection <? extends Criterion> criteria) {
+	public static Criterion and(Collection<? extends Criterion> criteria) {
 		if (criteria.size() == 1) {
 			return criteria.iterator().next();
 		}
@@ -38,7 +38,7 @@ public final class Criteria {
 		return or(List.of(criteria));
 	}
 
-	public static Criterion or(Collection <? extends Criterion> criteria) {
+	public static Criterion or(Collection<? extends Criterion> criteria) {
 		if (criteria.size() == 1) {
 			return criteria.iterator().next();
 		}

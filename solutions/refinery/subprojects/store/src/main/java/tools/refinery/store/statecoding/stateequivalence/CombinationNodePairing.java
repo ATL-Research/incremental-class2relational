@@ -38,23 +38,23 @@ public class CombinationNodePairing implements NodePairing {
 	}
 
 	@Override
-	public List <IntIntMap> permutations() {
+	public List<IntIntMap> permutations() {
 		int limit = this.size();
-		Iterable <Integer> interval = () -> new IntervalIterator(limit);
+		Iterable<Integer> interval = () -> new IntervalIterator(limit);
 
 		if (isComplete()) {
-			final List <int[]> p = PermutationsHolder.INSTANCE.permutations.getPermutations(this.size() - 1);
+			final List<int[]> p = PermutationsHolder.INSTANCE.permutations.getPermutations(this.size() - 1);
 			return p.stream().map(x -> constructPermutationMap(interval, x)).toList();
 		} else {
 			return List.of(constructTrivialMap(interval));
 		}
 	}
 
-	private IntIntMap constructTrivialMap(Iterable <Integer> interval) {
+	private IntIntMap constructTrivialMap(Iterable<Integer> interval) {
 		return IntIntMaps.immutable.from(interval, l -> left[l], r -> right[r]);
 	}
 
-	private IntIntMap constructPermutationMap(Iterable <Integer> interval, int[] permutation) {
+	private IntIntMap constructPermutationMap(Iterable<Integer> interval, int[] permutation) {
 		return IntIntMaps.immutable.from(interval, l -> left[l], r -> right[permutation[r]]);
 	}
 
@@ -63,7 +63,7 @@ public class CombinationNodePairing implements NodePairing {
 		return this.size() <= LIMIT;
 	}
 
-	private static class IntervalIterator implements Iterator <Integer> {
+	private static class IntervalIterator implements Iterator<Integer> {
 		private final int limit;
 		private int value = 0;
 

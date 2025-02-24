@@ -11,10 +11,10 @@ import tools.refinery.store.representation.Symbol;
 
 import java.util.Objects;
 
-abstract class InferredTypeView extends TuplePreservingView <InferredType> {
+abstract class InferredTypeView extends TuplePreservingView<InferredType> {
 	protected final PartialRelation type;
 
-	protected InferredTypeView(Symbol <InferredType> symbol, String name, PartialRelation type) {
+	protected InferredTypeView(Symbol<InferredType> symbol, String name, PartialRelation type) {
 		super(symbol, type.name() + "#" + name);
 		this.type = type;
 	}

@@ -10,11 +10,11 @@ import tools.refinery.store.reasoning.refinement.PartialModelInitializer;
 import tools.refinery.store.reasoning.representation.PartialSymbol;
 import tools.refinery.store.representation.Symbol;
 
-public class SeedInitializer <T> implements PartialModelInitializer {
-	private final Symbol <T> symbol;
-	private final PartialSymbol <T, ?> partialSymbol;
+public class SeedInitializer<T> implements PartialModelInitializer {
+	private final Symbol<T> symbol;
+	private final PartialSymbol<T, ?> partialSymbol;
 
-	public SeedInitializer(Symbol <T> symbol, PartialSymbol <T, ?> partialSymbol) {
+	public SeedInitializer(Symbol<T> symbol, PartialSymbol<T, ?> partialSymbol) {
 		this.symbol = symbol;
 		this.partialSymbol = partialSymbol;
 	}

@@ -10,7 +10,7 @@ import tools.refinery.store.representation.Symbol;
 import tools.refinery.store.tuple.Tuple;
 
 class CandidateTypeView extends InferredTypeView {
-	public CandidateTypeView(Symbol <InferredType> symbol, PartialRelation type) {
+	public CandidateTypeView(Symbol<InferredType> symbol, PartialRelation type) {
 		super(symbol, "candidate", type);
 	}
 

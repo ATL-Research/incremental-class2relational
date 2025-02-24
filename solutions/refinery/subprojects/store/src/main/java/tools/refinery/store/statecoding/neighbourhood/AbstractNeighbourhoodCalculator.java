@@ -19,13 +19,13 @@ import java.util.*;
 
 public abstract class AbstractNeighbourhoodCalculator {
 	protected final Model model;
-	protected final List <AnyInterpretation> nullImpactValues;
-	protected final LinkedHashMap <AnyInterpretation, long[]> impactValues;
+	protected final List<AnyInterpretation> nullImpactValues;
+	protected final LinkedHashMap<AnyInterpretation, long[]> impactValues;
 	protected final MutableIntLongMap individualHashValues = IntLongMaps.mutable.empty();
 
 	protected static final long PRIME = 31;
 
-	protected AbstractNeighbourhoodCalculator(Model model, List <? extends AnyInterpretation> interpretations,
+	protected AbstractNeighbourhoodCalculator(Model model, List<? extends AnyInterpretation> interpretations,
 											  IntSet individuals) {
 		this.model = model;
 		this.nullImpactValues = new ArrayList<>();
@@ -35,7 +35,7 @@ public abstract class AbstractNeighbourhoodCalculator {
 		Random random = new Random(1);
 
 		var individualsInOrder = individuals.toSortedList(Integer::compare);
-		for(int i = 0; i <individualsInOrder.size(); i++) {
+		for(int i = 0; i<individualsInOrder.size(); i++) {
 			individualHashValues.put(individualsInOrder.get(i), random.nextLong());
 		}
 
@@ -92,7 +92,7 @@ public abstract class AbstractNeighbourhoodCalculator {
 	protected long calculateModelCode(long lastSum) {
 		long result = 0;
 		for (var nullImpactValue : nullImpactValues) {
-			result = result * PRIME + Objects.hashCode(((Interpretation <?>) nullImpactValue).get(Tuple0.INSTANCE));
+			result = result * PRIME + Objects.hashCode(((Interpretation<?>) nullImpactValue).get(Tuple0.INSTANCE));
 		}
 		result += lastSum;
 		return result;

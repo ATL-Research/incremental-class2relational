@@ -13,11 +13,11 @@ import tools.refinery.store.tuple.Tuple;
 import tools.refinery.store.representation.TruthValue;
 
 class TerminalNode extends DecisionTreeNode {
-	private MutableIntObjectMap <TruthValue> children;
+	private MutableIntObjectMap<TruthValue> children;
 
 	private DecisionTreeValue otherwise;
 
-	TerminalNode(MutableIntObjectMap <TruthValue> children, DecisionTreeValue otherwise) {
+	TerminalNode(MutableIntObjectMap<TruthValue> children, DecisionTreeValue otherwise) {
 		this.children = children;
 		this.otherwise = otherwise;
 	}

@@ -168,7 +168,7 @@ public abstract class DualInputNode extends StandardNode implements NetworkStruc
      *
      * @return the collection of opposite substitutions if any, or null if none
      */
-    protected Collection <Tuple> retrieveOpposites(final Side side, final Tuple signature) {
+    protected Collection<Tuple> retrieveOpposites(final Side side, final Tuple signature) {
         return getSlot(side.opposite()).get(signature);
     }
 
@@ -192,12 +192,12 @@ public abstract class DualInputNode extends StandardNode implements NetworkStruc
     }
 
     @Override
-    public void pullInto(final Collection <Tuple> collector, final boolean flush) {
+    public void pullInto(final Collection<Tuple> collector, final boolean flush) {
         this.logic.pullInto(collector, flush);
     }
 
     @Override
-    public void pullIntoWithTimeline(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush) {
+    public void pullIntoWithTimeline(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush) {
         this.logic.pullIntoWithTimeline(collector, flush);
     }
 
@@ -277,7 +277,7 @@ public abstract class DualInputNode extends StandardNode implements NetworkStruc
      * The cache needs to be maintained when the network structure changes.
      * @since 2.3
      */
-    protected Map <Indexer, Boolean> indexerGroupCache;
+    protected Map<Indexer, Boolean> indexerGroupCache;
 
     /**
      * @since 2.3
@@ -297,17 +297,17 @@ public abstract class DualInputNode extends StandardNode implements NetworkStruc
     /**
      * @since 2.4
      */
-    protected Map <Tuple, Timeline <Timestamp>> getTimeline(final Tuple signature, final Indexer indexer) {
+    protected Map<Tuple, Timeline<Timestamp>> getTimeline(final Tuple signature, final Indexer indexer) {
         if (this.indexerGroupCache.get(indexer)) {
             // recursive timely case
             return indexer.getTimeline(signature);
         } else {
             // the indexer is in a different group, treat all of its tuples as they would have timestamp 0
-            final Collection <Tuple> tuples = indexer.get(signature);
+            final Collection<Tuple> tuples = indexer.get(signature);
             if (tuples == null) {
                 return null;
             } else {
-                return new Timestamp.AllZeroMap <Tuple>((Set <Tuple>) tuples);
+                return new Timestamp.AllZeroMap<Tuple>((Set<Tuple>) tuples);
             }
         }
     }
@@ -335,12 +335,12 @@ public abstract class DualInputNode extends StandardNode implements NetworkStruc
         public abstract void notifyUpdate(final Side side, final Direction direction, final Tuple updateElement,
                 final Tuple signature, final boolean change, final Timestamp timestamp);
 
-        public abstract void pullInto(final Collection <Tuple> collector, final boolean flush);
+        public abstract void pullInto(final Collection<Tuple> collector, final boolean flush);
 
         /**
          * @since 2.4
          */
-        public abstract void pullIntoWithTimeline(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush);
+        public abstract void pullIntoWithTimeline(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush);
 
     }
 

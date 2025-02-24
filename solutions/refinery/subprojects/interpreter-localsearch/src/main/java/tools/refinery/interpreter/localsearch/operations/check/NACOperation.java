@@ -73,12 +73,12 @@ public class NACOperation implements ISearchOperation, IPatternMatcherOperation 
     }
 
     @Override
-    public String toString(Function <Integer, String> variableMapping) {
+    public String toString(Function<Integer, String> variableMapping) {
         return "check     neg find "+information.toString(variableMapping);
     }
 
     @Override
-    public List <Integer> getVariablePositions() {
+    public List<Integer> getVariablePositions() {
         return information.getVariablePositions();
     }
 

@@ -24,7 +24,7 @@ import static org.hamcrest.Matchers.is;
 import static tools.refinery.store.query.interpreter.tests.QueryAssertions.assertResults;
 
 class WeaklyConnectedComponentsTest {
-	private static final Symbol <Boolean> friend = Symbol.of("friend", 2);
+	private static final Symbol<Boolean> friend = Symbol.of("friend", 2);
 	private static final AnySymbolView friendView = new KeyOnlyView<>(friend);
 
 	@Test

@@ -46,26 +46,26 @@ public class Inequality extends VariableDeferredPConstraint {
     }
 
     // private Inequality(
-    // PSystem <PatternDescription, StubHandle, ?> pSystem,
-    // PVariable subject, Set <PVariable> inequals)
+    // PSystem<PatternDescription, StubHandle, ?> pSystem,
+    // PVariable subject, Set<PVariable> inequals)
     // {
     // super(pSystem, include(inequals, subject));
     // this.subject = subject;
     // this.inequals = inequals;
     // }
 
-    // private static HashSet <PVariable> include(Set <PVariable> inequals, PVariable subject) {
-    // HashSet <PVariable> hashSet = new HashSet <PVariable>(inequals);
+    // private static HashSet<PVariable> include(Set<PVariable> inequals, PVariable subject) {
+    // HashSet<PVariable> hashSet = new HashSet<PVariable>(inequals);
     // hashSet.add(subject);
     // return hashSet;
     // }
 
     @Override
-    public Set <PVariable> getDeferringVariables() {
+    public Set<PVariable> getDeferringVariables() {
         return getAffectedVariables();
     }
 
-    // private static int[] mapIndices(Map <Object, Integer> variablesIndex, Set <PVariable> keys) {
+    // private static int[] mapIndices(Map<Object, Integer> variablesIndex, Set<PVariable> keys) {
     // int[] result = new int[keys.size()];
     // int k = 0;
     // for (PVariable key : keys) {
@@ -86,12 +86,12 @@ public class Inequality extends VariableDeferredPConstraint {
     //
     // @Override
     // public boolean incorporate(IFoldablePConstraint other) {
-    // if (other instanceof Inequality <?, ?>) {
+    // if (other instanceof Inequality<?, ?>) {
     // Inequality other2 = (Inequality) other;
     // if (subject.equals(other2.subject)) {
-    // Set <PVariable> newInequals = new HashSet <PVariable>(inequals);
+    // Set<PVariable> newInequals = new HashSet<PVariable>(inequals);
     // newInequals.addAll(other2.inequals);
-    // return new Inequality <PatternDescription, StubHandle>(buildable, subject, newInequals);
+    // return new Inequality<PatternDescription, StubHandle>(buildable, subject, newInequals);
     // }
     // } else return false;
     // }
@@ -110,7 +110,7 @@ public class Inequality extends VariableDeferredPConstraint {
     }
 
     @Override
-    public Set <PVariable> getDeducedVariables() {
+    public Set<PVariable> getDeducedVariables() {
         return Collections.emptySet();
     }
 

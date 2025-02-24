@@ -23,7 +23,7 @@ public final class QueryMatchers {
 	 * @param expected The expected {@link Dnf} instance.
 	 * @return A Hamcrest matcher for equality up to renaming of variables.
 	 */
-	public static Matcher <Dnf> structurallyEqualTo(Dnf expected) {
+	public static Matcher<Dnf> structurallyEqualTo(Dnf expected) {
 		return new StructurallyEqualTo(expected);
 	}
 
@@ -39,8 +39,8 @@ public final class QueryMatchers {
 	 * @param expectedLiterals The expected clauses. Each clause is represented by a list of literals.
 	 * @return A Hamcrest matcher for equality up to renaming of variables.
 	 */
-	public static Matcher <Dnf> structurallyEqualTo(List <SymbolicParameter> expectedSymbolicParameters,
-												   List <? extends List <? extends Literal>> expectedLiterals) {
+	public static Matcher<Dnf> structurallyEqualTo(List<SymbolicParameter> expectedSymbolicParameters,
+												   List<? extends List<? extends Literal>> expectedLiterals) {
 		return new StructurallyEqualToRaw(expectedSymbolicParameters, expectedLiterals);
 	}
 }

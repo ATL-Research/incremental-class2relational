@@ -18,7 +18,7 @@ import java.util.Set;
  * @author Gabor Bergmann
  * @since 2.0
  */
-public final class SingletonMemoryView <Value> implements IMemoryView <Value> {
+public final class SingletonMemoryView<Value> implements IMemoryView<Value> {
 
     private Value wrapped;
     private static final int ONE_HASH = Integer.valueOf(1).hashCode();
@@ -28,8 +28,8 @@ public final class SingletonMemoryView <Value> implements IMemoryView <Value> {
     }
 
     @Override
-    public Iterator <Value> iterator() {
-        return new Iterator <Value>() {
+    public Iterator<Value> iterator() {
+        return new Iterator<Value>() {
             boolean hasNext = true;
 
             @Override
@@ -78,14 +78,14 @@ public final class SingletonMemoryView <Value> implements IMemoryView <Value> {
     }
 
     @Override
-    public Set <Value> distinctValues() {
+    public Set<Value> distinctValues() {
         return Collections.singleton(wrapped);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof IMemoryView <?>) {
-            IMemoryView <?> other = (IMemoryView <?>) obj;
+        if (obj instanceof IMemoryView<?>) {
+            IMemoryView<?> other = (IMemoryView<?>) obj;
             if (1 != other.size()) return false;
             if (1 != other.getCountUnsafe(wrapped)) return false;
             return true;

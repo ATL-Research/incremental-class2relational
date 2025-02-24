@@ -35,7 +35,7 @@ import tools.refinery.interpreter.rete.traceability.RecipeTraceInfo;
  *
  */
 public class RecursionCutoffPoint {
-    final Map <PBody, RecipeTraceInfo> futureTraceMap;
+    final Map<PBody, RecipeTraceInfo> futureTraceMap;
     final CompiledQuery compiledQuery;
     final ProductionRecipe recipe;
     final QueryEvaluationHint hint;
@@ -60,7 +60,7 @@ public class RecursionCutoffPoint {
 
 
 
-    private String prettyPrintParentRecipeTraces(List <RecipeTraceInfo> trace) {
+    private String prettyPrintParentRecipeTraces(List<RecipeTraceInfo> trace) {
         return trace.stream().map(Object::toString).collect(Collectors.joining(", "));
     }
 

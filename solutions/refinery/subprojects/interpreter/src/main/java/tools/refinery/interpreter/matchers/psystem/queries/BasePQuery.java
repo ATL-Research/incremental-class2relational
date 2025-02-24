@@ -40,14 +40,14 @@ public abstract class BasePQuery implements PQuery {
      * @since 2.0
      */
 	protected final PVisibility visibility;
-	protected List <PProblem> pProblems = new ArrayList <PProblem>();
-	private List <PAnnotation> annotations = new ArrayList <PAnnotation>();
+	protected List<PProblem> pProblems = new ArrayList<PProblem>();
+	private List<PAnnotation> annotations = new ArrayList<PAnnotation>();
 	private QueryEvaluationHint evaluationHints = new QueryEvaluationHint(null, (IQueryBackendFactory)null);
 	PDisjunction canonicalDisjunction;
-	private List <String> parameterNames = null; // Lazy initialization
+	private List<String> parameterNames = null; // Lazy initialization
 
 	/** For traceability only. */
-	private List <Object> wrappingQuerySpecifications = new ArrayList <Object>(1);
+	private List<Object> wrappingQuerySpecifications = new ArrayList<Object>(1);
 
 	@Override
 	public Integer getPositionOfParameter(String parameterName) {
@@ -71,7 +71,7 @@ public abstract class BasePQuery implements PQuery {
 	}
 
 	@Override
-	public List <PProblem> getPProblems() {
+	public List<PProblem> getPProblems() {
 		return Collections.unmodifiableList(pProblems);
 	}
 
@@ -106,28 +106,28 @@ public abstract class BasePQuery implements PQuery {
 	}
 
 	@Override
-	public List <PAnnotation> getAllAnnotations() {
+	public List<PAnnotation> getAllAnnotations() {
 		ensureInitialized();
 	    return new ArrayList<>(annotations);
 	}
 
-	private Stream <PAnnotation> getAnnotationStreamByName(final String name) {
+	private Stream<PAnnotation> getAnnotationStreamByName(final String name) {
 	    ensureInitialized();
         return annotations.stream().filter(Objects::nonNull).filter(annotation -> Objects.equals(name, annotation.getName()));
 	}
 
 	@Override
-	public List <PAnnotation> getAnnotationsByName(final String annotationName) {
+	public List<PAnnotation> getAnnotationsByName(final String annotationName) {
 		return getAnnotationStreamByName(annotationName).collect(Collectors.toList());
 	}
 
 	@Override
-	public Optional <PAnnotation> getFirstAnnotationByName(String annotationName) {
+	public Optional<PAnnotation> getFirstAnnotationByName(String annotationName) {
 	    return getAnnotationStreamByName(annotationName).findFirst();
 	}
 
 	@Override
-	public List <String> getParameterNames() {
+	public List<String> getParameterNames() {
 		ensureInitialized();
 		if (parameterNames == null) {
 		    parameterNames = getParameters().stream().map(PParameter::getName).collect(Collectors.toList());
@@ -136,30 +136,30 @@ public abstract class BasePQuery implements PQuery {
 	}
 
 	@Override
-	public Set <PQuery> getDirectReferredQueries() {
+	public Set<PQuery> getDirectReferredQueries() {
 		ensureInitialized();
 	    return canonicalDisjunction.getDirectReferredQueries();
 	}
 
 	@Override
-	public Set <PQuery> getAllReferredQueries() {
+	public Set<PQuery> getAllReferredQueries() {
 	    ensureInitialized();
 	    return canonicalDisjunction.getAllReferredQueries();
 	}
 
 
 	@Override
-	public List <Object> publishedAs() {
+	public List<Object> publishedAs() {
 		return wrappingQuerySpecifications;
 	}
 
 	@Override
-	public Set <TypeJudgement> getTypeGuarantees() {
+	public Set<TypeJudgement> getTypeGuarantees() {
 	    ensureInitialized();
-		Set <TypeJudgement> result = new HashSet <TypeJudgement>();
+		Set<TypeJudgement> result = new HashSet<TypeJudgement>();
 
-		List <PParameter> parameters = getParameters();
-		for (int i=0; i <parameters.size(); ++i) {
+		List<PParameter> parameters = getParameters();
+		for (int i=0; i<parameters.size(); ++i) {
 			PParameter parameter = parameters.get(i);
 			IInputKey declaredUnaryType = parameter.getDeclaredUnaryType();
 			if (declaredUnaryType != null) {
@@ -199,7 +199,7 @@ public abstract class BasePQuery implements PQuery {
 	    }
 	}
 
-	protected final void setBodies(Set <PBody> bodies) {
+	protected final void setBodies(Set<PBody> bodies) {
 	    canonicalDisjunction = new PDisjunction(this, bodies);
 	    for (PBody body : canonicalDisjunction.getBodies()) {
 	        body.setStatus(null);
@@ -213,11 +213,11 @@ public abstract class BasePQuery implements PQuery {
 	 * @return
 	 * @throws InterpreterRuntimeException
 	 */
-	protected abstract Set <PBody> doGetContainedBodies();
+	protected abstract Set<PBody> doGetContainedBodies();
 
 	@Override
 	public String toString() {
-	    return String.format("PQuery <%s>=%s", getFullyQualifiedName(), super.toString());
+	    return String.format("PQuery<%s>=%s", getFullyQualifiedName(), super.toString());
 	}
 
     /**

@@ -11,17 +11,17 @@ import tools.refinery.store.reasoning.translator.TranslationException;
 import java.util.*;
 
 public class TypeHierarchy {
-	private final Set <PartialRelation> allTypes;
-	private final Map <PartialRelation, ExtendedTypeInfo> extendedTypeInfoMap;
-	private final Map <PartialRelation, PartialRelation> replacements = new LinkedHashMap<>();
+	private final Set<PartialRelation> allTypes;
+	private final Map<PartialRelation, ExtendedTypeInfo> extendedTypeInfoMap;
+	private final Map<PartialRelation, PartialRelation> replacements = new LinkedHashMap<>();
 	private final InferredType unknownType;
-	private final Map <PartialRelation, TypeAnalysisResult> preservedTypes;
+	private final Map<PartialRelation, TypeAnalysisResult> preservedTypes;
 
-	TypeHierarchy(Map <PartialRelation, TypeInfo> typeInfoMap) {
+	TypeHierarchy(Map<PartialRelation, TypeInfo> typeInfoMap) {
 		int size = typeInfoMap.size();
 		allTypes = Collections.unmodifiableSet(new LinkedHashSet<>(typeInfoMap.keySet()));
 		extendedTypeInfoMap = new LinkedHashMap<>(size);
-		var concreteTypes = new LinkedHashSet <PartialRelation>();
+		var concreteTypes = new LinkedHashSet<PartialRelation>();
 		int index = 0;
 		for (var entry : typeInfoMap.entrySet()) {
 			var type = entry.getKey();
@@ -48,15 +48,15 @@ public class TypeHierarchy {
 		return unknownType;
 	}
 
-	public Set <PartialRelation> getAllTypes() {
+	public Set<PartialRelation> getAllTypes() {
 		return allTypes;
 	}
 
-	public Map <PartialRelation, TypeAnalysisResult> getPreservedTypes() {
+	public Map<PartialRelation, TypeAnalysisResult> getPreservedTypes() {
 		return preservedTypes;
 	}
 
-	public Map <PartialRelation, PartialRelation> getEliminatedTypes() {
+	public Map<PartialRelation, PartialRelation> getEliminatedTypes() {
 		return Collections.unmodifiableMap(replacements);
 	}
 
@@ -77,7 +77,7 @@ public class TypeHierarchy {
 		do {
 			changed = false;
 			for (var extendedTypeInfo : extendedTypeInfoMap.values()) {
-				var found = new HashSet <PartialRelation>();
+				var found = new HashSet<PartialRelation>();
 				var allSupertypes = extendedTypeInfo.getAllSupertypes();
 				for (var supertype : allSupertypes) {
 					var supertypeInfo = extendedTypeInfoMap.get(supertype);
@@ -118,7 +118,7 @@ public class TypeHierarchy {
 		for (var extendedTypeInfo : extendedTypeInfoMap.values()) {
 			var allSubtypes = extendedTypeInfo.getAllSubtypes();
 			var directSubtypes = new LinkedHashSet<>(allSubtypes);
-			var indirectSubtypes = new LinkedHashSet <PartialRelation>(allSubtypes.size());
+			var indirectSubtypes = new LinkedHashSet<PartialRelation>(allSubtypes.size());
 			for (var subtype : allSubtypes) {
 				indirectSubtypes.addAll(extendedTypeInfoMap.get(subtype).getAllSubtypes());
 			}
@@ -128,9 +128,9 @@ public class TypeHierarchy {
 	}
 
 	private void eliminateTrivialSupertypes() {
-		Set <PartialRelation> toInspect = new HashSet<>(extendedTypeInfoMap.keySet());
+		Set<PartialRelation> toInspect = new HashSet<>(extendedTypeInfoMap.keySet());
 		while (!toInspect.isEmpty()) {
-			var toRemove = new ArrayList <PartialRelation>();
+			var toRemove = new ArrayList<PartialRelation>();
 			for (var partialRelation : toInspect) {
 				var extendedTypeInfo = extendedTypeInfoMap.get(partialRelation);
 				if (extendedTypeInfo != null && isTrivialSupertype(extendedTypeInfo)) {
@@ -151,14 +151,14 @@ public class TypeHierarchy {
 		var subtypeIterator = extendedTypeInfo.getDirectSubtypes().iterator();
 		if (!subtypeIterator.hasNext()) {
 			// Do not eliminate abstract types with 0 subtypes, because they can be used para-consistently, i.e.,
-			// an object determined to <b>must </b> have an abstract type with 0 subtypes <b>may not </b> ever exist.
+			// an object determined to <b>must</b> have an abstract type with 0 subtypes <b>may not</b> ever exist.
 			return false;
 		}
 		var directSubtype = subtypeIterator.next();
 		return !extendedTypeInfoMap.get(directSubtype).isAbstractType() && !subtypeIterator.hasNext();
 	}
 
-	private void removeTrivialType(PartialRelation trivialType, Set <PartialRelation> toInspect) {
+	private void removeTrivialType(PartialRelation trivialType, Set<PartialRelation> toInspect) {
 		var extendedTypeInfo = extendedTypeInfoMap.get(trivialType);
 		var iterator = extendedTypeInfo.getDirectSubtypes().iterator();
 		if (!iterator.hasNext()) {
@@ -201,9 +201,9 @@ public class TypeHierarchy {
 		return resolved;
 	}
 
-	private Map <PartialRelation, TypeAnalysisResult> computeAnalysisResults() {
+	private Map<PartialRelation, TypeAnalysisResult> computeAnalysisResults() {
 		var allExtendedTypeInfoList = sortTypes();
-		var preservedResults = new LinkedHashMap <PartialRelation, TypeAnalysisResult>(
+		var preservedResults = new LinkedHashMap<PartialRelation, TypeAnalysisResult>(
 				allExtendedTypeInfoList.size());
 		for (var extendedTypeInfo : allExtendedTypeInfoList) {
 			var type = extendedTypeInfo.getType();
@@ -212,7 +212,7 @@ public class TypeHierarchy {
 		return Collections.unmodifiableMap(preservedResults);
 	}
 
-	private List <ExtendedTypeInfo> sortTypes() {
+	private List<ExtendedTypeInfo> sortTypes() {
 		// Invert {@code directSubtypes} to keep track of the out-degree of types.
 		for (var extendedTypeInfo : extendedTypeInfoMap.values()) {
 			for (var directSubtype : extendedTypeInfo.getDirectSubtypes()) {
@@ -220,16 +220,16 @@ public class TypeHierarchy {
 				extendedDirectSubtypeInfo.getUnsortedDirectSupertypes().add(extendedTypeInfo.getType());
 			}
 		}
-		// Build a <i>inverse </i> topological order ({@code extends} edges always points to earlier nodes in the order,
+		// Build a <i>inverse</i> topological order ({@code extends} edges always points to earlier nodes in the order,
 		// breaking ties according to the original order ({@link ExtendedTypeInfo#index}) to form a 'stable' sort.
 		// See, e.g., https://stackoverflow.com/a/11236027.
-		var priorityQueue = new PriorityQueue <ExtendedTypeInfo>();
+		var priorityQueue = new PriorityQueue<ExtendedTypeInfo>();
 		for (var extendedTypeInfo : extendedTypeInfoMap.values()) {
 			if (extendedTypeInfo.getUnsortedDirectSupertypes().isEmpty()) {
 				priorityQueue.add(extendedTypeInfo);
 			}
 		}
-		var sorted = new ArrayList <ExtendedTypeInfo>(extendedTypeInfoMap.size());
+		var sorted = new ArrayList<ExtendedTypeInfo>(extendedTypeInfoMap.size());
 		while (!priorityQueue.isEmpty()) {
 			var extendedTypeInfo = priorityQueue.remove();
 			sorted.add(extendedTypeInfo);

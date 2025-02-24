@@ -65,7 +65,7 @@ public class InvalidMultiplicityErrorTranslator implements ModelStoreConfigurati
 		var cardinalityInterval = constrainedMultiplicity.multiplicity();
 		var node = Variable.of("node");
 		var other = Variable.of("other");
-		List <Variable> arguments = inverse ? List.of(other, node) : List.of(node, other);
+		List<Variable> arguments = inverse ? List.of(other, node) : List.of(node, other);
 		var mustBuilder = Query.builder(DnfLifter.decorateName(name, Modality.MUST, Concreteness.PARTIAL))
 				.parameter(node);
 		var candidateMayBuilder = Query.builder(DnfLifter.decorateName(name, Modality.MAY, Concreteness.PARTIAL))

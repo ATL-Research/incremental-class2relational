@@ -42,7 +42,7 @@ import tools.refinery.interpreter.rete.network.Supplier;
 public class RelationEvaluatorNode extends StandardNode implements Supplier, Clearable {
 
     private final IRelationEvaluator evaluator;
-    private Set <Tuple> cachedOutputs;
+    private Set<Tuple> cachedOutputs;
     private Supplier[] inputSuppliers;
     private BatchingReceiver[] inputReceivers;
 
@@ -57,11 +57,11 @@ public class RelationEvaluatorNode extends StandardNode implements Supplier, Cle
         this.cachedOutputs.clear();
     }
 
-    public void connectToParents(final List <Supplier> inputSuppliers) {
+    public void connectToParents(final List<Supplier> inputSuppliers) {
         this.inputSuppliers = new Supplier[inputSuppliers.size()];
         this.inputReceivers = new BatchingReceiver[inputSuppliers.size()];
 
-        final List <Integer> inputArities = evaluator.getInputArities();
+        final List<Integer> inputArities = evaluator.getInputArities();
 
         if (inputArities.size() != inputSuppliers.size()) {
             throw new IllegalStateException(evaluator.toString() + " expects " + inputArities.size()
@@ -94,7 +94,7 @@ public class RelationEvaluatorNode extends StandardNode implements Supplier, Cle
         }
 
         // initialize the output relation
-        final List <Set<Tuple>> inputSets = new ArrayList <Set<Tuple>>();
+        final List<Set<Tuple>> inputSets = new ArrayList<Set<Tuple>>();
         for (final BatchingReceiver inputReceiver : this.inputReceivers) {
             inputSets.add(inputReceiver.getTuples());
         }
@@ -110,19 +110,19 @@ public class RelationEvaluatorNode extends StandardNode implements Supplier, Cle
     }
 
     @Override
-    public void pullInto(final Collection <Tuple> collector, final boolean flush) {
+    public void pullInto(final Collection<Tuple> collector, final boolean flush) {
         collector.addAll(this.cachedOutputs);
     }
 
     @Override
-    public void pullIntoWithTimeline(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush) {
-        final Timeline <Timestamp> timeline = Timelines.createFrom(Timestamp.ZERO);
+    public void pullIntoWithTimeline(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush) {
+        final Timeline<Timestamp> timeline = Timelines.createFrom(Timestamp.ZERO);
         for (final Tuple output : this.cachedOutputs) {
             collector.put(output, timeline);
         }
     }
 
-    private Set <Tuple> evaluateRelation(final List <Set<Tuple>> inputs) {
+    private Set<Tuple> evaluateRelation(final List<Set<Tuple>> inputs) {
         try {
             return this.evaluator.evaluateRelation(inputs);
         } catch (final Exception e) {
@@ -131,11 +131,11 @@ public class RelationEvaluatorNode extends StandardNode implements Supplier, Cle
     }
 
     private void batchUpdateCompleted() {
-        final List <Set<Tuple>> inputSets = new ArrayList <Set<Tuple>>();
+        final List<Set<Tuple>> inputSets = new ArrayList<Set<Tuple>>();
         for (final BatchingReceiver inputReceiver : this.inputReceivers) {
             inputSets.add(inputReceiver.getTuples());
         }
-        final Set <Tuple> newOutputs = evaluateRelation(inputSets);
+        final Set<Tuple> newOutputs = evaluateRelation(inputSets);
         for (final Tuple tuple : newOutputs) {
             if (this.cachedOutputs != null && this.cachedOutputs.remove(tuple)) {
                 // already known tuple - do nothing
@@ -161,7 +161,7 @@ public class RelationEvaluatorNode extends StandardNode implements Supplier, Cle
             this.source = source;
         }
 
-        private Set <Tuple> getTuples() {
+        private Set<Tuple> getTuples() {
             return ((AbstractUniquenessEnforcerNode) this.source).getTuples();
         }
 
@@ -171,7 +171,7 @@ public class RelationEvaluatorNode extends StandardNode implements Supplier, Cle
         }
 
         @Override
-        public void batchUpdate(final Collection <Entry<Tuple, Integer>> updates, final Timestamp timestamp) {
+        public void batchUpdate(final Collection<Entry<Tuple, Integer>> updates, final Timestamp timestamp) {
             assert Timestamp.ZERO.equals(timestamp);
             // there is nothing to do here because the source production node has already updated itself
             // the only thing we need to do is to issue the callback

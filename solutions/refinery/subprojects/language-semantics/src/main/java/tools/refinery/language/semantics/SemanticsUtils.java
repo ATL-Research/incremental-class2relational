@@ -21,7 +21,7 @@ public class SemanticsUtils {
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
 
-	public Optional <String> getName(EObject eObject) {
+	public Optional<String> getName(EObject eObject) {
 		var qualifiedName = qualifiedNameProvider.getFullyQualifiedName(eObject);
 		if (qualifiedName == null) {
 			return Optional.empty();

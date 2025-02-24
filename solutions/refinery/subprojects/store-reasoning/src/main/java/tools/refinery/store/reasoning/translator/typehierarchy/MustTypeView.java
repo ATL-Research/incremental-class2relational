@@ -10,7 +10,7 @@ import tools.refinery.store.representation.Symbol;
 import tools.refinery.store.tuple.Tuple;
 
 class MustTypeView extends InferredTypeView {
-	public MustTypeView(Symbol <InferredType> symbol, PartialRelation type) {
+	public MustTypeView(Symbol<InferredType> symbol, PartialRelation type) {
 		super(symbol, "must", type);
 	}
 

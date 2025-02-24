@@ -31,7 +31,7 @@ class EqualsRelationRewriter extends QueryBasedRelationRewriter {
 	}
 
 	@Override
-	public List <Literal> rewriteLiteral(Set <Variable> positiveVariables, AbstractCallLiteral literal,
+	public List<Literal> rewriteLiteral(Set<Variable> positiveVariables, AbstractCallLiteral literal,
 										Modality modality, Concreteness concreteness) {
 		if (!(literal instanceof CallLiteral callLiteral)) {
 			return super.rewriteLiteral(positiveVariables, literal, modality, concreteness);

@@ -37,10 +37,10 @@ import java.util.stream.Stream;
  */
 class PConstraintInfoInferrer {
 
-    private static final Predicate <PVariable> SINGLE_USE_VARIABLE = input -> input != null && input.getReferringConstraints().size() == 1;
+    private static final Predicate<PVariable> SINGLE_USE_VARIABLE = input -> input != null && input.getReferringConstraints().size() == 1;
 
     private final boolean useIndex;
-    private final Function <IConstraintEvaluationContext, Double> costFunction;
+    private final Function<IConstraintEvaluationContext, Double> costFunction;
     private final IQueryBackendContext context;
     private final ResultProviderRequestor resultRequestor;
 
@@ -48,7 +48,7 @@ class PConstraintInfoInferrer {
     public PConstraintInfoInferrer(boolean useIndex,
             IQueryBackendContext backendContext,
             ResultProviderRequestor resultRequestor,
-            Function <IConstraintEvaluationContext, Double> costFunction) {
+            Function<IConstraintEvaluationContext, Double> costFunction) {
         this.useIndex = useIndex;
         this.context = backendContext;
         this.resultRequestor = resultRequestor;
@@ -62,8 +62,8 @@ class PConstraintInfoInferrer {
      * @param constraintSet the set of constraints
      * @return a collection of the wrapper PConstraintInfo objects with all the allowed application conditions
      */
-    public List <PConstraintInfo> createPConstraintInfos(Set <PConstraint> constraintSet) {
-        List <PConstraintInfo> constraintInfos = new ArrayList<>();
+    public List<PConstraintInfo> createPConstraintInfos(Set<PConstraint> constraintSet) {
+        List<PConstraintInfo> constraintInfos = new ArrayList<>();
 
         for (PConstraint pConstraint : constraintSet) {
             createPConstraintInfoDispatch(constraintInfos, pConstraint);
@@ -71,7 +71,7 @@ class PConstraintInfoInferrer {
         return constraintInfos;
     }
 
-    private void createPConstraintInfoDispatch(List <PConstraintInfo> resultList, PConstraint pConstraint){
+    private void createPConstraintInfoDispatch(List<PConstraintInfo> resultList, PConstraint pConstraint){
         if(pConstraint instanceof ExportedParameter){
             createConstraintInfoExportedParameter(resultList, (ExportedParameter) pConstraint);
         } else if(pConstraint instanceof TypeConstraint){
@@ -97,27 +97,27 @@ class PConstraintInfoInferrer {
         }
     }
 
-    private void createConstraintInfoConstantValue(List <PConstraintInfo> resultList,
+    private void createConstraintInfoConstantValue(List<PConstraintInfo> resultList,
             ConstantValue pConstraint) {
         // A ConstantValue constraint has a single variable, which is allowed to be unbound
         // (extending through ConstantValue is considered a cheap operation)
-        Set <PVariable> affectedVariables = pConstraint.getAffectedVariables();
-        Set <? extends Set <PVariable>> bindings = Sets.powerSet(affectedVariables);
+        Set<PVariable> affectedVariables = pConstraint.getAffectedVariables();
+        Set<? extends Set<PVariable>> bindings = Sets.powerSet(affectedVariables);
         doCreateConstraintInfos(resultList, pConstraint, affectedVariables, bindings);
     }
 
 
-    private void createConstraintInfoPositivePatternCall(List <PConstraintInfo> resultList,
+    private void createConstraintInfoPositivePatternCall(List<PConstraintInfo> resultList,
             PositivePatternCall pCall) {
         // A pattern call can have any of its variables unbound
-        Set <PVariable> affectedVariables = pCall.getAffectedVariables();
+        Set<PVariable> affectedVariables = pCall.getAffectedVariables();
         // IN parameters cannot be unbound and
         // OUT parameters cannot be bound
         Tuple variables = pCall.getVariablesTuple();
-        final Set <PVariable> inVariables = new HashSet<>();
-        Set <PVariable> inoutVariables = new HashSet<>();
-        List <PParameter> parameters = pCall.getReferredQuery().getParameters();
-        for(int i=0;i <parameters.size();i++){
+        final Set<PVariable> inVariables = new HashSet<>();
+        Set<PVariable> inoutVariables = new HashSet<>();
+        List<PParameter> parameters = pCall.getReferredQuery().getParameters();
+        for(int i=0;i<parameters.size();i++){
             switch(parameters.get(i).getDirection()){
             case IN:
                 inVariables.add((PVariable) variables.get(i));
@@ -131,21 +131,21 @@ class PConstraintInfoInferrer {
 
             }
         }
-        Iterable <Set<PVariable>> bindings = Sets.powerSet(inoutVariables).stream()
+        Iterable<Set<PVariable>> bindings = Sets.powerSet(inoutVariables).stream()
                 .map(input -> Stream.concat(input.stream(), inVariables.stream()).collect(Collectors.toSet()))
                 .collect(Collectors.toSet());
 
         doCreateConstraintInfos(resultList, pCall, affectedVariables, bindings);
     }
 
-    private void createConstraintInfoBinaryTransitiveClosure(List <PConstraintInfo> resultList,
+    private void createConstraintInfoBinaryTransitiveClosure(List<PConstraintInfo> resultList,
             AbstractTransitiveClosure closure) {
         // A pattern call can have any of its variables unbound
 
-        List <PParameter> parameters = closure.getReferredQuery().getParameters();
+        List<PParameter> parameters = closure.getReferredQuery().getParameters();
         Tuple variables = closure.getVariablesTuple();
 
-        Set <Set<PVariable>> bindings = new HashSet<>();
+        Set<Set<PVariable>> bindings = new HashSet<>();
         PVariable firstVariable = (PVariable) variables.get(0);
         PVariable secondVariable = (PVariable) variables.get(1);
         // Check is always supported
@@ -164,19 +164,19 @@ class PConstraintInfoInferrer {
 
 
 
-    private void createConstraintInfoExportedParameter(List <PConstraintInfo> resultList,
+    private void createConstraintInfoExportedParameter(List<PConstraintInfo> resultList,
             ExportedParameter parameter) {
         // In case of an exported parameter constraint, the parameter must be bound in order to execute
-        Set <PVariable> affectedVariables = parameter.getAffectedVariables();
+        Set<PVariable> affectedVariables = parameter.getAffectedVariables();
         doCreateConstraintInfos(resultList, parameter, affectedVariables, Collections.singleton(affectedVariables));
     }
 
-    private void createConstraintInfoExpressionEvaluation(List <PConstraintInfo> resultList,
+    private void createConstraintInfoExpressionEvaluation(List<PConstraintInfo> resultList,
             ExpressionEvaluation expressionEvaluation) {
         // An expression evaluation can only have its output variable unbound. All other variables shall be bound
         PVariable output = expressionEvaluation.getOutputVariable();
-        Set <Set<PVariable>> bindings = new HashSet<>();
-        Set <PVariable> affectedVariables = expressionEvaluation.getAffectedVariables();
+        Set<Set<PVariable>> bindings = new HashSet<>();
+        Set<PVariable> affectedVariables = expressionEvaluation.getAffectedVariables();
         // All variables bound -> check
         bindings.add(affectedVariables);
         // Output variable is not bound -> extend
@@ -184,29 +184,29 @@ class PConstraintInfoInferrer {
         doCreateConstraintInfos(resultList, expressionEvaluation, affectedVariables, bindings);
     }
 
-    private void createConstraintInfoTypeFilterConstraint(List <PConstraintInfo> resultList,
+    private void createConstraintInfoTypeFilterConstraint(List<PConstraintInfo> resultList,
             TypeFilterConstraint filter){
         // In case of type filter, all affected variables must be bound in order to execute
-        Set <PVariable> affectedVariables = filter.getAffectedVariables();
+        Set<PVariable> affectedVariables = filter.getAffectedVariables();
         doCreateConstraintInfos(resultList, filter, affectedVariables, Collections.singleton(affectedVariables));
     }
 
-    private void createConstraintInfoInequality(List <PConstraintInfo> resultList,
+    private void createConstraintInfoInequality(List<PConstraintInfo> resultList,
             Inequality inequality){
         // In case of inequality, all affected variables must be bound in order to execute
-        Set <PVariable> affectedVariables = inequality.getAffectedVariables();
+        Set<PVariable> affectedVariables = inequality.getAffectedVariables();
         doCreateConstraintInfos(resultList, inequality, affectedVariables, Collections.singleton(affectedVariables));
     }
 
-    private void createConstraintInfoAggregatorConstraint(List <PConstraintInfo> resultList,
+    private void createConstraintInfoAggregatorConstraint(List<PConstraintInfo> resultList,
             PConstraint pConstraint, PVariable resultVariable){
-        Set <PVariable> affectedVariables = pConstraint.getAffectedVariables();
+        Set<PVariable> affectedVariables = pConstraint.getAffectedVariables();
 
         // The only variables which can be unbound are single-use
-        Set <PVariable> canBeUnboundVariables =
+        Set<PVariable> canBeUnboundVariables =
                 Stream.concat(Stream.of(resultVariable), affectedVariables.stream().filter(SINGLE_USE_VARIABLE)).collect(Collectors.toSet());
 
-        Set <Set<PVariable>> bindings = calculatePossibleBindings(canBeUnboundVariables, affectedVariables);
+        Set<Set<PVariable>> bindings = calculatePossibleBindings(canBeUnboundVariables, affectedVariables);
 
         doCreateConstraintInfos(resultList, pConstraint, affectedVariables, bindings);
     }
@@ -217,33 +217,33 @@ class PConstraintInfoInferrer {
      * @param affectedVariables All affected variables
      * @return The set of possible bound variable sets
      */
-    private Set <Set<PVariable>> calculatePossibleBindings(Set <PVariable> canBeUnboundVariables, Set <PVariable> affectedVariables){
-        final Set <PVariable> mustBindVariables = affectedVariables.stream().filter(input -> !canBeUnboundVariables.contains(input)).collect(Collectors.toSet());
+    private Set<Set<PVariable>> calculatePossibleBindings(Set<PVariable> canBeUnboundVariables, Set<PVariable> affectedVariables){
+        final Set<PVariable> mustBindVariables = affectedVariables.stream().filter(input -> !canBeUnboundVariables.contains(input)).collect(Collectors.toSet());
         return Sets.powerSet(canBeUnboundVariables).stream()
                 .map(input -> {
                     //some variables have to be bound before executing this constraint
-                    Set <PVariable> result= new HashSet<>(input);
+                    Set<PVariable> result= new HashSet<>(input);
                     result.addAll(mustBindVariables);
                     return result;
                 })
                 .collect(Collectors.toSet());
     }
 
-    private void createConstraintInfoGeneric(List <PConstraintInfo> resultList, PConstraint pConstraint){
-        Set <PVariable> affectedVariables = pConstraint.getAffectedVariables();
+    private void createConstraintInfoGeneric(List<PConstraintInfo> resultList, PConstraint pConstraint){
+        Set<PVariable> affectedVariables = pConstraint.getAffectedVariables();
 
         // The only variables which can be unbound are single use variables
-        Set <PVariable> canBeUnboundVariables = affectedVariables.stream().filter(SINGLE_USE_VARIABLE).collect(Collectors.toSet());
+        Set<PVariable> canBeUnboundVariables = affectedVariables.stream().filter(SINGLE_USE_VARIABLE).collect(Collectors.toSet());
 
-        Set <Set<PVariable>> bindings = calculatePossibleBindings(canBeUnboundVariables, affectedVariables);
+        Set<Set<PVariable>> bindings = calculatePossibleBindings(canBeUnboundVariables, affectedVariables);
 
         doCreateConstraintInfos(resultList, pConstraint, affectedVariables, bindings);
     }
 
-    private void createConstraintInfoTypeConstraint(List <PConstraintInfo> resultList,
+    private void createConstraintInfoTypeConstraint(List<PConstraintInfo> resultList,
             TypeConstraint typeConstraint) {
-        Set <PVariable> affectedVariables = typeConstraint.getAffectedVariables();
-        Set <? extends Set <PVariable>> bindings = null;
+        Set<PVariable> affectedVariables = typeConstraint.getAffectedVariables();
+        Set<? extends Set<PVariable>> bindings = null;
 
         IInputKey inputKey = typeConstraint.getSupplierKey();
         if(inputKey.isEnumerable()){
@@ -256,10 +256,10 @@ class PConstraintInfoInferrer {
         doCreateConstraintInfos(resultList, typeConstraint, affectedVariables, bindings);
     }
 
-    private void doCreateConstraintInfos(List <PConstraintInfo> constraintInfos,
-            PConstraint pConstraint, Set <PVariable> affectedVariables, Iterable <? extends Set <PVariable>> bindings) {
-        Set <PConstraintInfo> sameWithDifferentBindings = new HashSet<>();
-        for (Set <PVariable> boundVariables : bindings) {
+    private void doCreateConstraintInfos(List<PConstraintInfo> constraintInfos,
+            PConstraint pConstraint, Set<PVariable> affectedVariables, Iterable<? extends Set<PVariable>> bindings) {
+        Set<PConstraintInfo> sameWithDifferentBindings = new HashSet<>();
+        for (Set<PVariable> boundVariables : bindings) {
 
             PConstraintInfo info = new PConstraintInfo(pConstraint, boundVariables,
                     affectedVariables.stream().filter(input -> !boundVariables.contains(input)).collect(Collectors.toSet()),
@@ -269,7 +269,7 @@ class PConstraintInfoInferrer {
         }
     }
 
-    private Set <Set<PVariable>> excludeUnnavigableOperationMasks(TypeConstraint typeConstraint, Set <? extends Set <PVariable>> bindings) {
+    private Set<Set<PVariable>> excludeUnnavigableOperationMasks(TypeConstraint typeConstraint, Set<? extends Set<PVariable>> bindings) {
         PVariable firstVariable = typeConstraint.getVariableInTuple(0);
         return bindings.stream().filter(
                 boundVariablesSet -> (boundVariablesSet.isEmpty() || boundVariablesSet.contains(firstVariable)))

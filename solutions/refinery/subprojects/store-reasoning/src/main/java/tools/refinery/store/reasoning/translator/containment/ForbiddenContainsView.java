@@ -9,8 +9,8 @@ import tools.refinery.store.query.view.TuplePreservingView;
 import tools.refinery.store.representation.Symbol;
 import tools.refinery.store.tuple.Tuple;
 
-class ForbiddenContainsView extends TuplePreservingView <InferredContainment> {
-	public ForbiddenContainsView(Symbol <InferredContainment> symbol) {
+class ForbiddenContainsView extends TuplePreservingView<InferredContainment> {
+	public ForbiddenContainsView(Symbol<InferredContainment> symbol) {
 		super(symbol, "contains#forbidden");
 	}
 

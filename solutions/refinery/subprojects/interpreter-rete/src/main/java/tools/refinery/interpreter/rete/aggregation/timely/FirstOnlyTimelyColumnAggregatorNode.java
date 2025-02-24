@@ -32,21 +32,21 @@ import tools.refinery.interpreter.rete.network.mailbox.timely.TimelyMailbox;
 /**
  * First-only timely implementation of the column aggregator node. Only timestamps of appearance are maintained for
  * tuples instead of complete timelines.
- * <br> <br>
+ * <br><br>
  * Subclasses are responsible for implementing the aggregator architecture, and they must make use of the inner class {@link CumulativeAggregate}.
- * <br> <br>
+ * <br><br>
  * This node supports recursive aggregation.
  *
  * @author Tamas Szabo
  * @since 2.4
  */
-public abstract class FirstOnlyTimelyColumnAggregatorNode <Domain, Accumulator, AggregateResult>
-        extends AbstractColumnAggregatorNode <Domain, Accumulator, AggregateResult> {
+public abstract class FirstOnlyTimelyColumnAggregatorNode<Domain, Accumulator, AggregateResult>
+        extends AbstractColumnAggregatorNode<Domain, Accumulator, AggregateResult> {
 
-    protected final Map <Tuple, TreeMap <Timestamp, CumulativeAggregate <Accumulator, AggregateResult>>> memory;
+    protected final Map<Tuple, TreeMap<Timestamp, CumulativeAggregate<Accumulator, AggregateResult>>> memory;
 
     public FirstOnlyTimelyColumnAggregatorNode(final ReteContainer reteContainer,
-            final IMultisetAggregationOperator <Domain, Accumulator, AggregateResult> operator,
+            final IMultisetAggregationOperator<Domain, Accumulator, AggregateResult> operator,
             final TupleMask groupMask, final TupleMask columnMask) {
         super(reteContainer, operator, groupMask, columnMask);
         this.memory = CollectionsFactory.createMap();
@@ -54,7 +54,7 @@ public abstract class FirstOnlyTimelyColumnAggregatorNode <Domain, Accumulator, 
         this.mailbox = instantiateMailbox();
     }
 
-    protected static class CumulativeAggregate <Accumulator, AggregateResult> {
+    protected static class CumulativeAggregate<Accumulator, AggregateResult> {
         // the accumulator storing the aggregands
         protected Accumulator accumulator;
         // the aggregate result at the timestamp where this cumulative aggregate is stored
@@ -67,12 +67,12 @@ public abstract class FirstOnlyTimelyColumnAggregatorNode <Domain, Accumulator, 
 
     }
 
-    public Collection <Tuple> getGroups() {
+    public Collection<Tuple> getGroups() {
         return this.memory.keySet();
     }
 
     public AggregateResult getLastResult(final Tuple group) {
-        final TreeMap <Timestamp, CumulativeAggregate <Accumulator, AggregateResult>> groupMap = this.memory.get(group);
+        final TreeMap<Timestamp, CumulativeAggregate<Accumulator, AggregateResult>> groupMap = this.memory.get(group);
         if (groupMap == null) {
             return null;
         } else {
@@ -81,7 +81,7 @@ public abstract class FirstOnlyTimelyColumnAggregatorNode <Domain, Accumulator, 
     }
 
     public Timestamp getLastTimestamp(final Tuple group) {
-        final TreeMap <Timestamp, CumulativeAggregate <Accumulator, AggregateResult>> groupMap = this.memory.get(group);
+        final TreeMap<Timestamp, CumulativeAggregate<Accumulator, AggregateResult>> groupMap = this.memory.get(group);
         if (groupMap == null) {
             return null;
         } else {
@@ -124,13 +124,13 @@ public abstract class FirstOnlyTimelyColumnAggregatorNode <Domain, Accumulator, 
     protected abstract Accumulator getAccumulator(final Tuple group, final Timestamp timestamp);
 
     protected AggregateResult getResultRaw(final Tuple group, final Timestamp timestamp, final boolean lower) {
-        final TreeMap <Timestamp, CumulativeAggregate <Accumulator, AggregateResult>> entryMap = this.memory.get(group);
+        final TreeMap<Timestamp, CumulativeAggregate<Accumulator, AggregateResult>> entryMap = this.memory.get(group);
         if (entryMap == null) {
             return null;
         } else {
-            CumulativeAggregate <Accumulator, AggregateResult> entry = null;
+            CumulativeAggregate<Accumulator, AggregateResult> entry = null;
             if (lower) {
-                final Entry <Timestamp, CumulativeAggregate <Accumulator, AggregateResult>> lowerEntry = entryMap
+                final Entry<Timestamp, CumulativeAggregate<Accumulator, AggregateResult>> lowerEntry = entryMap
                         .lowerEntry(timestamp);
                 if (lowerEntry != null) {
                     entry = lowerEntry.getValue();
@@ -161,7 +161,7 @@ public abstract class FirstOnlyTimelyColumnAggregatorNode <Domain, Accumulator, 
 
     protected void storeIfNotNeutral(final Tuple group, final Accumulator accumulator, final AggregateResult value,
             final Timestamp timestamp) {
-        TreeMap <Timestamp, CumulativeAggregate <Accumulator, AggregateResult>> entryMap = this.memory.get(group);
+        TreeMap<Timestamp, CumulativeAggregate<Accumulator, AggregateResult>> entryMap = this.memory.get(group);
         if (operator.isNeutral(accumulator)) {
             if (entryMap != null) {
                 entryMap.remove(timestamp);
@@ -189,13 +189,13 @@ public abstract class FirstOnlyTimelyColumnAggregatorNode <Domain, Accumulator, 
     }
 
     @Override
-    public Map <AggregateResult, Timeline <Timestamp>> getAggregateResultTimeline(final Tuple group) {
-        final TreeMap <Timestamp, CumulativeAggregate <Accumulator, AggregateResult>> entryMap = this.memory.get(group);
+    public Map<AggregateResult, Timeline<Timestamp>> getAggregateResultTimeline(final Tuple group) {
+        final TreeMap<Timestamp, CumulativeAggregate<Accumulator, AggregateResult>> entryMap = this.memory.get(group);
         if (entryMap == null) {
             return Collections.emptyMap();
         } else {
-            final Map <AggregateResult, Timeline <Timestamp>> result = CollectionsFactory.createMap();
-            for (final Entry <Timestamp, CumulativeAggregate <Accumulator, AggregateResult>> entry : entryMap
+            final Map<AggregateResult, Timeline<Timestamp>> result = CollectionsFactory.createMap();
+            for (final Entry<Timestamp, CumulativeAggregate<Accumulator, AggregateResult>> entry : entryMap
                     .descendingMap().entrySet()) {
                 result.put(entry.getValue().result, Timelines.createFrom(entry.getKey()));
             }
@@ -204,9 +204,9 @@ public abstract class FirstOnlyTimelyColumnAggregatorNode <Domain, Accumulator, 
     }
 
     @Override
-    public Map <Tuple, Timeline <Timestamp>> getAggregateTupleTimeline(final Tuple group) {
-        final Map <AggregateResult, Timeline <Timestamp>> resultTimelines = getAggregateResultTimeline(group);
-        return new GroupedMap <AggregateResult, Timeline <Timestamp>>(group, resultTimelines, this.runtimeContext);
+    public Map<Tuple, Timeline<Timestamp>> getAggregateTupleTimeline(final Tuple group) {
+        final Map<AggregateResult, Timeline<Timestamp>> resultTimelines = getAggregateResultTimeline(group);
+        return new GroupedMap<AggregateResult, Timeline<Timestamp>>(group, resultTimelines, this.runtimeContext);
     }
 
 }

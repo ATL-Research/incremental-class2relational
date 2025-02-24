@@ -14,7 +14,7 @@ import java.util.function.Supplier;
  * A cache is a simple key-value pair that stores calculated values for specific key objects
  *
  * <p>
- * <b>NOTE </b> These caches are not expected to be used outside query backend implementations
+ * <b>NOTE</b> These caches are not expected to be used outside query backend implementations
  *
  * @author Zoltan Ujhelyi
  * @since 1.7
@@ -27,6 +27,6 @@ public interface ICache {
      * called once
      * @since 2.0
      */
-    <T> T getValue(Object key, Class <? extends T> clazz, Supplier <T> valueProvider);
+    <T> T getValue(Object key, Class<? extends T> clazz, Supplier<T> valueProvider);
 
 }

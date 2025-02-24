@@ -45,7 +45,7 @@ public class PartialRelationTranslatorProxy implements ModelStoreConfiguration, 
 	}
 
 	@Override
-	public List <Literal> rewriteLiteral(Set <Variable> positiveVariables, AbstractCallLiteral literal,
+	public List<Literal> rewriteLiteral(Set<Variable> positiveVariables, AbstractCallLiteral literal,
 										Modality modality, Concreteness concreteness) {
 		return List.of(literal.withTarget(ModalConstraint.of(modality, concreteness, targetRelation)));
 	}

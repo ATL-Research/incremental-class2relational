@@ -221,7 +221,7 @@ class MatcherUtilsTest {
 	@SuppressWarnings("ConstantValue")
 	@Test
 	void getSingleValueNullTest() {
-		var value = MatcherUtils.getSingleValue((Iterable <? extends ITuple>) null);
+		var value = MatcherUtils.getSingleValue((Iterable<? extends ITuple>) null);
 		assertThat(value, nullValue());
 	}
 

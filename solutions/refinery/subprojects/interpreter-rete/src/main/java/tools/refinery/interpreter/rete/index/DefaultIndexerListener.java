@@ -14,10 +14,10 @@ import tools.refinery.interpreter.rete.network.Node;
 
 public abstract class DefaultIndexerListener implements IndexerListener {
 
-    WeakReference <Node> owner;
+    WeakReference<Node> owner;
 
     public DefaultIndexerListener(Node owner) {
-        this.owner = new WeakReference <Node>(owner);
+        this.owner = new WeakReference<Node>(owner);
     }
 
     @Override

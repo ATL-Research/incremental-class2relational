@@ -38,8 +38,8 @@ import tools.refinery.interpreter.matchers.util.timeline.Timeline;
 public class DiscriminatorDispatcherNode extends SingleInputNode implements NetworkStructureChangeSensitiveNode {
 
     private int discriminationColumnIndex;
-    private Map <Object, DiscriminatorBucketNode> buckets = new HashMap<>();
-    private Map <Object, Mailbox> bucketMailboxes = new HashMap<>();
+    private Map<Object, DiscriminatorBucketNode> buckets = new HashMap<>();
+    private Map<Object, Mailbox> bucketMailboxes = new HashMap<>();
 
     /**
      * @param reteContainer
@@ -63,20 +63,20 @@ public class DiscriminatorDispatcherNode extends SingleInputNode implements Netw
     }
 
     @Override
-    public void pullInto(final Collection <Tuple> collector, final boolean flush) {
+    public void pullInto(final Collection<Tuple> collector, final boolean flush) {
         propagatePullInto(collector, flush);
     }
 
     @Override
-    public void pullIntoWithTimeline(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush) {
+    public void pullIntoWithTimeline(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush) {
         propagatePullIntoWithTimestamp(collector, flush);
     }
 
     /**
      * @since 2.3
      */
-    public void pullIntoFiltered(final Collection <Tuple> collector, final Object bucketKey, final boolean flush) {
-        final ArrayList <Tuple> unfiltered = new ArrayList <Tuple>();
+    public void pullIntoFiltered(final Collection<Tuple> collector, final Object bucketKey, final boolean flush) {
+        final ArrayList<Tuple> unfiltered = new ArrayList<Tuple>();
         propagatePullInto(unfiltered, flush);
         for (Tuple tuple : unfiltered) {
             if (bucketKey.equals(tuple.get(discriminationColumnIndex))) {
@@ -88,11 +88,11 @@ public class DiscriminatorDispatcherNode extends SingleInputNode implements Netw
     /**
      * @since 2.3
      */
-    public void pullIntoWithTimestampFiltered(final Map <Tuple, Timeline <Timestamp>> collector, final Object bucketKey,
+    public void pullIntoWithTimestampFiltered(final Map<Tuple, Timeline<Timestamp>> collector, final Object bucketKey,
             final boolean flush) {
-        final Map <Tuple, Timeline <Timestamp>> unfiltered = CollectionsFactory.createMap();
+        final Map<Tuple, Timeline<Timestamp>> unfiltered = CollectionsFactory.createMap();
         propagatePullIntoWithTimestamp(unfiltered, flush);
-        for (final Entry <Tuple, Timeline <Timestamp>> entry : unfiltered.entrySet()) {
+        for (final Entry<Tuple, Timeline<Timestamp>> entry : unfiltered.entrySet()) {
             if (bucketKey.equals(entry.getKey().get(discriminationColumnIndex))) {
                 collector.put(entry.getKey(), entry.getValue());
             }
@@ -116,7 +116,7 @@ public class DiscriminatorDispatcherNode extends SingleInputNode implements Netw
     /**
      * @since 2.2
      */
-    public Map <Object, Mailbox> getBucketMailboxes() {
+    public Map<Object, Mailbox> getBucketMailboxes() {
         return this.bucketMailboxes;
     }
 
@@ -148,7 +148,7 @@ public class DiscriminatorDispatcherNode extends SingleInputNode implements Netw
 
     @Override
     protected String toStringCore() {
-        return super.toStringCore() + ' <' + discriminationColumnIndex + '>';
+        return super.toStringCore() + '<' + discriminationColumnIndex + '>';
     }
 
 }

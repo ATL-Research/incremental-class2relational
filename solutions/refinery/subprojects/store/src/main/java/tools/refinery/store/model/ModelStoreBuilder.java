@@ -21,24 +21,24 @@ public interface ModelStoreBuilder {
 		return symbols(List.of(symbols));
 	}
 
-	default ModelStoreBuilder symbols(Collection <? extends AnySymbol> symbols) {
+	default ModelStoreBuilder symbols(Collection<? extends AnySymbol> symbols) {
 		symbols.forEach(this::symbol);
 		return this;
 	}
 
 	default ModelStoreBuilder symbol(AnySymbol symbol) {
-		return symbol((Symbol <?>) symbol);
+		return symbol((Symbol<?>) symbol);
 	}
 
-	 <T> ModelStoreBuilder symbol(Symbol <T> symbol);
+	<T> ModelStoreBuilder symbol(Symbol<T> symbol);
 
 	ModelStoreBuilder with(ModelAdapterBuilder adapterBuilder);
 
 	ModelStoreBuilder with(ModelStoreConfiguration configuration);
 
-	 <T extends ModelAdapterBuilder> Optional <T> tryGetAdapter(Class <? extends T> adapterType);
+	<T extends ModelAdapterBuilder> Optional<T> tryGetAdapter(Class<? extends T> adapterType);
 
-	 <T extends ModelAdapterBuilder> T getAdapter(Class <T> adapterType);
+	<T extends ModelAdapterBuilder> T getAdapter(Class<T> adapterType);
 
 	ModelStore build();
 }

@@ -32,7 +32,7 @@ public record ModalConstraint(Modality modality, Concreteness concreteness, Cons
 	}
 
 	@Override
-	public List <Parameter> getParameters() {
+	public List<Parameter> getParameters() {
 		return constraint.getParameters();
 	}
 

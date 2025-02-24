@@ -36,12 +36,12 @@ public abstract class EvaluatorCore {
      * @since 2.4
      */
     protected int sourceTupleWidth;
-    private Map <String, Integer> parameterPositions;
+    private Map<String, Integer> parameterPositions;
     protected IQueryRuntimeContext runtimeContext;
     protected IEvaluatorNode evaluatorNode;
 
     public EvaluatorCore(final Logger logger, final IExpressionEvaluator evaluator,
-            final Map <String, Integer> parameterPositions, final int sourceTupleWidth) {
+            final Map<String, Integer> parameterPositions, final int sourceTupleWidth) {
         this.logger = logger;
         this.evaluator = evaluator;
         this.parameterPositions = parameterPositions;
@@ -56,7 +56,7 @@ public abstract class EvaluatorCore {
     /**
      * @since 2.4
      */
-    public abstract Iterable <Tuple> performEvaluation(final Tuple input);
+    public abstract Iterable<Tuple> performEvaluation(final Tuple input);
 
     protected abstract String evaluationKind();
 
@@ -89,12 +89,12 @@ public abstract class EvaluatorCore {
     public static class PredicateEvaluatorCore extends EvaluatorCore {
 
         public PredicateEvaluatorCore(final Logger logger, final IExpressionEvaluator evaluator,
-                final Map <String, Integer> parameterPositions, final int sourceTupleWidth) {
+                final Map<String, Integer> parameterPositions, final int sourceTupleWidth) {
             super(logger, evaluator, parameterPositions, sourceTupleWidth);
         }
 
         @Override
-        public Iterable <Tuple> performEvaluation(final Tuple input) {
+        public Iterable<Tuple> performEvaluation(final Tuple input) {
             final Object result = evaluateTerm(input);
             if (Boolean.TRUE.equals(result)) {
                 return Collections.singleton(input);
@@ -118,7 +118,7 @@ public abstract class EvaluatorCore {
         protected final boolean isUnwinding;
 
         public FunctionEvaluatorCore(final Logger logger, final IExpressionEvaluator evaluator,
-                final Map <String, Integer> parameterPositions, final int sourceTupleWidth) {
+                final Map<String, Integer> parameterPositions, final int sourceTupleWidth) {
             this(logger, evaluator, parameterPositions, sourceTupleWidth, false);
         }
 
@@ -126,23 +126,23 @@ public abstract class EvaluatorCore {
          * @since 2.4
          */
         public FunctionEvaluatorCore(final Logger logger, final IExpressionEvaluator evaluator,
-                final Map <String, Integer> parameterPositions, final int sourceTupleWidth, final boolean isUnwinding) {
+                final Map<String, Integer> parameterPositions, final int sourceTupleWidth, final boolean isUnwinding) {
             super(logger, evaluator, parameterPositions, sourceTupleWidth);
             this.isUnwinding = isUnwinding;
         }
 
         @Override
-        public Iterable <Tuple> performEvaluation(final Tuple input) {
+        public Iterable<Tuple> performEvaluation(final Tuple input) {
             final Object result = evaluateTerm(input);
             if (result != null) {
                 if (this.isUnwinding) {
-                    final Set <?> resultAsSet = (result instanceof Set <?>) ? (Set <?>) result
-                            : (result instanceof Iterable <?>) ? Sets.newSet((Iterable <?>) result) : null;
+                    final Set<?> resultAsSet = (result instanceof Set<?>) ? (Set<?>) result
+                            : (result instanceof Iterable<?>) ? Sets.newSet((Iterable<?>) result) : null;
 
                     if (resultAsSet != null) {
                         return () -> {
-                            final Iterator <?> wrapped = resultAsSet.iterator();
-                            return new Iterator <Tuple>() {
+                            final Iterator<?> wrapped = resultAsSet.iterator();
+                            return new Iterator<Tuple>() {
                                 @Override
                                 public boolean hasNext() {
                                     return wrapped.hasNext();

@@ -23,13 +23,13 @@ public class CompiledQuery extends RecipeTraceInfo implements
         PatternTraceInfo {
 
     private PQuery query;
-    private final Map <PBody, ? extends RecipeTraceInfo> parentRecipeTracesPerBody;
+    private final Map<PBody, ? extends RecipeTraceInfo> parentRecipeTracesPerBody;
 
     /**
      * @since 1.6
      */
     public CompiledQuery(ReteNodeRecipe recipe,
-                         Map <PBody, ? extends RecipeTraceInfo> parentRecipeTraces,
+                         Map<PBody, ? extends RecipeTraceInfo> parentRecipeTraces,
                          PQuery query) {
         super(recipe, parentRecipeTraces.values());
         parentRecipeTracesPerBody = parentRecipeTraces;
@@ -47,7 +47,7 @@ public class CompiledQuery extends RecipeTraceInfo implements
     /**
      * @since 1.6
      */
-    public Map <PBody, ? extends RecipeTraceInfo> getParentRecipeTracesPerBody() {
+    public Map<PBody, ? extends RecipeTraceInfo> getParentRecipeTracesPerBody() {
         return parentRecipeTracesPerBody;
     }
 

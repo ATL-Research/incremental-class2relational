@@ -41,8 +41,8 @@ public interface Receiver extends Node {
      *
      * @since 2.8
      */
-    public default void batchUpdate(final Collection <Map.Entry<Tuple, Integer>> updates, final Timestamp timestamp) {
-        for (final Entry <Tuple, Integer> entry : updates) {
+    public default void batchUpdate(final Collection<Map.Entry<Tuple, Integer>> updates, final Timestamp timestamp) {
+        for (final Entry<Tuple, Integer> entry : updates) {
             int count = entry.getValue();
 
             Direction direction;
@@ -80,6 +80,6 @@ public interface Receiver extends Node {
     /**
      * access active parent
      */
-    Collection <Supplier> getParents();
+    Collection<Supplier> getParents();
 
 }

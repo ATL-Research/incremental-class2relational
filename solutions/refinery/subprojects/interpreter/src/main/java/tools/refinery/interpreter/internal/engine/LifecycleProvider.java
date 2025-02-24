@@ -16,7 +16,7 @@ import tools.refinery.interpreter.api.InterpreterMatcher;
 
 import java.util.ArrayList;
 
-public final class LifecycleProvider extends ListenerContainer <InterpreterEngineLifecycleListener> implements InterpreterEngineLifecycleListener {
+public final class LifecycleProvider extends ListenerContainer<InterpreterEngineLifecycleListener> implements InterpreterEngineLifecycleListener {
 
         private final Logger logger;
 
@@ -37,9 +37,9 @@ public final class LifecycleProvider extends ListenerContainer <InterpreterEngin
             logger.debug("Lifecycle listener " + listener + " removed from engine.");
         }
 
-//        public void propagateEventToListeners(Predicate <ViatraQueryEngineLifecycleListener> function) {
+//        public void propagateEventToListeners(Predicate<ViatraQueryEngineLifecycleListener> function) {
 //            if (!listeners.isEmpty()) {
-//                for (ViatraQueryEngineLifecycleListener listener : new ArrayList <ViatraQueryEngineLifecycleListener>(listeners)) {
+//                for (ViatraQueryEngineLifecycleListener listener : new ArrayList<ViatraQueryEngineLifecycleListener>(listeners)) {
 //                    try {
 //                        function.apply(listener);
 //                    } catch (Exception ex) {
@@ -52,9 +52,9 @@ public final class LifecycleProvider extends ListenerContainer <InterpreterEngin
 //        }
 
         @Override
-        public void matcherInstantiated(final InterpreterMatcher <? extends IPatternMatch> matcher) {
+        public void matcherInstantiated(final InterpreterMatcher<? extends IPatternMatch> matcher) {
             if (!listeners.isEmpty()) {
-                for (InterpreterEngineLifecycleListener listener : new ArrayList <InterpreterEngineLifecycleListener>(listeners)) {
+                for (InterpreterEngineLifecycleListener listener : new ArrayList<InterpreterEngineLifecycleListener>(listeners)) {
                     try {
                         listener.matcherInstantiated(matcher);
                     } catch (Exception ex) {
@@ -64,7 +64,7 @@ public final class LifecycleProvider extends ListenerContainer <InterpreterEngin
                     }
                 }
             }
-//            propagateEventToListeners(new Predicate <ViatraQueryEngineLifecycleListener>() {
+//            propagateEventToListeners(new Predicate<ViatraQueryEngineLifecycleListener>() {
 //               public boolean apply(ViatraQueryEngineLifecycleListener listener) {
 //                   listener.matcherInstantiated(matcher);
 //                   return true;
@@ -75,7 +75,7 @@ public final class LifecycleProvider extends ListenerContainer <InterpreterEngin
         @Override
         public void engineBecameTainted(String description, Throwable t) {
             if (!listeners.isEmpty()) {
-                for (InterpreterEngineLifecycleListener listener : new ArrayList <InterpreterEngineLifecycleListener>(listeners)) {
+                for (InterpreterEngineLifecycleListener listener : new ArrayList<InterpreterEngineLifecycleListener>(listeners)) {
                     try {
                         listener.engineBecameTainted(description, t);
                     } catch (Exception ex) {
@@ -85,7 +85,7 @@ public final class LifecycleProvider extends ListenerContainer <InterpreterEngin
                     }
                 }
             }
-//            propagateEventToListeners(new Predicate <ViatraQueryEngineLifecycleListener>() {
+//            propagateEventToListeners(new Predicate<ViatraQueryEngineLifecycleListener>() {
 //                public boolean apply(ViatraQueryEngineLifecycleListener listener) {
 //                    listener.engineBecameTainted();
 //                    return true;
@@ -96,7 +96,7 @@ public final class LifecycleProvider extends ListenerContainer <InterpreterEngin
         @Override
         public void engineWiped() {
             if (!listeners.isEmpty()) {
-                for (InterpreterEngineLifecycleListener listener : new ArrayList <InterpreterEngineLifecycleListener>(listeners)) {
+                for (InterpreterEngineLifecycleListener listener : new ArrayList<InterpreterEngineLifecycleListener>(listeners)) {
                     try {
                         listener.engineWiped();
                     } catch (Exception ex) {
@@ -106,7 +106,7 @@ public final class LifecycleProvider extends ListenerContainer <InterpreterEngin
                     }
                 }
             }
-//            propagateEventToListeners(new Predicate <ViatraQueryEngineLifecycleListener>() {
+//            propagateEventToListeners(new Predicate<ViatraQueryEngineLifecycleListener>() {
 //                public boolean apply(ViatraQueryEngineLifecycleListener listener) {
 //                    listener.engineWiped();
 //                    return true;
@@ -117,7 +117,7 @@ public final class LifecycleProvider extends ListenerContainer <InterpreterEngin
         @Override
         public void engineDisposed() {
             if (!listeners.isEmpty()) {
-                for (InterpreterEngineLifecycleListener listener : new ArrayList <InterpreterEngineLifecycleListener>(listeners)) {
+                for (InterpreterEngineLifecycleListener listener : new ArrayList<InterpreterEngineLifecycleListener>(listeners)) {
                     try {
                         listener.engineDisposed();
                     } catch (Exception ex) {
@@ -127,7 +127,7 @@ public final class LifecycleProvider extends ListenerContainer <InterpreterEngin
                     }
                 }
             }
-//            propagateEventToListeners(new Predicate <ViatraQueryEngineLifecycleListener>() {
+//            propagateEventToListeners(new Predicate<ViatraQueryEngineLifecycleListener>() {
 //                public boolean apply(ViatraQueryEngineLifecycleListener listener) {
 //                    listener.engineDisposed();
 //                    return true;

@@ -36,8 +36,8 @@ public class Equality extends DeferredPConstraint {
         this.withWhom = withWhom;
     }
 
-    private static Set <PVariable> buildSet(PVariable who, PVariable withWhom) {
-        Set <PVariable> set = new HashSet <PVariable>();
+    private static Set<PVariable> buildSet(PVariable who, PVariable withWhom) {
+        Set<PVariable> set = new HashSet<PVariable>();
         set.add(who);
         set.add(withWhom);
         return set;
@@ -74,13 +74,13 @@ public class Equality extends DeferredPConstraint {
     }
 
     @Override
-    public Set <PVariable> getDeducedVariables() {
+    public Set<PVariable> getDeducedVariables() {
         return Collections.emptySet();
     }
 
     @Override
-    public Map <Set<PVariable>, Set <PVariable>> getFunctionalDependencies(IQueryMetaContext context) {
-        final Map <Set<PVariable>, Set <PVariable>> result = new HashMap <Set<PVariable>, Set <PVariable>>();
+    public Map<Set<PVariable>, Set<PVariable>> getFunctionalDependencies(IQueryMetaContext context) {
+        final Map<Set<PVariable>, Set<PVariable>> result = new HashMap<Set<PVariable>, Set<PVariable>>();
         result.put(Collections.singleton(who), Collections.singleton(withWhom));
         result.put(Collections.singleton(withWhom), Collections.singleton(who));
         return result;
@@ -90,7 +90,7 @@ public class Equality extends DeferredPConstraint {
     public boolean isReadyAt(SubPlan plan, IQueryMetaContext context) {
         return plan.getVisibleVariables().contains(who) && plan.getVisibleVariables().contains(withWhom);
         // will be replaced by || if copierNode is available;
-        // until then, LayoutHelper.unifyVariablesAlongEqualities(PSystem <PatternDescription, StubHandle, Collector>) is
+        // until then, LayoutHelper.unifyVariablesAlongEqualities(PSystem<PatternDescription, StubHandle, Collector>) is
         // recommended.
     }
 }

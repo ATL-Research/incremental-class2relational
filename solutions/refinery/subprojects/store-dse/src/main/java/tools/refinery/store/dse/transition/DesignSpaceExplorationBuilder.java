@@ -21,7 +21,7 @@ public interface DesignSpaceExplorationBuilder extends ModelAdapterBuilder {
 		return transformations(List.of(transformationRuleDefinitions));
 	}
 
-	default DesignSpaceExplorationBuilder transformations(Collection <? extends Rule> transformationRules) {
+	default DesignSpaceExplorationBuilder transformations(Collection<? extends Rule> transformationRules) {
 		transformationRules.forEach(this::transformation);
 		return this;
 	}
@@ -32,7 +32,7 @@ public interface DesignSpaceExplorationBuilder extends ModelAdapterBuilder {
 		return accept(List.of(criteria));
 	}
 
-	default DesignSpaceExplorationBuilder accept(Collection <Criterion> criteria) {
+	default DesignSpaceExplorationBuilder accept(Collection<Criterion> criteria) {
 		criteria.forEach(this::accept);
 		return this;
 	}
@@ -43,7 +43,7 @@ public interface DesignSpaceExplorationBuilder extends ModelAdapterBuilder {
 		return exclude(List.of(criteria));
 	}
 
-	default DesignSpaceExplorationBuilder exclude(Collection <Criterion> criteria) {
+	default DesignSpaceExplorationBuilder exclude(Collection<Criterion> criteria) {
 		criteria.forEach(this::exclude);
 		return this;
 	}
@@ -54,7 +54,7 @@ public interface DesignSpaceExplorationBuilder extends ModelAdapterBuilder {
 		return objectives(List.of(objectives));
 	}
 
-	default DesignSpaceExplorationBuilder objectives(Collection <? extends Objective> objectives) {
+	default DesignSpaceExplorationBuilder objectives(Collection<? extends Objective> objectives) {
 		objectives.forEach(this::objective);
 		return this;
 	}

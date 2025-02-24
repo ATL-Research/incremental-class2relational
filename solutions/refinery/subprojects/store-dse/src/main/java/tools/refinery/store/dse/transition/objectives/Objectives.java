@@ -24,7 +24,7 @@ public final class Objectives {
 		return new CountObjective(query);
 	}
 
-	public static QueryObjective value(FunctionalQuery <? extends Number> query) {
+	public static QueryObjective value(FunctionalQuery<? extends Number> query) {
 		return new QueryObjective(query);
 	}
 
@@ -32,7 +32,7 @@ public final class Objectives {
 		return sum(List.of(objectives));
 	}
 
-	public static Objective sum(Collection <? extends Objective> objectives) {
+	public static Objective sum(Collection<? extends Objective> objectives) {
 		if (objectives.size() == 1) {
 			return objectives.iterator().next();
 		}

@@ -34,14 +34,14 @@ public interface PQueryHeader {
      *
      * @return a non-null, but possibly empty list of parameter names
      */
-    public List <String> getParameterNames();
+    public List<String> getParameterNames();
 
     /**
      * Returns a list of parameter descriptions
      *
      * @return a non-null, but possibly empty list of parameter descriptions
      */
-    public List <PParameter> getParameters();
+    public List<PParameter> getParameters();
 
     /**
      * Returns the index of a named parameter
@@ -55,7 +55,7 @@ public interface PQueryHeader {
      * Returns a parameter by name if exists
      * @since 2.1
      */
-    default Optional <PParameter> getParameter(String parameterName) {
+    default Optional<PParameter> getParameter(String parameterName) {
         return Optional.ofNullable(getPositionOfParameter(parameterName))
             .map(getParameters()::get);
     }
@@ -65,7 +65,7 @@ public interface PQueryHeader {
      *
      * @return a non-null, but possibly empty list of annotations
      */
-    public List <PAnnotation> getAllAnnotations();
+    public List<PAnnotation> getAllAnnotations();
 
     /**
      * Returns the list of annotations with a specified name
@@ -73,14 +73,14 @@ public interface PQueryHeader {
      * @param annotationName
      * @return a non-null, but possibly empty list of annotations
      */
-    public List <PAnnotation> getAnnotationsByName(String annotationName);
+    public List<PAnnotation> getAnnotationsByName(String annotationName);
 
     /**
      * Returns the first annotation with a specified name
      *
      * @since 2.0
      */
-    public Optional <PAnnotation> getFirstAnnotationByName(String annotationName);
+    public Optional<PAnnotation> getFirstAnnotationByName(String annotationName);
 
     /**
      * Returns the visibility information about the query.

@@ -29,9 +29,9 @@ import tools.refinery.interpreter.matchers.util.timeline.Timeline;
  * @author Gabor Bergmann
  * @since 2.0
  */
-public final class UnaryMaskedTupleMemory <Timestamp extends Comparable <Timestamp>> extends MaskedTupleMemory <Timestamp> {
+public final class UnaryMaskedTupleMemory<Timestamp extends Comparable<Timestamp>> extends MaskedTupleMemory<Timestamp> {
 
-    protected IMultiLookup <Object, Tuple> columnToTuples;
+    protected IMultiLookup<Object, Tuple> columnToTuples;
     protected final int keyPosition;
 
     /**
@@ -70,15 +70,15 @@ public final class UnaryMaskedTupleMemory <Timestamp extends Comparable <Timesta
     }
 
     @Override
-    public Iterator <Tuple> iterator() {
+    public Iterator<Tuple> iterator() {
         return columnToTuples.distinctValues().iterator();
     }
 
     @Override
-    public Iterable <Tuple> getSignatures() {
+    public Iterable<Tuple> getSignatures() {
         return () -> {
-            Iterator <Object> wrapped = columnToTuples.distinctKeys().iterator();
-            return new Iterator <Tuple>() {
+            Iterator<Object> wrapped = columnToTuples.distinctKeys().iterator();
+            return new Iterator<Tuple>() {
                 @Override
                 public boolean hasNext() {
                     return wrapped.hasNext();
@@ -93,14 +93,14 @@ public final class UnaryMaskedTupleMemory <Timestamp extends Comparable <Timesta
     }
 
     @Override
-    public Collection <Tuple> get(ITuple signature) {
+    public Collection<Tuple> get(ITuple signature) {
         Object key = signature.get(0);
-        IMemoryView <Tuple> bucket = columnToTuples.lookup(key);
+        IMemoryView<Tuple> bucket = columnToTuples.lookup(key);
         return bucket == null ? null : bucket.distinctValues();
     }
 
     @Override
-    public Map <Tuple, Timeline <Timestamp>> getWithTimeline(ITuple signature) {
+    public Map<Tuple, Timeline<Timestamp>> getWithTimeline(ITuple signature) {
         throw new UnsupportedOperationException("Timeless memories do not support timestamp-based lookup!");
     }
 

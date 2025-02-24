@@ -15,10 +15,10 @@ public interface ModelQueryAdapter extends ModelAdapter {
 	ModelQueryStoreAdapter getStoreAdapter();
 
 	default AnyResultSet getResultSet(AnyQuery query) {
-		return getResultSet((Query <?>) query);
+		return getResultSet((Query<?>) query);
 	}
 
-	 <T> ResultSet <T> getResultSet(Query <T> query);
+	<T> ResultSet<T> getResultSet(Query<T> query);
 
 	boolean hasPendingChanges();
 

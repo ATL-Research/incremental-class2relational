@@ -34,13 +34,13 @@ public class PatternMatchCounter extends PatternCallBasedDeferred {
     }
 
     @Override
-    public Set <PVariable> getDeducedVariables() {
+    public Set<PVariable> getDeducedVariables() {
         return Collections.singleton(resultVariable);
     }
 
     @Override
-    public Map <Set<PVariable>, Set <PVariable>> getFunctionalDependencies(IQueryMetaContext context) {
-        final Map <Set<PVariable>, Set <PVariable>> result = new HashMap <Set<PVariable>, Set <PVariable>>();
+    public Map<Set<PVariable>, Set<PVariable>> getFunctionalDependencies(IQueryMetaContext context) {
+        final Map<Set<PVariable>, Set<PVariable>> result = new HashMap<Set<PVariable>, Set<PVariable>>();
         result.put(getDeferringVariables(), getDeducedVariables());
         return result;
     }
@@ -52,7 +52,7 @@ public class PatternMatchCounter extends PatternCallBasedDeferred {
     }
 
     @Override
-    protected Set <PVariable> getCandidateQuantifiedVariables() {
+    protected Set<PVariable> getCandidateQuantifiedVariables() {
         return actualParametersTuple.<PVariable> getDistinctElements();
     }
 

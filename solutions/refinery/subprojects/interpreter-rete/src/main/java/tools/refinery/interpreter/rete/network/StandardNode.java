@@ -32,11 +32,11 @@ import java.util.Set;
  *
  */
 public abstract class StandardNode extends BaseNode implements Supplier, NetworkStructureChangeSensitiveNode {
-    protected final List <Receiver> children = CollectionsFactory.createObserverList();
+    protected final List<Receiver> children = CollectionsFactory.createObserverList();
     /**
      * @since 2.2
      */
-    protected final List <Mailbox> childMailboxes = CollectionsFactory.createObserverList();
+    protected final List<Mailbox> childMailboxes = CollectionsFactory.createObserverList();
 
     public StandardNode(final ReteContainer reteContainer) {
         super(reteContainer);
@@ -81,20 +81,20 @@ public abstract class StandardNode extends BaseNode implements Supplier, Network
     }
 
     @Override
-    public Collection <Receiver> getReceivers() {
+    public Collection<Receiver> getReceivers() {
         return children;
     }
 
     /**
      * @since 2.2
      */
-    public Collection <Mailbox> getChildMailboxes() {
+    public Collection<Mailbox> getChildMailboxes() {
         return this.childMailboxes;
     }
 
     @Override
-    public Set <Tuple> getPulledContents(final boolean flush) {
-        final HashSet <Tuple> results = new HashSet <Tuple>();
+    public Set<Tuple> getPulledContents(final boolean flush) {
+        final HashSet<Tuple> results = new HashSet<Tuple>();
         pullInto(results, flush);
         return results;
     }

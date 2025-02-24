@@ -29,7 +29,7 @@ import tools.refinery.interpreter.rete.network.mailbox.Mailbox;
  * @author Tamas Szabo
  * @since 2.0
  */
-public class UpdateSplittingMailbox extends AbstractUpdateSplittingMailbox <DefaultMessageIndexer, Receiver>
+public class UpdateSplittingMailbox extends AbstractUpdateSplittingMailbox<DefaultMessageIndexer, Receiver>
         implements AdaptableMailbox {
 
     protected Mailbox adapter;
@@ -98,7 +98,7 @@ public class UpdateSplittingMailbox extends AbstractUpdateSplittingMailbox <Defa
         if (kind == PhasedSelector.ANTI_MONOTONE) {
             // deliver anti-monotone
             this.deliveringAntiMonotone = true;
-            for (final Entry <Tuple, Integer> entry : this.antiMonotoneQueue.getTuples().entrySet()) {
+            for (final Entry<Tuple, Integer> entry : this.antiMonotoneQueue.getTuples().entrySet()) {
                 final Tuple update = entry.getKey();
                 final int count = entry.getValue();
                 assert count < 0;
@@ -111,7 +111,7 @@ public class UpdateSplittingMailbox extends AbstractUpdateSplittingMailbox <Defa
         } else if (kind == PhasedSelector.MONOTONE) {
             // deliver monotone
             this.deliveringMonotone = true;
-            for (final Entry <Tuple, Integer> entry : this.monotoneQueue.getTuples().entrySet()) {
+            for (final Entry<Tuple, Integer> entry : this.monotoneQueue.getTuples().entrySet()) {
                 final Tuple update = entry.getKey();
                 final int count = entry.getValue();
                 assert count > 0;

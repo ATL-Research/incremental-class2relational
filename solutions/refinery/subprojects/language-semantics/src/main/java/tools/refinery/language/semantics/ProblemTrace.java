@@ -22,7 +22,7 @@ public interface ProblemTrace {
 
 	Metamodel getMetamodel();
 
-	ObjectIntMap <Node> getNodeTrace();
+	ObjectIntMap<Node> getNodeTrace();
 
 	int getNodeId(Node node);
 
@@ -30,9 +30,9 @@ public interface ProblemTrace {
 
 	int getNodeId(String qualifiedName);
 
-	Map <Relation, PartialRelation> getRelationTrace();
+	Map<Relation, PartialRelation> getRelationTrace();
 
-	Map <AnyPartialSymbol, Relation> getInverseRelationTrace();
+	Map<AnyPartialSymbol, Relation> getInverseRelationTrace();
 
 	Relation getRelation(AnyPartialSymbol partialSymbol);
 

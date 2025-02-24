@@ -23,7 +23,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class PushWebDocumentProvider implements IWebDocumentProvider {
 	@Inject
-	private Provider <DocumentSynchronizer> synchronizerProvider;
+	private Provider<DocumentSynchronizer> synchronizerProvider;
 
 	@Override
 	public XtextWebDocument get(String resourceId, IServiceContext serviceContext) {

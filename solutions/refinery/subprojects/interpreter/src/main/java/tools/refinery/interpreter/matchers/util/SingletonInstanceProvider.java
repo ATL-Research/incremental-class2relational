@@ -12,7 +12,7 @@ package tools.refinery.interpreter.matchers.util;
  * A provider implementation that always returns the same object instance.
  * @author Zoltan Ujhelyi
  */
-public class SingletonInstanceProvider <T> implements IProvider <T>{
+public class SingletonInstanceProvider<T> implements IProvider<T>{
 
     private T instance;
 

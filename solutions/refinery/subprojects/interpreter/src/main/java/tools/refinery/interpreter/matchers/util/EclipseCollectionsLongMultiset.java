@@ -20,7 +20,7 @@ import org.eclipse.collections.impl.map.mutable.primitive.LongIntHashMap;
  * <p> TODO refactor common methods with {@link EclipseCollectionsMultiset}
  * <p> TODO refactor into LongBagMemory etc.
  */
-public class EclipseCollectionsLongMultiset extends LongIntHashMap implements IMultiset <Long> {
+public class EclipseCollectionsLongMultiset extends LongIntHashMap implements IMultiset<Long> {
 
     @Override
     public boolean addOne(Long value) {
@@ -111,7 +111,7 @@ public class EclipseCollectionsLongMultiset extends LongIntHashMap implements IM
     }
 
     @Override
-    public Iterator <Long> iterator() {
+    public Iterator<Long> iterator() {
         return EclipseCollectionsLongSetMemory.iteratorOf(super.keySet());
     }
 
@@ -129,12 +129,12 @@ public class EclipseCollectionsLongMultiset extends LongIntHashMap implements IM
     }
 
     @Override
-    public Set <Long> distinctValues() {
+    public Set<Long> distinctValues() {
         return new EclipseCollectionsLongSetMemory.SetWrapper(super.keySet());
     }
 
     @Override
-    public void forEachEntryWithMultiplicities(BiConsumer <Long, Integer> entryConsumer) {
+    public void forEachEntryWithMultiplicities(BiConsumer<Long, Integer> entryConsumer) {
         super.forEachKeyValue(entryConsumer::accept);
     }
 

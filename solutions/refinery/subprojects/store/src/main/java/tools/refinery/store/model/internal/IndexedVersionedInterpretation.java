@@ -12,16 +12,16 @@ import tools.refinery.store.tuple.Tuple;
 
 import java.util.Objects;
 
-class IndexedVersionedInterpretation <T> extends VersionedInterpretation <T> {
-	private final BaseIndexer <T> indexer;
+class IndexedVersionedInterpretation<T> extends VersionedInterpretation<T> {
+	private final BaseIndexer<T> indexer;
 
-	public IndexedVersionedInterpretation(ModelImpl model, Symbol <T> symbol, VersionedMap <Tuple, T> map) {
+	public IndexedVersionedInterpretation(ModelImpl model, Symbol<T> symbol, VersionedMap<Tuple, T> map) {
 		super(model, symbol, map);
 		indexer = new BaseIndexer<>(symbol.arity(), map);
 	}
 
 	@Override
-	public Cursor <Tuple, T> getAdjacent(int slot, int node) {
+	public Cursor<Tuple, T> getAdjacent(int slot, int node) {
 		return indexer.getAdjacent(slot, node);
 	}
 

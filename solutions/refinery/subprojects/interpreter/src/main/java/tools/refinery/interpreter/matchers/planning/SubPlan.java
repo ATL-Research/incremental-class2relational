@@ -33,8 +33,8 @@ import tools.refinery.interpreter.matchers.psystem.TypeJudgement;
  *
  * <p> A SubPlan is constructed by applying a {@link POperation} on zero or more parent SubPlans.
  * Important maintained information: <ul>
- * <li>set of <b>variables </b> whose values are known when the runtime evaluation is at this stage,
- * <li>set of <b>constraints </b> that are known to hold true at this point.
+ * <li>set of <b>variables</b> whose values are known when the runtime evaluation is at this stage,
+ * <li>set of <b>constraints</b> that are known to hold true at this point.
  * </ul>
  *
  * <p> Recommended to instantiate via a {@link SubPlanFactory} or subclasses,
@@ -45,15 +45,15 @@ import tools.refinery.interpreter.matchers.psystem.TypeJudgement;
  */
 public class SubPlan {
     private PBody body;
-    private List <? extends SubPlan> parentPlans;
+    private List<? extends SubPlan> parentPlans;
     private POperation operation;
 
-    private final Set <PVariable> visibleVariables;
-    private final Set <PVariable> allVariables;
-    private final Set <PVariable> introducedVariables; // delta compared to first parent
-    private Set <PConstraint> allConstraints;
-    private Set <PConstraint> deltaConstraints; // delta compared to all parents
-    private Set <PConstraint> externallyInferredConstraints; // inferred in addition to direct consequences of the operation and parents
+    private final Set<PVariable> visibleVariables;
+    private final Set<PVariable> allVariables;
+    private final Set<PVariable> introducedVariables; // delta compared to first parent
+    private Set<PConstraint> allConstraints;
+    private Set<PConstraint> deltaConstraints; // delta compared to all parents
+    private Set<PConstraint> externallyInferredConstraints; // inferred in addition to direct consequences of the operation and parents
 
 
 
@@ -68,20 +68,20 @@ public class SubPlan {
     /**
      * A SubPlan is constructed by applying a {@link POperation} on zero or more parent SubPlans.
      */
-    public SubPlan(PBody body, POperation operation, List <? extends SubPlan> parentPlans) {
+    public SubPlan(PBody body, POperation operation, List<? extends SubPlan> parentPlans) {
         super();
         this.body = body;
         this.parentPlans = parentPlans;
         this.operation = operation;
 
-        this.externallyInferredConstraints = new HashSet <PConstraint>();
-        this.deltaConstraints = new HashSet <PConstraint>(operation.getDeltaConstraints());
+        this.externallyInferredConstraints = new HashSet<PConstraint>();
+        this.deltaConstraints = new HashSet<PConstraint>(operation.getDeltaConstraints());
 
-        this.allVariables = new HashSet <PVariable>();
+        this.allVariables = new HashSet<PVariable>();
         for (PConstraint constraint: deltaConstraints) {
             this.allVariables.addAll(constraint.getDeducedVariables());
         }
-        this.allConstraints = new HashSet <PConstraint>(deltaConstraints);
+        this.allConstraints = new HashSet<PConstraint>(deltaConstraints);
         for (SubPlan parentPlan: parentPlans) {
             this.allConstraints.addAll(parentPlan.getAllEnforcedConstraints());
             this.allVariables.addAll(parentPlan.getAllDeducedVariables());
@@ -89,19 +89,19 @@ public class SubPlan {
 
         // TODO this is ugly a bit
         if (operation instanceof PStart) {
-            this.visibleVariables = new HashSet <PVariable>(((PStart) operation).getAPrioriVariables());
+            this.visibleVariables = new HashSet<PVariable>(((PStart) operation).getAPrioriVariables());
             this.allVariables.addAll(visibleVariables);
         } else if (operation instanceof PProject) {
-            this.visibleVariables = new HashSet <PVariable>(((PProject) operation).getToVariables());
+            this.visibleVariables = new HashSet<PVariable>(((PProject) operation).getToVariables());
         } else {
-            this.visibleVariables = new HashSet <PVariable>();
+            this.visibleVariables = new HashSet<PVariable>();
             for (SubPlan parentPlan: parentPlans)
                 this.visibleVariables.addAll(parentPlan.getVisibleVariables());
             for (PConstraint constraint: deltaConstraints)
                 this.visibleVariables.addAll(constraint.getDeducedVariables());
         }
 
-        this.introducedVariables = new HashSet <PVariable>(this.visibleVariables);
+        this.introducedVariables = new HashSet<PVariable>(this.visibleVariables);
         if (!parentPlans.isEmpty())
             introducedVariables.removeAll(parentPlans.get(0).getVisibleVariables());
 
@@ -119,7 +119,7 @@ public class SubPlan {
                 operation.getShortName());
     }
     public String toLongString() {
-        return String.format("%s <%s>",
+        return String.format("%s<%s>",
                 toShortString(),
                 parentPlans.stream().map(Object::toString).collect(Collectors.joining("; ")));
     }
@@ -128,7 +128,7 @@ public class SubPlan {
     /**
      * All constraints that are known to hold at this point
      */
-    public Set <PConstraint> getAllEnforcedConstraints() {
+    public Set<PConstraint> getAllEnforcedConstraints() {
         return allConstraints;
     }
 
@@ -136,7 +136,7 @@ public class SubPlan {
      * The new constraints enforced at this stage of plan, that aren't yet enforced at parents
      * (results are also included in {@link SubPlan#getAllEnforcedConstraints()})
      */
-    public Set <PConstraint> getDeltaEnforcedConstraints() {
+    public Set<PConstraint> getDeltaEnforcedConstraints() {
         return deltaConstraints;
     }
 
@@ -162,7 +162,7 @@ public class SubPlan {
      * Variables which are assigned a value at this point
      * (results are also included in {@link SubPlan#getAllDeducedVariables()})
      */
-    public Set <PVariable> getVisibleVariables() {
+    public Set<PVariable> getVisibleVariables() {
         return visibleVariables;
     }
     /**
@@ -170,16 +170,16 @@ public class SubPlan {
      * includes visible variables (see {@link #getVisibleVariables()})
      *   and additionally any variables hidden by a projection (see {@link PProject}).
      */
-    public Set <PVariable> getAllDeducedVariables() {
+    public Set<PVariable> getAllDeducedVariables() {
         return allVariables;
     }
     /**
      * Delta compared to first parent: variables that are visible here but were not visible at the first parent.
      */
-    public Set <PVariable> getIntroducedVariables() {
+    public Set<PVariable> getIntroducedVariables() {
         return introducedVariables;
     }
-    public List <? extends SubPlan> getParentPlans() {
+    public List<? extends SubPlan> getParentPlans() {
         return parentPlans;
     }
     public POperation getOperation() {
@@ -191,17 +191,17 @@ public class SubPlan {
      * The closure of all type judgments of enforced constraints at this point.
      * <p> No subsumption applied.
      */
-    public Set <TypeJudgement> getAllImpliedTypeJudgements(IQueryMetaContext context) {
-        Set <TypeJudgement> impliedJudgements = allImpliedTypeJudgements.get(context);
+    public Set<TypeJudgement> getAllImpliedTypeJudgements(IQueryMetaContext context) {
+        Set<TypeJudgement> impliedJudgements = allImpliedTypeJudgements.get(context);
         if (impliedJudgements == null) {
-            Set <TypeJudgement> equivalentJudgements = TypeHelper.getDirectJudgements(getAllEnforcedConstraints(), context);
+            Set<TypeJudgement> equivalentJudgements = TypeHelper.getDirectJudgements(getAllEnforcedConstraints(), context);
             impliedJudgements = TypeHelper.typeClosure(equivalentJudgements, context);
 
             allImpliedTypeJudgements.put(context, impliedJudgements);
         }
         return impliedJudgements;
     }
-    private WeakHashMap <IQueryMetaContext, Set <TypeJudgement>> allImpliedTypeJudgements = new WeakHashMap <IQueryMetaContext, Set <TypeJudgement>>();
+    private WeakHashMap<IQueryMetaContext, Set<TypeJudgement>> allImpliedTypeJudgements = new WeakHashMap<IQueryMetaContext, Set<TypeJudgement>>();
 
 
     @Override

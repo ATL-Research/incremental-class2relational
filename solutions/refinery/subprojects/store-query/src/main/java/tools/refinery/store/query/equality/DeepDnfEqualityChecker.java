@@ -14,15 +14,15 @@ import tools.refinery.store.util.CycleDetectingMapper;
 import java.util.List;
 
 public class DeepDnfEqualityChecker implements DnfEqualityChecker {
-	private final CycleDetectingMapper <Pair, Boolean> mapper = new CycleDetectingMapper<>(this::doCheckEqual);
+	private final CycleDetectingMapper<Pair, Boolean> mapper = new CycleDetectingMapper<>(this::doCheckEqual);
 
 	@Override
 	public boolean dnfEqual(Dnf left, Dnf right) {
 		return mapper.map(new Pair(left, right));
 	}
 
-	public boolean dnfEqualRaw(List <SymbolicParameter> symbolicParameters,
-							   List <? extends List <? extends Literal>> clauses, Dnf other) {
+	public boolean dnfEqualRaw(List<SymbolicParameter> symbolicParameters,
+							   List<? extends List<? extends Literal>> clauses, Dnf other) {
 		int arity = symbolicParameters.size();
 		if (arity != other.arity()) {
 			return false;
@@ -46,7 +46,7 @@ public class DeepDnfEqualityChecker implements DnfEqualityChecker {
 		return true;
 	}
 
-	private boolean equalsWithSubstitutionRaw(LiteralEqualityHelper helper, List <? extends Literal> literals,
+	private boolean equalsWithSubstitutionRaw(LiteralEqualityHelper helper, List<? extends Literal> literals,
 											  DnfClause other) {
 		int size = literals.size();
 		if (size != other.literals().size()) {
@@ -64,7 +64,7 @@ public class DeepDnfEqualityChecker implements DnfEqualityChecker {
 		return pair.left.equalsWithSubstitution(this, pair.right);
 	}
 
-	protected List <Pair> getInProgress() {
+	protected List<Pair> getInProgress() {
 		return mapper.getInProgress();
 	}
 

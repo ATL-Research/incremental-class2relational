@@ -240,7 +240,7 @@ class IntTermsEvaluateTest {
 		assertThat(term.evaluate(Valuation.empty()), is(result));
 	}
 
-	static Stream <Arguments> asIntTest() {
+	static Stream<Arguments> asIntTest() {
 		return Stream.of(
 				Arguments.of(2.0, 2),
 				Arguments.of(2.1, 2),

@@ -19,18 +19,18 @@ import java.util.*;
 import java.util.function.Function;
 
 class ClausePostProcessor {
-	private final Map <Variable, ParameterInfo> parameters;
-	private final List <Literal> literals;
-	private final Map <Variable, Variable> representatives = new LinkedHashMap<>();
-	private final Map <Variable, Set <Variable>> equivalencePartition = new HashMap<>();
-	private List <Literal> substitutedLiterals;
-	private final Set <Variable> existentiallyQuantifiedVariables = new LinkedHashSet<>();
-	private Set <Variable> positiveVariables;
-	private Map <Variable, Set <SortableLiteral>> variableToLiteralInputMap;
-	private PriorityQueue <SortableLiteral> literalsWithAllInputsBound;
-	private LinkedHashSet <Literal> topologicallySortedLiterals;
+	private final Map<Variable, ParameterInfo> parameters;
+	private final List<Literal> literals;
+	private final Map<Variable, Variable> representatives = new LinkedHashMap<>();
+	private final Map<Variable, Set<Variable>> equivalencePartition = new HashMap<>();
+	private List<Literal> substitutedLiterals;
+	private final Set<Variable> existentiallyQuantifiedVariables = new LinkedHashSet<>();
+	private Set<Variable> positiveVariables;
+	private Map<Variable, Set<SortableLiteral>> variableToLiteralInputMap;
+	private PriorityQueue<SortableLiteral> literalsWithAllInputsBound;
+	private LinkedHashSet<Literal> topologicallySortedLiterals;
 
-	public ClausePostProcessor(Map <Variable, ParameterInfo> parameters, List <Literal> literals) {
+	public ClausePostProcessor(Map<Variable, ParameterInfo> parameters, List<Literal> literals) {
 		this.parameters = parameters;
 		this.literals = literals;
 	}
@@ -45,7 +45,7 @@ class ClausePostProcessor {
 		validatePositiveRepresentatives();
 		validatePrivateVariables();
 		topologicallySortLiterals();
-		var filteredLiterals = new ArrayList <Literal>(topologicallySortedLiterals.size());
+		var filteredLiterals = new ArrayList<Literal>(topologicallySortedLiterals.size());
 		for (var literal : topologicallySortedLiterals) {
 			var reducedLiteral = literal.reduce();
 			if (BooleanLiteral.FALSE.equals(reducedLiteral)) {
@@ -105,14 +105,14 @@ class ClausePostProcessor {
 		return representatives.computeIfAbsent(variable, Function.identity());
 	}
 
-	private Set <Variable> getEquivalentVariables(Variable variable) {
+	private Set<Variable> getEquivalentVariables(Variable variable) {
 		var representative = getRepresentative(variable);
 		if (!representative.equals(variable)) {
 			throw new AssertionError("NodeVariable %s already has a representative %s"
 					.formatted(variable, representative));
 		}
 		return equivalencePartition.computeIfAbsent(variable, key -> {
-			var set = new HashSet <Variable>(1);
+			var set = new HashSet<Variable>(1);
 			set.add(key);
 			return set;
 		});
@@ -180,7 +180,7 @@ class ClausePostProcessor {
 	}
 
 	private void validatePrivateVariables() {
-		var negativeVariablesMap = new HashMap <Variable, Literal>();
+		var negativeVariablesMap = new HashMap<Variable, Literal>();
 		for (var literal : substitutedLiterals) {
 			for (var variable : literal.getPrivateVariables(positiveVariables)) {
 				var oldLiteral = negativeVariablesMap.put(variable, literal);
@@ -212,8 +212,8 @@ class ClausePostProcessor {
 		}
 	}
 
-	private boolean hasContradictoryCall(Collection <Literal> filteredLiterals) {
-		var positiveCalls = new HashMap <Constraint, Set <CallLiteral>>();
+	private boolean hasContradictoryCall(Collection<Literal> filteredLiterals) {
+		var positiveCalls = new HashMap<Constraint, Set<CallLiteral>>();
 		for (var literal : filteredLiterals) {
 			if (literal instanceof CallLiteral callLiteral && callLiteral.getPolarity() == CallPolarity.POSITIVE) {
 				var callsOfTarget = positiveCalls.computeIfAbsent(callLiteral.getTarget(), key -> new HashSet<>());
@@ -231,7 +231,7 @@ class ClausePostProcessor {
 		return false;
 	}
 
-	private boolean contradicts(CallLiteral negativeCall, Collection <CallLiteral> positiveCalls) {
+	private boolean contradicts(CallLiteral negativeCall, Collection<CallLiteral> positiveCalls) {
 		if (positiveCalls == null) {
 			return false;
 		}
@@ -261,10 +261,10 @@ class ClausePostProcessor {
 		return true;
 	}
 
-	private class SortableLiteral implements Comparable <SortableLiteral> {
+	private class SortableLiteral implements Comparable<SortableLiteral> {
 		private final int index;
 		private final Literal literal;
-		private final Set <Variable> remainingInputs;
+		private final Set<Variable> remainingInputs;
 
 		private SortableLiteral(int index, Literal literal) {
 			this.index = index;

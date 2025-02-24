@@ -28,15 +28,15 @@ public abstract class TransformerNode extends SingleInputNode {
     protected abstract Tuple transform(final Tuple input);
 
     @Override
-    public void pullInto(final Collection <Tuple> collector, final boolean flush) {
+    public void pullInto(final Collection<Tuple> collector, final boolean flush) {
         for (Tuple ps : reteContainer.pullPropagatedContents(this, flush)) {
             collector.add(transform(ps));
         }
     }
 
     @Override
-    public void pullIntoWithTimeline(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush) {
-        for (final Entry <Tuple, Timeline <Timestamp>> entry : reteContainer.pullPropagatedContentsWithTimestamp(this, flush).entrySet()) {
+    public void pullIntoWithTimeline(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush) {
+        for (final Entry<Tuple, Timeline<Timestamp>> entry : reteContainer.pullPropagatedContentsWithTimestamp(this, flush).entrySet()) {
             collector.put(transform(entry.getKey()), entry.getValue());
         }
     }

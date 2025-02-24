@@ -36,26 +36,26 @@ import tools.refinery.interpreter.matchers.psystem.PVariable;
 public class PlanState {
 
     private final PBody pBody;
-    private final List <PConstraintInfo> operationsList;
-    private final Set <PVariable> boundVariables;
-    private final Collection <PVariable> deltaVariables; /* bound since ancestor plan */
-    private final Set <PConstraint> enforcedConstraints;
+    private final List<PConstraintInfo> operationsList;
+    private final Set<PVariable> boundVariables;
+    private final Collection<PVariable> deltaVariables; /* bound since ancestor plan */
+    private final Set<PConstraint> enforcedConstraints;
 
     private double cummulativeProduct;
     private double cost;
 
-    private static Comparator <PConstraintInfo> infoComparator = new OperationCostComparator();
+    private static Comparator<PConstraintInfo> infoComparator = new OperationCostComparator();
 
     /*
      * For a short explanation of past, present and future operations,
      * see class
      */
-    private List <PConstraintInfo> presentExtends;
+    private List<PConstraintInfo> presentExtends;
 
     /**
      * Creates an initial state
      */
-    public PlanState(PBody pBody, Set <PVariable> boundVariables) {
+    public PlanState(PBody pBody, Set<PVariable> boundVariables) {
 
         this(pBody, new ArrayList<>(), boundVariables, boundVariables /* also the delta */,
                 0.0 /* initial cost */, 1.0 /*initial branch count */);
@@ -63,15 +63,15 @@ public class PlanState {
 
     public PlanState cloneWithApplied(PConstraintInfo op) {
         // Create operation list based on the current state
-        ArrayList <PConstraintInfo> newOperationsList =
+        ArrayList<PConstraintInfo> newOperationsList =
                 // pre-reserve excess capacity for later addition of CHECK ops
                 new ArrayList<>(pBody.getConstraints().size());
         newOperationsList.addAll(this.getOperations());
         newOperationsList.add(op);
 
         // Bind the variables of the op
-        Collection <PVariable> deltaVariables = op.getFreeVariables();
-        Set <PVariable> allBoundVariables =
+        Collection<PVariable> deltaVariables = op.getFreeVariables();
+        Set<PVariable> allBoundVariables =
                 // pre-reserve exact capacity as variables are known
                 // (will not be affected by adding CHECK ops later)
                 new HashSet<>(this.getBoundVariables().size() + deltaVariables.size());
@@ -84,8 +84,8 @@ public class PlanState {
         return newState;
     }
 
-    private PlanState(PBody pBody, List <PConstraintInfo> operationsList,
-            Set <PVariable> boundVariables, Collection <PVariable> deltaVariables,
+    private PlanState(PBody pBody, List<PConstraintInfo> operationsList,
+            Set<PVariable> boundVariables, Collection<PVariable> deltaVariables,
             double cost, double cummulativeProduct)
     {
         this.pBody = pBody;
@@ -113,7 +113,7 @@ public class PlanState {
     }
 
 
-    public Set <PConstraint> getEnforcedConstraints() {
+    public Set<PConstraint> getEnforcedConstraints() {
         return enforcedConstraints;
     }
 
@@ -126,7 +126,7 @@ public class PlanState {
      * to this plan state now or in the future;
      * MUST consist of "extend" constraint applications only (at least one free variable)
      */
-    public void updateExtends(Iterable <PConstraintInfo> allPotentialExtendInfos) {
+    public void updateExtends(Iterable<PConstraintInfo> allPotentialExtendInfos) {
         presentExtends = new ArrayList<>();
 
 
@@ -141,12 +141,12 @@ public class PlanState {
      * immediately applicable ones (saved as presently viable extends),
      * and not yet applicable ones (discarded).
      *
-     * @param extendOpsByBoundVariables all EXTEND operations indexed by affected <i>bound </i> variables
+     * @param extendOpsByBoundVariables all EXTEND operations indexed by affected <i>bound</i> variables
      * MUST consist of "extend" constraint applications only (at least one free variable)
      */
     public void updateExtendsBasedOnDelta(
-            Iterable <PConstraintInfo> previousPresentExtends,
-            Map <PVariable, ? extends Collection <PConstraintInfo>> extendOpsByBoundVariables)
+            Iterable<PConstraintInfo> previousPresentExtends,
+            Map<PVariable, ? extends Collection<PConstraintInfo>> extendOpsByBoundVariables)
     {
         presentExtends = new ArrayList<>();
         if (operationsList.isEmpty())
@@ -156,10 +156,10 @@ public class PlanState {
             updateExtendInternal(extend);
         }
 
-        Set <PConstraintInfo> affectedExtends = new HashSet<>();
+        Set<PConstraintInfo> affectedExtends = new HashSet<>();
         for (PVariable variable : deltaVariables) {
             // only those check ops may become applicable that have an affected variable in the delta
-            Collection <PConstraintInfo> extendsForVariable = extendOpsByBoundVariables.get(variable);
+            Collection<PConstraintInfo> extendsForVariable = extendOpsByBoundVariables.get(variable);
             if (null != extendsForVariable) {
                 affectedExtends.addAll(extendsForVariable);
             }
@@ -188,7 +188,7 @@ public class PlanState {
      *
      *
      */
-    public void applyChecks(List <PConstraintInfo> allPotentialCheckInfos) {
+    public void applyChecks(List<PConstraintInfo> allPotentialCheckInfos) {
         applyChecksInternal(allPotentialCheckInfos);
     }
 
@@ -199,15 +199,15 @@ public class PlanState {
      * MUST consist of "check" constraint applications only (no free variables)
      * and each bucket must be iterable in decreasing order of cost
      */
-    public void applyChecksBasedOnDelta(Map <PVariable, List <PConstraintInfo>> checkOpsByVariables) {
+    public void applyChecksBasedOnDelta(Map<PVariable, List<PConstraintInfo>> checkOpsByVariables) {
         if (operationsList.isEmpty())
             throw new IllegalStateException("Not applicable as starting step");
 
-        Iterable <PConstraintInfo> affectedChecks = Collections.emptyList();
+        Iterable<PConstraintInfo> affectedChecks = Collections.emptyList();
 
         for (PVariable variable : deltaVariables) {
             // only those check ops may become applicable that have an affected variable in the delta
-            List <PConstraintInfo> checksForVariable = checkOpsByVariables.get(variable);
+            List<PConstraintInfo> checksForVariable = checkOpsByVariables.get(variable);
             if (null != checksForVariable) {
                 affectedChecks = OrderedIterableMerge.mergeUniques(affectedChecks, checksForVariable, infoComparator);
             }
@@ -217,7 +217,7 @@ public class PlanState {
         applyChecksInternal(affectedChecks);
     }
 
-    private void applyChecksInternal(Iterable <PConstraintInfo> checks) {
+    private void applyChecksInternal(Iterable<PConstraintInfo> checks) {
         for (PConstraintInfo checkInfo : checks) {
             if (this.boundVariables.containsAll(checkInfo.getBoundVariables()) &&
                     !enforcedConstraints.contains(checkInfo.getConstraint()))
@@ -243,11 +243,11 @@ public class PlanState {
         return pBody;
     }
 
-    public List <PConstraintInfo> getOperations() {
+    public List<PConstraintInfo> getOperations() {
         return operationsList;
     }
 
-    public Set <PVariable> getBoundVariables() {
+    public Set<PVariable> getBoundVariables() {
         return boundVariables;
     }
 
@@ -267,7 +267,7 @@ public class PlanState {
         return cummulativeProduct;
     }
 
-    public List <PConstraintInfo> getPresentExtends() {
+    public List<PConstraintInfo> getPresentExtends() {
         return presentExtends;
     }
 
@@ -275,7 +275,7 @@ public class PlanState {
      * Contains only those variables that are added by the newest extend
      * (or the initially bound ones if no extend yet)
      */
-    public Collection <PVariable> getDeltaVariables() {
+    public Collection<PVariable> getDeltaVariables() {
         return deltaVariables;
     }
 

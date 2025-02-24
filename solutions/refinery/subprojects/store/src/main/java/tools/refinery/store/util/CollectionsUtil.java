@@ -15,8 +15,8 @@ public final class CollectionsUtil {
 		throw new UnsupportedOperationException();
 	}
 	
-	public static <S,T> Iterator <T> map(Iterator <S> source, Function <S, T> transformation) {
-		return new Iterator <T>() {
+	public static <S,T> Iterator<T> map(Iterator<S> source, Function<S, T> transformation) {
+		return new Iterator<T>() {
 
 			@Override
 			public boolean hasNext() {
@@ -30,12 +30,12 @@ public final class CollectionsUtil {
 		};
 	}
 	
-	public static <S,T> Iterable <T> map(Iterable <S> source, Function <S, T> transformation) {
+	public static <S,T> Iterable<T> map(Iterable<S> source, Function<S, T> transformation) {
 		return (()->map(source.iterator(),transformation));
 	}
 	
-	public static <T> Iterator <T> filter(Iterator <T> source, Predicate <T> condition) {
-		return new Iterator <T>() {
+	public static <T> Iterator<T> filter(Iterator<T> source, Predicate<T> condition) {
+		return new Iterator<T>() {
 			T internalNext = move();
 			boolean internalHasNext;
 			
@@ -71,7 +71,7 @@ public final class CollectionsUtil {
 		};
 	}
 	
-	public static <T> Iterable <T> filter(Iterable <T> source, Predicate <T> condition) {
+	public static <T> Iterable<T> filter(Iterable<T> source, Predicate<T> condition) {
 		return (()->filter(source.iterator(),condition));
 	}
 }

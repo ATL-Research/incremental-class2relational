@@ -27,10 +27,10 @@ import tools.refinery.interpreter.matchers.util.Sets;
 public class AllValidAdornments implements IAdornmentProvider {
 
     @Override
-    public Iterable <Set<PParameter>> getAdornments(PQuery query) {
-        final Set <PParameter> ins = query.getParameters().stream().filter(PQueries.parameterDirectionPredicate(PParameterDirection.IN)).collect(Collectors.toSet());
-        Set <PParameter> inouts = query.getParameters().stream().filter(PQueries.parameterDirectionPredicate(PParameterDirection.INOUT)).collect(Collectors.toSet());
-        Set <? extends Set <PParameter>> possibleInouts = Sets.powerSet(inouts);
+    public Iterable<Set<PParameter>> getAdornments(PQuery query) {
+        final Set<PParameter> ins = query.getParameters().stream().filter(PQueries.parameterDirectionPredicate(PParameterDirection.IN)).collect(Collectors.toSet());
+        Set<PParameter> inouts = query.getParameters().stream().filter(PQueries.parameterDirectionPredicate(PParameterDirection.INOUT)).collect(Collectors.toSet());
+        Set<? extends Set<PParameter>> possibleInouts = Sets.powerSet(inouts);
         return possibleInouts.stream().map(input -> Sets.union(ins, input)).collect(Collectors.toSet());
     }
 

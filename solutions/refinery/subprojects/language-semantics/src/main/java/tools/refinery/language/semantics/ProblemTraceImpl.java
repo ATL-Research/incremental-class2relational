@@ -40,13 +40,13 @@ public class ProblemTraceImpl implements ProblemTrace {
 
 	private Problem problem;
 	private Metamodel metamodel;
-	private final MutableObjectIntMap <Node> mutableNodeTrace = ObjectIntMaps.mutable.empty();
-	private final ObjectIntMap <Node> nodeTrace = mutableNodeTrace.asUnmodifiable();
-	private final Map <Relation, PartialRelation> mutableRelationTrace = new LinkedHashMap<>();
-	private final Map <Relation, PartialRelation> relationTrace =
+	private final MutableObjectIntMap<Node> mutableNodeTrace = ObjectIntMaps.mutable.empty();
+	private final ObjectIntMap<Node> nodeTrace = mutableNodeTrace.asUnmodifiable();
+	private final Map<Relation, PartialRelation> mutableRelationTrace = new LinkedHashMap<>();
+	private final Map<Relation, PartialRelation> relationTrace =
 			Collections.unmodifiableMap(mutableRelationTrace);
-	private final Map <AnyPartialSymbol, Relation> mutableInverseTrace = new HashMap<>();
-	private final Map <AnyPartialSymbol, Relation> inverseTrace = Collections.unmodifiableMap(mutableInverseTrace);
+	private final Map<AnyPartialSymbol, Relation> mutableInverseTrace = new HashMap<>();
+	private final Map<AnyPartialSymbol, Relation> inverseTrace = Collections.unmodifiableMap(mutableInverseTrace);
 
 	@Override
 	public Problem getProblem() {
@@ -67,7 +67,7 @@ public class ProblemTraceImpl implements ProblemTrace {
 	}
 
 	@Override
-	public ObjectIntMap <Node> getNodeTrace() {
+	public ObjectIntMap<Node> getNodeTrace() {
 		return nodeTrace;
 	}
 
@@ -98,7 +98,7 @@ public class ProblemTraceImpl implements ProblemTrace {
 	}
 
 	@Override
-	public Map <Relation, PartialRelation> getRelationTrace() {
+	public Map<Relation, PartialRelation> getRelationTrace() {
 		return relationTrace;
 	}
 
@@ -115,7 +115,7 @@ public class ProblemTraceImpl implements ProblemTrace {
 	}
 
 	@Override
-	public Map <AnyPartialSymbol, Relation> getInverseRelationTrace() {
+	public Map<AnyPartialSymbol, Relation> getInverseRelationTrace() {
 		return inverseTrace;
 	}
 
@@ -163,7 +163,7 @@ public class ProblemTraceImpl implements ProblemTrace {
 		return getPartialRelation(convertedName);
 	}
 
-	private <T> T getElement(IScope scope, QualifiedName qualifiedName, Class <T> type) {
+	private <T> T getElement(IScope scope, QualifiedName qualifiedName, Class<T> type) {
 		var iterator = scope.getElements(qualifiedName).iterator();
 		if (!iterator.hasNext()) {
 			var qualifiedNameString = qualifiedNameConverter.toString(qualifiedName);

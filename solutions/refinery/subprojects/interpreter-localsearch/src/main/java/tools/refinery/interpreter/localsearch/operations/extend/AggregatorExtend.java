@@ -33,7 +33,7 @@ import tools.refinery.interpreter.matchers.tuple.VolatileModifiableMaskedTuple;
  */
 public class AggregatorExtend  implements ISearchOperation, IPatternMatcherOperation{
 
-    private class Executor extends SingleValueExtendOperationExecutor <Object> {
+    private class Executor extends SingleValueExtendOperationExecutor<Object> {
 
         private final VolatileModifiableMaskedTuple maskedTuple;
         private IQueryResultProvider matcher;
@@ -44,7 +44,7 @@ public class AggregatorExtend  implements ISearchOperation, IPatternMatcherOpera
         }
 
         @Override
-        public Iterator <?> getIterator(MatchingFrame frame, ISearchContext context) {
+        public Iterator<?> getIterator(MatchingFrame frame, ISearchContext context) {
             maskedTuple.updateTuple(frame);
             matcher = context.getMatcher(information.getCallWithAdornment());
             Object aggregate = aggregate(aggregator.getAggregator().getOperator(), aggregator.getAggregatedColumn());
@@ -54,8 +54,8 @@ public class AggregatorExtend  implements ISearchOperation, IPatternMatcherOpera
 
         @SuppressWarnings("unchecked")
         private <Domain, Accumulator, AggregateResult> AggregateResult aggregate(
-                IMultisetAggregationOperator <Domain, Accumulator, AggregateResult> operator, int aggregatedColumn) {
-            final Stream <Domain> valueStream = matcher.getAllMatches(information.getParameterMask(), maskedTuple)
+                IMultisetAggregationOperator<Domain, Accumulator, AggregateResult> operator, int aggregatedColumn) {
+            final Stream<Domain> valueStream = matcher.getAllMatches(information.getParameterMask(), maskedTuple)
                     .map(match -> (Domain) match.get(aggregatedColumn));
             return operator.aggregateStream(valueStream);
         }
@@ -85,7 +85,7 @@ public class AggregatorExtend  implements ISearchOperation, IPatternMatcherOpera
     }
 
     @Override
-    public List <Integer> getVariablePositions() {
+    public List<Integer> getVariablePositions() {
         return Arrays.asList(position);
     }
 
@@ -95,7 +95,7 @@ public class AggregatorExtend  implements ISearchOperation, IPatternMatcherOpera
     }
 
     @Override
-    public String toString(Function <Integer, String> variableMapping) {
+    public String toString(Function<Integer, String> variableMapping) {
         return "extend    -"+variableMapping.apply(position)+" = " + aggregator.getAggregator().getOperator().getName()+" find " + information.toString(variableMapping);
     }
 

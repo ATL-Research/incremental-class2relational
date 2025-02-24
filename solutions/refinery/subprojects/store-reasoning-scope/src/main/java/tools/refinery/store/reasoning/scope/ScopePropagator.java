@@ -19,15 +19,15 @@ import tools.refinery.store.representation.cardinality.FiniteUpperCardinality;
 import java.util.*;
 
 public class ScopePropagator implements ModelStoreConfiguration {
-	private final Symbol <CardinalityInterval> countSymbol;
-	private final Map <PartialRelation, CardinalityInterval> scopes = new LinkedHashMap<>();
-	private final List <TypeScopePropagator.Factory> typeScopePropagatorFactories = new ArrayList<>();
+	private final Symbol<CardinalityInterval> countSymbol;
+	private final Map<PartialRelation, CardinalityInterval> scopes = new LinkedHashMap<>();
+	private final List<TypeScopePropagator.Factory> typeScopePropagatorFactories = new ArrayList<>();
 
 	public ScopePropagator() {
 		this(MultiObjectTranslator.COUNT_STORAGE);
 	}
 
-	public ScopePropagator(Symbol <CardinalityInterval> countSymbol) {
+	public ScopePropagator(Symbol<CardinalityInterval> countSymbol) {
 		if (countSymbol.arity() != 1) {
 			throw new IllegalArgumentException("Count symbol must have arty 1, got %s with arity %d instead"
 					.formatted(countSymbol, countSymbol.arity()));
@@ -54,11 +54,11 @@ public class ScopePropagator implements ModelStoreConfiguration {
 		return this;
 	}
 
-	public ScopePropagator scopes(Map <PartialRelation, CardinalityInterval> scopes) {
+	public ScopePropagator scopes(Map<PartialRelation, CardinalityInterval> scopes) {
 		return scopes(scopes.entrySet());
 	}
 
-	public ScopePropagator scopes(Collection <Map.Entry<PartialRelation, CardinalityInterval>> scopes) {
+	public ScopePropagator scopes(Collection<Map.Entry<PartialRelation, CardinalityInterval>> scopes) {
 		for (var entry : scopes) {
 			scope(entry.getKey(), entry.getValue());
 		}
@@ -92,11 +92,11 @@ public class ScopePropagator implements ModelStoreConfiguration {
 		}
 	}
 
-	Symbol <CardinalityInterval> getCountSymbol() {
+	Symbol<CardinalityInterval> getCountSymbol() {
 		return countSymbol;
 	}
 
-	List <TypeScopePropagator.Factory> getTypeScopePropagatorFactories() {
+	List<TypeScopePropagator.Factory> getTypeScopePropagatorFactories() {
 		return typeScopePropagatorFactories;
 	}
 }

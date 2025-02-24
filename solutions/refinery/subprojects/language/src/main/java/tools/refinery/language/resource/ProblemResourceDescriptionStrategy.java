@@ -33,7 +33,7 @@ public class ProblemResourceDescriptionStrategy extends DefaultResourceDescripti
 	private IQualifiedNameConverter qualifiedNameConverter;
 
 	@Override
-	public boolean createEObjectDescriptions(EObject eObject, IAcceptor <IEObjectDescription> acceptor) {
+	public boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
 		if (!shouldExport(eObject)) {
 			return false;
 		}
@@ -96,7 +96,7 @@ public class ProblemResourceDescriptionStrategy extends DefaultResourceDescripti
 		return true;
 	}
 
-	protected Map <String, String> getUserData(EObject eObject) {
+	protected Map<String, String> getUserData(EObject eObject) {
 		var builder = ImmutableMap.<String, String>builder();
 		if (eObject instanceof Relation relation) {
 			int arity = ProblemUtil.getArity(relation);
@@ -119,7 +119,7 @@ public class ProblemResourceDescriptionStrategy extends DefaultResourceDescripti
 	}
 
 	private void acceptEObjectDescription(EObject eObject, QualifiedName prefix, QualifiedName qualifiedName,
-										  Map <String, String> userData, IAcceptor <IEObjectDescription> acceptor) {
+										  Map<String, String> userData, IAcceptor<IEObjectDescription> acceptor) {
 		var qualifiedNameWithPrefix = prefix == null ? qualifiedName : prefix.append(qualifiedName);
 		var description = EObjectDescription.create(qualifiedNameWithPrefix, eObject, userData);
 		acceptor.accept(description);

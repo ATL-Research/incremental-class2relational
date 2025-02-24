@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 public class QueryEvaluationHintSource implements ArgumentsProvider {
 	@Override
-	public Stream <? extends Arguments> provideArguments(ExtensionContext context) {
+	public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
 		return Stream.of(
 				Arguments.of(new QueryBackendHint(QueryEvaluationHint.BackendRequirement.UNSPECIFIED)),
 				Arguments.of(new QueryBackendHint(QueryEvaluationHint.BackendRequirement.DEFAULT_CACHING)),

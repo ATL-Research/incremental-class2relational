@@ -95,8 +95,8 @@ public class ProblemValidator extends AbstractProblemValidator {
 
 	@Check
 	public void checkUniqueDeclarations(Problem problem) {
-		var relations = new ArrayList <Relation>();
-		var individuals = new ArrayList <Node>();
+		var relations = new ArrayList<Relation>();
+		var individuals = new ArrayList<Node>();
 		for (var statement : problem.getStatements()) {
 			if (statement instanceof Relation relation) {
 				relations.add(relation);
@@ -118,8 +118,8 @@ public class ProblemValidator extends AbstractProblemValidator {
 		checkUniqueSimpleNames(enumDeclaration.getLiterals());
 	}
 
-	protected void checkUniqueSimpleNames(Iterable <? extends NamedElement> namedElements) {
-		var names = new LinkedHashMap <String, Set <NamedElement>>();
+	protected void checkUniqueSimpleNames(Iterable<? extends NamedElement> namedElements) {
+		var names = new LinkedHashMap<String, Set<NamedElement>>();
 		for (var namedElement : namedElements) {
 			var name = namedElement.getName();
 			var objectsWithName = names.computeIfAbsent(name, ignored -> new LinkedHashSet<>());

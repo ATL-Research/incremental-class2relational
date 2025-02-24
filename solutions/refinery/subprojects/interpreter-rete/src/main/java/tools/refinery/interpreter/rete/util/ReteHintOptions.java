@@ -21,13 +21,13 @@ public final class ReteHintOptions {
 
     private ReteHintOptions() {/*Utility class constructor*/}
 
-    public static final QueryHintOption <Boolean> useDiscriminatorDispatchersForConstantFiltering =
+    public static final QueryHintOption<Boolean> useDiscriminatorDispatchersForConstantFiltering =
             hintOption("useDiscriminatorDispatchersForConstantFiltering", true);
 
-    public static final QueryHintOption <Boolean> prioritizeConstantFiltering =
+    public static final QueryHintOption<Boolean> prioritizeConstantFiltering =
             hintOption("prioritizeConstantFiltering", true);
 
-    public static final QueryHintOption <Boolean> cacheOutputOfEvaluatorsByDefault =
+    public static final QueryHintOption<Boolean> cacheOutputOfEvaluatorsByDefault =
             hintOption("cacheOutputOfEvaluatorsByDefault", true);
 
     /**
@@ -41,7 +41,7 @@ public final class ReteHintOptions {
      * @deprecated Use {@link DRedReteBackendFactory} instead of setting this option to true.
      */
     @Deprecated
-    public static final QueryHintOption <Boolean> deleteRederiveEvaluation =
+    public static final QueryHintOption<Boolean> deleteRederiveEvaluation =
             hintOption("deleteRederiveEvaluation", false);
 
     /**
@@ -50,11 +50,11 @@ public final class ReteHintOptions {
      *
      * @since 1.6
      */
-    public static final QueryHintOption <Boolean> expandWeakenedAlternativeConstraints =
+    public static final QueryHintOption<Boolean> expandWeakenedAlternativeConstraints =
             hintOption("expandWeakenedAlternativeConstraints", true);
 
     // internal helper for conciseness
-    private static <T> QueryHintOption <T> hintOption(String hintKeyLocalName, T defaultValue) {
+    private static <T> QueryHintOption<T> hintOption(String hintKeyLocalName, T defaultValue) {
         return new QueryHintOption<>(ReteHintOptions.class, hintKeyLocalName, defaultValue);
     }
 }

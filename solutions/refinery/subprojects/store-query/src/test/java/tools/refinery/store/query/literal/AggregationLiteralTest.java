@@ -25,9 +25,9 @@ import static tools.refinery.store.query.term.int_.IntTerms.constant;
 
 class AggregationLiteralTest {
 	private static final NodeVariable p = Variable.of("p");
-	private static final DataVariable <Integer> x = Variable.of("x", Integer.class);
-	private static final DataVariable <Integer> y = Variable.of("y", Integer.class);
-	private static final DataVariable <Integer> z = Variable.of("z", Integer.class);
+	private static final DataVariable<Integer> x = Variable.of("x", Integer.class);
+	private static final DataVariable<Integer> y = Variable.of("y", Integer.class);
+	private static final DataVariable<Integer> z = Variable.of("z", Integer.class);
 	private static final Constraint fakeConstraint = new Constraint() {
 		@Override
 		public String name() {
@@ -35,7 +35,7 @@ class AggregationLiteralTest {
 		}
 
 		@Override
-		public List <Parameter> getParameters() {
+		public List<Parameter> getParameters() {
 			return List.of(
 					new Parameter(null, ParameterDirection.OUT),
 					new Parameter(Integer.class, ParameterDirection.OUT)

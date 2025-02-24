@@ -16,13 +16,13 @@ import tools.refinery.interpreter.rete.network.Node;
 
 import java.util.Set;
 
-public class NetworkComponentDetector implements RepresentativeObserver <Node> {
+public class NetworkComponentDetector implements RepresentativeObserver<Node> {
 	private final Logger logger;
-	private final Graph <Node> dependencyGraph;
-	private StronglyConnectedComponentAlgorithm <Node> stronglyConnectedComponentAlgorithm;
-	private IncSCCAlg <Node> sccInformationProvider;
+	private final Graph<Node> dependencyGraph;
+	private StronglyConnectedComponentAlgorithm<Node> stronglyConnectedComponentAlgorithm;
+	private IncSCCAlg<Node> sccInformationProvider;
 
-	public NetworkComponentDetector(Logger logger, Graph <Node> dependencyGraph) {
+	public NetworkComponentDetector(Logger logger, Graph<Node> dependencyGraph) {
 		this.logger = logger;
 		this.dependencyGraph = dependencyGraph;
 		stronglyConnectedComponentAlgorithm = new StronglyConnectedComponentAlgorithm<>(dependencyGraph);
@@ -36,7 +36,7 @@ public class NetworkComponentDetector implements RepresentativeObserver <Node> {
 	}
 
 	@Nullable
-	public Set <Node> getPartition(Node node) {
+	public Set<Node> getPartition(Node node) {
 		if (sccInformationProvider == null) {
 			return null;
 		}
@@ -57,7 +57,7 @@ public class NetworkComponentDetector implements RepresentativeObserver <Node> {
 		return sccInformationProvider.hasOutgoingEdges(representative);
 	}
 
-	public Graph <Node> getReducedGraph() {
+	public Graph<Node> getReducedGraph() {
 		if (sccInformationProvider == null) {
 			return dependencyGraph;
 		}

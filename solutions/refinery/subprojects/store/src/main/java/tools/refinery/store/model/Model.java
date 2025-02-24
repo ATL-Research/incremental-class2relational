@@ -22,16 +22,16 @@ public interface Model extends Versioned {
 	boolean hasUncommittedChanges();
 
 	default AnyInterpretation getInterpretation(AnySymbol symbol) {
-		return getInterpretation((Symbol <?>) symbol);
+		return getInterpretation((Symbol<?>) symbol);
 	}
 
-	 <T> Interpretation <T> getInterpretation(Symbol <T> symbol);
+	<T> Interpretation<T> getInterpretation(Symbol<T> symbol);
 
 	ModelDiffCursor getDiffCursor(Version to);
 
-	 <T extends ModelAdapter> Optional <T> tryGetAdapter(Class <? extends T> adapterType);
+	<T extends ModelAdapter> Optional<T> tryGetAdapter(Class<? extends T> adapterType);
 
-	 <T extends ModelAdapter> T getAdapter(Class <T> adapterType);
+	<T extends ModelAdapter> T getAdapter(Class<T> adapterType);
 
 	void addListener(ModelListener listener);
 

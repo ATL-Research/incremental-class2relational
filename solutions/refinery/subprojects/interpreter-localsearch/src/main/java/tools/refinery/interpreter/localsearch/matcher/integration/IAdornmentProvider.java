@@ -23,7 +23,7 @@ import tools.refinery.interpreter.matchers.psystem.queries.PQuery;
  * adornments fulfilling the parameter direction declarations;
  * another default option (with better performance but restricted applicability) is {@link LazyPlanningAdornments}.
  *
- * <br> <br>
+ * <br><br>
  *
  * Users may implement this interface to limit the number of prepared plans based on some runtime information:
  *
@@ -32,7 +32,7 @@ import tools.refinery.interpreter.matchers.psystem.queries.PQuery;
  *
  *     public Iterable&lt;Set&lt;{@link PParameter}>> getAdornments({@link PQuery} query){
  *         if (SomeGeneratedQuerySpecification.instance().getInternalQueryRepresentation().equals(query)){
- *             return Collections.singleton(Sets.filter(Sets.newHashSet(query.getParameters()), new Predicate <PParameter>() {
+ *             return Collections.singleton(Sets.filter(Sets.newHashSet(query.getParameters()), new Predicate<PParameter>() {
  *
  *                  &#64;Override
  *                  public boolean apply(PParameter input) {
@@ -57,7 +57,7 @@ public interface IAdornmentProvider {
     /**
      * The bound parameter sets
      */
-    public Iterable <Set<PParameter>> getAdornments(PQuery query);
+    public Iterable<Set<PParameter>> getAdornments(PQuery query);
 
     /**
      * @return a simple hint that only overrides the adornment provider

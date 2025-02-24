@@ -16,7 +16,7 @@ import tools.refinery.interpreter.rete.network.indexer.MessageIndexer;
  * @author Tamas Szabo
  * @since 2.0
  */
-public interface MessageIndexerFactory <I extends MessageIndexer> {
+public interface MessageIndexerFactory<I extends MessageIndexer> {
 
     public I create();
 

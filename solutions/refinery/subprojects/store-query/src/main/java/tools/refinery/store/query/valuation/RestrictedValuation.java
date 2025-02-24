@@ -10,9 +10,9 @@ import tools.refinery.store.query.term.DataVariable;
 
 import java.util.Set;
 
-public record RestrictedValuation(Valuation valuation, Set <AnyDataVariable> allowedVariables) implements Valuation {
+public record RestrictedValuation(Valuation valuation, Set<AnyDataVariable> allowedVariables) implements Valuation {
 	@Override
-	public <T> T getValue(DataVariable <T> variable) {
+	public <T> T getValue(DataVariable<T> variable) {
 		if (!allowedVariables.contains(variable)) {
 			throw new IllegalArgumentException("Variable %s is not in scope".formatted(variable));
 		}

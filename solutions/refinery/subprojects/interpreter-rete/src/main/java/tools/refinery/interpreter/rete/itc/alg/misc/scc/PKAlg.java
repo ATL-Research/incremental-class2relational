@@ -20,20 +20,20 @@ import tools.refinery.interpreter.rete.itc.igraph.IBiDirectionalWrapper;
 import tools.refinery.interpreter.rete.itc.igraph.IGraphDataSource;
 import tools.refinery.interpreter.rete.itc.igraph.IGraphObserver;
 
-public class PKAlg <V> implements IGraphObserver <V> {
+public class PKAlg<V> implements IGraphObserver<V> {
 
     /**
      * Maps the nodes to their indicies.
      */
-    private Map <V, Integer> node2index;
-    private Map <Integer, V> index2node;
-    private Map <V, Boolean> node2mark;
+    private Map<V, Integer> node2index;
+    private Map<Integer, V> index2node;
+    private Map<V, Boolean> node2mark;
 
     /**
      * Maps the index of a node to the index in the topsort.
      */
-    private Map <Integer, Integer> index2topsort;
-    private Map <Integer, Integer> topsort2index;
+    private Map<Integer, Integer> index2topsort;
+    private Map<Integer, Integer> topsort2index;
 
     /**
      * Index associated to the inserted nodes (incrementing with every insertion).
@@ -50,22 +50,22 @@ public class PKAlg <V> implements IGraphObserver <V> {
      */
     private int upper_bound;
 
-    private List <V> RF;
-    private List <V> RB;
-    private IBiDirectionalGraphDataSource <V> gds;
+    private List<V> RF;
+    private List<V> RB;
+    private IBiDirectionalGraphDataSource<V> gds;
 
-    public PKAlg(IGraphDataSource <V> gds) {
-        if (gds instanceof IBiDirectionalGraphDataSource <?>) {
-            this.gds = (IBiDirectionalGraphDataSource <V>) gds;
+    public PKAlg(IGraphDataSource<V> gds) {
+        if (gds instanceof IBiDirectionalGraphDataSource<?>) {
+            this.gds = (IBiDirectionalGraphDataSource<V>) gds;
         } else {
-            this.gds = new IBiDirectionalWrapper <V>(gds);
+            this.gds = new IBiDirectionalWrapper<V>(gds);
         }
 
-        node2mark = new HashMap <V, Boolean>();
-        node2index = new HashMap <V, Integer>();
-        index2node = new HashMap <Integer, V>();
-        index2topsort = new HashMap <Integer, Integer>();
-        topsort2index = new HashMap <Integer, Integer>();
+        node2mark = new HashMap<V, Boolean>();
+        node2index = new HashMap<V, Integer>();
+        index2node = new HashMap<Integer, V>();
+        index2topsort = new HashMap<Integer, Integer>();
+        topsort2index = new HashMap<Integer, Integer>();
         index = 0;
 
         gds.attachObserver(this);
@@ -74,8 +74,8 @@ public class PKAlg <V> implements IGraphObserver <V> {
     @Override
     public void edgeInserted(V source, V target) {
 
-        RF = new ArrayList <V>();
-        RB = new ArrayList <V>();
+        RF = new ArrayList<V>();
+        RB = new ArrayList<V>();
 
         lower_bound = index2topsort.get(node2index.get(target));
         upper_bound = index2topsort.get(node2index.get(source));
@@ -87,8 +87,8 @@ public class PKAlg <V> implements IGraphObserver <V> {
         }
     }
 
-    private List <Integer> getIndicies(List <V> list) {
-        List <Integer> indicies = new ArrayList <Integer>();
+    private List<Integer> getIndicies(List<V> list) {
+        List<Integer> indicies = new ArrayList<Integer>();
 
         for (V n : list)
             indicies.add(index2topsort.get(node2index.get(n)));
@@ -101,7 +101,7 @@ public class PKAlg <V> implements IGraphObserver <V> {
         Collections.reverse(RB);
 
         // azon csomopontok indexei amelyek sorrendje nem jo
-        List <Integer> L = getIndicies(RF);
+        List<Integer> L = getIndicies(RF);
         L.addAll(getIndicies(RB));
         Collections.sort(L);
 
@@ -117,8 +117,8 @@ public class PKAlg <V> implements IGraphObserver <V> {
     }
 
     @SuppressWarnings("unused")
-    private List <V> getTopSort() {
-        List <V> topsort = new ArrayList <V>();
+    private List<V> getTopSort() {
+        List<V> topsort = new ArrayList<V>();
 
         for (int i : topsort2index.values()) {
             topsort.add(index2node.get(i));

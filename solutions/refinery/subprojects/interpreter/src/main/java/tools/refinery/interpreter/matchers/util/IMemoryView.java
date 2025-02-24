@@ -28,7 +28,7 @@ import java.util.stream.StreamSupport;
  *
  * @since 2.0
  */
-public interface IMemoryView <T> extends Iterable <T> {
+public interface IMemoryView<T> extends Iterable<T> {
 
     /**
      * Returns the number of occurrences of the given value.
@@ -68,7 +68,7 @@ public interface IMemoryView <T> extends Iterable <T> {
     /**
      * The set of distinct values
      */
-    Set <T> distinctValues();
+    Set<T> distinctValues();
 
 
     /**
@@ -101,20 +101,20 @@ public interface IMemoryView <T> extends Iterable <T> {
     /**
      * @return an unmodifiable view of contained values with their multiplicities
      */
-    default Iterable <Map.Entry<T, Integer>> entriesWithMultiplicities() {
+    default Iterable<Map.Entry<T, Integer>> entriesWithMultiplicities() {
         return () -> {
-            Iterator <T> wrapped = distinctValues().iterator();
-            return new Iterator <Map.Entry<T, Integer>> () {
+            Iterator<T> wrapped = distinctValues().iterator();
+            return new Iterator<Map.Entry<T, Integer>> () {
                 @Override
                 public boolean hasNext() {
                     return wrapped.hasNext();
                 }
 
                 @Override
-                public Map.Entry <T, Integer> next() {
+                public Map.Entry<T, Integer> next() {
                     T key = wrapped.next();
                     int count = getCount(key);
-                    return new Map.Entry <T, Integer>(){
+                    return new Map.Entry<T, Integer>(){
                         @Override
                         public T getKey() {
                             return key;
@@ -145,7 +145,7 @@ public interface IMemoryView <T> extends Iterable <T> {
     /**
      * Process contained values with their multiplicities
      */
-    default void forEachEntryWithMultiplicities(BiConsumer <T, Integer> entryConsumer) {
+    default void forEachEntryWithMultiplicities(BiConsumer<T, Integer> entryConsumer) {
         for (T value : distinctValues()) {
             entryConsumer.accept(value, getCount(value));
         }
@@ -156,7 +156,7 @@ public interface IMemoryView <T> extends Iterable <T> {
      * For compatibility with legacy code relying on element-to-integer maps.
      * @return an unmodifiable view of contained values with their multiplicities
      */
-    public default Map <T, Integer> asMap() {
+    public default Map<T, Integer> asMap() {
         return new MemoryViewBackedMapView<>(this);
     }
 
@@ -164,7 +164,7 @@ public interface IMemoryView <T> extends Iterable <T> {
      * For compatibility with legacy code relying on element-to-integer maps.
      * @return an unmodifiable view of contained values with their multiplicities
      */
-    public static <T> IMemoryView <T> fromMap(Map <T, Integer> wrapped) {
+    public static <T> IMemoryView<T> fromMap(Map<T, Integer> wrapped) {
         return new MapBackedMemoryView<>(wrapped);
     }
 
@@ -172,18 +172,18 @@ public interface IMemoryView <T> extends Iterable <T> {
      * @return a stream of values, iterable once
      * @since 2.1
      */
-    public default Stream <T> asStream() {
+    public default Stream<T> asStream() {
         return StreamSupport.stream(spliterator(), false);
     }
 
     /**
      * Provides semantic equality comparison.
      */
-    public static <T> boolean equals(IMemoryView <T> self, Object obj) {
-        if (obj instanceof IMemoryView <?>) {
-            IMemoryView <?> other = (IMemoryView <?>) obj;
+    public static <T> boolean equals(IMemoryView<T> self, Object obj) {
+        if (obj instanceof IMemoryView<?>) {
+            IMemoryView<?> other = (IMemoryView<?>) obj;
             if (other.size() != self.size()) return false;
-            for (Entry <?, Integer> entry : other.entriesWithMultiplicities()) {
+            for (Entry<?, Integer> entry : other.entriesWithMultiplicities()) {
                 if ( !entry.getValue().equals(self.getCountUnsafe(entry.getKey())))
                     return false;
             }
@@ -195,7 +195,7 @@ public interface IMemoryView <T> extends Iterable <T> {
     /**
      * Provides semantic hashCode() comparison.
      */
-    public static <T> int hashCode(IMemoryView <T> memory) {
+    public static <T> int hashCode(IMemoryView<T> memory) {
         int hashCode = 0;
         for (T value : memory.distinctValues()) {
             hashCode += value.hashCode() ^ Integer.hashCode(memory.getCount(value));

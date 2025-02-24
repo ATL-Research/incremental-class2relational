@@ -32,7 +32,7 @@ public class TransactionExecutor implements IDisposable, PrecomputationListener 
 
 	private final IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 
-	private final Map <String, WeakReference <PushWebDocument>> subscriptions = new HashMap<>();
+	private final Map<String, WeakReference<PushWebDocument>> subscriptions = new HashMap<>();
 
 	private ResponseHandler responseHandler;
 
@@ -40,7 +40,7 @@ public class TransactionExecutor implements IDisposable, PrecomputationListener 
 
 	private boolean callPending;
 
-	private final List <XtextWebPushMessage> pendingPushMessages = new ArrayList<>();
+	private final List<XtextWebPushMessage> pendingPushMessages = new ArrayList<>();
 
 	private volatile boolean disposed;
 

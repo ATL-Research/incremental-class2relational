@@ -38,8 +38,8 @@ public class HybridMatcherConstraintCostFunction extends IndexerBasedConstraintC
     protected double _calculateCost(PositivePatternCall patternCall, IConstraintEvaluationContext context) {
         // Determine local constant constraints which is used to filter results
         Tuple variables = patternCall.getVariablesTuple();
-        Set <Object> variablesSet = variables.getDistinctElements();
-        final Map <PVariable, Object> constantMap = new HashMap<>();
+        Set<Object> variablesSet = variables.getDistinctElements();
+        final Map<PVariable, Object> constantMap = new HashMap<>();
         for (PConstraint _constraint : patternCall.getPSystem().getConstraints()) {
             if (_constraint instanceof ConstantValue){
                 ConstantValue constraint = (ConstantValue) _constraint;
@@ -59,14 +59,14 @@ public class HybridMatcherConstraintCostFunction extends IndexerBasedConstraintC
         // aggregate keys are the bound and not filtered variables
         // These will be fixed in runtime, but unknown at planning time
         // This is represented by indices to ease working with result tuples
-        final Map <Object, Integer> variableIndices = variables.invertIndex();
-        List <Integer> aggregateKeys = context.getBoundVariables().stream()
+        final Map<Object, Integer> variableIndices = variables.invertIndex();
+        List<Integer> aggregateKeys = context.getBoundVariables().stream()
                 .filter(input -> !constantMap.containsKey(input))
                 .map(variableIndices::get)
                 .collect(Collectors.toList());
 
         IQueryResultProvider resultProvider = context.resultProviderRequestor().requestResultProvider(patternCall, null);
-        Map <Tuple, Integer> aggregatedCounts = new HashMap<>();
+        Map<Tuple, Integer> aggregatedCounts = new HashMap<>();
 
         // Iterate over all matches and count together matches that has equal values on
         // aggregateKeys positions. The cost of the pattern call is considered to be the
@@ -75,7 +75,7 @@ public class HybridMatcherConstraintCostFunction extends IndexerBasedConstraintC
         int result = 0;
         // NOTE: a stream is not an iterable (cannot be iterated more than once), so to use it in a for-loop
         // it has to be wrapped; in the following line a lambda is used to implement Iterable#iterator()
-        for (Tuple match : (Iterable <Tuple>) () -> resultProvider.getAllMatches(filter).iterator()) {
+        for (Tuple match : (Iterable<Tuple>) () -> resultProvider.getAllMatches(filter).iterator()) {
             Tuple extracted = Tuples.flatTupleOf(aggregateKeys.stream().map(match::get).toArray());
             int count = (aggregatedCounts.containsKey(extracted))
                 ? aggregatedCounts.get(extracted) + 1

@@ -18,12 +18,12 @@ import tools.refinery.interpreter.matchers.util.CollectionsFactory;
 import java.util.*;
 import java.util.Map.Entry;
 
-public final class ModelUpdateProvider extends ListenerContainer <InterpreterModelUpdateListener> {
+public final class ModelUpdateProvider extends ListenerContainer<InterpreterModelUpdateListener> {
 
     private final AdvancedInterpreterEngine queryEngine;
     private ChangeLevel currentChange = ChangeLevel.NO_CHANGE;
     private ChangeLevel maxLevel = ChangeLevel.NO_CHANGE;
-    private final Map <ChangeLevel, Collection <InterpreterModelUpdateListener>> listenerMap;
+    private final Map<ChangeLevel, Collection<InterpreterModelUpdateListener>> listenerMap;
     private final Logger logger;
 
     public ModelUpdateProvider(AdvancedInterpreterEngine queryEngine, Logger logger) {
@@ -54,7 +54,7 @@ public final class ModelUpdateProvider extends ListenerContainer <InterpreterMod
         maxLevel = maxLevel.changeOccured(changeLevel);
         if(!maxLevel.equals(oldMaxLevel) && ChangeLevel.MATCHSET.compareTo(oldMaxLevel) > 0 && ChangeLevel.MATCHSET.compareTo(maxLevel) <= 0) {
             // add matchUpdateListener to all matchers
-            for (InterpreterMatcher <?> matcher : this.queryEngine.getCurrentMatchers()) {
+            for (InterpreterMatcher<?> matcher : this.queryEngine.getCurrentMatchers()) {
                 this.queryEngine.addMatchUpdateListener(matcher, matchSetListener, false);
             }
         }
@@ -63,7 +63,7 @@ public final class ModelUpdateProvider extends ListenerContainer <InterpreterMod
     @Override
     protected void listenerRemoved(InterpreterModelUpdateListener listener) {
         ChangeLevel changeLevel = listener.getLevel();
-        Collection <InterpreterModelUpdateListener> old = listenerMap.getOrDefault(changeLevel, Collections.emptySet());
+        Collection<InterpreterModelUpdateListener> old = listenerMap.getOrDefault(changeLevel, Collections.emptySet());
         boolean removed = old.remove(listener);
         if(removed) {
             if (old.isEmpty()) listenerMap.remove(changeLevel);
@@ -97,15 +97,15 @@ public final class ModelUpdateProvider extends ListenerContainer <InterpreterMod
         }
         if(maxLevel.compareTo(ChangeLevel.MATCHSET) < 0) {
             // remove listener from matchers
-            for (InterpreterMatcher <?> matcher : this.queryEngine.getCurrentMatchers()) {
+            for (InterpreterMatcher<?> matcher : this.queryEngine.getCurrentMatchers()) {
                 this.queryEngine.removeMatchUpdateListener(matcher, matchSetListener);
             }
         }
     }
 
     private void handleUnsuccesfulRemove(InterpreterModelUpdateListener listener) {
-        for (Entry <ChangeLevel, Collection <InterpreterModelUpdateListener>> entry : listenerMap.entrySet()) {
-            Collection <InterpreterModelUpdateListener> existingListeners = entry.getValue();
+        for (Entry<ChangeLevel, Collection<InterpreterModelUpdateListener>> entry : listenerMap.entrySet()) {
+            Collection<InterpreterModelUpdateListener> existingListeners = entry.getValue();
             // if the listener is contained in some other bucket, remove it from there
             if(existingListeners.remove(listener)) {
                 logger.error("Listener "+listener+" change level changed since initialization!");
@@ -166,7 +166,7 @@ public final class ModelUpdateProvider extends ListenerContainer <InterpreterMod
 
     };
     // - matchset: add the same listener to each matcher and use a dirty flag. needs IQBase callback as well
-    private final IMatchUpdateListener <IPatternMatch> matchSetListener = new IMatchUpdateListener <IPatternMatch>() {
+    private final IMatchUpdateListener<IPatternMatch> matchSetListener = new IMatchUpdateListener<IPatternMatch>() {
 
         @Override
         public void notifyDisappearance(IPatternMatch match) {
@@ -182,7 +182,7 @@ public final class ModelUpdateProvider extends ListenerContainer <InterpreterMod
     private final InterpreterEngineLifecycleListener selfListener = new InterpreterEngineLifecycleListener() {
 
         @Override
-        public void matcherInstantiated(InterpreterMatcher <? extends IPatternMatch> matcher) {
+        public void matcherInstantiated(InterpreterMatcher<? extends IPatternMatch> matcher) {
             if (maxLevel.compareTo(ChangeLevel.MATCHSET) >= 0) {
                 ModelUpdateProvider.this.queryEngine.addMatchUpdateListener(matcher, matchSetListener, false);
             }

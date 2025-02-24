@@ -22,7 +22,7 @@ import java.util.Set;
  * @author Gabor Bergmann
  * @since 2.0
  */
-public class EclipseCollectionsLongSetMemory extends LongHashSet implements ISetMemory <Long> {
+public class EclipseCollectionsLongSetMemory extends LongHashSet implements ISetMemory<Long> {
 
     @Override
     public boolean addOne(Long value) {
@@ -76,12 +76,12 @@ public class EclipseCollectionsLongSetMemory extends LongHashSet implements ISet
     }
 
     @Override
-    public Iterator <Long> iterator() {
+    public Iterator<Long> iterator() {
         return iteratorOf(this);
     }
 
     @Override
-    public Set <Long> distinctValues() {
+    public Set<Long> distinctValues() {
         return new SetWrapper(this);
     }
 
@@ -93,8 +93,8 @@ public class EclipseCollectionsLongSetMemory extends LongHashSet implements ISet
     /**
      * Helper for iterating a LongIterable
      */
-    public static Iterator <Long> iteratorOf(LongIterable wrapped) {
-        return new Iterator <Long>() {
+    public static Iterator<Long> iteratorOf(LongIterable wrapped) {
+        return new Iterator<Long>() {
             private final LongIterator longIterator = wrapped.longIterator();
 
             @Override
@@ -126,7 +126,7 @@ public class EclipseCollectionsLongSetMemory extends LongHashSet implements ISet
      * Helper that presents a primitive collection as a Set view
      * @author Gabor Bergmann
      */
-    public static final class SetWrapper implements Set <Long> {
+    public static final class SetWrapper implements Set<Long> {
         private LongSet wrapped;
 
         /**
@@ -152,12 +152,12 @@ public class EclipseCollectionsLongSetMemory extends LongHashSet implements ISet
         }
 
         @Override
-        public Iterator <Long> iterator() {
+        public Iterator<Long> iterator() {
             return iteratorOf(wrapped);
         }
 
         @Override
-        public boolean containsAll(Collection <?> c) {
+        public boolean containsAll(Collection<?> c) {
             for (Object object : c) {
                 if (contains(object))
                     return true;
@@ -191,17 +191,17 @@ public class EclipseCollectionsLongSetMemory extends LongHashSet implements ISet
         }
 
         @Override
-        public boolean addAll(Collection <? extends Long> c) {
+        public boolean addAll(Collection<? extends Long> c) {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public boolean retainAll(Collection <?> c) {
+        public boolean retainAll(Collection<?> c) {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public boolean removeAll(Collection <?> c) {
+        public boolean removeAll(Collection<?> c) {
             throw new UnsupportedOperationException();
         }
 

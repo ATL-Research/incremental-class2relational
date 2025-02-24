@@ -17,11 +17,11 @@ import tools.refinery.store.tuple.Tuple;
 
 import java.util.Set;
 
-class OppositeInterpretation <A, C> extends AbstractPartialInterpretation <A, C> {
-	private final PartialInterpretation <A, C> opposite;
+class OppositeInterpretation<A, C> extends AbstractPartialInterpretation<A, C> {
+	private final PartialInterpretation<A, C> opposite;
 
 	private OppositeInterpretation(ReasoningAdapter adapter, Concreteness concreteness,
-								   PartialSymbol <A, C> partialSymbol, PartialInterpretation <A, C> opposite) {
+								   PartialSymbol<A, C> partialSymbol, PartialInterpretation<A, C> opposite) {
 		super(adapter, concreteness, partialSymbol);
 		this.opposite = opposite;
 	}
@@ -32,18 +32,18 @@ class OppositeInterpretation <A, C> extends AbstractPartialInterpretation <A, C>
 	}
 
 	@Override
-	public Cursor <Tuple, A> getAll() {
+	public Cursor<Tuple, A> getAll() {
 		return new OppositeCursor<>(opposite.getAll());
 	}
 
-	public static <A1, C1> Factory <A1, C1> of(PartialSymbol <A1, C1> oppositeSymbol) {
+	public static <A1, C1> Factory<A1, C1> of(PartialSymbol<A1, C1> oppositeSymbol) {
 		return (adapter, concreteness, partialSymbol) -> {
 			var opposite = adapter.getPartialInterpretation(concreteness, oppositeSymbol);
 			return new OppositeInterpretation<>(adapter, concreteness, partialSymbol, opposite);
 		};
 	}
 
-	private record OppositeCursor <T>(Cursor <Tuple, T> opposite) implements Cursor <Tuple, T> {
+	private record OppositeCursor<T>(Cursor<Tuple, T> opposite) implements Cursor<Tuple, T> {
 		@Override
 		public Tuple getKey() {
 			return OppositeUtils.flip(opposite.getKey());
@@ -65,7 +65,7 @@ class OppositeInterpretation <A, C> extends AbstractPartialInterpretation <A, C>
 		}
 
 		@Override
-		public Set <AnyVersionedMap> getDependingMaps() {
+		public Set<AnyVersionedMap> getDependingMaps() {
 			return opposite.getDependingMaps();
 		}
 

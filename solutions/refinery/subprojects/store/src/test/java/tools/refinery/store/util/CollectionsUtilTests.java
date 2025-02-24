@@ -18,18 +18,18 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class CollectionsUtilTests {
-	List <Integer> list10 = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-	List <String> listTen = List.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+	List<Integer> list10 = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+	List<String> listTen = List.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 
-	private static <T> void compare(Iterable <T> a, Iterable <T> b) {
-		List <T> listA = toList(a);
-		List <T> listB = toList(b);
+	private static <T> void compare(Iterable<T> a, Iterable<T> b) {
+		List<T> listA = toList(a);
+		List<T> listB = toList(b);
 		assertEquals(listA, listB);
 	}
 
-	private static <T> List <T> toList(Iterable <T> a) {
-		List <T> result = new ArrayList <T>();
-		Iterator <T> iterator = a.iterator();
+	private static <T> List<T> toList(Iterable<T> a) {
+		List<T> result = new ArrayList<T>();
+		Iterator<T> iterator = a.iterator();
 		while (iterator.hasNext()) {
 			result.add(iterator.next());
 		}
@@ -63,8 +63,8 @@ class CollectionsUtilTests {
 
 	@Test()
 	void testNoSuchElement() {
-		Iterable <Integer> iterable = filter(list10, (x -> x % 2 == 0));
-		Iterator <Integer> iterator = iterable.iterator();
+		Iterable<Integer> iterable = filter(list10, (x -> x % 2 == 0));
+		Iterator<Integer> iterator = iterable.iterator();
 		while (iterator.hasNext()) {
 			iterator.next();
 		}

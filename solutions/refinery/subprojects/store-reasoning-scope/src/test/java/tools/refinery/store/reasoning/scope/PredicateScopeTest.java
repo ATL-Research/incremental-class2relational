@@ -145,7 +145,7 @@ class PredicateScopeTest {
 				.build();
 	}
 
-	private void assertSize(PartialInterpretation <TruthValue, Boolean> partialInterpretation, int expected) {
+	private void assertSize(PartialInterpretation<TruthValue, Boolean> partialInterpretation, int expected) {
 		int size = 0;
 		var cursor = partialInterpretation.getAll();
 		while (cursor.move()) {

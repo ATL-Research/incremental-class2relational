@@ -19,12 +19,12 @@ import java.util.Set;
 
 // {@link Object#equals(Object)} is implemented by {@link AbstractLiteral}.
 @SuppressWarnings("squid:S2160")
-public abstract class AbstractCountLiteral <T> extends AbstractCallLiteral {
-	private final Class <T> resultType;
-	private final DataVariable <T> resultVariable;
+public abstract class AbstractCountLiteral<T> extends AbstractCallLiteral {
+	private final Class<T> resultType;
+	private final DataVariable<T> resultVariable;
 
-	protected AbstractCountLiteral(Class <T> resultType, DataVariable <T> resultVariable, Constraint target,
-								   List <Variable> arguments) {
+	protected AbstractCountLiteral(Class<T> resultType, DataVariable<T> resultVariable, Constraint target,
+								   List<Variable> arguments) {
 		super(target, arguments);
 		if (!resultVariable.getType().equals(resultType)) {
 			throw new InvalidQueryException("Count result variable %s must be of type %s, got %s instead".formatted(
@@ -38,16 +38,16 @@ public abstract class AbstractCountLiteral <T> extends AbstractCallLiteral {
 		this.resultVariable = resultVariable;
 	}
 
-	public Class <T> getResultType() {
+	public Class<T> getResultType() {
 		return resultType;
 	}
 
-	public DataVariable <T> getResultVariable() {
+	public DataVariable<T> getResultVariable() {
 		return resultVariable;
 	}
 
 	@Override
-	public Set <Variable> getOutputVariables() {
+	public Set<Variable> getOutputVariables() {
 		return Set.of(resultVariable);
 	}
 
@@ -72,7 +72,7 @@ public abstract class AbstractCountLiteral <T> extends AbstractCallLiteral {
 		if (!super.equalsWithSubstitution(helper, other)) {
 			return false;
 		}
-		var otherCountLiteral = (AbstractCountLiteral <?>) other;
+		var otherCountLiteral = (AbstractCountLiteral<?>) other;
 		return Objects.equals(resultType, otherCountLiteral.resultType) &&
 				helper.variableEqual(resultVariable, otherCountLiteral.resultVariable);
 	}

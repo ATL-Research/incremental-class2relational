@@ -5,7 +5,7 @@
  */
 package tools.refinery.store.query.term;
 
-public interface StatefulAggregate <R, T> {
+public interface StatefulAggregate<R, T> {
 	void add(T value);
 
 	void remove(T value);
@@ -14,7 +14,7 @@ public interface StatefulAggregate <R, T> {
 
 	boolean isEmpty();
 
-	StatefulAggregate <R, T> deepCopy();
+	StatefulAggregate<R, T> deepCopy();
 
 	default boolean contains(T value) {
 		throw new UnsupportedOperationException();

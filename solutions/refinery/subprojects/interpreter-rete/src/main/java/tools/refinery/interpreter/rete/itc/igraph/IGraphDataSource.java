@@ -24,14 +24,14 @@ import java.util.Set;
  * @param <V>
  *            the type of the nodes in the graph
  */
-public interface IGraphDataSource <V> {
+public interface IGraphDataSource<V> {
 
     /**
      * Attaches a new graph observer to this graph data source. Observers will be notified in the order they have been registered.
      *
      * @param observer the graph observer
      */
-    public void attachObserver(IGraphObserver <V> observer);
+    public void attachObserver(IGraphObserver<V> observer);
 
     /**
      * Attaches a new graph observer to this graph data source as the first one.
@@ -40,21 +40,21 @@ public interface IGraphDataSource <V> {
      * @param observer the graph observer
      * @since 1.6
      */
-    public void attachAsFirstObserver(IGraphObserver <V> observer);
+    public void attachAsFirstObserver(IGraphObserver<V> observer);
 
     /**
      * Detaches an already registered graph observer from this graph data source.
      *
      * @param observer the graph observer
      */
-    public void detachObserver(IGraphObserver <V> observer);
+    public void detachObserver(IGraphObserver<V> observer);
 
     /**
      * Returns the complete set of nodes in the graph data source.
      *
      * @return the set of all nodes
      */
-    public Set <V> getAllNodes();
+    public Set<V> getAllNodes();
 
     /**
      * Returns the target nodes for the given source node.
@@ -66,5 +66,5 @@ public interface IGraphDataSource <V> {
      * @return the multiset of target nodes
      * @since 2.0
      */
-    public IMemoryView <V> getTargetNodes(V source);
+    public IMemoryView<V> getTargetNodes(V source);
 }

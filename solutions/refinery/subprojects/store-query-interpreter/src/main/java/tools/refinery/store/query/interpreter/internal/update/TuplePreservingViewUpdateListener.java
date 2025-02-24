@@ -11,11 +11,11 @@ import tools.refinery.store.query.interpreter.internal.QueryInterpreterAdapterIm
 import tools.refinery.store.query.view.TuplePreservingView;
 import tools.refinery.store.tuple.Tuple;
 
-public class TuplePreservingViewUpdateListener <T> extends SymbolViewUpdateListener <T> {
-	private final TuplePreservingView <T> view;
+public class TuplePreservingViewUpdateListener<T> extends SymbolViewUpdateListener<T> {
+	private final TuplePreservingView<T> view;
 
-	TuplePreservingViewUpdateListener(QueryInterpreterAdapterImpl adapter, TuplePreservingView <T> view,
-                                      Interpretation <T> interpretation) {
+	TuplePreservingViewUpdateListener(QueryInterpreterAdapterImpl adapter, TuplePreservingView<T> view,
+                                      Interpretation<T> interpretation) {
         super(adapter, interpretation);
         this.view = view;
 	}

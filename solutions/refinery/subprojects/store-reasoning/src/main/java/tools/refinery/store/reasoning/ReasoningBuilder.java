@@ -24,7 +24,7 @@ import java.util.List;
 
 @SuppressWarnings("UnusedReturnValue")
 public interface ReasoningBuilder extends ModelAdapterBuilder {
-	ReasoningBuilder requiredInterpretations(Collection <Concreteness> requiredInterpretations);
+	ReasoningBuilder requiredInterpretations(Collection<Concreteness> requiredInterpretations);
 
 	default ReasoningBuilder requiredInterpretations(Concreteness... requiredInterpretations) {
 		return requiredInterpretations(List.of(requiredInterpretations));
@@ -32,7 +32,7 @@ public interface ReasoningBuilder extends ModelAdapterBuilder {
 
 	ReasoningBuilder partialSymbol(AnyPartialSymbolTranslator translator);
 
-	 <T> ReasoningBuilder storageRefiner(Symbol <T> symbol, StorageRefiner.Factory <T> refiner);
+	<T> ReasoningBuilder storageRefiner(Symbol<T> symbol, StorageRefiner.Factory<T> refiner);
 
 	ReasoningBuilder initializer(PartialModelInitializer initializer);
 
@@ -42,16 +42,16 @@ public interface ReasoningBuilder extends ModelAdapterBuilder {
 		return objectives(List.of(objectives));
 	}
 
-	default ReasoningBuilder objectives(Collection <Objective> objectives) {
+	default ReasoningBuilder objectives(Collection<Objective> objectives) {
 		objectives.forEach(this::objective);
 		return this;
 	}
 
-	 <T> Query <T> lift(Modality modality, Concreteness concreteness, Query <T> query);
+	<T> Query<T> lift(Modality modality, Concreteness concreteness, Query<T> query);
 
 	RelationalQuery lift(Modality modality, Concreteness concreteness, RelationalQuery query);
 
-	 <T> FunctionalQuery <T> lift(Modality modality, Concreteness concreteness, FunctionalQuery <T> query);
+	<T> FunctionalQuery<T> lift(Modality modality, Concreteness concreteness, FunctionalQuery<T> query);
 
 	Dnf lift(Modality modality, Concreteness concreteness, Dnf dnf);
 

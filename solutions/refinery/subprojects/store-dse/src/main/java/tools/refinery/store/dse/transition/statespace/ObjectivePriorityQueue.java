@@ -12,7 +12,7 @@ import java.util.Comparator;
 import java.util.Random;
 
 public interface ObjectivePriorityQueue {
-	Comparator <VersionWithObjectiveValue> getComparator();
+	Comparator<VersionWithObjectiveValue> getComparator();
 	void submit(VersionWithObjectiveValue versionWithObjectiveValue);
 	void remove(VersionWithObjectiveValue versionWithObjectiveValue);
 	int getSize();

@@ -7,7 +7,7 @@ package tools.refinery.store.representation.cardinality;
 
 import org.jetbrains.annotations.Nullable;
 
-public sealed interface UpperCardinality extends Comparable <UpperCardinality> permits FiniteUpperCardinality,
+public sealed interface UpperCardinality extends Comparable<UpperCardinality> permits FiniteUpperCardinality,
 		UnboundedUpperCardinality {
 	default UpperCardinality min(UpperCardinality other) {
 		return this.compareTo(other) <= 0 ? this : other;

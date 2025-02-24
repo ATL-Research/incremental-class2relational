@@ -22,7 +22,7 @@ package tools.refinery.interpreter.matchers.util;
  * @since 1.7
  * @noimplement This interface is not intended to be implemented by clients.
  */
-public interface IMemory <T> extends IMemoryView <T>, Clearable {
+public interface IMemory<T> extends IMemoryView<T>, Clearable {
 
     /**
      * Adds one value occurrence to the memory.

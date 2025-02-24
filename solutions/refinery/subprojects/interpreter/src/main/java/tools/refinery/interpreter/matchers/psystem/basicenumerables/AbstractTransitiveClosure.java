@@ -22,7 +22,7 @@ import tools.refinery.interpreter.matchers.tuple.Tuple;
 /**
  * @since 2.0
  */
-public abstract class AbstractTransitiveClosure extends KeyedEnumerablePConstraint <PQuery> implements IQueryReference, ITypeInfoProviderConstraint {
+public abstract class AbstractTransitiveClosure extends KeyedEnumerablePConstraint<PQuery> implements IQueryReference, ITypeInfoProviderConstraint {
 
     public AbstractTransitiveClosure(PBody pBody, Tuple variablesTuple, PQuery supplierKey) {
         super(pBody, variablesTuple, supplierKey);
@@ -37,7 +37,7 @@ public abstract class AbstractTransitiveClosure extends KeyedEnumerablePConstrai
      * @since 1.3
      */
     @Override
-    public Set <TypeJudgement> getImpliedJudgements(IQueryMetaContext context) {
+    public Set<TypeJudgement> getImpliedJudgements(IQueryMetaContext context) {
         return PositivePatternCall.getTypesImpliedByCall(supplierKey, variablesTuple);
     }
 

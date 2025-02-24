@@ -30,12 +30,12 @@ public final class SonarPropertiesUtils {
 	 * @param propertyName The name of the property to append to.
 	 * @param entries      The entries to append.
 	 */
-	public static void addToList(Map <String, Object> properties, String propertyName, String... entries) {
-		ArrayList <Object> newValue;
+	public static void addToList(Map<String, Object> properties, String propertyName, String... entries) {
+		ArrayList<Object> newValue;
 		var currentValue = properties.get(propertyName);
-		if (currentValue instanceof ArrayList <?> currentList) {
+		if (currentValue instanceof ArrayList<?> currentList) {
 			@SuppressWarnings("unchecked")
-			var objectList = (ArrayList <Object>) currentList;
+			var objectList = (ArrayList<Object>) currentList;
 			newValue = objectList;
 		} else if (currentValue == null) {
 			newValue = new ArrayList<>(entries.length);

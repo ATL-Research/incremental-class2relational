@@ -35,11 +35,11 @@ import static tools.refinery.store.query.interpreter.tests.QueryAssertions.asser
 import static tools.refinery.store.query.interpreter.tests.QueryAssertions.assertResults;
 
 class FunctionalQueryTest {
-	private static final Symbol <Boolean> person = Symbol.of("Person", 1);
-	private static final Symbol <Integer> age = Symbol.of("age", 1, Integer.class);
-	private static final Symbol <TruthValue> friend = Symbol.of("friend", 2, TruthValue.class, TruthValue.FALSE);
+	private static final Symbol<Boolean> person = Symbol.of("Person", 1);
+	private static final Symbol<Integer> age = Symbol.of("age", 1, Integer.class);
+	private static final Symbol<TruthValue> friend = Symbol.of("friend", 2, TruthValue.class, TruthValue.FALSE);
 	private static final AnySymbolView personView = new KeyOnlyView<>(person);
-	private static final FunctionView <Integer> ageView = new FunctionView<>(age);
+	private static final FunctionView<Integer> ageView = new FunctionView<>(age);
 	private static final AnySymbolView friendMustView = new FilteredView<>(friend, "must", TruthValue::must);
 
 	@QueryEngineTest
@@ -563,7 +563,7 @@ class FunctionalQueryTest {
 		), queryResultSet);
 	}
 
-	private static void enumerateValues(Cursor <?, ?> cursor) {
+	private static void enumerateValues(Cursor<?, ?> cursor) {
 		//noinspection StatementWithEmptyBody
 		while (cursor.move()) {
 			// Nothing do, just let the cursor move through the result set.

@@ -19,21 +19,21 @@ import java.util.UUID;
  * @param <T>
  * @author Oszkar Semerath
  */
-public abstract non-sealed class SymbolView <T> implements AnySymbolView {
-	private final Symbol <T> symbol;
+public abstract non-sealed class SymbolView<T> implements AnySymbolView {
+	private final Symbol<T> symbol;
 	private final String viewName;
 
-	protected SymbolView(Symbol <T> symbol, String viewName) {
+	protected SymbolView(Symbol<T> symbol, String viewName) {
 		this.symbol = symbol;
 		this.viewName = viewName;
 	}
 
-	protected SymbolView(Symbol <T> representation) {
+	protected SymbolView(Symbol<T> representation) {
 		this(representation, UUID.randomUUID().toString());
 	}
 
 	@Override
-	public Symbol <T> getSymbol() {
+	public Symbol<T> getSymbol() {
 		return symbol;
 	}
 
@@ -56,7 +56,7 @@ public abstract non-sealed class SymbolView <T> implements AnySymbolView {
 	public abstract Object[] forwardMap(Tuple key, T value);
 
 	@Override
-	public Iterable <Object[]> getAll(Model model) {
+	public Iterable<Object[]> getAll(Model model) {
 		return (() -> new CursorAsIterator<>(model.getInterpretation(symbol).getAll(), this::forwardMap, this::filter));
 	}
 
@@ -74,7 +74,7 @@ public abstract non-sealed class SymbolView <T> implements AnySymbolView {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		SymbolView <?> that = (SymbolView <?>) o;
+		SymbolView<?> that = (SymbolView<?>) o;
 		return Objects.equals(symbol, that.symbol) && Objects.equals(viewName, that.viewName);
 	}
 

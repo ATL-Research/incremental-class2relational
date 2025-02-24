@@ -55,8 +55,8 @@ public abstract class AbstractEvaluatorNode extends SingleInputNode implements I
     /**
      * @since 2.4
      */
-    protected void propagateIterableUpdate(final Direction direction, final Iterable <Tuple> update, final Timestamp timestamp) {
-        final Iterator <Tuple> itr = update.iterator();
+    protected void propagateIterableUpdate(final Direction direction, final Iterable<Tuple> update, final Timestamp timestamp) {
+        final Iterator<Tuple> itr = update.iterator();
         while (itr.hasNext()) {
             propagateUpdate(direction, itr.next(), timestamp);
         }

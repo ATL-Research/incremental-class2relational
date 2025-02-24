@@ -14,14 +14,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.Callable;
 
 /**
- * Copied from <code>tools.refinery.viatra.runtime.tabular.TabularEngineContext </code>
+ * Copied from <code>tools.refinery.viatra.runtime.tabular.TabularEngineContext</code>
  */
 public class DummyBaseIndexer implements IBaseIndex {
 	DummyBaseIndexer() {
 	}
 
 	@Override
-	public <V> V coalesceTraversals(Callable <V> callable) throws InvocationTargetException {
+	public <V> V coalesceTraversals(Callable<V> callable) throws InvocationTargetException {
 		try {
 			return callable.call();
 		} catch (Exception e) {

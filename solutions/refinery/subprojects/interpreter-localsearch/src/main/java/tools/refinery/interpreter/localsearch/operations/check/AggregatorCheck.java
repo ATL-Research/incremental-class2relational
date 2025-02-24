@@ -53,17 +53,17 @@ public class AggregatorCheck implements ISearchOperation, IPatternMatcherOperati
 
         @Override
         protected boolean check(MatchingFrame frame, ISearchContext context) {
-            IMultisetAggregationOperator <?, ?, ?> operator = aggregator.getAggregator().getOperator();
+            IMultisetAggregationOperator<?, ?, ?> operator = aggregator.getAggregator().getOperator();
             Object result = aggregate(operator, aggregator.getAggregatedColumn(), frame);
             return result == null ? false : Objects.equals(frame.getValue(position), result);
         }
 
         @SuppressWarnings("unchecked")
         private <Domain, Accumulator, AggregateResult> AggregateResult aggregate(
-                IMultisetAggregationOperator <Domain, Accumulator, AggregateResult> operator, int aggregatedColumn,
+                IMultisetAggregationOperator<Domain, Accumulator, AggregateResult> operator, int aggregatedColumn,
                 MatchingFrame initialFrame) {
             maskedTuple.updateTuple(initialFrame);
-            final Stream <Domain> valueStream = matcher.getAllMatches(information.getParameterMask(), maskedTuple)
+            final Stream<Domain> valueStream = matcher.getAllMatches(information.getParameterMask(), maskedTuple)
                     .map(match -> (Domain) match.get(aggregatedColumn));
             return operator.aggregateStream(valueStream);
         }
@@ -94,7 +94,7 @@ public class AggregatorCheck implements ISearchOperation, IPatternMatcherOperati
     }
 
     @Override
-    public List <Integer> getVariablePositions() {
+    public List<Integer> getVariablePositions() {
         return Collections.singletonList(position);
     }
 
@@ -104,7 +104,7 @@ public class AggregatorCheck implements ISearchOperation, IPatternMatcherOperati
     }
 
     @Override
-    public String toString(Function <Integer, String> variableMapping) {
+    public String toString(Function<Integer, String> variableMapping) {
         return "check     "+variableMapping.apply(position)+" = " + aggregator.getAggregator().getOperator().getName() + " find " + information.toString(variableMapping);
     }
 

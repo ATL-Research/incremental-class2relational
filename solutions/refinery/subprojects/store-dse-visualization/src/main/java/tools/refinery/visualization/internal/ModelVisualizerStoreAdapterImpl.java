@@ -18,10 +18,10 @@ public class ModelVisualizerStoreAdapterImpl implements ModelVisualizerStoreAdap
 	private final String outputPath;
 	private final boolean renderDesignSpace;
 	private final boolean renderStates;
-	private final Set <FileFormat> formats;
+	private final Set<FileFormat> formats;
 
 	public ModelVisualizerStoreAdapterImpl(ModelStore store, String dotBinaryPath, String outputPath,
-										   Set <FileFormat> formats, boolean renderDesignSpace, boolean renderStates) {
+										   Set<FileFormat> formats, boolean renderDesignSpace, boolean renderStates) {
 		this.store = store;
 		this.dotBinaryPath = dotBinaryPath;
 		this.outputPath = outputPath;
@@ -60,7 +60,7 @@ public class ModelVisualizerStoreAdapterImpl implements ModelVisualizerStoreAdap
 	}
 
 	@Override
-	public Set <FileFormat> getFormats() {
+	public Set<FileFormat> getFormats() {
 		return formats;
 	}
 }

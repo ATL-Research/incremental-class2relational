@@ -16,19 +16,19 @@ import java.util.Iterator;
  * @author Bergmann Gabor
  *
  */
-public class LexicographicComparator <T> implements Comparator <Iterable<? extends T>> {
+public class LexicographicComparator<T> implements Comparator<Iterable<? extends T>> {
 
-    final Comparator <T> elementComparator;
+    final Comparator<T> elementComparator;
 
-    public LexicographicComparator(Comparator <T> elementComparator) {
+    public LexicographicComparator(Comparator<T> elementComparator) {
         super();
         this.elementComparator = elementComparator;
     }
 
     @Override
-    public int compare(Iterable <? extends T> o1, Iterable <? extends T> o2) {
-        Iterator <? extends T> it1 = o1.iterator();
-        Iterator <? extends T> it2 = o2.iterator();
+    public int compare(Iterable<? extends T> o1, Iterable<? extends T> o2) {
+        Iterator<? extends T> it1 = o1.iterator();
+        Iterator<? extends T> it2 = o2.iterator();
 
         boolean has1, has2, bothHaveNext;
         do {

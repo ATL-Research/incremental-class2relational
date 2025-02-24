@@ -168,8 +168,8 @@ public abstract class AdvancedInterpreterEngine extends InterpreterEngine {
      * @param matcher
      *            the {@link InterpreterMatcher} for which this listener should be active
      */
-    public abstract <Match extends IPatternMatch> void addMatchUpdateListener(InterpreterMatcher <Match> matcher,
-																			  IMatchUpdateListener <? super Match> listener, boolean fireNow);
+    public abstract <Match extends IPatternMatch> void addMatchUpdateListener(InterpreterMatcher<Match> matcher,
+																			  IMatchUpdateListener<? super Match> listener, boolean fireNow);
 
     /**
      * Remove an existing match update event listener to this engine instance.
@@ -179,8 +179,8 @@ public abstract class AdvancedInterpreterEngine extends InterpreterEngine {
      * @param listener
      *            the {@link IMatchUpdateListener} that should not receive the callbacks anymore
      */
-    public abstract <Match extends IPatternMatch> void removeMatchUpdateListener(InterpreterMatcher <Match> matcher,
-																				 IMatchUpdateListener <? super Match> listener);
+    public abstract <Match extends IPatternMatch> void removeMatchUpdateListener(InterpreterMatcher<Match> matcher,
+																				 IMatchUpdateListener<? super Match> listener);
 
 
     /**
@@ -198,8 +198,8 @@ public abstract class AdvancedInterpreterEngine extends InterpreterEngine {
      * @throws InterpreterRuntimeException if the matcher could not be initialized
      * @since 0.9
      */
-    public abstract <Matcher extends InterpreterMatcher <? extends IPatternMatch>> Matcher getMatcher(
-            IQuerySpecification <Matcher> querySpecification,
+    public abstract <Matcher extends InterpreterMatcher<? extends IPatternMatch>> Matcher getMatcher(
+            IQuerySpecification<Matcher> querySpecification,
             QueryEvaluationHint optionalEvaluationHints);
 
     /**
@@ -284,10 +284,10 @@ public abstract class AdvancedInterpreterEngine extends InterpreterEngine {
      * Access an existing pattern matcher based on a {@link IQuerySpecification}, and optional hints override.
      * @param querySpecification a {@link IQuerySpecification} that describes a Refinery Interpreter query specification
      * @param optionalOverrideHints a {@link QueryEvaluationHint} that may override the pattern hints (can be null)
-     * @return a pattern matcher corresponding to the specification, <code>null </code> if a matcher does not exist yet.
+     * @return a pattern matcher corresponding to the specification, <code>null</code> if a matcher does not exist yet.
      * @since 1.4
      */
-    public abstract <Matcher extends InterpreterMatcher <? extends IPatternMatch>> Matcher getExistingMatcher(IQuerySpecification <Matcher> querySpecification, QueryEvaluationHint optionalOverrideHints);
+    public abstract <Matcher extends InterpreterMatcher<? extends IPatternMatch>> Matcher getExistingMatcher(IQuerySpecification<Matcher> querySpecification, QueryEvaluationHint optionalOverrideHints);
 
     /**
      * Returns the immutable {@link InterpreterEngineOptions} of the engine.
@@ -304,7 +304,7 @@ public abstract class AdvancedInterpreterEngine extends InterpreterEngine {
      * @since 1.4
      * @noreference This method is considered internal API
      */
-    public abstract IQueryResultProvider getResultProviderOfMatcher(InterpreterMatcher <? extends IPatternMatch> matcher);
+    public abstract IQueryResultProvider getResultProviderOfMatcher(InterpreterMatcher<? extends IPatternMatch> matcher);
 
     /**
      * The given callable will be executed, and all update propagation in stateful query backends
@@ -322,7 +322,7 @@ public abstract class AdvancedInterpreterEngine extends InterpreterEngine {
      * @return the result of the callable
      * @since 1.6
      */
-    public abstract <V> V delayUpdatePropagation(Callable <V> callable) throws InvocationTargetException;
+    public abstract <V> V delayUpdatePropagation(Callable<V> callable) throws InvocationTargetException;
 
     /**
      * Returns true if the update propagation in this engine is currently delayed, false otherwise.

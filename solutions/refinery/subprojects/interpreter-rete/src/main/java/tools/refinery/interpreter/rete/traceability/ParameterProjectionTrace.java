@@ -27,7 +27,7 @@ public class ParameterProjectionTrace extends RecipeTraceInfo implements Pattern
     }
 
     public ParameterProjectionTrace(PBody body, ReteNodeRecipe recipe,
-            Collection <? extends RecipeTraceInfo> parentRecipeTraces) {
+            Collection<? extends RecipeTraceInfo> parentRecipeTraces) {
         super(recipe, parentRecipeTraces);
         this.body = body;
     }

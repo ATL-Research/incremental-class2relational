@@ -208,7 +208,7 @@ class ArityValidationTest {
 		));
 	}
 
-	static Stream <Arguments> invalidReferenceTypeTest() {
+	static Stream<Arguments> invalidReferenceTypeTest() {
 		return Stream.of(
 				"pred Foo(node n) <-> true.",
 				"pred Foo(node n, node m) <-> true.",
@@ -237,7 +237,7 @@ class ArityValidationTest {
 		)))));
 	}
 
-	static Stream <Arguments> validReferenceTypeTest() {
+	static Stream<Arguments> validReferenceTypeTest() {
 		return Stream.of(
 				"class Foo.",
 				"abstract class Foo."

@@ -52,23 +52,23 @@ public final class QueryAnalyzer {
     /**
      * Maps query and strictness to functional dependencies
      */
-    private Map <PQuery, Map <Set<Integer>, Set <Integer>>> strictFunctionalDependencyGuarantees =
+    private Map<PQuery, Map<Set<Integer>, Set<Integer>>> strictFunctionalDependencyGuarantees =
             new HashMap<>();
-    private Map <PQuery, Map <Set<Integer>, Set <Integer>>> softFunctionalDependencyGuarantees =
+    private Map<PQuery, Map<Set<Integer>, Set<Integer>>> softFunctionalDependencyGuarantees =
             new HashMap<>();
 
     /**
      * Functional dependency information, expressed on query parameters, that the match set of the query is guaranteed to respect.
-     * <p> The type dependencies shall be expressed on the <i>parameter index </i> integers, NOT the {@link PParameter} object.
+     * <p> The type dependencies shall be expressed on the <i>parameter index</i> integers, NOT the {@link PParameter} object.
      * @return a non-null map of functional dependencies on parameters that can be processed by {@link FunctionalDependencyHelper}
      * @param strict if true, only "hard" dependencies are taken into account that are strictly enforced by the model representation;
      *  if false, user-provided soft dependencies (@FunctionalDependency) are included as well, that are anticipated but not guaranteed by the storage mechanism;
      *  use true if superfluous dependencies may taint the correctness of a computation, false if they would merely impact performance
      * @since 1.5
      */
-    public Map <Set<Integer>, Set <Integer>> getProjectedFunctionalDependencies(PQuery query, boolean strict) {
-        Map <PQuery, Map <Set<Integer>, Set <Integer>>> guaranteeStore =  strict ? strictFunctionalDependencyGuarantees : softFunctionalDependencyGuarantees;
-        Map <Set<Integer>, Set <Integer>> dependencies = guaranteeStore.get(query);
+    public Map<Set<Integer>, Set<Integer>> getProjectedFunctionalDependencies(PQuery query, boolean strict) {
+        Map<PQuery, Map<Set<Integer>, Set<Integer>>> guaranteeStore =  strict ? strictFunctionalDependencyGuarantees : softFunctionalDependencyGuarantees;
+        Map<Set<Integer>, Set<Integer>> dependencies = guaranteeStore.get(query);
         //  Why not computeIfAbsent? See Bug 532507
         //      Invoked method #computeFunctionalDependencies may trigger functional dependency computation for called queries;
         //      and may thus recurs back into #getProjectedFunctionalDependencies, causing a ConcurrentModificationException
@@ -86,29 +86,29 @@ public final class QueryAnalyzer {
         return dependencies;
     }
 
-    private void computeFunctionalDependencies(Map <Set<Integer>, Set <Integer>> accumulator, PQuery query, boolean strict) {
-        Set <PBody> bodies = query.getDisjunctBodies().getBodies();
+    private void computeFunctionalDependencies(Map<Set<Integer>, Set<Integer>> accumulator, PQuery query, boolean strict) {
+        Set<PBody> bodies = query.getDisjunctBodies().getBodies();
         if (bodies.size() == 1) { // no support for recursion or disjunction
 
             PBody body = bodies.iterator().next();
 
             // collect parameter variables
-            Map <PVariable, Integer> parameters = body.getSymbolicParameters().stream()
+            Map<PVariable, Integer> parameters = body.getSymbolicParameters().stream()
                     .collect(Collectors.toMap(ExportedParameter::getParameterVariable,
                             param -> query.getParameters().indexOf(param.getPatternParameter())));
 
             // collect all internal dependencies
-            Map <Set<PVariable>, Set <PVariable>> internalDependencies =
+            Map<Set<PVariable>, Set<PVariable>> internalDependencies =
                     getFunctionalDependencies(body.getConstraints(), strict);
 
             // project onto parameter variables
-            Map <Set<PVariable>, Set <PVariable>> projectedDeps =
+            Map<Set<PVariable>, Set<PVariable>> projectedDeps =
                     FunctionalDependencyHelper.projectDependencies(internalDependencies, parameters.keySet());
 
             // translate into indices
-            for (Entry <Set<PVariable>, Set <PVariable>> entry : projectedDeps.entrySet()) {
-                Set <Integer> left = new HashSet <Integer>();
-                Set <Integer> right = new HashSet <Integer>();
+            for (Entry<Set<PVariable>, Set<PVariable>> entry : projectedDeps.entrySet()) {
+                Set<Integer> left = new HashSet<Integer>();
+                Set<Integer> right = new HashSet<Integer>();
                 for (PVariable pVariable : entry.getKey()) {
                     left.add(parameters.get(pVariable));
                 }
@@ -129,8 +129,8 @@ public final class QueryAnalyzer {
         if (!strict) {
             outer:
                 for (PAnnotation annotation : query.getAnnotationsByName("FunctionalDependency")) {
-                    Set <Integer> lefts = new HashSet <Integer>();
-                    Set <Integer> rights = new HashSet <Integer>();
+                    Set<Integer> lefts = new HashSet<Integer>();
+                    Set<Integer> rights = new HashSet<Integer>();
 
                     for (Object object : annotation.getAllValues("forEach")) {
                         ParameterReference parameter = (ParameterReference) object;
@@ -159,17 +159,17 @@ public final class QueryAnalyzer {
      *  use true if superfluous dependencies may taint the correctness of a computation, false if they would merely impact performance
      * @since 1.5
      */
-   public Map <Set<PVariable>, Set <PVariable>> getFunctionalDependencies(Set <? extends PConstraint> constraints, boolean strict) {
-        Map <Set<PVariable>, Set <PVariable>> accumulator = new HashMap <Set<PVariable>, Set <PVariable>>();
+   public Map<Set<PVariable>, Set<PVariable>> getFunctionalDependencies(Set<? extends PConstraint> constraints, boolean strict) {
+        Map<Set<PVariable>, Set<PVariable>> accumulator = new HashMap<Set<PVariable>, Set<PVariable>>();
         for (PConstraint pConstraint : constraints){
             if (pConstraint instanceof PositivePatternCall) {
                 // use query analysis results instead
                 PositivePatternCall call = (PositivePatternCall) pConstraint;
                 PQuery query = call.getSupplierKey();
-                Map <Set<Integer>, Set <Integer>> paramDependencies = getProjectedFunctionalDependencies(query, strict);
-                for (Entry <Set<Integer>, Set <Integer>> entry : paramDependencies.entrySet()) {
-                    Set <PVariable> lefts = new HashSet <PVariable>();
-                    Set <PVariable> rights = new HashSet <PVariable>();
+                Map<Set<Integer>, Set<Integer>> paramDependencies = getProjectedFunctionalDependencies(query, strict);
+                for (Entry<Set<Integer>, Set<Integer>> entry : paramDependencies.entrySet()) {
+                    Set<PVariable> lefts = new HashSet<PVariable>();
+                    Set<PVariable> rights = new HashSet<PVariable>();
 
                     for (Integer index : entry.getKey()) {
                         lefts.add(call.getVariableInTuple(index));

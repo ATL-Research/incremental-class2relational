@@ -51,7 +51,7 @@ public class QueryEvaluationHint {
     }
 
     final IQueryBackendFactory queryBackendFactory;
-    final Map <QueryHintOption<?>, Object> backendHintSettings;
+    final Map<QueryHintOption<?>, Object> backendHintSettings;
     final BackendRequirement requirement;
 
     /**
@@ -69,14 +69,14 @@ public class QueryEvaluationHint {
      *            defines the kind of backend requirement
      * @since 2.0
      */
-    public QueryEvaluationHint(Map <QueryHintOption<?>, Object> backendHintSettings, BackendRequirement backendRequirementType) {
+    public QueryEvaluationHint(Map<QueryHintOption<?>, Object> backendHintSettings, BackendRequirement backendRequirementType) {
         super();
         Preconditions.checkArgument(backendRequirementType != null, "Specific requirement needs to be set");
         Preconditions.checkArgument(backendRequirementType != BackendRequirement.SPECIFIC, "Specific backend requirement needs providing a corresponding backend type");
         this.queryBackendFactory = null;
         this.requirement = backendRequirementType;
         this.backendHintSettings = (backendHintSettings == null)
-                ? Collections.<QueryHintOption <?>, Object> emptyMap()
+                ? Collections.<QueryHintOption<?>, Object> emptyMap()
                 : new HashMap<>(backendHintSettings);
     }
 
@@ -95,13 +95,13 @@ public class QueryEvaluationHint {
      * @since 1.5
      */
     public QueryEvaluationHint(
-            Map <QueryHintOption<?>, Object> backendHintSettings,
+            Map<QueryHintOption<?>, Object> backendHintSettings,
             IQueryBackendFactory queryBackendFactory) {
         super();
         this.queryBackendFactory = queryBackendFactory;
         this.requirement = (queryBackendFactory == null) ? BackendRequirement.UNSPECIFIED : BackendRequirement.SPECIFIC;
         this.backendHintSettings = (backendHintSettings == null)
-                ? Collections.<QueryHintOption <?>, Object> emptyMap()
+                ? Collections.<QueryHintOption<?>, Object> emptyMap()
                 : new HashMap<>(backendHintSettings);
     }
 
@@ -132,7 +132,7 @@ public class QueryEvaluationHint {
      *
      * @since 1.5
      */
-    public Map <QueryHintOption<?>, Object> getBackendHintSettings() {
+    public Map<QueryHintOption<?>, Object> getBackendHintSettings() {
         return backendHintSettings;
     }
 
@@ -150,7 +150,7 @@ public class QueryEvaluationHint {
         if (overridingHint.getQueryBackendRequirementType() != BackendRequirement.UNSPECIFIED) {
             overriddenRequirement = overridingHint.getQueryBackendRequirementType();
         }
-        Map <QueryHintOption<?>, Object> hints = new HashMap<>(this.getBackendHintSettings());
+        Map<QueryHintOption<?>, Object> hints = new HashMap<>(this.getBackendHintSettings());
         if (overridingHint.getBackendHintSettings() != null) {
             hints.putAll(overridingHint.getBackendHintSettings());
         }
@@ -169,7 +169,7 @@ public class QueryEvaluationHint {
      * Returns whether the given hint option is overridden.
      * @since 1.5
      */
-    public boolean isOptionOverridden(QueryHintOption <?> option) {
+    public boolean isOptionOverridden(QueryHintOption<?> option) {
         return getBackendHintSettings().containsKey(option);
     }
 
@@ -178,7 +178,7 @@ public class QueryEvaluationHint {
      * @since 1.5
      */
     @SuppressWarnings("unchecked")
-    public <HintValue> HintValue getValueOrNull(QueryHintOption <HintValue> option) {
+    public <HintValue> HintValue getValueOrNull(QueryHintOption<HintValue> option) {
         return (HintValue) getBackendHintSettings().get(option);
     }
 
@@ -187,7 +187,7 @@ public class QueryEvaluationHint {
      * Intended to be called by backends to find out the definitive value that should be considered.
      * @since 1.5
      */
-    public <HintValue> HintValue getValueOrDefault(QueryHintOption <HintValue> option) {
+    public <HintValue> HintValue getValueOrDefault(QueryHintOption<HintValue> option) {
         return option.getValueOrDefault(this);
     }
 

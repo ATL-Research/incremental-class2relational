@@ -46,9 +46,9 @@ public class ExpressionCheck implements ISearchOperation {
     }
 
     IExpressionEvaluator evaluator;
-    Map <String, Integer> nameMap;
+    Map<String, Integer> nameMap;
 
-    public ExpressionCheck(IExpressionEvaluator evaluator, Map <String, Integer> nameMap) {
+    public ExpressionCheck(IExpressionEvaluator evaluator, Map<String, Integer> nameMap) {
         super();
         this.evaluator = evaluator;
         this.nameMap = nameMap;
@@ -60,7 +60,7 @@ public class ExpressionCheck implements ISearchOperation {
     }
 
     @Override
-    public List <Integer> getVariablePositions() {
+    public List<Integer> getVariablePositions() {
         // XXX not sure if this is the correct implementation to get the affected variable indicies
         return new ArrayList<>(nameMap.values());
     }
@@ -71,7 +71,7 @@ public class ExpressionCheck implements ISearchOperation {
     }
 
     @Override
-    public String toString(Function <Integer, String> variableMapping) {
+    public String toString(Function<Integer, String> variableMapping) {
         return "check     expression "+evaluator.getShortDescription();
     }
 

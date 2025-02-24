@@ -33,11 +33,11 @@ import tools.refinery.interpreter.matchers.util.timeline.Timeline;
  * @author Tamas Szabo
  * @since 2.3
  */
-abstract class AbstractTimelyMaskedMemory <Timestamp extends Comparable <Timestamp>, KeyType>
-        extends MaskedTupleMemory <Timestamp> {
+abstract class AbstractTimelyMaskedMemory<Timestamp extends Comparable<Timestamp>, KeyType>
+        extends MaskedTupleMemory<Timestamp> {
 
-    protected final TreeMap <Timestamp, Set <KeyType>> foldingStates;
-    protected final Map <KeyType, TimelyMemory <Timestamp>> memoryMap;
+    protected final TreeMap<Timestamp, Set<KeyType>> foldingStates;
+    protected final Map<KeyType, TimelyMemory<Timestamp>> memoryMap;
     protected final boolean isLazy;
 
     public AbstractTimelyMaskedMemory(final TupleMask mask, final Object owner, final boolean isLazy) {
@@ -48,13 +48,13 @@ abstract class AbstractTimelyMaskedMemory <Timestamp extends Comparable <Timesta
     }
 
     @Override
-    public void initializeWith(final MaskedTupleMemory <Timestamp> other, final Timestamp defaultValue) {
-        final Iterable <Tuple> signatures = other.getSignatures();
+    public void initializeWith(final MaskedTupleMemory<Timestamp> other, final Timestamp defaultValue) {
+        final Iterable<Tuple> signatures = other.getSignatures();
         for (final Tuple signature : signatures) {
             if (other.isTimely()) {
-                final Map <Tuple, Timeline <Timestamp>> tupleMap = other.getWithTimeline(signature);
-                for (final Entry <Tuple, Timeline <Timestamp>> entry : tupleMap.entrySet()) {
-                    for (final Signed <Timestamp> signed : entry.getValue().asChangeSequence()) {
+                final Map<Tuple, Timeline<Timestamp>> tupleMap = other.getWithTimeline(signature);
+                for (final Entry<Tuple, Timeline<Timestamp>> entry : tupleMap.entrySet()) {
+                    for (final Signed<Timestamp> signed : entry.getValue().asChangeSequence()) {
                         if (signed.getDirection() == Direction.DELETE) {
                             this.removeWithTimestamp(entry.getKey(), signed.getPayload());
                         } else {
@@ -63,7 +63,7 @@ abstract class AbstractTimelyMaskedMemory <Timestamp extends Comparable <Timesta
                     }
                 }
             } else {
-                final Collection <Tuple> tuples = other.get(signature);
+                final Collection<Tuple> tuples = other.get(signature);
                 for (final Tuple tuple : tuples) {
                     this.addWithTimestamp(tuple, defaultValue);
                 }
@@ -72,7 +72,7 @@ abstract class AbstractTimelyMaskedMemory <Timestamp extends Comparable <Timesta
     }
 
     public boolean isPresentAtInfinityInteral(KeyType key) {
-        final TimelyMemory <Timestamp> values = this.memoryMap.get(key);
+        final TimelyMemory<Timestamp> values = this.memoryMap.get(key);
         if (values == null) {
             return false;
         } else {
@@ -93,19 +93,19 @@ abstract class AbstractTimelyMaskedMemory <Timestamp extends Comparable <Timesta
     @Override
     public int getTotalSize() {
         int i = 0;
-        for (final Entry <KeyType, TimelyMemory <Timestamp>> entry : this.memoryMap.entrySet()) {
+        for (final Entry<KeyType, TimelyMemory<Timestamp>> entry : this.memoryMap.entrySet()) {
             i += entry.getValue().size();
         }
         return i;
     }
 
     @Override
-    public Iterator <Tuple> iterator() {
+    public Iterator<Tuple> iterator() {
         return this.memoryMap.values().stream().flatMap(e -> e.keySet().stream()).iterator();
     }
 
-    protected Collection <Tuple> getInternal(final KeyType key) {
-        final TimelyMemory <Timestamp> memory = this.memoryMap.get(key);
+    protected Collection<Tuple> getInternal(final KeyType key) {
+        final TimelyMemory<Timestamp> memory = this.memoryMap.get(key);
         if (memory == null) {
             return null;
         } else {
@@ -113,8 +113,8 @@ abstract class AbstractTimelyMaskedMemory <Timestamp extends Comparable <Timesta
         }
     }
 
-    public Map <Tuple, Timeline <Timestamp>> getWithTimestampInternal(final KeyType key) {
-        final TimelyMemory <Timestamp> memory = this.memoryMap.get(key);
+    public Map<Tuple, Timeline<Timestamp>> getWithTimestampInternal(final KeyType key) {
+        final TimelyMemory<Timestamp> memory = this.memoryMap.get(key);
         if (memory == null) {
             return null;
         } else {
@@ -122,11 +122,11 @@ abstract class AbstractTimelyMaskedMemory <Timestamp extends Comparable <Timesta
         }
     }
 
-    protected Diff <Timestamp> removeInternal(final KeyType key, final Tuple tuple, final Timestamp timestamp) {
+    protected Diff<Timestamp> removeInternal(final KeyType key, final Tuple tuple, final Timestamp timestamp) {
         Timestamp oldResumableTimestamp = null;
         Timestamp newResumableTimestamp = null;
 
-        final TimelyMemory <Timestamp> keyMemory = this.memoryMap.get(key);
+        final TimelyMemory<Timestamp> keyMemory = this.memoryMap.get(key);
         if (keyMemory == null) {
             throw raiseDuplicateDeletion(tuple);
         }
@@ -135,7 +135,7 @@ abstract class AbstractTimelyMaskedMemory <Timestamp extends Comparable <Timesta
             oldResumableTimestamp = keyMemory.getResumableTimestamp();
         }
 
-        Diff <Timestamp> diff = null;
+        Diff<Timestamp> diff = null;
         try {
             diff = keyMemory.remove(tuple, timestamp);
         } catch (final IllegalStateException e) {
@@ -156,18 +156,18 @@ abstract class AbstractTimelyMaskedMemory <Timestamp extends Comparable <Timesta
         return diff;
     }
 
-    protected Diff <Timestamp> addInternal(final KeyType key, final Tuple tuple, final Timestamp timestamp) {
+    protected Diff<Timestamp> addInternal(final KeyType key, final Tuple tuple, final Timestamp timestamp) {
         Timestamp oldResumableTimestamp = null;
         Timestamp newResumableTimestamp = null;
 
-        final TimelyMemory <Timestamp> keyMemory = this.memoryMap.computeIfAbsent(key,
-                k -> new TimelyMemory <Timestamp>(this.isLazy));
+        final TimelyMemory<Timestamp> keyMemory = this.memoryMap.computeIfAbsent(key,
+                k -> new TimelyMemory<Timestamp>(this.isLazy));
 
         if (this.isLazy) {
             oldResumableTimestamp = keyMemory.getResumableTimestamp();
         }
 
-        final Diff <Timestamp> diff = keyMemory.put(tuple, timestamp);
+        final Diff<Timestamp> diff = keyMemory.put(tuple, timestamp);
 
         if (this.isLazy) {
             newResumableTimestamp = keyMemory.getResumableTimestamp();
@@ -181,12 +181,12 @@ abstract class AbstractTimelyMaskedMemory <Timestamp extends Comparable <Timesta
     }
 
     @Override
-    public Diff <Timestamp> removeWithTimestamp(final Tuple tuple, final Timestamp timestamp) {
+    public Diff<Timestamp> removeWithTimestamp(final Tuple tuple, final Timestamp timestamp) {
         return removeWithTimestamp(tuple, null, timestamp);
     }
 
     @Override
-    public Diff <Timestamp> addWithTimestamp(final Tuple tuple, final Timestamp timestamp) {
+    public Diff<Timestamp> addWithTimestamp(final Tuple tuple, final Timestamp timestamp) {
         return addWithTimestamp(tuple, null, timestamp);
     }
 

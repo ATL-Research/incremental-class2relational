@@ -21,7 +21,7 @@ import tools.refinery.interpreter.localsearch.plan.SearchPlan;
  * A local search adapter allows external code to follow the internal executions of the local search matcher. Possible
  * implementations of the interface include profilers and debuggers.
  * <p>
- * <strong>EXPERIMENTAL </strong>. A few shortcomings have been found for this interface late during the development
+ * <strong>EXPERIMENTAL</strong>. A few shortcomings have been found for this interface late during the development
  * lifecycle of version 2.0 whose solution might need breaking possible future implementors. Because of this, right now
  * it is not recommended to provide implementations outside of VIATRA. If necessary, have a look at the built-in
  * adapters that should fulfill most cases in the meantime. See bugs https://bugs.eclipse.org/bugs/show_bug.cgi?id=535101
@@ -55,7 +55,7 @@ public interface ILocalSearchAdapter {
     /**
      * Callback method to indicate the end of a matching process
      * </p>
-     * <strong>WARNING </strong>: It is not guaranteed that this method will be called;
+     * <strong>WARNING</strong>: It is not guaranteed that this method will be called;
      * it is possible that a match process will end after a match is found and no other matches are accessed.
      *
      * @param lsMatcher the local search matcher that finished
@@ -70,7 +70,7 @@ public interface ILocalSearchAdapter {
      * @param newPlan the plan that will begin execution
      * @since 2.0
      */
-    default void planChanged(Optional <SearchPlan> oldPlan, Optional <SearchPlan> newPlan) {};
+    default void planChanged(Optional<SearchPlan> oldPlan, Optional<SearchPlan> newPlan) {};
 
     /**
      * Callback method to indicate the selection of an operation to execute

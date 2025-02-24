@@ -32,23 +32,23 @@ class SharedStoreFuzzTest {
 	private void runFuzzTest(String scenario, int seed, int steps, int maxKey, int maxValue,
 							 boolean nullDefault, int commitFrequency, boolean evilHash) {
 		String[] values = MapTestEnvironment.prepareValues(maxValue, nullDefault);
-		ContinuousHashProvider <Integer> chp = MapTestEnvironment.prepareHashProvider(evilHash);
+		ContinuousHashProvider<Integer> chp = MapTestEnvironment.prepareHashProvider(evilHash);
 
-		List <VersionedMapStore<Integer, String>> stores = VersionedMapStoreStateImpl.createSharedVersionedMapStores(5, chp, values[0]);
+		List<VersionedMapStore<Integer, String>> stores = VersionedMapStoreStateImpl.createSharedVersionedMapStores(5, chp, values[0]);
 
 		iterativeRandomPutsAndCommitsThenRestore(scenario, stores, steps, maxKey, values, seed, commitFrequency);
 	}
 
-	private void iterativeRandomPutsAndCommitsThenRestore(String scenario, List <VersionedMapStore<Integer, String>> stores,
+	private void iterativeRandomPutsAndCommitsThenRestore(String scenario, List<VersionedMapStore<Integer, String>> stores,
 														  int steps, int maxKey, String[] values, int seed, int commitFrequency) {
 		// 1. maps with versions
 		Random r = new Random(seed);
-		List <VersionedMapStateImpl<Integer, String>> versioneds = new LinkedList<>();
-		for (VersionedMapStore <Integer, String> store : stores) {
-			versioneds.add((VersionedMapStateImpl <Integer, String>) store.createMap());
+		List<VersionedMapStateImpl<Integer, String>> versioneds = new LinkedList<>();
+		for (VersionedMapStore<Integer, String> store : stores) {
+			versioneds.add((VersionedMapStateImpl<Integer, String>) store.createMap());
 		}
 
-		List <Map<Integer, Version>> index2Version = new LinkedList<>();
+		List<Map<Integer, Version>> index2Version = new LinkedList<>();
 		for (int i = 0; i < stores.size(); i++) {
 			index2Version.add(new HashMap<>());
 		}
@@ -67,9 +67,9 @@ class SharedStoreFuzzTest {
 			}
 		}
 		// 2. create a non-versioned and
-		List <VersionedMapStateImpl<Integer, String>> reference = new LinkedList<>();
-		for (VersionedMapStore <Integer, String> store : stores) {
-			reference.add((VersionedMapStateImpl <Integer, String>) store.createMap());
+		List<VersionedMapStateImpl<Integer, String>> reference = new LinkedList<>();
+		for (VersionedMapStore<Integer, String> store : stores) {
+			reference.add((VersionedMapStateImpl<Integer, String>) store.createMap());
 		}
 		r = new Random(seed);
 
@@ -100,7 +100,7 @@ class SharedStoreFuzzTest {
 				nullDefault, commitFrequency, evilHash);
 	}
 
-	static Stream <Arguments> parametrizedFastFuzz() {
+	static Stream<Arguments> parametrizedFastFuzz() {
 		return FuzzTestUtils.permutationWithSize(stepCounts, keyCounts, valueCounts, nullDefaultOptions,
 				commitFrequencyOptions, randomSeedOptions, new Object[]{false, true});
 	}
@@ -116,7 +116,7 @@ class SharedStoreFuzzTest {
 				nullDefault, commitFrequency, evilHash);
 	}
 
-	static Stream <Arguments> parametrizedSlowFuzz() {
+	static Stream<Arguments> parametrizedSlowFuzz() {
 		return FuzzTestUtils.changeStepCount(RestoreFuzzTest.parametrizedFastFuzz(), 1);
 	}
 }

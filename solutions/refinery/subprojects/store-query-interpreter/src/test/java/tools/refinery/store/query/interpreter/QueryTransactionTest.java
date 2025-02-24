@@ -27,8 +27,8 @@ import static tools.refinery.store.query.interpreter.tests.QueryAssertions.asser
 import static tools.refinery.store.query.interpreter.tests.QueryAssertions.assertResults;
 
 class QueryTransactionTest {
-	private static final Symbol <Boolean> person = Symbol.of("Person", 1);
-	private static final Symbol <Integer> age = Symbol.of("age", 1, Integer.class);
+	private static final Symbol<Boolean> person = Symbol.of("Person", 1);
+	private static final Symbol<Integer> age = Symbol.of("age", 1, Integer.class);
 	private static final AnySymbolView personView = new KeyOnlyView<>(person);
 	private static final AnySymbolView ageView = new FunctionView<>(age);
 	private static final RelationalQuery predicate = Query.of("TypeConstraint", (builder, p1) ->

@@ -16,7 +16,7 @@ package tools.refinery.interpreter.matchers.util.resumable;
  * @author Tamas Szabo
  * @since 2.4
  */
-public interface Resumable <Timestamp extends Comparable <Timestamp>> {
+public interface Resumable<Timestamp extends Comparable<Timestamp>> {
 
     /**
      * Returns the smallest timestamp where lazy folding shall be resumed, or null if there is no more folding to do in this

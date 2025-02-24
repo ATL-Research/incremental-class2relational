@@ -16,14 +16,14 @@ import tools.refinery.store.tuple.Tuple;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class VersionedInterpretation <T> implements Interpretation <T> {
+public abstract class VersionedInterpretation<T> implements Interpretation<T> {
 	private final ModelImpl model;
-	private final Symbol <T> symbol;
-	private final VersionedMap <Tuple, T> map;
-	private final List <InterpretationListener<T>> listeners = new ArrayList<>();
-	private final List <InterpretationListener<T>> restoreListeners = new ArrayList<>();
+	private final Symbol<T> symbol;
+	private final VersionedMap<Tuple, T> map;
+	private final List<InterpretationListener<T>> listeners = new ArrayList<>();
+	private final List<InterpretationListener<T>> restoreListeners = new ArrayList<>();
 
-	protected VersionedInterpretation(ModelImpl model, Symbol <T> symbol, VersionedMap <Tuple, T> map) {
+	protected VersionedInterpretation(ModelImpl model, Symbol<T> symbol, VersionedMap<Tuple, T> map) {
 		this.model = model;
 		this.symbol = symbol;
 		this.map = map;
@@ -35,7 +35,7 @@ public abstract class VersionedInterpretation <T> implements Interpretation <T> 
 	}
 
 	@Override
-	public Symbol <T> getSymbol() {
+	public Symbol<T> getSymbol() {
 		return symbol;
 	}
 
@@ -58,14 +58,14 @@ public abstract class VersionedInterpretation <T> implements Interpretation <T> 
 	}
 
 	@Override
-	public Cursor <Tuple, T> getAll() {
+	public Cursor<Tuple, T> getAll() {
 		return map.getAll();
 	}
 
 	protected void valueChanged(Tuple key, T fromValue, T toValue, boolean restoring) {
 		var listenerList = restoring ? restoreListeners : listeners;
 		int listenerCount = listenerList.size();
-		// Use a for loop instead of a for-each loop to avoid <code>Iterator </code> allocation overhead.
+		// Use a for loop instead of a for-each loop to avoid <code>Iterator</code> allocation overhead.
 		//noinspection ForLoopReplaceableByForEach
 		for (int i = 0; i < listenerCount; i++) {
 			listenerList.get(i).put(key, fromValue, toValue, restoring);
@@ -83,11 +83,11 @@ public abstract class VersionedInterpretation <T> implements Interpretation <T> 
 	}
 
 	@Override
-	public void putAll(Cursor <Tuple, T> cursor) {
+	public void putAll(Cursor<Tuple, T> cursor) {
 		model.markAsChanged();
 		if (cursor.getDependingMaps().contains(map)) {
-			List <Tuple> keys = new ArrayList<>();
-			List <T> values = new ArrayList<>();
+			List<Tuple> keys = new ArrayList<>();
+			List<T> values = new ArrayList<>();
 			while (cursor.move()) {
 				model.checkCancelled();
 				keys.add(cursor.getKey());
@@ -106,7 +106,7 @@ public abstract class VersionedInterpretation <T> implements Interpretation <T> 
 	}
 
 	@Override
-	public DiffCursor <Tuple, T> getDiffCursor(Version to) {
+	public DiffCursor<Tuple, T> getDiffCursor(Version to) {
 		return map.getDiffCursor(to);
 	}
 
@@ -129,7 +129,7 @@ public abstract class VersionedInterpretation <T> implements Interpretation <T> 
 	}
 
 	@Override
-	public void addListener(InterpretationListener <T> listener, boolean alsoWhenRestoring) {
+	public void addListener(InterpretationListener<T> listener, boolean alsoWhenRestoring) {
 		listeners.add(listener);
 		if (alsoWhenRestoring) {
 			restoreListeners.add(listener);
@@ -137,28 +137,28 @@ public abstract class VersionedInterpretation <T> implements Interpretation <T> 
 	}
 
 	@Override
-	public void removeListener(InterpretationListener <T> listener) {
+	public void removeListener(InterpretationListener<T> listener) {
 		listeners.remove(listener);
 		restoreListeners.remove(listener);
 	}
 
-	static <T> VersionedInterpretation <T> of(ModelImpl model, AnySymbol symbol, VersionedMapStore <Tuple, T> store) {
+	static <T> VersionedInterpretation<T> of(ModelImpl model, AnySymbol symbol, VersionedMapStore<Tuple, T> store) {
 		@SuppressWarnings("unchecked")
-		var typedSymbol = (Symbol <T>) symbol;
+		var typedSymbol = (Symbol<T>) symbol;
 		var map = store.createMap();
 		return of(model, typedSymbol, map);
 	}
 
-	static <T> VersionedInterpretation <T> of(ModelImpl model, AnySymbol symbol, VersionedMapStore <Tuple, T> store,
+	static <T> VersionedInterpretation<T> of(ModelImpl model, AnySymbol symbol, VersionedMapStore<Tuple, T> store,
 											 Version state) {
 		@SuppressWarnings("unchecked")
-		var typedSymbol = (Symbol <T>) symbol;
+		var typedSymbol = (Symbol<T>) symbol;
 		var map = store.createMap(state);
 		return of(model, typedSymbol, map);
 	}
 
-	private static <T> VersionedInterpretation <T> of(ModelImpl model, Symbol <T> typedSymbol,
-													 VersionedMap <Tuple, T> map) {
+	private static <T> VersionedInterpretation<T> of(ModelImpl model, Symbol<T> typedSymbol,
+													 VersionedMap<Tuple, T> map) {
 		return switch (typedSymbol.arity()) {
 			case 0 -> new NullaryVersionedInterpretation<>(model, typedSymbol, map);
 			case 1 -> new UnaryVersionedInterpretation<>(model, typedSymbol, map);

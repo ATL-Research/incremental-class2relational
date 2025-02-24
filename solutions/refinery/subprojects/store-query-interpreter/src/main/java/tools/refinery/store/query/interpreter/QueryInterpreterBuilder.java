@@ -36,7 +36,7 @@ public interface QueryInterpreterBuilder extends ModelQueryBuilder {
 	}
 
 	@Override
-	default QueryInterpreterBuilder queries(Collection <? extends AnyQuery> queries) {
+	default QueryInterpreterBuilder queries(Collection<? extends AnyQuery> queries) {
 		ModelQueryBuilder.super.queries(queries);
 		return this;
 	}
@@ -47,7 +47,7 @@ public interface QueryInterpreterBuilder extends ModelQueryBuilder {
 	@Override
 	QueryInterpreterBuilder rewriter(DnfRewriter rewriter);
 
-	QueryInterpreterBuilder computeHint(Function <Dnf, QueryEvaluationHint> computeHint);
+	QueryInterpreterBuilder computeHint(Function<Dnf, QueryEvaluationHint> computeHint);
 
 	@Override
 	QueryInterpreterStoreAdapter build(ModelStore store);

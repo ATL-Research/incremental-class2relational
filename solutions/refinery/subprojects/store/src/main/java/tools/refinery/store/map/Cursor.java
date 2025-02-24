@@ -7,7 +7,7 @@ package tools.refinery.store.map;
 
 import java.util.Set;
 
-public interface Cursor <K, V> {
+public interface Cursor<K, V> {
 	K getKey();
 
 	V getValue();
@@ -20,7 +20,7 @@ public interface Cursor <K, V> {
 		return false;
 	}
 
-	default Set <AnyVersionedMap> getDependingMaps() {
+	default Set<AnyVersionedMap> getDependingMaps() {
 		return Set.of();
 	}
 }

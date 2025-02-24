@@ -65,15 +65,15 @@ class ConnectionFactory {
             ReteNodeRecipe parentRecipe = ((SingleParentNodeRecipe) recipe).getParent();
             connectToParent(recipe, receiver, parentRecipe);
         } else if (recipe instanceof RelationEvaluationRecipe) {
-            List <ReteNodeRecipe> parentRecipes = ((MultiParentNodeRecipe) recipe).getParents();
-            List <Supplier> parentSuppliers = new ArrayList <Supplier>();
+            List<ReteNodeRecipe> parentRecipes = ((MultiParentNodeRecipe) recipe).getParents();
+            List<Supplier> parentSuppliers = new ArrayList<Supplier>();
             for (final ReteNodeRecipe parentRecipe : parentRecipes) {
                 parentSuppliers.add(getSupplierForRecipe(parentRecipe));
             }
             ((RelationEvaluatorNode) freshNode).connectToParents(parentSuppliers);
         } else if (recipe instanceof BetaRecipe) {
             final DualInputNode beta = (DualInputNode) freshNode;
-            final ArrayList <RecipeTraceInfo> parentTraces = new ArrayList <RecipeTraceInfo>(
+            final ArrayList<RecipeTraceInfo> parentTraces = new ArrayList<RecipeTraceInfo>(
                     recipeTrace.getParentRecipeTraces());
             Slots slots = avoidActiveNodeConflict(parentTraces.get(0), parentTraces.get(1));
             beta.connectToIndexers(slots.primary, slots.secondary);
@@ -83,7 +83,7 @@ class ConnectionFactory {
             aggregator.initializeWith((ProjectionIndexer) resolveIndexer(aggregatorRecipe.getParent()));
         } else if (recipe instanceof MultiParentNodeRecipe) {
             final Receiver receiver = (Receiver) freshNode;
-            List <ReteNodeRecipe> parentRecipes = ((MultiParentNodeRecipe) recipe).getParents();
+            List<ReteNodeRecipe> parentRecipes = ((MultiParentNodeRecipe) recipe).getParents();
             for (ReteNodeRecipe parentRecipe : parentRecipes) {
                 connectToParent(recipe, receiver, parentRecipe);
             }
@@ -91,7 +91,7 @@ class ConnectionFactory {
     }
 
     private Indexer resolveIndexer(final IndexerRecipe indexerRecipe) {
-        final Address <? extends Node> address = reteContainer.getNetwork().getExistingNodeByRecipe(indexerRecipe);
+        final Address<? extends Node> address = reteContainer.getNetwork().getExistingNodeByRecipe(indexerRecipe);
         return (Indexer) reteContainer.resolveLocal(address);
     }
 
@@ -100,7 +100,7 @@ class ConnectionFactory {
 
         // special synch
         if (freshNode instanceof ReinitializedNode) {
-            Collection <Tuple> tuples = new ArrayList <Tuple>();
+            Collection<Tuple> tuples = new ArrayList<Tuple>();
             parentSupplier.pullInto(tuples, true);
             ((ReinitializedNode) freshNode).reinitializeWith(tuples);
             reteContainer.connect(parentSupplier, freshNode);
@@ -119,7 +119,7 @@ class ConnectionFactory {
 
     private Supplier getSupplierForRecipe(ReteNodeRecipe recipe) {
         @SuppressWarnings("unchecked")
-        final Address <? extends Supplier> parentAddress = (Address <? extends Supplier>) reteContainer.getNetwork()
+        final Address<? extends Supplier> parentAddress = (Address<? extends Supplier>) reteContainer.getNetwork()
                 .getExistingNodeByRecipe(recipe);
         final Supplier supplier = reteContainer.getProvisioner().asSupplier(parentAddress);
         return supplier;

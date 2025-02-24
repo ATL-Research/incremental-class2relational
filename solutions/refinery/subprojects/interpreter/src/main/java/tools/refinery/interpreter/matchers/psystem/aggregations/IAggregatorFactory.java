@@ -18,7 +18,7 @@ package tools.refinery.interpreter.matchers.psystem.aggregations;
  * annotation {@link AggregatorType} to indicate type inference rules.
  *
  * <p>
- * <strong>Important! </strong> Implemented aggregators must be (1) deterministic (2) pure and (3)support incremental
+ * <strong>Important!</strong> Implemented aggregators must be (1) deterministic (2) pure and (3)support incremental
  * value updates in the internal operation.
  *
  * @author Zoltan Ujhelyi
@@ -35,6 +35,6 @@ public interface IAggregatorFactory {
      *            Java type of the values that are being aggregated
      * @return the actual run-time aggregator logic, with type bindings
      */
-    public BoundAggregator getAggregatorLogic(Class <?> domainClass);
+    public BoundAggregator getAggregatorLogic(Class<?> domainClass);
 
 }

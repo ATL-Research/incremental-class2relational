@@ -72,13 +72,13 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
     /**
      * Initialized matchers for each query
      */
-    private final IMultiLookup <IQuerySpecification<? extends InterpreterMatcher <?>>, InterpreterMatcher <?>> matchers =
+    private final IMultiLookup<IQuerySpecification<? extends InterpreterMatcher<?>>, InterpreterMatcher<?>> matchers =
             CollectionsFactory.createMultiLookup(Object.class, CollectionsFactory.MemoryType.SETS, Object.class);
 
     /**
      * The RETE and other pattern matcher implementations of the Refinery Interpreter engine.
      */
-    private final Map <IQueryBackendFactory, IQueryBackend> queryBackends = Collections.synchronizedMap(new HashMap<>());
+    private final Map<IQueryBackendFactory, IQueryBackend> queryBackends = Collections.synchronizedMap(new HashMap<>());
 
     /**
      * The current engine default hints
@@ -137,7 +137,7 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
     }
 
     @Override
-    public <V> V delayUpdatePropagation(Callable <V> callable) throws InvocationTargetException {
+    public <V> V delayUpdatePropagation(Callable<V> callable) throws InvocationTargetException {
 		if (!delayMessageDelivery) {
 			throw new IllegalStateException("Trying to delay propagation while changes are being flushed");
 		}
@@ -168,7 +168,7 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
 	}
 
 	@Override
-	public <T> T withFlushingChanges(Supplier <T> callback) {
+	public <T> T withFlushingChanges(Supplier<T> callback) {
 		if (!delayMessageDelivery) {
 			return callback.get();
 		}
@@ -182,19 +182,19 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
 	}
 
 	@Override
-    public Set <? extends InterpreterMatcher <? extends IPatternMatch>> getCurrentMatchers() {
+    public Set<? extends InterpreterMatcher<? extends IPatternMatch>> getCurrentMatchers() {
         return matchers.distinctValuesStream().collect(Collectors.toSet());
     }
 
     @Override
-    public <Matcher extends InterpreterMatcher <? extends IPatternMatch>> Matcher getMatcher(
-            IQuerySpecification <Matcher> querySpecification) {
+    public <Matcher extends InterpreterMatcher<? extends IPatternMatch>> Matcher getMatcher(
+            IQuerySpecification<Matcher> querySpecification) {
         return getMatcher(querySpecification, null);
     }
 
     @Override
-    public <Matcher extends InterpreterMatcher <? extends IPatternMatch>> Matcher getMatcher(
-            IQuerySpecification <Matcher> querySpecification, QueryEvaluationHint optionalEvaluationHints) {
+    public <Matcher extends InterpreterMatcher<? extends IPatternMatch>> Matcher getMatcher(
+            IQuerySpecification<Matcher> querySpecification, QueryEvaluationHint optionalEvaluationHints) {
 		return withFlushingChanges(() -> {
 			IMatcherCapability capability = getRequestedCapability(querySpecification, optionalEvaluationHints);
 			Matcher matcher = doGetExistingMatcher(querySpecification, capability);
@@ -203,7 +203,7 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
 			}
 			matcher = querySpecification.instantiate();
 
-			BaseMatcher <?> baseMatcher = (BaseMatcher <?>) matcher;
+			BaseMatcher<?> baseMatcher = (BaseMatcher<?>) matcher;
 			((QueryResultWrapper) baseMatcher).setBackend(this,
 					getResultProvider(querySpecification, optionalEvaluationHints), capability);
 			internalRegisterMatcher(querySpecification, baseMatcher);
@@ -212,22 +212,22 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
     }
 
     @Override
-    public <Matcher extends InterpreterMatcher <? extends IPatternMatch>> Matcher getExistingMatcher(
-            IQuerySpecification <Matcher> querySpecification) {
+    public <Matcher extends InterpreterMatcher<? extends IPatternMatch>> Matcher getExistingMatcher(
+            IQuerySpecification<Matcher> querySpecification) {
         return getExistingMatcher(querySpecification, null);
     }
 
     @Override
-    public <Matcher extends InterpreterMatcher <? extends IPatternMatch>> Matcher getExistingMatcher(
-            IQuerySpecification <Matcher> querySpecification, QueryEvaluationHint optionalOverrideHints) {
+    public <Matcher extends InterpreterMatcher<? extends IPatternMatch>> Matcher getExistingMatcher(
+            IQuerySpecification<Matcher> querySpecification, QueryEvaluationHint optionalOverrideHints) {
         return doGetExistingMatcher(querySpecification, getRequestedCapability(querySpecification, optionalOverrideHints));
     }
 
     @SuppressWarnings("unchecked")
-    private <Matcher extends InterpreterMatcher <? extends IPatternMatch>> Matcher doGetExistingMatcher(
-            IQuerySpecification <Matcher> querySpecification, IMatcherCapability requestedCapability) {
-        for (InterpreterMatcher <?> matcher : matchers.lookupOrEmpty(querySpecification)) {
-            BaseMatcher <?> baseMatcher = (BaseMatcher <?>) matcher;
+    private <Matcher extends InterpreterMatcher<? extends IPatternMatch>> Matcher doGetExistingMatcher(
+            IQuerySpecification<Matcher> querySpecification, IMatcherCapability requestedCapability) {
+        for (InterpreterMatcher<?> matcher : matchers.lookupOrEmpty(querySpecification)) {
+            BaseMatcher<?> baseMatcher = (BaseMatcher<?>) matcher;
             if (baseMatcher.getCapabilities().canBeSubstitute(requestedCapability))
                 return (Matcher) matcher;
         }
@@ -235,7 +235,7 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
     }
 
     @Override
-    public InterpreterMatcher <? extends IPatternMatch> getMatcher(String patternFQN) {
+    public InterpreterMatcher<? extends IPatternMatch> getMatcher(String patternFQN) {
 		throw new UnsupportedOperationException("Query specification registry is not available");
     }
 
@@ -256,7 +256,7 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
     }
 
     ///////////////// internal stuff //////////////
-    private void internalRegisterMatcher(IQuerySpecification <?> querySpecification, InterpreterMatcher <?> matcher) {
+    private void internalRegisterMatcher(IQuerySpecification<?> querySpecification, InterpreterMatcher<?> matcher) {
         matchers.addPair(querySpecification, matcher);
         lifecycleProvider.matcherInstantiated(matcher);
     }
@@ -370,10 +370,10 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
     private IIndexingErrorListener taintListener = new SelfTaintListener(this);
 
     private static class SelfTaintListener implements IIndexingErrorListener {
-        WeakReference <InterpreterEngineImpl> queryEngineRef;
+        WeakReference<InterpreterEngineImpl> queryEngineRef;
 
         public SelfTaintListener(InterpreterEngineImpl queryEngine) {
-            this.queryEngineRef = new WeakReference <InterpreterEngineImpl>(queryEngine);
+            this.queryEngineRef = new WeakReference<InterpreterEngineImpl>(queryEngine);
         }
 
         public void engineBecameTainted(String description, Throwable t) {
@@ -410,20 +410,20 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
     }
 
     private <Match extends IPatternMatch> IQueryResultProvider getUnderlyingResultProvider(
-            final BaseMatcher <Match> matcher) {
+            final BaseMatcher<Match> matcher) {
         // IQueryResultProvider resultProvider = reteEngine.accessMatcher(matcher.getSpecification());
         return matcher.backend;
     }
 
     @Override
-    public <Match extends IPatternMatch> void addMatchUpdateListener(final InterpreterMatcher <Match> matcher,
-            final IMatchUpdateListener <? super Match> listener, boolean fireNow) {
+    public <Match extends IPatternMatch> void addMatchUpdateListener(final InterpreterMatcher<Match> matcher,
+            final IMatchUpdateListener<? super Match> listener, boolean fireNow) {
 
         Preconditions.checkArgument(listener != null, "Cannot add null listener!");
         Preconditions.checkArgument(matcher.getEngine() == this, "Cannot register listener for matcher of different engine!");
         Preconditions.checkArgument(!disposed, "Cannot register listener on matcher of disposed engine!");
 
-        final BaseMatcher <Match> bm = (BaseMatcher <Match>) matcher;
+        final BaseMatcher<Match> bm = (BaseMatcher<Match>) matcher;
 
         final IUpdateable updateDispatcher = (updateElement, isInsertion) -> {
             Match match = null;
@@ -452,13 +452,13 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
     }
 
     @Override
-    public <Match extends IPatternMatch> void removeMatchUpdateListener(InterpreterMatcher <Match> matcher,
-																		IMatchUpdateListener <? super Match> listener) {
+    public <Match extends IPatternMatch> void removeMatchUpdateListener(InterpreterMatcher<Match> matcher,
+																		IMatchUpdateListener<? super Match> listener) {
         Preconditions.checkArgument(listener != null, "Cannot remove null listener!");
         Preconditions.checkArgument(matcher.getEngine() == this, "Cannot remove listener from matcher of different engine!");
         Preconditions.checkArgument(!disposed, "Cannot remove listener from matcher of disposed engine!");
 
-        final BaseMatcher <Match> bm = (BaseMatcher <Match>) matcher;
+        final BaseMatcher<Match> bm = (BaseMatcher<Match>) matcher;
 
         try {
             IQueryResultProvider resultProvider = getUnderlyingResultProvider(bm);
@@ -498,7 +498,7 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
      *
      * @throws InterpreterRuntimeException
      */
-    public IQueryResultProvider getResultProvider(IQuerySpecification <?> query) {
+    public IQueryResultProvider getResultProvider(IQuerySpecification<?> query) {
         Preconditions.checkState(!disposed, QUERY_ON_DISPOSED_ENGINE_MESSAGE);
 
         return getResultProviderInternal(query, null);
@@ -512,7 +512,7 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
      *
      * @throws InterpreterRuntimeException
      */
-    public IQueryResultProvider getResultProvider(IQuerySpecification <?> query, QueryEvaluationHint hint) {
+    public IQueryResultProvider getResultProvider(IQuerySpecification<?> query, QueryEvaluationHint hint) {
         Preconditions.checkState(!disposed, QUERY_ON_DISPOSED_ENGINE_MESSAGE);
 
         return getResultProviderInternal(query, hint);
@@ -525,7 +525,7 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
      *
      * @throws InterpreterRuntimeException
      */
-    private IQueryResultProvider getResultProviderInternal(IQuerySpecification <?> query, QueryEvaluationHint hint) {
+    private IQueryResultProvider getResultProviderInternal(IQuerySpecification<?> query, QueryEvaluationHint hint) {
         return getResultProviderInternal(query.getInternalQueryRepresentation(), hint);
     }
 
@@ -595,7 +595,7 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
         return getEngineDefaultHint().overrideBy(query.getEvaluationHints());
     }
 
-    private QueryEvaluationHint getQueryEvaluationHint(IQuerySpecification <?> querySpecification,
+    private QueryEvaluationHint getQueryEvaluationHint(IQuerySpecification<?> querySpecification,
             QueryEvaluationHint optionalOverrideHints) {
         return getQueryEvaluationHint(querySpecification.getInternalQueryRepresentation())
                         .overrideBy(optionalOverrideHints);
@@ -605,7 +605,7 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
         return getQueryEvaluationHint(query).overrideBy(optionalOverrideHints);
     }
 
-    private IMatcherCapability getRequestedCapability(IQuerySpecification <?> querySpecification,
+    private IMatcherCapability getRequestedCapability(IQuerySpecification<?> querySpecification,
             QueryEvaluationHint optionalOverrideHints) {
         final QueryEvaluationHint hint = getQueryEvaluationHint(querySpecification, optionalOverrideHints);
         return engineOptions.getQueryBackendFactory(hint)
@@ -617,13 +617,13 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
         try {
             Preconditions.checkState(!disposed, QUERY_ON_DISPOSED_ENGINE_MESSAGE);
 
-            final Set <IQuerySpecification<?>> specifications = new HashSet <IQuerySpecification<?>>(
+            final Set<IQuerySpecification<?>> specifications = new HashSet<IQuerySpecification<?>>(
                     queryGroup.getSpecifications());
-            final Collection <PQuery> patterns = specifications.stream().map(
+            final Collection<PQuery> patterns = specifications.stream().map(
                     IQuerySpecification::getInternalQueryRepresentation).collect(Collectors.toList());
             patterns.forEach(PQuery::ensureInitialized);
 
-            Collection <String> erroneousPatterns = patterns.stream().
+            Collection<String> erroneousPatterns = patterns.stream().
                     filter(PQueries.queryStatusPredicate(PQuery.PQueryStatus.ERROR)).
                     map(PQuery::getFullyQualifiedName).
                     collect(Collectors.toList());
@@ -632,10 +632,10 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
 
             // TODO maybe do some smarter preparation per backend?
             try {
-                engineContext.getBaseIndex().coalesceTraversals(new Callable <Void>() {
+                engineContext.getBaseIndex().coalesceTraversals(new Callable<Void>() {
                     @Override
                     public Void call() throws Exception {
-                        for (IQuerySpecification <?> query : specifications) {
+                        for (IQuerySpecification<?> query : specifications) {
                             getResultProviderInternal(query, optionalEvaluationHints);
                         }
                         return null;
@@ -667,7 +667,7 @@ public final class InterpreterEngineImpl extends AdvancedInterpreterEngine
     }
 
     @Override
-    public IQueryResultProvider getResultProviderOfMatcher(InterpreterMatcher <? extends IPatternMatch> matcher) {
+    public IQueryResultProvider getResultProviderOfMatcher(InterpreterMatcher<? extends IPatternMatch> matcher) {
         return ((QueryResultWrapper) matcher).backend;
     }
 

@@ -32,12 +32,12 @@ public interface IRelationEvaluator {
      * The relation evaluator code. For performance reasons, it is expected that the returned set is a mutable
      * collection, and the caller must be allowed to actually perform mutations!
      */
-    Set <Tuple> evaluateRelation(List <Set<Tuple>> inputs) throws Exception;
+    Set<Tuple> evaluateRelation(List<Set<Tuple>> inputs) throws Exception;
 
     /**
      * For each input relation that this evaluator requires, this method returns the expected arities of the relations in order.
      */
-    List <Integer> getInputArities();
+    List<Integer> getInputArities();
 
     /**
      * Returns the arity of the output relation that this evaluator computes.

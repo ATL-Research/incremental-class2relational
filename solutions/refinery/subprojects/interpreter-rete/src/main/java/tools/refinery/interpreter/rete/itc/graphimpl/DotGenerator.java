@@ -46,17 +46,17 @@ public class DotGenerator {
      *            use this function to provide custom edge labels, null if no edge label shall be printed
      * @return the dot representation as a string
      */
-    public static <V> String generateDot(final Graph <V> graph, final boolean colorSCCs,
-            final Function <V, String> nameFunction, final Function <V, String> colorFunction,
-            final Function <V, Function <V, String>> edgeFunction) {
-        final Map <V, String> colorMap = new HashMap <V, String>();
+    public static <V> String generateDot(final Graph<V> graph, final boolean colorSCCs,
+            final Function<V, String> nameFunction, final Function<V, String> colorFunction,
+            final Function<V, Function<V, String>> edgeFunction) {
+        final Map<V, String> colorMap = new HashMap<V, String>();
 
         if (colorSCCs) {
-            final SCCResult <V> result = SCC.computeSCC(graph);
-            final Set <Set<V>> sccs = result.getSccs();
+            final SCCResult<V> result = SCC.computeSCC(graph);
+            final Set<Set<V>> sccs = result.getSccs();
 
             int i = 0;
-            for (final Set <V> scc : sccs) {
+            for (final Set<V> scc : sccs) {
                 if (scc.size() > 1) {
                     for (final V node : scc) {
                         final String color = colorMap.get(node);
@@ -99,13 +99,13 @@ public class DotGenerator {
         }
 
         for (final V source : graph.getAllNodes()) {
-            final IMemoryView <V> targets = graph.getTargetNodes(source);
+            final IMemoryView<V> targets = graph.getTargetNodes(source);
             if (!targets.isEmpty()) {
                 final String sourcePresentation = nameFunction == null ? source.toString() : nameFunction.apply(source);
                 for (final V target : targets.distinctValues()) {
                     String edgeLabel = null;
                     if (edgeFunction != null) {
-                        final Function <V, String> v1 = edgeFunction.apply(source);
+                        final Function<V, String> v1 = edgeFunction.apply(source);
                         if (v1 != null) {
                             edgeLabel = v1.apply(target);
                         }
@@ -134,7 +134,7 @@ public class DotGenerator {
      *            the graph
      * @return the dot representation as a string
      */
-    public static <V> String generateDot(final Graph <V> graph) {
+    public static <V> String generateDot(final Graph<V> graph) {
         return generateDot(graph, false, null, null, null);
     }
 
@@ -147,8 +147,8 @@ public class DotGenerator {
      *            the maximum length of the text that is kept from the toString of the objects in the graph
      * @return the shrunk toString value
      */
-    public static <V> Function <V, String> getNameShortener(final int maxLength) {
-        return new Function <V, String>() {
+    public static <V> Function<V, String> getNameShortener(final int maxLength) {
+        return new Function<V, String>() {
             @Override
             public String apply(final V obj) {
                 final String value = obj.toString();

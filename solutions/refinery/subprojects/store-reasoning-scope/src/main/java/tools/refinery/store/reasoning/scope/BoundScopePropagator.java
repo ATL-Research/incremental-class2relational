@@ -24,10 +24,10 @@ import tools.refinery.store.tuple.Tuple;
 class BoundScopePropagator implements BoundPropagator {
 	private final Model model;
 	private final ModelQueryAdapter queryEngine;
-	private final Interpretation <CardinalityInterval> countInterpretation;
+	private final Interpretation<CardinalityInterval> countInterpretation;
 	private final MPSolver solver;
 	private final MPObjective objective;
-	private final MutableIntObjectMap <MPVariable> variables = IntObjectMaps.mutable.empty();
+	private final MutableIntObjectMap<MPVariable> variables = IntObjectMaps.mutable.empty();
 	private final MutableIntSet activeVariables = IntSets.mutable.empty();
 	private final TypeScopePropagator[] propagators;
 	private boolean changed = true;

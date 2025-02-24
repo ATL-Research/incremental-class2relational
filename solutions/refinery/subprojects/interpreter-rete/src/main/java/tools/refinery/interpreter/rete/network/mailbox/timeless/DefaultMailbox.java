@@ -35,8 +35,8 @@ public class DefaultMailbox implements AdaptableMailbox {
 
     private static int SIZE_TRESHOLD = 127;
 
-    protected Map <Tuple, Integer> queue;
-    protected Map <Tuple, Integer> buffer;
+    protected Map<Tuple, Integer> queue;
+    protected Map<Tuple, Integer> buffer;
     protected final Receiver receiver;
     protected final ReteContainer container;
     protected boolean delivering;
@@ -51,7 +51,7 @@ public class DefaultMailbox implements AdaptableMailbox {
         this.adapter = this;
     }
 
-    protected Map <Tuple, Integer> getActiveQueue() {
+    protected Map<Tuple, Integer> getActiveQueue() {
         if (this.delivering) {
             return this.buffer;
         } else {
@@ -76,7 +76,7 @@ public class DefaultMailbox implements AdaptableMailbox {
 
     @Override
     public void postMessage(final Direction direction, final Tuple update, final Timestamp timestamp) {
-        final Map <Tuple, Integer> activeQueue = getActiveQueue();
+        final Map<Tuple, Integer> activeQueue = getActiveQueue();
         final boolean wasEmpty = activeQueue.isEmpty();
 
         boolean significantChange = false;
@@ -125,7 +125,7 @@ public class DefaultMailbox implements AdaptableMailbox {
                 this.buffer = CollectionsFactory.createMap();
             } else {
                 this.queue.clear();
-                final Map <Tuple, Integer> tmpQueue = this.queue;
+                final Map<Tuple, Integer> tmpQueue = this.queue;
                 this.queue = this.buffer;
                 this.buffer = tmpQueue;
             }

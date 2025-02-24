@@ -19,14 +19,14 @@ import tools.refinery.interpreter.matchers.psystem.IValueProvider;
 public class TupleValueProvider implements IValueProvider {
 
     final ITuple tuple;
-    final Map <String, Integer> indexMapping;
+    final Map<String, Integer> indexMapping;
 
     /**
      * Wraps a tuple with an index mapping
      * @param tuple
      * @param indexMapping
      */
-    public TupleValueProvider(ITuple tuple, Map <String, Integer> indexMapping) {
+    public TupleValueProvider(ITuple tuple, Map<String, Integer> indexMapping) {
         super();
         this.tuple = tuple;
         this.indexMapping = indexMapping;

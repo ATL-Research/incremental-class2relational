@@ -75,7 +75,7 @@ public class CheckPositivePatternCall implements ISearchOperation, IPatternMatch
     }
 
     @Override
-    public List <Integer> getVariablePositions() {
+    public List<Integer> getVariablePositions() {
         return information.getVariablePositions();
     }
 
@@ -85,7 +85,7 @@ public class CheckPositivePatternCall implements ISearchOperation, IPatternMatch
     }
 
     @Override
-    public String toString(Function <Integer, String> variableMapping) {
+    public String toString(Function<Integer, String> variableMapping) {
         return "check     find "+information.toString(variableMapping);
     }
 

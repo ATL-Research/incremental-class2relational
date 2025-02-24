@@ -8,8 +8,8 @@ package tools.refinery.store.query.term.bool;
 import tools.refinery.store.query.term.BinaryTerm;
 import tools.refinery.store.query.term.Term;
 
-public abstract class BoolBinaryTerm extends BinaryTerm <Boolean, Boolean, Boolean> {
-	protected BoolBinaryTerm(Term <Boolean> left, Term <Boolean> right) {
+public abstract class BoolBinaryTerm extends BinaryTerm<Boolean, Boolean, Boolean> {
+	protected BoolBinaryTerm(Term<Boolean> left, Term<Boolean> right) {
 		super(Boolean.class, Boolean.class, Boolean.class, left, right);
 	}
 }

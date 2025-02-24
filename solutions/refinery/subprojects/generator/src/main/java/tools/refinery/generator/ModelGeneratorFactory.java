@@ -23,7 +23,7 @@ import java.util.Set;
 
 public final class ModelGeneratorFactory {
 	@Inject
-	private Provider <ModelInitializer> initializerProvider;
+	private Provider<ModelInitializer> initializerProvider;
 
 	private CancellationToken cancellationToken = CancellationToken.NONE;
 
@@ -56,7 +56,7 @@ public final class ModelGeneratorFactory {
 		return new ModelGenerator(initializer.getProblemTrace(), store, initializer.getModelSeed());
 	}
 
-	private Collection <Concreteness> getRequiredInterpretations() {
+	private Collection<Concreteness> getRequiredInterpretations() {
 		return debugPartialInterpretations ? Set.of(Concreteness.PARTIAL, Concreteness.CANDIDATE) :
 				Set.of(Concreteness.CANDIDATE);
 	}

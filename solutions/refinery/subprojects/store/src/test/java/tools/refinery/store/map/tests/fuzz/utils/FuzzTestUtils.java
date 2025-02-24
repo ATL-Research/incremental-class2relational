@@ -20,7 +20,7 @@ public final class FuzzTestUtils {
 		throw new IllegalStateException("This is a static utility class and should not be instantiated directly");
 	}
 
-	public static Stream <Arguments> changeStepCount(Stream <Arguments> arguments, int parameterIndex) {
+	public static Stream<Arguments> changeStepCount(Stream<Arguments> arguments, int parameterIndex) {
 		return arguments.map(x -> Arguments.of(updatedStepCount(x.get(), parameterIndex)));
 	}
 
@@ -30,16 +30,16 @@ public final class FuzzTestUtils {
 		return copy;
 	}
 
-	static List <List<Object>> permutationInternal(int from, Object[]... valueOption) {
+	static List<List<Object>> permutationInternal(int from, Object[]... valueOption) {
 		if (valueOption.length == from) {
 			return List.of(List.of());
 		} else {
 			Object[] permuteThis = valueOption[from];
-			List <List<Object>> otherCombination = permutationInternal(from + 1, valueOption);
-			List <List<Object>> result = new LinkedList<>();
+			List<List<Object>> otherCombination = permutationInternal(from + 1, valueOption);
+			List<List<Object>> result = new LinkedList<>();
 			for (Object permuteThisElement : permuteThis) {
-				for (List <Object> otherCombinationList : otherCombination) {
-					List <Object> newResult = new LinkedList<>();
+				for (List<Object> otherCombinationList : otherCombination) {
+					List<Object> newResult = new LinkedList<>();
 					newResult.add(permuteThisElement);
 					newResult.addAll(otherCombinationList);
 					result.add(newResult);
@@ -49,12 +49,12 @@ public final class FuzzTestUtils {
 		}
 	}
 
-	public static Stream <Arguments> permutation(Object[]... valueOption) {
-		List <List<Object>> permutations = permutationInternal(0, valueOption);
+	public static Stream<Arguments> permutation(Object[]... valueOption) {
+		List<List<Object>> permutations = permutationInternal(0, valueOption);
 		return permutations.stream().map(x -> Arguments.of(x.toArray()));
 	}
 
-	public static Stream <Arguments> permutationWithSize(Object[]... valueOption) {
+	public static Stream<Arguments> permutationWithSize(Object[]... valueOption) {
 		int size = 1;
 		for (Object[] objects : valueOption) {
 			size *= objects.length;

@@ -45,24 +45,24 @@ public class PQueryFlattener extends PDisjunctionRewriter {
      * @param values
      * @return
      */
-    private static <K, V> Set <Map<K, V>> permutation(Map <K, Set <V>> values) {
+    private static <K, V> Set<Map<K, V>> permutation(Map<K, Set<V>> values) {
         // An ordering of keys is defined here which will help restoring the appropriate values after the execution of
         // the cartesian product
-        List <K> keyList = new ArrayList<>(values.keySet());
+        List<K> keyList = new ArrayList<>(values.keySet());
 
         // Produce list of value sets with the ordering defined by keyList
-        List <Set<V>> valuesList = new ArrayList <Set<V>>(keyList.size());
+        List<Set<V>> valuesList = new ArrayList<Set<V>>(keyList.size());
         for (K key : keyList) {
             valuesList.add(values.get(key));
         }
 
         // Cartesian product will obey ordering of the list
-        Set <List<V>> valueMappings = Sets.cartesianProduct(valuesList);
+        Set<List<V>> valueMappings = Sets.cartesianProduct(valuesList);
 
         // Build result
-        Set <Map<K, V>> result = new LinkedHashSet<>();
-        for (List <V> valueList : valueMappings) {
-            Map <K, V> map = new HashMap<>();
+        Set<Map<K, V>> result = new LinkedHashSet<>();
+        for (List<V> valueList : valueMappings) {
+            Map<K, V> map = new HashMap<>();
             for (int i = 0; i < keyList.size(); i++) {
                 map.put(keyList.get(i), valueList.get(i));
             }
@@ -83,7 +83,7 @@ public class PQueryFlattener extends PDisjunctionRewriter {
         PQuery query = disjunction.getQuery();
 
         // Check for recursion
-        Set <PQuery> allReferredQueries = disjunction.getAllReferredQueries();
+        Set<PQuery> allReferredQueries = disjunction.getAllReferredQueries();
         for (PQuery referredQuery : allReferredQueries) {
             if (referredQuery.getAllReferredQueries().contains(referredQuery)) {
                 throw new RewriterException("Recursive queries are not supported, can't flatten query named \"{1}\"",
@@ -100,11 +100,11 @@ public class PQueryFlattener extends PDisjunctionRewriter {
      * @param rootDisjunction
      * @return
      */
-    private List <PDisjunction> disjunctionDependencies(PDisjunction rootDisjunction) {
+    private List<PDisjunction> disjunctionDependencies(PDisjunction rootDisjunction) {
         // Disjunctions are first collected into a list usign a depth-first approach,
         // which can be iterated backwards while removing duplicates
-        Deque <PDisjunction> stack = new ArrayDeque<>();
-        LinkedList <PDisjunction> list = new LinkedList<>();
+        Deque<PDisjunction> stack = new ArrayDeque<>();
+        LinkedList<PDisjunction> list = new LinkedList<>();
         stack.push(rootDisjunction);
         list.add(rootDisjunction);
 
@@ -127,8 +127,8 @@ public class PQueryFlattener extends PDisjunctionRewriter {
         }
 
         // Remove duplicates (keeping the last instance) and reverse order
-        Set <PDisjunction> visited = new HashSet <PDisjunction>();
-        List <PDisjunction> result = new ArrayList <PDisjunction>(list.size());
+        Set<PDisjunction> visited = new HashSet<PDisjunction>();
+        List<PDisjunction> result = new ArrayList<PDisjunction>(list.size());
 
         list.descendingIterator().forEachRemaining(item -> {
             if (!visited.contains(item)) {
@@ -150,15 +150,15 @@ public class PQueryFlattener extends PDisjunctionRewriter {
      */
     private PDisjunction doFlatten(PDisjunction rootDisjunction) {
 
-        Map <PDisjunction, Set <PBody>> flatBodyMapping = new HashMap<>();
+        Map<PDisjunction, Set<PBody>> flatBodyMapping = new HashMap<>();
 
-        List <PDisjunction> dependencies = disjunctionDependencies(rootDisjunction);
+        List<PDisjunction> dependencies = disjunctionDependencies(rootDisjunction);
 
         for (PDisjunction disjunction : dependencies) {
-            Set <PBody> flatBodies = new LinkedHashSet<>();
+            Set<PBody> flatBodies = new LinkedHashSet<>();
             for (PBody body : disjunction.getBodies()) {
                 if (isFlatteningNeeded(body)) {
-                    Map <PositivePatternCall, Set <PBody>> flattenedBodies = new HashMap<>();
+                    Map<PositivePatternCall, Set<PBody>> flattenedBodies = new HashMap<>();
                     for (PConstraint pConstraint : body.getConstraints()) {
 
                         if (pConstraint instanceof PositivePatternCall) {
@@ -168,7 +168,7 @@ public class PQueryFlattener extends PDisjunctionRewriter {
                                 PDisjunction calledDisjunction = positivePatternCall.getReferredQuery()
                                         .getDisjunctBodies();
 
-                                Set <PBody> flattenedBodySet = flatBodyMapping.get(calledDisjunction);
+                                Set<PBody> flattenedBodySet = flatBodyMapping.get(calledDisjunction);
                                 Preconditions.checkArgument(!flattenedBodySet.isEmpty());
                                 flattenedBodies.put(positivePatternCall, flattenedBodySet);
                             }
@@ -195,15 +195,15 @@ public class PQueryFlattener extends PDisjunctionRewriter {
      * @param flattenedCalls
      * @return
      */
-    private Set <PBody> createSetOfFlatPBodies(PBody pBody, Map <PositivePatternCall, Set <PBody>> flattenedCalls) {
+    private Set<PBody> createSetOfFlatPBodies(PBody pBody, Map<PositivePatternCall, Set<PBody>> flattenedCalls) {
         PQuery pQuery = pBody.getPattern();
 
-        Set <Map<PositivePatternCall, PBody>> conjunctedCalls = permutation(flattenedCalls);
+        Set<Map<PositivePatternCall, PBody>> conjunctedCalls = permutation(flattenedCalls);
 
         // The result set containing the merged conjuncted bodies
-        Set <PBody> conjunctedBodies = new HashSet<>();
+        Set<PBody> conjunctedBodies = new HashSet<>();
 
-        for (Map <PositivePatternCall, PBody> calledBodies : conjunctedCalls) {
+        for (Map<PositivePatternCall, PBody> calledBodies : conjunctedCalls) {
             FlattenerCopier copier = createBodyCopier(pQuery, calledBodies);
 
             int i = 0;
@@ -225,7 +225,7 @@ public class PQueryFlattener extends PDisjunctionRewriter {
         return conjunctedBodies;
     }
 
-    private FlattenerCopier createBodyCopier(PQuery query, Map <PositivePatternCall, PBody> calledBodies) {
+    private FlattenerCopier createBodyCopier(PQuery query, Map<PositivePatternCall, PBody> calledBodies) {
         FlattenerCopier flattenerCopier = new FlattenerCopier(query, calledBodies);
         flattenerCopier.setTraceCollector(getTraceCollector());
         return flattenerCopier;

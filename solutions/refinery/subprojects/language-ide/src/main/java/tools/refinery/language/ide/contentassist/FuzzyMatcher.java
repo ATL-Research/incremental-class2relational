@@ -15,7 +15,7 @@ import com.google.inject.Singleton;
  * Using this class ensures that the same candidates will be returned when
  * filtering content assist proposals on the server as on the client.
  * 
- * The matching is "fuzzy" (<code>fzf </code>-like), i.e., the prefix characters
+ * The matching is "fuzzy" (<code>fzf</code>-like), i.e., the prefix characters
  * may occur anywhere in the name, but must be in the same order as in the
  * prefix.
  * 

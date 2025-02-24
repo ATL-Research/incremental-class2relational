@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static tools.refinery.store.query.tests.QueryMatchers.structurallyEqualTo;
 
 class StructurallyEqualToTest {
-	private static final Symbol <Boolean> person = Symbol.of("Person", 1);
-	private static final Symbol <Boolean> friend = Symbol.of("friend", 2);
+	private static final Symbol<Boolean> person = Symbol.of("Person", 1);
+	private static final Symbol<Boolean> friend = Symbol.of("friend", 2);
 	private static final AnySymbolView personView = new KeyOnlyView<>(person);
 	private static final AnySymbolView friendView = new KeyOnlyView<>(friend);
 	private static final NodeVariable p = Variable.of("p");

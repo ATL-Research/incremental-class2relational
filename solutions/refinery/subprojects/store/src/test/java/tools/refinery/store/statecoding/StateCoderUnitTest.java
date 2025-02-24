@@ -16,11 +16,11 @@ import java.util.Objects;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StateCoderUnitTest {
-	Symbol <Boolean> person = new Symbol<>("Person", 1, Boolean.class, false);
-	Symbol <Integer> age = new Symbol<>("age", 1, Integer.class, null);
-	Symbol <Boolean> friend = new Symbol<>("friend", 2, Boolean.class, false);
-	Symbol <Boolean> parents = new Symbol<>("parents", 3, Boolean.class, false);
-	Symbol <Integer> population = new Symbol<>("population", 0, Integer.class, 0);
+	Symbol<Boolean> person = new Symbol<>("Person", 1, Boolean.class, false);
+	Symbol<Integer> age = new Symbol<>("age", 1, Integer.class, null);
+	Symbol<Boolean> friend = new Symbol<>("friend", 2, Boolean.class, false);
+	Symbol<Boolean> parents = new Symbol<>("parents", 3, Boolean.class, false);
+	Symbol<Integer> population = new Symbol<>("population", 0, Integer.class, 0);
 
 	private Model createEmptyModel() {
 		var store = ModelStore.builder()

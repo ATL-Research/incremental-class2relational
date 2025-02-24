@@ -16,7 +16,7 @@ import java.util.Map;
 
 @SuppressWarnings("UnusedReturnValue")
 public class SubstitutionBuilder {
-	private final Map <Variable, Variable> map = new HashMap<>();
+	private final Map<Variable, Variable> map = new HashMap<>();
 	private Substitution fallback;
 
 	SubstitutionBuilder() {
@@ -27,7 +27,7 @@ public class SubstitutionBuilder {
 		return putChecked(original, substitute);
 	}
 
-	public <T> SubstitutionBuilder put(DataVariable <T> original, DataVariable <T> substitute) {
+	public <T> SubstitutionBuilder put(DataVariable<T> original, DataVariable<T> substitute) {
 		return putChecked(original, substitute);
 	}
 
@@ -44,7 +44,7 @@ public class SubstitutionBuilder {
 		return this;
 	}
 
-	public SubstitutionBuilder putManyChecked(List <Variable> originals, List <Variable> substitutes) {
+	public SubstitutionBuilder putManyChecked(List<Variable> originals, List<Variable> substitutes) {
 		int size = originals.size();
 		if (size != substitutes.size()) {
 			throw new IllegalArgumentException("Cannot substitute %d variables %s with %d variables %s"

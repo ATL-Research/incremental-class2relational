@@ -10,7 +10,7 @@ import tools.refinery.store.map.Cursors;
 import tools.refinery.store.representation.TruthValue;
 import tools.refinery.store.tuple.Tuple;
 
-class NullaryMutableSeed implements MutableSeed <TruthValue> {
+class NullaryMutableSeed implements MutableSeed<TruthValue> {
 	private DecisionTreeValue value;
 
 	public NullaryMutableSeed(TruthValue reducedValue) {
@@ -24,7 +24,7 @@ class NullaryMutableSeed implements MutableSeed <TruthValue> {
 	}
 
 	@Override
-	public Class <TruthValue> valueType() {
+	public Class<TruthValue> valueType() {
 		return TruthValue.class;
 	}
 
@@ -46,7 +46,7 @@ class NullaryMutableSeed implements MutableSeed <TruthValue> {
 	}
 
 	@Override
-	public Cursor <Tuple, TruthValue> getCursor(TruthValue defaultValue, int nodeCount) {
+	public Cursor<Tuple, TruthValue> getCursor(TruthValue defaultValue, int nodeCount) {
 		if (value == DecisionTreeValue.UNSET || value.getTruthValue() == defaultValue) {
 			return Cursors.empty();
 		}
@@ -72,7 +72,7 @@ class NullaryMutableSeed implements MutableSeed <TruthValue> {
 	}
 
 	@Override
-	public void overwriteValues(MutableSeed <TruthValue> other) {
+	public void overwriteValues(MutableSeed<TruthValue> other) {
 		if (!(other instanceof NullaryMutableSeed nullaryMutableSeed)) {
 			throw new IllegalArgumentException("Incompatible overwrite: " + other);
 		}

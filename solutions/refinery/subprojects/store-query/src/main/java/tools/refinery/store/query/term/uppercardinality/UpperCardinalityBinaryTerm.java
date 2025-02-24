@@ -9,9 +9,9 @@ import tools.refinery.store.query.term.BinaryTerm;
 import tools.refinery.store.query.term.Term;
 import tools.refinery.store.representation.cardinality.UpperCardinality;
 
-public abstract class UpperCardinalityBinaryTerm extends BinaryTerm <UpperCardinality, UpperCardinality,
+public abstract class UpperCardinalityBinaryTerm extends BinaryTerm<UpperCardinality, UpperCardinality,
 		UpperCardinality> {
-	protected UpperCardinalityBinaryTerm(Term <UpperCardinality> left, Term <UpperCardinality> right) {
+	protected UpperCardinalityBinaryTerm(Term<UpperCardinality> left, Term<UpperCardinality> right) {
 		super(UpperCardinality.class, UpperCardinality.class, UpperCardinality.class, left, right);
 	}
 }

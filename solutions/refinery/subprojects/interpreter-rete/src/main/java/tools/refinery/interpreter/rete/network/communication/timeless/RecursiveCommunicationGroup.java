@@ -33,10 +33,10 @@ import tools.refinery.interpreter.rete.network.mailbox.Mailbox;
  */
 public class RecursiveCommunicationGroup extends CommunicationGroup {
 
-    private final Set <Mailbox> antiMonotoneMailboxes;
-    private final Set <Mailbox> monotoneMailboxes;
-    private final Set <Mailbox> defaultMailboxes;
-    private final Set <RederivableNode> rederivables;
+    private final Set<Mailbox> antiMonotoneMailboxes;
+    private final Set<Mailbox> monotoneMailboxes;
+    private final Set<Mailbox> defaultMailboxes;
+    private final Set<RederivableNode> rederivables;
     private boolean currentlyDelivering;
 
     /**
@@ -47,7 +47,7 @@ public class RecursiveCommunicationGroup extends CommunicationGroup {
         this.antiMonotoneMailboxes = CollectionsFactory.createSet();
         this.monotoneMailboxes = CollectionsFactory.createSet();
         this.defaultMailboxes = CollectionsFactory.createSet();
-        this.rederivables = new LinkedHashSet <RederivableNode>();
+        this.rederivables = new LinkedHashSet<RederivableNode>();
         this.currentlyDelivering = false;
     }
 
@@ -101,7 +101,7 @@ public class RecursiveCommunicationGroup extends CommunicationGroup {
 
     @Override
     public void notifyHasMessage(final Mailbox mailbox, final MessageSelector kind) {
-        final Collection <Mailbox> mailboxes = getMailboxContainer(kind);
+        final Collection<Mailbox> mailboxes = getMailboxContainer(kind);
         mailboxes.add(mailbox);
         if (!this.isEnqueued && !this.currentlyDelivering) {
             this.tracker.activateUnenqueued(this);
@@ -110,14 +110,14 @@ public class RecursiveCommunicationGroup extends CommunicationGroup {
 
     @Override
     public void notifyLostAllMessages(final Mailbox mailbox, final MessageSelector kind) {
-        final Collection <Mailbox> mailboxes = getMailboxContainer(kind);
+        final Collection<Mailbox> mailboxes = getMailboxContainer(kind);
         mailboxes.remove(mailbox);
         if (isEmpty()) {
             this.tracker.deactivate(this);
         }
     }
 
-    private Collection <Mailbox> getMailboxContainer(final MessageSelector kind) {
+    private Collection<Mailbox> getMailboxContainer(final MessageSelector kind) {
         if (kind == PhasedSelector.ANTI_MONOTONE) {
             return this.antiMonotoneMailboxes;
         } else if (kind == PhasedSelector.MONOTONE) {
@@ -143,13 +143,13 @@ public class RecursiveCommunicationGroup extends CommunicationGroup {
         }
     }
 
-    public Collection <RederivableNode> getRederivables() {
+    public Collection<RederivableNode> getRederivables() {
         return this.rederivables;
     }
 
     @Override
-    public Map <MessageSelector, Collection <Mailbox>> getMailboxes() {
-        Map <PhasedSelector, Collection <Mailbox>> map = new EnumMap<>(PhasedSelector.class);
+    public Map<MessageSelector, Collection<Mailbox>> getMailboxes() {
+        Map<PhasedSelector, Collection<Mailbox>> map = new EnumMap<>(PhasedSelector.class);
         map.put(PhasedSelector.ANTI_MONOTONE, antiMonotoneMailboxes);
         map.put(PhasedSelector.MONOTONE, monotoneMailboxes);
         map.put(PhasedSelector.DEFAULT, defaultMailboxes);

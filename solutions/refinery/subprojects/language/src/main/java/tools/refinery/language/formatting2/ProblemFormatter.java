@@ -81,7 +81,7 @@ public class ProblemFormatter extends AbstractJavaFormatter {
 		doc.append(region.keyword("pred"), this::oneSpace);
 		doc.append(region.feature(ProblemPackage.Literals.NAMED_ELEMENT__NAME), this::noSpace);
 		formatParenthesizedList(region, doc);
-		doc.surround(region.keyword(" <->"), this::oneSpace);
+		doc.surround(region.keyword("<->"), this::oneSpace);
 		formatList(region, ";", doc);
 		doc.prepend(region.keyword("."), this::noSpace);
 		for (var parameter : predicateDefinition.getParameters()) {
@@ -151,14 +151,14 @@ public class ProblemFormatter extends AbstractJavaFormatter {
 	}
 
 	protected void surroundNewLines(IFormattableDocument doc, EObject eObject,
-			Procedure1 <? super IHiddenRegionFormatter> init) {
+			Procedure1<? super IHiddenRegionFormatter> init) {
 		var region = doc.getRequest().getTextRegionAccess().regionForEObject(eObject);
 		preprendNewLines(doc, region, init);
 		appendNewLines(doc, region, init);
 	}
 
 	protected void preprendNewLines(IFormattableDocument doc, ISequentialRegion region,
-			Procedure1 <? super IHiddenRegionFormatter> init) {
+			Procedure1<? super IHiddenRegionFormatter> init) {
 		if (region == null) {
 			return;
 		}
@@ -174,7 +174,7 @@ public class ProblemFormatter extends AbstractJavaFormatter {
 	}
 
 	protected void appendNewLines(IFormattableDocument doc, ISequentialRegion region,
-			Procedure1 <? super IHiddenRegionFormatter> init) {
+			Procedure1<? super IHiddenRegionFormatter> init) {
 		if (region == null) {
 			return;
 		}

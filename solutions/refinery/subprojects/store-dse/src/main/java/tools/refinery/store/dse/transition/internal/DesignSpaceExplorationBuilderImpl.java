@@ -18,13 +18,13 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 public class DesignSpaceExplorationBuilderImpl
-		extends AbstractModelAdapterBuilder <DesignSpaceExplorationStoreAdapterImpl>
+		extends AbstractModelAdapterBuilder<DesignSpaceExplorationStoreAdapterImpl>
 		implements DesignSpaceExplorationBuilder {
 
-	LinkedHashSet <Rule> transformationRuleDefinitions = new LinkedHashSet<>();
-	LinkedHashSet <Criterion> accepts = new LinkedHashSet<>();
-	LinkedHashSet <Criterion> excludes = new LinkedHashSet<>();
-	LinkedHashSet <Objective> objectives = new LinkedHashSet<>();
+	LinkedHashSet<Rule> transformationRuleDefinitions = new LinkedHashSet<>();
+	LinkedHashSet<Criterion> accepts = new LinkedHashSet<>();
+	LinkedHashSet<Criterion> excludes = new LinkedHashSet<>();
+	LinkedHashSet<Objective> objectives = new LinkedHashSet<>();
 
 	@Override
 	public DesignSpaceExplorationBuilder transformation(Rule transformationRuleDefinition) {
@@ -64,10 +64,10 @@ public class DesignSpaceExplorationBuilderImpl
 
 	@Override
 	protected DesignSpaceExplorationStoreAdapterImpl doBuild(ModelStore store) {
-		List <Rule> transformationRuleDefinitionsList = List.copyOf(transformationRuleDefinitions);
-		List <Criterion> acceptsList = List.copyOf(accepts);
-		List <Criterion> excludesList = List.copyOf(excludes);
-		List <Objective> objectivesList = List.copyOf(objectives);
+		List<Rule> transformationRuleDefinitionsList = List.copyOf(transformationRuleDefinitions);
+		List<Criterion> acceptsList = List.copyOf(accepts);
+		List<Criterion> excludesList = List.copyOf(excludes);
+		List<Objective> objectivesList = List.copyOf(objectives);
 
 		return new DesignSpaceExplorationStoreAdapterImpl(store, transformationRuleDefinitionsList, acceptsList,
 				excludesList, objectivesList);

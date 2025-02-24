@@ -14,5 +14,5 @@ public interface VisualizationStore {
 	void addSolution(Version state);
 	void addTransition(Version from, Version to, String label);
 	StringBuilder getDesignSpaceStringBuilder();
-	Map <Version, Integer> getStates();
+	Map<Version, Integer> getStates();
 }

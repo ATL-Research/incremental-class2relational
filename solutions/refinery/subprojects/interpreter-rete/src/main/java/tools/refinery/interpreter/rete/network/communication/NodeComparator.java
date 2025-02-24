@@ -16,11 +16,11 @@ import tools.refinery.interpreter.rete.network.Node;
 /**
  * @since 2.4
  */
-public class NodeComparator implements Comparator <Node> {
+public class NodeComparator implements Comparator<Node> {
 
-    protected final Map <Node, Integer> nodeMap;
+    protected final Map<Node, Integer> nodeMap;
 
-    public NodeComparator(final Map <Node, Integer> nodeMap) {
+    public NodeComparator(final Map<Node, Integer> nodeMap) {
         this.nodeMap = nodeMap;
     }
 

@@ -200,7 +200,7 @@ public class ServerLauncher {
 		return getAllowedOriginsFromPublicHostAndPort();
 	}
 
-	// This method returns <code>null </code> to indicate that all origins are allowed.
+	// This method returns <code>null</code> to indicate that all origins are allowed.
 	@SuppressWarnings("squid:S1168")
 	private static String[] getAllowedOriginsFromPublicHostAndPort() {
 		var publicHost = getPublicHost();

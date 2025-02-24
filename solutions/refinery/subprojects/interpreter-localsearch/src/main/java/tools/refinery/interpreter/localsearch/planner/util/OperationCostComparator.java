@@ -16,7 +16,7 @@ import tools.refinery.interpreter.localsearch.planner.PConstraintInfo;
  * @author Marton Bur
  *
  */
-public class OperationCostComparator implements Comparator <PConstraintInfo>{
+public class OperationCostComparator implements Comparator<PConstraintInfo>{
 
     @Override
     public int compare(PConstraintInfo o1, PConstraintInfo o2) {

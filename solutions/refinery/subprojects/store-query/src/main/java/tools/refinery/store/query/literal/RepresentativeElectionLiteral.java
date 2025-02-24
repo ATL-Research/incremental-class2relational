@@ -27,7 +27,7 @@ public class RepresentativeElectionLiteral extends AbstractCallLiteral {
 		this(connectivity, target, List.of(specific, representative));
 	}
 
-	private RepresentativeElectionLiteral(Connectivity connectivity, Constraint target, List <Variable> arguments) {
+	private RepresentativeElectionLiteral(Connectivity connectivity, Constraint target, List<Variable> arguments) {
 		super(target, arguments);
 		this.connectivity = connectivity;
 		var parameters = target.getParameters();
@@ -49,22 +49,22 @@ public class RepresentativeElectionLiteral extends AbstractCallLiteral {
 	}
 
 	@Override
-	protected Literal doSubstitute(Substitution substitution, List <Variable> substitutedArguments) {
+	protected Literal doSubstitute(Substitution substitution, List<Variable> substitutedArguments) {
 		return new RepresentativeElectionLiteral(connectivity, getTarget(), substitutedArguments);
 	}
 
 	@Override
-	public Set <Variable> getOutputVariables() {
+	public Set<Variable> getOutputVariables() {
 		return getArgumentsOfDirection(ParameterDirection.OUT);
 	}
 
 	@Override
-	public Set <Variable> getInputVariables(Set <? extends Variable> positiveVariablesInClause) {
+	public Set<Variable> getInputVariables(Set<? extends Variable> positiveVariablesInClause) {
 		return Set.of();
 	}
 
 	@Override
-	public Set <Variable> getPrivateVariables(Set <? extends Variable> positiveVariablesInClause) {
+	public Set<Variable> getPrivateVariables(Set<? extends Variable> positiveVariablesInClause) {
 		return Set.of();
 	}
 
@@ -80,7 +80,7 @@ public class RepresentativeElectionLiteral extends AbstractCallLiteral {
 	}
 
 	@Override
-	public AbstractCallLiteral withArguments(Constraint newTarget, List <Variable> newArguments) {
+	public AbstractCallLiteral withArguments(Constraint newTarget, List<Variable> newArguments) {
 		return new RepresentativeElectionLiteral(connectivity, newTarget, newArguments);
 	}
 

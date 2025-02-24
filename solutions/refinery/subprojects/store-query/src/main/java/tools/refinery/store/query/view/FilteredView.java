@@ -13,25 +13,25 @@ import java.util.Objects;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
-public class FilteredView <T> extends TuplePreservingView <T> {
-	private final BiPredicate <Tuple, T> predicate;
+public class FilteredView<T> extends TuplePreservingView<T> {
+	private final BiPredicate<Tuple, T> predicate;
 
-	public FilteredView(Symbol <T> symbol, String name, BiPredicate <Tuple, T> predicate) {
+	public FilteredView(Symbol<T> symbol, String name, BiPredicate<Tuple, T> predicate) {
 		super(symbol, name);
 		this.predicate = predicate;
 	}
 
-	public FilteredView(Symbol <T> symbol, BiPredicate <Tuple, T> predicate) {
+	public FilteredView(Symbol<T> symbol, BiPredicate<Tuple, T> predicate) {
 		super(symbol);
 		this.predicate = predicate;
 	}
 
-	public FilteredView(Symbol <T> symbol, String name, Predicate <T> predicate) {
+	public FilteredView(Symbol<T> symbol, String name, Predicate<T> predicate) {
 		this(symbol, name, (k, v) -> predicate.test(v));
 		validateDefaultValue(predicate);
 	}
 
-	public FilteredView(Symbol <T> symbol, Predicate <T> predicate) {
+	public FilteredView(Symbol<T> symbol, Predicate<T> predicate) {
 		this(symbol, (k, v) -> predicate.test(v));
 		validateDefaultValue(predicate);
 	}
@@ -46,7 +46,7 @@ public class FilteredView <T> extends TuplePreservingView <T> {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		if (!super.equals(o)) return false;
-		FilteredView <?> that = (FilteredView <?>) o;
+		FilteredView<?> that = (FilteredView<?>) o;
 		return Objects.equals(predicate, that.predicate);
 	}
 
@@ -55,7 +55,7 @@ public class FilteredView <T> extends TuplePreservingView <T> {
 		return Objects.hash(super.hashCode(), predicate);
 	}
 
-	private void validateDefaultValue(Predicate <T> predicate) {
+	private void validateDefaultValue(Predicate<T> predicate) {
 		var defaultValue = getSymbol().defaultValue();
 		boolean matchesDefaultValue = false;
 		try {

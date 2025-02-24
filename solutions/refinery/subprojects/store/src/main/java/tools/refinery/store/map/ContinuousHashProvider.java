@@ -15,7 +15,7 @@ import tools.refinery.store.map.internal.state.Node;
  *
  * @param <K> Target java type.
  */
-public interface ContinuousHashProvider <K> {
+public interface ContinuousHashProvider<K> {
 	public static final int EFFECTIVE_BITS = Node.EFFECTIVE_BITS;
 	public static final int EFFECTIVE_BIT_MASK = (1 << (EFFECTIVE_BITS)) - 1;
 
@@ -33,7 +33,7 @@ public interface ContinuousHashProvider <K> {
 	 * {@code getHash(key1, index) == getHash(key2, index)} for all values of
 	 * {@code index}.</li>
 	 * <li>If {@code getHash(key1,index) == getHash(key2, index)} for all values of
-	 * {@code index}, then {@link #equals}{@code (key1, key2)} </li>
+	 * {@code index}, then {@link #equals}{@code (key1, key2)}</li>
 	 * <li>In current implementation, we use only the least significant
 	 * {@link #EFFECTIVE_BITS}
 	 * </ul>
@@ -56,8 +56,8 @@ public interface ContinuousHashProvider <K> {
 			for (int i = 0; i < ContinuousHashProvider.MAX_PRACTICAL_DEPTH; i++) {
 				int hash1 = getEffectiveHash(key1, i);
 				int hash2 = getEffectiveHash(key2, i);
-				for(int j = 0; j <Integer.SIZE/Node.BRANCHING_FACTOR_BITS; j++) {
-					final int factorMask = (1 <<Node.BRANCHING_FACTOR_BITS)-1;
+				for(int j = 0; j<Integer.SIZE/Node.BRANCHING_FACTOR_BITS; j++) {
+					final int factorMask = (1<<Node.BRANCHING_FACTOR_BITS)-1;
 					int hashFragment1 = (hash1>>>j*Node.BRANCHING_FACTOR_BITS) & factorMask;
 					int hashFragment2 = (hash2>>>j*Node.BRANCHING_FACTOR_BITS) & factorMask;
 					var result = Integer.compare(hashFragment1, hashFragment2);

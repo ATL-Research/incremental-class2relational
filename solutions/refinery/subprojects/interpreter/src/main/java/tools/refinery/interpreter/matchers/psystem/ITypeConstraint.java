@@ -38,11 +38,11 @@ public interface ITypeConstraint extends ITypeInfoProviderConstraint {
             // Hiding constructor for utility class
         }
 
-        public static Map <Set<PVariable>, Set <PVariable>> getFunctionalDependencies(IQueryMetaContext context, IInputKey inputKey, Tuple variablesTuple) {
-            final Map <Set<PVariable>, Set <PVariable>> result = new HashMap <Set<PVariable>, Set <PVariable>>();
+        public static Map<Set<PVariable>, Set<PVariable>> getFunctionalDependencies(IQueryMetaContext context, IInputKey inputKey, Tuple variablesTuple) {
+            final Map<Set<PVariable>, Set<PVariable>> result = new HashMap<Set<PVariable>, Set<PVariable>>();
 
-            Set <Entry<Set<Integer>, Set <Integer>>> dependencies = context.getFunctionalDependencies(inputKey).entrySet();
-            for (Entry <Set<Integer>, Set <Integer>> dependency : dependencies) {
+            Set<Entry<Set<Integer>, Set<Integer>>> dependencies = context.getFunctionalDependencies(inputKey).entrySet();
+            for (Entry<Set<Integer>, Set<Integer>> dependency : dependencies) {
                 result.put(
                         transcribeVariables(dependency.getKey(), variablesTuple),
                         transcribeVariables(dependency.getValue(), variablesTuple)
@@ -52,8 +52,8 @@ public interface ITypeConstraint extends ITypeInfoProviderConstraint {
             return result;
         }
 
-        private static Set <PVariable> transcribeVariables(Set <Integer> indices, Tuple variablesTuple) {
-            Set <PVariable> result = new HashSet <PVariable>();
+        private static Set<PVariable> transcribeVariables(Set<Integer> indices, Tuple variablesTuple) {
+            Set<PVariable> result = new HashSet<PVariable>();
             for (Integer index : indices) {
                 result.add((PVariable) variablesTuple.get(index));
             }

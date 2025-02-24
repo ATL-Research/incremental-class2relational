@@ -8,12 +8,12 @@ package tools.refinery.store.query.term.comparable;
 import tools.refinery.store.query.term.BinaryTerm;
 import tools.refinery.store.query.term.Term;
 
-public abstract class ComparisonTerm <T> extends BinaryTerm <Boolean, T, T> {
-	protected ComparisonTerm(Class <T> argumentType, Term <T> left, Term <T> right) {
+public abstract class ComparisonTerm<T> extends BinaryTerm<Boolean, T, T> {
+	protected ComparisonTerm(Class<T> argumentType, Term<T> left, Term<T> right) {
 		super(Boolean.class, argumentType, argumentType, left, right);
 	}
 
-	public Class <T> getArgumentType() {
+	public Class<T> getArgumentType() {
 		return getLeftType();
 	}
 }

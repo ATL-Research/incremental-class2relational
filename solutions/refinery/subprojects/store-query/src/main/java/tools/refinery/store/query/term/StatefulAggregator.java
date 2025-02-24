@@ -7,11 +7,11 @@ package tools.refinery.store.query.term;
 
 import java.util.stream.Stream;
 
-public interface StatefulAggregator <R, T> extends Aggregator <R, T> {
-	StatefulAggregate <R, T> createEmptyAggregate();
+public interface StatefulAggregator<R, T> extends Aggregator<R, T> {
+	StatefulAggregate<R, T> createEmptyAggregate();
 
 	@Override
-	default R aggregateStream(Stream <T> stream) {
+	default R aggregateStream(Stream<T> stream) {
 		var accumulator = createEmptyAggregate();
 		var iterator = stream.iterator();
 		while (iterator.hasNext()) {

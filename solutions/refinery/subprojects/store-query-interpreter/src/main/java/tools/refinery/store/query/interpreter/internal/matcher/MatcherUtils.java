@@ -93,14 +93,14 @@ final class MatcherUtils {
 		return result;
 	}
 
-	public static <T> T getSingleValue(@Nullable Iterable <? extends ITuple> viatraTuples) {
+	public static <T> T getSingleValue(@Nullable Iterable<? extends ITuple> viatraTuples) {
 		if (viatraTuples == null) {
 			return null;
 		}
 		return getSingleValue(viatraTuples.iterator());
 	}
 
-	public static <T> T getSingleValue(Iterator <? extends ITuple> iterator) {
+	public static <T> T getSingleValue(Iterator<? extends ITuple> iterator) {
 		if (!iterator.hasNext()) {
 			return null;
 		}

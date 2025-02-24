@@ -8,12 +8,12 @@ package tools.refinery.store.map;
 import java.util.Iterator;
 import java.util.Map;
 
-public class IteratorBasedCursor <K, V> implements Cursor <K, V> {
-	private final Iterator <Map.Entry<K, V>> iterator;
-	private Map.Entry <K, V> entry;
+public class IteratorBasedCursor<K, V> implements Cursor<K, V> {
+	private final Iterator<Map.Entry<K, V>> iterator;
+	private Map.Entry<K, V> entry;
 	private boolean terminated;
 
-	public IteratorBasedCursor(Iterator <Map.Entry<K, V>> iterator) {
+	public IteratorBasedCursor(Iterator<Map.Entry<K, V>> iterator) {
 		this.iterator = iterator;
 	}
 

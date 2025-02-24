@@ -27,7 +27,7 @@ public abstract class POperation {
     /**
      * Newly enforced constraints
      */
-    public abstract Set <? extends PConstraint> getDeltaConstraints();
+    public abstract Set<? extends PConstraint> getDeltaConstraints();
 
     public abstract String getShortName();
 

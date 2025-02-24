@@ -24,9 +24,9 @@ import tools.refinery.interpreter.matchers.psystem.queries.PDisjunction;
  */
 public class PDisjunctionRewriterCacher extends PDisjunctionRewriter {
 
-    private final List <PDisjunctionRewriter> rewriterChain;
-    private WeakHashMap <PDisjunction, PDisjunction> cachedResults =
-            new WeakHashMap <PDisjunction, PDisjunction>();
+    private final List<PDisjunctionRewriter> rewriterChain;
+    private WeakHashMap<PDisjunction, PDisjunction> cachedResults =
+            new WeakHashMap<PDisjunction, PDisjunction>();
 
     private void setupTraceCollectorInChain(){
         IRewriterTraceCollector collector = getTraceCollector();
@@ -43,7 +43,7 @@ public class PDisjunctionRewriterCacher extends PDisjunctionRewriter {
         rewriterChain = new ArrayList<>(Arrays.asList(rewriters));
     }
 
-    public PDisjunctionRewriterCacher(List <PDisjunctionRewriter> rewriterChain) {
+    public PDisjunctionRewriterCacher(List<PDisjunctionRewriter> rewriterChain) {
         this.rewriterChain = new ArrayList<>(rewriterChain);
     }
 

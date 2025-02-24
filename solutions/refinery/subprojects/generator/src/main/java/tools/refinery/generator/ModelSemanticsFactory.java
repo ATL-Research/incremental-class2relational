@@ -20,7 +20,7 @@ import java.util.Set;
 
 public final class ModelSemanticsFactory {
 	@Inject
-	private Provider <ModelInitializer> initializerProvider;
+	private Provider<ModelInitializer> initializerProvider;
 
 	private CancellationToken cancellationToken = CancellationToken.NONE;
 

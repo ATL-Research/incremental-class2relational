@@ -17,8 +17,8 @@ import java.util.Collection;
 
 abstract class TypeScopePropagator {
 	private final BoundScopePropagator adapter;
-	private final ResultSet <Boolean> allNodes;
-	private final ResultSet <Boolean> multiNodes;
+	private final ResultSet<Boolean> allNodes;
+	private final ResultSet<Boolean> multiNodes;
 	protected final MPConstraint constraint;
 
 	protected TypeScopePropagator(BoundScopePropagator adapter, RelationalQuery allQuery,
@@ -62,7 +62,7 @@ abstract class TypeScopePropagator {
 	abstract static class Factory {
 		public abstract TypeScopePropagator createPropagator(BoundScopePropagator adapter);
 
-		protected abstract Collection <AnyQuery> getQueries();
+		protected abstract Collection<AnyQuery> getQueries();
 
 		public void configure(ModelStoreBuilder storeBuilder) {
 			storeBuilder.getAdapter(ModelQueryBuilder.class).queries(getQueries());

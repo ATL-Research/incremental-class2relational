@@ -39,7 +39,7 @@ import tools.refinery.interpreter.rete.util.Options;
  */
 public abstract class AbstractUniquenessEnforcerNode extends StandardNode implements Tunnel {
 
-    protected final Collection <Supplier> parents;
+    protected final Collection<Supplier> parents;
     protected ProjectionIndexer memoryNullIndexer;
     protected ProjectionIndexer memoryIdentityIndexer;
     protected final int tupleWidth;
@@ -47,12 +47,12 @@ public abstract class AbstractUniquenessEnforcerNode extends StandardNode implem
     protected Mailbox mailbox;
     protected final TupleMask nullMask;
     protected final TupleMask identityMask;
-    protected final List <ListenerSubscription> specializedListeners;
+    protected final List<ListenerSubscription> specializedListeners;
 
     public AbstractUniquenessEnforcerNode(final ReteContainer reteContainer, final int tupleWidth) {
         super(reteContainer);
-        this.parents = new ArrayList <Supplier>();
-        this.specializedListeners = new ArrayList <ListenerSubscription>();
+        this.parents = new ArrayList<Supplier>();
+        this.specializedListeners = new ArrayList<ListenerSubscription>();
         this.tupleWidth = tupleWidth;
         this.nullMask = TupleMask.linear(0, tupleWidth);
         this.identityMask = TupleMask.identity(tupleWidth);
@@ -68,7 +68,7 @@ public abstract class AbstractUniquenessEnforcerNode extends StandardNode implem
     /**
      * @since 2.8
      */
-    public abstract Set <Tuple> getTuples();
+    public abstract Set<Tuple> getTuples();
 
     /**
      * @since 2.4
@@ -121,7 +121,7 @@ public abstract class AbstractUniquenessEnforcerNode extends StandardNode implem
     }
 
     @Override
-    public Collection <Supplier> getParents() {
+    public Collection<Supplier> getParents() {
         return parents;
     }
 

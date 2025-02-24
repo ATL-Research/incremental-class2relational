@@ -12,10 +12,10 @@ import tools.refinery.interpreter.matchers.psystem.IValueProvider;
 
 import java.util.stream.Collectors;
 
-class TermEvaluator <T> implements IExpressionEvaluator {
-	private final Term <T> term;
+class TermEvaluator<T> implements IExpressionEvaluator {
+	private final Term<T> term;
 
-	public TermEvaluator(Term <T> term) {
+	public TermEvaluator(Term<T> term) {
 		this.term = term;
 	}
 
@@ -25,7 +25,7 @@ class TermEvaluator <T> implements IExpressionEvaluator {
 	}
 
 	@Override
-	public Iterable <String> getInputParameterNames() {
+	public Iterable<String> getInputParameterNames() {
 		return term.getInputVariables().stream().map(Variable::getUniqueName).collect(Collectors.toUnmodifiableSet());
 	}
 

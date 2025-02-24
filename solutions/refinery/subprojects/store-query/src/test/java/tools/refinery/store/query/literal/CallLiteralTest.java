@@ -34,7 +34,7 @@ class CallLiteralTest {
 		}
 
 		@Override
-		public List <Parameter> getParameters() {
+		public List<Parameter> getParameters() {
 			return List.of(
 					new Parameter(null, ParameterDirection.IN),
 					new Parameter(null, ParameterDirection.IN),

@@ -26,10 +26,10 @@ import tools.refinery.interpreter.matchers.util.Direction;
 // UNFINISHED, not used yet
 public class TransitiveClosureNodeIndexer extends StandardIndexer implements IterableIndexer {
     private TransitiveClosureNode tcNode;
-    private IncSCCAlg <Object> tcAlg;
-    private Collection <tools.refinery.interpreter.matchers.tuple.Tuple> emptySet;
+    private IncSCCAlg<Object> tcAlg;
+    private Collection<tools.refinery.interpreter.matchers.tuple.Tuple> emptySet;
 
-    public TransitiveClosureNodeIndexer(TupleMask mask, IncSCCAlg <Object> tcAlg, TransitiveClosureNode tcNode) {
+    public TransitiveClosureNodeIndexer(TupleMask mask, IncSCCAlg<Object> tcAlg, TransitiveClosureNode tcNode) {
         super(tcNode.getContainer(), mask);
         this.tcAlg = tcAlg;
         this.tcNode = tcNode;
@@ -38,13 +38,13 @@ public class TransitiveClosureNodeIndexer extends StandardIndexer implements Ite
     }
 
     @Override
-    public Collection <tools.refinery.interpreter.matchers.tuple.Tuple> get(tools.refinery.interpreter.matchers.tuple.Tuple signature) {
+    public Collection<tools.refinery.interpreter.matchers.tuple.Tuple> get(tools.refinery.interpreter.matchers.tuple.Tuple signature) {
         if (signature.getSize() == mask.sourceWidth) {
             if (mask.indices.length == 0) {
                 // mask ()/2
                 return getSignatures();
             } else if (mask.indices.length == 1) {
-                Set <tools.refinery.interpreter.matchers.tuple.Tuple> retSet = CollectionsFactory.createSet();
+                Set<tools.refinery.interpreter.matchers.tuple.Tuple> retSet = CollectionsFactory.createSet();
 
                 // mask (0)/2
                 if (mask.indices[0] == 0) {
@@ -88,19 +88,19 @@ public class TransitiveClosureNodeIndexer extends StandardIndexer implements Ite
     }
 
     @Override
-    public Collection <tools.refinery.interpreter.matchers.tuple.Tuple> getSignatures() {
+    public Collection<tools.refinery.interpreter.matchers.tuple.Tuple> getSignatures() {
         return asTupleCollection(tcAlg.getTcRelation());
     }
 
     @Override
-    public Iterator <tools.refinery.interpreter.matchers.tuple.Tuple> iterator() {
+    public Iterator<tools.refinery.interpreter.matchers.tuple.Tuple> iterator() {
         return asTupleCollection(tcAlg.getTcRelation()).iterator();
     }
 
-    private Collection <tools.refinery.interpreter.matchers.tuple.Tuple> asTupleCollection(
-            Collection <Tuple<Object>> tuples) {
-        Set <tools.refinery.interpreter.matchers.tuple.Tuple> retSet = CollectionsFactory.createSet();
-        for (Tuple <Object> tuple : tuples) {
+    private Collection<tools.refinery.interpreter.matchers.tuple.Tuple> asTupleCollection(
+            Collection<Tuple<Object>> tuples) {
+        Set<tools.refinery.interpreter.matchers.tuple.Tuple> retSet = CollectionsFactory.createSet();
+        for (Tuple<Object> tuple : tuples) {
             retSet.add(Tuples.staticArityFlatTupleOf(tuple.getSource(), tuple.getTarget()));
         }
         return retSet;

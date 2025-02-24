@@ -15,11 +15,11 @@ import tools.refinery.store.representation.cardinality.CardinalityInterval;
 import tools.refinery.store.representation.cardinality.CardinalityIntervals;
 import tools.refinery.store.tuple.Tuple;
 
-public class EqualsRefiner extends AbstractPartialInterpretationRefiner <TruthValue, Boolean> {
-	private final Interpretation <CardinalityInterval> countInterpretation;
+public class EqualsRefiner extends AbstractPartialInterpretationRefiner<TruthValue, Boolean> {
+	private final Interpretation<CardinalityInterval> countInterpretation;
 
-	private EqualsRefiner(ReasoningAdapter adapter, PartialSymbol <TruthValue, Boolean> partialSymbol,
-                          Symbol <CardinalityInterval> countSymbol) {
+	private EqualsRefiner(ReasoningAdapter adapter, PartialSymbol<TruthValue, Boolean> partialSymbol,
+                          Symbol<CardinalityInterval> countSymbol) {
 		super(adapter, partialSymbol);
 		countInterpretation = adapter.getModel().getInterpretation(countSymbol);
 	}
@@ -58,7 +58,7 @@ public class EqualsRefiner extends AbstractPartialInterpretationRefiner <TruthVa
 		return true;
 	}
 
-	public static Factory <TruthValue, Boolean> of(Symbol <CardinalityInterval> countSymbol) {
+	public static Factory<TruthValue, Boolean> of(Symbol<CardinalityInterval> countSymbol) {
 		return (adapter, partialSymbol) -> new EqualsRefiner(adapter, partialSymbol, countSymbol);
 	}
 }

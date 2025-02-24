@@ -26,7 +26,7 @@ import tools.refinery.store.util.CancellationToken;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
-class SemanticsWorker implements Callable <SemanticsResult> {
+class SemanticsWorker implements Callable<SemanticsResult> {
 	private static final String DIAGNOSTIC_ID = "tools.refinery.language.semantics.SemanticError";
 
 	@Inject
@@ -87,7 +87,7 @@ class SemanticsWorker implements Callable <SemanticsResult> {
 		}
 		var diagnostic = new FeatureBasedDiagnostic(Diagnostic.ERROR, message, sourceElement, null, 0,
 				CheckType.EXPENSIVE, DIAGNOSTIC_ID);
-		var xtextIssues = new ArrayList <Issue>();
+		var xtextIssues = new ArrayList<Issue>();
 		diagnosticConverter.convertValidatorDiagnostic(diagnostic, xtextIssues::add);
 		var issues = xtextIssues.stream()
 				.map(issue -> new ValidationResult.Issue(issue.getMessage(), "error", issue.getLineNumber(),

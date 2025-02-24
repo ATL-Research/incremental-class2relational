@@ -9,13 +9,13 @@ import tools.refinery.store.query.substitution.Substitution;
 import tools.refinery.store.query.term.Term;
 
 public class IntSubTerm extends IntBinaryTerm {
-	public IntSubTerm(Term <Integer> left, Term <Integer> right) {
+	public IntSubTerm(Term<Integer> left, Term<Integer> right) {
 		super(left, right);
 	}
 
 	@Override
-	public Term <Integer> doSubstitute(Substitution substitution, Term <Integer> substitutedLeft,
-									  Term <Integer> substitutedRight) {
+	public Term<Integer> doSubstitute(Substitution substitution, Term<Integer> substitutedLeft,
+									  Term<Integer> substitutedRight) {
 		return new IntSubTerm(substitutedLeft, substitutedRight);
 	}
 

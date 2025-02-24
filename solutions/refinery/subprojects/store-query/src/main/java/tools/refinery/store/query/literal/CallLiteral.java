@@ -17,10 +17,10 @@ import java.util.*;
 
 // {@link Object#equals(Object)} is implemented by {@link AbstractLiteral}.
 @SuppressWarnings("squid:S2160")
-public final class CallLiteral extends AbstractCallLiteral implements CanNegate <CallLiteral> {
+public final class CallLiteral extends AbstractCallLiteral implements CanNegate<CallLiteral> {
 	private final CallPolarity polarity;
 
-	public CallLiteral(CallPolarity polarity, Constraint target, List <Variable> arguments) {
+	public CallLiteral(CallPolarity polarity, Constraint target, List<Variable> arguments) {
 		super(target, arguments);
 		var parameters = target.getParameters();
 		int arity = target.arity();
@@ -44,12 +44,12 @@ public final class CallLiteral extends AbstractCallLiteral implements CanNegate 
 	}
 
 	@Override
-	protected Literal doSubstitute(Substitution substitution, List <Variable> substitutedArguments) {
+	protected Literal doSubstitute(Substitution substitution, List<Variable> substitutedArguments) {
 		return new CallLiteral(polarity, getTarget(), substitutedArguments);
 	}
 
 	@Override
-	public Set <Variable> getOutputVariables() {
+	public Set<Variable> getOutputVariables() {
 		if (polarity.isPositive()) {
 			return getArgumentsOfDirection(ParameterDirection.OUT);
 		}
@@ -57,7 +57,7 @@ public final class CallLiteral extends AbstractCallLiteral implements CanNegate 
 	}
 
 	@Override
-	public Set <Variable> getInputVariables(Set <? extends Variable> positiveVariablesInClause) {
+	public Set<Variable> getInputVariables(Set<? extends Variable> positiveVariablesInClause) {
 		if (polarity.isPositive()) {
 			return getArgumentsOfDirection(ParameterDirection.IN);
 		}
@@ -65,7 +65,7 @@ public final class CallLiteral extends AbstractCallLiteral implements CanNegate 
 	}
 
 	@Override
-	public Set <Variable> getPrivateVariables(Set <? extends Variable> positiveVariablesInClause) {
+	public Set<Variable> getPrivateVariables(Set<? extends Variable> positiveVariablesInClause) {
 		if (polarity.isPositive()) {
 			return Set.of();
 		}
@@ -103,7 +103,7 @@ public final class CallLiteral extends AbstractCallLiteral implements CanNegate 
 	}
 
 	@Override
-	public AbstractCallLiteral withArguments(Constraint newTarget, List <Variable> newArguments) {
+	public AbstractCallLiteral withArguments(Constraint newTarget, List<Variable> newArguments) {
 		return new CallLiteral(polarity, newTarget, newArguments);
 	}
 

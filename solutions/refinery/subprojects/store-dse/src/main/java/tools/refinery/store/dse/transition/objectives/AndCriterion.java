@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public final class AndCriterion extends CompositeCriterion {
-	AndCriterion(Collection <? extends Criterion> criteria) {
+	AndCriterion(Collection<? extends Criterion> criteria) {
 		super(criteria);
 	}
 
@@ -32,7 +32,7 @@ public final class AndCriterion extends CompositeCriterion {
 
 	@Override
 	public CriterionCalculator createCalculator(Model model) {
-		var calculators = new ArrayList <CriterionCalculator>();
+		var calculators = new ArrayList<CriterionCalculator>();
 		for (var criterion : getCriteria()) {
 			var reduction = criterion.getReduction(model.getStore());
 			if (reduction == Reduction.ALWAYS_FALSE) {

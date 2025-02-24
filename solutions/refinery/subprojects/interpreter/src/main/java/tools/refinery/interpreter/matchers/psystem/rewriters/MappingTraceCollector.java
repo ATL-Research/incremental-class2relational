@@ -37,28 +37,28 @@ public class MappingTraceCollector implements IRewriterTraceCollector {
     /**
      * Traces from derivative to original
      */
-    private final IMultiLookup <PTraceable, PTraceable> traces = CollectionsFactory.createMultiLookup(Object.class, MemoryType.SETS, Object.class);
+    private final IMultiLookup<PTraceable, PTraceable> traces = CollectionsFactory.createMultiLookup(Object.class, MemoryType.SETS, Object.class);
 
     /**
      * Traces from original to derivative
      */
-    private final IMultiLookup <PTraceable, PTraceable> inverseTraces = CollectionsFactory.createMultiLookup(Object.class, MemoryType.SETS, Object.class);
+    private final IMultiLookup<PTraceable, PTraceable> inverseTraces = CollectionsFactory.createMultiLookup(Object.class, MemoryType.SETS, Object.class);
 
     /**
      * Reasons for removing {@link PTraceable}s
      */
-    private final Map <PTraceable, IDerivativeModificationReason> removals = new HashMap<>();
+    private final Map<PTraceable, IDerivativeModificationReason> removals = new HashMap<>();
 
     /**
      * Decides whether {@link PTraceable} is removed
      */
-    private final Predicate <PTraceable> removed = removals::containsKey;
+    private final Predicate<PTraceable> removed = removals::containsKey;
 
     /**
      * @since 2.0
      */
     @Override
-    public Stream <PTraceable> getCanonicalTraceables(PTraceable derivative) {
+    public Stream<PTraceable> getCanonicalTraceables(PTraceable derivative) {
         return findTraceEnds(derivative, traces).stream();
     }
 
@@ -66,26 +66,26 @@ public class MappingTraceCollector implements IRewriterTraceCollector {
      * @since 2.0
      */
     @Override
-    public Stream <PTraceable> getRewrittenTraceables(PTraceable source) {
+    public Stream<PTraceable> getRewrittenTraceables(PTraceable source) {
         return findTraceEnds(source, inverseTraces).stream();
     }
 
     /**
      * Returns the end of trace chains starting from the given {@link PTraceable} along the given trace edges.
      */
-    private Set <PTraceable> findTraceEnds(PTraceable traceable, IMultiLookup <PTraceable, PTraceable> traceRecords) {
+    private Set<PTraceable> findTraceEnds(PTraceable traceable, IMultiLookup<PTraceable, PTraceable> traceRecords) {
         if (traceable instanceof PQuery) { // PQueries are preserved
             return Collections.singleton(traceable);
         }
-        Set <PTraceable> visited = new HashSet<>();
-        Set <PTraceable> result = new HashSet<>();
-        Queue <PTraceable> queue = new LinkedList<>();
+        Set<PTraceable> visited = new HashSet<>();
+        Set<PTraceable> result = new HashSet<>();
+        Queue<PTraceable> queue = new LinkedList<>();
         queue.add(traceable);
         while(!queue.isEmpty()){
             PTraceable aDerivative = queue.poll();
             // Track visited elements to avoid infinite loop via directed cycles in traces
             visited.add(aDerivative);
-            IMemoryView <PTraceable> nextOrigins = traceRecords.lookup(aDerivative);
+            IMemoryView<PTraceable> nextOrigins = traceRecords.lookup(aDerivative);
             if (nextOrigins == null){
                 // End of trace chain
                 result.add(aDerivative);
@@ -128,7 +128,7 @@ public class MappingTraceCollector implements IRewriterTraceCollector {
      * @since 2.0
      */
     @Override
-    public Stream <IDerivativeModificationReason> getRemovalReasons(PTraceable traceable) {
+    public Stream<IDerivativeModificationReason> getRemovalReasons(PTraceable traceable) {
         return getRewrittenTraceables(traceable).filter(removed).map(removals::get);
     }
 

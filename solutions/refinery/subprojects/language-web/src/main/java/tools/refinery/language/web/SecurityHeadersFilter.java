@@ -33,7 +33,7 @@ public class SecurityHeadersFilter implements Filter {
 			// Enable cross-origin isolation, https://web.dev/cross-origin-isolation-guide/
 			httpResponse.setHeader("Cross-Origin-Opener-Policy", "same-origin");
 			httpResponse.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
-			// We do not expose any sensitive data over HTTP, so <code>cross-origin </code> is safe here.
+			// We do not expose any sensitive data over HTTP, so <code>cross-origin</code> is safe here.
 			httpResponse.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
 		}
 		chain.doFilter(request, response);

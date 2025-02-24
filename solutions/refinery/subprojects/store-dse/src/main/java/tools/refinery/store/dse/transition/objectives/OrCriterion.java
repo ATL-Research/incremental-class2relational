@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public final class OrCriterion extends CompositeCriterion {
-	OrCriterion(Collection <? extends Criterion> criteria) {
+	OrCriterion(Collection<? extends Criterion> criteria) {
 		super(criteria);
 	}
 
@@ -32,7 +32,7 @@ public final class OrCriterion extends CompositeCriterion {
 
 	@Override
 	public CriterionCalculator createCalculator(Model model) {
-		var calculators = new ArrayList <CriterionCalculator>();
+		var calculators = new ArrayList<CriterionCalculator>();
 		for (var criterion : getCriteria()) {
 			var reduction = criterion.getReduction(model.getStore());
 			if (reduction == Reduction.ALWAYS_TRUE) {

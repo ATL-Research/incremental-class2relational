@@ -28,12 +28,12 @@ public class ProblemLocalScopeProvider extends ImportedNamespaceAwareLocalScopeP
 	private IResourceDescriptionsProvider resourceDescriptionsProvider;
 
 	@Override
-	protected List <ImportNormalizer> getImplicitImports(boolean ignoreCase) {
+	protected List<ImportNormalizer> getImplicitImports(boolean ignoreCase) {
 		return List.of(doCreateImportNormalizer(BUILTIN_LIBRARY_QUALIFIED_NAME, true, ignoreCase));
 	}
 
 	@Override
-	protected List <ImportNormalizer> getImportedNamespaceResolvers(EObject context, boolean ignoreCase) {
+	protected List<ImportNormalizer> getImportedNamespaceResolvers(EObject context, boolean ignoreCase) {
 		return List.of();
 	}
 

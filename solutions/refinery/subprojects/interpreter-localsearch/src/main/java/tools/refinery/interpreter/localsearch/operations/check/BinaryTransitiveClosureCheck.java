@@ -53,15 +53,15 @@ public class BinaryTransitiveClosureCheck implements ISearchOperation, IPatternM
             }
 
             Object targetValue = frame.get(targetPosition);
-            Queue <Object> sourcesToEvaluate = new LinkedList<>();
+            Queue<Object> sourcesToEvaluate = new LinkedList<>();
             sourcesToEvaluate.add(frame.get(sourcePosition));
-            Set <Object> sourceEvaluated = new HashSet<>();
+            Set<Object> sourceEvaluated = new HashSet<>();
             final Object[] mappedFrame = new Object[] {null, null};
             while (!sourcesToEvaluate.isEmpty()) {
                 Object currentValue = sourcesToEvaluate.poll();
                 sourceEvaluated.add(currentValue);
                 mappedFrame[0] = currentValue;
-                for (Tuple match : (Iterable <Tuple>) () -> matcher.getAllMatches(mappedFrame).iterator()) {
+                for (Tuple match : (Iterable<Tuple>) () -> matcher.getAllMatches(mappedFrame).iterator()) {
                     Object foundTarget = match.get(1);
                     if (targetValue.equals(foundTarget)) {
                         return true;
@@ -92,7 +92,7 @@ public class BinaryTransitiveClosureCheck implements ISearchOperation, IPatternM
     /**
      * The source position will be matched in the called pattern to the first parameter; while target to the second.
      * </p>
-     * <strong>NOTE </strong>: the reflexive check call does not include the parameter type checks; appropriate type checks should be
+     * <strong>NOTE</strong>: the reflexive check call does not include the parameter type checks; appropriate type checks should be
      * added as necessary by the operation compiler.
      *
      * @since 2.0
@@ -116,7 +116,7 @@ public class BinaryTransitiveClosureCheck implements ISearchOperation, IPatternM
     }
 
     @Override
-    public String toString(Function <Integer, String> variableMapping) {
+    public String toString(Function<Integer, String> variableMapping) {
         String c = information.toString(variableMapping);
         int p = c.indexOf('(');
         String modifier = reflexive ? "*" : "+";
@@ -124,7 +124,7 @@ public class BinaryTransitiveClosureCheck implements ISearchOperation, IPatternM
     }
 
     @Override
-    public List <Integer> getVariablePositions() {
+    public List<Integer> getVariablePositions() {
         return Arrays.asList(sourcePosition, targetPosition);
     }
 

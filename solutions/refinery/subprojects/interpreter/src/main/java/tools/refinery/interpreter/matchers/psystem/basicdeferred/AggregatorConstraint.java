@@ -54,13 +54,13 @@ public class AggregatorConstraint extends PatternCallBasedDeferred implements IT
     }
 
     @Override
-    public Set <PVariable> getDeducedVariables() {
+    public Set<PVariable> getDeducedVariables() {
         return Collections.singleton(resultVariable);
     }
 
     @Override
-    public Map <Set<PVariable>, Set <PVariable>> getFunctionalDependencies(IQueryMetaContext context) {
-        final Map <Set<PVariable>, Set <PVariable>> result = new HashMap <Set<PVariable>, Set <PVariable>>();
+    public Map<Set<PVariable>, Set<PVariable>> getFunctionalDependencies(IQueryMetaContext context) {
+        final Map<Set<PVariable>, Set<PVariable>> result = new HashMap<Set<PVariable>, Set<PVariable>>();
         result.put(getDeferringVariables(), getDeducedVariables());
         return result;
     }
@@ -72,7 +72,7 @@ public class AggregatorConstraint extends PatternCallBasedDeferred implements IT
     }
 
     @Override
-    protected Set <PVariable> getCandidateQuantifiedVariables() {
+    protected Set<PVariable> getCandidateQuantifiedVariables() {
         return actualParametersTuple.<PVariable> getDistinctElements();
     }
 
@@ -87,8 +87,8 @@ public class AggregatorConstraint extends PatternCallBasedDeferred implements IT
     }
 
     @Override
-    public Set <TypeJudgement> getImpliedJudgements(IQueryMetaContext context) {
-        Set <TypeJudgement> result = new HashSet <TypeJudgement>();
+    public Set<TypeJudgement> getImpliedJudgements(IQueryMetaContext context) {
+        Set<TypeJudgement> result = new HashSet<TypeJudgement>();
         IInputKey aggregateResultType = aggregator.getAggregateResultTypeAsInputKey();
         if (aggregateResultType != null) {
             result.add(new TypeJudgement(aggregateResultType, Tuples.staticArityFlatTupleOf(resultVariable)));

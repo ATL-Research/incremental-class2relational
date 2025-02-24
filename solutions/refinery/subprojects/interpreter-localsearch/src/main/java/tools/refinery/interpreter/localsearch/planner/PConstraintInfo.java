@@ -33,16 +33,16 @@ import tools.refinery.interpreter.matchers.psystem.analysis.QueryAnalyzer;
 public class PConstraintInfo implements IConstraintEvaluationContext {
 
     private PConstraint constraint;
-    private Set <PVariable> boundMaskVariables;
-    private Set <PVariable> freeMaskVariables;
-    private Set <PConstraintInfo> sameWithDifferentBindings;
+    private Set<PVariable> boundMaskVariables;
+    private Set<PVariable> freeMaskVariables;
+    private Set<PConstraintInfo> sameWithDifferentBindings;
     private IQueryRuntimeContext runtimeContext;
     private QueryAnalyzer queryAnalyzer;
     private IQueryResultProviderAccess resultProviderAccess;
     private ResultProviderRequestor resultRequestor;
 
     private Double cost;
-    private Function <IConstraintEvaluationContext, Double> costFunction;
+    private Function<IConstraintEvaluationContext, Double> costFunction;
 
 
     /**
@@ -55,11 +55,11 @@ public class PConstraintInfo implements IConstraintEvaluationContext {
      * constraint, but with different adornment
      * @param context the query backend context
      */
-    public PConstraintInfo(PConstraint constraint, Set <PVariable> boundMaskVariables, Set <PVariable> freeMaskVariables,
-        Set <PConstraintInfo> sameWithDifferentBindings,
+    public PConstraintInfo(PConstraint constraint, Set<PVariable> boundMaskVariables, Set<PVariable> freeMaskVariables,
+        Set<PConstraintInfo> sameWithDifferentBindings,
         IQueryBackendContext context,
         ResultProviderRequestor resultRequestor,
-        Function <IConstraintEvaluationContext, Double> costFunction) {
+        Function<IConstraintEvaluationContext, Double> costFunction) {
         this.constraint = constraint;
         this.costFunction = costFunction;
         this.boundMaskVariables = new LinkedHashSet<>(boundMaskVariables);
@@ -89,16 +89,16 @@ public class PConstraintInfo implements IConstraintEvaluationContext {
     }
 
     @Override
-    public Set <PVariable> getFreeVariables() {
+    public Set<PVariable> getFreeVariables() {
         return freeMaskVariables;
     }
 
     @Override
-    public Set <PVariable> getBoundVariables() {
+    public Set<PVariable> getBoundVariables() {
         return boundMaskVariables;
     }
 
-    public Set <PConstraintInfo> getSameWithDifferentBindings() {
+    public Set<PConstraintInfo> getSameWithDifferentBindings() {
         return sameWithDifferentBindings;
     }
 
@@ -110,7 +110,7 @@ public class PConstraintInfo implements IConstraintEvaluationContext {
         return cost;
     }
 
-    public PConstraintCategory getCategory(PBody pBody, Set <PVariable> boundVariables) {
+    public PConstraintCategory getCategory(PBody pBody, Set<PVariable> boundVariables) {
         if (!Collections.disjoint(boundVariables, this.freeMaskVariables)) {
             return PConstraintCategory.PAST;
         } else if (!boundVariables.containsAll(this.boundMaskVariables)) {

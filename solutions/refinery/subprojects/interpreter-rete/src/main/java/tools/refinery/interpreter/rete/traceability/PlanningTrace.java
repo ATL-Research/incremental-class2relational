@@ -27,22 +27,22 @@ import tools.refinery.interpreter.rete.recipes.ReteNodeRecipe;
 public class PlanningTrace extends RecipeTraceInfo implements PatternTraceInfo {
 
     protected SubPlan subPlan;
-    protected List <PVariable> variablesTuple;
-    protected Map <PVariable, Integer> posMapping;
+    protected List<PVariable> variablesTuple;
+    protected Map<PVariable, Integer> posMapping;
 
-    public PlanningTrace(SubPlan subPlan, List <PVariable> variablesTuple,
+    public PlanningTrace(SubPlan subPlan, List<PVariable> variablesTuple,
             ReteNodeRecipe recipe,
-            Collection <? extends RecipeTraceInfo> parentRecipeTraces) {
+            Collection<? extends RecipeTraceInfo> parentRecipeTraces) {
         super(recipe, parentRecipeTraces);
         this.subPlan = subPlan;
         this.variablesTuple = variablesTuple;
 
-        this.posMapping = new HashMap <PVariable, Integer>();
+        this.posMapping = new HashMap<PVariable, Integer>();
         for (int i = 0; i < variablesTuple.size(); ++i)
             posMapping.put(variablesTuple.get(i), i);
     }
 
-    public PlanningTrace(SubPlan subPlan, List <PVariable> variablesTuple,
+    public PlanningTrace(SubPlan subPlan, List<PVariable> variablesTuple,
             ReteNodeRecipe recipe,
             RecipeTraceInfo... parentRecipeTraces) {
         this(subPlan, variablesTuple, recipe, Arrays.asList(parentRecipeTraces));
@@ -57,11 +57,11 @@ public class PlanningTrace extends RecipeTraceInfo implements PatternTraceInfo {
         return subPlan.getBody().getPattern().getFullyQualifiedName();
     }
 
-    public List <PVariable> getVariablesTuple() {
+    public List<PVariable> getVariablesTuple() {
         return variablesTuple;
     }
 
-    public Map <PVariable, Integer> getPosMapping() {
+    public Map<PVariable, Integer> getPosMapping() {
         return posMapping;
     }
 

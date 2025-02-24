@@ -14,7 +14,7 @@ import java.util.List;
 public interface Constraint {
 	String name();
 
-	List <Parameter> getParameters();
+	List<Parameter> getParameters();
 
 	default int arity() {
 		return getParameters().size();
@@ -36,7 +36,7 @@ public interface Constraint {
 		return name();
 	}
 
-	default CallLiteral call(CallPolarity polarity, List <Variable> arguments) {
+	default CallLiteral call(CallPolarity polarity, List<Variable> arguments) {
 		return new CallLiteral(polarity, this, arguments);
 	}
 
@@ -52,20 +52,20 @@ public interface Constraint {
 		return call(CallPolarity.TRANSITIVE, List.of(left, right));
 	}
 
-	default AssignedValue <Integer> count(List <Variable> arguments) {
+	default AssignedValue<Integer> count(List<Variable> arguments) {
 		return targetVariable -> new CountLiteral(targetVariable, this, arguments);
 	}
 
-	default AssignedValue <Integer> count(Variable... arguments) {
+	default AssignedValue<Integer> count(Variable... arguments) {
 		return count(List.of(arguments));
 	}
 
-	default <R, T> AssignedValue <R> aggregateBy(DataVariable <T> inputVariable, Aggregator <R, T> aggregator,
-												List <Variable> arguments) {
+	default <R, T> AssignedValue<R> aggregateBy(DataVariable<T> inputVariable, Aggregator<R, T> aggregator,
+												List<Variable> arguments) {
 		return targetVariable -> new AggregationLiteral<>(targetVariable, aggregator, inputVariable, this, arguments);
 	}
 
-	default <R, T> AssignedValue <R> aggregateBy(DataVariable <T> inputVariable, Aggregator <R, T> aggregator,
+	default <R, T> AssignedValue<R> aggregateBy(DataVariable<T> inputVariable, Aggregator<R, T> aggregator,
 												Variable... arguments) {
 		return aggregateBy(inputVariable, aggregator, List.of(arguments));
 	}

@@ -38,7 +38,7 @@ public class BestFirstStoreManager {
 				modelStore.getAdapter(DesignSpaceExplorationStoreAdapter.class);
 
 		objectiveStore = new ObjectivePriorityQueueImpl(storeAdapter.getObjectives());
-		Consumer <VersionWithObjectiveValue> whenAllActivationsVisited = x -> objectiveStore.remove(x);
+		Consumer<VersionWithObjectiveValue> whenAllActivationsVisited = x -> objectiveStore.remove(x);
 		activationStore = new ActivationStoreImpl(storeAdapter.getTransformations().size(), whenAllActivationsVisited);
 		solutionStore = new SolutionStoreImpl(maxNumberOfSolutions);
 		equivalenceClassStore = new FastEquivalenceClassStore(modelStore.getAdapter(StateCoderStoreAdapter.class)) {

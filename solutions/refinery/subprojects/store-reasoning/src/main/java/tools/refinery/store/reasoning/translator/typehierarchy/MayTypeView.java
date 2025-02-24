@@ -10,7 +10,7 @@ import tools.refinery.store.representation.Symbol;
 import tools.refinery.store.tuple.Tuple;
 
 class MayTypeView extends InferredTypeView {
-	public MayTypeView(Symbol <InferredType> symbol, PartialRelation type) {
+	public MayTypeView(Symbol<InferredType> symbol, PartialRelation type) {
 		super(symbol, "may", type);
 	}
 

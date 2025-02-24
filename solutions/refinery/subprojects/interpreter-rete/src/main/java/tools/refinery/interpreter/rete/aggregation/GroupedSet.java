@@ -21,14 +21,14 @@ import java.util.function.BiFunction;
  * @author Tamas Szabo
  * @since 2.4
  */
-public class GroupedSet <GroupingValueType, GroupedKeyType, WholeKeyType> implements Set <WholeKeyType> {
+public class GroupedSet<GroupingValueType, GroupedKeyType, WholeKeyType> implements Set<WholeKeyType> {
 
     protected final GroupingValueType group;
-    protected final Collection <GroupedKeyType> values;
-    protected final BiFunction <GroupingValueType, GroupedKeyType, WholeKeyType> valueFunc;
+    protected final Collection<GroupedKeyType> values;
+    protected final BiFunction<GroupingValueType, GroupedKeyType, WholeKeyType> valueFunc;
 
-    public GroupedSet(final GroupingValueType group, final Collection <GroupedKeyType> values,
-            final BiFunction <GroupingValueType, GroupedKeyType, WholeKeyType> valueFunc) {
+    public GroupedSet(final GroupingValueType group, final Collection<GroupedKeyType> values,
+            final BiFunction<GroupingValueType, GroupedKeyType, WholeKeyType> valueFunc) {
         this.group = group;
         this.values = values;
         this.valueFunc = valueFunc;
@@ -50,9 +50,9 @@ public class GroupedSet <GroupingValueType, GroupedKeyType, WholeKeyType> implem
     }
 
     @Override
-    public Iterator <WholeKeyType> iterator() {
-        final Iterator <GroupedKeyType> wrapped = this.values.iterator();
-        return new Iterator <WholeKeyType>() {
+    public Iterator<WholeKeyType> iterator() {
+        final Iterator<GroupedKeyType> wrapped = this.values.iterator();
+        return new Iterator<WholeKeyType>() {
             @Override
             public boolean hasNext() {
                 return wrapped.hasNext();
@@ -87,22 +87,22 @@ public class GroupedSet <GroupingValueType, GroupedKeyType, WholeKeyType> implem
     }
 
     @Override
-    public boolean containsAll(final Collection <?> c) {
+    public boolean containsAll(final Collection<?> c) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean addAll(final Collection <? extends WholeKeyType> coll) {
+    public boolean addAll(final Collection<? extends WholeKeyType> coll) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean retainAll(final Collection <?> coll) {
+    public boolean retainAll(final Collection<?> coll) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean removeAll(final Collection <?> coll) {
+    public boolean removeAll(final Collection<?> coll) {
         throw new UnsupportedOperationException();
     }
 

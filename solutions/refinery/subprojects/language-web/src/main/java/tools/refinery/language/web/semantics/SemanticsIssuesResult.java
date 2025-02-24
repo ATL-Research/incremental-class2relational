@@ -9,5 +9,5 @@ import org.eclipse.xtext.web.server.validation.ValidationResult;
 
 import java.util.List;
 
-public record SemanticsIssuesResult(List <ValidationResult.Issue> issues) implements SemanticsResult {
+public record SemanticsIssuesResult(List<ValidationResult.Issue> issues) implements SemanticsResult {
 }

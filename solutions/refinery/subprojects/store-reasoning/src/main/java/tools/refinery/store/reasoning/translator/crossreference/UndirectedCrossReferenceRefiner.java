@@ -14,11 +14,11 @@ import tools.refinery.store.representation.Symbol;
 import tools.refinery.store.representation.TruthValue;
 import tools.refinery.store.tuple.Tuple;
 
-class UndirectedCrossReferenceRefiner extends ConcreteSymbolRefiner <TruthValue, Boolean> {
-	private final PartialInterpretationRefiner <TruthValue, Boolean> sourceRefiner;
+class UndirectedCrossReferenceRefiner extends ConcreteSymbolRefiner<TruthValue, Boolean> {
+	private final PartialInterpretationRefiner<TruthValue, Boolean> sourceRefiner;
 
-	public UndirectedCrossReferenceRefiner(ReasoningAdapter adapter, PartialSymbol <TruthValue, Boolean> partialSymbol,
-										   Symbol <TruthValue> concreteSymbol, PartialRelation sourceType) {
+	public UndirectedCrossReferenceRefiner(ReasoningAdapter adapter, PartialSymbol<TruthValue, Boolean> partialSymbol,
+										   Symbol<TruthValue> concreteSymbol, PartialRelation sourceType) {
 		super(adapter, partialSymbol, concreteSymbol);
 		sourceRefiner = adapter.getRefiner(sourceType);
 	}
@@ -37,7 +37,7 @@ class UndirectedCrossReferenceRefiner extends ConcreteSymbolRefiner <TruthValue,
 		return true;
 	}
 
-	public static Factory <TruthValue, Boolean> of(Symbol <TruthValue> concreteSymbol, PartialRelation sourceType) {
+	public static Factory<TruthValue, Boolean> of(Symbol<TruthValue> concreteSymbol, PartialRelation sourceType) {
 		return (adapter, partialSymbol) -> new UndirectedCrossReferenceRefiner(adapter, partialSymbol, concreteSymbol,
 				sourceType);
 	}

@@ -38,12 +38,12 @@ public class ConstantNode extends StandardNode {
     }
 
     @Override
-    public void pullInto(Collection <Tuple> collector, boolean flush) {
+    public void pullInto(Collection<Tuple> collector, boolean flush) {
         collector.add(constant);
     }
 
     @Override
-    public void pullIntoWithTimeline(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush) {
+    public void pullIntoWithTimeline(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush) {
         collector.put(constant, Timestamp.INSERT_AT_ZERO_TIMELINE);
     }
 

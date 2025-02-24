@@ -26,7 +26,7 @@ import tools.refinery.interpreter.rete.util.OrderingCompareAgent;
  * @author Gabor Bergmann
  *
  */
-public class OrderingHeuristics implements Comparator <PConstraint> {
+public class OrderingHeuristics implements Comparator<PConstraint> {
     private SubPlan plan;
     private IQueryMetaContext context;
 
@@ -38,7 +38,7 @@ public class OrderingHeuristics implements Comparator <PConstraint> {
 
     @Override
     public int compare(PConstraint o1, PConstraint o2) {
-        return new OrderingCompareAgent <PConstraint>(o1, o2) {
+        return new OrderingCompareAgent<PConstraint>(o1, o2) {
             @Override
             protected void doCompare() {
                 boolean temp = consider(preferTrue(isConstant(a), isConstant(b)))
@@ -46,8 +46,8 @@ public class OrderingHeuristics implements Comparator <PConstraint> {
                 if (!temp)
                     return;
 
-                Set <PVariable> bound1 = boundVariables(a);
-                Set <PVariable> bound2 = boundVariables(b);
+                Set<PVariable> bound1 = boundVariables(a);
+                Set<PVariable> bound2 = boundVariables(b);
                 swallowBoolean(temp && consider(preferTrue(isBound(a, bound1), isBound(b, bound2)))
                         && consider(preferMore(degreeBound(a, bound1), degreeBound(b, bound2)))
                         && consider(preferLess(degreeFree(a, bound1), degreeFree(b, bound2)))
@@ -69,21 +69,21 @@ public class OrderingHeuristics implements Comparator <PConstraint> {
                         .isReadyAt(plan, context));
     }
 
-    Set <PVariable> boundVariables(PConstraint o) {
-        Set <PVariable> boundVariables = CollectionsFactory.createSet(o.getAffectedVariables());
+    Set<PVariable> boundVariables(PConstraint o) {
+        Set<PVariable> boundVariables = CollectionsFactory.createSet(o.getAffectedVariables());
         boundVariables.retainAll(plan.getVisibleVariables());
         return boundVariables;
     }
 
-    boolean isBound(PConstraint o, Set <PVariable> boundVariables) {
+    boolean isBound(PConstraint o, Set<PVariable> boundVariables) {
         return boundVariables.size() == o.getAffectedVariables().size();
     }
 
-    int degreeBound(PConstraint o, Set <PVariable> boundVariables) {
+    int degreeBound(PConstraint o, Set<PVariable> boundVariables) {
         return boundVariables.size();
     }
 
-    int degreeFree(PConstraint o, Set <PVariable> boundVariables) {
+    int degreeFree(PConstraint o, Set<PVariable> boundVariables) {
         return o.getAffectedVariables().size() - boundVariables.size();
     }
 

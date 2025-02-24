@@ -18,7 +18,7 @@ import tools.refinery.interpreter.rete.network.ReteContainer;
  * @author Gabor Bergmann
  *
  */
-public class Address <T extends Node> {
+public class Address<T extends Node> {
     ReteContainer container;
     Long nodeId;
     /**
@@ -29,8 +29,8 @@ public class Address <T extends Node> {
     /**
      * Address of local node (use only for containers in the same VM!)
      */
-    public static <N extends Node> Address <N> of(N node) {
-        return new Address <N>(node);
+    public static <N extends Node> Address<N> of(N node) {
+        return new Address<N>(node);
     }
 
     /**
@@ -73,9 +73,9 @@ public class Address <T extends Node> {
             return true;
         if (obj == null)
             return false;
-        if (!(obj instanceof Address <?>))
+        if (!(obj instanceof Address<?>))
             return false;
-        final Address <?> other = (Address <?>) obj;
+        final Address<?> other = (Address<?>) obj;
         if (container == null) {
             if (other.container != null)
                 return false;

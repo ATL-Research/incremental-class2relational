@@ -41,13 +41,13 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class Dnf2PQuery {
-	private final CycleDetectingMapper <Dnf, RawPQuery> mapper = new CycleDetectingMapper<>(Dnf::name,
+	private final CycleDetectingMapper<Dnf, RawPQuery> mapper = new CycleDetectingMapper<>(Dnf::name,
 			this::doTranslate);
 	private final QueryWrapperFactory wrapperFactory = new QueryWrapperFactory(this);
-	private Function <Dnf, QueryEvaluationHint> computeHint = dnf -> new QueryEvaluationHint(null,
+	private Function<Dnf, QueryEvaluationHint> computeHint = dnf -> new QueryEvaluationHint(null,
 			(IQueryBackendFactory) null);
 
-	public void setComputeHint(Function <Dnf, QueryEvaluationHint> computeHint) {
+	public void setComputeHint(Function<Dnf, QueryEvaluationHint> computeHint) {
 		this.computeHint = computeHint;
 	}
 
@@ -55,7 +55,7 @@ public class Dnf2PQuery {
 		return mapper.map(dnfQuery);
 	}
 
-	public Map <AnySymbolView, IInputKey> getSymbolViews() {
+	public Map<AnySymbolView, IInputKey> getSymbolViews() {
 		return wrapperFactory.getSymbolViews();
 	}
 
@@ -63,8 +63,8 @@ public class Dnf2PQuery {
 		var pQuery = new RawPQuery(dnfQuery.getUniqueName());
 		pQuery.setEvaluationHints(computeHint.apply(dnfQuery));
 
-		Map <SymbolicParameter, PParameter> parameters = new HashMap<>();
-		List <PParameter> parameterList = new ArrayList<>();
+		Map<SymbolicParameter, PParameter> parameters = new HashMap<>();
+		List<PParameter> parameterList = new ArrayList<>();
 		for (var parameter : dnfQuery.getSymbolicParameters()) {
 			var direction = switch (parameter.getDirection()) {
 				case OUT -> PParameterDirection.INOUT;
@@ -93,7 +93,7 @@ public class Dnf2PQuery {
 
 		for (DnfClause clause : dnfQuery.getClauses()) {
 			PBody body = new PBody(pQuery);
-			List <ExportedParameter> parameterExports = new ArrayList<>();
+			List<ExportedParameter> parameterExports = new ArrayList<>();
 			for (var parameter : dnfQuery.getSymbolicParameters()) {
 				PVariable pVar = body.getOrCreateVariableByName(parameter.getVariable().getUniqueName());
 				parameterExports.add(new ExportedParameter(body, pVar, parameters.get(parameter)));
@@ -115,13 +115,13 @@ public class Dnf2PQuery {
 			translateCallLiteral(callLiteral, body);
 		} else if (literal instanceof ConstantLiteral constantLiteral) {
 			translateConstantLiteral(constantLiteral, body);
-		} else if (literal instanceof AssignLiteral <?> assignLiteral) {
+		} else if (literal instanceof AssignLiteral<?> assignLiteral) {
 			translateAssignLiteral(assignLiteral, body);
 		} else if (literal instanceof CheckLiteral checkLiteral) {
 			translateCheckLiteral(checkLiteral, body);
 		} else if (literal instanceof CountLiteral countLiteral) {
 			translateCountLiteral(countLiteral, body);
-		} else if (literal instanceof AggregationLiteral <?, ?> aggregationLiteral) {
+		} else if (literal instanceof AggregationLiteral<?, ?> aggregationLiteral) {
 			translateAggregationLiteral(aggregationLiteral, body);
 		} else if (literal instanceof RepresentativeElectionLiteral representativeElectionLiteral) {
 			translateRepresentativeElectionLiteral(representativeElectionLiteral, body);
@@ -181,7 +181,7 @@ public class Dnf2PQuery {
 		}
 	}
 
-	private static Tuple translateSubstitution(List <Variable> substitution, PBody body) {
+	private static Tuple translateSubstitution(List<Variable> substitution, PBody body) {
 		int arity = substitution.size();
 		Object[] variables = new Object[arity];
 		for (int i = 0; i < arity; i++) {
@@ -196,10 +196,10 @@ public class Dnf2PQuery {
 		new ConstantValue(body, variable, tools.refinery.store.tuple.Tuple.of(constantLiteral.getNodeId()));
 	}
 
-	private <T> void translateAssignLiteral(AssignLiteral <T> assignLiteral, PBody body) {
+	private <T> void translateAssignLiteral(AssignLiteral<T> assignLiteral, PBody body) {
 		var variable = body.getOrCreateVariableByName(assignLiteral.getVariable().getUniqueName());
 		var term = assignLiteral.getTerm();
-		if (term instanceof ConstantTerm <T> constantTerm) {
+		if (term instanceof ConstantTerm<T> constantTerm) {
 			new ConstantValue(body, variable, constantTerm.getValue());
 		} else {
 			var evaluator = new TermEvaluator<>(term);
@@ -219,12 +219,12 @@ public class Dnf2PQuery {
 		new PatternMatchCounter(body, substitution, wrappedCall.pattern(), resultVariable);
 	}
 
-	private <R, T> void translateAggregationLiteral(AggregationLiteral <R, T> aggregationLiteral, PBody body) {
+	private <R, T> void translateAggregationLiteral(AggregationLiteral<R, T> aggregationLiteral, PBody body) {
 		var aggregator = aggregationLiteral.getAggregator();
-		IMultisetAggregationOperator <T, ?, R> aggregationOperator;
-		if (aggregator instanceof StatelessAggregator <R, T> statelessAggregator) {
+		IMultisetAggregationOperator<T, ?, R> aggregationOperator;
+		if (aggregator instanceof StatelessAggregator<R, T> statelessAggregator) {
 			aggregationOperator = new StatelessMultisetAggregator<>(statelessAggregator);
-		} else if (aggregator instanceof StatefulAggregator <R, T> statefulAggregator) {
+		} else if (aggregator instanceof StatefulAggregator<R, T> statefulAggregator) {
 			aggregationOperator = new StatefulMultisetAggregator<>(statefulAggregator);
 		} else {
 			throw new IllegalArgumentException("Unknown aggregator: " + aggregator);

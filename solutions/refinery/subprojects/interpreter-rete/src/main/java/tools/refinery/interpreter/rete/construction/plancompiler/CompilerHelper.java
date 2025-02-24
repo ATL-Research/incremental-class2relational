@@ -74,7 +74,7 @@ public class CompilerHelper {
      */
     public static PlanningTrace checkAndTrimEqualVariables(SubPlan plan, final PlanningTrace coreTrace) {
         // are variables in the constraint all different?
-        final List <PVariable> coreVariablesTuple = coreTrace.getVariablesTuple();
+        final List<PVariable> coreVariablesTuple = coreTrace.getVariablesTuple();
         final int constraintArity = coreVariablesTuple.size();
         final int distinctVariables = coreTrace.getPosMapping().size();
         if (constraintArity == distinctVariables) {
@@ -83,14 +83,14 @@ public class CompilerHelper {
         } else { // apply equality checks and trim
 
             // find the positions in the tuple for each variable
-            Map <PVariable, SortedSet <Integer>> posMultimap = new HashMap <PVariable, SortedSet <Integer>>();
-            List <PVariable> trimmedVariablesTuple = new ArrayList <PVariable>(distinctVariables);
+            Map<PVariable, SortedSet<Integer>> posMultimap = new HashMap<PVariable, SortedSet<Integer>>();
+            List<PVariable> trimmedVariablesTuple = new ArrayList<PVariable>(distinctVariables);
             int[] trimIndices = new int[distinctVariables];
             for (int i = 0; i < constraintArity; ++i) {
                 final PVariable variable = coreVariablesTuple.get(i);
-                SortedSet <Integer> indexSet = posMultimap.get(variable);
+                SortedSet<Integer> indexSet = posMultimap.get(variable);
                 if (indexSet == null) { // first occurrence of variable
-                    indexSet = new TreeSet <Integer>();
+                    indexSet = new TreeSet<Integer>();
                     posMultimap.put(variable, indexSet);
 
                     // this is the first occurrence, set up trimming
@@ -102,7 +102,7 @@ public class CompilerHelper {
 
             // construct equality checks for each variable occurring multiple times
             PlanningTrace lastTrace = coreTrace;
-            for (Entry <PVariable, SortedSet <Integer>> entry : posMultimap.entrySet()) {
+            for (Entry<PVariable, SortedSet<Integer>> entry : posMultimap.entrySet()) {
                 if (entry.getValue().size() > 1) {
                     EqualityFilterRecipe equalityFilterRecipe = FACTORY.createEqualityFilterRecipe();
                     equalityFilterRecipe.setParent(lastTrace.getRecipe());
@@ -123,15 +123,15 @@ public class CompilerHelper {
     /**
      * Extracts the variable list representation of the variables tuple.
      */
-    public static List <PVariable> convertVariablesTuple(EnumerablePConstraint constraint) {
+    public static List<PVariable> convertVariablesTuple(EnumerablePConstraint constraint) {
         return convertVariablesTuple(constraint.getVariablesTuple());
     }
 
     /**
      * Extracts the variable list representation of the variables tuple.
      */
-    public static List <PVariable> convertVariablesTuple(Tuple variablesTuple) {
-        List <PVariable> result = new ArrayList <PVariable>();
+    public static List<PVariable> convertVariablesTuple(Tuple variablesTuple) {
+        List<PVariable> result = new ArrayList<PVariable>();
         for (Object o : variablesTuple.getElements())
             result.add((PVariable) o);
         return result;
@@ -147,7 +147,7 @@ public class CompilerHelper {
             throw new IllegalArgumentException(
                     "Cannot take projection indexer of aggregator node at plan " + planToCompile);
         IndexerRecipe recipe = RecipesHelper.projectionIndexerRecipe(parentRecipe, toRecipeMask(mask));
-        // final List <PVariable> maskedVariables = mask.transform(parentTrace.getVariablesTuple());
+        // final List<PVariable> maskedVariables = mask.transform(parentTrace.getVariablesTuple());
         return new PlanningTrace(planToCompile, /* maskedVariables */ parentTrace.getVariablesTuple(), recipe,
                 parentTrace);
         // TODO add specialized indexer trace info?
@@ -157,7 +157,7 @@ public class CompilerHelper {
      * Creates a trimmer that keeps selected variables only.
      */
     protected static TrimmerRecipe makeTrimmerRecipe(final PlanningTrace compiledParent,
-            List <PVariable> projectedVariables) {
+            List<PVariable> projectedVariables) {
         final Mask projectionMask = makeProjectionMask(compiledParent, projectedVariables);
         final TrimmerRecipe trimmerRecipe = ReteRecipeCompiler.FACTORY.createTrimmerRecipe();
         trimmerRecipe.setParent(compiledParent.getRecipe());
@@ -165,8 +165,8 @@ public class CompilerHelper {
         return trimmerRecipe;
     }
 
-    public static Mask makeProjectionMask(final PlanningTrace compiledParent, Iterable <PVariable> projectedVariables) {
-        List <Integer> projectionSourceIndices = new ArrayList <Integer>();
+    public static Mask makeProjectionMask(final PlanningTrace compiledParent, Iterable<PVariable> projectedVariables) {
+        List<Integer> projectionSourceIndices = new ArrayList<Integer>();
         for (PVariable pVariable : projectedVariables) {
             projectionSourceIndices.add(compiledParent.getPosMapping().get(pVariable));
         }
@@ -186,10 +186,10 @@ public class CompilerHelper {
     /**
      * @since 1.6
      */
-    public static PosetTriplet computePosetInfo(List <PVariable> variables, PBody body, IQueryMetaContext context) {
-        Map <PVariable, Set <IInputKey>> typeMap = TypeHelper.inferUnaryTypesFor(variables, body.getConstraints(),
+    public static PosetTriplet computePosetInfo(List<PVariable> variables, PBody body, IQueryMetaContext context) {
+        Map<PVariable, Set<IInputKey>> typeMap = TypeHelper.inferUnaryTypesFor(variables, body.getConstraints(),
                 context);
-        List <Set<IInputKey>> keys = new LinkedList <Set<IInputKey>>();
+        List<Set<IInputKey>> keys = new LinkedList<Set<IInputKey>>();
 
         for (int i = 0; i < variables.size(); i++) {
             keys.add(typeMap.get(variables.get(i)));
@@ -201,8 +201,8 @@ public class CompilerHelper {
     /**
      * @since 1.6
      */
-    public static PosetTriplet computePosetInfo(List <PParameter> parameters, IQueryMetaContext context) {
-        List <Set<IInputKey>> keys = new LinkedList <Set<IInputKey>>();
+    public static PosetTriplet computePosetInfo(List<PParameter> parameters, IQueryMetaContext context) {
+        List<Set<IInputKey>> keys = new LinkedList<Set<IInputKey>>();
         for (int i = 0; i < parameters.size(); i++) {
             IInputKey key = parameters.get(i).getDeclaredUnaryType();
             if (key == null) {
@@ -219,15 +219,15 @@ public class CompilerHelper {
     /**
      * @since 1.6
      */
-    public static PosetTriplet computePosetInfo(Iterable <Set<IInputKey>> keys, IQueryMetaContext context) {
+    public static PosetTriplet computePosetInfo(Iterable<Set<IInputKey>> keys, IQueryMetaContext context) {
         PosetTriplet result = new PosetTriplet();
-        List <Integer> coreIndices = new ArrayList <Integer>();
-        List <Integer> posetIndices = new ArrayList <Integer>();
-        List <IInputKey> filtered = new ArrayList <IInputKey>();
+        List<Integer> coreIndices = new ArrayList<Integer>();
+        List<Integer> posetIndices = new ArrayList<Integer>();
+        List<IInputKey> filtered = new ArrayList<IInputKey>();
         boolean posetKey = false;
         int index = -1;
 
-        for (Set <IInputKey> _keys : keys) {
+        for (Set<IInputKey> _keys : keys) {
             ++index;
             posetKey = false;
 
@@ -260,8 +260,8 @@ public class CompilerHelper {
      *  the object yielded now by bodyFinalTraces.values() must return up-to-date results later
      * @since 2.4
      */
-    public static CompiledQuery makeQueryTrace(PQuery query, Map <PBody, RecipeTraceInfo> bodyFinalTraces,
-            Collection <ReteNodeRecipe> bodyFinalRecipes, QueryEvaluationHint hint, IQueryMetaContext context,
+    public static CompiledQuery makeQueryTrace(PQuery query, Map<PBody, RecipeTraceInfo> bodyFinalTraces,
+            Collection<ReteNodeRecipe> bodyFinalRecipes, QueryEvaluationHint hint, IQueryMetaContext context,
             boolean deleteAndRederiveEvaluation, TimelyConfiguration timelyEvaluation) {
         ProductionRecipe recipe = ReteRecipeCompiler.FACTORY.createProductionRecipe();
 
@@ -305,7 +305,7 @@ public class CompilerHelper {
         private RecipeTraceInfo primaryIndexer;
         private RecipeTraceInfo secondaryIndexer;
         private JoinRecipe naturalJoinRecipe;
-        private List <PVariable> naturalJoinVariablesTuple;
+        private List<PVariable> naturalJoinVariablesTuple;
 
         /**
          * @pre enforceVariableCoincidences() has been called on both sides.
@@ -313,25 +313,25 @@ public class CompilerHelper {
         public JoinHelper(SubPlan planToCompile, PlanningTrace primaryCompiled, PlanningTrace callTrace) {
             super();
 
-            Set <PVariable> primaryVariables = new LinkedHashSet <PVariable>(primaryCompiled.getVariablesTuple());
-            Set <PVariable> secondaryVariables = new LinkedHashSet <PVariable>(callTrace.getVariablesTuple());
+            Set<PVariable> primaryVariables = new LinkedHashSet<PVariable>(primaryCompiled.getVariablesTuple());
+            Set<PVariable> secondaryVariables = new LinkedHashSet<PVariable>(callTrace.getVariablesTuple());
             int oldNodes = 0;
-            Set <Integer> introducingSecondaryIndices = new TreeSet <Integer>();
+            Set<Integer> introducingSecondaryIndices = new TreeSet<Integer>();
             for (PVariable var : secondaryVariables) {
                 if (primaryVariables.contains(var))
                     oldNodes++;
                 else
                     introducingSecondaryIndices.add(callTrace.getPosMapping().get(var));
             }
-            List <Integer> primaryIndices = new ArrayList <Integer>(oldNodes);
-            List <Integer> secondaryIndices = new ArrayList <Integer>(oldNodes);
+            List<Integer> primaryIndices = new ArrayList<Integer>(oldNodes);
+            List<Integer> secondaryIndices = new ArrayList<Integer>(oldNodes);
             for (PVariable var : secondaryVariables) {
                 if (primaryVariables.contains(var)) {
                     primaryIndices.add(primaryCompiled.getPosMapping().get(var));
                     secondaryIndices.add(callTrace.getPosMapping().get(var));
                 }
             }
-            Collection <Integer> complementerIndices = introducingSecondaryIndices;
+            Collection<Integer> complementerIndices = introducingSecondaryIndices;
 
             primaryMask = TupleMask.fromSelectedIndices(primaryCompiled.getVariablesTuple().size(), primaryIndices);
             secondaryMask = TupleMask.fromSelectedIndices(callTrace.getVariablesTuple().size(), secondaryIndices);
@@ -345,7 +345,7 @@ public class CompilerHelper {
             naturalJoinRecipe.setRightParent((IndexerRecipe) secondaryIndexer.getRecipe());
             naturalJoinRecipe.setRightParentComplementaryMask(CompilerHelper.toRecipeMask(complementerMask));
 
-            naturalJoinVariablesTuple = new ArrayList <PVariable>(primaryCompiled.getVariablesTuple());
+            naturalJoinVariablesTuple = new ArrayList<PVariable>(primaryCompiled.getVariablesTuple());
             for (int complementerIndex : complementerMask.indices)
                 naturalJoinVariablesTuple.add(callTrace.getVariablesTuple().get(complementerIndex));
         }
@@ -374,7 +374,7 @@ public class CompilerHelper {
             return naturalJoinRecipe;
         }
 
-        public List <PVariable> getNaturalJoinVariablesTuple() {
+        public List<PVariable> getNaturalJoinVariablesTuple() {
             return naturalJoinVariablesTuple;
         }
 

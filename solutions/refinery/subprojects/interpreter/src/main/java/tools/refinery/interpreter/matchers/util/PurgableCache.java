@@ -19,11 +19,11 @@ import java.util.function.Supplier;
  */
 public class PurgableCache implements ICache {
 
-    Map <Object, Object> storage = new HashMap<>();
+    Map<Object, Object> storage = new HashMap<>();
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T getValue(Object key, Class <? extends T> clazz, Supplier <T> valueProvider) {
+    public <T> T getValue(Object key, Class<? extends T> clazz, Supplier<T> valueProvider) {
         if (storage.containsKey(key)) {
             Object value = storage.get(key);
             Preconditions.checkState(clazz.isInstance(value), "Cache stores for key %s a value of %s that is incompatible with the requested type %s", key, value, clazz);

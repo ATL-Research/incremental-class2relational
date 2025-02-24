@@ -26,12 +26,12 @@ import tools.refinery.interpreter.matchers.util.timeline.Timeline;
  * @author Tamas Szabo
  * @since 2.3
  */
-public final class TimelyNullaryMaskedTupleMemory <Timestamp extends Comparable <Timestamp>>
-        extends AbstractTimelyTrivialMaskedMemory <Timestamp> {
+public final class TimelyNullaryMaskedTupleMemory<Timestamp extends Comparable<Timestamp>>
+        extends AbstractTimelyTrivialMaskedMemory<Timestamp> {
 
     protected static final Tuple EMPTY_TUPLE = Tuples.staticArityFlatTupleOf();
-    protected static final Set <Tuple> UNIT_RELATION = Collections.singleton(EMPTY_TUPLE);
-    protected static final Set <Tuple> EMPTY_RELATION = Collections.emptySet();
+    protected static final Set<Tuple> UNIT_RELATION = Collections.singleton(EMPTY_TUPLE);
+    protected static final Set<Tuple> EMPTY_RELATION = Collections.emptySet();
 
     public TimelyNullaryMaskedTupleMemory(final TupleMask mask, final Object owner, final boolean isLazy) {
         super(mask, owner, isLazy);
@@ -46,12 +46,12 @@ public final class TimelyNullaryMaskedTupleMemory <Timestamp extends Comparable 
     }
 
     @Override
-    public Iterable <Tuple> getSignatures() {
+    public Iterable<Tuple> getSignatures() {
         return this.memory.isEmpty() ? EMPTY_RELATION : UNIT_RELATION;
     }
 
     @Override
-    public Collection <Tuple> get(final ITuple signature) {
+    public Collection<Tuple> get(final ITuple signature) {
         if (0 == signature.getSize()) {
             return this.memory.getTuplesAtInfinity();
         } else {
@@ -60,7 +60,7 @@ public final class TimelyNullaryMaskedTupleMemory <Timestamp extends Comparable 
     }
 
     @Override
-    public Map <Tuple, Timeline <Timestamp>> getWithTimeline(final ITuple signature) {
+    public Map<Tuple, Timeline<Timestamp>> getWithTimeline(final ITuple signature) {
         if (0 == signature.getSize()) {
             return this.memory.asMap();
         } else {
@@ -69,7 +69,7 @@ public final class TimelyNullaryMaskedTupleMemory <Timestamp extends Comparable 
     }
 
     @Override
-    public Diff <Timestamp> removeWithTimestamp(final Tuple tuple, final Tuple signature, final Timestamp timestamp) {
+    public Diff<Timestamp> removeWithTimestamp(final Tuple tuple, final Tuple signature, final Timestamp timestamp) {
         try {
             return this.memory.remove(tuple, timestamp);
         } catch (final IllegalStateException e) {
@@ -78,7 +78,7 @@ public final class TimelyNullaryMaskedTupleMemory <Timestamp extends Comparable 
     }
 
     @Override
-    public Diff <Timestamp> addWithTimestamp(final Tuple tuple, final Tuple signature, final Timestamp timestamp) {
+    public Diff<Timestamp> addWithTimestamp(final Tuple tuple, final Tuple signature, final Timestamp timestamp) {
         return this.memory.put(tuple, timestamp);
     }
 
@@ -92,7 +92,7 @@ public final class TimelyNullaryMaskedTupleMemory <Timestamp extends Comparable 
     }
 
     @Override
-    public Set <Tuple> getResumableSignatures() {
+    public Set<Tuple> getResumableSignatures() {
         if (this.memory.getResumableTimestamp() != null) {
             return UNIT_RELATION;
         } else {
@@ -101,7 +101,7 @@ public final class TimelyNullaryMaskedTupleMemory <Timestamp extends Comparable 
     }
 
     @Override
-    public Map <Tuple, Map <Tuple, Diff <Timestamp>>> resumeAt(final Timestamp timestamp) {
+    public Map<Tuple, Map<Tuple, Diff<Timestamp>>> resumeAt(final Timestamp timestamp) {
         return Collections.singletonMap(EMPTY_TUPLE, this.memory.resumeAt(timestamp));
     }
 

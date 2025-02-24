@@ -25,7 +25,7 @@ import tools.refinery.interpreter.rete.network.mailbox.Mailbox;
 
 public class TimelyMailbox implements Mailbox {
 
-    protected TreeMap <Timestamp, Map <Tuple, Integer>> queue;
+    protected TreeMap<Timestamp, Map<Tuple, Integer>> queue;
     protected final Receiver receiver;
     protected final ReteContainer container;
     protected CommunicationGroup group;
@@ -37,7 +37,7 @@ public class TimelyMailbox implements Mailbox {
         this.queue = CollectionsFactory.createTreeMap();
     }
 
-    protected TreeMap <Timestamp, Map <Tuple, Integer>> getActiveQueue() {
+    protected TreeMap<Timestamp, Map<Tuple, Integer>> getActiveQueue() {
         return this.queue;
     }
 
@@ -48,9 +48,9 @@ public class TimelyMailbox implements Mailbox {
 
     @Override
     public void postMessage(final Direction direction, final Tuple update, final Timestamp timestamp) {
-        final TreeMap <Timestamp, Map <Tuple, Integer>> activeQueue = getActiveQueue();
+        final TreeMap<Timestamp, Map<Tuple, Integer>> activeQueue = getActiveQueue();
 
-        Map <Tuple, Integer> tupleMap = activeQueue.get(timestamp);
+        Map<Tuple, Integer> tupleMap = activeQueue.get(timestamp);
         final boolean wasEmpty = tupleMap == null;
         boolean significantChange = false;
 
@@ -102,7 +102,7 @@ public class TimelyMailbox implements Mailbox {
         if (selector instanceof Timestamp) {
             final Timestamp timestamp = (Timestamp) selector;
             // REMOVE the tuples associated with the selector, dont just query them
-            final Map <Tuple, Integer> tupleMap = this.queue.remove(timestamp);
+            final Map<Tuple, Integer> tupleMap = this.queue.remove(timestamp);
 
             // tupleMap may be empty if we only have lazy folding to do
             if (tupleMap != null) {

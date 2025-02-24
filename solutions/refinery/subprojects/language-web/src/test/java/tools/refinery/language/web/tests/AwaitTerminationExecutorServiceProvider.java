@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutorService;
 
 @Singleton
 public class AwaitTerminationExecutorServiceProvider extends ExecutorServiceProvider {
-	private final List <RestartableCachedThreadPool> servicesToShutDown = new ArrayList<>();
+	private final List<RestartableCachedThreadPool> servicesToShutDown = new ArrayList<>();
 
 	@Override
 	protected ExecutorService createInstance(String key) {

@@ -42,7 +42,7 @@ public abstract class FilterNode extends SingleInputNode {
     public abstract boolean check(final Tuple ps);
 
     @Override
-    public void pullInto(final Collection <Tuple> collector, final boolean flush) {
+    public void pullInto(final Collection<Tuple> collector, final boolean flush) {
         for (final Tuple ps : this.reteContainer.pullPropagatedContents(this, flush)) {
             if (check(ps)) {
                 collector.add(ps);
@@ -51,8 +51,8 @@ public abstract class FilterNode extends SingleInputNode {
     }
 
     @Override
-    public void pullIntoWithTimeline(Map <Tuple, Timeline <Timestamp>> collector, boolean flush) {
-        for (final Entry <Tuple, Timeline <Timestamp>> entry : this.reteContainer.pullPropagatedContentsWithTimestamp(this, flush).entrySet()) {
+    public void pullIntoWithTimeline(Map<Tuple, Timeline<Timestamp>> collector, boolean flush) {
+        for (final Entry<Tuple, Timeline<Timestamp>> entry : this.reteContainer.pullPropagatedContentsWithTimestamp(this, flush).entrySet()) {
             if (check(entry.getKey())) {
                 collector.put(entry.getKey(), entry.getValue());
             }

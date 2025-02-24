@@ -21,7 +21,7 @@ import tools.refinery.interpreter.rete.itc.igraph.ITcDataSource;
  *
  * @param <V> the node type of the graph
  */
-public interface IGraphPathFinder <V> {
+public interface IGraphPathFinder<V> {
 
     /**
      * Returns an arbitrary path from the source node to the target node (if such exists). If there is no path
@@ -31,7 +31,7 @@ public interface IGraphPathFinder <V> {
      * @param targetNode the target node of the path
      * @return the path from the source to the target, or empty collection if target is not reachable from source.
      */
-    Deque <V> getPath(V sourceNode, V targetNode);
+    Deque<V> getPath(V sourceNode, V targetNode);
 
     /**
      * Returns the collection of shortest paths from the source node to the target node (if such exists). If there is no path
@@ -41,7 +41,7 @@ public interface IGraphPathFinder <V> {
      * @param targetNode the target node of the path
      * @return the collection of shortest paths from the source to the target, or empty collection if target is not reachable from source.
      */
-    Iterable <Deque<V>> getShortestPaths(V sourceNode, V targetNode);
+    Iterable<Deque<V>> getShortestPaths(V sourceNode, V targetNode);
 
     /**
      * Returns the collection of paths from the source node to the target node (if such exists). If there is no path
@@ -51,7 +51,7 @@ public interface IGraphPathFinder <V> {
      * @param targetNode the target node of the path
      * @return the collection of paths from the source to the target, or empty collection if target is not reachable from source.
      */
-    Iterable <Deque<V>> getAllPaths(V sourceNode, V targetNode);
+    Iterable<Deque<V>> getAllPaths(V sourceNode, V targetNode);
 
     /**
      * Returns the collection of paths from the source node to any of the target nodes (if such exists). If there is no path
@@ -61,7 +61,7 @@ public interface IGraphPathFinder <V> {
      * @param targetNodes the set of target nodes of the paths
      * @return the collection of paths from the source to any of the targets, or empty collection if neither target is reachable from source.
      */
-    Iterable <Deque<V>> getAllPathsToTargets(V sourceNode, Set <V> targetNodes);
+    Iterable<Deque<V>> getAllPathsToTargets(V sourceNode, Set<V> targetNodes);
 
 
 }

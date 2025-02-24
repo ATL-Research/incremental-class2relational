@@ -18,7 +18,7 @@ public class ProblemValueConverterService extends DefaultTerminalConverters {
 	@ValueConverter(rule = "UpperBound")
 	// Method name follows Xtext convention.
 	@SuppressWarnings("squid:S100")
-	public IValueConverter <Integer> UpperBound() {
+	public IValueConverter<Integer> UpperBound() {
 		return upperBoundValueConverter;
 	}
 }

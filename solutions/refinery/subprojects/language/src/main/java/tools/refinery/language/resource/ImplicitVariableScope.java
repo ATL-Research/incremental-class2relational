@@ -28,7 +28,7 @@ public class ImplicitVariableScope {
 
 	private final ImplicitVariableScope parent;
 
-	private Set <String> knownVariables;
+	private Set<String> knownVariables;
 
 	private ImplicitVariableScope(ExistentialQuantifier quantifier, ImplicitVariableScope parent) {
 		this.root = quantifier;
@@ -37,20 +37,20 @@ public class ImplicitVariableScope {
 		this.knownVariables = null;
 	}
 
-	public ImplicitVariableScope(EObject root, ExistentialQuantifier quantifier, Set <String> knownVariables) {
+	public ImplicitVariableScope(EObject root, ExistentialQuantifier quantifier, Set<String> knownVariables) {
 		this.root = root;
 		this.quantifier = quantifier;
 		this.parent = null;
 		this.knownVariables = new HashSet<>(knownVariables);
 	}
 
-	public ImplicitVariableScope(ExistentialQuantifier root, Set <String> knownVariables) {
+	public ImplicitVariableScope(ExistentialQuantifier root, Set<String> knownVariables) {
 		this(root, root, knownVariables);
 	}
 
 	public void createVariables(IScopeProvider scopeProvider, LinkingHelper linkingHelper,
 								IQualifiedNameConverter qualifiedNameConverter,
-								Deque <ImplicitVariableScope> scopeQueue) {
+								Deque<ImplicitVariableScope> scopeQueue) {
 		initializeKnownVariables();
 		processEObject(root, scopeProvider, linkingHelper, qualifiedNameConverter);
 		var treeIterator = root.eAllContents();
@@ -87,7 +87,7 @@ public class ImplicitVariableScope {
 		}
 		IScope scope = scopeProvider.getScope(variableOrNodeExpr,
 				ProblemPackage.Literals.VARIABLE_OR_NODE_EXPR__VARIABLE_OR_NODE);
-		List <INode> nodes = NodeModelUtils.findNodesForFeature(variableOrNodeExpr,
+		List<INode> nodes = NodeModelUtils.findNodesForFeature(variableOrNodeExpr,
 				ProblemPackage.Literals.VARIABLE_OR_NODE_EXPR__VARIABLE_OR_NODE);
 		for (INode node : nodes) {
 			var variableName = linkingHelper.getCrossRefNodeAsString(node, true);

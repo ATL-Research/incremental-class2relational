@@ -14,17 +14,17 @@ import tools.refinery.store.tuple.Tuple;
 
 import java.util.Set;
 
-class BaseIndexer <T> {
-	private final MutableIntObjectMap <MutableMap<Tuple, T>>[] maps;
-	private final VersionedMap <Tuple, T> versionedMap;
+class BaseIndexer<T> {
+	private final MutableIntObjectMap<MutableMap<Tuple, T>>[] maps;
+	private final VersionedMap<Tuple, T> versionedMap;
 
-	public BaseIndexer(int arity, VersionedMap <Tuple, T> map) {
+	public BaseIndexer(int arity, VersionedMap<Tuple, T> map) {
 		if (arity < 2) {
 			throw new IllegalArgumentException("Only arity >= 2 symbols need to be indexed");
 		}
 		// There is no way in Java to create a generic array in a checked way.
 		@SuppressWarnings({"unchecked", "squid:S1905"})
-		var uncheckedMaps = (MutableIntObjectMap <MutableMap<Tuple, T>>[]) new MutableIntObjectMap[arity];
+		var uncheckedMaps = (MutableIntObjectMap<MutableMap<Tuple, T>>[]) new MutableIntObjectMap[arity];
 		maps = uncheckedMaps;
 		for (int i = 0; i < arity; i++) {
 			maps[i] = IntObjectMaps.mutable.empty();
@@ -62,7 +62,7 @@ class BaseIndexer <T> {
 		}
 	}
 
-	private MutableMap <Tuple, T> getAdjacentMap(int slot, int node) {
+	private MutableMap<Tuple, T> getAdjacentMap(int slot, int node) {
 		if (slot < 0 || slot >= maps.length) {
 			throw new IllegalArgumentException("Invalid index: " + slot);
 		}
@@ -78,7 +78,7 @@ class BaseIndexer <T> {
 		return adjacentTuples.size();
 	}
 
-	public Cursor <Tuple, T> getAdjacent(int slot, int node) {
+	public Cursor<Tuple, T> getAdjacent(int slot, int node) {
 		var adjacentTuples = getAdjacentMap(slot, node);
 		if (adjacentTuples == null) {
 			return Cursors.empty();
@@ -86,16 +86,16 @@ class BaseIndexer <T> {
 		return new IndexCursor<>(adjacentTuples, versionedMap);
 	}
 
-	private static class IndexCursor <T> extends IteratorBasedCursor <Tuple, T> {
-		private final Set <AnyVersionedMap> dependingMaps;
+	private static class IndexCursor<T> extends IteratorBasedCursor<Tuple, T> {
+		private final Set<AnyVersionedMap> dependingMaps;
 
-		public IndexCursor(MutableMap <Tuple, T> map, VersionedMap <Tuple, T> versionedMap) {
+		public IndexCursor(MutableMap<Tuple, T> map, VersionedMap<Tuple, T> versionedMap) {
 			super(map.entrySet().iterator());
 			dependingMaps = versionedMap == null ? Set.of() : Set.of(versionedMap);
 		}
 
 		@Override
-		public Set <AnyVersionedMap> getDependingMaps() {
+		public Set<AnyVersionedMap> getDependingMaps() {
 			return dependingMaps;
 		}
 	}

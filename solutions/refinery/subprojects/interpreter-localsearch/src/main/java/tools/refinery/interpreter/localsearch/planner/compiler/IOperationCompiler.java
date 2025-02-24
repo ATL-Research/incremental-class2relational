@@ -30,24 +30,24 @@ import tools.refinery.interpreter.matchers.psystem.queries.PParameter;
 public interface IOperationCompiler {
 
     /**
-     * Compiles a plan of <code>POperation </code>s to a list of type <code>List&ltISearchOperation> </code>
+     * Compiles a plan of <code>POperation</code>s to a list of type <code>List&ltISearchOperation></code>
      *
      * @param plan
      * @param boundParameters
      * @return an ordered list of POperations that make up the compiled search plan
      * @throws InterpreterRuntimeException
      */
-    List <ISearchOperation> compile(SubPlan plan, Set <PParameter> boundParameters);
+    List<ISearchOperation> compile(SubPlan plan, Set<PParameter> boundParameters);
 
     /**
      * Replaces previous method returning {@link MatcherReference}
      * @since 2.1
      */
-    Set <CallWithAdornment> getDependencies();
+    Set<CallWithAdornment> getDependencies();
 
     /**
      * @return the cached variable bindings for the previously created plan
      */
-    Map <PVariable, Integer> getVariableMappings();
+    Map<PVariable, Integer> getVariableMappings();
 
 }

@@ -22,9 +22,9 @@ import java.util.*;
 
 public class ModelStoreBuilderImpl implements ModelStoreBuilder {
 	private CancellationToken cancellationToken;
-	private final LinkedHashSet <AnySymbol> allSymbols = new LinkedHashSet<>();
-	private final LinkedHashMap <SymbolEquivalenceClass<?>, List <AnySymbol>> equivalenceClasses = new LinkedHashMap<>();
-	private final List <ModelAdapterBuilder> adapters = new ArrayList<>();
+	private final LinkedHashSet<AnySymbol> allSymbols = new LinkedHashSet<>();
+	private final LinkedHashMap<SymbolEquivalenceClass<?>, List<AnySymbol>> equivalenceClasses = new LinkedHashMap<>();
+	private final List<ModelAdapterBuilder> adapters = new ArrayList<>();
 
 	@Override
 	public ModelStoreBuilder cancellationToken(CancellationToken cancellationToken) {
@@ -39,7 +39,7 @@ public class ModelStoreBuilderImpl implements ModelStoreBuilder {
 	}
 
 	@Override
-	public <T> ModelStoreBuilder symbol(Symbol <T> symbol) {
+	public <T> ModelStoreBuilder symbol(Symbol<T> symbol) {
 		if (!allSymbols.add(symbol)) {
 			// No need to add symbol twice.
 			return this;
@@ -70,12 +70,12 @@ public class ModelStoreBuilderImpl implements ModelStoreBuilder {
 	}
 
 	@Override
-	public <T extends ModelAdapterBuilder> Optional <T> tryGetAdapter(Class <? extends T> adapterType) {
+	public <T extends ModelAdapterBuilder> Optional<T> tryGetAdapter(Class<? extends T> adapterType) {
 		return AdapterUtils.tryGetAdapter(adapters, adapterType);
 	}
 
 	@Override
-	public <T extends ModelAdapterBuilder> T getAdapter(Class <T> adapterType) {
+	public <T extends ModelAdapterBuilder> T getAdapter(Class<T> adapterType) {
 		return AdapterUtils.getAdapter(adapters, adapterType);
 	}
 
@@ -85,7 +85,7 @@ public class ModelStoreBuilderImpl implements ModelStoreBuilder {
 		for (int i = adapters.size() - 1; i >= 0; i--) {
 			adapters.get(i).configure(this);
 		}
-		var stores = new LinkedHashMap <AnySymbol, VersionedMapStore <Tuple, ?>>(allSymbols.size());
+		var stores = new LinkedHashMap<AnySymbol, VersionedMapStore<Tuple, ?>>(allSymbols.size());
 		for (var entry : equivalenceClasses.entrySet()) {
 			createStores(stores, entry.getKey(), entry.getValue());
 		}
@@ -98,10 +98,10 @@ public class ModelStoreBuilderImpl implements ModelStoreBuilder {
 		return modelStore;
 	}
 
-	private <T> void createStores(Map <AnySymbol, VersionedMapStore <Tuple, ?>> stores,
-								  SymbolEquivalenceClass <T> equivalenceClass, List <AnySymbol> symbols) {
+	private <T> void createStores(Map<AnySymbol, VersionedMapStore<Tuple, ?>> stores,
+								  SymbolEquivalenceClass<T> equivalenceClass, List<AnySymbol> symbols) {
 		int size = symbols.size();
-		VersionedMapStoreFactory <Tuple, T> mapFactory = VersionedMapStore
+		VersionedMapStoreFactory<Tuple, T> mapFactory = VersionedMapStore
 				.<Tuple, T>builder()
 				.strategy(VersionedMapStoreFactoryBuilder.StoreStrategy.DELTA)
 				.defaultValue(equivalenceClass.defaultValue())

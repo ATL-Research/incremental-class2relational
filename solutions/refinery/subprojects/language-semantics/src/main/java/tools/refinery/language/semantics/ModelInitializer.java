@@ -59,17 +59,17 @@ public class ModelInitializer {
 
 	private PartialRelation nodeRelation;
 
-	private final Map <Relation, RelationInfo> relationInfoMap = new LinkedHashMap<>();
+	private final Map<Relation, RelationInfo> relationInfoMap = new LinkedHashMap<>();
 
-	private final Map <PartialRelation, RelationInfo> partialRelationInfoMap = new HashMap<>();
+	private final Map<PartialRelation, RelationInfo> partialRelationInfoMap = new HashMap<>();
 
-	private final Set <PartialRelation> targetTypes = new HashSet<>();
+	private final Set<PartialRelation> targetTypes = new HashSet<>();
 
 	private final MetamodelBuilder metamodelBuilder = Metamodel.builder();
 
 	private Metamodel metamodel;
 
-	private final Map <Tuple, CardinalityInterval> countSeed = new LinkedHashMap<>();
+	private final Map<Tuple, CardinalityInterval> countSeed = new LinkedHashMap<>();
 
 	private ScopePropagator scopePropagator;
 
@@ -264,7 +264,7 @@ public class ModelInitializer {
 
 	private void collectClassDeclarationMetamodel(ClassDeclaration classDeclaration) {
 		var superTypes = classDeclaration.getSuperTypes();
-		var partialSuperTypes = new ArrayList <PartialRelation>(superTypes.size() + 1);
+		var partialSuperTypes = new ArrayList<PartialRelation>(superTypes.size() + 1);
 		partialSuperTypes.add(nodeRelation);
 		for (var superType : superTypes) {
 			partialSuperTypes.add(getPartialRelation(superType));
@@ -495,8 +495,8 @@ public class ModelInitializer {
 		var problemParameters = predicateDefinition.getParameters();
 		int arity = problemParameters.size();
 		var parameters = new NodeVariable[arity];
-		var parameterMap = new HashMap <tools.refinery.language.model.problem.Variable, Variable>(arity);
-		var commonLiterals = new ArrayList <Literal>();
+		var parameterMap = new HashMap<tools.refinery.language.model.problem.Variable, Variable>(arity);
+		var commonLiterals = new ArrayList<Literal>();
 		for (int i = 0; i < arity; i++) {
 			var problemParameter = problemParameters.get(i);
 			var parameter = Variable.of(problemParameter.getName());
@@ -525,14 +525,14 @@ public class ModelInitializer {
 		return builder.build();
 	}
 
-	private Map <tools.refinery.language.model.problem.Variable, Variable> extendScope(
-			Map <tools.refinery.language.model.problem.Variable, Variable> existing,
-			Collection <? extends tools.refinery.language.model.problem.Variable> newVariables) {
+	private Map<tools.refinery.language.model.problem.Variable, Variable> extendScope(
+			Map<tools.refinery.language.model.problem.Variable, Variable> existing,
+			Collection<? extends tools.refinery.language.model.problem.Variable> newVariables) {
 		if (newVariables.isEmpty()) {
 			return existing;
 		}
 		int localScopeSize = existing.size() + newVariables.size();
-		var localScope = new HashMap <tools.refinery.language.model.problem.Variable, Variable>(localScopeSize);
+		var localScope = new HashMap<tools.refinery.language.model.problem.Variable, Variable>(localScopeSize);
 		localScope.putAll(existing);
 		for (var newVariable : newVariables) {
 			localScope.put(newVariable, Variable.of(newVariable.getName()));
@@ -540,8 +540,8 @@ public class ModelInitializer {
 		return localScope;
 	}
 
-	private void toLiteralsTraced(Expr expr, Map <tools.refinery.language.model.problem.Variable, Variable> localScope,
-								  List <Literal> literals) {
+	private void toLiteralsTraced(Expr expr, Map<tools.refinery.language.model.problem.Variable, Variable> localScope,
+								  List<Literal> literals) {
 		try {
 			toLiterals(expr, localScope, literals);
 		} catch (RuntimeException e) {
@@ -549,8 +549,8 @@ public class ModelInitializer {
 		}
 	}
 
-	private void toLiterals(Expr expr, Map <tools.refinery.language.model.problem.Variable, Variable> localScope,
-							List <Literal> literals) {
+	private void toLiterals(Expr expr, Map<tools.refinery.language.model.problem.Variable, Variable> localScope,
+							List<Literal> literals) {
 		if (expr instanceof LogicConstant logicConstant) {
 			switch (logicConstant.getLogicValue()) {
 			case TRUE -> literals.add(BooleanLiteral.TRUE);
@@ -594,10 +594,10 @@ public class ModelInitializer {
 		}
 	}
 
-	private List <Variable> toArgumentList(
-			List <Expr> expressions, Map <tools.refinery.language.model.problem.Variable, Variable> localScope,
-			List <Literal> literals) {
-		var argumentList = new ArrayList <Variable>(expressions.size());
+	private List<Variable> toArgumentList(
+			List<Expr> expressions, Map<tools.refinery.language.model.problem.Variable, Variable> localScope,
+			List<Literal> literals) {
+		var argumentList = new ArrayList<Variable>(expressions.size());
 		for (var expr : expressions) {
 			if (!(expr instanceof VariableOrNodeExpr variableOrNodeExpr)) {
 				throw new TracedException(expr, "Unsupported argument");
@@ -667,8 +667,8 @@ public class ModelInitializer {
 		scopePropagator.scope(type, interval);
 	}
 
-	private record RelationInfo(PartialRelation partialRelation, MutableSeed <TruthValue> assertions,
-								MutableSeed <TruthValue> defaultAssertions) {
+	private record RelationInfo(PartialRelation partialRelation, MutableSeed<TruthValue> assertions,
+								MutableSeed<TruthValue> defaultAssertions) {
 		public RelationInfo(String name, int arity, TruthValue value, TruthValue defaultValue) {
 			this(new PartialRelation(name, arity), value, defaultValue);
 		}
@@ -678,7 +678,7 @@ public class ModelInitializer {
 					MutableSeed.of(partialRelation.arity(), defaultValue));
 		}
 
-		public Seed <TruthValue> toSeed(int nodeCount) {
+		public Seed<TruthValue> toSeed(int nodeCount) {
 			defaultAssertions.overwriteValues(assertions);
 			if (partialRelation.equals(ReasoningAdapter.EQUALS_SYMBOL)) {
 				for (int i = 0; i < nodeCount; i++) {

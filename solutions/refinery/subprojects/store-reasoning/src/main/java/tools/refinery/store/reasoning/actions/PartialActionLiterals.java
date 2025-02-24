@@ -17,17 +17,17 @@ public final class PartialActionLiterals {
 		throw new IllegalStateException("This is a static utility class and should not be instantiated directly");
 	}
 
-	public static <A, C> MergeActionLiteral <A, C> merge(PartialSymbol <A, C> partialSymbol, A value,
+	public static <A, C> MergeActionLiteral<A, C> merge(PartialSymbol<A, C> partialSymbol, A value,
 														NodeVariable... parameters) {
 		return new MergeActionLiteral<>(partialSymbol, value, List.of(parameters));
 	}
 
-	public static MergeActionLiteral <TruthValue, Boolean> add(PartialRelation partialRelation,
+	public static MergeActionLiteral<TruthValue, Boolean> add(PartialRelation partialRelation,
 															  NodeVariable... parameters) {
 		return merge(partialRelation, TruthValue.TRUE, parameters);
 	}
 
-	public static MergeActionLiteral <TruthValue, Boolean> remove(PartialRelation partialRelation,
+	public static MergeActionLiteral<TruthValue, Boolean> remove(PartialRelation partialRelation,
 																 NodeVariable... parameters) {
 		return merge(partialRelation, TruthValue.FALSE, parameters);
 	}

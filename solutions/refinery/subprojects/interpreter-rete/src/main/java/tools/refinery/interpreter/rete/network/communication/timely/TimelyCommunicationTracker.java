@@ -59,9 +59,9 @@ public class TimelyCommunicationTracker extends CommunicationTracker {
     }
 
     @Override
-    protected void reconstructQueueContents(final Set <CommunicationGroup> oldActiveGroups) {
+    protected void reconstructQueueContents(final Set<CommunicationGroup> oldActiveGroups) {
         for (final CommunicationGroup oldGroup : oldActiveGroups) {
-            for (final Entry <MessageSelector, Collection <Mailbox>> entry : oldGroup.getMailboxes().entrySet()) {
+            for (final Entry<MessageSelector, Collection<Mailbox>> entry : oldGroup.getMailboxes().entrySet()) {
                 for (final Mailbox mailbox : entry.getValue()) {
                     final CommunicationGroup newGroup = this.groupMap.get(mailbox.getReceiver());
                     newGroup.notifyHasMessage(mailbox, entry.getKey());
@@ -133,9 +133,9 @@ public class TimelyCommunicationTracker extends CommunicationTracker {
     protected void postProcessGroup(final CommunicationGroup group) {
         if (this.configuration.getTimelineRepresentation() == TimelineRepresentation.FAITHFUL) {
             final Node representative = group.getRepresentative();
-            final Set <Node> groupMembers = getPartition(representative);
+            final Set<Node> groupMembers = getPartition(representative);
             if (groupMembers != null && groupMembers.size() > 1) {
-                final Graph <Node> graph = new Graph <Node>();
+                final Graph<Node> graph = new Graph<Node>();
 
                 for (final Node node : groupMembers) {
                     graph.insertNode(node);
@@ -151,8 +151,8 @@ public class TimelyCommunicationTracker extends CommunicationTracker {
                     }
                 }
 
-                final List <Node> orderedNodes = TopologicalSorting.compute(graph);
-                final Map <Node, Integer> nodeMap = CollectionsFactory.createMap();
+                final List<Node> orderedNodes = TopologicalSorting.compute(graph);
+                final Map<Node, Integer> nodeMap = CollectionsFactory.createMap();
                 int identifier = 0;
                 for (final Node orderedNode : orderedNodes) {
                     nodeMap.put(orderedNode, identifier++);
@@ -166,15 +166,15 @@ public class TimelyCommunicationTracker extends CommunicationTracker {
     /**
      * This static field is used for debug purposes in the DotGenerator.
      */
-    public static final Function <Node, Function <Node, String>> EDGE_LABEL_FUNCTION = new Function <Node, Function <Node, String>>() {
+    public static final Function<Node, Function<Node, String>> EDGE_LABEL_FUNCTION = new Function<Node, Function<Node, String>>() {
 
         @Override
-        public Function <Node, String> apply(final Node source) {
-            return new Function <Node, String>() {
+        public Function<Node, String> apply(final Node source) {
+            return new Function<Node, String>() {
                 @Override
                 public String apply(final Node target) {
                     if (source instanceof SpecializedProjectionIndexer) {
-                        final Collection <ListenerSubscription> subscriptions = ((SpecializedProjectionIndexer) source)
+                        final Collection<ListenerSubscription> subscriptions = ((SpecializedProjectionIndexer) source)
                                 .getSubscriptions();
                         for (final ListenerSubscription subscription : subscriptions) {
                             if (subscription.getListener().getOwner() == target
@@ -185,7 +185,7 @@ public class TimelyCommunicationTracker extends CommunicationTracker {
                         }
                     }
                     if (source instanceof StandardIndexer) {
-                        final Collection <IndexerListener> listeners = ((StandardIndexer) source).getListeners();
+                        final Collection<IndexerListener> listeners = ((StandardIndexer) source).getListeners();
                         for (final IndexerListener listener : listeners) {
                             if (listener.getOwner() == target && listener instanceof TimelyIndexerListenerProxy) {
                                 return ((TimelyIndexerListenerProxy) listener).preprocessor.toString();
@@ -193,7 +193,7 @@ public class TimelyCommunicationTracker extends CommunicationTracker {
                         }
                     }
                     if (source instanceof StandardNode) {
-                        final Collection <Mailbox> mailboxes = ((StandardNode) source).getChildMailboxes();
+                        final Collection<Mailbox> mailboxes = ((StandardNode) source).getChildMailboxes();
                         for (final Mailbox mailbox : mailboxes) {
                             if (mailbox.getReceiver() == target && mailbox instanceof TimelyMailboxProxy) {
                                 return ((TimelyMailboxProxy) mailbox).preprocessor.toString();
@@ -201,7 +201,7 @@ public class TimelyCommunicationTracker extends CommunicationTracker {
                         }
                     }
                     if (source instanceof DiscriminatorDispatcherNode) {
-                        final Collection <Mailbox> mailboxes = ((DiscriminatorDispatcherNode) source)
+                        final Collection<Mailbox> mailboxes = ((DiscriminatorDispatcherNode) source)
                                 .getBucketMailboxes().values();
                         for (final Mailbox mailbox : mailboxes) {
                             if (mailbox.getReceiver() == target && mailbox instanceof TimelyMailboxProxy) {

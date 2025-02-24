@@ -20,15 +20,15 @@ import java.util.List;
  *
  * @author Bergmann Gábor
  */
-public interface IPatternMatch extends Cloneable /* , Map <String, Object> */{
+public interface IPatternMatch extends Cloneable /* , Map<String, Object> */{
     /** @return the pattern for which this is a match. */
-    public IQuerySpecification <? extends InterpreterMatcher <? extends IPatternMatch>> specification();
+    public IQuerySpecification<? extends InterpreterMatcher<? extends IPatternMatch>> specification();
 
     /** Identifies the name of the pattern for which this is a match. */
     public String patternName();
 
     /** Returns the list of symbolic parameter names. */
-    public List <String> parameterNames();
+    public List<String> parameterNames();
 
     /** Returns the value of the parameter with the given name, or null if name is invalid. */
     public Object get(String parameterName);

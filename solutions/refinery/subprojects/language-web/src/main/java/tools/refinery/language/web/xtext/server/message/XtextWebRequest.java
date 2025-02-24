@@ -14,13 +14,13 @@ public class XtextWebRequest {
 	private String id;
 
 	@SerializedName("request")
-	private Map <String, String> requestData;
+	private Map<String, String> requestData;
 
 	public XtextWebRequest() {
 		this(null, null);
 	}
 
-	public XtextWebRequest(String id, Map <String, String> requestData) {
+	public XtextWebRequest(String id, Map<String, String> requestData) {
 		this.id = id;
 		this.requestData = requestData;
 	}
@@ -33,11 +33,11 @@ public class XtextWebRequest {
 		this.id = id;
 	}
 
-	public Map <String, String> getRequestData() {
+	public Map<String, String> getRequestData() {
 		return requestData;
 	}
 
-	public void setRequestData(Map <String, String> requestData) {
+	public void setRequestData(Map<String, String> requestData) {
 		this.requestData = requestData;
 	}
 

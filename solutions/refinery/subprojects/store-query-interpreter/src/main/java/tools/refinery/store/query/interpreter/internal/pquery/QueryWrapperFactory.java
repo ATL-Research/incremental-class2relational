@@ -31,8 +31,8 @@ import java.util.function.ToIntFunction;
 
 class QueryWrapperFactory {
 	private final Dnf2PQuery dnf2PQuery;
-	private final Map <AnySymbolView, SymbolViewWrapper> view2WrapperMap = new LinkedHashMap<>();
-	private final CycleDetectingMapper <RemappedConstraint, RawPQuery> wrapConstraint = new CycleDetectingMapper<>(
+	private final Map<AnySymbolView, SymbolViewWrapper> view2WrapperMap = new LinkedHashMap<>();
+	private final CycleDetectingMapper<RemappedConstraint, RawPQuery> wrapConstraint = new CycleDetectingMapper<>(
 			this::doWrapConstraint);
 
 	QueryWrapperFactory(Dnf2PQuery dnf2PQuery) {
@@ -51,7 +51,7 @@ class QueryWrapperFactory {
 		var arguments = callLiteral.getArguments();
 		int arity = arguments.size();
 		var remappedParameters = new int[arity];
-		var unboundVariableIndices = new HashMap <Variable, Integer>();
+		var unboundVariableIndices = new HashMap<Variable, Integer>();
 		var appendVariable = new VariableAppender();
 		for (int i = 0; i < arity; i++) {
 			var variable = arguments.get(i);
@@ -91,9 +91,9 @@ class QueryWrapperFactory {
 		var embeddedPQuery = new RawPQuery(DnfUtils.generateUniqueName(constraint.name()), PVisibility.EMBEDDED);
 		var body = new PBody(embeddedPQuery);
 		int arity = Arrays.stream(remappedParameters).max().orElse(-1) + 1;
-		var parameters = new ArrayList <PParameter>(arity);
+		var parameters = new ArrayList<PParameter>(arity);
 		var parameterVariables = new PVariable[arity];
-		var symbolicParameters = new ArrayList <ExportedParameter>(arity);
+		var symbolicParameters = new ArrayList<ExportedParameter>(arity);
 		for (int i = 0; i < arity; i++) {
 			var parameterName = "p" + i;
 			var parameter = new PParameter(parameterName);
@@ -126,7 +126,7 @@ class QueryWrapperFactory {
 	}
 
 	private void addPositiveConstraint(Constraint constraint, PBody body, Tuple argumentTuple) {
-		if (constraint instanceof SymbolView <?> view) {
+		if (constraint instanceof SymbolView<?> view) {
 			new TypeConstraint(body, argumentTuple, getInputKey(view));
 		} else if (constraint instanceof Dnf dnf) {
 			var calledPQuery = dnf2PQuery.translate(dnf);
@@ -140,15 +140,15 @@ class QueryWrapperFactory {
 		return view2WrapperMap.computeIfAbsent(symbolView, SymbolViewWrapper::new);
 	}
 
-	public Map <AnySymbolView, IInputKey> getSymbolViews() {
+	public Map<AnySymbolView, IInputKey> getSymbolViews() {
 		return Collections.unmodifiableMap(view2WrapperMap);
 	}
 
-	public record WrappedCall(PQuery pattern, List <Variable> remappedArguments) {
+	public record WrappedCall(PQuery pattern, List<Variable> remappedArguments) {
 	}
 
-	private static class VariableAppender implements ToIntFunction <Variable> {
-		private final List <Variable> remappedArguments = new ArrayList<>();
+	private static class VariableAppender implements ToIntFunction<Variable> {
+		private final List<Variable> remappedArguments = new ArrayList<>();
 		private int nextIndex = 0;
 
 		@Override
@@ -159,7 +159,7 @@ class QueryWrapperFactory {
 			return index;
 		}
 
-		public List <Variable> getRemappedArguments() {
+		public List<Variable> getRemappedArguments() {
 			return remappedArguments;
 		}
 	}

@@ -22,15 +22,15 @@ import java.util.List;
 import java.util.stream.Stream;
 
 class TermSubstitutionTest {
-	private final static DataVariable <Integer> intA = Variable.of("intA", Integer.class);
-	private final static DataVariable <Integer> intB = Variable.of("intB", Integer.class);
-	private final static DataVariable <Double> realA = Variable.of("realA", Double.class);
-	private final static DataVariable <Double> realB = Variable.of("realB", Double.class);
-	private final static DataVariable <Boolean> boolA = Variable.of("boolA", Boolean.class);
-	private final static DataVariable <Boolean> boolB = Variable.of("boolB", Boolean.class);
-	private final static DataVariable <UpperCardinality> upperCardinalityA = Variable.of("upperCardinalityA",
+	private final static DataVariable<Integer> intA = Variable.of("intA", Integer.class);
+	private final static DataVariable<Integer> intB = Variable.of("intB", Integer.class);
+	private final static DataVariable<Double> realA = Variable.of("realA", Double.class);
+	private final static DataVariable<Double> realB = Variable.of("realB", Double.class);
+	private final static DataVariable<Boolean> boolA = Variable.of("boolA", Boolean.class);
+	private final static DataVariable<Boolean> boolB = Variable.of("boolB", Boolean.class);
+	private final static DataVariable<UpperCardinality> upperCardinalityA = Variable.of("upperCardinalityA",
 			UpperCardinality.class);
-	private final static DataVariable <UpperCardinality> upperCardinalityB = Variable.of("upperCardinalityB",
+	private final static DataVariable<UpperCardinality> upperCardinalityB = Variable.of("upperCardinalityB",
 			UpperCardinality.class);
 	private final static Substitution substitution = Substitution.builder()
 			.put(intA, intB)
@@ -55,7 +55,7 @@ class TermSubstitutionTest {
 		Assertions.assertEquals(term, substitutedTerm2, "Original term is not equal to back-substituted term");
 	}
 
-	static Stream <Arguments> substitutionTest() {
+	static Stream<Arguments> substitutionTest() {
 		return Stream.of(
 				Arguments.of(IntTerms.plus(intA)),
 				Arguments.of(IntTerms.minus(intA)),

@@ -12,12 +12,12 @@ import tools.refinery.store.tuple.Tuple;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractResultSet <T> implements ResultSet <T> {
+public abstract class AbstractResultSet<T> implements ResultSet<T> {
 	private final ModelQueryAdapter adapter;
-	private final Query <T> query;
-	private final List <ResultSetListener<T>> listeners = new ArrayList<>();
+	private final Query<T> query;
+	private final List<ResultSetListener<T>> listeners = new ArrayList<>();
 
-	protected AbstractResultSet(ModelQueryAdapter adapter, Query <T> query) {
+	protected AbstractResultSet(ModelQueryAdapter adapter, Query<T> query) {
 		this.adapter = adapter;
 		this.query = query;
 	}
@@ -28,12 +28,12 @@ public abstract class AbstractResultSet <T> implements ResultSet <T> {
 	}
 
 	@Override
-	public Query <T> getCanonicalQuery() {
+	public Query<T> getCanonicalQuery() {
 		return query;
 	}
 
 	@Override
-	public void addListener(ResultSetListener <T> listener) {
+	public void addListener(ResultSetListener<T> listener) {
 		if (listeners.isEmpty()) {
 			startListeningForChanges();
 		}
@@ -41,7 +41,7 @@ public abstract class AbstractResultSet <T> implements ResultSet <T> {
 	}
 
 	@Override
-	public void removeListener(ResultSetListener <T> listener) {
+	public void removeListener(ResultSetListener<T> listener) {
 		listeners.remove(listener);
 		if (listeners.isEmpty()) {
 			stopListeningForChanges();

@@ -10,33 +10,33 @@ import java.util.Objects;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-public class ExtremeValueAggregator <T> implements StatefulAggregator <T, T> {
-	private final Class <T> type;
+public class ExtremeValueAggregator<T> implements StatefulAggregator<T, T> {
+	private final Class<T> type;
 	private final T emptyResult;
-	private final Comparator <T> comparator;
+	private final Comparator<T> comparator;
 
-	public ExtremeValueAggregator(Class <T> type, T emptyResult) {
+	public ExtremeValueAggregator(Class<T> type, T emptyResult) {
 		this(type, emptyResult, null);
 	}
 
-	public ExtremeValueAggregator(Class <T> type, T emptyResult, Comparator <T> comparator) {
+	public ExtremeValueAggregator(Class<T> type, T emptyResult, Comparator<T> comparator) {
 		this.type = type;
 		this.emptyResult = emptyResult;
 		this.comparator = comparator;
 	}
 
 	@Override
-	public Class <T> getResultType() {
+	public Class<T> getResultType() {
 		return getInputType();
 	}
 
 	@Override
-	public Class <T> getInputType() {
+	public Class<T> getInputType() {
 		return type;
 	}
 
 	@Override
-	public StatefulAggregate <T, T> createEmptyAggregate() {
+	public StatefulAggregate<T, T> createEmptyAggregate() {
 		return new Aggregate();
 	}
 
@@ -49,7 +49,7 @@ public class ExtremeValueAggregator <T> implements StatefulAggregator <T, T> {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		ExtremeValueAggregator <?> that = (ExtremeValueAggregator <?>) o;
+		ExtremeValueAggregator<?> that = (ExtremeValueAggregator<?>) o;
 		return type.equals(that.type) && Objects.equals(emptyResult, that.emptyResult) && Objects.equals(comparator,
 				that.comparator);
 	}
@@ -59,8 +59,8 @@ public class ExtremeValueAggregator <T> implements StatefulAggregator <T, T> {
 		return Objects.hash(type, emptyResult, comparator);
 	}
 
-	private class Aggregate implements StatefulAggregate <T, T> {
-		private final SortedMap <T, Integer> values;
+	private class Aggregate implements StatefulAggregate<T, T> {
+		private final SortedMap<T, Integer> values;
 
 		private Aggregate() {
 			values = new TreeMap<>(comparator);
@@ -96,7 +96,7 @@ public class ExtremeValueAggregator <T> implements StatefulAggregator <T, T> {
 		}
 
 		@Override
-		public StatefulAggregate <T, T> deepCopy() {
+		public StatefulAggregate<T, T> deepCopy() {
 			return new Aggregate(this);
 		}
 

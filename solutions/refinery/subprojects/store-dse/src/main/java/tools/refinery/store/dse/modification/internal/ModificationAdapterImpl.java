@@ -17,11 +17,11 @@ import tools.refinery.store.tuple.Tuple1;
 import java.util.HashSet;
 
 public class ModificationAdapterImpl implements ModificationAdapter {
-	static final Symbol <Integer> NEXT_ID = Symbol.of("NEXT_ID", 0, Integer.class, 0);
+	static final Symbol<Integer> NEXT_ID = Symbol.of("NEXT_ID", 0, Integer.class, 0);
 
 	final ModelStoreAdapter storeAdapter;
 	final Model model;
-	Interpretation <Integer> nodeCountInterpretation;
+	Interpretation<Integer> nodeCountInterpretation;
 
 	ModificationAdapterImpl(ModelStoreAdapter storeAdapter, Model model) {
 		this.storeAdapter = storeAdapter;
@@ -72,13 +72,13 @@ public class ModificationAdapterImpl implements ModificationAdapter {
 
 	private void deleteDanglingEdges(int objectId) {
 		for (var symbol : model.getStore().getSymbols()) {
-			deleteDanglingEdges(objectId, (Symbol <?>) symbol);
+			deleteDanglingEdges(objectId, (Symbol<?>) symbol);
 		}
 	}
 
-	private <T> void deleteDanglingEdges(int objectId, Symbol <T> symbol) {
+	private <T> void deleteDanglingEdges(int objectId, Symbol<T> symbol) {
 		var interpretation = model.getInterpretation(symbol);
-		var toDelete = new HashSet <Tuple>();
+		var toDelete = new HashSet<Tuple>();
 		int arity = symbol.arity();
 		for (int i = 0; i < arity; i++) {
 			var cursor = interpretation.getAdjacent(i, objectId);

@@ -19,11 +19,11 @@ import tools.refinery.store.util.CancellationToken;
 import java.util.*;
 
 public class ModelStoreImpl implements ModelStore {
-	private final LinkedHashMap <? extends AnySymbol, ? extends VersionedMapStore <Tuple, ?>> stores;
-	private final List <ModelStoreAdapter> adapters;
+	private final LinkedHashMap<? extends AnySymbol, ? extends VersionedMapStore<Tuple, ?>> stores;
+	private final List<ModelStoreAdapter> adapters;
 	private final CancellationToken cancellationToken;
 
-	ModelStoreImpl(LinkedHashMap <? extends AnySymbol, ? extends VersionedMapStore <Tuple, ?>> stores, int adapterCount,
+	ModelStoreImpl(LinkedHashMap<? extends AnySymbol, ? extends VersionedMapStore<Tuple, ?>> stores, int adapterCount,
 				   CancellationToken cancellationToken) {
 		this.stores = stores;
 		adapters = new ArrayList<>(adapterCount);
@@ -31,7 +31,7 @@ public class ModelStoreImpl implements ModelStore {
 	}
 
 	@Override
-	public Collection <AnySymbol> getSymbols() {
+	public Collection<AnySymbol> getSymbols() {
 		return Collections.unmodifiableCollection(stores.keySet());
 	}
 
@@ -42,7 +42,7 @@ public class ModelStoreImpl implements ModelStore {
 	@Override
 	public ModelImpl createEmptyModel() {
 		var model = createModelWithoutInterpretations(null);
-		var interpretations = new LinkedHashMap <AnySymbol, VersionedInterpretation <?>>(stores.size());
+		var interpretations = new LinkedHashMap<AnySymbol, VersionedInterpretation<?>>(stores.size());
 		for (var entry : this.stores.entrySet()) {
 			var symbol = entry.getKey();
 			interpretations.put(symbol, VersionedInterpretation.of(model, symbol, entry.getValue()));
@@ -55,7 +55,7 @@ public class ModelStoreImpl implements ModelStore {
 	@Override
 	public synchronized ModelImpl createModelForState(Version state) {
 		var model = createModelWithoutInterpretations(state);
-		var interpretations = new LinkedHashMap <AnySymbol, VersionedInterpretation <?>>(stores.size());
+		var interpretations = new LinkedHashMap<AnySymbol, VersionedInterpretation<?>>(stores.size());
 
 		int i=0;
 		for (var entry : this.stores.entrySet()) {
@@ -82,7 +82,7 @@ public class ModelStoreImpl implements ModelStore {
 
 	@Override
 	public synchronized ModelDiffCursor getDiffCursor(Version from, Version to) {
-		var diffCursors = new HashMap <AnySymbol, DiffCursor <?, ?>>();
+		var diffCursors = new HashMap<AnySymbol, DiffCursor<?, ?>>();
 		for (var entry : stores.entrySet()) {
 			var representation = entry.getKey();
 			var diffCursor = entry.getValue().getDiffCursor(from, to);
@@ -92,12 +92,12 @@ public class ModelStoreImpl implements ModelStore {
 	}
 
 	@Override
-	public <T extends ModelStoreAdapter> Optional <T> tryGetAdapter(Class <? extends T> adapterType) {
+	public <T extends ModelStoreAdapter> Optional<T> tryGetAdapter(Class<? extends T> adapterType) {
 		return AdapterUtils.tryGetAdapter(adapters, adapterType);
 	}
 
 	@Override
-	public <T extends ModelStoreAdapter> T getAdapter(Class <T> adapterType) {
+	public <T extends ModelStoreAdapter> T getAdapter(Class<T> adapterType) {
 		return AdapterUtils.getAdapter(adapters, adapterType);
 	}
 

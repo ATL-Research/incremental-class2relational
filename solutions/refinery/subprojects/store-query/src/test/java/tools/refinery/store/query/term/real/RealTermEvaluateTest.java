@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.*;
 class RealTermEvaluateTest {
 	public static final double TOLERANCE = 1e-6;
 
-	private static Matcher <Double> closeToOrNull(Double expected) {
+	private static Matcher<Double> closeToOrNull(Double expected) {
 		return expected == null ? nullValue(Double.class) : closeTo(expected, TOLERANCE);
 	}
 

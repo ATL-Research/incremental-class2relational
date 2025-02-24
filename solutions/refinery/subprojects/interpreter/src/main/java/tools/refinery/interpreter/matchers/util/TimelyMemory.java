@@ -30,14 +30,14 @@ import tools.refinery.interpreter.matchers.util.timeline.Timelines;
  * @author Tamas Szabo
  * @since 2.3
  */
-public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements Clearable, UnmaskedResumable <Timestamp> {
+public class TimelyMemory<Timestamp extends Comparable<Timestamp>> implements Clearable, UnmaskedResumable<Timestamp> {
 
-    protected final Map <Tuple, TreeMap <Timestamp, CumulativeCounter>> counters;
-    protected final Map <Tuple, Timeline <Timestamp>> timelines;
-    public final TreeMap <Timestamp, Map <Tuple, FoldingState>> foldingState;
-    protected final Set <Tuple> presentAtInfinity;
+    protected final Map<Tuple, TreeMap<Timestamp, CumulativeCounter>> counters;
+    protected final Map<Tuple, Timeline<Timestamp>> timelines;
+    public final TreeMap<Timestamp, Map<Tuple, FoldingState>> foldingState;
+    protected final Set<Tuple> presentAtInfinity;
     protected final boolean isLazy;
-    protected final Diff <Timestamp> EMPTY_DIFF = new Diff <Timestamp>();
+    protected final Diff<Timestamp> EMPTY_DIFF = new Diff<Timestamp>();
 
     public TimelyMemory() {
         this(false);
@@ -56,7 +56,7 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
     }
 
     @Override
-    public Set <Tuple> getResumableTuples() {
+    public Set<Tuple> getResumableTuples() {
         if (this.foldingState == null || this.foldingState.isEmpty()) {
             return Collections.emptySet();
         } else {
@@ -79,7 +79,7 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
      */
     protected void addFoldingState(final Tuple tuple, final FoldingState state, final Timestamp timestamp) {
         assert state.diff != 0;
-        final Map <Tuple, FoldingState> tupleMap = this.foldingState.computeIfAbsent(timestamp,
+        final Map<Tuple, FoldingState> tupleMap = this.foldingState.computeIfAbsent(timestamp,
                 k -> CollectionsFactory.createMap());
         tupleMap.compute(tuple, (k, v) -> {
             return v == null ? state : v.merge(state);
@@ -87,7 +87,7 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
     }
 
     @Override
-    public Map <Tuple, Diff <Timestamp>> resumeAt(final Timestamp timestamp) {
+    public Map<Tuple, Diff<Timestamp>> resumeAt(final Timestamp timestamp) {
         Timestamp current = this.getResumableTimestamp();
         if (current == null) {
             throw new IllegalStateException("There is othing to fold!");
@@ -98,8 +98,8 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
             // However, we only do garbage collection in doFoldingState, so now it is time to
             // first clean up those states with zero diffs.
             while (current != null && current.compareTo(timestamp) < 0) {
-                final Map <Tuple, FoldingState> tupleMap = this.foldingState.remove(current);
-                for (final Entry <Tuple, FoldingState> entry : tupleMap.entrySet()) {
+                final Map<Tuple, FoldingState> tupleMap = this.foldingState.remove(current);
+                for (final Entry<Tuple, FoldingState> entry : tupleMap.entrySet()) {
                     final Tuple key = entry.getKey();
                     final FoldingState value = entry.getValue();
                     if (value.diff != 0) {
@@ -115,9 +115,9 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
             }
         }
 
-        final Map <Tuple, Diff <Timestamp>> diffMap = CollectionsFactory.createMap();
-        final Map <Tuple, FoldingState> tupleMap = this.foldingState.remove(timestamp);
-        for (final Entry <Tuple, FoldingState> entry : tupleMap.entrySet()) {
+        final Map<Tuple, Diff<Timestamp>> diffMap = CollectionsFactory.createMap();
+        final Map<Tuple, FoldingState> tupleMap = this.foldingState.remove(timestamp);
+        for (final Entry<Tuple, FoldingState> entry : tupleMap.entrySet()) {
             final Tuple key = entry.getKey();
             final FoldingState value = entry.getValue();
             diffMap.put(key, doFoldingStep(key, value, timestamp));
@@ -131,13 +131,13 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
         return diffMap;
     }
 
-    protected Diff <Timestamp> doFoldingStep(final Tuple tuple, final FoldingState state, final Timestamp timestamp) {
+    protected Diff<Timestamp> doFoldingStep(final Tuple tuple, final FoldingState state, final Timestamp timestamp) {
         final CumulativeCounter counter = getCounter(tuple, timestamp);
         if (state.diff == 0) {
             gcCounters(counter, tuple, timestamp);
             return EMPTY_DIFF;
         } else {
-            final Diff <Timestamp> resultDiff = new Diff<>();
+            final Diff<Timestamp> resultDiff = new Diff<>();
             final Timestamp nextTimestamp = this.counters.get(tuple).higherKey(timestamp);
 
             final int oldCumulative = counter.cumulative;
@@ -164,11 +164,11 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
      * On-demand initializes and returns the counter for the given tuple and timestamp.
      */
     protected CumulativeCounter getCounter(final Tuple tuple, final Timestamp timestamp) {
-        final TreeMap <Timestamp, CumulativeCounter> counterTimeline = this.counters.computeIfAbsent(tuple,
+        final TreeMap<Timestamp, CumulativeCounter> counterTimeline = this.counters.computeIfAbsent(tuple,
                 k -> CollectionsFactory.createTreeMap());
 
         final CumulativeCounter counter = counterTimeline.computeIfAbsent(timestamp, k -> {
-            final Entry <Timestamp, CumulativeCounter> previousCounter = counterTimeline.lowerEntry(k);
+            final Entry<Timestamp, CumulativeCounter> previousCounter = counterTimeline.lowerEntry(k);
             final int previousCumulative = previousCounter == null ? 0 : previousCounter.getValue().cumulative;
             return new CumulativeCounter(0, previousCumulative);
         });
@@ -181,7 +181,7 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
      */
     protected void gcCounters(final CumulativeCounter counter, final Tuple tuple, final Timestamp timestamp) {
         if (counter.diff == 0) {
-            final TreeMap <Timestamp, CumulativeCounter> counterMap = this.counters.get(tuple);
+            final TreeMap<Timestamp, CumulativeCounter> counterMap = this.counters.get(tuple);
             counterMap.remove(timestamp);
             if (counterMap.isEmpty()) {
                 this.counters.remove(tuple);
@@ -199,7 +199,7 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
      * the new value to 1.
      */
     protected void computeDiffsLazy(final Direction direction, final int oldCumulative, final int newCumulative,
-            final Timestamp timestamp, final Timestamp nextTimestamp, final Diff <Timestamp> diffs) {
+            final Timestamp timestamp, final Timestamp nextTimestamp, final Diff<Timestamp> diffs) {
         if (direction == Direction.INSERT) {
             if (newCumulative == 0) {
                 throw new IllegalStateException("Cumulative count can never be negative!");
@@ -237,7 +237,7 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
      * {@link SignChange} that describes how the sign has changed at the given timestamp.
      */
     protected SignChange computeDiffsEager(final Direction direction, final CumulativeCounter counter,
-            final SignChange signChangeAtPrevious, final Timestamp timestamp, final Diff <Timestamp> diffs) {
+            final SignChange signChangeAtPrevious, final Timestamp timestamp, final Diff<Timestamp> diffs) {
         if (direction == Direction.INSERT) {
             if (counter.cumulative == 0) {
                 throw new IllegalStateException("Cumulative count can never be negative!");
@@ -303,7 +303,7 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
         }
     }
 
-    public Diff <Timestamp> put(final Tuple tuple, final Timestamp timestamp) {
+    public Diff<Timestamp> put(final Tuple tuple, final Timestamp timestamp) {
         if (this.isLazy) {
             return putLazy(tuple, timestamp);
         } else {
@@ -311,7 +311,7 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
         }
     }
 
-    public Diff <Timestamp> remove(final Tuple tuple, final Timestamp timestamp) {
+    public Diff<Timestamp> remove(final Tuple tuple, final Timestamp timestamp) {
         if (this.isLazy) {
             return removeLazy(tuple, timestamp);
         } else {
@@ -319,8 +319,8 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
         }
     }
 
-    protected Diff <Timestamp> putEager(final Tuple tuple, final Timestamp timestamp) {
-        final Diff <Timestamp> resultDiff = new Diff<>();
+    protected Diff<Timestamp> putEager(final Tuple tuple, final Timestamp timestamp) {
+        final Diff<Timestamp> resultDiff = new Diff<>();
         final CumulativeCounter counter = getCounter(tuple, timestamp);
         ++counter.diff;
 
@@ -328,9 +328,9 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
         // it cannot happen that those became positive in this round
         SignChange signChangeAtPrevious = SignChange.IRRELEVANT;
 
-        final NavigableMap <Timestamp, CumulativeCounter> nextCounters = this.counters.get(tuple).tailMap(timestamp,
+        final NavigableMap<Timestamp, CumulativeCounter> nextCounters = this.counters.get(tuple).tailMap(timestamp,
                 true);
-        for (final Entry <Timestamp, CumulativeCounter> currentEntry : nextCounters.entrySet()) {
+        for (final Entry<Timestamp, CumulativeCounter> currentEntry : nextCounters.entrySet()) {
             final Timestamp currentTimestamp = currentEntry.getKey();
             final CumulativeCounter currentCounter = currentEntry.getValue();
             ++currentCounter.cumulative;
@@ -344,7 +344,7 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
         return resultDiff;
     }
 
-    protected Diff <Timestamp> putLazy(final Tuple tuple, final Timestamp timestamp) {
+    protected Diff<Timestamp> putLazy(final Tuple tuple, final Timestamp timestamp) {
         final CumulativeCounter counter = getCounter(tuple, timestamp);
         counter.diff += 1;
         // before the INSERT timestamp, no change at all
@@ -353,8 +353,8 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
         return EMPTY_DIFF;
     }
 
-    protected Diff <Timestamp> removeEager(final Tuple tuple, final Timestamp timestamp) {
-        final Diff <Timestamp> resultDiff = new Diff<>();
+    protected Diff<Timestamp> removeEager(final Tuple tuple, final Timestamp timestamp) {
+        final Diff<Timestamp> resultDiff = new Diff<>();
         final CumulativeCounter counter = getCounter(tuple, timestamp);
         --counter.diff;
 
@@ -362,9 +362,9 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
         // it cannot happen that those became zero in this round
         SignChange signChangeAtPrevious = SignChange.IRRELEVANT;
 
-        final NavigableMap <Timestamp, CumulativeCounter> nextCounters = this.counters.get(tuple).tailMap(timestamp,
+        final NavigableMap<Timestamp, CumulativeCounter> nextCounters = this.counters.get(tuple).tailMap(timestamp,
                 true);
-        for (final Entry <Timestamp, CumulativeCounter> currentEntry : nextCounters.entrySet()) {
+        for (final Entry<Timestamp, CumulativeCounter> currentEntry : nextCounters.entrySet()) {
             final Timestamp currentTimestamp = currentEntry.getKey();
             final CumulativeCounter currentCounter = currentEntry.getValue();
             --currentCounter.cumulative;
@@ -378,7 +378,7 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
         return resultDiff;
     }
 
-    protected Diff <Timestamp> removeLazy(final Tuple tuple, final Timestamp timestamp) {
+    protected Diff<Timestamp> removeLazy(final Tuple tuple, final Timestamp timestamp) {
         final CumulativeCounter counter = getCounter(tuple, timestamp);
         counter.diff -= 1;
         // before the DELETE timestamp, no change at all
@@ -390,11 +390,11 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
     /**
      * Updates and garbage collects the timeline of the given tuple based on the given timeline diff.
      */
-    protected void updateTimeline(final Tuple tuple, final Diff <Timestamp> diff) {
+    protected void updateTimeline(final Tuple tuple, final Diff<Timestamp> diff) {
         if (!diff.isEmpty()) {
             this.timelines.compute(tuple, (k, oldTimeline) -> {
                 this.presentAtInfinity.remove(tuple);
-                final Timeline <Timestamp> timeline = oldTimeline == null ? Timelines.createFrom(diff)
+                final Timeline<Timestamp> timeline = oldTimeline == null ? Timelines.createFrom(diff)
                         : oldTimeline.mergeAdditive(diff);
                 if (timeline.isPresentAtInfinity()) {
                     this.presentAtInfinity.add(tuple);
@@ -411,7 +411,7 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
     /**
      * @since 2.8
      */
-    public Set <Tuple> getTuplesAtInfinity() {
+    public Set<Tuple> getTuplesAtInfinity() {
         return this.presentAtInfinity;
     }
 
@@ -426,7 +426,7 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
      * Returns true if the given tuple is present at the moment 'infinity'.
      */
     public boolean isPresentAtInfinity(final Tuple tuple) {
-        final Timeline <Timestamp> timeline = this.timelines.get(tuple);
+        final Timeline<Timestamp> timeline = this.timelines.get(tuple);
         if (timeline == null) {
             return false;
         } else {
@@ -442,15 +442,15 @@ public class TimelyMemory <Timestamp extends Comparable <Timestamp>> implements 
         return this.counters.size();
     }
 
-    public Set <Tuple> keySet() {
+    public Set<Tuple> keySet() {
         return this.counters.keySet();
     }
 
-    public Map <Tuple, Timeline <Timestamp>> asMap() {
+    public Map<Tuple, Timeline<Timestamp>> asMap() {
         return this.timelines;
     }
 
-    public Timeline <Timestamp> get(final ITuple tuple) {
+    public Timeline<Timestamp> get(final ITuple tuple) {
         return this.timelines.get(tuple);
     }
 

@@ -17,7 +17,7 @@ import org.junit.jupiter.params.provider.Arguments;
 class FuzzTestUtilsTest {
 	@Test
 	void permutationInternalTest() {
-		List <List<Object>> res = FuzzTestUtils.permutationInternal(0, new Object[]{1, 2, 3},
+		List<List<Object>> res = FuzzTestUtils.permutationInternal(0, new Object[]{1, 2, 3},
 				new Object[]{'a', 'b', 'c'}, new Object[]{"alpha", "beta", "gamma", "delta"});
 		assertEquals(3 * 3 * 4, res.size());
 	}
@@ -33,7 +33,7 @@ class FuzzTestUtilsTest {
 	void permutationTest2() {
 		var res = FuzzTestUtils.permutation(new Object[]{1, 2, 3}, new Object[]{'a', 'b', 'c'},
 				new Object[]{"alpha", "beta", "gamma", "delta"});
-		Optional <Arguments> first = res.findFirst();
+		Optional<Arguments> first = res.findFirst();
 		assertTrue(first.isPresent());
 		var arguments = first.get().get();
 		assertEquals(1, arguments[0]);

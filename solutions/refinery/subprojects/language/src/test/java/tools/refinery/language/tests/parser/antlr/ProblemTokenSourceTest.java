@@ -37,7 +37,7 @@ import static org.hamcrest.Matchers.*;
 class ProblemTokenSourceTest {
 	@Inject
 	@Named(LexerBindings.RUNTIME)
-	private Provider <Lexer> lexerProvider;
+	private Provider<Lexer> lexerProvider;
 
 	@Inject
 	private IdentifierTokenProvider identifierTokenProvider;
@@ -102,7 +102,7 @@ class ProblemTokenSourceTest {
 		assertThat("transitive closure before plus", transitiveClosureIndex, greaterThan(plusIndex));
 	}
 
-	static Stream <Arguments> plusAndTransitiveClosureInSameTokenStreamTest() {
+	static Stream<Arguments> plusAndTransitiveClosureInSameTokenStreamTest() {
 		return Stream.of(
 				Arguments.of("c+(d), equals+(a, b)", false),
 				Arguments.of("foo+(bar baz+(a, b))", false),
@@ -122,9 +122,9 @@ class ProblemTokenSourceTest {
 		return tokenSource;
 	}
 
-	private List <Token> createTokenList(String text) {
+	private List<Token> createTokenList(String text) {
 		var tokenSource = createTokenSource(text);
-		var tokens = new ArrayList <Token>();
+		var tokens = new ArrayList<Token>();
 		Token token;
 		do {
 			token = tokenSource.nextToken();
@@ -133,7 +133,7 @@ class ProblemTokenSourceTest {
 		return tokens;
 	}
 
-	private Matcher <Iterable<? super Token>> hasTokenOfType(int tokenId) {
+	private Matcher<Iterable<? super Token>> hasTokenOfType(int tokenId) {
 		return hasItem(hasProperty("type", equalTo(tokenId)));
 	}
 }

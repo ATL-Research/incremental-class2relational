@@ -28,7 +28,7 @@ public class NegativePatternCall extends PatternCallBasedDeferred {
     }
 
     @Override
-    public Set <PVariable> getDeducedVariables() {
+    public Set<PVariable> getDeducedVariables() {
         return Collections.emptySet();
     }
 
@@ -36,7 +36,7 @@ public class NegativePatternCall extends PatternCallBasedDeferred {
      * @return all variables that may potentially be quantified they are not used anywhere else
      */
     @Override
-    protected Set <PVariable> getCandidateQuantifiedVariables() {
+    protected Set<PVariable> getCandidateQuantifiedVariables() {
         return getAffectedVariables();
     }
 

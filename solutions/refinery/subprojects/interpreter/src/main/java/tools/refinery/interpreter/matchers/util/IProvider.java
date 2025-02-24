@@ -19,11 +19,11 @@ import tools.refinery.interpreter.matchers.psystem.queries.PQuery;
  * @author Zoltan Ujhelyi
  *
  */
-public interface IProvider <T> extends Supplier <T>{
+public interface IProvider<T> extends Supplier<T>{
 
-    public final class ProvidedValueFunction implements Function <IProvider<PQuery>, PQuery> {
+    public final class ProvidedValueFunction implements Function<IProvider<PQuery>, PQuery> {
         @Override
-        public PQuery apply(IProvider <PQuery> input) {
+        public PQuery apply(IProvider<PQuery> input) {
             return (input == null) ? null : input.get();
         }
     }

@@ -35,8 +35,8 @@ import tools.refinery.interpreter.matchers.psystem.queries.PVisibility;
  * @noinstantiate This class is not intended to be instantiated by end-users.
  * @since 0.9
  */
-public abstract class GenericQuerySpecification <Matcher extends GenericPatternMatcher> extends
-        BaseQuerySpecification <Matcher> {
+public abstract class GenericQuerySpecification<Matcher extends GenericPatternMatcher> extends
+        BaseQuerySpecification<Matcher> {
 
     /**
      * Instantiates query specification for the given internal query representation.

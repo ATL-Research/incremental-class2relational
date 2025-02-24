@@ -18,6 +18,6 @@ import tools.refinery.interpreter.localsearch.operations.ISearchOperation;
  */
 public interface ISearchPlanCodeGenerator {
 
-    void compile(List <List<ISearchOperation>> plans);
+    void compile(List<List<ISearchOperation>> plans);
 
 }

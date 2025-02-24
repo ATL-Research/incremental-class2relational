@@ -16,6 +16,6 @@ public interface StateEquivalenceChecker {
 	}
 
 	EquivalenceResult constructMorphism(
-			IntSet individuals, List <? extends AnyInterpretation> interpretations1, ObjectCode code1,
-			List <? extends AnyInterpretation> interpretations2, ObjectCode code2);
+			IntSet individuals, List<? extends AnyInterpretation> interpretations1, ObjectCode code1,
+			List<? extends AnyInterpretation> interpretations2, ObjectCode code2);
 }

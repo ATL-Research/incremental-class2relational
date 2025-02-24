@@ -20,7 +20,7 @@ public interface PropagationBuilder extends ModelAdapterBuilder {
 		return rules(List.of(propagationRules));
 	}
 
-	default PropagationBuilder rules(Collection <Rule> propagationRules) {
+	default PropagationBuilder rules(Collection<Rule> propagationRules) {
 		propagationRules.forEach(this::rule);
 		return this;
 	}

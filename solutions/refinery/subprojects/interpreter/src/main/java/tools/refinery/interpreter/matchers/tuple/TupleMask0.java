@@ -27,7 +27,7 @@ public final class TupleMask0 extends TupleMask {
     }
 
     @Override
-    public <T> List <T> transform(List <T> original) {
+    public <T> List<T> transform(List<T> original) {
         return Collections.emptyList();
     }
 

@@ -78,7 +78,7 @@ public class PBodyNormalizer extends PDisjunctionRewriter {
 
     @Override
     public PDisjunction rewrite(PDisjunction disjunction) {
-        Set <PBody> normalizedBodies = new LinkedHashSet<>();
+        Set<PBody> normalizedBodies = new LinkedHashSet<>();
         for (PBody body : disjunction.getBodies()) {
             PBodyCopier copier = new PBodyCopier(body, getTraceCollector());
             PBody modifiedBody = copier.getCopiedBody();
@@ -134,7 +134,7 @@ public class PBodyNormalizer extends PDisjunctionRewriter {
     }
 
     private void removeMootEqualities(PBody body) {
-        Set <Equality> equals = body.getConstraintsOfType(Equality.class);
+        Set<Equality> equals = body.getConstraintsOfType(Equality.class);
         for (Equality equality : equals) {
             if (equality.isMoot()) {
                 equality.delete();
@@ -149,7 +149,7 @@ public class PBodyNormalizer extends PDisjunctionRewriter {
      * @param body
      */
     void unifyVariablesAlongEqualities(PBody body) {
-        Set <Equality> equals = body.getConstraintsOfType(Equality.class);
+        Set<Equality> equals = body.getConstraintsOfType(Equality.class);
         for (Equality equality : equals) {
             if (!equality.isMoot()) {
                 equality.getWho().unifyInto(equality.getWithWhom());
@@ -175,20 +175,20 @@ public class PBodyNormalizer extends PDisjunctionRewriter {
      * Eliminates all type constraints that are inferrable from other constraints.
      */
     void eliminateInferrableTypes(final PBody body, IQueryMetaContext context) {
-        Set <TypeJudgement> subsumedByRetainedConstraints = new HashSet <TypeJudgement>();
-        LinkedList <ITypeConstraint> allTypeConstraints = new LinkedList <ITypeConstraint>();
+        Set<TypeJudgement> subsumedByRetainedConstraints = new HashSet<TypeJudgement>();
+        LinkedList<ITypeConstraint> allTypeConstraints = new LinkedList<ITypeConstraint>();
         for (PConstraint pConstraint : body.getConstraints()) {
             if (pConstraint instanceof ITypeConstraint) {
                 allTypeConstraints.add((ITypeConstraint) pConstraint);
             } else if (pConstraint instanceof ITypeInfoProviderConstraint) {
                 // non-type constraints are all retained
-                final Set <TypeJudgement> directJudgements = ((ITypeInfoProviderConstraint) pConstraint)
+                final Set<TypeJudgement> directJudgements = ((ITypeInfoProviderConstraint) pConstraint)
                         .getImpliedJudgements(context);
                 subsumedByRetainedConstraints = TypeHelper.typeClosure(subsumedByRetainedConstraints, directJudgements,
                         context);
             }
         }
-        Comparator <ITypeConstraint> eliminationOrder = (o1, o2) -> {
+        Comparator<ITypeConstraint> eliminationOrder = (o1, o2) -> {
             IInputKey type1 = o1.getEquivalentJudgement().getInputKey();
             IInputKey type2 = o2.getEquivalentJudgement().getInputKey();
 
@@ -199,16 +199,16 @@ public class PBodyNormalizer extends PDisjunctionRewriter {
         };
 
         Collections.sort(allTypeConstraints, eliminationOrder);
-        Queue <ITypeConstraint> potentialConstraints = allTypeConstraints; // rename for better comprehension
+        Queue<ITypeConstraint> potentialConstraints = allTypeConstraints; // rename for better comprehension
 
         while (!potentialConstraints.isEmpty()) {
             ITypeConstraint candidate = potentialConstraints.poll();
 
             boolean isSubsumed = subsumedByRetainedConstraints.contains(candidate.getEquivalentJudgement());
             if (!isSubsumed) {
-                Set <TypeJudgement> typeClosure = subsumedByRetainedConstraints;
+                Set<TypeJudgement> typeClosure = subsumedByRetainedConstraints;
                 for (ITypeConstraint subsuming : potentialConstraints) { // the remaining ones
-                    final Set <TypeJudgement> directJudgements = subsuming.getImpliedJudgements(context);
+                    final Set<TypeJudgement> directJudgements = subsuming.getImpliedJudgements(context);
                     typeClosure = TypeHelper.typeClosure(typeClosure, directJudgements, context);
 
                     if (typeClosure.contains(candidate.getEquivalentJudgement())) {
@@ -231,10 +231,10 @@ public class PBodyNormalizer extends PDisjunctionRewriter {
      * Inserts "weakened alternative" constraints suggested by the meta context that aid in coming up with a query plan.
      */
     void expandWeakenedAlternativeConstraints(PBody body) {
-        Set <TypeJudgement> allJudgements = new HashSet <TypeJudgement>();
-        Set <TypeJudgement> newJudgementsToAdd = new HashSet <TypeJudgement>();
-        Queue <TypeJudgement> judgementsToProcess = new LinkedList <TypeJudgement>();
-        Map <TypeJudgement, List <PConstraint>> traceability = CollectionsFactory.createMap();
+        Set<TypeJudgement> allJudgements = new HashSet<TypeJudgement>();
+        Set<TypeJudgement> newJudgementsToAdd = new HashSet<TypeJudgement>();
+        Queue<TypeJudgement> judgementsToProcess = new LinkedList<TypeJudgement>();
+        Map<TypeJudgement, List<PConstraint>> traceability = CollectionsFactory.createMap();
 
         for (ITypeConstraint typeConstraint : body.getConstraintsOfType(ITypeConstraint.class)) {
             TypeJudgement equivalentJudgement = typeConstraint.getEquivalentJudgement();
@@ -275,7 +275,7 @@ public class PBodyNormalizer extends PDisjunctionRewriter {
     }
 
     void eliminateDuplicateTypeConstraints(PBody body) {
-        Map <Object, PConstraint> constraints = new HashMap<>();
+        Map<Object, PConstraint> constraints = new HashMap<>();
         for (PConstraint constraint : body.getConstraints()) {
             Object key = getConstraintKey(constraint);
             // Retain first found instance of a constraint
@@ -285,8 +285,8 @@ public class PBodyNormalizer extends PDisjunctionRewriter {
         }
 
         // Retain collected constraints, remove everything else
-        Iterator <PConstraint> iterator = body.getConstraints().iterator();
-        Collection <PConstraint> toRetain = constraints.values();
+        Iterator<PConstraint> iterator = body.getConstraints().iterator();
+        Collection<PConstraint> toRetain = constraints.values();
         while(iterator.hasNext()){
             PConstraint next = iterator.next();
             if (!toRetain.contains(next)){

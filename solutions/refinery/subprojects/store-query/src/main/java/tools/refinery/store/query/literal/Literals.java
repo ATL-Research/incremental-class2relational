@@ -12,11 +12,11 @@ public final class Literals {
 		throw new IllegalStateException("This is a static utility class and should not be instantiated directly");
 	}
 
-	public static <T extends CanNegate <T>> T not(CanNegate <T> literal) {
+	public static <T extends CanNegate<T>> T not(CanNegate<T> literal) {
 		return literal.negate();
 	}
 
-	public static CheckLiteral check(Term <Boolean> term) {
+	public static CheckLiteral check(Term<Boolean> term) {
 		return new CheckLiteral(term);
 	}
 }

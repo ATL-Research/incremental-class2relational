@@ -11,5 +11,5 @@ import java.util.List;
 
 @FunctionalInterface
 public interface ActionCallback0 {
-	List <ActionLiteral> toLiterals();
+	List<ActionLiteral> toLiterals();
 }

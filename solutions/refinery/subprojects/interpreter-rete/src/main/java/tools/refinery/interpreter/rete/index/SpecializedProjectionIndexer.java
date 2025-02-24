@@ -37,20 +37,20 @@ import tools.refinery.interpreter.matchers.util.Direction;
 public abstract class SpecializedProjectionIndexer extends StandardIndexer implements ProjectionIndexer {
 
     protected Node activeNode;
-    protected List <ListenerSubscription> subscriptions;
+    protected List<ListenerSubscription> subscriptions;
 
     /**
      * @since 1.7
      */
     public SpecializedProjectionIndexer(final ReteContainer reteContainer, final TupleMask mask, final Supplier parent,
-                                        final Node activeNode, final List <ListenerSubscription> subscriptions) {
+                                        final Node activeNode, final List<ListenerSubscription> subscriptions) {
         super(reteContainer, mask);
         this.parent = parent;
         this.activeNode = activeNode;
         this.subscriptions = subscriptions;
     }
 
-    public List <ListenerSubscription> getSubscriptions() {
+    public List<ListenerSubscription> getSubscriptions() {
         return subscriptions;
     }
 
@@ -96,7 +96,7 @@ public abstract class SpecializedProjectionIndexer extends StandardIndexer imple
     @Override
     public void networkStructureChanged() {
         super.networkStructureChanged();
-        final List <ListenerSubscription> oldSubscriptions = new ArrayList <ListenerSubscription>();
+        final List<ListenerSubscription> oldSubscriptions = new ArrayList<ListenerSubscription>();
         oldSubscriptions.addAll(subscriptions);
         subscriptions.clear();
         for (final ListenerSubscription oldSubscription : oldSubscriptions) {

@@ -20,12 +20,12 @@ import static org.hamcrest.Matchers.is;
 class UpperCardinalitySumAggregatorStreamTest {
 	@ParameterizedTest
 	@MethodSource
-	void testStream(List <UpperCardinality> list, UpperCardinality expected) {
+	void testStream(List<UpperCardinality> list, UpperCardinality expected) {
 		var result = UpperCardinalitySumAggregator.INSTANCE.aggregateStream(list.stream());
 		assertThat(result, is(expected));
 	}
 
-	static Stream <Arguments> testStream() {
+	static Stream<Arguments> testStream() {
 		return Stream.of(
 				Arguments.of(List.of(), UpperCardinalities.ZERO),
 				Arguments.of(List.of(UpperCardinality.of(3)), UpperCardinality.of(3)),

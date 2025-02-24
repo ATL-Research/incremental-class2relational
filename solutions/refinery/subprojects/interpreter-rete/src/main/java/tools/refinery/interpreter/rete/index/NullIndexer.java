@@ -35,19 +35,19 @@ import tools.refinery.interpreter.matchers.util.Direction;
  */
 public abstract class NullIndexer extends SpecializedProjectionIndexer {
 
-    protected abstract Collection <Tuple> getTuples();
+    protected abstract Collection<Tuple> getTuples();
 
     protected static final Tuple nullSignature = Tuples.staticArityFlatTupleOf();
-    protected static final Collection <Tuple> nullSingleton = Collections.singleton(nullSignature);
-    protected static final Collection <Tuple> emptySet = Collections.emptySet();
+    protected static final Collection<Tuple> nullSingleton = Collections.singleton(nullSignature);
+    protected static final Collection<Tuple> emptySet = Collections.emptySet();
 
     public NullIndexer(ReteContainer reteContainer, int tupleWidth, Supplier parent, Node activeNode,
-                       List <ListenerSubscription> sharedSubscriptionList) {
+                       List<ListenerSubscription> sharedSubscriptionList) {
         super(reteContainer, TupleMask.linear(0, tupleWidth), parent, activeNode, sharedSubscriptionList);
     }
 
     @Override
-    public Collection <Tuple> get(Tuple signature) {
+    public Collection<Tuple> get(Tuple signature) {
         if (nullSignature.equals(signature))
             return isEmpty() ? null : getTuples();
         else
@@ -55,7 +55,7 @@ public abstract class NullIndexer extends SpecializedProjectionIndexer {
     }
 
     @Override
-    public Collection <Tuple> getSignatures() {
+    public Collection<Tuple> getSignatures() {
         return isEmpty() ? emptySet : nullSingleton;
     }
 
@@ -68,7 +68,7 @@ public abstract class NullIndexer extends SpecializedProjectionIndexer {
     }
 
     @Override
-    public Iterator <Tuple> iterator() {
+    public Iterator<Tuple> iterator() {
         return getTuples().iterator();
     }
 

@@ -25,12 +25,12 @@ import tools.refinery.store.tuple.Tuple;
  * implementation for these methods.
  * Using this class with any other runtime context may lead to undefined behavior.
  */
-public class InterpretedFunctionalMatcher <T> extends AbstractInterpretedMatcher <T> {
+public class InterpretedFunctionalMatcher<T> extends AbstractInterpretedMatcher<T> {
 	private final TupleMask emptyMask;
 	private final TupleMask omitOutputMask;
 	private final IterableIndexer omitOutputIndexer;
 
-	public InterpretedFunctionalMatcher(QueryInterpreterAdapterImpl adapter, FunctionalQuery <T> query,
+	public InterpretedFunctionalMatcher(QueryInterpreterAdapterImpl adapter, FunctionalQuery<T> query,
 										RawPatternMatcher rawPatternMatcher) {
 		super(adapter, query, rawPatternMatcher);
 		int arity = query.arity();
@@ -60,7 +60,7 @@ public class InterpretedFunctionalMatcher <T> extends AbstractInterpretedMatcher
 	}
 
 	@Override
-	public Cursor <Tuple, T> getAll() {
+	public Cursor<Tuple, T> getAll() {
 		if (omitOutputIndexer == null) {
 			var allMatches = backend.getAllMatches(emptyMask, Tuples.staticArityFlatTupleOf());
 			return new UnsafeFunctionalCursor<>(allMatches.iterator());

@@ -31,10 +31,10 @@ import tools.refinery.interpreter.localsearch.plan.SearchPlanExecutor;
  */
 public class LocalSearchProfilerAdapter implements ILocalSearchAdapter {
 
-    private final Map <MatcherReference, List <SearchPlan>> planReference = new HashMap<>();
+    private final Map<MatcherReference, List<SearchPlan>> planReference = new HashMap<>();
 
-    private final Map <ISearchOperation, Integer> successfulOperationCounts = new HashMap<>();
-    private final Map <ISearchOperation, Integer> failedOperationCounts = new HashMap<>();
+    private final Map<ISearchOperation, Integer> successfulOperationCounts = new HashMap<>();
+    private final Map<ISearchOperation, Integer> failedOperationCounts = new HashMap<>();
 
     @Override
     public void patternMatchingStarted(LocalSearchMatcher lsMatcher) {
@@ -45,7 +45,7 @@ public class LocalSearchProfilerAdapter implements ILocalSearchAdapter {
 
     @Override
     public void operationExecuted(SearchPlan plan, ISearchOperation operation, MatchingFrame frame, boolean isSuccessful) {
-        Map <ISearchOperation, Integer> counts = isSuccessful ? successfulOperationCounts : failedOperationCounts;
+        Map<ISearchOperation, Integer> counts = isSuccessful ? successfulOperationCounts : failedOperationCounts;
         counts.merge(operation,
                 /*no previous entry*/1,
                 /*increase previous value*/(oldValue, v) -> oldValue + 1);
@@ -54,15 +54,15 @@ public class LocalSearchProfilerAdapter implements ILocalSearchAdapter {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (java.util.Map.Entry <MatcherReference, List <SearchPlan>> entry: planReference.entrySet()){
+        for (java.util.Map.Entry<MatcherReference, List<SearchPlan>> entry: planReference.entrySet()){
             sb.append(entry.getKey());
             sb.append("\n");
 
             sb.append(entry.getValue());
 
-            List <SearchPlan> bodies = entry.getValue();
+            List<SearchPlan> bodies = entry.getValue();
             sb.append("{\n");
-            for(int i=0;i <bodies.size();i++){
+            for(int i=0;i<bodies.size();i++){
                 sb.append("\tbody #");sb.append(i);sb.append("(\n");
                 for(ISearchOperation operation : bodies.get(i).getOperations()){
                     final int successCount = successfulOperationCounts.computeIfAbsent(operation, op -> 0);

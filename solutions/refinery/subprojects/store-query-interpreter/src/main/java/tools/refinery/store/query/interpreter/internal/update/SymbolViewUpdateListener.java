@@ -18,12 +18,12 @@ import tools.refinery.store.query.view.TuplePreservingView;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class SymbolViewUpdateListener <T> implements InterpretationListener <T> {
+public abstract class SymbolViewUpdateListener<T> implements InterpretationListener<T> {
 	private final QueryInterpreterAdapterImpl adapter;
-	private final Interpretation <T> interpretation;
-	private final List <RelationViewFilter> filters = new ArrayList<>();
+	private final Interpretation<T> interpretation;
+	private final List<RelationViewFilter> filters = new ArrayList<>();
 
-	protected SymbolViewUpdateListener(QueryInterpreterAdapterImpl adapter, Interpretation <T> interpretation) {
+	protected SymbolViewUpdateListener(QueryInterpreterAdapterImpl adapter, Interpretation<T> interpretation) {
 		this.adapter = adapter;
 		this.interpretation = interpretation;
 	}
@@ -46,17 +46,17 @@ public abstract class SymbolViewUpdateListener <T> implements InterpretationList
 	protected void processUpdate(Tuple tuple, boolean isInsertion) {
 		adapter.markAsPending();
 		int size = filters.size();
-		// Use a for loop instead of a for-each loop to avoid <code>Iterator </code> allocation overhead.
+		// Use a for loop instead of a for-each loop to avoid <code>Iterator</code> allocation overhead.
 		//noinspection ForLoopReplaceableByForEach
 		for (int i = 0; i < size; i++) {
 			filters.get(i).update(tuple, isInsertion);
 		}
 	}
 
-	public static <T> SymbolViewUpdateListener <T> of(QueryInterpreterAdapterImpl adapter,
-                                                     SymbolView <T> view,
-                                                     Interpretation <T> interpretation) {
-		if (view instanceof TuplePreservingView <T> tuplePreservingRelationView) {
+	public static <T> SymbolViewUpdateListener<T> of(QueryInterpreterAdapterImpl adapter,
+                                                     SymbolView<T> view,
+                                                     Interpretation<T> interpretation) {
+		if (view instanceof TuplePreservingView<T> tuplePreservingRelationView) {
 			return new TuplePreservingViewUpdateListener<>(adapter, tuplePreservingRelationView,
 					interpretation);
 		}

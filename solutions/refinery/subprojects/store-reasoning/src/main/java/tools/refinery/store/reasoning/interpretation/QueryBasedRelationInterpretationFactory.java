@@ -19,14 +19,14 @@ import tools.refinery.store.tuple.Tuple;
 
 import java.util.Set;
 
-public class QueryBasedRelationInterpretationFactory implements PartialInterpretation.Factory <TruthValue, Boolean> {
-	private final Query <Boolean> may;
-	private final Query <Boolean> must;
-	private final Query <Boolean> candidateMay;
-	private final Query <Boolean> candidateMust;
+public class QueryBasedRelationInterpretationFactory implements PartialInterpretation.Factory<TruthValue, Boolean> {
+	private final Query<Boolean> may;
+	private final Query<Boolean> must;
+	private final Query<Boolean> candidateMay;
+	private final Query<Boolean> candidateMust;
 
 	public QueryBasedRelationInterpretationFactory(
-			Query <Boolean> may, Query <Boolean> must, Query <Boolean> candidateMay, Query <Boolean> candidateMust) {
+			Query<Boolean> may, Query<Boolean> must, Query<Boolean> candidateMay, Query<Boolean> candidateMust) {
 		this.may = may;
 		this.must = must;
 		this.candidateMay = candidateMay;
@@ -34,11 +34,11 @@ public class QueryBasedRelationInterpretationFactory implements PartialInterpret
 	}
 
 	@Override
-	public PartialInterpretation <TruthValue, Boolean> create(
-			ReasoningAdapter adapter, Concreteness concreteness, PartialSymbol <TruthValue, Boolean> partialSymbol) {
+	public PartialInterpretation<TruthValue, Boolean> create(
+			ReasoningAdapter adapter, Concreteness concreteness, PartialSymbol<TruthValue, Boolean> partialSymbol) {
 		var queryEngine = adapter.getModel().getAdapter(ModelQueryAdapter.class);
-		ResultSet <Boolean> mayResultSet;
-		ResultSet <Boolean> mustResultSet;
+		ResultSet<Boolean> mayResultSet;
+		ResultSet<Boolean> mustResultSet;
 		switch (concreteness) {
 		case PARTIAL -> {
 			mayResultSet = queryEngine.getResultSet(may);
@@ -59,7 +59,7 @@ public class QueryBasedRelationInterpretationFactory implements PartialInterpret
 	}
 
 	@Override
-	public void configure(ModelStoreBuilder storeBuilder, Set <Concreteness> requiredInterpretations) {
+	public void configure(ModelStoreBuilder storeBuilder, Set<Concreteness> requiredInterpretations) {
 		var queryBuilder = storeBuilder.getAdapter(ModelQueryBuilder.class);
 		if (requiredInterpretations.contains(Concreteness.PARTIAL)) {
 			queryBuilder.queries(may, must);
@@ -69,12 +69,12 @@ public class QueryBasedRelationInterpretationFactory implements PartialInterpret
 		}
 	}
 
-	private static class TwoValuedInterpretation extends AbstractPartialInterpretation <TruthValue, Boolean> {
-		private final ResultSet <Boolean> resultSet;
+	private static class TwoValuedInterpretation extends AbstractPartialInterpretation<TruthValue, Boolean> {
+		private final ResultSet<Boolean> resultSet;
 
 		protected TwoValuedInterpretation(
-				ReasoningAdapter adapter, Concreteness concreteness, PartialSymbol <TruthValue, Boolean> partialSymbol,
-				ResultSet <Boolean> resultSet) {
+				ReasoningAdapter adapter, Concreteness concreteness, PartialSymbol<TruthValue, Boolean> partialSymbol,
+				ResultSet<Boolean> resultSet) {
 			super(adapter, concreteness, partialSymbol);
 			this.resultSet = resultSet;
 		}
@@ -85,11 +85,11 @@ public class QueryBasedRelationInterpretationFactory implements PartialInterpret
 		}
 
 		@Override
-		public Cursor <Tuple, TruthValue> getAll() {
+		public Cursor<Tuple, TruthValue> getAll() {
 			return new TwoValuedCursor(resultSet.getAll());
 		}
 
-		private record TwoValuedCursor(Cursor <Tuple, Boolean> cursor) implements Cursor <Tuple, TruthValue> {
+		private record TwoValuedCursor(Cursor<Tuple, Boolean> cursor) implements Cursor<Tuple, TruthValue> {
 			@Override
 			public Tuple getKey() {
 				return cursor.getKey();
@@ -112,13 +112,13 @@ public class QueryBasedRelationInterpretationFactory implements PartialInterpret
 		}
 	}
 
-	private static class FourValuedInterpretation extends AbstractPartialInterpretation <TruthValue, Boolean> {
-		private final ResultSet <Boolean> mayResultSet;
-		private final ResultSet <Boolean> mustResultSet;
+	private static class FourValuedInterpretation extends AbstractPartialInterpretation<TruthValue, Boolean> {
+		private final ResultSet<Boolean> mayResultSet;
+		private final ResultSet<Boolean> mustResultSet;
 
 		public FourValuedInterpretation(
-				ReasoningAdapter adapter, Concreteness concreteness, PartialSymbol <TruthValue, Boolean> partialSymbol,
-				ResultSet <Boolean> mayResultSet, ResultSet <Boolean> mustResultSet) {
+				ReasoningAdapter adapter, Concreteness concreteness, PartialSymbol<TruthValue, Boolean> partialSymbol,
+				ResultSet<Boolean> mayResultSet, ResultSet<Boolean> mustResultSet) {
 			super(adapter, concreteness, partialSymbol);
 			this.mayResultSet = mayResultSet;
 			this.mustResultSet = mustResultSet;
@@ -136,13 +136,13 @@ public class QueryBasedRelationInterpretationFactory implements PartialInterpret
 		}
 
 		@Override
-		public Cursor <Tuple, TruthValue> getAll() {
+		public Cursor<Tuple, TruthValue> getAll() {
 			return new FourValuedCursor();
 		}
 
-		private final class FourValuedCursor implements Cursor <Tuple, TruthValue> {
-			private final Cursor <Tuple, Boolean> mayCursor;
-			private Cursor <Tuple, Boolean> mustCursor;
+		private final class FourValuedCursor implements Cursor<Tuple, TruthValue> {
+			private final Cursor<Tuple, Boolean> mayCursor;
+			private Cursor<Tuple, Boolean> mustCursor;
 
 			private FourValuedCursor() {
 				this.mayCursor = mayResultSet.getAll();

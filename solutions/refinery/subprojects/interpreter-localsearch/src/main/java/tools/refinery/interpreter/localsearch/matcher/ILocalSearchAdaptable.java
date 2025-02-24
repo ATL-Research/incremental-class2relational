@@ -16,14 +16,14 @@ import java.util.List;
  */
 public interface ILocalSearchAdaptable {
 
-    List <ILocalSearchAdapter> getAdapters();
+    List<ILocalSearchAdapter> getAdapters();
 
     void addAdapter(ILocalSearchAdapter adapter);
 
     void removeAdapter(ILocalSearchAdapter adapter);
 
-    void removeAdapters(List <ILocalSearchAdapter> adapter);
+    void removeAdapters(List<ILocalSearchAdapter> adapter);
 
-    void addAdapters(List <ILocalSearchAdapter> adapter);
+    void addAdapters(List<ILocalSearchAdapter> adapter);
 
 }

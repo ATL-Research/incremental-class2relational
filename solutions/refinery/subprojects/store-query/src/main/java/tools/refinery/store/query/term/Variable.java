@@ -20,7 +20,7 @@ public abstract sealed class Variable permits AnyDataVariable, NodeVariable {
 		uniqueName = DnfUtils.generateUniqueName(name);
 	}
 
-	public abstract Optional <Class<?>> tryGetType();
+	public abstract Optional<Class<?>> tryGetType();
 
 	public String getName() {
 		return explicitName == null ? uniqueName : explicitName;
@@ -48,7 +48,7 @@ public abstract sealed class Variable permits AnyDataVariable, NodeVariable {
 
 	public abstract NodeVariable asNodeVariable();
 
-	public abstract <T> DataVariable <T> asDataVariable(Class <T> type);
+	public abstract <T> DataVariable<T> asDataVariable(Class<T> type);
 
 	public abstract int hashCodeWithSubstitution(int sequenceNumber);
 
@@ -78,11 +78,11 @@ public abstract sealed class Variable permits AnyDataVariable, NodeVariable {
 		return of((String) null);
 	}
 
-	public static <T> DataVariable <T> of(@Nullable String name, Class <T> type) {
+	public static <T> DataVariable<T> of(@Nullable String name, Class<T> type) {
 		return new DataVariable<>(name, type);
 	}
 
-	public static <T> DataVariable <T> of(Class <T> type) {
+	public static <T> DataVariable<T> of(Class<T> type) {
 		return of(null, type);
 	}
 }

@@ -27,8 +27,8 @@ public class StatisticsHelper {
         // Hidden utility class constructor
     }
 
-    public static Optional <Double> estimateAverageBucketSize(TupleMask groupMask, Accuracy requiredAccuracy,
-            BiFunction <TupleMask, Accuracy, Optional <Long>> estimateCardinality)
+    public static Optional<Double> estimateAverageBucketSize(TupleMask groupMask, Accuracy requiredAccuracy,
+            BiFunction<TupleMask, Accuracy, Optional<Long>> estimateCardinality)
     {
         if (groupMask.isIdentity()) return Optional.of(1.0);
 
@@ -36,8 +36,8 @@ public class StatisticsHelper {
         Accuracy denominatorAccuracy = requiredAccuracy.reciprocal();
         TupleMask identityMask = TupleMask.identity(groupMask.sourceWidth);
 
-        Optional <Long> totalCountEstimate  = estimateCardinality.apply(identityMask, numeratorAccuracy);
-        Optional <Long> bucketCountEstimate = estimateCardinality.apply(groupMask,    denominatorAccuracy);
+        Optional<Long> totalCountEstimate  = estimateCardinality.apply(identityMask, numeratorAccuracy);
+        Optional<Long> bucketCountEstimate = estimateCardinality.apply(groupMask,    denominatorAccuracy);
 
         return totalCountEstimate.flatMap(matchCount ->
             bucketCountEstimate.map(bucketCount ->
@@ -45,14 +45,14 @@ public class StatisticsHelper {
         ));
     }
 
-    public static Optional <Double> min(Optional <Double> a,  Optional <Double> b) {
+    public static Optional<Double> min(Optional<Double> a,  Optional<Double> b) {
         if (b.isPresent()) {
             if (a.isPresent()) {
                 return Optional.of(Math.min(a.get(), b.get()));
             } else return b;
         } else return a;
     }
-    public static Optional <Double> min(Optional <Double> a, double b) {
+    public static Optional<Double> min(Optional<Double> a, double b) {
         if (a.isPresent()) {
             return Optional.of(Math.min(a.get(), b));
         } else return Optional.of(b);

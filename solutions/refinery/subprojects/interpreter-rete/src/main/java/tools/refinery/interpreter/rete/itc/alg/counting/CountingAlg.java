@@ -32,11 +32,11 @@ import tools.refinery.interpreter.matchers.util.IMemoryView;
  * @param <V>
  *            the type parameter of the nodes in the graph data source
  */
-public class CountingAlg <V> implements IGraphObserver <V>, ITcDataSource <V> {
+public class CountingAlg<V> implements IGraphObserver<V>, ITcDataSource<V> {
 
-    private CountingTcRelation <V> tc = null;
-    private IBiDirectionalGraphDataSource <V> gds = null;
-    private List <ITcObserver<V>> observers;
+    private CountingTcRelation<V> tc = null;
+    private IBiDirectionalGraphDataSource<V> gds = null;
+    private List<ITcObserver<V>> observers;
 
     /**
      * Constructs a new Counting algorithm and initializes the transitive closure relation with the given graph data
@@ -45,16 +45,16 @@ public class CountingAlg <V> implements IGraphObserver <V>, ITcDataSource <V> {
      * @param gds
      *            the graph data source instance
      */
-    public CountingAlg(IGraphDataSource <V> gds) {
+    public CountingAlg(IGraphDataSource<V> gds) {
 
-        if (gds instanceof IBiDirectionalGraphDataSource <?>) {
-            this.gds = (IBiDirectionalGraphDataSource <V>) gds;
+        if (gds instanceof IBiDirectionalGraphDataSource<?>) {
+            this.gds = (IBiDirectionalGraphDataSource<V>) gds;
         } else {
-            this.gds = new IBiDirectionalWrapper <V>(gds);
+            this.gds = new IBiDirectionalWrapper<V>(gds);
         }
 
-        observers = CollectionsFactory.<ITcObserver <V>>createObserverList();
-        tc = new CountingTcRelation <V>(true);
+        observers = CollectionsFactory.<ITcObserver<V>>createObserverList();
+        tc = new CountingTcRelation<V>(true);
 
         initTc();
         gds.attachObserver(this);
@@ -107,8 +107,8 @@ public class CountingAlg <V> implements IGraphObserver <V>, ITcDataSource <V> {
         // System.out.println("The graph contains cycle with (" + source + ","+ target + ") edge!");
         // }
 
-        CountingTcRelation <V> dtc = new CountingTcRelation <V>(false);
-        Set <V> tupEnds = null;
+        CountingTcRelation<V> dtc = new CountingTcRelation<V>(false);
+        Set<V> tupEnds = null;
 
         // 1. d(tc(x,y)) :- d(l(x,y))
         if (tc.updateTuple(source, target, isInsertion)) {
@@ -130,11 +130,11 @@ public class CountingAlg <V> implements IGraphObserver <V>, ITcDataSource <V> {
         }
 
         // 3. d(tc(x,y)) :- lv(x,z) & d(tc(z,y))
-        CountingTcRelation <V> newTuples = dtc;
-        CountingTcRelation <V> tmp = null;
-        dtc = new CountingTcRelation <V>(false);
+        CountingTcRelation<V> newTuples = dtc;
+        CountingTcRelation<V> tmp = null;
+        dtc = new CountingTcRelation<V>(false);
 
-        IMemoryView <V> nodes = null;
+        IMemoryView<V> nodes = null;
 
         while (!newTuples.isEmpty()) {
 
@@ -167,11 +167,11 @@ public class CountingAlg <V> implements IGraphObserver <V>, ITcDataSource <V> {
         // System.out.println(tc);
     }
 
-    public ITcRelation <V> getTcRelation() {
+    public ITcRelation<V> getTcRelation() {
         return this.tc;
     }
 
-    public void setTcRelation(CountingTcRelation <V> tc) {
+    public void setTcRelation(CountingTcRelation<V> tc) {
         this.tc = tc;
     }
 
@@ -181,33 +181,33 @@ public class CountingAlg <V> implements IGraphObserver <V>, ITcDataSource <V> {
     }
 
     @Override
-    public void attachObserver(ITcObserver <V> to) {
+    public void attachObserver(ITcObserver<V> to) {
         this.observers.add(to);
 
     }
 
     @Override
-    public void detachObserver(ITcObserver <V> to) {
+    public void detachObserver(ITcObserver<V> to) {
         this.observers.remove(to);
     }
 
     @Override
-    public Set <V> getAllReachableTargets(V source) {
+    public Set<V> getAllReachableTargets(V source) {
         return tc.getTupleEnds(source);
     }
 
     @Override
-    public Set <V> getAllReachableSources(V target) {
+    public Set<V> getAllReachableSources(V target) {
         return tc.getTupleStarts(target);
     }
 
     private void notifyTcObservers(V source, V target, boolean isInsertion) {
         if (isInsertion) {
-            for (ITcObserver <V> o : observers) {
+            for (ITcObserver<V> o : observers) {
                 o.tupleInserted(source, target);
             }
         } else {
-            for (ITcObserver <V> o : observers) {
+            for (ITcObserver<V> o : observers) {
                 o.tupleDeleted(source, target);
             }
         }
@@ -220,7 +220,7 @@ public class CountingAlg <V> implements IGraphObserver <V>, ITcDataSource <V> {
     }
 
     @Override
-    public IGraphPathFinder <V> getPathFinder() {
-        return new DFSPathFinder <V>(gds, this);
+    public IGraphPathFinder<V> getPathFinder() {
+        return new DFSPathFinder<V>(gds, this);
     }
 }

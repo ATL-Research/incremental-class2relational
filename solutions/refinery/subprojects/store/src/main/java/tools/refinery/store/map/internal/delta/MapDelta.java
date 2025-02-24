@@ -5,7 +5,7 @@
  */
 package tools.refinery.store.map.internal.delta;
 
-public record MapDelta <K, V>(K key, V oldValue, V newValue) {
+public record MapDelta<K, V>(K key, V oldValue, V newValue) {
 	public K getKey() {
 		return key;
 	}

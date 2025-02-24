@@ -28,39 +28,39 @@ import tools.refinery.interpreter.matchers.util.timeline.Timeline;
  * @author Tamas Szabo
  * @since 2.3
  */
-public final class TimelyDefaultMaskedTupleMemory <Timestamp extends Comparable <Timestamp>>
-        extends AbstractTimelyMaskedMemory <Timestamp, Tuple> {
+public final class TimelyDefaultMaskedTupleMemory<Timestamp extends Comparable<Timestamp>>
+        extends AbstractTimelyMaskedMemory<Timestamp, Tuple> {
 
     public TimelyDefaultMaskedTupleMemory(final TupleMask mask, final Object owner, final boolean isLazy) {
         super(mask, owner, isLazy);
     }
 
     @Override
-    public Iterable <Tuple> getSignatures() {
+    public Iterable<Tuple> getSignatures() {
         return this.memoryMap.keySet();
     }
 
     @Override
-    public Diff <Timestamp> removeWithTimestamp(final Tuple tuple, final Tuple signature,
+    public Diff<Timestamp> removeWithTimestamp(final Tuple tuple, final Tuple signature,
             final Timestamp timestamp) {
         final Tuple key = mask.transform(tuple);
         return removeInternal(key, tuple, timestamp);
     }
 
     @Override
-    public Diff <Timestamp> addWithTimestamp(final Tuple tuple, final Tuple signature,
+    public Diff<Timestamp> addWithTimestamp(final Tuple tuple, final Tuple signature,
             final Timestamp timestamp) {
         final Tuple key = this.mask.transform(tuple);
         return addInternal(key, tuple, timestamp);
     }
 
     @Override
-    public Collection <Tuple> get(final ITuple signature) {
+    public Collection<Tuple> get(final ITuple signature) {
         return getInternal(signature.toImmutable());
     }
 
     @Override
-    public Map <Tuple, Timeline <Timestamp>> getWithTimeline(final ITuple signature) {
+    public Map<Tuple, Timeline<Timestamp>> getWithTimeline(final ITuple signature) {
         return getWithTimestampInternal(signature.toImmutable());
     }
 
@@ -70,7 +70,7 @@ public final class TimelyDefaultMaskedTupleMemory <Timestamp extends Comparable 
     }
 
     @Override
-    public Set <Tuple> getResumableSignatures() {
+    public Set<Tuple> getResumableSignatures() {
         if (this.foldingStates == null || this.foldingStates.isEmpty()) {
             return Collections.emptySet();
         } else {
@@ -79,16 +79,16 @@ public final class TimelyDefaultMaskedTupleMemory <Timestamp extends Comparable 
     }
 
     @Override
-    public Map <Tuple, Map <Tuple, Diff <Timestamp>>> resumeAt(final Timestamp timestamp) {
-        final Map <Tuple, Map <Tuple, Diff <Timestamp>>> result = CollectionsFactory.createMap();
+    public Map<Tuple, Map<Tuple, Diff<Timestamp>>> resumeAt(final Timestamp timestamp) {
+        final Map<Tuple, Map<Tuple, Diff<Timestamp>>> result = CollectionsFactory.createMap();
         final Timestamp resumableTimestamp = this.getResumableTimestamp();
         if (resumableTimestamp == null || resumableTimestamp.compareTo(timestamp) != 0) {
             throw new IllegalStateException("Expected to continue folding at " + resumableTimestamp + "!");
         }
-        final Set <Tuple> signatures = this.foldingStates.remove(timestamp);
+        final Set<Tuple> signatures = this.foldingStates.remove(timestamp);
         for (final Tuple signature : signatures) {
-            final TimelyMemory <Timestamp> memory = this.memoryMap.get(signature);
-            final Map <Tuple, Diff <Timestamp>> diffMap = memory.resumeAt(resumableTimestamp);
+            final TimelyMemory<Timestamp> memory = this.memoryMap.get(signature);
+            final Map<Tuple, Diff<Timestamp>> diffMap = memory.resumeAt(resumableTimestamp);
             result.put(signature, diffMap);
             registerFoldingState(memory.getResumableTimestamp(), signature);
         }

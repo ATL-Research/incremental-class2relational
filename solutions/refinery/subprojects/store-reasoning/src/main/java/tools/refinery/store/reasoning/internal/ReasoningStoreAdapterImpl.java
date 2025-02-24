@@ -28,17 +28,17 @@ import java.util.Set;
 
 class ReasoningStoreAdapterImpl implements ReasoningStoreAdapter {
 	private final ModelStore store;
-	private final Set <Concreteness> supportedInterpretations;
-	private final Map <AnyPartialSymbol, PartialInterpretation.Factory <?, ?>> symbolInterpreters;
-	private final Map <AnyPartialSymbol, PartialInterpretationRefiner.Factory <?, ?>> symbolRefiners;
-	private final Map <AnySymbol, StorageRefiner.Factory <?>> storageRefiners;
-	private final List <PartialModelInitializer> initializers;
+	private final Set<Concreteness> supportedInterpretations;
+	private final Map<AnyPartialSymbol, PartialInterpretation.Factory<?, ?>> symbolInterpreters;
+	private final Map<AnyPartialSymbol, PartialInterpretationRefiner.Factory<?, ?>> symbolRefiners;
+	private final Map<AnySymbol, StorageRefiner.Factory<?>> storageRefiners;
+	private final List<PartialModelInitializer> initializers;
 
-	ReasoningStoreAdapterImpl(ModelStore store, Set <Concreteness> supportedInterpretations,
-							  Map <AnyPartialSymbol, PartialInterpretation.Factory <?, ?>> symbolInterpreters,
-							  Map <AnyPartialSymbol, PartialInterpretationRefiner.Factory <?, ?>> symbolRefiners,
-							  Map <AnySymbol, StorageRefiner.Factory <?>> storageRefiners,
-							  List <PartialModelInitializer> initializers) {
+	ReasoningStoreAdapterImpl(ModelStore store, Set<Concreteness> supportedInterpretations,
+							  Map<AnyPartialSymbol, PartialInterpretation.Factory<?, ?>> symbolInterpreters,
+							  Map<AnyPartialSymbol, PartialInterpretationRefiner.Factory<?, ?>> symbolRefiners,
+							  Map<AnySymbol, StorageRefiner.Factory<?>> storageRefiners,
+							  List<PartialModelInitializer> initializers) {
 		this.store = store;
 		this.supportedInterpretations = supportedInterpretations;
 		this.symbolInterpreters = symbolInterpreters;
@@ -53,29 +53,29 @@ class ReasoningStoreAdapterImpl implements ReasoningStoreAdapter {
 	}
 
 	@Override
-	public Set <Concreteness> getSupportedInterpretations() {
+	public Set<Concreteness> getSupportedInterpretations() {
 		return supportedInterpretations;
 	}
 
 	@Override
-	public Collection <AnyPartialSymbol> getPartialSymbols() {
+	public Collection<AnyPartialSymbol> getPartialSymbols() {
 		return symbolInterpreters.keySet();
 	}
 
 	@Override
-	public Collection <AnyPartialSymbol> getRefinablePartialSymbols() {
+	public Collection<AnyPartialSymbol> getRefinablePartialSymbols() {
 		return symbolRefiners.keySet();
 	}
 
 	// Use of wildcard return value only in internal method not exposed as API, so there is less chance of confusion.
 	@SuppressWarnings("squid:S1452")
-	Map <AnyPartialSymbol, PartialInterpretation.Factory <?, ?>> getSymbolInterpreters() {
+	Map<AnyPartialSymbol, PartialInterpretation.Factory<?, ?>> getSymbolInterpreters() {
 		return symbolInterpreters;
 	}
 
 	// Use of wildcard return value only in internal method not exposed as API, so there is less chance of confusion.
 	@SuppressWarnings("squid:S1452")
-	Map <AnyPartialSymbol, PartialInterpretationRefiner.Factory <?, ?>> getSymbolRefiners() {
+	Map<AnyPartialSymbol, PartialInterpretationRefiner.Factory<?, ?>> getSymbolRefiners() {
 		return symbolRefiners;
 	}
 
@@ -91,10 +91,10 @@ class ReasoningStoreAdapterImpl implements ReasoningStoreAdapter {
 		return refiners;
 	}
 
-	private <T> StorageRefiner createStorageRefiner(StorageRefiner.Factory <T> factory, Model model, AnySymbol symbol) {
+	private <T> StorageRefiner createStorageRefiner(StorageRefiner.Factory<T> factory, Model model, AnySymbol symbol) {
 		// The builder only allows well-typed assignment of refiners to symbols.
 		@SuppressWarnings("unchecked")
-		var typedSymbol = (Symbol <T>) symbol;
+		var typedSymbol = (Symbol<T>) symbol;
 		return factory.create(typedSymbol, model);
 	}
 

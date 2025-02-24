@@ -119,8 +119,8 @@ public final class LocalSearchHints implements IMatcherCapability {
     }
 
 
-    private Map <QueryHintOption<?>, Object> calculateHintMap() {
-        Map <QueryHintOption<?>, Object> map = new HashMap<>();
+    private Map<QueryHintOption<?>, Object> calculateHintMap() {
+        Map<QueryHintOption<?>, Object> map = new HashMap<>();
         if (useBase != null){
             USE_BASE_INDEX.insertOverridingValue(map, useBase);
         }
@@ -146,7 +146,7 @@ public final class LocalSearchHints implements IMatcherCapability {
     }
 
     public QueryEvaluationHint build(){
-        Map <QueryHintOption<?>, Object> map = calculateHintMap();
+        Map<QueryHintOption<?>, Object> map = calculateHintMap();
         return new QueryEvaluationHint(map, backendFactory);
     }
 
@@ -161,7 +161,7 @@ public final class LocalSearchHints implements IMatcherCapability {
                 ? this.backendFactory
                 : overridingHint.getQueryBackendFactory();
 
-        Map <QueryHintOption<?>, Object> hints = calculateHintMap();
+        Map<QueryHintOption<?>, Object> hints = calculateHintMap();
         if (overridingHint.getBackendHintSettings() != null) {
             hints.putAll(overridingHint.getBackendHintSettings());
         }

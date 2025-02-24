@@ -26,7 +26,7 @@ public class RecipesHelper {
     /**
      * @since 2.0
      */
-    public static Mask mask(final int sourceArity, final Collection <Integer> sourceIndices) {
+    public static Mask mask(final int sourceArity, final Collection<Integer> sourceIndices) {
         Mask mask = RecipesHelper.FACTORY.createMask();
         mask.setSourceArity(sourceArity);
         mask.getSourceIndices().addAll(sourceIndices);
@@ -36,7 +36,7 @@ public class RecipesHelper {
     public static Mask mask(final int sourceArity, final int... sourceIndices) {
         Mask mask = RecipesHelper.FACTORY.createMask();
         mask.setSourceArity(sourceArity);
-        final EList <Integer> maskIndeces = mask.getSourceIndices();
+        final EList<Integer> maskIndeces = mask.getSourceIndices();
         for (int index : sourceIndices) {
             maskIndeces.add(index);
         }

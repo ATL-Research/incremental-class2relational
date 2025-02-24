@@ -14,9 +14,9 @@ import tools.refinery.store.tuple.Tuple;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StateCoderBuildTest {
-	Symbol <Boolean> person = new Symbol<>("Person", 1, Boolean.class, false);
-	Symbol <Integer> age = new Symbol<>("age", 1, Integer.class, null);
-	Symbol <Boolean> friend = new Symbol<>("friend", 2, Boolean.class, false);
+	Symbol<Boolean> person = new Symbol<>("Person", 1, Boolean.class, false);
+	Symbol<Integer> age = new Symbol<>("age", 1, Integer.class, null);
+	Symbol<Boolean> friend = new Symbol<>("friend", 2, Boolean.class, false);
 
 	@Test
 	void simpleStateCoderBuildTest() {
@@ -160,7 +160,7 @@ class StateCoderBuildTest {
 	}
 
 
-	private static void fill(Interpretation <Boolean> personI, Interpretation <Boolean> friendI, Interpretation <Integer> ageI) {
+	private static void fill(Interpretation<Boolean> personI, Interpretation<Boolean> friendI, Interpretation<Integer> ageI) {
 		personI.put(Tuple.of(1), true);
 		personI.put(Tuple.of(2), true);
 

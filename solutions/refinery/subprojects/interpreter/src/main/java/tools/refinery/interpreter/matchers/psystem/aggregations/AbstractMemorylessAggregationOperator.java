@@ -14,8 +14,8 @@ package tools.refinery.interpreter.matchers.psystem.aggregations;
  * @author Gabor Bergmann
  * @since 1.4
  */
-public abstract class AbstractMemorylessAggregationOperator <Domain, AggregateResult>
-    implements IMultisetAggregationOperator <Domain, AggregateResult, AggregateResult>
+public abstract class AbstractMemorylessAggregationOperator<Domain, AggregateResult>
+    implements IMultisetAggregationOperator<Domain, AggregateResult, AggregateResult>
 {
 
     @Override

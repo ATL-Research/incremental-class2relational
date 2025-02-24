@@ -31,7 +31,7 @@ public class QueryInterpreterAdapterImpl implements QueryInterpreterAdapter, Mod
 	private final Model model;
 	private final QueryInterpreterStoreAdapterImpl storeAdapter;
 	private final AdvancedInterpreterEngine queryEngine;
-	private final Map <AnyQuery, AnyResultSet> resultSets;
+	private final Map<AnyQuery, AnyResultSet> resultSets;
 	private boolean pendingChanges;
 
 	QueryInterpreterAdapterImpl(Model model, QueryInterpreterStoreAdapterImpl storeAdapter) {
@@ -43,7 +43,7 @@ public class QueryInterpreterAdapterImpl implements QueryInterpreterAdapter, Mod
 
 		var querySpecifications = storeAdapter.getQuerySpecifications();
 		GenericQueryGroup.of(
-				Collections.<IQuerySpecification <?>>unmodifiableCollection(querySpecifications.values()).stream()
+				Collections.<IQuerySpecification<?>>unmodifiableCollection(querySpecifications.values()).stream()
 		).prepare(queryEngine);
 		queryEngine.flushChanges();
 		var vacuousQueries = storeAdapter.getVacuousQueries();
@@ -51,21 +51,21 @@ public class QueryInterpreterAdapterImpl implements QueryInterpreterAdapter, Mod
 		for (var entry : querySpecifications.entrySet()) {
 			var rawPatternMatcher = queryEngine.getMatcher(entry.getValue());
 			var query = entry.getKey();
-			resultSets.put(query, createResultSet((Query <?>) query, rawPatternMatcher));
+			resultSets.put(query, createResultSet((Query<?>) query, rawPatternMatcher));
 		}
 		for (var vacuousQuery : vacuousQueries) {
-			resultSets.put(vacuousQuery, new EmptyResultSet<>(this, (Query <?>) vacuousQuery));
+			resultSets.put(vacuousQuery, new EmptyResultSet<>(this, (Query<?>) vacuousQuery));
 		}
 
 		model.addListener(this);
 	}
 
-	private <T> ResultSet <T> createResultSet(Query <T> query, RawPatternMatcher matcher) {
+	private <T> ResultSet<T> createResultSet(Query<T> query, RawPatternMatcher matcher) {
 		if (query instanceof RelationalQuery relationalQuery) {
 			@SuppressWarnings("unchecked")
-			var resultSet = (ResultSet <T>) new InterpretedRelationalMatcher(this, relationalQuery, matcher);
+			var resultSet = (ResultSet<T>) new InterpretedRelationalMatcher(this, relationalQuery, matcher);
 			return resultSet;
-		} else if (query instanceof FunctionalQuery <T> functionalQuery) {
+		} else if (query instanceof FunctionalQuery<T> functionalQuery) {
 			return new InterpretedFunctionalMatcher<>(this, functionalQuery, matcher);
 		} else {
 			throw new IllegalArgumentException("Unknown query: " + query);
@@ -87,14 +87,14 @@ public class QueryInterpreterAdapterImpl implements QueryInterpreterAdapter, Mod
 	}
 
 	@Override
-	public <T> ResultSet <T> getResultSet(Query <T> query) {
+	public <T> ResultSet<T> getResultSet(Query<T> query) {
 		var canonicalQuery = storeAdapter.getCanonicalQuery(query);
 		var resultSet = resultSets.get(canonicalQuery);
 		if (resultSet == null) {
 			throw new IllegalArgumentException("No matcher for query %s in model".formatted(query.name()));
 		}
 		@SuppressWarnings("unchecked")
-		var typedResultSet = (ResultSet <T>) resultSet;
+		var typedResultSet = (ResultSet<T>) resultSet;
 		return typedResultSet;
 	}
 

@@ -13,7 +13,7 @@ public class AdapterUtils {
 		throw new IllegalStateException("This is a static utility class and should not be instantiated directly");
 	}
 
-	public static <T, U extends T> Optional <U> tryGetAdapter(Collection <T> adapters, Class <? extends U> type) {
+	public static <T, U extends T> Optional<U> tryGetAdapter(Collection<T> adapters, Class<? extends U> type) {
 		var iterator = adapters.stream().filter(type::isInstance).iterator();
 		if (!iterator.hasNext()) {
 			return Optional.empty();
@@ -26,7 +26,7 @@ public class AdapterUtils {
 		return Optional.of(adapter);
 	}
 
-	public static <T> T getAdapter(Collection <? super T> adapters, Class <T> type) {
+	public static <T> T getAdapter(Collection<? super T> adapters, Class<T> type) {
 		return tryGetAdapter(adapters, type).orElseThrow(() -> new IllegalArgumentException(
 				"No %s adapter was configured".formatted(type.getName())));
 	}

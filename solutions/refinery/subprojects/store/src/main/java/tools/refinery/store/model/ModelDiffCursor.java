@@ -13,20 +13,20 @@ import tools.refinery.store.tuple.Tuple;
 import java.util.Map;
 
 public class ModelDiffCursor {
-	private final Map <? extends AnySymbol, ? extends DiffCursor <?, ?>> diffCursors;
+	private final Map<? extends AnySymbol, ? extends DiffCursor<?, ?>> diffCursors;
 
-	public ModelDiffCursor(Map <? extends AnySymbol, ? extends DiffCursor <?, ?>> diffCursors) {
+	public ModelDiffCursor(Map<? extends AnySymbol, ? extends DiffCursor<?, ?>> diffCursors) {
 		super();
 		this.diffCursors = diffCursors;
 	}
 
-	public <T> DiffCursor <Tuple, T> getCursor(Symbol <T> symbol) {
+	public <T> DiffCursor<Tuple, T> getCursor(Symbol<T> symbol) {
 		var cursor = diffCursors.get(symbol);
 		if (cursor == null) {
 			throw new IllegalArgumentException("No cursor for symbol %s".formatted(symbol));
 		}
 		@SuppressWarnings("unchecked")
-		var typedCursor = (DiffCursor <Tuple, T>) cursor;
+		var typedCursor = (DiffCursor<Tuple, T>) cursor;
 		return typedCursor;
 	}
 }

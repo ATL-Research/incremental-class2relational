@@ -25,11 +25,11 @@ public final class CommonQueryHintOptions {
     /**
      * This hint instructs the query backends to record trace information into the given trace collector
      */
-    public static final QueryHintOption <IRewriterTraceCollector> normalizationTraceCollector =
+    public static final QueryHintOption<IRewriterTraceCollector> normalizationTraceCollector =
             hintOption("normalizationTraceCollector", NopTraceCollector.INSTANCE);
 
     // internal helper for conciseness
-    private static <T> QueryHintOption <T> hintOption(String hintKeyLocalName, T defaultValue) {
+    private static <T> QueryHintOption<T> hintOption(String hintKeyLocalName, T defaultValue) {
         return new QueryHintOption<>(CommonQueryHintOptions.class, hintKeyLocalName, defaultValue);
     }
 

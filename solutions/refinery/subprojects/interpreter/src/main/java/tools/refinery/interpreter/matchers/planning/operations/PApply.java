@@ -20,7 +20,7 @@ import tools.refinery.interpreter.matchers.util.Preconditions;
  * <p> Either a "selection" filter operation according to a deferred PConstraint (or transform in case of eval/aggregate), or
  * alternatively a shorthand for PJoin + a PEnumerate on the right input for an enumerable PConstraint.
  *
- * <p> <b>WARNING </b>: if there are coinciding variables in the variable tuple of the enumerable constraint,
+ * <p> <b>WARNING</b>: if there are coinciding variables in the variable tuple of the enumerable constraint,
  *   it is the responsibility of the compiler to check them for equality.
  *
  * @author Bergmann Gabor
@@ -44,7 +44,7 @@ public class PApply extends POperation {
     }
 
     @Override
-    public Set <? extends PConstraint> getDeltaConstraints() {
+    public Set<? extends PConstraint> getDeltaConstraints() {
         return Collections.singleton(pConstraint);
     }
 

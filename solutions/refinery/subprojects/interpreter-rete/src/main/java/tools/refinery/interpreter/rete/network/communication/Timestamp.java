@@ -22,14 +22,14 @@ import tools.refinery.interpreter.matchers.util.timeline.Timelines;
  * @author Tamas Szabo
  * @since 2.3
  */
-public class Timestamp implements Comparable <Timestamp>, MessageSelector {
+public class Timestamp implements Comparable<Timestamp>, MessageSelector {
 
     protected final int value;
     public static final Timestamp ZERO = new Timestamp(0);
     /**
      * @since 2.4
      */
-    public static final Timeline <Timestamp> INSERT_AT_ZERO_TIMELINE = Timelines.createFrom(Timestamp.ZERO);
+    public static final Timeline<Timestamp> INSERT_AT_ZERO_TIMELINE = Timelines.createFrom(Timestamp.ZERO);
 
     public Timestamp(final int value) {
         this.value = value;
@@ -88,16 +88,16 @@ public class Timestamp implements Comparable <Timestamp>, MessageSelector {
      *
      * @author Tamas Szabo
      */
-    public static final class AllZeroMap <T> extends AbstractMap <T, Timeline <Timestamp>> {
+    public static final class AllZeroMap<T> extends AbstractMap<T, Timeline<Timestamp>> {
 
-        private final Collection <T> wrapped;
+        private final Collection<T> wrapped;
 
-        public AllZeroMap(Set <T> wrapped) {
+        public AllZeroMap(Set<T> wrapped) {
             this.wrapped = wrapped;
         }
 
         @Override
-        public Set <Entry<T, Timeline <Timestamp>>> entrySet() {
+        public Set<Entry<T, Timeline<Timestamp>>> entrySet() {
             throw new UnsupportedOperationException("Use the combination of keySet() and get()!");
         }
 
@@ -105,13 +105,13 @@ public class Timestamp implements Comparable <Timestamp>, MessageSelector {
          * @since 2.4
          */
         @Override
-        public Timeline <Timestamp> get(final Object key) {
+        public Timeline<Timestamp> get(final Object key) {
             return INSERT_AT_ZERO_TIMELINE;
         }
 
         @Override
-        public Set <T> keySet() {
-            return (Set <T>) this.wrapped;
+        public Set<T> keySet() {
+            return (Set<T>) this.wrapped;
         }
 
         @Override

@@ -300,7 +300,7 @@ class PartialCountTest {
 		assertThat(resultSet.get(Tuple.of(3)), is(UpperCardinalities.ZERO));
 	}
 
-	private static <T> ResultSet <T> getResultSet(Query <T> query, ModelSeed modelSeed) {
+	private static <T> ResultSet<T> getResultSet(Query<T> query, ModelSeed modelSeed) {
 		var personStorage = Symbol.of("Person", 1, TruthValue.class, TruthValue.FALSE);
 		var friendStorage = Symbol.of("friend", 2, TruthValue.class, TruthValue.FALSE);
 

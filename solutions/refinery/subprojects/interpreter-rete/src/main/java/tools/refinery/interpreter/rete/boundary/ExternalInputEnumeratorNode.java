@@ -51,7 +51,7 @@ public class ExternalInputEnumeratorNode extends StandardNode
     private Tuple globalSeed;
     private InputConnector inputConnector;
     private Network network;
-    private Address <? extends Receiver> myAddress;
+    private Address<? extends Receiver> myAddress;
     private boolean parallelExecutionEnabled;
     /**
      * @since 1.6
@@ -117,8 +117,8 @@ public class ExternalInputEnumeratorNode extends StandardNode
     /**
      * @since 2.2
      */
-    protected Iterable <Tuple> getTuplesInternal() {
-        Iterable <Tuple> tuples = null;
+    protected Iterable<Tuple> getTuplesInternal() {
+        Iterable<Tuple> tuples = null;
 
         if (context != null) { // if connected
             if (globalSeed == null) {
@@ -134,8 +134,8 @@ public class ExternalInputEnumeratorNode extends StandardNode
     }
 
     @Override
-    public void pullInto(final Collection <Tuple> collector, final boolean flush) {
-        final Iterable <Tuple> tuples = getTuplesInternal();
+    public void pullInto(final Collection<Tuple> collector, final boolean flush) {
+        final Iterable<Tuple> tuples = getTuplesInternal();
         if (tuples != null) {
             for (final Tuple tuple : tuples) {
                 collector.add(tuple);
@@ -144,8 +144,8 @@ public class ExternalInputEnumeratorNode extends StandardNode
     }
 
     @Override
-    public void pullIntoWithTimeline(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush) {
-        final Iterable <Tuple> tuples = getTuplesInternal();
+    public void pullIntoWithTimeline(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush) {
+        final Iterable<Tuple> tuples = getTuplesInternal();
         if (tuples != null) {
             for (final Tuple tuple : tuples) {
                 collector.put(tuple, Timestamp.INSERT_AT_ZERO_TIMELINE);
@@ -194,7 +194,7 @@ public class ExternalInputEnumeratorNode extends StandardNode
     }
 
     @Override
-    public Collection <Supplier> getParents() {
+    public Collection<Supplier> getParents() {
         return Collections.emptySet();
     }
 

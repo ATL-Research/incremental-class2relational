@@ -65,7 +65,7 @@ public abstract class InterpreterEngine {
      * @return a pattern matcher corresponding to the specification
      * @throws InterpreterRuntimeException if the matcher could not be initialized
      */
-    public abstract <Matcher extends InterpreterMatcher <? extends IPatternMatch>> Matcher getMatcher(IQuerySpecification <Matcher> querySpecification);
+    public abstract <Matcher extends InterpreterMatcher<? extends IPatternMatch>> Matcher getMatcher(IQuerySpecification<Matcher> querySpecification);
 
     /**
      * Access a pattern matcher for the graph pattern with the given fully qualified name.
@@ -76,23 +76,23 @@ public abstract class InterpreterEngine {
      * @return a pattern matcher corresponding to the specification
      * @throws InterpreterRuntimeException if the matcher could not be initialized
      */
-    public abstract InterpreterMatcher <? extends IPatternMatch> getMatcher(String patternFQN);
+    public abstract InterpreterMatcher<? extends IPatternMatch> getMatcher(String patternFQN);
 
     /**
      * Access an existing pattern matcher based on a {@link IQuerySpecification}.
      * @param querySpecification a {@link IQuerySpecification} that describes a Refinery Interpreter query specification
-     * @return a pattern matcher corresponding to the specification, <code>null </code> if a matcher does not exist yet.
+     * @return a pattern matcher corresponding to the specification, <code>null</code> if a matcher does not exist yet.
      */
-    public abstract <Matcher extends InterpreterMatcher <? extends IPatternMatch>> Matcher getExistingMatcher(IQuerySpecification <Matcher> querySpecification);
+    public abstract <Matcher extends InterpreterMatcher<? extends IPatternMatch>> Matcher getExistingMatcher(IQuerySpecification<Matcher> querySpecification);
 
 
     /**
      * Access a copy of available {@link InterpreterMatcher} pattern matchers.
      * @return a copy of the set of currently available pattern matchers registered on this engine instance
      */
-    public abstract Set <? extends InterpreterMatcher <? extends IPatternMatch>> getCurrentMatchers();
+    public abstract Set<? extends InterpreterMatcher<? extends IPatternMatch>> getCurrentMatchers();
 
-    public Set <IQuerySpecification<? extends InterpreterMatcher <? extends IPatternMatch>>> getRegisteredQuerySpecifications() {
+    public Set<IQuerySpecification<? extends InterpreterMatcher<? extends IPatternMatch>>> getRegisteredQuerySpecifications() {
         return getCurrentMatchers().stream().map(InterpreterMatcher::getSpecification).collect(Collectors.toSet());
     }
 
@@ -103,5 +103,5 @@ public abstract class InterpreterEngine {
 
 	public abstract void flushChanges();
 
-	public abstract <T> T withFlushingChanges(Supplier <T> supplier);
+	public abstract <T> T withFlushingChanges(Supplier<T> supplier);
 }

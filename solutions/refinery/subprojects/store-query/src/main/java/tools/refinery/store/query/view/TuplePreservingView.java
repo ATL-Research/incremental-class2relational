@@ -17,15 +17,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-public abstract class TuplePreservingView <T> extends SymbolView <T> {
-	private final List <Parameter> parameters;
+public abstract class TuplePreservingView<T> extends SymbolView<T> {
+	private final List<Parameter> parameters;
 
-	protected TuplePreservingView(Symbol <T> symbol, String name) {
+	protected TuplePreservingView(Symbol<T> symbol, String name) {
 		super(symbol, name);
 		this.parameters = createParameters(symbol.arity());
 	}
 
-	protected TuplePreservingView(Symbol <T> symbol) {
+	protected TuplePreservingView(Symbol<T> symbol) {
 		super(symbol);
 		this.parameters = createParameters(symbol.arity());
 	}
@@ -63,7 +63,7 @@ public abstract class TuplePreservingView <T> extends SymbolView <T> {
 	}
 
 	@Override
-	public Iterable <Object[]> getAdjacent(Model model, int slot, Object value) {
+	public Iterable<Object[]> getAdjacent(Model model, int slot, Object value) {
 		if (!(value instanceof Tuple1 tuple1)) {
 			return Set.of();
 		}
@@ -72,7 +72,7 @@ public abstract class TuplePreservingView <T> extends SymbolView <T> {
 	}
 
 	@Override
-	public List <Parameter> getParameters() {
+	public List<Parameter> getParameters() {
 		return parameters;
 	}
 
@@ -81,7 +81,7 @@ public abstract class TuplePreservingView <T> extends SymbolView <T> {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		if (!super.equals(o)) return false;
-		TuplePreservingView <?> that = (TuplePreservingView <?>) o;
+		TuplePreservingView<?> that = (TuplePreservingView<?>) o;
 		return Objects.equals(parameters, that.parameters);
 	}
 
@@ -90,7 +90,7 @@ public abstract class TuplePreservingView <T> extends SymbolView <T> {
 		return Objects.hash(super.hashCode(), parameters);
 	}
 
-	private static List <Parameter> createParameters(int arity) {
+	private static List<Parameter> createParameters(int arity) {
 		var parameters = new Parameter[arity];
 		Arrays.fill(parameters, Parameter.NODE_OUT);
 		return List.of(parameters);

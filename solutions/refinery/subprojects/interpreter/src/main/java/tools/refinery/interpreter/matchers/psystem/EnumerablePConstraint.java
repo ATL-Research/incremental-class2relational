@@ -48,7 +48,7 @@ public abstract class EnumerablePConstraint extends BasePConstraint {
     }
 
     @Override
-    public Set <PVariable> getDeducedVariables() {
+    public Set<PVariable> getDeducedVariables() {
         return getAffectedVariables();
     }
 

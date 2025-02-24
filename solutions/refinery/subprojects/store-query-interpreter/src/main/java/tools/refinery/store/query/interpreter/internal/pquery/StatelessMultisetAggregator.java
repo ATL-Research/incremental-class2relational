@@ -10,8 +10,8 @@ import tools.refinery.store.query.term.StatelessAggregator;
 
 import java.util.stream.Stream;
 
-record StatelessMultisetAggregator <R, T>(StatelessAggregator <R, T> aggregator)
-		implements IMultisetAggregationOperator <T, R, R> {
+record StatelessMultisetAggregator<R, T>(StatelessAggregator<R, T> aggregator)
+		implements IMultisetAggregationOperator<T, R, R> {
 	@Override
 	public String getShortDescription() {
 		return getName();
@@ -49,7 +49,7 @@ record StatelessMultisetAggregator <R, T>(StatelessAggregator <R, T> aggregator)
 	}
 
 	@Override
-	public R aggregateStream(Stream <T> stream) {
+	public R aggregateStream(Stream<T> stream) {
 		return aggregator.aggregateStream(stream);
 	}
 }

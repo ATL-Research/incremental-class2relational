@@ -9,13 +9,13 @@ import tools.refinery.store.query.substitution.Substitution;
 import tools.refinery.store.query.term.Term;
 import tools.refinery.store.query.term.UnaryTerm;
 
-public class IntToRealTerm extends UnaryTerm <Double, Integer> {
-	protected IntToRealTerm(Term <Integer> body) {
+public class IntToRealTerm extends UnaryTerm<Double, Integer> {
+	protected IntToRealTerm(Term<Integer> body) {
 		super(Double.class, Integer.class, body);
 	}
 
 	@Override
-	protected Term <Double> doSubstitute(Substitution substitution, Term <Integer> substitutedBody) {
+	protected Term<Double> doSubstitute(Substitution substitution, Term<Integer> substitutedBody) {
 		return new IntToRealTerm(substitutedBody);
 	}
 

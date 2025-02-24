@@ -29,8 +29,8 @@ import tools.refinery.interpreter.matchers.util.timeline.Timeline;
  * @author Tamas Szabo
  * @since 2.3
  */
-public final class TimelyUnaryMaskedTupleMemory <Timestamp extends Comparable <Timestamp>>
-        extends AbstractTimelyMaskedMemory <Timestamp, Object> {
+public final class TimelyUnaryMaskedTupleMemory<Timestamp extends Comparable<Timestamp>>
+        extends AbstractTimelyMaskedMemory<Timestamp, Object> {
 
     protected final int keyPosition;
 
@@ -42,10 +42,10 @@ public final class TimelyUnaryMaskedTupleMemory <Timestamp extends Comparable <T
     }
 
     @Override
-    public Iterable <Tuple> getSignatures() {
+    public Iterable<Tuple> getSignatures() {
         return () -> {
-            final Iterator <Object> wrapped = this.memoryMap.keySet().iterator();
-            return new Iterator <Tuple>() {
+            final Iterator<Object> wrapped = this.memoryMap.keySet().iterator();
+            return new Iterator<Tuple>() {
                 @Override
                 public boolean hasNext() {
                     return wrapped.hasNext();
@@ -61,24 +61,24 @@ public final class TimelyUnaryMaskedTupleMemory <Timestamp extends Comparable <T
     }
 
     @Override
-    public Diff <Timestamp> removeWithTimestamp(final Tuple tuple, final Tuple signature, final Timestamp timestamp) {
+    public Diff<Timestamp> removeWithTimestamp(final Tuple tuple, final Tuple signature, final Timestamp timestamp) {
         final Object key = tuple.get(keyPosition);
         return removeInternal(key, tuple, timestamp);
     }
 
     @Override
-    public Diff <Timestamp> addWithTimestamp(final Tuple tuple, final Tuple signature, final Timestamp timestamp) {
+    public Diff<Timestamp> addWithTimestamp(final Tuple tuple, final Tuple signature, final Timestamp timestamp) {
         final Object key = tuple.get(keyPosition);
         return addInternal(key, tuple, timestamp);
     }
 
     @Override
-    public Collection <Tuple> get(final ITuple signature) {
+    public Collection<Tuple> get(final ITuple signature) {
         return getInternal(signature.get(0));
     }
 
     @Override
-    public Map <Tuple, Timeline <Timestamp>> getWithTimeline(final ITuple signature) {
+    public Map<Tuple, Timeline<Timestamp>> getWithTimeline(final ITuple signature) {
         return getWithTimestampInternal(signature.get(0));
     }
 
@@ -88,13 +88,13 @@ public final class TimelyUnaryMaskedTupleMemory <Timestamp extends Comparable <T
     }
 
     @Override
-    public Iterable <Tuple> getResumableSignatures() {
+    public Iterable<Tuple> getResumableSignatures() {
         if (this.foldingStates == null || this.foldingStates.isEmpty()) {
             return Collections.emptySet();
         } else {
             return () -> {
-                final Iterator <Object> wrapped = this.foldingStates.firstEntry().getValue().iterator();
-                return new Iterator <Tuple>() {
+                final Iterator<Object> wrapped = this.foldingStates.firstEntry().getValue().iterator();
+                return new Iterator<Tuple>() {
                     @Override
                     public boolean hasNext() {
                         return wrapped.hasNext();
@@ -111,8 +111,8 @@ public final class TimelyUnaryMaskedTupleMemory <Timestamp extends Comparable <T
     }
 
     @Override
-    public Map <Tuple, Map <Tuple, Diff <Timestamp>>> resumeAt(final Timestamp timestamp) {
-        final Map <Tuple, Map <Tuple, Diff <Timestamp>>> result = CollectionsFactory.createMap();
+    public Map<Tuple, Map<Tuple, Diff<Timestamp>>> resumeAt(final Timestamp timestamp) {
+        final Map<Tuple, Map<Tuple, Diff<Timestamp>>> result = CollectionsFactory.createMap();
         final Timestamp resumableTimestamp = this.getResumableTimestamp();
         if (resumableTimestamp == null) {
             throw new IllegalStateException("There is nothing to fold!");
@@ -120,10 +120,10 @@ public final class TimelyUnaryMaskedTupleMemory <Timestamp extends Comparable <T
             throw new IllegalStateException("Expected to continue folding at " + resumableTimestamp + "!");
         }
 
-        final Set <Object> signatures = this.foldingStates.remove(timestamp);
+        final Set<Object> signatures = this.foldingStates.remove(timestamp);
         for (final Object signature : signatures) {
-            final TimelyMemory <Timestamp> memory = this.memoryMap.get(signature);
-            final Map <Tuple, Diff <Timestamp>> diffMap = memory.resumeAt(resumableTimestamp);
+            final TimelyMemory<Timestamp> memory = this.memoryMap.get(signature);
+            final Map<Tuple, Diff<Timestamp>> diffMap = memory.resumeAt(resumableTimestamp);
             result.put(Tuples.staticArityFlatTupleOf(signature), diffMap);
             registerFoldingState(memory.getResumableTimestamp(), signature);
         }

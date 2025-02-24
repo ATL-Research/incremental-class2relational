@@ -35,10 +35,10 @@ import java.util.Map;
  *
  */
 public class TransitiveClosureNode extends SingleInputNode
-        implements Clearable, ITcObserver <Object>, NetworkStructureChangeSensitiveNode, ReinitializedNode {
+        implements Clearable, ITcObserver<Object>, NetworkStructureChangeSensitiveNode, ReinitializedNode {
 
-    private Graph <Object> graphDataSource;
-    private ITcDataSource <Object> transitiveClosureAlgorithm;
+    private Graph<Object> graphDataSource;
+    private ITcDataSource<Object> transitiveClosureAlgorithm;
 
     /**
      * Create a new transitive closure rete node.
@@ -51,8 +51,8 @@ public class TransitiveClosureNode extends SingleInputNode
      */
     public TransitiveClosureNode(ReteContainer reteContainer) {
         super(reteContainer);
-        graphDataSource = new Graph <Object>();
-        transitiveClosureAlgorithm = new IncSCCAlg <Object>(graphDataSource);
+        graphDataSource = new Graph<Object>();
+        transitiveClosureAlgorithm = new IncSCCAlg<Object>(graphDataSource);
         transitiveClosureAlgorithm.attachObserver(this);
         reteContainer.registerClearable(this);
     }
@@ -72,7 +72,7 @@ public class TransitiveClosureNode extends SingleInputNode
      *            the initial collection of tuples
      */
 	@Override
-    public void reinitializeWith(Collection <tools.refinery.interpreter.matchers.tuple.Tuple> tuples) {
+    public void reinitializeWith(Collection<tools.refinery.interpreter.matchers.tuple.Tuple> tuples) {
         clear();
 
         for (tools.refinery.interpreter.matchers.tuple.Tuple t : tuples) {
@@ -84,18 +84,18 @@ public class TransitiveClosureNode extends SingleInputNode
     }
 
     @Override
-    public void pullInto(final Collection <tools.refinery.interpreter.matchers.tuple.Tuple> collector, final boolean flush) {
-        for (final Tuple <Object> tuple : ((IncSCCAlg <Object>) transitiveClosureAlgorithm).getTcRelation()) {
+    public void pullInto(final Collection<tools.refinery.interpreter.matchers.tuple.Tuple> collector, final boolean flush) {
+        for (final Tuple<Object> tuple : ((IncSCCAlg<Object>) transitiveClosureAlgorithm).getTcRelation()) {
             collector.add(Tuples.staticArityFlatTupleOf(tuple.getSource(), tuple.getTarget()));
         }
     }
 
     @Override
     public void pullIntoWithTimeline(
-            final Map <tools.refinery.interpreter.matchers.tuple.Tuple, Timeline <Timestamp>> collector,
+            final Map<tools.refinery.interpreter.matchers.tuple.Tuple, Timeline<Timestamp>> collector,
             final boolean flush) {
         // use all zero timestamps because this node cannot be used in recursive groups anyway
-        for (final Tuple <Object> tuple : ((IncSCCAlg <Object>) transitiveClosureAlgorithm).getTcRelation()) {
+        for (final Tuple<Object> tuple : ((IncSCCAlg<Object>) transitiveClosureAlgorithm).getTcRelation()) {
             collector.put(Tuples.staticArityFlatTupleOf(tuple.getSource(), tuple.getTarget()), Timestamp.INSERT_AT_ZERO_TIMELINE);
         }
     }
@@ -115,10 +115,10 @@ public class TransitiveClosureNode extends SingleInputNode
             if (direction == Direction.DELETE) {
                 graphDataSource.deleteEdgeIfExists(source, target);
 
-                if (((IncSCCAlg <Object>) transitiveClosureAlgorithm).isIsolated(source)) {
+                if (((IncSCCAlg<Object>) transitiveClosureAlgorithm).isIsolated(source)) {
                     graphDataSource.deleteNode(source);
                 }
-                if (!source.equals(target) && ((IncSCCAlg <Object>) transitiveClosureAlgorithm).isIsolated(target)) {
+                if (!source.equals(target) && ((IncSCCAlg<Object>) transitiveClosureAlgorithm).isIsolated(target)) {
                     graphDataSource.deleteNode(target);
                 }
             }
@@ -128,8 +128,8 @@ public class TransitiveClosureNode extends SingleInputNode
     @Override
     public void clear() {
         transitiveClosureAlgorithm.dispose();
-        graphDataSource = new Graph <Object>();
-        transitiveClosureAlgorithm = new IncSCCAlg <Object>(graphDataSource);
+        graphDataSource = new Graph<Object>();
+        transitiveClosureAlgorithm = new IncSCCAlg<Object>(graphDataSource);
     }
 
     @Override

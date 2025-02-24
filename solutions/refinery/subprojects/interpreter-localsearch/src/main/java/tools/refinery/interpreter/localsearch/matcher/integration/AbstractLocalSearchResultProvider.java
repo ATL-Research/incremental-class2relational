@@ -75,10 +75,10 @@ public abstract class AbstractLocalSearchResultProvider implements IQueryResultP
     protected final IQueryRuntimeContext runtimeContext;
     protected final PQuery query;
     protected final QueryEvaluationHint userHints;
-    protected final Map <PQuery, LocalSearchHints> hintCache = new HashMap<>();
+    protected final Map<PQuery, LocalSearchHints> hintCache = new HashMap<>();
     protected final IPlanProvider planProvider;
     private static final String PLAN_CACHE_KEY = AbstractLocalSearchResultProvider.class.getName() + "#planCache";
-    private final Map <MatcherReference, IPlanDescriptor> planCache;
+    private final Map<MatcherReference, IPlanDescriptor> planCache;
     protected final ISearchContext searchContext;
     /**
      * @since 2.1
@@ -110,7 +110,7 @@ public abstract class AbstractLocalSearchResultProvider implements IQueryResultP
     }
 
     private LocalSearchMatcher createMatcher(IPlanDescriptor plan, final ISearchContext searchContext) {
-        List <SearchPlan> executors = plan.getPlan().stream()
+        List<SearchPlan> executors = plan.getPlan().stream()
                 .map(input -> new SearchPlan(input.getBody(), input.getCompiledOperations(), input.calculateParameterMask(),
                         input.getVariableKeys()))
                 .collect(Collectors.toList());
@@ -183,7 +183,7 @@ public abstract class AbstractLocalSearchResultProvider implements IQueryResultP
 
     protected void preparePlansForExpectedAdornments() {
         // Plan for possible adornments
-        for (Set <PParameter> adornment : overrideDefaultHints(query).getAdornmentProvider().getAdornments(query)) {
+        for (Set<PParameter> adornment : overrideDefaultHints(query).getAdornmentProvider().getAdornments(query)) {
             MatcherReference reference = new MatcherReference(query, adornment, userHints);
             LocalSearchHints configuration = overrideDefaultHints(query);
             IOperationCompiler compiler = getOperationCompiler(backendContext, configuration);
@@ -236,11 +236,11 @@ public abstract class AbstractLocalSearchResultProvider implements IQueryResultP
         );
     }
 
-    private Set <IQueryReference> getDirectDependencies() {
+    private Set<IQueryReference> getDirectDependencies() {
         IFlattenCallPredicate flattenPredicate = overrideDefaultHints(query).getFlattenCallPredicate();
-        Queue <PQuery> queue = new LinkedList<>();
-        Set <PQuery> visited = new HashSet<>();
-        Set <IQueryReference> result = new HashSet<>();
+        Queue<PQuery> queue = new LinkedList<>();
+        Set<PQuery> visited = new HashSet<>();
+        Set<IQueryReference> result = new HashSet<>();
         queue.add(query);
 
         while(!queue.isEmpty()){
@@ -278,7 +278,7 @@ public abstract class AbstractLocalSearchResultProvider implements IQueryResultP
      * @throws InterpreterRuntimeException
      */
     public LocalSearchMatcher newLocalSearchMatcher(ITuple parameters) {
-        final Set <PParameter> adornment = new HashSet<>();
+        final Set<PParameter> adornment = new HashSet<>();
         for (int i = 0; i < parameters.getSize(); i++) {
             if (parameters.get(i) != null) {
                 adornment.add(query.getParameters().get(i));
@@ -292,7 +292,7 @@ public abstract class AbstractLocalSearchResultProvider implements IQueryResultP
      * @throws InterpreterRuntimeException
      */
     public LocalSearchMatcher newLocalSearchMatcher(Object[] parameters) {
-        final Set <PParameter> adornment = new HashSet<>();
+        final Set<PParameter> adornment = new HashSet<>();
         for (int i = 0; i < parameters.length; i++) {
             if (parameters[i] != null) {
                 adornment.add(query.getParameters().get(i));
@@ -302,7 +302,7 @@ public abstract class AbstractLocalSearchResultProvider implements IQueryResultP
         return newLocalSearchMatcher(adornment);
     }
 
-    private LocalSearchMatcher newLocalSearchMatcher(final Set <PParameter> adornment) {
+    private LocalSearchMatcher newLocalSearchMatcher(final Set<PParameter> adornment) {
         final MatcherReference reference = new MatcherReference(query, adornment, userHints);
 
         IPlanDescriptor plan = getOrCreatePlan(reference, planProvider);
@@ -319,9 +319,9 @@ public abstract class AbstractLocalSearchResultProvider implements IQueryResultP
         return matcher;
     }
 
-    private void indexKeys(final Iterable <IInputKey> keys) throws InvocationTargetException {
+    private void indexKeys(final Iterable<IInputKey> keys) throws InvocationTargetException {
         final IQueryRuntimeContext qrc = getRuntimeContext();
-        qrc.coalesceTraversals(new Callable <Void>() {
+        qrc.coalesceTraversals(new Callable<Void>() {
 
             @Override
             public Void call() throws Exception {
@@ -348,13 +348,13 @@ public abstract class AbstractLocalSearchResultProvider implements IQueryResultP
     }
 
     @Override
-    public Optional <Tuple> getOneArbitraryMatch(Object[] parameters) {
+    public Optional<Tuple> getOneArbitraryMatch(Object[] parameters) {
         final LocalSearchMatcher matcher = initializeMatcher(parameters);
         return matcher.streamMatches(parameters).findAny();
     }
 
     @Override
-    public Optional <Tuple> getOneArbitraryMatch(TupleMask parameterSeedMask, ITuple parameters) {
+    public Optional<Tuple> getOneArbitraryMatch(TupleMask parameterSeedMask, ITuple parameters) {
         final LocalSearchMatcher matcher = initializeMatcher(parameterSeedMask);
         return matcher.streamMatches(parameterSeedMask, parameters).findAny();
     }
@@ -376,13 +376,13 @@ public abstract class AbstractLocalSearchResultProvider implements IQueryResultP
     private static final double ESTIMATE_CEILING = Long.MAX_VALUE / 16.0;
 
     @Override
-    public Optional <Long> estimateCardinality(TupleMask groupMask, Accuracy requiredAccuracy) {
+    public Optional<Long> estimateCardinality(TupleMask groupMask, Accuracy requiredAccuracy) {
         if (Accuracy.BEST_UPPER_BOUND.atLeastAsPreciseAs(requiredAccuracy)) { // approximate using parameter types
-            final List <PParameter> parameters = query.getParameters();
-            final Map <Set<Integer>, Set <Integer>> dependencies = backendContext.getQueryAnalyzer()
+            final List<PParameter> parameters = query.getParameters();
+            final Map<Set<Integer>, Set<Integer>> dependencies = backendContext.getQueryAnalyzer()
                     .getProjectedFunctionalDependencies(query, false);
 
-            List <Integer> projectionIndices = groupMask.getIndicesAsList();
+            List<Integer> projectionIndices = groupMask.getIndicesAsList();
 
             return estimateParameterCombinations(requiredAccuracy, parameters, dependencies,
                     projectionIndices,
@@ -392,18 +392,18 @@ public abstract class AbstractLocalSearchResultProvider implements IQueryResultP
     }
 
     @Override
-    public Optional <Double> estimateAverageBucketSize(TupleMask groupMask, Accuracy requiredAccuracy) {
+    public Optional<Double> estimateAverageBucketSize(TupleMask groupMask, Accuracy requiredAccuracy) {
         if (Accuracy.BEST_UPPER_BOUND.atLeastAsPreciseAs(requiredAccuracy)) { // approximate using parameter types
-            final List <PParameter> parameters = query.getParameters();
-            final Map <Set<Integer>, Set <Integer>> dependencies = backendContext.getQueryAnalyzer()
+            final List<PParameter> parameters = query.getParameters();
+            final Map<Set<Integer>, Set<Integer>> dependencies = backendContext.getQueryAnalyzer()
                     .getProjectedFunctionalDependencies(query, false);
 
             // all parameters used for the estimation - determinized order
-            final List <Integer> allParameterIndices =
+            final List<Integer> allParameterIndices =
                     IntStream.range(0, parameters.size()).boxed().collect(Collectors.toList());
 
             // some free parameters are functionally determined by bound parameters
-            final Set <Integer> boundOrImplied = FunctionalDependencyHelper.closureOf(groupMask.getIndicesAsList(),
+            final Set<Integer> boundOrImplied = FunctionalDependencyHelper.closureOf(groupMask.getIndicesAsList(),
                     dependencies);
 
             return estimateParameterCombinations(requiredAccuracy, parameters, dependencies,
@@ -420,7 +420,7 @@ public abstract class AbstractLocalSearchResultProvider implements IQueryResultP
     public double estimateCost(TupleMask inputBindingMask) {
         // TODO this is currently an abstract cost, not really a branching factor
 
-        HashSet <PParameter> adornment = new HashSet<>(inputBindingMask.transform(query.getParameters()));
+        HashSet<PParameter> adornment = new HashSet<>(inputBindingMask.transform(query.getParameters()));
         final MatcherReference reference = new MatcherReference(query, adornment, userHints);
         IPlanDescriptor plan = getOrCreatePlan(reference, planProvider);
 
@@ -430,26 +430,26 @@ public abstract class AbstractLocalSearchResultProvider implements IQueryResultP
     /**
      * Approximates using parameter types
      */
-    private Optional <Double> estimateParameterCombinations(
+    private Optional<Double> estimateParameterCombinations(
             Accuracy requiredAccuracy,
-            final List <PParameter> parameters,
-            final Map <Set<Integer>, Set <Integer>> functionalDependencies,
-            final Collection <Integer> parameterIndicesToEstimate,
-            final Set <Integer> otherDeterminingIndices)
+            final List<PParameter> parameters,
+            final Map<Set<Integer>, Set<Integer>> functionalDependencies,
+            final Collection<Integer> parameterIndicesToEstimate,
+            final Set<Integer> otherDeterminingIndices)
     {
         // keep order deterministic
-        LinkedHashSet <Integer> freeParameterIndices = new LinkedHashSet<>(parameterIndicesToEstimate);
+        LinkedHashSet<Integer> freeParameterIndices = new LinkedHashSet<>(parameterIndicesToEstimate);
 
         // determining indices are bound
         freeParameterIndices.removeAll(otherDeterminingIndices);
 
         // some free parameters are functionally determined by other free parameters
         for (Integer candidateForRemoval : new ArrayList<>(freeParameterIndices)) {
-            List <Integer> others = Stream.concat(
+            List<Integer> others = Stream.concat(
                     otherDeterminingIndices.stream(),
                     freeParameterIndices.stream().filter(index -> !Objects.equals(index, candidateForRemoval))
             ).collect(Collectors.toList());
-            Set <Integer> othersClosure = FunctionalDependencyHelper.closureOf(others, functionalDependencies);
+            Set<Integer> othersClosure = FunctionalDependencyHelper.closureOf(others, functionalDependencies);
             if (othersClosure.contains(candidateForRemoval)) {
                 // other parameters functionally determine this mone, does not count towards estimate
                 freeParameterIndices.remove(candidateForRemoval);
@@ -457,7 +457,7 @@ public abstract class AbstractLocalSearchResultProvider implements IQueryResultP
         }
 
 
-        Optional <Double> result = Optional.of(1.0);
+        Optional<Double> result = Optional.of(1.0);
         // TODO this is currently works with declared types only. For better results, information from
         // the Type inferrer should be included in the PSystem
         for (int i = 0; (i < parameters.size()); i++) {
@@ -475,13 +475,13 @@ public abstract class AbstractLocalSearchResultProvider implements IQueryResultP
 
 
     @Override
-    public Stream <Tuple> getAllMatches(Object[] parameters) {
+    public Stream<Tuple> getAllMatches(Object[] parameters) {
         final LocalSearchMatcher matcher = initializeMatcher(parameters);
         return matcher.streamMatches(parameters);
     }
 
     @Override
-    public Stream <Tuple> getAllMatches(TupleMask parameterSeedMask, ITuple parameters) {
+    public Stream<Tuple> getAllMatches(TupleMask parameterSeedMask, ITuple parameters) {
         final LocalSearchMatcher matcher = initializeMatcher(parameterSeedMask);
         return matcher.streamMatches(parameterSeedMask, parameters);
     }
@@ -526,7 +526,7 @@ public abstract class AbstractLocalSearchResultProvider implements IQueryResultP
      * @since 2.0
      * @noreference This method is not intended to be referenced by clients; it should only used by {@link LocalSearchBackend}.
      */
-    public IPlanDescriptor getSearchPlan(Set <PParameter> adornment) {
+    public IPlanDescriptor getSearchPlan(Set<PParameter> adornment) {
         return planCache.get(new MatcherReference(query, adornment));
     }
 }

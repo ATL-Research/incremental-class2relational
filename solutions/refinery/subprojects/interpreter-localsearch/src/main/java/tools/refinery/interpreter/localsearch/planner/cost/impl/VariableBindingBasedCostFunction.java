@@ -53,7 +53,7 @@ public class VariableBindingBasedCostFunction implements ICostFunction {
     @Override
     public double apply(IConstraintEvaluationContext input) {
         PConstraint constraint = input.getConstraint();
-        Set <PVariable> affectedVariables = constraint.getAffectedVariables();
+        Set<PVariable> affectedVariables = constraint.getAffectedVariables();
 
         int cost = 0;
 

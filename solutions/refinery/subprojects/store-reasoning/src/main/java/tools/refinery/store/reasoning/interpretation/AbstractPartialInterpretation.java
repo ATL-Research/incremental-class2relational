@@ -9,13 +9,13 @@ import tools.refinery.store.reasoning.ReasoningAdapter;
 import tools.refinery.store.reasoning.literal.Concreteness;
 import tools.refinery.store.reasoning.representation.PartialSymbol;
 
-public abstract class AbstractPartialInterpretation <A, C> implements PartialInterpretation <A, C> {
+public abstract class AbstractPartialInterpretation<A, C> implements PartialInterpretation<A, C> {
 	private final ReasoningAdapter adapter;
-	private final PartialSymbol <A, C> partialSymbol;
+	private final PartialSymbol<A, C> partialSymbol;
 	private final Concreteness concreteness;
 
 	protected AbstractPartialInterpretation(ReasoningAdapter adapter, Concreteness concreteness,
-											PartialSymbol <A, C> partialSymbol) {
+											PartialSymbol<A, C> partialSymbol) {
 		this.adapter = adapter;
 		this.partialSymbol = partialSymbol;
 		this.concreteness = concreteness;
@@ -27,7 +27,7 @@ public abstract class AbstractPartialInterpretation <A, C> implements PartialInt
 	}
 
 	@Override
-	public PartialSymbol <A, C> getPartialSymbol() {
+	public PartialSymbol<A, C> getPartialSymbol() {
 		return partialSymbol;
 	}
 

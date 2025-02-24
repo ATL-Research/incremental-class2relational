@@ -42,30 +42,30 @@ import tools.refinery.language.validation.ProblemDiagnosticConverter;
  */
 public class ProblemRuntimeModule extends AbstractProblemRuntimeModule {
 	@Override
-	public Class <? extends IParser> bindIParser() {
+	public Class<? extends IParser> bindIParser() {
 		return TokenSourceInjectingProblemParser.class;
 	}
 
-	public Class <? extends IQualifiedNameConverter> bindIQualifiedNameConverter() {
+	public Class<? extends IQualifiedNameConverter> bindIQualifiedNameConverter() {
 		return ProblemQualifiedNameConverter.class;
 	}
 
-	public Class <? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
+	public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
 		return ProblemResourceDescriptionStrategy.class;
 	}
 
 	@Override
-	public Class <? extends IValueConverterService> bindIValueConverterService() {
+	public Class<? extends IValueConverterService> bindIValueConverterService() {
 		return ProblemValueConverterService.class;
 	}
 
 	@Override
-	public Class <? extends ILinkingService> bindILinkingService() {
+	public Class<? extends ILinkingService> bindILinkingService() {
 		return ProblemLinkingService.class;
 	}
 
 	@Override
-	public Class <? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return ProblemGlobalScopeProvider.class;
 	}
 
@@ -76,35 +76,35 @@ public class ProblemRuntimeModule extends AbstractProblemRuntimeModule {
 	}
 
 	@Override
-	public Class <? extends XtextResource> bindXtextResource() {
+	public Class<? extends XtextResource> bindXtextResource() {
 		return ProblemResource.class;
 	}
 
 	// Method name follows Xtext convention.
 	@SuppressWarnings("squid:S100")
-	public Class <? extends IResourceDescription.Manager> bindIResourceDescription$Manager() {
+	public Class<? extends IResourceDescription.Manager> bindIResourceDescription$Manager() {
 		return DerivedStateAwareResourceDescriptionManager.class;
 	}
 
-	public Class <? extends IResourceValidator> bindIResourceValidator() {
+	public Class<? extends IResourceValidator> bindIResourceValidator() {
 		return DerivedStateAwareResourceValidator.class;
 	}
 
-	public Class <? extends IDerivedStateComputer> bindIDerivedStateComputer() {
+	public Class<? extends IDerivedStateComputer> bindIDerivedStateComputer() {
 		return ProblemDerivedStateComputer.class;
 	}
 
 	@Override
-	public Class <? extends ILocationInFileProvider> bindILocationInFileProvider() {
+	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
 		return ProblemLocationInFileProvider.class;
 	}
 
 	@Override
-	public Class <? extends ISemanticSequencer> bindISemanticSequencer() {
+	public Class<? extends ISemanticSequencer> bindISemanticSequencer() {
 		return PreferShortAssertionsProblemSemanticSequencer.class;
 	}
 
-	public Class <? extends IDiagnosticConverter> bindIDiagnosticConverter() {
+	public Class<? extends IDiagnosticConverter> bindIDiagnosticConverter() {
 		return ProblemDiagnosticConverter.class;
 	}
 }

@@ -19,7 +19,7 @@ import java.util.stream.Stream;
  *
  * @author Oszkar Semerath
  */
-public class MapDiffCursor <K, V> implements DiffCursor <K, V>, Cursor <K, V> {
+public class MapDiffCursor<K, V> implements DiffCursor<K, V>, Cursor<K, V> {
 	private enum State {
 		/**
 		 * initialized state.
@@ -73,8 +73,8 @@ public class MapDiffCursor <K, V> implements DiffCursor <K, V>, Cursor <K, V> {
 	 * Default nodeId representing missing elements.
 	 */
 	private final V defaultValue;
-	private final InOrderMapCursor <K, V> cursor1;
-	private final InOrderMapCursor <K, V> cursor2;
+	private final InOrderMapCursor<K, V> cursor1;
+	private final InOrderMapCursor<K, V> cursor2;
 
 	// State
 	State state = State.INIT;
@@ -85,7 +85,7 @@ public class MapDiffCursor <K, V> implements DiffCursor <K, V>, Cursor <K, V> {
 	private V toValue;
 
 
-	public MapDiffCursor(V defaultValue, InOrderMapCursor <K, V> cursor1, InOrderMapCursor <K, V> cursor2) {
+	public MapDiffCursor(V defaultValue, InOrderMapCursor<K, V> cursor1, InOrderMapCursor<K, V> cursor2) {
 		super();
 		this.defaultValue = defaultValue;
 		this.cursor1 = cursor1;
@@ -122,7 +122,7 @@ public class MapDiffCursor <K, V> implements DiffCursor <K, V>, Cursor <K, V> {
 	}
 
 	@Override
-	public Set <AnyVersionedMap> getDependingMaps() {
+	public Set<AnyVersionedMap> getDependingMaps() {
 		return Stream.concat(cursor1.getDependingMaps().stream(), cursor2.getDependingMaps().stream()).map(AnyVersionedMap.class::cast).collect(Collectors.toUnmodifiableSet());
 	}
 

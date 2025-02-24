@@ -43,38 +43,38 @@ public final class CallInformation {
     private final TupleMask parameterMask;
     private final int[] freeParameterIndices;
 
-    private final Map <PParameter, Integer> mapping = new HashMap<>();
-    private final Set <PParameter> adornment = new HashSet<>();
+    private final Map<PParameter, Integer> mapping = new HashMap<>();
+    private final Set<PParameter> adornment = new HashSet<>();
     private final PQuery referredQuery;
     private final MatcherReference matcherReference;
     private final IQueryReference call;
     private CallWithAdornment callWithAdornment;
 
-    public static CallInformation create(PatternCallBasedDeferred constraint, Map <PVariable, Integer> variableMapping, Set <Integer> bindings) {
+    public static CallInformation create(PatternCallBasedDeferred constraint, Map<PVariable, Integer> variableMapping, Set<Integer> bindings) {
         return new CallInformation(constraint.getActualParametersTuple(), constraint, bindings, variableMapping);
     }
 
-    public static CallInformation create(PositivePatternCall pCall, Map <PVariable, Integer> variableMapping, Set <Integer> bindings) {
+    public static CallInformation create(PositivePatternCall pCall, Map<PVariable, Integer> variableMapping, Set<Integer> bindings) {
         return new CallInformation(pCall.getVariablesTuple(), pCall, bindings, variableMapping);
     }
 
-    public static CallInformation create(BinaryTransitiveClosure constraint, Map <PVariable, Integer> variableMapping, Set <Integer> bindings) {
+    public static CallInformation create(BinaryTransitiveClosure constraint, Map<PVariable, Integer> variableMapping, Set<Integer> bindings) {
         return new CallInformation(constraint.getVariablesTuple(), constraint, bindings, variableMapping);
     }
 
     /**
      * @since 2.0
      */
-    public static CallInformation create(BinaryReflexiveTransitiveClosure constraint, Map <PVariable, Integer> variableMapping, Set <Integer> bindings) {
+    public static CallInformation create(BinaryReflexiveTransitiveClosure constraint, Map<PVariable, Integer> variableMapping, Set<Integer> bindings) {
         return new CallInformation(constraint.getVariablesTuple(), constraint, bindings, variableMapping);
     }
 
-    private CallInformation(Tuple actualParameters, IQueryReference call, final Set <Integer> bindings,
-            Map <PVariable, Integer> variableMapping) {
+    private CallInformation(Tuple actualParameters, IQueryReference call, final Set<Integer> bindings,
+            Map<PVariable, Integer> variableMapping) {
         this.call = call;
         this.referredQuery = call.getReferredQuery();
         int keySize = actualParameters.getSize();
-        List <Integer> parameterMaskIndices = new ArrayList<>();
+        List<Integer> parameterMaskIndices = new ArrayList<>();
         int[] fullParameterMaskIndices = new int[keySize];
         for (int i = 0; i < keySize; i++) {
             PParameter symbolicParameter = referredQuery.getParameters().get(i);
@@ -156,8 +156,8 @@ public final class CallInformation {
         return freeParameterIndices;
     }
 
-    public List <Integer> getVariablePositions() {
-        List <Integer> variables = new ArrayList<>(mapping.size());
+    public List<Integer> getVariablePositions() {
+        List<Integer> variables = new ArrayList<>(mapping.size());
         for(PParameter p : referredQuery.getParameters()){
             variables.add(mapping.get(p));
         }
@@ -174,7 +174,7 @@ public final class CallInformation {
     /**
      * @since 2.0
      */
-    public String toString(Function <Integer, String> variableMapping) {
+    public String toString(Function<Integer, String> variableMapping) {
         return referredQuery.getFullyQualifiedName() + "("
                 + referredQuery.getParameters().stream().map(
                         input -> (adornment.contains(input) ? "+" : "-") + variableMapping.apply(mapping.get(input)))

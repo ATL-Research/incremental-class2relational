@@ -17,13 +17,13 @@ import tools.refinery.interpreter.matchers.tuple.Tuple;
  * @author Gabor Bergmann
  *
  */
-public interface IterableIndexer extends Indexer, Iterable <Tuple> {
+public interface IterableIndexer extends Indexer, Iterable<Tuple> {
 
     /**
      * A view consisting of exactly those signatures whose tuple group is not empty
      * @since 2.0
      */
-    public Iterable <Tuple> getSignatures();
+    public Iterable<Tuple> getSignatures();
 
     /**
      * @return the number of signatures whose tuple group is not empty

@@ -25,12 +25,12 @@ class CommitFuzzTest {
 
 	private void runFuzzTest(String scenario, int seed, int steps, int maxKey, int maxValue,
 							 boolean nullDefault, int commitFrequency,
-							 VersionedMapStoreFactoryBuilder <Integer, String> builder) {
+							 VersionedMapStoreFactoryBuilder<Integer, String> builder) {
 		String[] values = MapTestEnvironment.prepareValues(maxValue, nullDefault);
 
-		VersionedMapStore <Integer, String> store = builder.defaultValue(values[0]).build().createOne();
+		VersionedMapStore<Integer, String> store = builder.defaultValue(values[0]).build().createOne();
 		var sut = store.createMap();
-		MapTestEnvironment <Integer, String> e = new MapTestEnvironment<>(sut);
+		MapTestEnvironment<Integer, String> e = new MapTestEnvironment<>(sut);
 
 		Random r = new Random(seed);
 
@@ -38,7 +38,7 @@ class CommitFuzzTest {
 	}
 
 	private void iterativeRandomPutsAndCommits(String scenario, int steps, int maxKey, String[] values,
-											   MapTestEnvironment <Integer, String> e, Random r, int commitFrequency) {
+											   MapTestEnvironment<Integer, String> e, Random r, int commitFrequency) {
 		for (int i = 0; i < steps; i++) {
 			int index = i + 1;
 			int nextKey = r.nextInt(maxKey);
@@ -65,12 +65,12 @@ class CommitFuzzTest {
 	@Timeout(value = 10)
 	@Tag("fuzz")
 	void parametrizedFastFuzz(int ignoredTests, int steps, int noKeys, int noValues, boolean nullDefault, int commitFrequency,
-							  int seed, VersionedMapStoreFactoryBuilder <Integer, String> builder) {
+							  int seed, VersionedMapStoreFactoryBuilder<Integer, String> builder) {
 		runFuzzTest("CommitS" + steps + "K" + noKeys + "V" + noValues + "s" + seed, seed, steps, noKeys, noValues,
 				nullDefault, commitFrequency, builder);
 	}
 
-	static Stream <Arguments> parametrizedFastFuzz() {
+	static Stream<Arguments> parametrizedFastFuzz() {
 		return FuzzTestUtils.permutationWithSize(stepCounts, keyCounts, valueCounts, nullDefaultOptions,
 				commitFrequencyOptions, randomSeedOptions, storeConfigs);
 	}
@@ -80,12 +80,12 @@ class CommitFuzzTest {
 	@Tag("fuzz")
 	@Tag("slow")
 	void parametrizedSlowFuzz(int ignoredTests, int steps, int noKeys, int noValues, boolean nullDefault, int commitFrequency,
-							  int seed, VersionedMapStoreFactoryBuilder <Integer, String> builder) {
+							  int seed, VersionedMapStoreFactoryBuilder<Integer, String> builder) {
 		runFuzzTest("CommitS" + steps + "K" + noKeys + "V" + noValues + "s" + seed, seed, steps, noKeys, noValues,
 				nullDefault, commitFrequency, builder);
 	}
 
-	static Stream <Arguments> parametrizedSlowFuzz() {
+	static Stream<Arguments> parametrizedSlowFuzz() {
 		return FuzzTestUtils.changeStepCount(parametrizedFastFuzz(), 1);
 	}
 }

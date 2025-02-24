@@ -14,7 +14,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class UpperBoundValueConverter extends AbstractValueConverter <Integer> {
+public class UpperBoundValueConverter extends AbstractValueConverter<Integer> {
 	public static final String INFINITY = "*";	
 	
 	@Inject

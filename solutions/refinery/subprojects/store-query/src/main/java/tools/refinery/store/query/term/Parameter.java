@@ -11,14 +11,14 @@ import java.util.Optional;
 public class Parameter {
 	public static final Parameter NODE_OUT = new Parameter(null);
 
-	private final Class <?> dataType;
+	private final Class<?> dataType;
 	private final ParameterDirection direction;
 
-	public Parameter(Class <?> dataType) {
+	public Parameter(Class<?> dataType) {
 		this(dataType, ParameterDirection.OUT);
 	}
 
-	public Parameter(Class <?> dataType, ParameterDirection direction) {
+	public Parameter(Class<?> dataType, ParameterDirection direction) {
 		this.dataType = dataType;
 		this.direction = direction;
 	}
@@ -31,7 +31,7 @@ public class Parameter {
 		return !isNodeVariable();
 	}
 
-	public Optional <Class<?>> tryGetType() {
+	public Optional<Class<?>> tryGetType() {
 		return Optional.ofNullable(dataType);
 	}
 

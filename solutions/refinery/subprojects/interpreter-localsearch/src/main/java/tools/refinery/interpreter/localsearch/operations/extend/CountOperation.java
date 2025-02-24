@@ -28,7 +28,7 @@ import tools.refinery.interpreter.matchers.tuple.VolatileModifiableMaskedTuple;
  */
 public class CountOperation implements ISearchOperation, IPatternMatcherOperation{
 
-    private class Executor extends SingleValueExtendOperationExecutor <Integer>  {
+    private class Executor extends SingleValueExtendOperationExecutor<Integer>  {
         private final VolatileModifiableMaskedTuple maskedTuple;
         private IQueryResultProvider matcher;
 
@@ -38,7 +38,7 @@ public class CountOperation implements ISearchOperation, IPatternMatcherOperatio
         }
 
         @Override
-        public Iterator <Integer> getIterator(MatchingFrame frame, ISearchContext context) {
+        public Iterator<Integer> getIterator(MatchingFrame frame, ISearchContext context) {
             matcher = context.getMatcher(information.getCallWithAdornment());
             maskedTuple.updateTuple(frame);
             return Collections.singletonList(matcher.countMatches(information.getParameterMask(), maskedTuple)).iterator();
@@ -67,7 +67,7 @@ public class CountOperation implements ISearchOperation, IPatternMatcherOperatio
     }
 
     @Override
-    public List <Integer> getVariablePositions() {
+    public List<Integer> getVariablePositions() {
         return information.getVariablePositions();
     }
 
@@ -77,7 +77,7 @@ public class CountOperation implements ISearchOperation, IPatternMatcherOperatio
     }
 
     @Override
-    public String toString(Function <Integer, String> variableMapping) {
+    public String toString(Function<Integer, String> variableMapping) {
         return "extend    -"+variableMapping.apply(position)+" = count find " + information.toString(variableMapping);
     }
 

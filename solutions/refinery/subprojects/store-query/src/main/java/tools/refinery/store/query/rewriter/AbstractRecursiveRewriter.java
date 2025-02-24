@@ -10,7 +10,7 @@ import tools.refinery.store.query.equality.DnfEqualityChecker;
 import tools.refinery.store.util.CycleDetectingMapper;
 
 public abstract class AbstractRecursiveRewriter implements DnfRewriter {
-	private final CycleDetectingMapper <Dnf, Dnf> mapper = new CycleDetectingMapper<>(Dnf::name, this::map);
+	private final CycleDetectingMapper<Dnf, Dnf> mapper = new CycleDetectingMapper<>(Dnf::name, this::map);
 
 	@Override
 	public Dnf rewrite(Dnf dnf) {

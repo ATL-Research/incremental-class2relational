@@ -12,6 +12,6 @@ import tools.refinery.store.query.term.NodeVariable;
 import java.util.Collection;
 
 @FunctionalInterface
-public interface ClauseCallback2Data1 <T> {
-	Collection <Literal> toLiterals(NodeVariable v1, DataVariable <T> x1);
+public interface ClauseCallback2Data1<T> {
+	Collection<Literal> toLiterals(NodeVariable v1, DataVariable<T> x1);
 }

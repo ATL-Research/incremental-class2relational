@@ -14,7 +14,7 @@ import tools.refinery.store.query.resultset.ResultSet;
 
 class BoundPropagationRule {
 	private final Model model;
-	private final ResultSet <Boolean> resultSet;
+	private final ResultSet<Boolean> resultSet;
 	private final BoundAction action;
 
 	public BoundPropagationRule(Model model, Rule rule) {

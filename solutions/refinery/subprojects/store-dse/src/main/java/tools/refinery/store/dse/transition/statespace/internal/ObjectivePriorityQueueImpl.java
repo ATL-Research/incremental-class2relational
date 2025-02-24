@@ -16,13 +16,13 @@ import java.util.PriorityQueue;
 import java.util.Random;
 
 public class ObjectivePriorityQueueImpl implements ObjectivePriorityQueue {
-	public static final Comparator <VersionWithObjectiveValue> c1 = (o1, o2) -> Double.compare(
+	public static final Comparator<VersionWithObjectiveValue> c1 = (o1, o2) -> Double.compare(
 			((ObjectiveValues.ObjectiveValue1) o1.objectiveValue()).value0(),
 			((ObjectiveValues.ObjectiveValue1) o2.objectiveValue()).value0());
 	// TODO: support multi objective!
-	final PriorityQueue <VersionWithObjectiveValue> priorityQueue;
+	final PriorityQueue<VersionWithObjectiveValue> priorityQueue;
 
-	public ObjectivePriorityQueueImpl(List <Objective> objectives) {
+	public ObjectivePriorityQueueImpl(List<Objective> objectives) {
 
 		if(objectives.size() == 1) {
 			this.priorityQueue = new PriorityQueue<>(c1);
@@ -31,7 +31,7 @@ public class ObjectivePriorityQueueImpl implements ObjectivePriorityQueue {
 		}
 	}
 	@Override
-	public Comparator <VersionWithObjectiveValue> getComparator() {
+	public Comparator<VersionWithObjectiveValue> getComparator() {
 		return c1;
 	}
 

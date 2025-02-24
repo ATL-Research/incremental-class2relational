@@ -27,7 +27,7 @@ public abstract class BaseNode implements Node {
     protected ReteContainer reteContainer;
     protected long nodeId;
     protected Object tag;
-    protected Set <TraceInfo> traceInfos;
+    protected Set<TraceInfo> traceInfos;
 
     /**
      * @param reteContainer
@@ -37,7 +37,7 @@ public abstract class BaseNode implements Node {
         super();
         this.reteContainer = reteContainer;
         this.nodeId = reteContainer.registerNode(this);
-        this.traceInfos = new HashSet <TraceInfo>();
+        this.traceInfos = new HashSet<TraceInfo>();
     }
 
     @Override
@@ -76,7 +76,7 @@ public abstract class BaseNode implements Node {
     }
 
     @Override
-    public Set <TraceInfo> getTraceInfos() {
+    public Set<TraceInfo> getTraceInfos() {
         return Collections.unmodifiableSet(traceInfos);
     }
 
@@ -95,7 +95,7 @@ public abstract class BaseNode implements Node {
      * Descendants should use this in e.g. logging
      */
     protected String getTraceInfoPatternsEnumerated() {
-        TreeSet <String> patternNames = new TreeSet <String>();
+        TreeSet<String> patternNames = new TreeSet<String>();
         for (TraceInfo trInfo : traceInfos) {
             if (trInfo instanceof PatternTraceInfo) {
                 final String pName = ((PatternTraceInfo) trInfo).getPatternName();

@@ -18,7 +18,7 @@ public interface Substitution {
 		return substitute.asNodeVariable();
 	}
 
-	default <T> DataVariable <T> getTypeSafeSubstitute(DataVariable <T> variable) {
+	default <T> DataVariable<T> getTypeSafeSubstitute(DataVariable<T> variable) {
 		var substitute = getSubstitute(variable);
 		return substitute.asDataVariable(variable.getType());
 	}

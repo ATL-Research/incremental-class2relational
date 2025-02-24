@@ -15,7 +15,7 @@ package tools.refinery.interpreter.rete.itc.igraph;
  * @author Tamas Szabo
  *
  */
-public interface IGraphObserver <V> {
+public interface IGraphObserver<V> {
 
     /**
      * Used to notify when an edge is inserted into the graph.

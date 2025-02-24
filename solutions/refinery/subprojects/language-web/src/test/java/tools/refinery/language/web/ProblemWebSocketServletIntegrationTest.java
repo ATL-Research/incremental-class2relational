@@ -142,7 +142,7 @@ class ProblemWebSocketServletIntegrationTest {
 	void badSubProtocolTest() {
 		startServer(null);
 		var clientSocket = new CloseImmediatelyTestClient();
-		var session = connect(clientSocket, null, " <invalid sub-protocol>");
+		var session = connect(clientSocket, null, "<invalid sub-protocol>");
 		assertThat(session.getUpgradeResponse().getAcceptedSubProtocol(), equalTo(null));
 		clientSocket.waitForTestResult();
 		assertThat(clientSocket.getCloseStatusCode(), equalTo(StatusCode.NORMAL));
@@ -160,7 +160,7 @@ class ProblemWebSocketServletIntegrationTest {
 	void subProtocolNegotiationTest() {
 		startServer(null);
 		var clientSocket = new CloseImmediatelyTestClient();
-		try (var session = connect(clientSocket, null, " <invalid sub-protocol>",
+		try (var session = connect(clientSocket, null, "<invalid sub-protocol>",
 				XtextWebSocketServlet.XTEXT_SUBPROTOCOL_V1)) {
 			assertThat(session.getUpgradeResponse().getAcceptedSubProtocol(),
 					equalTo(XtextWebSocketServlet.XTEXT_SUBPROTOCOL_V1));
@@ -183,7 +183,7 @@ class ProblemWebSocketServletIntegrationTest {
 	public static class InvalidJsonTestClient extends WebSocketIntegrationTestClient {
 		@Override
 		protected void arrange(Session session, int responsesReceived) {
-			session.sendText(" <invalid json>", Callback.NOOP);
+			session.sendText("<invalid json>", Callback.NOOP);
 		}
 	}
 
@@ -241,7 +241,7 @@ class ProblemWebSocketServletIntegrationTest {
 			upgradeRequest.setHeader(HttpHeader.ORIGIN.name(), origin);
 		}
 		upgradeRequest.setSubProtocols(subProtocols);
-		CompletableFuture <Session> sessionFuture;
+		CompletableFuture<Session> sessionFuture;
 		try {
 			sessionFuture = client.connect(webSocketClient,
 					URI.create("ws://%s:%d%s".formatted(HOSTNAME, serverPort, SERVLET_URI)),

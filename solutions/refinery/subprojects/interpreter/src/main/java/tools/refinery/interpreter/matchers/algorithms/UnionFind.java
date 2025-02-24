@@ -26,10 +26,10 @@ import tools.refinery.interpreter.matchers.util.CollectionsFactory;
  * @param <V>
  *            the type parameter of the element's stored in the union-find data structure
  */
-public class UnionFind <V> {
+public class UnionFind<V> {
 
-    private final Map <V, UnionFindNodeProperty <V>> nodeMap;
-    final Map <V, Set <V>> setMap;
+    private final Map<V, UnionFindNodeProperty<V>> nodeMap;
+    final Map<V, Set<V>> setMap;
 
     /**
      * Instantiate a new union-find data structure.
@@ -42,7 +42,7 @@ public class UnionFind <V> {
     /**
      * Instantiate a new union-find data structure with the given elements as separate sets.
      */
-    public UnionFind(Iterable <V> elements) {
+    public UnionFind(Iterable<V> elements) {
         this();
         for (V element : elements) {
             makeSet(element);
@@ -56,9 +56,9 @@ public class UnionFind <V> {
      *            the collection of elements
      * @return the root element
      */
-    public V makeSet(Collection <V> nodes) {
+    public V makeSet(Collection<V> nodes) {
         if (!nodes.isEmpty()) {
-            Iterator <V> iterator = nodes.iterator();
+            Iterator<V> iterator = nodes.iterator();
             V root = makeSet(iterator.next());
             while (iterator.hasNext()) {
                 root = union(root, iterator.next());
@@ -78,9 +78,9 @@ public class UnionFind <V> {
      */
     public V makeSet(V node) {
         if (!nodeMap.containsKey(node)) {
-            UnionFindNodeProperty <V> prop = new UnionFindNodeProperty <V>(0, node);
+            UnionFindNodeProperty<V> prop = new UnionFindNodeProperty<V>(0, node);
             nodeMap.put(node, prop);
-            Set <V> set = new HashSet <V>();
+            Set<V> set = new HashSet<V>();
             set.add(node);
             setMap.put(node, set);
         }
@@ -95,7 +95,7 @@ public class UnionFind <V> {
      * @return the root node of the set in which the given node can be found
      */
     public V find(V node) {
-        UnionFindNodeProperty <V> prop = nodeMap.get(node);
+        UnionFindNodeProperty<V> prop = nodeMap.get(node);
 
         if (prop != null) {
             if (prop.parent.equals(node)) {
@@ -126,8 +126,8 @@ public class UnionFind <V> {
             return union( (xRoot == null) ? makeSet(x) : xRoot, (yRoot == null) ? makeSet(y) : yRoot);
         }
         else if (!xRoot.equals(yRoot)) {
-            UnionFindNodeProperty <V> xRootProp = nodeMap.get(xRoot);
-            UnionFindNodeProperty <V> yRootProp = nodeMap.get(yRoot);
+            UnionFindNodeProperty<V> xRootProp = nodeMap.get(xRoot);
+            UnionFindNodeProperty<V> yRootProp = nodeMap.get(yRoot);
 
             if (xRootProp.rank < yRootProp.rank) {
                 xRootProp.parent = yRoot;
@@ -149,7 +149,7 @@ public class UnionFind <V> {
     /**
      * Places the given elements in to the same partition.
      */
-    public void unite(Set <V> elements) {
+    public void unite(Set<V> elements) {
         if (elements.size() > 1) {
             V current = null;
             for (V element : elements) {
@@ -183,8 +183,8 @@ public class UnionFind <V> {
     /**
      * Returns if all given elements are in the same partition.
      */
-    public boolean isSameUnion(Set <V> elements) {
-        for (Set <V> partition : setMap.values()) {
+    public boolean isSameUnion(Set<V> elements) {
+        for (Set<V> partition : setMap.values()) {
             if (partition.containsAll(elements)) {
                 return true;
             }
@@ -196,7 +196,7 @@ public class UnionFind <V> {
     /**
      * Returns the partition in which the given element can be found, or null otherwise.
      */
-    public Set <V> getPartition(V element) {
+    public Set<V> getPartition(V element) {
         V root = find(element);
         return setMap.get(root);
     }
@@ -204,11 +204,11 @@ public class UnionFind <V> {
     /**
      * Returns all partitions.
      */
-    public Collection <Set<V>> getPartitions() {
+    public Collection<Set<V>> getPartitions() {
         return setMap.values();
     }
 
-    public Set <V> getPartitionHeads() {
+    public Set<V> getPartitionHeads() {
         return setMap.keySet();
     }
 }

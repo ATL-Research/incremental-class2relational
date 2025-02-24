@@ -36,7 +36,7 @@ public class ProblemWebInjectorProvider extends ProblemInjectorProvider {
 		return new ProblemWebModule() {
 			@Override
 			@SuppressWarnings("unused")
-			public Class <? extends ExecutorServiceProvider> bindExecutorServiceProvider() {
+			public Class<? extends ExecutorServiceProvider> bindExecutorServiceProvider() {
 				return AwaitTerminationExecutorServiceProvider.class;
 			}
 		};

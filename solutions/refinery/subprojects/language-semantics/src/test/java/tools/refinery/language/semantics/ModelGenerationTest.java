@@ -245,7 +245,7 @@ class ModelGenerationTest {
 				.getPartialInterpretation(Concreteness.CANDIDATE, ReasoningAdapter.EXISTS_SYMBOL);
 		var cursor = interpretation.getAll();
 		int max = -1;
-		var types = new LinkedHashMap <PartialRelation, Integer>();
+		var types = new LinkedHashMap<PartialRelation, Integer>();
 		var typeInterpretation = model.getInterpretation(TypeHierarchyTranslator.TYPE_SYMBOL);
 		while (cursor.move()) {
 			max = Math.max(max, cursor.getKey().get(0));
@@ -312,7 +312,7 @@ class ModelGenerationTest {
 				.getPartialInterpretation(Concreteness.CANDIDATE, ReasoningAdapter.EXISTS_SYMBOL);
 		var cursor = interpretation.getAll();
 		int max = -1;
-		var types = new LinkedHashMap <PartialRelation, Integer>();
+		var types = new LinkedHashMap<PartialRelation, Integer>();
 		var typeInterpretation = model.getInterpretation(TypeHierarchyTranslator.TYPE_SYMBOL);
 		while (cursor.move()) {
 			max = Math.max(max, cursor.getKey().get(0));

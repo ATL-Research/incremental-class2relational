@@ -30,7 +30,7 @@ import tools.refinery.interpreter.matchers.tuple.Tuple;
 
 public class MemoryIdentityIndexer extends IdentityIndexer {
 
-    protected final Collection <Tuple> memory;
+    protected final Collection<Tuple> memory;
 
     /**
      * @param reteContainer
@@ -41,14 +41,14 @@ public class MemoryIdentityIndexer extends IdentityIndexer {
      * @param parent
      *            the parent node that owns the memory
      */
-    public MemoryIdentityIndexer(ReteContainer reteContainer, int tupleWidth, Collection <Tuple> memory,
-                                 Supplier parent, Receiver activeNode, List <ListenerSubscription> sharedSubscriptionList) {
+    public MemoryIdentityIndexer(ReteContainer reteContainer, int tupleWidth, Collection<Tuple> memory,
+                                 Supplier parent, Receiver activeNode, List<ListenerSubscription> sharedSubscriptionList) {
         super(reteContainer, tupleWidth, parent, activeNode, sharedSubscriptionList);
         this.memory = memory;
     }
 
     @Override
-    protected Collection <Tuple> getTuples() {
+    protected Collection<Tuple> getTuples() {
         return this.memory;
     }
 

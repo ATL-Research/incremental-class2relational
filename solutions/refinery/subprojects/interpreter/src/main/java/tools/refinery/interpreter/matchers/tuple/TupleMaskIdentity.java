@@ -24,7 +24,7 @@ public final class TupleMaskIdentity extends TupleMask {
     }
 
     @Override
-    public <T> List <T> transform(List <T> original) {
+    public <T> List<T> transform(List<T> original) {
         return original;
     }
 

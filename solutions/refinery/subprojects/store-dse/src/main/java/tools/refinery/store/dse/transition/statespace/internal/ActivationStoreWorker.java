@@ -14,9 +14,9 @@ import java.util.Random;
 
 public class ActivationStoreWorker {
 	final ActivationStore store;
-	final List <Transformation> transformations;
+	final List<Transformation> transformations;
 
-	public ActivationStoreWorker(ActivationStore store, List <Transformation> transformations) {
+	public ActivationStoreWorker(ActivationStore store, List<Transformation> transformations) {
 		this.store = store;
 		this.transformations = transformations;
 	}

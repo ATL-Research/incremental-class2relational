@@ -11,24 +11,24 @@ import tools.refinery.store.query.term.StatefulAggregator;
 import java.util.Map;
 import java.util.TreeMap;
 
-public final class RealSumAggregator implements StatefulAggregator <Double, Double> {
+public final class RealSumAggregator implements StatefulAggregator<Double, Double> {
 	public static final RealSumAggregator INSTANCE = new RealSumAggregator();
 
 	private RealSumAggregator() {
 	}
 
 	@Override
-	public Class <Double> getResultType() {
+	public Class<Double> getResultType() {
 		return Double.class;
 	}
 
 	@Override
-	public Class <Double> getInputType() {
+	public Class<Double> getInputType() {
 		return Double.class;
 	}
 
 	@Override
-	public StatefulAggregate <Double, Double> createEmptyAggregate() {
+	public StatefulAggregate<Double, Double> createEmptyAggregate() {
 		return new Aggregate();
 	}
 
@@ -37,8 +37,8 @@ public final class RealSumAggregator implements StatefulAggregator <Double, Doub
 		return 0d;
 	}
 
-	private static class Aggregate implements StatefulAggregate <Double, Double> {
-		private final Map <Double, Integer> values;
+	private static class Aggregate implements StatefulAggregate<Double, Double> {
+		private final Map<Double, Integer> values;
 
 		public Aggregate() {
 			values = new TreeMap<>();
@@ -78,7 +78,7 @@ public final class RealSumAggregator implements StatefulAggregator <Double, Doub
 		}
 
 		@Override
-		public StatefulAggregate <Double, Double> deepCopy() {
+		public StatefulAggregate<Double, Double> deepCopy() {
 			return new Aggregate(this);
 		}
 

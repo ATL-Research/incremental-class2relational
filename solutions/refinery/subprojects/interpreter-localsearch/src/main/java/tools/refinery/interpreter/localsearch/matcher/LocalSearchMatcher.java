@@ -40,33 +40,33 @@ import tools.refinery.interpreter.matchers.util.Preconditions;
  */
 public final class LocalSearchMatcher implements ILocalSearchAdaptable {
 
-    private final List <SearchPlanExecutor> plan;
+    private final List<SearchPlanExecutor> plan;
     private final IPlanDescriptor planDescriptor;
-    private final List <ILocalSearchAdapter> adapters;
+    private final List<ILocalSearchAdapter> adapters;
 
     /**
      * @since 2.0
      */
-    public List <SearchPlanExecutor> getPlan() {
+    public List<SearchPlanExecutor> getPlan() {
         return plan;
     }
 
     @Override
-    public List <ILocalSearchAdapter> getAdapters() {
+    public List<ILocalSearchAdapter> getAdapters() {
         return new ArrayList<>(adapters);
     }
 
-    private abstract class PlanExecutionIterator implements Iterator <Tuple> {
+    private abstract class PlanExecutionIterator implements Iterator<Tuple> {
 
-        protected final Iterator <SearchPlanExecutor> planIterator;
+        protected final Iterator<SearchPlanExecutor> planIterator;
 
         protected SearchPlanExecutor currentPlan;
         protected MatchingFrame frame;
-        protected final Set <ITuple> matchSet;
+        protected final Set<ITuple> matchSet;
         protected VolatileModifiableMaskedTuple parametersOfFrameView;
         private boolean isNextMatchCalculated;
 
-        public PlanExecutionIterator(final Iterator <SearchPlanExecutor> planIterator) {
+        public PlanExecutionIterator(final Iterator<SearchPlanExecutor> planIterator) {
             this.planIterator = planIterator;
             isNextMatchCalculated = false;
             matchSet = new HashSet<>();
@@ -152,7 +152,7 @@ public final class LocalSearchMatcher implements ILocalSearchAdaptable {
 
         private final Object[] parameterValues;
 
-        public PlanExecutionIteratorWithArrayParameters(Iterator <SearchPlanExecutor> planIterator, final Object[] parameterValues) {
+        public PlanExecutionIteratorWithArrayParameters(Iterator<SearchPlanExecutor> planIterator, final Object[] parameterValues) {
             super(planIterator);
             this.parameterValues = parameterValues;
             selectNextPlan();
@@ -184,7 +184,7 @@ public final class LocalSearchMatcher implements ILocalSearchAdaptable {
         private final ITuple parameterValues;
         private final TupleMask parameterSeedMask;
 
-        public PlanExecutionIteratorWithTupleParameters(Iterator <SearchPlanExecutor> planIterator, final TupleMask parameterSeedMask, final ITuple parameterValues) {
+        public PlanExecutionIteratorWithTupleParameters(Iterator<SearchPlanExecutor> planIterator, final TupleMask parameterSeedMask, final ITuple parameterValues) {
             super(planIterator);
             this.parameterSeedMask = parameterSeedMask;
             this.parameterValues = parameterValues;
@@ -217,7 +217,7 @@ public final class LocalSearchMatcher implements ILocalSearchAdaptable {
     /**
      * @since 2.0
      */
-    public LocalSearchMatcher(ISearchContext searchContext, IPlanDescriptor planDescriptor, List <SearchPlan> plan) {
+    public LocalSearchMatcher(ISearchContext searchContext, IPlanDescriptor planDescriptor, List<SearchPlan> plan) {
         Preconditions.checkArgument(planDescriptor != null, "Cannot initialize matcher with null query.");
         this.planDescriptor = planDescriptor;
         this.plan = plan.stream().map(p -> new SearchPlanExecutor(p, searchContext)).collect(Collectors.toList());
@@ -237,7 +237,7 @@ public final class LocalSearchMatcher implements ILocalSearchAdaptable {
     }
 
     @Override
-    public void addAdapters(List <ILocalSearchAdapter> adapters) {
+    public void addAdapters(List<ILocalSearchAdapter> adapters) {
         this.adapters.addAll(adapters);
         for (ILocalSearchAdapter adapter : adapters) {
             adapter.adapterRegistered(this);
@@ -245,7 +245,7 @@ public final class LocalSearchMatcher implements ILocalSearchAdaptable {
     }
 
     @Override
-    public void removeAdapters(List <ILocalSearchAdapter> adapters) {
+    public void removeAdapters(List<ILocalSearchAdapter> adapters) {
         this.adapters.removeAll(adapters);
         for (ILocalSearchAdapter adapter : adapters) {
             adapter.adapterUnregistered(this);
@@ -265,7 +265,7 @@ public final class LocalSearchMatcher implements ILocalSearchAdaptable {
     /**
      * @since 2.0
      */
-    public Stream <Tuple> streamMatches(final Object[] parameterValues) {
+    public Stream<Tuple> streamMatches(final Object[] parameterValues) {
         matchingStarted();
         PlanExecutionIterator it = new PlanExecutionIteratorWithArrayParameters(plan.iterator(), parameterValues);
         return StreamSupport.stream(Spliterators.spliteratorUnknownSize(it,
@@ -275,7 +275,7 @@ public final class LocalSearchMatcher implements ILocalSearchAdaptable {
     /**
      * @since 2.0
      */
-    public Stream <Tuple> streamMatches(TupleMask parameterSeedMask, final ITuple parameterValues) {
+    public Stream<Tuple> streamMatches(TupleMask parameterSeedMask, final ITuple parameterValues) {
         matchingStarted();
         PlanExecutionIterator it = new PlanExecutionIteratorWithTupleParameters(
                 plan.iterator(), parameterSeedMask, parameterValues);

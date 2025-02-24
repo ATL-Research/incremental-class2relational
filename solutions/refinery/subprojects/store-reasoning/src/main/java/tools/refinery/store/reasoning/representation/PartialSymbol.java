@@ -7,9 +7,9 @@ package tools.refinery.store.reasoning.representation;
 
 import tools.refinery.store.representation.AbstractDomain;
 
-public sealed interface PartialSymbol <A, C> extends AnyPartialSymbol permits PartialFunction, PartialRelation {
+public sealed interface PartialSymbol<A, C> extends AnyPartialSymbol permits PartialFunction, PartialRelation {
 	@Override
-	AbstractDomain <A, C> abstractDomain();
+	AbstractDomain<A, C> abstractDomain();
 
 	A defaultValue();
 
@@ -17,7 +17,7 @@ public sealed interface PartialSymbol <A, C> extends AnyPartialSymbol permits Pa
 		return new PartialRelation(name, arity);
 	}
 
-	static <A, C> PartialFunction <A, C> of(String name, int arity, AbstractDomain <A, C> abstractDomain) {
+	static <A, C> PartialFunction<A, C> of(String name, int arity, AbstractDomain<A, C> abstractDomain) {
 		return new PartialFunction<>(name, arity, abstractDomain);
 	}
 }

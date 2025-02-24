@@ -76,12 +76,12 @@ public class CountCheck implements ISearchOperation, IPatternMatcherOperation {
     }
 
     @Override
-    public List <Integer> getVariablePositions() {
+    public List<Integer> getVariablePositions() {
         return Collections.singletonList(position);
     }
 
     @Override
-    public String toString(Function <Integer, String> variableMapping) {
+    public String toString(Function<Integer, String> variableMapping) {
         return "check     "+variableMapping.apply(position)+" = count find "+ information.toString(variableMapping);
     }
 

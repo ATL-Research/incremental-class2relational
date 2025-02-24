@@ -12,7 +12,7 @@ import tools.refinery.store.tuple.Tuple;
 import java.util.Map;
 import java.util.Objects;
 
-record MapBasedSeed <T>(int arity, Class <T> valueType, T reducedValue, Map <Tuple, T> map) implements Seed <T> {
+record MapBasedSeed<T>(int arity, Class<T> valueType, T reducedValue, Map<Tuple, T> map) implements Seed<T> {
 	@Override
 	public T get(Tuple key) {
 		var value = map.get(key);
@@ -20,24 +20,24 @@ record MapBasedSeed <T>(int arity, Class <T> valueType, T reducedValue, Map <Tup
 	}
 
 	@Override
-	public Cursor <Tuple, T> getCursor(T defaultValue, int nodeCount) {
+	public Cursor<Tuple, T> getCursor(T defaultValue, int nodeCount) {
 		if (Objects.equals(defaultValue, reducedValue)) {
 			return Cursors.of(map);
 		}
 		return new CartesianProductCursor<>(arity, nodeCount, reducedValue, defaultValue, map);
 	}
 
-	private static class CartesianProductCursor <T> implements Cursor <Tuple, T> {
+	private static class CartesianProductCursor<T> implements Cursor<Tuple, T> {
 		private final int nodeCount;
 		private final T reducedValue;
 		private final T defaultValue;
-		private final Map <Tuple, T> map;
+		private final Map<Tuple, T> map;
 		private final int[] counter;
 		private State state = State.INITIAL;
 		private Tuple key;
 		private T value;
 
-		private CartesianProductCursor(int arity, int nodeCount, T reducedValue, T defaultValue, Map <Tuple, T> map) {
+		private CartesianProductCursor(int arity, int nodeCount, T reducedValue, T defaultValue, Map<Tuple, T> map) {
 			this.nodeCount = nodeCount;
 			this.reducedValue = reducedValue;
 			this.defaultValue = defaultValue;

@@ -11,7 +11,7 @@ import tools.refinery.store.map.VersionedMapStoreFactoryBuilder;
 import tools.refinery.store.map.internal.delta.DeltaBasedVersionedMapStoreFactory;
 import tools.refinery.store.map.internal.state.StateBasedVersionedMapStoreFactory;
 
-public class VersionedMapStoreFactoryBuilderImpl <K, V> implements VersionedMapStoreFactoryBuilder <K, V> {
+public class VersionedMapStoreFactoryBuilderImpl<K, V> implements VersionedMapStoreFactoryBuilder<K, V> {
 
 	private boolean defaultSet = false;
 	private V defaultValue;
@@ -19,7 +19,7 @@ public class VersionedMapStoreFactoryBuilderImpl <K, V> implements VersionedMapS
 	private Boolean transformToImmutable = null;
 	private SharingStrategy sharingStrategy = null;
 	private Boolean enableVersionFreeing = null;
-	private ContinuousHashProvider <K> continuousHashProvider = null;
+	private ContinuousHashProvider<K> continuousHashProvider = null;
 	private DeltaTransactionStrategy deltaTransactionStrategy = null;
 
 	private StoreStrategy checkStrategy() {
@@ -52,49 +52,49 @@ public class VersionedMapStoreFactoryBuilderImpl <K, V> implements VersionedMapS
 	}
 
 	@Override
-	public VersionedMapStoreFactoryBuilder <K, V> defaultValue(V defaultValue) {
+	public VersionedMapStoreFactoryBuilder<K, V> defaultValue(V defaultValue) {
 		this.defaultSet = true;
 		this.defaultValue = defaultValue;
 		return this;
 	}
 
 	@Override
-	public VersionedMapStoreFactoryBuilder <K, V> strategy(StoreStrategy strategy) {
+	public VersionedMapStoreFactoryBuilder<K, V> strategy(StoreStrategy strategy) {
 		this.strategy = strategy;
 		checkStrategy();
 		return this;
 	}
 
 	@Override
-	public VersionedMapStoreFactoryBuilder <K, V> versionFreeing(boolean enabled) {
+	public VersionedMapStoreFactoryBuilder<K, V> versionFreeing(boolean enabled) {
 		this.enableVersionFreeing = enabled;
 		checkStrategy();
 		return this;
 	}
 
 	@Override
-	public VersionedMapStoreFactoryBuilder <K, V> stateBasedImmutableWhenCommitting(boolean transformToImmutable) {
+	public VersionedMapStoreFactoryBuilder<K, V> stateBasedImmutableWhenCommitting(boolean transformToImmutable) {
 		this.transformToImmutable = transformToImmutable;
 		checkStrategy();
 		return this;
 	}
 
 	@Override
-	public VersionedMapStoreFactoryBuilder <K, V> stateBasedSharingStrategy(SharingStrategy sharingStrategy) {
+	public VersionedMapStoreFactoryBuilder<K, V> stateBasedSharingStrategy(SharingStrategy sharingStrategy) {
 		this.sharingStrategy = sharingStrategy;
 		checkStrategy();
 		return this;
 	}
 
 	@Override
-	public VersionedMapStoreFactoryBuilder <K, V> stateBasedHashProvider(ContinuousHashProvider <K> hashProvider) {
+	public VersionedMapStoreFactoryBuilder<K, V> stateBasedHashProvider(ContinuousHashProvider<K> hashProvider) {
 		this.continuousHashProvider = hashProvider;
 		checkStrategy();
 		return this;
 	}
 
 	@Override
-	public VersionedMapStoreFactoryBuilder <K, V> deltaTransactionStrategy(DeltaTransactionStrategy deltaTransactionStrategy) {
+	public VersionedMapStoreFactoryBuilder<K, V> deltaTransactionStrategy(DeltaTransactionStrategy deltaTransactionStrategy) {
 		this.deltaTransactionStrategy = deltaTransactionStrategy;
 		checkStrategy();
 		return this;
@@ -109,7 +109,7 @@ public class VersionedMapStoreFactoryBuilderImpl <K, V> implements VersionedMapS
 	}
 
 	@Override
-	public VersionedMapStoreFactory <K, V> build() {
+	public VersionedMapStoreFactory<K, V> build() {
 		if (!defaultSet) {
 			throw new IllegalArgumentException("Default value is missing!");
 		}

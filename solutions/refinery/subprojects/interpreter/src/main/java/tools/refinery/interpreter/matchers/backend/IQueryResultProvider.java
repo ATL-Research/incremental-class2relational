@@ -87,7 +87,7 @@ public interface IQueryResultProvider {
      *
      * @since 2.1
      */
-    public Optional <Long> estimateCardinality(TupleMask groupMask, Accuracy requiredAccuracy);
+    public Optional<Long> estimateCardinality(TupleMask groupMask, Accuracy requiredAccuracy);
 
     /**
      * Gives an estimate of the average size of different groups the matches are projected into by the given mask
@@ -106,7 +106,7 @@ public interface IQueryResultProvider {
      *
      * @since 2.1
      */
-    public default Optional <Double> estimateAverageBucketSize(TupleMask groupMask, Accuracy requiredAccuracy) {
+    public default Optional<Double> estimateAverageBucketSize(TupleMask groupMask, Accuracy requiredAccuracy) {
         return StatisticsHelper.estimateAverageBucketSize(groupMask, requiredAccuracy, this::estimateCardinality);
     }
 
@@ -120,7 +120,7 @@ public interface IQueryResultProvider {
      * @return a match represented in the internal {@link Tuple} representation.
      * @since 2.0
      */
-    public Optional <Tuple> getOneArbitraryMatch(Object[] parameters);
+    public Optional<Tuple> getOneArbitraryMatch(Object[] parameters);
 
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
@@ -136,7 +136,7 @@ public interface IQueryResultProvider {
      * @return a match represented in the internal {@link Tuple} representation.
      * @since 2.0
      */
-    public Optional <Tuple> getOneArbitraryMatch(TupleMask parameterSeedMask, ITuple parameters);
+    public Optional<Tuple> getOneArbitraryMatch(TupleMask parameterSeedMask, ITuple parameters);
 
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
@@ -147,7 +147,7 @@ public interface IQueryResultProvider {
      * @return matches represented in the internal {@link Tuple} representation.
      * @since 2.0
      */
-    public Stream <Tuple> getAllMatches(Object[] parameters);
+    public Stream<Tuple> getAllMatches(Object[] parameters);
 
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
@@ -162,7 +162,7 @@ public interface IQueryResultProvider {
      * @return matches represented in the internal {@link Tuple} representation.
      * @since 2.0
      */
-    public Stream <Tuple> getAllMatches(TupleMask parameterSeedMask, ITuple parameters);
+    public Stream<Tuple> getAllMatches(TupleMask parameterSeedMask, ITuple parameters);
 
     /**
      * The underlying query evaluator backend.

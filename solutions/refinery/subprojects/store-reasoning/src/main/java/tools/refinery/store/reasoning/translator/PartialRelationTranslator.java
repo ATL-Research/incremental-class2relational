@@ -44,7 +44,7 @@ import java.util.function.BiConsumer;
 import static tools.refinery.store.query.literal.Literals.not;
 
 @SuppressWarnings("UnusedReturnValue")
-public final class PartialRelationTranslator extends PartialSymbolTranslator <TruthValue, Boolean> {
+public final class PartialRelationTranslator extends PartialSymbolTranslator<TruthValue, Boolean> {
 	private final PartialRelation partialRelation;
 	private PartialRelationRewriter rewriter;
 	private RelationalQuery query;
@@ -70,22 +70,22 @@ public final class PartialRelationTranslator extends PartialSymbolTranslator <Tr
 	}
 
 	@Override
-	public <T> PartialRelationTranslator symbol(Symbol <T> storageSymbol,
-												StorageRefiner.Factory <T> storageRefiner) {
+	public <T> PartialRelationTranslator symbol(Symbol<T> storageSymbol,
+												StorageRefiner.Factory<T> storageRefiner) {
 		super.symbol(storageSymbol, storageRefiner);
 		return this;
 	}
 
 	@Override
 	public PartialRelationTranslator interpretation(
-			PartialInterpretation.Factory <TruthValue, Boolean> interpretationFactory) {
+			PartialInterpretation.Factory<TruthValue, Boolean> interpretationFactory) {
 		super.interpretation(interpretationFactory);
 		return this;
 	}
 
 	@Override
 	public PartialRelationTranslator refiner(
-			PartialInterpretationRefiner.Factory <TruthValue, Boolean> interpretationRefiner) {
+			PartialInterpretationRefiner.Factory<TruthValue, Boolean> interpretationRefiner) {
 		super.refiner(interpretationRefiner);
 		return this;
 	}
@@ -216,7 +216,7 @@ public final class PartialRelationTranslator extends PartialSymbolTranslator <Tr
 		}
 	}
 
-	private RelationalQuery createQuery(String name, BiConsumer <QueryBuilder, NodeVariable[]> callback) {
+	private RelationalQuery createQuery(String name, BiConsumer<QueryBuilder, NodeVariable[]> callback) {
 		int arity = partialRelation.arity();
 		var queryBuilder = Query.builder(name);
 		var parameters = new NodeVariable[arity];
@@ -243,7 +243,7 @@ public final class PartialRelationTranslator extends PartialSymbolTranslator <Tr
 		}
 		// We checked in the guard clause that this is safe.
 		@SuppressWarnings("unchecked")
-		var typedStorageSymbol = (Symbol <TruthValue>) storageSymbol;
+		var typedStorageSymbol = (Symbol<TruthValue>) storageSymbol;
 		var defaultValue = typedStorageSymbol.defaultValue();
 		if (may == null && !defaultValue.may()) {
 			may = createQuery(DnfLifter.decorateName(partialRelation.name(), Modality.MAY, Concreteness.PARTIAL),
@@ -325,7 +325,7 @@ public final class PartialRelationTranslator extends PartialSymbolTranslator <Tr
 		if (interpretationRefiner == null && storageSymbol != null && storageSymbol.valueType() == TruthValue.class) {
 			// We checked in the condition that this is safe.
 			@SuppressWarnings("unchecked")
-			var typedStorageSymbol = (Symbol <TruthValue>) storageSymbol;
+			var typedStorageSymbol = (Symbol<TruthValue>) storageSymbol;
 			interpretationRefiner = ConcreteSymbolRefiner.of(typedStorageSymbol);
 		}
 	}
@@ -335,7 +335,7 @@ public final class PartialRelationTranslator extends PartialSymbolTranslator <Tr
 			return;
 		}
 		var excludeQuery = createQuery("exclude", (builder, parameters) -> {
-			var literals = new ArrayList <Literal>(parameters.length + 2);
+			var literals = new ArrayList<Literal>(parameters.length + 2);
 			literals.add(PartialLiterals.must(partialRelation.call(parameters)));
 			literals.add(not(PartialLiterals.may(partialRelation.call(parameters))));
 			for (var parameter : parameters) {
@@ -364,7 +364,7 @@ public final class PartialRelationTranslator extends PartialSymbolTranslator <Tr
 						not(PartialLiterals.candidateMay(partialRelation.call(parameters)))
 				));
 		var reject = createQuery("reject", (builder, parameters) -> {
-			var literals = new ArrayList <Literal>(parameters.length + 1);
+			var literals = new ArrayList<Literal>(parameters.length + 1);
 			literals.add(invalidCandidate.call(parameters));
 			for (var parameter : parameters) {
 				literals.add(PartialLiterals.candidateMust(ReasoningAdapter.EXISTS_SYMBOL.call(parameter)));

@@ -14,12 +14,12 @@ import tools.refinery.store.query.literal.Literal;
 
 import java.util.List;
 
-public class StructurallyEqualToRaw extends TypeSafeMatcher <Dnf> {
-	private final List <SymbolicParameter> expectedSymbolicParameters;
-	private final List <? extends List <? extends Literal>> expectedClauses;
+public class StructurallyEqualToRaw extends TypeSafeMatcher<Dnf> {
+	private final List<SymbolicParameter> expectedSymbolicParameters;
+	private final List<? extends List<? extends Literal>> expectedClauses;
 
-	public StructurallyEqualToRaw(List <SymbolicParameter> expectedSymbolicParameters,
-								  List <? extends List <? extends Literal>> expectedClauses) {
+	public StructurallyEqualToRaw(List<SymbolicParameter> expectedSymbolicParameters,
+								  List<? extends List<? extends Literal>> expectedClauses) {
 		this.expectedSymbolicParameters = expectedSymbolicParameters;
 		this.expectedClauses = expectedClauses;
 	}

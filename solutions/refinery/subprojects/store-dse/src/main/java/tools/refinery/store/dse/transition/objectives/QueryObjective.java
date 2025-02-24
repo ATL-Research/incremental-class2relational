@@ -12,9 +12,9 @@ import tools.refinery.store.query.ModelQueryBuilder;
 import tools.refinery.store.query.dnf.FunctionalQuery;
 
 public class QueryObjective implements Objective {
-	protected final FunctionalQuery <? extends Number> objectiveFunction;
+	protected final FunctionalQuery<? extends Number> objectiveFunction;
 
-	public QueryObjective(FunctionalQuery <? extends Number> objectiveFunction) {
+	public QueryObjective(FunctionalQuery<? extends Number> objectiveFunction) {
 		if (objectiveFunction.arity() != 0) {
 			throw new IllegalArgumentException("Objective functions must have 0 parameters, got %d instead"
 					.formatted(objectiveFunction.arity()));

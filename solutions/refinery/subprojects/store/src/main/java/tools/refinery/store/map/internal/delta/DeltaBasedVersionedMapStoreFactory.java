@@ -12,7 +12,7 @@ import tools.refinery.store.map.VersionedMapStoreFactoryBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeltaBasedVersionedMapStoreFactory <K, V> implements VersionedMapStoreFactory <K, V> {
+public class DeltaBasedVersionedMapStoreFactory<K, V> implements VersionedMapStoreFactory<K, V> {
 	private final V defaultValue;
 	private final boolean summarizeChanges;
 
@@ -23,14 +23,14 @@ public class DeltaBasedVersionedMapStoreFactory <K, V> implements VersionedMapSt
 	}
 
 	@Override
-	public VersionedMapStore <K, V> createOne() {
+	public VersionedMapStore<K, V> createOne() {
 		return new VersionedMapStoreDeltaImpl<>(summarizeChanges, defaultValue);
 	}
 
 	@Override
-	public List <VersionedMapStore<K, V>> createGroup(int amount) {
-		List <VersionedMapStore<K, V>> result = new ArrayList<>(amount);
-		for(int i=0; i <amount; i++) {
+	public List<VersionedMapStore<K, V>> createGroup(int amount) {
+		List<VersionedMapStore<K, V>> result = new ArrayList<>(amount);
+		for(int i=0; i<amount; i++) {
 			result.add(new VersionedMapStoreDeltaImpl<>(summarizeChanges,defaultValue));
 		}
 		return result;

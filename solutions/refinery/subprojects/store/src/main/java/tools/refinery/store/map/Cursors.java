@@ -13,23 +13,23 @@ public final class Cursors {
         throw new IllegalStateException("This is a static utility class and should not be instantiated directly");
     }
 
-    public static <K, V> Cursor <K, V> empty() {
+    public static <K, V> Cursor<K, V> empty() {
         return new Empty<>();
     }
 
-	public static <K, V> Cursor <K, V> singleton(K key, V value) {
+	public static <K, V> Cursor<K, V> singleton(K key, V value) {
 		return new Singleton<>(key, value);
 	}
 
-	public static <K, V> Cursor <K, V> of(Iterator <Map.Entry<K, V>> iterator) {
+	public static <K, V> Cursor<K, V> of(Iterator<Map.Entry<K, V>> iterator) {
 		return new IteratorBasedCursor<>(iterator);
 	}
 
-	public static <K, V> Cursor <K, V> of(Map <K, V> map) {
+	public static <K, V> Cursor<K, V> of(Map<K, V> map) {
 		return of(map.entrySet().iterator());
 	}
 
-    private static class Empty <K, V> implements Cursor <K, V> {
+    private static class Empty<K, V> implements Cursor<K, V> {
         private boolean terminated = false;
 
         @Override
@@ -54,7 +54,7 @@ public final class Cursors {
         }
     }
 
-	private static class Singleton <K, V> implements Cursor <K, V> {
+	private static class Singleton<K, V> implements Cursor<K, V> {
 		private State state = State.INITIAL;
 		private final K key;
 		private final V value;

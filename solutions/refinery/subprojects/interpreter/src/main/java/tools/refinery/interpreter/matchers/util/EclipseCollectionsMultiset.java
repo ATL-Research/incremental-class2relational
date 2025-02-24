@@ -12,7 +12,7 @@ package tools.refinery.interpreter.matchers.util;
  * @author Gabor Bergmann
  * @since 1.7
  */
-public class EclipseCollectionsMultiset <T> extends EclipseCollectionsBagMemory <T> implements IMultiset <T> {
+public class EclipseCollectionsMultiset<T> extends EclipseCollectionsBagMemory<T> implements IMultiset<T> {
 
     @Override
     public boolean addOne(T value) {

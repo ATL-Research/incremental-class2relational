@@ -31,12 +31,12 @@ public class FocusActionLiteral extends AbstractActionLiteral {
 	}
 
 	@Override
-	public List <NodeVariable> getInputVariables() {
+	public List<NodeVariable> getInputVariables() {
 		return List.of(parentNode);
 	}
 
 	@Override
-	public List <NodeVariable> getOutputVariables() {
+	public List<NodeVariable> getOutputVariables() {
 		return List.of(childNode);
 	}
 

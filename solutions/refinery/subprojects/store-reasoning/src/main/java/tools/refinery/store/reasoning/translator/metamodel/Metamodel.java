@@ -13,10 +13,10 @@ import tools.refinery.store.reasoning.translator.typehierarchy.TypeHierarchy;
 
 import java.util.Map;
 
-public record Metamodel(TypeHierarchy typeHierarchy, Map <PartialRelation, ContainmentInfo> containmentHierarchy,
-						Map <PartialRelation, DirectedCrossReferenceInfo> directedCrossReferences,
-						Map <PartialRelation, UndirectedCrossReferenceInfo> undirectedCrossReferences,
-						Map <PartialRelation, PartialRelation> oppositeReferences) {
+public record Metamodel(TypeHierarchy typeHierarchy, Map<PartialRelation, ContainmentInfo> containmentHierarchy,
+						Map<PartialRelation, DirectedCrossReferenceInfo> directedCrossReferences,
+						Map<PartialRelation, UndirectedCrossReferenceInfo> undirectedCrossReferences,
+						Map<PartialRelation, PartialRelation> oppositeReferences) {
 	public static MetamodelBuilder builder() {
 		return new MetamodelBuilder();
 	}

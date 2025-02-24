@@ -17,9 +17,9 @@ import tools.refinery.store.representation.cardinality.UpperCardinality;
 
 import java.util.List;
 
-public class CountUpperBoundLiteral extends AbstractCountLiteral <UpperCardinality> {
-	public CountUpperBoundLiteral(DataVariable <UpperCardinality> resultVariable, Constraint target,
-								  List <Variable> arguments) {
+public class CountUpperBoundLiteral extends AbstractCountLiteral<UpperCardinality> {
+	public CountUpperBoundLiteral(DataVariable<UpperCardinality> resultVariable, Constraint target,
+								  List<Variable> arguments) {
 		super(UpperCardinality.class, resultVariable, target, arguments);
 	}
 
@@ -34,13 +34,13 @@ public class CountUpperBoundLiteral extends AbstractCountLiteral <UpperCardinali
 	}
 
 	@Override
-	protected Literal doSubstitute(Substitution substitution, List <Variable> substitutedArguments) {
+	protected Literal doSubstitute(Substitution substitution, List<Variable> substitutedArguments) {
 		return new CountUpperBoundLiteral(substitution.getTypeSafeSubstitute(getResultVariable()), getTarget(),
 				substitutedArguments);
 	}
 
 	@Override
-	public AbstractCallLiteral withArguments(Constraint newTarget, List <Variable> newArguments) {
+	public AbstractCallLiteral withArguments(Constraint newTarget, List<Variable> newArguments) {
 		return new CountUpperBoundLiteral(getResultVariable(), newTarget, newArguments);
 	}
 

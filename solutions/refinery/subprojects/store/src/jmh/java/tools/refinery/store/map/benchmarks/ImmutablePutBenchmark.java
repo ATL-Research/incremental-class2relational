@@ -47,7 +47,7 @@ public class ImmutablePutBenchmark {
 
 	@Benchmark
 	public void baselinePutBenchmark(ImmutablePutExecutionPlan executionPlan, Blackhole blackhole) {
-		var sut = new HashMap <Integer, String>();
+		var sut = new HashMap<Integer, String>();
 		for (int i = 0; i < executionPlan.nPut; i++) {
 			var key = executionPlan.nextKey();
 			var value = executionPlan.nextValue();
@@ -62,8 +62,8 @@ public class ImmutablePutBenchmark {
 
 	@Benchmark
 	public void baselinePutAndCommitBenchmark(ImmutablePutExecutionPlan executionPlan, Blackhole blackhole) {
-		var sut = new HashMap <Integer, String>();
-		var store = new ArrayList <HashMap<Integer, String>>();
+		var sut = new HashMap<Integer, String>();
+		var store = new ArrayList<HashMap<Integer, String>>();
 		for (int i = 0; i < executionPlan.nPut; i++) {
 			var key = executionPlan.nextKey();
 			var value = executionPlan.nextValue();

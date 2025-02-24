@@ -102,7 +102,7 @@ public abstract class StatisticsBasedConstraintCostFunction implements ICostFunc
      * New implementors shall implement this instead of {@link #countTuples(IConstraintEvaluationContext, IInputKey)}
      * @since 2.1
      */
-    public Optional <Long> projectionSize(final IConstraintEvaluationContext input, final IInputKey supplierKey,
+    public Optional<Long> projectionSize(final IConstraintEvaluationContext input, final IInputKey supplierKey,
             final TupleMask groupMask, Accuracy requiredAccuracy) {
         long legacyCount = countTuples(input, supplierKey);
         return legacyCount < 0 ? Optional.empty() : Optional.of(legacyCount);
@@ -112,7 +112,7 @@ public abstract class StatisticsBasedConstraintCostFunction implements ICostFunc
      * Override this to provide custom estimates for match set sizes of called patterns.
      * @since 2.1
      */
-    public Optional <Double> bucketSize(final IQueryReference patternCall,
+    public Optional<Double> bucketSize(final IQueryReference patternCall,
             final IConstraintEvaluationContext input, TupleMask projMask) {
         IQueryResultProvider resultProvider = input.resultProviderRequestor().requestResultProvider(patternCall, null);
         // TODO hack: use LS cost instead of true bucket size estimate
@@ -136,8 +136,8 @@ public abstract class StatisticsBasedConstraintCostFunction implements ICostFunc
     }
 
     protected double _calculateCost(final TypeConstraint constraint, final IConstraintEvaluationContext input) {
-        final Collection <PVariable> freeMaskVariables = input.getFreeVariables();
-        final Collection <PVariable> boundMaskVariables = input.getBoundVariables();
+        final Collection<PVariable> freeMaskVariables = input.getFreeVariables();
+        final Collection<PVariable> boundMaskVariables = input.getBoundVariables();
         IInputKey supplierKey = constraint.getSupplierKey();
         long arity = supplierKey.getArity();
 
@@ -180,15 +180,15 @@ public abstract class StatisticsBasedConstraintCostFunction implements ICostFunc
     protected double calculateBinaryCost(final IInputKey supplierKey, final PVariable srcVariable,
             final PVariable dstVariable, final boolean isInverse,
             final IConstraintEvaluationContext input) {
-        final Collection <PVariable> freeMaskVariables = input.getFreeVariables();
+        final Collection<PVariable> freeMaskVariables = input.getFreeVariables();
         final PConstraint constraint = input.getConstraint();
 
 //        IQueryMetaContext metaContext = input.getRuntimeContext().getMetaContext();
-//        Collection <InputKeyImplication> implications = metaContext.getImplications(supplierKey);
+//        Collection<InputKeyImplication> implications = metaContext.getImplications(supplierKey);
 
-        Optional <Long> edgeUpper = projectionSize(input,   supplierKey,    TupleMask.identity(2),          Accuracy.BEST_UPPER_BOUND);
-        Optional <Long> srcUpper  = projectionSize(input,   supplierKey,    TupleMask.selectSingle(0, 2),   Accuracy.BEST_UPPER_BOUND);
-        Optional <Long> dstUpper  = projectionSize(input,   supplierKey,    TupleMask.selectSingle(1, 2),   Accuracy.BEST_UPPER_BOUND);
+        Optional<Long> edgeUpper = projectionSize(input,   supplierKey,    TupleMask.identity(2),          Accuracy.BEST_UPPER_BOUND);
+        Optional<Long> srcUpper  = projectionSize(input,   supplierKey,    TupleMask.selectSingle(0, 2),   Accuracy.BEST_UPPER_BOUND);
+        Optional<Long> dstUpper  = projectionSize(input,   supplierKey,    TupleMask.selectSingle(1, 2),   Accuracy.BEST_UPPER_BOUND);
 
         if (freeMaskVariables.contains(srcVariable) && freeMaskVariables.contains(dstVariable)) {
             Double branchCount = edgeUpper.map(Long::doubleValue).orElse(
@@ -200,16 +200,16 @@ public abstract class StatisticsBasedConstraintCostFunction implements ICostFunc
 
         } else {
 
-            Optional <Long> srcLower  = projectionSize(input,   supplierKey,    TupleMask.selectSingle(0, 2),   Accuracy.APPROXIMATION);
-            Optional <Long> dstLower  = projectionSize(input,   supplierKey,    TupleMask.selectSingle(1, 2),   Accuracy.APPROXIMATION);
+            Optional<Long> srcLower  = projectionSize(input,   supplierKey,    TupleMask.selectSingle(0, 2),   Accuracy.APPROXIMATION);
+            Optional<Long> dstLower  = projectionSize(input,   supplierKey,    TupleMask.selectSingle(1, 2),   Accuracy.APPROXIMATION);
 
-            List <Optional<Long>> nodeLower = Arrays.asList(srcLower, dstLower);
-            List <Optional<Long>> nodeUpper = Arrays.asList(srcUpper, dstUpper);
+            List<Optional<Long>> nodeLower = Arrays.asList(srcLower, dstLower);
+            List<Optional<Long>> nodeUpper = Arrays.asList(srcUpper, dstUpper);
 
             int from = isInverse ? 1 : 0;
             int to   = isInverse ? 0 : 1;
 
-            Optional <Double> costEstimate = Optional.empty();
+            Optional<Double> costEstimate = Optional.empty();
 
             if (!freeMaskVariables.contains(srcVariable) && !freeMaskVariables.contains(dstVariable)) {
                 // both variables bound, this is a simple check
@@ -267,11 +267,11 @@ public abstract class StatisticsBasedConstraintCostFunction implements ICostFunc
      * @since 2.1
      */
     protected boolean navigatesThroughFunctionalDependency(final IConstraintEvaluationContext input,
-            final PConstraint constraint, Collection <PVariable> determining, Collection <PVariable> determined) {
+            final PConstraint constraint, Collection<PVariable> determining, Collection<PVariable> determined) {
         final QueryAnalyzer queryAnalyzer = input.getQueryAnalyzer();
-        final Map <Set<PVariable>, Set <PVariable>> functionalDependencies = queryAnalyzer
+        final Map<Set<PVariable>, Set<PVariable>> functionalDependencies = queryAnalyzer
                 .getFunctionalDependencies(Collections.singleton(constraint), false);
-        final Set <PVariable> impliedVariables = FunctionalDependencyHelper.closureOf(determining,
+        final Set<PVariable> impliedVariables = FunctionalDependencyHelper.closureOf(determining,
                 functionalDependencies);
         return ((impliedVariables != null) && impliedVariables.containsAll(determined));
     }
@@ -297,8 +297,8 @@ public abstract class StatisticsBasedConstraintCostFunction implements ICostFunc
     }
 
     protected double _calculateCost(final PositivePatternCall patternCall, final IConstraintEvaluationContext input) {
-        final List <Integer> boundPositions = new ArrayList<>();
-        final List <PParameter> parameters = patternCall.getReferredQuery().getParameters();
+        final List<Integer> boundPositions = new ArrayList<>();
+        final List<PParameter> parameters = patternCall.getReferredQuery().getParameters();
         for (int i = 0; (i < parameters.size()); i++) {
             final PVariable variable = patternCall.getVariableInTuple(i);
             if (input.getBoundVariables().contains(variable)) boundPositions.add(i);
