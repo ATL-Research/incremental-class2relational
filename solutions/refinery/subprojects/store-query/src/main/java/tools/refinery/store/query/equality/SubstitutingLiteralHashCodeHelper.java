@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SubstitutingLiteralHashCodeHelper implements LiteralHashCodeHelper {
-	private final Map<Variable, Integer> assignedHashCodes = new LinkedHashMap<>();
+	private final Map <Variable, Integer> assignedHashCodes = new LinkedHashMap<>();
 
 	// 0 is for {@code null}, so we start with 1.
 	private int next = 1;
@@ -22,7 +22,7 @@ public class SubstitutingLiteralHashCodeHelper implements LiteralHashCodeHelper 
 		this(List.of());
 	}
 
-	public SubstitutingLiteralHashCodeHelper(List<SymbolicParameter> parameters) {
+	public SubstitutingLiteralHashCodeHelper(List <SymbolicParameter> parameters) {
 		for (var parameter : parameters) {
 			getVariableHashCode(parameter.getVariable());
 		}

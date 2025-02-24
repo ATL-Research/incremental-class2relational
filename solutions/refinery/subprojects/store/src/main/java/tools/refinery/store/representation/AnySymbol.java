@@ -10,5 +10,5 @@ public sealed interface AnySymbol permits Symbol {
 
 	int arity();
 
-	Class<?> valueType();
+	Class <?> valueType();
 }

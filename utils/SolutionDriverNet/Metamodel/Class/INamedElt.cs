@@ -60,12 +60,12 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Gets fired before the Name property changes its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> NameChanging;
+        event System.EventHandler <ValueChangedEventArgs> NameChanging;
         
         /// <summary>
         /// Gets fired when the Name property changed its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> NameChanged;
+        event System.EventHandler <ValueChangedEventArgs> NameChanged;
     }
 }
 

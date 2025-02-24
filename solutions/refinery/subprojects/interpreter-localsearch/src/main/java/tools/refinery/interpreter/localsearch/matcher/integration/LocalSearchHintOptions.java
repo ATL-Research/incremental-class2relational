@@ -26,30 +26,30 @@ public final class LocalSearchHintOptions {
         // Private constructor for utility class
     }
 
-    public static final QueryHintOption<Boolean> USE_BASE_INDEX =
+    public static final QueryHintOption <Boolean> USE_BASE_INDEX =
             hintOption("USE_BASE_INDEX", true);
 
     // This key can be used to influence the core planner algorithm
-    public static final QueryHintOption<Integer> PLANNER_TABLE_ROW_COUNT =
+    public static final QueryHintOption <Integer> PLANNER_TABLE_ROW_COUNT =
             hintOption("PLANNER_TABLE_ROW_COUNT", 4);
     /**
      * Cost function to be used by the planner. Must implement {@link ICostFunction}
      * @since 1.4
      */
-    public static final QueryHintOption<ICostFunction> PLANNER_COST_FUNCTION =
+    public static final QueryHintOption <ICostFunction> PLANNER_COST_FUNCTION =
             hintOption("PLANNER_COST_FUNCTION", new IndexerBasedConstraintCostFunction());
     /**
      * Predicate to decide whether to flatten specific positive pattern calls {@link IFlattenCallPredicate}
      * @since 1.4
      */
-    public static final QueryHintOption<IFlattenCallPredicate> FLATTEN_CALL_PREDICATE =
+    public static final QueryHintOption <IFlattenCallPredicate> FLATTEN_CALL_PREDICATE =
             hintOption("FLATTEN_CALL_PREDICATE", new DontFlattenDisjunctive());
     /**
      * Strategy to decide how hints (most importantly, backend selection) propagate across pattern calls.
      * Must implement {@link ICallDelegationStrategy}.
      * @since 2.1
      */
-    public static final QueryHintOption<ICallDelegationStrategy> CALL_DELEGATION_STRATEGY =
+    public static final QueryHintOption <ICallDelegationStrategy> CALL_DELEGATION_STRATEGY =
             hintOption("CALL_DELEGATION_STRATEGY", ICallDelegationStrategy.FULL_BACKEND_ADHESION);
 
     /**
@@ -60,11 +60,11 @@ public final class LocalSearchHintOptions {
      *
      * @since 1.5
      */
-    public static final QueryHintOption<IAdornmentProvider> ADORNMENT_PROVIDER =
+    public static final QueryHintOption <IAdornmentProvider> ADORNMENT_PROVIDER =
             hintOption("ADORNMENT_PROVIDER", new AllValidAdornments());
 
     // internal helper for conciseness
-    private static <T, V extends T> QueryHintOption<T> hintOption(String hintKeyLocalName, V defaultValue) {
+    private static <T, V extends T> QueryHintOption <T> hintOption(String hintKeyLocalName, V defaultValue) {
         return new QueryHintOption<>(LocalSearchHintOptions.class, hintKeyLocalName, defaultValue);
     }
 }

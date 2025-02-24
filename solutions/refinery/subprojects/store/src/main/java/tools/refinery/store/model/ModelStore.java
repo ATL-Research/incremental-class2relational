@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 public interface ModelStore {
-	Collection<AnySymbol> getSymbols();
+	Collection <AnySymbol> getSymbols();
 
 	Model createEmptyModel();
 
@@ -22,9 +22,9 @@ public interface ModelStore {
 
 	ModelDiffCursor getDiffCursor(Version from, Version to);
 
-	<T extends ModelStoreAdapter> Optional<T> tryGetAdapter(Class<? extends T> adapterType);
+	 <T extends ModelStoreAdapter> Optional <T> tryGetAdapter(Class <? extends T> adapterType);
 
-	<T extends ModelStoreAdapter> T getAdapter(Class<T> adapterType);
+	 <T extends ModelStoreAdapter> T getAdapter(Class <T> adapterType);
 
 	void checkCancelled();
 

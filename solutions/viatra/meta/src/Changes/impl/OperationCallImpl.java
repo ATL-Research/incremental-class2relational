@@ -25,22 +25,22 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Operation Call</b></em>'.
+ * An implementation of the model object ' <em> <b>Operation Call </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.OperationCallImpl#getOperation <em>Operation</em>}</li>
- *   <li>{@link Changes.impl.OperationCallImpl#getTargetElement <em>Target Element</em>}</li>
- *   <li>{@link Changes.impl.OperationCallImpl#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link Changes.impl.OperationCallImpl#getOperation <em>Operation </em>} </li>
+ *   <li>{@link Changes.impl.OperationCallImpl#getTargetElement <em>Target Element </em>} </li>
+ *   <li>{@link Changes.impl.OperationCallImpl#getArguments <em>Arguments </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class OperationCallImpl extends ModelChangeImpl implements OperationCall {
 	/**
-	 * The cached value of the '{@link #getOperation() <em>Operation</em>}' reference.
+	 * The cached value of the '{@link #getOperation() <em>Operation </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getOperation()
@@ -50,7 +50,7 @@ public class OperationCallImpl extends ModelChangeImpl implements OperationCall 
 	protected EOperation operation;
 
 	/**
-	 * The cached value of the '{@link #getTargetElement() <em>Target Element</em>}' reference.
+	 * The cached value of the '{@link #getTargetElement() <em>Target Element </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTargetElement()
@@ -60,14 +60,14 @@ public class OperationCallImpl extends ModelChangeImpl implements OperationCall 
 	protected EObject targetElement;
 
 	/**
-	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.
+	 * The cached value of the '{@link #getArguments() <em>Arguments </em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getArguments()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<OperationArgument> arguments;
+	protected EList <OperationArgument> arguments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -169,9 +169,9 @@ public class OperationCallImpl extends ModelChangeImpl implements OperationCall 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<OperationArgument> getArguments() {
+	public EList <OperationArgument> getArguments() {
 		if (arguments == null) {
-			arguments = new EObjectContainmentEList<OperationArgument>(OperationArgument.class, this, ChangesPackage.OPERATION_CALL__ARGUMENTS);
+			arguments = new EObjectContainmentEList <OperationArgument>(OperationArgument.class, this, ChangesPackage.OPERATION_CALL__ARGUMENTS);
 		}
 		return arguments;
 	}
@@ -185,7 +185,7 @@ public class OperationCallImpl extends ModelChangeImpl implements OperationCall 
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ChangesPackage.OPERATION_CALL__ARGUMENTS:
-				return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
+				return ((InternalEList <?>)getArguments()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -227,7 +227,7 @@ public class OperationCallImpl extends ModelChangeImpl implements OperationCall 
 				return;
 			case ChangesPackage.OPERATION_CALL__ARGUMENTS:
 				getArguments().clear();
-				getArguments().addAll((Collection<? extends OperationArgument>)newValue);
+				getArguments().addAll((Collection <? extends OperationArgument>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

@@ -20,7 +20,7 @@ public class InputParameterResolver extends AbstractRecursiveRewriter {
 		return rewriteWithContext(List.of(), dnf);
 	}
 
-	Dnf rewriteWithContext(List<Literal> context, Dnf dnf) {
+	Dnf rewriteWithContext(List <Literal> context, Dnf dnf) {
 		var dnfName = dnf.name();
 		var builder = Dnf.builder(dnfName);
 		createSymbolicParameters(context, dnf, builder);
@@ -35,8 +35,8 @@ public class InputParameterResolver extends AbstractRecursiveRewriter {
 		return builder.build();
 	}
 
-	private static void createSymbolicParameters(List<Literal> context, Dnf dnf, DnfBuilder builder) {
-		var positiveInContext = new HashSet<Variable>();
+	private static void createSymbolicParameters(List <Literal> context, Dnf dnf, DnfBuilder builder) {
+		var positiveInContext = new HashSet <Variable>();
 		for (var literal : context) {
 			positiveInContext.addAll(literal.getOutputVariables());
 		}

@@ -11,8 +11,8 @@ import java.util.ArrayDeque;
 import java.util.HashSet;
 import java.util.Set;
 
-public class WeaklyConnectedComponentAlgorithm<T> extends RepresentativeElectionAlgorithm<T> {
-	public WeaklyConnectedComponentAlgorithm(Graph<T> graph) {
+public class WeaklyConnectedComponentAlgorithm <T> extends RepresentativeElectionAlgorithm <T> {
+	public WeaklyConnectedComponentAlgorithm(Graph <T> graph) {
 		super(graph);
 	}
 
@@ -47,7 +47,7 @@ public class WeaklyConnectedComponentAlgorithm<T> extends RepresentativeElection
 		}
 	}
 
-	private void split(T sourceRepresentative, Set<T> targetReachable) {
+	private void split(T sourceRepresentative, Set <T> targetReachable) {
 		var sourceComponent = getComponent(sourceRepresentative);
 		sourceComponent.removeAll(targetReachable);
 		if (targetReachable.contains(sourceRepresentative)) {
@@ -58,10 +58,10 @@ public class WeaklyConnectedComponentAlgorithm<T> extends RepresentativeElection
 		}
 	}
 
-	private Set<T> getReachableNodes(T source) {
-		var retSet = new HashSet<T>();
+	private Set <T> getReachableNodes(T source) {
+		var retSet = new HashSet <T>();
 		retSet.add(source);
-		var nodeQueue = new ArrayDeque<T>();
+		var nodeQueue = new ArrayDeque <T>();
 		nodeQueue.addLast(source);
 
 		while (!nodeQueue.isEmpty()) {

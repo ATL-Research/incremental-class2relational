@@ -15,7 +15,7 @@ package tools.refinery.interpreter.rete.itc.igraph;
  * @author Szabo Tamas
  *
  */
-public interface ITcObserver<V> {
+public interface ITcObserver <V> {
 
     /**
      * Used to notify when a tuple is inserted into the transitive closure relation.

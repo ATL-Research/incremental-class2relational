@@ -13,7 +13,7 @@ import java.util.Map.Entry;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MapTestEnvironment<K, V> {
+public class MapTestEnvironment <K, V> {
 	public static String[] prepareValues(int maxValue, boolean nullDefault) {
 		String[] values = new String[maxValue];
 		if (nullDefault) {
@@ -28,7 +28,7 @@ public class MapTestEnvironment<K, V> {
 		return values;
 	}
 
-	public static ContinuousHashProvider<Integer> prepareHashProvider(final boolean evil) {
+	public static ContinuousHashProvider <Integer> prepareHashProvider(final boolean evil) {
 		// Use maxPrime = 2147483629
 
 		return (key, index) -> {
@@ -53,13 +53,13 @@ public class MapTestEnvironment<K, V> {
 
 	}
 
-	public static <K, V> void compareTwoMaps(String title, VersionedMap<K, V> map1,
-											 VersionedMap<K, V> map2) {
+	public static <K, V> void compareTwoMaps(String title, VersionedMap <K, V> map1,
+											 VersionedMap <K, V> map2) {
 		compareTwoMaps(title, map1, map2, null);
 	}
 
-	public static <K, V> void compareTwoMaps(String title, VersionedMap<K, V> map1,
-											 VersionedMap<K, V> map2, List<Throwable> errors) {
+	public static <K, V> void compareTwoMaps(String title, VersionedMap <K, V> map1,
+											 VersionedMap <K, V> map2, List <Throwable> errors) {
 		map1.checkIntegrity();
 		map2.checkIntegrity();
 
@@ -73,7 +73,7 @@ public class MapTestEnvironment<K, V> {
 		}
 	}
 
-	private static void assertEqualsList(Object o1, Object o2, String message, List<Throwable> errors) {
+	private static void assertEqualsList(Object o1, Object o2, String message, List <Throwable> errors) {
 		if (errors == null) {
 			assertEquals(o1, o2, message);
 		} else {
@@ -89,7 +89,7 @@ public class MapTestEnvironment<K, V> {
 	}
 
 	private static void assertContentEqualsList(AnyVersionedMap o1, AnyVersionedMap o2, String message,
-												List<Throwable> errors) {
+												List <Throwable> errors) {
 		boolean result = o1.contentEquals(o2);
 		if (errors == null) {
 			assertTrue(result, message);
@@ -100,11 +100,11 @@ public class MapTestEnvironment<K, V> {
 		}
 	}
 
-	final private VersionedMap<K, V> sut;
+	final private VersionedMap <K, V> sut;
 	final private V defaultValue;
-	Map<K, V> oracle = new HashMap<>();
+	Map <K, V> oracle = new HashMap<>();
 
-	public MapTestEnvironment(VersionedMap<K, V> sut) {
+	public MapTestEnvironment(VersionedMap <K, V> sut) {
 		this.sut = sut;
 		this.defaultValue = sut.getDefaultValue();
 	}
@@ -140,7 +140,7 @@ public class MapTestEnvironment<K, V> {
 		// 1. Checking: if Reference contains <key,nodeId> pair, then SUT contains
 		// <key,nodeId> pair.
 		// Tests get functions
-		for (Entry<K, V> entry : oracle.entrySet()) {
+		for (Entry <K, V> entry : oracle.entrySet()) {
 			V sutValue = sut.get(entry.getKey());
 			V oracleValue = entry.getValue();
 			if (sutValue != oracleValue) {
@@ -154,7 +154,7 @@ public class MapTestEnvironment<K, V> {
 		// <key,nodeId> pair.
 		// Tests iterators
 		int elementsInSutEntrySet = 0;
-		Cursor<K, V> cursor = sut.getAll();
+		Cursor <K, V> cursor = sut.getAll();
 		while (cursor.move()) {
 			elementsInSutEntrySet++;
 			K key = cursor.getKey();
@@ -163,7 +163,7 @@ public class MapTestEnvironment<K, V> {
 			V oracleValue = oracle.get(key);
 			if (sutValue != oracleValue) {
 				printComparison();
-				fail(title + ": Non-equivalent entry in iterator: SUT=<" + key + "," + sutValue + ">, Oracle=<" + key
+				fail(title + ": Non-equivalent entry in iterator: SUT= <" + key + "," + sutValue + ">, Oracle= <" + key
 						+ "," + oracleValue + ">!");
 			}
 
@@ -180,14 +180,14 @@ public class MapTestEnvironment<K, V> {
 		}
 	}
 
-	public static <K, V> void checkOrder(String scenario, VersionedMap<K, V> versionedMap) {
+	public static <K, V> void checkOrder(String scenario, VersionedMap <K, V> versionedMap) {
 		K previous = null;
-		Cursor<K, V> cursor = versionedMap.getAll();
+		Cursor <K, V> cursor = versionedMap.getAll();
 		while (cursor.move()) {
-			//System.out.println(cursor.getKey() + " " + ((VersionedMapImpl<K, V>) versionedMap).getHashProvider()
+			//System.out.println(cursor.getKey() + " " + ((VersionedMapImpl <K, V>) versionedMap).getHashProvider()
 			// .getHash(cursor.getKey(), 0));
 			if (previous != null) {
-				int comparisonResult = ((VersionedMapStateImpl<K, V>) versionedMap).getHashProvider().compare(previous,
+				int comparisonResult = ((VersionedMapStateImpl <K, V>) versionedMap).getHashProvider().compare(previous,
 						cursor.getKey());
 				assertTrue(comparisonResult < 0, scenario + " Cursor order is not incremental!");
 			}
@@ -202,23 +202,23 @@ public class MapTestEnvironment<K, V> {
 		printEntrySet(oracle.entrySet().iterator());
 	}
 
-	private void printEntrySet(Iterator<Entry<K, V>> iterator) {
-		Map<K, V> map = new LinkedHashMap<>();
+	private void printEntrySet(Iterator <Entry<K, V>> iterator) {
+		Map <K, V> map = new LinkedHashMap<>();
 		while (iterator.hasNext()) {
-			Entry<K, V> entry = iterator.next();
+			Entry <K, V> entry = iterator.next();
 			map.put(entry.getKey(), entry.getValue());
 		}
-		for (Entry<K, V> e : map.entrySet()) {
+		for (Entry <K, V> e : map.entrySet()) {
 			System.out.println("\t" + e.getKey() + " -> " + e.getValue());
 		}
 	}
 
-	private void printEntrySet(Cursor<K, V> cursor) {
-		Map<K, V> map = new LinkedHashMap<>();
+	private void printEntrySet(Cursor <K, V> cursor) {
+		Map <K, V> map = new LinkedHashMap<>();
 		while (cursor.move()) {
 			map.put(cursor.getKey(), cursor.getValue());
 		}
-		for (Entry<K, V> e : map.entrySet()) {
+		for (Entry <K, V> e : map.entrySet()) {
 			System.out.println("\t" + e.getKey() + " -> " + e.getValue());
 		}
 	}

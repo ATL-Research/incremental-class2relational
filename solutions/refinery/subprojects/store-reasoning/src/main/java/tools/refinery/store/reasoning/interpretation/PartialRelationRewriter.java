@@ -16,6 +16,6 @@ import java.util.Set;
 
 @FunctionalInterface
 public interface PartialRelationRewriter {
-	List<Literal> rewriteLiteral(Set<Variable> positiveVariables, AbstractCallLiteral literal, Modality modality,
+	List <Literal> rewriteLiteral(Set <Variable> positiveVariables, AbstractCallLiteral literal, Modality modality,
 								 Concreteness concreteness);
 }

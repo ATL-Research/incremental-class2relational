@@ -35,13 +35,13 @@ public class MemorylessEvaluatorNode extends AbstractEvaluatorNode {
     }
 
     @Override
-    public void pullInto(final Collection<Tuple> collector, final boolean flush) {
-        final Collection<Tuple> parentTuples = new ArrayList<Tuple>();
+    public void pullInto(final Collection <Tuple> collector, final boolean flush) {
+        final Collection <Tuple> parentTuples = new ArrayList <Tuple>();
         propagatePullInto(parentTuples, flush);
         for (final Tuple parentTuple : parentTuples) {
-            final Iterable<Tuple> output = core.performEvaluation(parentTuple);
+            final Iterable <Tuple> output = core.performEvaluation(parentTuple);
             if (output != null) {
-                final Iterator<Tuple> itr = output.iterator();
+                final Iterator <Tuple> itr = output.iterator();
                 while (itr.hasNext()) {
                     collector.add(itr.next());
                 }
@@ -50,13 +50,13 @@ public class MemorylessEvaluatorNode extends AbstractEvaluatorNode {
     }
 
     @Override
-    public void pullIntoWithTimeline(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush) {
-        final Map<Tuple, Timeline<Timestamp>> parentTuples = CollectionsFactory.createMap();
+    public void pullIntoWithTimeline(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush) {
+        final Map <Tuple, Timeline <Timestamp>> parentTuples = CollectionsFactory.createMap();
         propagatePullIntoWithTimestamp(parentTuples, flush);
-        for (final Entry<Tuple, Timeline<Timestamp>> entry : parentTuples.entrySet()) {
-            final Iterable<Tuple> output = core.performEvaluation(entry.getKey());
+        for (final Entry <Tuple, Timeline <Timestamp>> entry : parentTuples.entrySet()) {
+            final Iterable <Tuple> output = core.performEvaluation(entry.getKey());
             if (output != null) {
-                final Iterator<Tuple> itr = output.iterator();
+                final Iterator <Tuple> itr = output.iterator();
                 while (itr.hasNext()) {
                     collector.put(itr.next(), entry.getValue());
                 }
@@ -66,7 +66,7 @@ public class MemorylessEvaluatorNode extends AbstractEvaluatorNode {
 
     @Override
     public void update(final Direction direction, final Tuple input, final Timestamp timestamp) {
-        final Iterable<Tuple> output = core.performEvaluation(input);
+        final Iterable <Tuple> output = core.performEvaluation(input);
         if (output != null) {
             propagateIterableUpdate(direction, output, timestamp);
         }

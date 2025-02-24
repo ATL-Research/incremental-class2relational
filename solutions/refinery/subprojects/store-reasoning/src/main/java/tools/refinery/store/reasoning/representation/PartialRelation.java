@@ -14,9 +14,9 @@ import tools.refinery.store.representation.TruthValueDomain;
 import java.util.Arrays;
 import java.util.List;
 
-public record PartialRelation(String name, int arity) implements PartialSymbol<TruthValue, Boolean>, Constraint {
+public record PartialRelation(String name, int arity) implements PartialSymbol <TruthValue, Boolean>, Constraint {
 	@Override
-	public AbstractDomain<TruthValue, Boolean> abstractDomain() {
+	public AbstractDomain <TruthValue, Boolean> abstractDomain() {
 		return TruthValueDomain.INSTANCE;
 	}
 
@@ -26,7 +26,7 @@ public record PartialRelation(String name, int arity) implements PartialSymbol<T
 	}
 
 	@Override
-	public List<Parameter> getParameters() {
+	public List <Parameter> getParameters() {
 		var parameters = new Parameter[arity];
 		Arrays.fill(parameters, Parameter.NODE_OUT);
 		return List.of(parameters);

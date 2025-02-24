@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * The <b>Adapter Factory</b> for the model.
- * It provides an adapter <code>createXXX</code> method for each class of the model.
+ * The <b>Adapter Factory </b> for the model.
+ * It provides an adapter <code>createXXX </code> method for each class of the model.
  * <!-- end-user-doc -->
  * @see atl.research.relational_.Relational_Package
  * @generated
@@ -43,7 +43,7 @@ public class Relational_AdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * Returns whether this factory is applicable for the type of the object.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
+	 * This implementation returns <code>true </code> if the object is either the model's package or is an instance object of the model.
 	 * <!-- end-user-doc -->
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
@@ -60,13 +60,13 @@ public class Relational_AdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * The switch that delegates to the <code>createXXX</code> methods.
+	 * The switch that delegates to the <code>createXXX </code> methods.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Relational_Switch<Adapter> modelSwitch =
-		new Relational_Switch<Adapter>() {
+	protected Relational_Switch <Adapter> modelSwitch =
+		new Relational_Switch <Adapter>() {
 			@Override
 			public Adapter caseNamed(Named object) {
 				return createNamedAdapter();
@@ -90,11 +90,11 @@ public class Relational_AdapterFactory extends AdapterFactoryImpl {
 		};
 
 	/**
-	 * Creates an adapter for the <code>target</code>.
+	 * Creates an adapter for the <code>target </code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param target the object to adapt.
-	 * @return the adapter for the <code>target</code>.
+	 * @return the adapter for the <code>target </code>.
 	 * @generated
 	 */
 	@Override
@@ -104,7 +104,7 @@ public class Relational_AdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link atl.research.relational_.Named <em>Named</em>}'.
+	 * Creates a new adapter for an object of class '{@link atl.research.relational_.Named <em>Named </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -118,7 +118,7 @@ public class Relational_AdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link atl.research.relational_.Table <em>Table</em>}'.
+	 * Creates a new adapter for an object of class '{@link atl.research.relational_.Table <em>Table </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -132,7 +132,7 @@ public class Relational_AdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link atl.research.relational_.Column <em>Column</em>}'.
+	 * Creates a new adapter for an object of class '{@link atl.research.relational_.Column <em>Column </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -146,7 +146,7 @@ public class Relational_AdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link atl.research.relational_.Type <em>Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link atl.research.relational_.Type <em>Type </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.

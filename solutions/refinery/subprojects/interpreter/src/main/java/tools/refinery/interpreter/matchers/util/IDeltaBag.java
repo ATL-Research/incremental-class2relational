@@ -15,7 +15,7 @@ package tools.refinery.interpreter.matchers.util;
  * @author Gabor Bergmann
  * @since 1.7
  */
-public interface IDeltaBag<T> extends IMemory<T> {
+public interface IDeltaBag <T> extends IMemory <T> {
 
     @Override
     default boolean removeOneOrNop(T value) {

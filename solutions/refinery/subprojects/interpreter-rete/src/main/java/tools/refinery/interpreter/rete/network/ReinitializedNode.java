@@ -10,5 +10,5 @@ import tools.refinery.interpreter.matchers.tuple.Tuple;
 import java.util.Collection;
 
 public interface ReinitializedNode {
-	void reinitializeWith(Collection<Tuple> tuples);
+	void reinitializeWith(Collection <Tuple> tuples);
 }

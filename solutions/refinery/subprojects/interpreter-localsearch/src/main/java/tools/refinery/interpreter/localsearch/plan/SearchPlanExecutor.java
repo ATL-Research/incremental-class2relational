@@ -35,15 +35,15 @@ import tools.refinery.interpreter.matchers.util.Preconditions;
 public class SearchPlanExecutor implements ILocalSearchAdaptable {
 
     private int currentOperation;
-    private final List<ISearchOperation.ISearchOperationExecutor> operations;
+    private final List <ISearchOperation.ISearchOperationExecutor> operations;
     private final SearchPlan plan;
     private final ISearchContext context;
-    private final List<ILocalSearchAdapter> adapters = new CopyOnWriteArrayList<>();
+    private final List <ILocalSearchAdapter> adapters = new CopyOnWriteArrayList<>();
 
     /**
      * @since 2.0
      */
-    public Map<Integer, PVariable> getVariableMapping() {
+    public Map <Integer, PVariable> getVariableMapping() {
         return plan.getVariableMapping();
     }
 
@@ -63,7 +63,7 @@ public class SearchPlanExecutor implements ILocalSearchAdaptable {
     }
 
     @Override
-    public void addAdapters(List<ILocalSearchAdapter> adapters) {
+    public void addAdapters(List <ILocalSearchAdapter> adapters) {
         for(ILocalSearchAdapter adapter : adapters){
             if (!this.adapters.contains(adapter)){
                 this.adapters.add(adapter);
@@ -73,7 +73,7 @@ public class SearchPlanExecutor implements ILocalSearchAdaptable {
     }
 
     @Override
-    public void removeAdapters(List<ILocalSearchAdapter> adapters) {
+    public void removeAdapters(List <ILocalSearchAdapter> adapters) {
         for (ILocalSearchAdapter adapter : adapters) {
             if (this.adapters.remove(adapter)){
                 adapter.adapterUnregistered(this);
@@ -183,7 +183,7 @@ public class SearchPlanExecutor implements ILocalSearchAdaptable {
     }
 
     @Override
-    public List<ILocalSearchAdapter> getAdapters() {
+    public List <ILocalSearchAdapter> getAdapters() {
         return Collections.<ILocalSearchAdapter>unmodifiableList(this.adapters);
     }
 

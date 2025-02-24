@@ -16,7 +16,7 @@ import java.util.PriorityQueue;
 public class SolutionStoreImpl implements SolutionStore {
 	final int maxNumberSolutions;
 	public static final int UNLIMITED = -1;
-	final PriorityQueue<VersionWithObjectiveValue> solutions;
+	final PriorityQueue <VersionWithObjectiveValue> solutions;
 
 	public SolutionStoreImpl(int maxNumberSolutions) {
 		this.maxNumberSolutions = maxNumberSolutions;
@@ -37,7 +37,7 @@ public class SolutionStoreImpl implements SolutionStore {
 	}
 
 	@Override
-	public List<VersionWithObjectiveValue> getSolutions() {
+	public List <VersionWithObjectiveValue> getSolutions() {
 		return new ArrayList<>(solutions);
 	}
 

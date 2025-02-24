@@ -10,10 +10,10 @@ import tools.refinery.store.reasoning.ReasoningAdapter;
 import tools.refinery.store.reasoning.representation.PartialSymbol;
 import tools.refinery.store.reasoning.seed.ModelSeed;
 
-public class RefinementBasedInitializer<A, C> implements PartialModelInitializer {
-	private final PartialSymbol<A, C> partialSymbol;
+public class RefinementBasedInitializer <A, C> implements PartialModelInitializer {
+	private final PartialSymbol <A, C> partialSymbol;
 
-	public RefinementBasedInitializer(PartialSymbol<A, C> partialSymbol) {
+	public RefinementBasedInitializer(PartialSymbol <A, C> partialSymbol) {
 		this.partialSymbol = partialSymbol;
 	}
 

@@ -68,7 +68,7 @@ class ProblemSerializerTest {
 				""" + serializedAssertion + "\n");
 	}
 
-	static Stream<Arguments> assertionTest() {
+	static Stream <Arguments> assertionTest() {
 		return Stream.of(Arguments.of(LogicValue.TRUE, "foo(a)."), Arguments.of(LogicValue.FALSE, "!foo(a)."),
 				Arguments.of(LogicValue.UNKNOWN, "?foo(a)."), Arguments.of(LogicValue.ERROR, "foo(a): error."));
 	}
@@ -91,7 +91,7 @@ class ProblemSerializerTest {
 				default foo(a):\040""" + valueAsString + ".\n");
 	}
 
-	static Stream<Arguments> defaultAssertionTest() {
+	static Stream <Arguments> defaultAssertionTest() {
 		return Stream.of(Arguments.of(LogicValue.TRUE, "true"), Arguments.of(LogicValue.FALSE, "false"),
 				Arguments.of(LogicValue.UNKNOWN, "unknown"), Arguments.of(LogicValue.ERROR, "error"));
 	}

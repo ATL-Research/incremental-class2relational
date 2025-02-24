@@ -177,7 +177,7 @@ class NodeFactory {
 
     private Supplier instantiateNode(ReteContainer reteContainer, ExpressionEnforcerRecipe recipe) {
         final IExpressionEvaluator evaluator = toIExpressionEvaluator(recipe.getExpression());
-        final Map<String, Integer> posMapping = toStringIndexMap(recipe.getMappedIndices());
+        final Map <String, Integer> posMapping = toStringIndexMap(recipe.getMappedIndices());
         final int sourceTupleWidth = recipe.getParent().getArity();
         EvaluatorCore core = null;
         if (recipe instanceof CheckRecipe) {
@@ -294,7 +294,7 @@ class NodeFactory {
     }
 
     private Supplier instantiateNode(ReteContainer reteContainer, ConstantRecipe recipe) {
-        final List<Object> constantValues = recipe.getConstantValues();
+        final List <Object> constantValues = recipe.getConstantValues();
         final Object[] constantArray = constantValues.toArray(new Object[constantValues.size()]);
         return new ConstantNode(reteContainer, Tuples.flatTupleOf(constantArray));
     }
@@ -352,9 +352,9 @@ class NodeFactory {
         throw new IllegalArgumentException("No runtime support for relation evaluator: " + evaluator);
     }
 
-    private Map<String, Integer> toStringIndexMap(final EMap<String, Integer> mappedIndices) {
-        final HashMap<String, Integer> result = new HashMap<String, Integer>();
-        for (java.util.Map.Entry<String, Integer> entry : mappedIndices) {
+    private Map <String, Integer> toStringIndexMap(final EMap <String, Integer> mappedIndices) {
+        final HashMap <String, Integer> result = new HashMap <String, Integer>();
+        for (java.util.Map.Entry <String, Integer> entry : mappedIndices) {
             result.put(entry.getKey(), entry.getValue());
         }
         return result;

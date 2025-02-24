@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * The <b>Adapter Factory</b> for the model.
- * It provides an adapter <code>createXXX</code> method for each class of the model.
+ * The <b>Adapter Factory </b> for the model.
+ * It provides an adapter <code>createXXX </code> method for each class of the model.
  * <!-- end-user-doc -->
  * @see de.tbuchmann.ttc.corrmodel.CorrModelPackage
  * @generated
@@ -43,7 +43,7 @@ public class CorrModelAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * Returns whether this factory is applicable for the type of the object.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
+	 * This implementation returns <code>true </code> if the object is either the model's package or is an instance object of the model.
 	 * <!-- end-user-doc -->
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
@@ -60,13 +60,13 @@ public class CorrModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * The switch that delegates to the <code>createXXX</code> methods.
+	 * The switch that delegates to the <code>createXXX </code> methods.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CorrModelSwitch<Adapter> modelSwitch =
-		new CorrModelSwitch<Adapter>() {
+	protected CorrModelSwitch <Adapter> modelSwitch =
+		new CorrModelSwitch <Adapter>() {
 			@Override
 			public Adapter caseTransformation(Transformation object) {
 				return createTransformationAdapter();
@@ -94,11 +94,11 @@ public class CorrModelAdapterFactory extends AdapterFactoryImpl {
 		};
 
 	/**
-	 * Creates an adapter for the <code>target</code>.
+	 * Creates an adapter for the <code>target </code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param target the object to adapt.
-	 * @return the adapter for the <code>target</code>.
+	 * @return the adapter for the <code>target </code>.
 	 * @generated
 	 */
 	@Override
@@ -108,7 +108,7 @@ public class CorrModelAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.tbuchmann.ttc.corrmodel.Transformation <em>Transformation</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.tbuchmann.ttc.corrmodel.Transformation <em>Transformation </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -122,7 +122,7 @@ public class CorrModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.tbuchmann.ttc.corrmodel.Corr <em>Corr</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.tbuchmann.ttc.corrmodel.Corr <em>Corr </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -136,7 +136,7 @@ public class CorrModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.tbuchmann.ttc.corrmodel.CorrElem <em>Corr Elem</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.tbuchmann.ttc.corrmodel.CorrElem <em>Corr Elem </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -150,7 +150,7 @@ public class CorrModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.tbuchmann.ttc.corrmodel.SingleElem <em>Single Elem</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.tbuchmann.ttc.corrmodel.SingleElem <em>Single Elem </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -164,7 +164,7 @@ public class CorrModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.tbuchmann.ttc.corrmodel.MultiElem <em>Multi Elem</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.tbuchmann.ttc.corrmodel.MultiElem <em>Multi Elem </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.

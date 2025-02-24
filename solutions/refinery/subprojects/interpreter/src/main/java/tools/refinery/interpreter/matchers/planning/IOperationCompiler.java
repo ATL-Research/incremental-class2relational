@@ -30,7 +30,7 @@ import tools.refinery.interpreter.matchers.tuple.TupleMask;
  * @author Gabor Bergmann
  * @noimplement This interface is not intended to be implemented by clients.
  */
-public interface IOperationCompiler<Collector> {
+public interface IOperationCompiler <Collector> {
 
     /**
      * @throws InterpreterRuntimeException
@@ -87,21 +87,21 @@ public interface IOperationCompiler<Collector> {
     public SubPlan buildCountCheckBetaNode(SubPlan primaryPlan, SubPlan sidePlan,
             TupleMask primaryMask, TupleMask originalSideMask, int resultPositionInSignature);
 
-    public SubPlan buildPredicateChecker(IExpressionEvaluator evaluator, Map<String, Integer> tupleNameMap,
+    public SubPlan buildPredicateChecker(IExpressionEvaluator evaluator, Map <String, Integer> tupleNameMap,
             SubPlan parentPlan);
-    public SubPlan buildFunctionEvaluator(IExpressionEvaluator evaluator, Map<String, Integer> tupleNameMap,
+    public SubPlan buildFunctionEvaluator(IExpressionEvaluator evaluator, Map <String, Integer> tupleNameMap,
             SubPlan parentPlan, Object computedResultCalibrationElement);
 
     /**
      * @return an operation compiler that potentially acts on a separate container
      */
-    public IOperationCompiler<Collector> getNextContainer();
+    public IOperationCompiler <Collector> getNextContainer();
 
     /**
      * @return an operation compiler that puts build actions on the tab of the given pattern
      * @since 0.9
      */
-    public IOperationCompiler<Collector> putOnTab(PQuery effort /*, IPatternMatcherContext context*/);
+    public IOperationCompiler <Collector> putOnTab(PQuery effort /*, IPatternMatcherContext context*/);
 
     public void reinitialize();
 

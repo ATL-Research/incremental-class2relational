@@ -15,9 +15,9 @@ import tools.refinery.store.tuple.Tuple;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ModelTest {
-	private static final Symbol<Boolean> person = Symbol.of("Person", 1);
-	private static final Symbol<Integer> age = Symbol.of("age", 1, Integer.class);
-	private static final Symbol<Boolean> friend = Symbol.of("friend", 2);
+	private static final Symbol <Boolean> person = Symbol.of("Person", 1);
+	private static final Symbol <Integer> age = Symbol.of("age", 1, Integer.class);
+	private static final Symbol <Boolean> friend = Symbol.of("friend", 2);
 
 	@Test
 	void modelConstructionTest() {

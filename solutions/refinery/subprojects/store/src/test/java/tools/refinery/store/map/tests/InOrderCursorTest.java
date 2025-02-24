@@ -26,7 +26,7 @@ class InOrderCursorTest {
 				.build()
 				.createOne();
 
-		VersionedMapStateImpl<Integer,String> map = (VersionedMapStateImpl<Integer,String>) store.createMap();
+		VersionedMapStateImpl <Integer,String> map = (VersionedMapStateImpl <Integer,String>) store.createMap();
 		checkMove(map,0);
 
 		map.put(1,"A");
@@ -44,9 +44,9 @@ class InOrderCursorTest {
 
 	}
 
-	private void checkMove(VersionedMapStateImpl<Integer,String> map, int num) {
-		InOrderMapCursor<Integer,String> cursor = new InOrderMapCursor<>(map);
-		for(int i=0; i<num; i++) {
+	private void checkMove(VersionedMapStateImpl <Integer,String> map, int num) {
+		InOrderMapCursor <Integer,String> cursor = new InOrderMapCursor<>(map);
+		for(int i=0; i <num; i++) {
 			assertTrue(cursor.move());
 			assertFalse(cursor.isTerminated());
 		}

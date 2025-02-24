@@ -15,7 +15,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 class UpperCardinalitySumAggregatorTest {
-	private StatefulAggregate<UpperCardinality, UpperCardinality> accumulator;
+	private StatefulAggregate <UpperCardinality, UpperCardinality> accumulator;
 
 	@BeforeEach
 	void beforeEach() {

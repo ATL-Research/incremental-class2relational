@@ -26,7 +26,7 @@ public class Class2Relational {
 	// Tracing
 	private static final Tracer TRACER = new Tracer();
 	// Helper
-	private static final List<DataType> allDataTypes = new LinkedList<>();
+	private static final List <DataType> allDataTypes = new LinkedList<>();
 
 	private static Type objectIdType;
 
@@ -38,7 +38,7 @@ public class Class2Relational {
 	}
 
     // Traversal
-	public static List<Named> transform(List<EObject> input) {
+	public static List <Named> transform(List <EObject> input) {
 
 		for (EObject namedElt : input) {
 			if (namedElt instanceof DataType) {
@@ -51,7 +51,7 @@ public class Class2Relational {
 	}
 
 	// Traversal
-    private static void preTransform(List<EObject> input) {
+    private static void preTransform(List <EObject> input) {
     	var iterator = input.iterator();
         var traverser = new Traverser(TRACER);
         traverser.addFunction(ClassImpl.class, x -> Class2TablePre((Class)x ));
@@ -66,7 +66,7 @@ public class Class2Relational {
     }
 
     // Traversal
-    private static List<Named> actualTransform(List<EObject> input) {
+    private static List <Named> actualTransform(List <EObject> input) {
     	var newRoot = Classes2List(input);
 
     	var iterator = input.iterator();
@@ -85,8 +85,8 @@ public class Class2Relational {
     }
 
     // Transformation
-    private static List<Named> Classes2List(List<EObject> input) {
-    	var nameds = new LinkedList<Named>();
+    private static List <Named> Classes2List(List <EObject> input) {
+    	var nameds = new LinkedList <Named>();
 
     	for (EObject eObject : input) {
             // Transformation 4

@@ -28,13 +28,13 @@ import tools.refinery.interpreter.rete.recipes.ReteNodeRecipe;
  */
 public class CompiledSubPlan extends PlanningTrace {
 
-    public CompiledSubPlan(SubPlan subPlan, List<PVariable> variablesTuple,
+    public CompiledSubPlan(SubPlan subPlan, List <PVariable> variablesTuple,
                            ReteNodeRecipe recipe,
-                           Collection<? extends RecipeTraceInfo> parentRecipeTraces) {
+                           Collection <? extends RecipeTraceInfo> parentRecipeTraces) {
         super(subPlan, variablesTuple, recipe, parentRecipeTraces);
 
         // Make sure that each variable occurs only once
-        Set<PVariable> variablesSet = new HashSet<PVariable>(variablesTuple);
+        Set <PVariable> variablesSet = new HashSet <PVariable>(variablesTuple);
         Preconditions.checkState(variablesSet.size() == variablesTuple.size(),
                 () -> String.format(
                         "Illegal column duplication (%s) while the query plan %s was compiled into a Rete Recipe %s",
@@ -42,7 +42,7 @@ public class CompiledSubPlan extends PlanningTrace {
                         subPlan.toShortString(), recipe));
     }
 
-    public CompiledSubPlan(SubPlan subPlan, List<PVariable> variablesTuple,
+    public CompiledSubPlan(SubPlan subPlan, List <PVariable> variablesTuple,
             ReteNodeRecipe recipe,
             RecipeTraceInfo... parentRecipeTraces) {
         this(subPlan, variablesTuple, recipe, Arrays.asList(parentRecipeTraces));

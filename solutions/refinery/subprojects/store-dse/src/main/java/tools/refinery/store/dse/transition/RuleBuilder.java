@@ -14,9 +14,9 @@ import tools.refinery.store.query.term.Variable;
 
 import java.util.List;
 
-public class RuleBuilder extends AbstractQueryBuilder<RuleBuilder> {
+public class RuleBuilder extends AbstractQueryBuilder <RuleBuilder> {
 	private final String name;
-	private List<ActionLiteral> action;
+	private List <ActionLiteral> action;
 
 	RuleBuilder(String name) {
 		super(Dnf.builder(name == null ? null : name + "#precondition"));
@@ -32,7 +32,7 @@ public class RuleBuilder extends AbstractQueryBuilder<RuleBuilder> {
 		return action(List.of(literals));
 	}
 
-	public RuleBuilder action(List<? extends ActionLiteral> literals) {
+	public RuleBuilder action(List <? extends ActionLiteral> literals) {
 		if (this.action != null) {
 			throw new IllegalStateException("Actions have already been set");
 		}

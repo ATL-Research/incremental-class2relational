@@ -44,7 +44,7 @@ public abstract class IndexerBasedAggregatorNode extends StandardNode implements
     ProjectionIndexer projection;
     IndexerBasedAggregatorNode me;
     int sourceWidth;
-    Map<Tuple, Object> mainAggregates;
+    Map <Tuple, Object> mainAggregates;
 
     AggregatorOuterIndexer aggregatorOuterIndexer = null;
     AggregatorOuterIdentityIndexer[] aggregatorOuterIdentityIndexers = null;
@@ -88,7 +88,7 @@ public abstract class IndexerBasedAggregatorNode extends StandardNode implements
     /**
      * Aggregates (reduces) a group of tuples. The group can be null.
      */
-    public abstract Object aggregateGroup(Tuple signature, Collection<Tuple> group);
+    public abstract Object aggregateGroup(Tuple signature, Collection <Tuple> group);
 
 
     /**
@@ -96,12 +96,12 @@ public abstract class IndexerBasedAggregatorNode extends StandardNode implements
      * the update definition. Defaults to aggregateGroup(). Override to increase performance.
      * @since 2.4
      */
-    public Object aggregateGroupAfterUpdate(Tuple signature, Collection<Tuple> currentGroup, Object oldAggregate,
+    public Object aggregateGroupAfterUpdate(Tuple signature, Collection <Tuple> currentGroup, Object oldAggregate,
             Direction direction, Tuple updateElement, boolean change) {
         return aggregateGroup(signature, currentGroup);
     }
 
-    protected Tuple aggregateAndPack(Tuple signature, Collection<Tuple> group) {
+    protected Tuple aggregateAndPack(Tuple signature, Collection <Tuple> group) {
         return packResult(signature, aggregateGroup(signature, group));
     }
 
@@ -129,16 +129,16 @@ public abstract class IndexerBasedAggregatorNode extends StandardNode implements
     }
 
     @Override
-    public void pullInto(final Collection<Tuple> collector, final boolean flush) {
-        for (final Entry<Tuple, Object> aggregateEntry : mainAggregates.entrySet()) {
+    public void pullInto(final Collection <Tuple> collector, final boolean flush) {
+        for (final Entry <Tuple, Object> aggregateEntry : mainAggregates.entrySet()) {
             collector.add(packResult(aggregateEntry.getKey(), aggregateEntry.getValue()));
         }
     }
 
     @Override
-    public void pullIntoWithTimeline(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush) {
+    public void pullIntoWithTimeline(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush) {
         // use all zero timestamps because this node cannot be used in recursive groups anyway
-        for (final Entry<Tuple, Object> aggregateEntry : mainAggregates.entrySet()) {
+        for (final Entry <Tuple, Object> aggregateEntry : mainAggregates.entrySet()) {
             collector.put(packResult(aggregateEntry.getKey(), aggregateEntry.getValue()), Timestamp.INSERT_AT_ZERO_TIMELINE);
         }
     }
@@ -151,7 +151,7 @@ public abstract class IndexerBasedAggregatorNode extends StandardNode implements
      * @since 2.4
      */
     protected void aggregateUpdate(Direction direction, Tuple updateElement, Tuple signature, boolean change) {
-        Collection<Tuple> currentGroup = projection.get(signature);
+        Collection <Tuple> currentGroup = projection.get(signature);
         // these will be null if group is empty
         Object oldAggregate = mainAggregates.get(signature);
         Object safeOldAggregate = oldAggregate == null ? aggregateGroup(signature, null) : oldAggregate;
@@ -204,7 +204,7 @@ public abstract class IndexerBasedAggregatorNode extends StandardNode implements
         }
 
         @Override
-        public Collection<Tuple> get(Tuple signature) {
+        public Collection <Tuple> get(Tuple signature) {
             return Collections.singleton(packResult(signature, getAggregate(signature)));
         }
 
@@ -236,7 +236,7 @@ public abstract class IndexerBasedAggregatorNode extends StandardNode implements
         public AggregatorOuterIdentityIndexer(int resultPositionInSignature) {
             super(me.reteContainer, TupleMask.displace(sourceWidth, resultPositionInSignature, sourceWidth + 1));
             this.parent = me;
-            // this.localAggregates = new HashMap<Tuple, Tuple>();
+            // this.localAggregates = new HashMap <Tuple, Tuple>();
             this.resultPositionInSignature = resultPositionInSignature;
             this.pruneResult = TupleMask.omit(resultPositionInSignature, sourceWidth + 1);
             if (resultPositionInSignature == sourceWidth)
@@ -246,7 +246,7 @@ public abstract class IndexerBasedAggregatorNode extends StandardNode implements
         }
 
         @Override
-        public Collection<Tuple> get(Tuple signatureWithResult) {
+        public Collection <Tuple> get(Tuple signatureWithResult) {
             Tuple prunedSignature = pruneResult.transform(signatureWithResult);
             Object result = getAggregate(prunedSignature);
             if (signatureWithResult.get(resultPositionInSignature).equals(result))

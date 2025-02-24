@@ -20,10 +20,10 @@ import java.util.function.Consumer;
  * @author Bergmann Gabor
  *
  */
-public class MatchUpdateAdapter<Match extends IPatternMatch> implements IMatchUpdateListener<Match> {
+public class MatchUpdateAdapter <Match extends IPatternMatch> implements IMatchUpdateListener <Match> {
 
-    Consumer<Match> appearCallback;
-    Consumer<Match> disappearCallback;
+    Consumer <Match> appearCallback;
+    Consumer <Match> disappearCallback;
 
     /**
      * Constructs an instance without any match processors registered yet.
@@ -46,7 +46,7 @@ public class MatchUpdateAdapter<Match extends IPatternMatch> implements IMatchUp
      *            will be executed on match disappearance. See {@link Consumer} for details on how to implement.
      * @since 2.0
      */
-    public MatchUpdateAdapter(Consumer<Match> appearCallback, Consumer<Match> disappearCallback) {
+    public MatchUpdateAdapter(Consumer <Match> appearCallback, Consumer <Match> disappearCallback) {
         super();
         setAppearCallback(appearCallback);
         setDisappearCallback(disappearCallback);
@@ -57,7 +57,7 @@ public class MatchUpdateAdapter<Match extends IPatternMatch> implements IMatchUp
      *         executed on match appearance.
      * @since 2.0
      */
-    public Consumer<Match> getAppearCallback() {
+    public Consumer <Match> getAppearCallback() {
         return appearCallback;
     }
 
@@ -67,7 +67,7 @@ public class MatchUpdateAdapter<Match extends IPatternMatch> implements IMatchUp
      *            executed on match appearance. See {@link Consumer} for details on how to implement.
      * @since 2.0
      */
-    public void setAppearCallback(Consumer<Match> appearCallback) {
+    public void setAppearCallback(Consumer <Match> appearCallback) {
         this.appearCallback = appearCallback;
     }
 
@@ -76,7 +76,7 @@ public class MatchUpdateAdapter<Match extends IPatternMatch> implements IMatchUp
      *         will be executed on match disappearance.
      * @since 2.0
      */
-    public Consumer<Match> getDisappearCallback() {
+    public Consumer <Match> getDisappearCallback() {
         return disappearCallback;
     }
 
@@ -86,7 +86,7 @@ public class MatchUpdateAdapter<Match extends IPatternMatch> implements IMatchUp
      *            will be executed on match disappearance. See {@link Consumer} for details on how to implement.
      * @since 2.0
      */
-    public void setDisappearCallback(Consumer<Match> disappearCallback) {
+    public void setDisappearCallback(Consumer <Match> disappearCallback) {
         this.disappearCallback = disappearCallback;
     }
 

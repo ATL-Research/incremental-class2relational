@@ -28,14 +28,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 class ReasoningAdapterImpl implements ReasoningAdapter {
-	static final Symbol<Integer> NODE_COUNT_SYMBOL = Symbol.of("MODEL_SIZE", 0, Integer.class, 0);
+	static final Symbol <Integer> NODE_COUNT_SYMBOL = Symbol.of("MODEL_SIZE", 0, Integer.class, 0);
 	private final Model model;
 	private final ReasoningStoreAdapterImpl storeAdapter;
-	private final Map<AnyPartialSymbol, AnyPartialInterpretation>[] partialInterpretations;
-	private final Map<AnyPartialSymbol, AnyPartialInterpretationRefiner> refiners;
+	private final Map <AnyPartialSymbol, AnyPartialInterpretation>[] partialInterpretations;
+	private final Map <AnyPartialSymbol, AnyPartialInterpretationRefiner> refiners;
 	private final StorageRefiner[] storageRefiners;
-	private final Interpretation<Integer> nodeCountInterpretation;
-	private final Interpretation<CardinalityInterval> countInterpretation;
+	private final Interpretation <Integer> nodeCountInterpretation;
+	private final Interpretation <CardinalityInterval> countInterpretation;
 
 	ReasoningAdapterImpl(Model model, ReasoningStoreAdapterImpl storeAdapter) {
 		this.model = model;
@@ -44,7 +44,7 @@ class ReasoningAdapterImpl implements ReasoningAdapter {
 		int concretenessLength = Concreteness.values().length;
 		// Creation of a generic array.
 		@SuppressWarnings({"unchecked", "squid:S1905"})
-		var interpretationsArray = (Map<AnyPartialSymbol, AnyPartialInterpretation>[]) new Map[concretenessLength];
+		var interpretationsArray = (Map <AnyPartialSymbol, AnyPartialInterpretation>[]) new Map[concretenessLength];
 		partialInterpretations = interpretationsArray;
 		createPartialInterpretations();
 
@@ -87,11 +87,11 @@ class ReasoningAdapterImpl implements ReasoningAdapter {
 		}
 	}
 
-	private <A, C> PartialInterpretation<A, C> createPartialInterpretation(
-			Concreteness concreteness, PartialInterpretation.Factory<A, C> interpreter, AnyPartialSymbol symbol) {
+	private <A, C> PartialInterpretation <A, C> createPartialInterpretation(
+			Concreteness concreteness, PartialInterpretation.Factory <A, C> interpreter, AnyPartialSymbol symbol) {
 		// The builder only allows well-typed assignment of interpreters to symbols.
 		@SuppressWarnings("unchecked")
-		var typedSymbol = (PartialSymbol<A, C>) symbol;
+		var typedSymbol = (PartialSymbol <A, C>) symbol;
 		return interpreter.create(this, concreteness, typedSymbol);
 	}
 
@@ -107,11 +107,11 @@ class ReasoningAdapterImpl implements ReasoningAdapter {
 		}
 	}
 
-	private <A, C> PartialInterpretationRefiner<A, C> createRefiner(
-			PartialInterpretationRefiner.Factory<A, C> factory, AnyPartialSymbol symbol) {
+	private <A, C> PartialInterpretationRefiner <A, C> createRefiner(
+			PartialInterpretationRefiner.Factory <A, C> factory, AnyPartialSymbol symbol) {
 		// The builder only allows well-typed assignment of interpreters to symbols.
 		@SuppressWarnings("unchecked")
-		var typedSymbol = (PartialSymbol<A, C>) symbol;
+		var typedSymbol = (PartialSymbol <A, C>) symbol;
 		return factory.create(this, typedSymbol);
 	}
 
@@ -126,8 +126,8 @@ class ReasoningAdapterImpl implements ReasoningAdapter {
 	}
 
 	@Override
-	public <A, C> PartialInterpretation<A, C> getPartialInterpretation(Concreteness concreteness,
-																	   PartialSymbol<A, C> partialSymbol) {
+	public <A, C> PartialInterpretation <A, C> getPartialInterpretation(Concreteness concreteness,
+																	   PartialSymbol <A, C> partialSymbol) {
 		var map = partialInterpretations[concreteness.ordinal()];
 		if (map == null) {
 			throw new IllegalArgumentException("No interpretation for concreteness: " + concreteness);
@@ -138,19 +138,19 @@ class ReasoningAdapterImpl implements ReasoningAdapter {
 		}
 		// The builder only allows well-typed assignment of interpreters to symbols.
 		@SuppressWarnings("unchecked")
-		var typedInterpretation = (PartialInterpretation<A, C>) interpretation;
+		var typedInterpretation = (PartialInterpretation <A, C>) interpretation;
 		return typedInterpretation;
 	}
 
 	@Override
-	public <A, C> PartialInterpretationRefiner<A, C> getRefiner(PartialSymbol<A, C> partialSymbol) {
+	public <A, C> PartialInterpretationRefiner <A, C> getRefiner(PartialSymbol <A, C> partialSymbol) {
 		var refiner = refiners.get(partialSymbol);
 		if (refiner == null) {
 			throw new IllegalArgumentException("No refiner for partial symbol: " + partialSymbol);
 		}
 		// The builder only allows well-typed assignment of refiners to symbols.
 		@SuppressWarnings("unchecked")
-		var typedRefiner = (PartialInterpretationRefiner<A, C>) refiner;
+		var typedRefiner = (PartialInterpretationRefiner <A, C>) refiner;
 		return typedRefiner;
 	}
 

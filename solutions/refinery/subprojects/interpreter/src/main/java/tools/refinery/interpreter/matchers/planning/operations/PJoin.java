@@ -21,18 +21,18 @@ import tools.refinery.interpreter.matchers.psystem.PConstraint;
 public class PJoin extends POperation {
 
 //	// TODO leave here? is this a problem in equivalnece checking?
-//	private Set<PVariable> onVariables;
+//	private Set <PVariable> onVariables;
 
-    public PJoin(/*Set<PVariable> onVariables*/) {
+    public PJoin(/*Set <PVariable> onVariables*/) {
         super();
-        //this.onVariables = new HashSet<PVariable>(onVariables);
+        //this.onVariables = new HashSet <PVariable>(onVariables);
     }
-//	public Set<PVariable> getOnVariables() {
+//	public Set <PVariable> getOnVariables() {
 //		return onVariables;
 //	}
 
     @Override
-    public Set<? extends PConstraint> getDeltaConstraints() {
+    public Set <? extends PConstraint> getDeltaConstraints() {
         return Collections.emptySet();
     }
     @Override

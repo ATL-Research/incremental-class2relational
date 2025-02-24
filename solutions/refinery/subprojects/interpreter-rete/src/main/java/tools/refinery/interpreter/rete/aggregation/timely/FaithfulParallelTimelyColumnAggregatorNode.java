@@ -33,36 +33,36 @@ import java.util.TreeMap;
  * @since 2.4
  *
  */
-public class FaithfulParallelTimelyColumnAggregatorNode<Domain, Accumulator, AggregateResult> extends
-        FaithfulTimelyColumnAggregatorNode<Domain, Accumulator, AggregateResult, CumulativeAggregate<Domain, Accumulator>, FoldingState<Domain>>
+public class FaithfulParallelTimelyColumnAggregatorNode <Domain, Accumulator, AggregateResult> extends
+        FaithfulTimelyColumnAggregatorNode <Domain, Accumulator, AggregateResult, CumulativeAggregate <Domain, Accumulator>, FoldingState <Domain>>
         implements ResumableNode {
 
     public FaithfulParallelTimelyColumnAggregatorNode(final ReteContainer reteContainer,
-            final IMultisetAggregationOperator<Domain, Accumulator, AggregateResult> operator,
+            final IMultisetAggregationOperator <Domain, Accumulator, AggregateResult> operator,
             final TupleMask groupMask, final TupleMask columnMask) {
         super(reteContainer, operator, groupMask, columnMask);
     }
 
     public FaithfulParallelTimelyColumnAggregatorNode(final ReteContainer reteContainer,
-            final IMultisetAggregationOperator<Domain, Accumulator, AggregateResult> operator,
+            final IMultisetAggregationOperator <Domain, Accumulator, AggregateResult> operator,
             final TupleMask groupMask, final int aggregatedColumn) {
         this(reteContainer, operator, groupMask, TupleMask.selectSingle(aggregatedColumn, groupMask.sourceWidth));
     }
 
     @Override
-    protected Map<AggregateResult, Diff<Timestamp>> doFoldingStep(final Tuple group, final FoldingState<Domain> state,
+    protected Map <AggregateResult, Diff <Timestamp>> doFoldingStep(final Tuple group, final FoldingState <Domain> state,
             final Timestamp timestamp) {
-        final CumulativeAggregate<Domain, Accumulator> aggregate = getAggregate(group, timestamp);
+        final CumulativeAggregate <Domain, Accumulator> aggregate = getAggregate(group, timestamp);
         if (state.delta.isEmpty()) {
             gcAggregates(aggregate, group, timestamp);
             return Collections.emptyMap();
         } else {
-            final Map<AggregateResult, Diff<Timestamp>> diffMap = CollectionsFactory.createMap();
+            final Map <AggregateResult, Diff <Timestamp>> diffMap = CollectionsFactory.createMap();
             final Timestamp nextTimestamp = this.aggregates.get(group).higherKey(timestamp);
 
             final AggregateResult currentOldResult = operator.getAggregate(aggregate.accumulator);
 
-            for (final Entry<Domain, Integer> entry : state.delta.entriesWithMultiplicities()) {
+            for (final Entry <Domain, Integer> entry : state.delta.entriesWithMultiplicities()) {
                 final boolean isInsertion = entry.getValue() > 0;
                 final Domain aggregand = entry.getKey();
                 for (int i = 0; i < Math.abs(entry.getValue()); i++) {
@@ -91,7 +91,7 @@ public class FaithfulParallelTimelyColumnAggregatorNode<Domain, Accumulator, Agg
 
             // prepare folding state for next timestamp
             if (nextTimestamp != null) {
-                final FoldingState<Domain> newState = new FoldingState<>();
+                final FoldingState <Domain> newState = new FoldingState<>();
                 newState.delta = state.delta;
                 addFoldingState(group, newState, nextTimestamp);
             }
@@ -108,8 +108,8 @@ public class FaithfulParallelTimelyColumnAggregatorNode<Domain, Accumulator, Agg
         final Domain aggregand = (Domain) runtimeContext.unwrapElement(value.get(0));
         final boolean isInsertion = direction == Direction.INSERT;
 
-        final CumulativeAggregate<Domain, Accumulator> aggregate = getAggregate(group, timestamp);
-        final FoldingState<Domain> state = new FoldingState<>();
+        final CumulativeAggregate <Domain, Accumulator> aggregate = getAggregate(group, timestamp);
+        final FoldingState <Domain> state = new FoldingState<>();
         if (isInsertion) {
             aggregate.aggregands.addOne(aggregand);
             state.delta.addOne(aggregand);
@@ -125,10 +125,10 @@ public class FaithfulParallelTimelyColumnAggregatorNode<Domain, Accumulator, Agg
      * Garbage collects the counter of the given group and timestamp if the bag of aggregands is empty.
      */
     @Override
-    protected void gcAggregates(final CumulativeAggregate<Domain, Accumulator> aggregate, final Tuple group,
+    protected void gcAggregates(final CumulativeAggregate <Domain, Accumulator> aggregate, final Tuple group,
             final Timestamp timestamp) {
         if (aggregate.aggregands.isEmpty()) {
-            final TreeMap<Timestamp, CumulativeAggregate<Domain, Accumulator>> groupAggregates = this.aggregates
+            final TreeMap <Timestamp, CumulativeAggregate <Domain, Accumulator>> groupAggregates = this.aggregates
                     .get(group);
             groupAggregates.remove(timestamp);
             if (groupAggregates.isEmpty()) {
@@ -141,12 +141,12 @@ public class FaithfulParallelTimelyColumnAggregatorNode<Domain, Accumulator, Agg
      * On-demand initializes and returns the aggregate for the given group and timestamp.
      */
     @Override
-    protected CumulativeAggregate<Domain, Accumulator> getAggregate(final Tuple group, final Timestamp timestamp) {
-        final TreeMap<Timestamp, CumulativeAggregate<Domain, Accumulator>> groupAggregates = this.aggregates
+    protected CumulativeAggregate <Domain, Accumulator> getAggregate(final Tuple group, final Timestamp timestamp) {
+        final TreeMap <Timestamp, CumulativeAggregate <Domain, Accumulator>> groupAggregates = this.aggregates
                 .computeIfAbsent(group, k -> CollectionsFactory.createTreeMap());
         return groupAggregates.computeIfAbsent(timestamp, k -> {
-            final CumulativeAggregate<Domain, Accumulator> aggregate = new CumulativeAggregate<>();
-            final Entry<Timestamp, CumulativeAggregate<Domain, Accumulator>> lowerEntry = groupAggregates
+            final CumulativeAggregate <Domain, Accumulator> aggregate = new CumulativeAggregate<>();
+            final Entry <Timestamp, CumulativeAggregate <Domain, Accumulator>> lowerEntry = groupAggregates
                     .lowerEntry(timestamp);
             if (lowerEntry == null) {
                 aggregate.accumulator = operator.createNeutral();
@@ -159,18 +159,18 @@ public class FaithfulParallelTimelyColumnAggregatorNode<Domain, Accumulator, Agg
 
     @Override
     public AggregateResult getAggregateResult(final Tuple group) {
-        final TreeMap<Timestamp, CumulativeAggregate<Domain, Accumulator>> groupAggregates = this.aggregates.get(group);
+        final TreeMap <Timestamp, CumulativeAggregate <Domain, Accumulator>> groupAggregates = this.aggregates.get(group);
         if (groupAggregates != null) {
-            final Entry<Timestamp, CumulativeAggregate<Domain, Accumulator>> lastEntry = groupAggregates.lastEntry();
+            final Entry <Timestamp, CumulativeAggregate <Domain, Accumulator>> lastEntry = groupAggregates.lastEntry();
             return operator.getAggregate(lastEntry.getValue().accumulator);
         } else {
             return NEUTRAL;
         }
     }
 
-    protected static class CumulativeAggregate<Domain, Accumulator> {
+    protected static class CumulativeAggregate <Domain, Accumulator> {
         protected Accumulator accumulator;
-        protected IDeltaBag<Domain> aggregands;
+        protected IDeltaBag <Domain> aggregands;
 
         protected CumulativeAggregate() {
             this.aggregands = CollectionsFactory.createDeltaBag();
@@ -182,8 +182,8 @@ public class FaithfulParallelTimelyColumnAggregatorNode<Domain, Accumulator, Agg
         }
     }
 
-    protected static class FoldingState<Domain> implements MergeableFoldingState<FoldingState<Domain>> {
-        protected IDeltaBag<Domain> delta;
+    protected static class FoldingState <Domain> implements MergeableFoldingState <FoldingState<Domain>> {
+        protected IDeltaBag <Domain> delta;
 
         protected FoldingState() {
             this.delta = CollectionsFactory.createDeltaBag();
@@ -198,11 +198,11 @@ public class FaithfulParallelTimelyColumnAggregatorNode<Domain, Accumulator, Agg
          * The returned result will never be null, even if the resulting delta set is empty.
          */
         @Override
-        public FoldingState<Domain> merge(final FoldingState<Domain> that) {
+        public FoldingState <Domain> merge(final FoldingState <Domain> that) {
             Preconditions.checkArgument(that != null);
             // 'this' was the previously registered folding state
             // 'that' is the new folding state being pushed upwards
-            final FoldingState<Domain> result = new FoldingState<>();
+            final FoldingState <Domain> result = new FoldingState<>();
             this.delta.forEachEntryWithMultiplicities((d, m) -> result.delta.addSigned(d, m));
             that.delta.forEachEntryWithMultiplicities((d, m) -> result.delta.addSigned(d, m));
             return result;

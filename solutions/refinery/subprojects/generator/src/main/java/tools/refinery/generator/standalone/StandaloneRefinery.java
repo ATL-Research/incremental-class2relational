@@ -20,7 +20,7 @@ public final class StandaloneRefinery {
 		return LazyHolder.INJECTOR;
 	}
 
-	public static <T> T getInstance(Class<T> type) {
+	public static <T> T getInstance(Class <T> type) {
 		return getInjector().getInstance(type);
 	}
 

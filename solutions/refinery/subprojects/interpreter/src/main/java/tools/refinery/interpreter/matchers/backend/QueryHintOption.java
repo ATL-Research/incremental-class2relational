@@ -19,7 +19,7 @@ import java.util.Objects;
  * @author Gabor Bergmann
  * @since 1.5
  */
-public class QueryHintOption<HintValue> {
+public class QueryHintOption <HintValue> {
 
     private String optionQualifiedName;
     private HintValue defaultValue;
@@ -36,7 +36,7 @@ public class QueryHintOption<HintValue> {
      * This is the recommended constructor for hint options defined as static fields within an enclosing class.
      * Combines the qualified name of the hint from the (qualified) name of the enclosing class and a local name (unique within that class).
      */
-    public <T extends HintValue> QueryHintOption(Class<?> optionNamespace, String optionLocalName, T defaultValue) {
+    public <T extends HintValue> QueryHintOption(Class <?> optionNamespace, String optionLocalName, T defaultValue) {
         this(String.format("%s@%s", optionLocalName, optionNamespace.getName()), defaultValue);
     }
 
@@ -94,7 +94,7 @@ public class QueryHintOption<HintValue> {
      * @return the hint value that was previously present in the map under this hint option, carrying over the semantics of {@link Map#put(Object, Object)}.
      */
     @SuppressWarnings("unchecked")
-    public HintValue insertOverridingValue(Map<QueryHintOption<?>, Object> hints, HintValue overridingValue) {
+    public HintValue insertOverridingValue(Map <QueryHintOption<?>, Object> hints, HintValue overridingValue) {
         return (HintValue) hints.put(this, overridingValue);
     }
 
@@ -109,7 +109,7 @@ public class QueryHintOption<HintValue> {
      * @see #insertOverridingValue(Map, Object)
      * @since 2.0
      */
-    public void insertValueIfNondefault(Map<QueryHintOption<?>, Object> hints, HintValue overridingValue) {
+    public void insertValueIfNondefault(Map <QueryHintOption<?>, Object> hints, HintValue overridingValue) {
         if (!Objects.equals(defaultValue, overridingValue))
             hints.put(this, overridingValue);
     }

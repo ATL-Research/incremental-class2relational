@@ -13,33 +13,33 @@ import tools.refinery.interpreter.matchers.context.common.JavaTransitiveInstance
 
 /**
  * Augments an aggregator operator with type bindings for the type of values being aggregated and the aggregate result.
- * <p> In case of <em>count</em>, the operator should be null.
+ * <p> In case of <em>count </em>, the operator should be null.
  * @author Gabor Bergmann
  * @since 1.4
  */
 public class BoundAggregator {
-    private final IMultisetAggregationOperator<?, ?, ?> operator;
-    private final Class<?> domainType;
-    private final Class<?> aggregateResultType;
+    private final IMultisetAggregationOperator <?, ?, ?> operator;
+    private final Class <?> domainType;
+    private final Class <?> aggregateResultType;
 
-    public BoundAggregator(IMultisetAggregationOperator<?, ?, ?> operator,
-            Class<?> domainType,
-            Class<?> aggregateResultType) {
+    public BoundAggregator(IMultisetAggregationOperator <?, ?, ?> operator,
+            Class <?> domainType,
+            Class <?> aggregateResultType) {
         super();
         this.operator = operator;
         this.domainType = domainType;
         this.aggregateResultType = aggregateResultType;
     }
 
-    public IMultisetAggregationOperator<?, ?, ?> getOperator() {
+    public IMultisetAggregationOperator <?, ?, ?> getOperator() {
         return operator;
     }
 
-    public Class<?> getDomainType() {
+    public Class <?> getDomainType() {
         return domainType;
     }
 
-    public Class<?> getAggregateResultType() {
+    public Class <?> getAggregateResultType() {
         return aggregateResultType;
     }
 
@@ -51,7 +51,7 @@ public class BoundAggregator {
         return toJavaInputKey(aggregateResultType);
     }
 
-    private static IInputKey toJavaInputKey(Class<?> type) {
+    private static IInputKey toJavaInputKey(Class <?> type) {
         if (type==null) {
             return null;
         } else {

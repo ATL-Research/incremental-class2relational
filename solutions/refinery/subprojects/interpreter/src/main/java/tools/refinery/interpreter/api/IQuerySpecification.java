@@ -23,7 +23,7 @@ import tools.refinery.interpreter.matchers.psystem.queries.PQueryHeader;
  * @author Bergmann Gábor
  *
  */
-public interface IQuerySpecification<Matcher extends InterpreterMatcher<? extends IPatternMatch>> extends PQueryHeader {
+public interface IQuerySpecification <Matcher extends InterpreterMatcher <? extends IPatternMatch>> extends PQueryHeader {
 
     /**
      * Initializes the pattern matcher within an existing {@link InterpreterEngine}. If the pattern matcher is already
@@ -66,7 +66,7 @@ public interface IQuerySpecification<Matcher extends InterpreterMatcher<? extend
      * The query is formulated over this kind of modeling platform.
      * E.g. for queries over EMF models, the {@link EMFScope} class is returned.
      */
-    public Class<? extends QueryScope> getPreferredScopeClass();
+    public Class <? extends QueryScope> getPreferredScopeClass();
 
     /**
      * Returns the definition of the query in a format intended for consumption by the query evaluator.

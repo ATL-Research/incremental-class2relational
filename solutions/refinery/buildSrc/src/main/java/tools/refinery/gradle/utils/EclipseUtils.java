@@ -25,12 +25,12 @@ public final class EclipseUtils {
 		throw new IllegalStateException("This is a static utility class and should not be instantiated directly");
 	}
 
-	public static void patchClasspathEntries(EclipseModel eclipseModel, Consumer<AbstractClasspathEntry> consumer) {
+	public static void patchClasspathEntries(EclipseModel eclipseModel, Consumer <AbstractClasspathEntry> consumer) {
 		whenClasspathFileMerged(eclipseModel.getClasspath().getFile(),
 				classpath -> patchClasspathEntries(classpath, consumer));
 	}
 
-	public static void patchClasspathEntries(Classpath eclipseClasspath, Consumer<AbstractClasspathEntry> consumer) {
+	public static void patchClasspathEntries(Classpath eclipseClasspath, Consumer <AbstractClasspathEntry> consumer) {
 		for (var entry : eclipseClasspath.getEntries()) {
 			if (entry instanceof AbstractClasspathEntry abstractClasspathEntry) {
 				consumer.accept(abstractClasspathEntry);
@@ -43,24 +43,24 @@ public final class EclipseUtils {
 	 * {@link XmlFileContentMerger#whenMerged(Action)}) in Kotlin build scripts.
 	 * <p>
 	 * The {@code Closure} variant will use the build script itself as {@code this}, and Kotlin will consider any
-	 * type ascription as a cast of {@code this} (instead of the argument of the {@code Action<?>}). This results in
+	 * type ascription as a cast of {@code this} (instead of the argument of the {@code Action <?>}). This results in
 	 * a mysterious {@link ClassCastException}, since the class generated from the build script doesn't extend from
 	 * {@link Classpath}. Using this helper method selects the correct call and applies the cast properly.
 	 *
 	 * @param file     The Eclipse classpath file.
 	 * @param consumer The lambda to run on when the classpath file is merged.
 	 */
-	public static void whenClasspathFileMerged(XmlFileContentMerger file, Consumer<Classpath> consumer) {
+	public static void whenClasspathFileMerged(XmlFileContentMerger file, Consumer <Classpath> consumer) {
 		file.whenMerged(untypedClasspath -> {
 			var classpath = (Classpath) untypedClasspath;
 			consumer.accept(classpath);
 		});
 	}
 
-	public static void patchGradleUsedByScope(AbstractClasspathEntry entry, Consumer<Set<String>> consumer) {
+	public static void patchGradleUsedByScope(AbstractClasspathEntry entry, Consumer <Set<String>> consumer) {
 		var entryAttributes = entry.getEntryAttributes();
 		var usedByValue = entryAttributes.get(GRADLE_USED_BY_SCOPE_ATTRIBUTE);
-		Set<String> usedBySet;
+		Set <String> usedBySet;
 		if (usedByValue instanceof String usedByString) {
 			usedBySet = new LinkedHashSet<>(List.of(usedByString.split(GRADLE_USED_BY_SCOPE_SEPARATOR)));
 		} else {

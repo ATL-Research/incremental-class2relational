@@ -52,7 +52,7 @@ import relational_.Named;
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
  * 
  * <p>Original source:
- *         <code><pre>
+ *         <code> <pre>
  *         ///////////////////
  *         // Property mapping
  *         ///////////////////
@@ -116,14 +116,14 @@ import relational_.Named;
  *         	find postName(attr,pname);
  *         	name == eval(aname+pname);
  *         }
- * </pre></code>
+ * </pre> </code>
  * 
  * @see Matcher
  * @see Match
  * 
  */
 @SuppressWarnings("all")
-public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.Matcher> {
+public final class NamedMap extends BaseGeneratedEMFQuerySpecification <NamedMap.Matcher> {
   /**
    * Pattern-specific match representation of the c2r.version2.namedMap pattern,
    * to be used in conjunction with {@link Matcher}.
@@ -141,7 +141,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
 
     private String fName;
 
-    private static List<String> parameterNames = makeImmutableList("named", "name");
+    private static List <String> parameterNames = makeImmutableList("named", "name");
 
     private Match(final Named pNamed, final String pName) {
       this.fNamed = pNamed;
@@ -204,7 +204,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
     }
 
     @Override
-    public List<String> parameterNames() {
+    public List <String> parameterNames() {
       return NamedMap.Match.parameterNames;
     }
 
@@ -326,7 +326,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
    * <p>Matches of the pattern will be represented as {@link Match}.
    * 
    * <p>Original source:
-   * <code><pre>
+   * <code> <pre>
    * ///////////////////
    * // Property mapping
    * ///////////////////
@@ -390,13 +390,13 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
    * 	find postName(attr,pname);
    * 	name == eval(aname+pname);
    * }
-   * </pre></code>
+   * </pre> </code>
    * 
    * @see Match
    * @see NamedMap
    * 
    */
-  public static class Matcher extends BaseMatcher<NamedMap.Match> {
+  public static class Matcher extends BaseMatcher <NamedMap.Match> {
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
@@ -449,22 +449,22 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<NamedMap.Match> getAllMatches(final Named pNamed, final String pName) {
+    public Collection <NamedMap.Match> getAllMatches(final Named pNamed, final String pName) {
       return rawStreamAllMatches(new Object[]{pNamed, pName}).collect(Collectors.toSet());
     }
 
     /**
      * Returns a stream of all matches of the pattern that conform to the given fixed values of some parameters.
      * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      * @param pNamed the fixed value of pattern parameter named, or null if not bound.
      * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<NamedMap.Match> streamAllMatches(final Named pNamed, final String pName) {
+    public Stream <NamedMap.Match> streamAllMatches(final Named pNamed, final String pName) {
       return rawStreamAllMatches(new Object[]{pNamed, pName});
     }
 
@@ -476,7 +476,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<NamedMap.Match> getOneArbitraryMatch(final Named pNamed, final String pName) {
+    public Optional <NamedMap.Match> getOneArbitraryMatch(final Named pNamed, final String pName) {
       return rawGetOneArbitraryMatch(new Object[]{pNamed, pName});
     }
 
@@ -512,7 +512,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final Named pNamed, final String pName, final Consumer<? super NamedMap.Match> processor) {
+    public boolean forOneArbitraryMatch(final Named pNamed, final String pName, final Consumer <? super NamedMap.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pNamed, pName}, processor);
     }
 
@@ -534,7 +534,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<Named> rawStreamAllValuesOfnamed(final Object[] parameters) {
+    protected Stream <Named> rawStreamAllValuesOfnamed(final Object[] parameters) {
       return rawStreamAllValues(POSITION_NAMED, parameters).map(Named.class::cast);
     }
 
@@ -543,7 +543,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Named> getAllValuesOfnamed() {
+    public Set <Named> getAllValuesOfnamed() {
       return rawStreamAllValuesOfnamed(emptyArray()).collect(Collectors.toSet());
     }
 
@@ -552,35 +552,35 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<Named> streamAllValuesOfnamed() {
+    public Stream <Named> streamAllValuesOfnamed() {
       return rawStreamAllValuesOfnamed(emptyArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for named.
      * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Named> streamAllValuesOfnamed(final NamedMap.Match partialMatch) {
+    public Stream <Named> streamAllValuesOfnamed(final NamedMap.Match partialMatch) {
       return rawStreamAllValuesOfnamed(partialMatch.toArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for named.
      * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Named> streamAllValuesOfnamed(final String pName) {
+    public Stream <Named> streamAllValuesOfnamed(final String pName) {
       return rawStreamAllValuesOfnamed(new Object[]{null, pName});
     }
 
@@ -589,7 +589,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Named> getAllValuesOfnamed(final NamedMap.Match partialMatch) {
+    public Set <Named> getAllValuesOfnamed(final NamedMap.Match partialMatch) {
       return rawStreamAllValuesOfnamed(partialMatch.toArray()).collect(Collectors.toSet());
     }
 
@@ -598,7 +598,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Named> getAllValuesOfnamed(final String pName) {
+    public Set <Named> getAllValuesOfnamed(final String pName) {
       return rawStreamAllValuesOfnamed(new Object[]{null, pName}).collect(Collectors.toSet());
     }
 
@@ -607,7 +607,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<String> rawStreamAllValuesOfname(final Object[] parameters) {
+    protected Stream <String> rawStreamAllValuesOfname(final Object[] parameters) {
       return rawStreamAllValues(POSITION_NAME, parameters).map(String.class::cast);
     }
 
@@ -616,7 +616,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOfname() {
+    public Set <String> getAllValuesOfname() {
       return rawStreamAllValuesOfname(emptyArray()).collect(Collectors.toSet());
     }
 
@@ -625,35 +625,35 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<String> streamAllValuesOfname() {
+    public Stream <String> streamAllValuesOfname() {
       return rawStreamAllValuesOfname(emptyArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for name.
      * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<String> streamAllValuesOfname(final NamedMap.Match partialMatch) {
+    public Stream <String> streamAllValuesOfname(final NamedMap.Match partialMatch) {
       return rawStreamAllValuesOfname(partialMatch.toArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for name.
      * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<String> streamAllValuesOfname(final Named pNamed) {
+    public Stream <String> streamAllValuesOfname(final Named pNamed) {
       return rawStreamAllValuesOfname(new Object[]{pNamed, null});
     }
 
@@ -662,7 +662,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOfname(final NamedMap.Match partialMatch) {
+    public Set <String> getAllValuesOfname(final NamedMap.Match partialMatch) {
       return rawStreamAllValuesOfname(partialMatch.toArray()).collect(Collectors.toSet());
     }
 
@@ -671,7 +671,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOfname(final Named pNamed) {
+    public Set <String> getAllValuesOfname(final Named pNamed) {
       return rawStreamAllValuesOfname(new Object[]{pNamed, null}).collect(Collectors.toSet());
     }
 
@@ -710,7 +710,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
      * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
      * 
      */
-    public static IQuerySpecification<NamedMap.Matcher> querySpecification() {
+    public static IQuerySpecification <NamedMap.Matcher> querySpecification() {
       return NamedMap.instance();
     }
   }
@@ -754,7 +754,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
 
   /**
    * Inner class allowing the singleton instance of {@link NamedMap} to be created 
-   *     <b>not</b> at the class load time of the outer class, 
+   *     <b>not </b> at the class load time of the outer class, 
    *     but rather at the first call to {@link NamedMap#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
@@ -764,7 +764,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
     private static final NamedMap INSTANCE = new NamedMap();
 
     /**
-     * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
+     * Statically initializes the query specification <b>after </b> the field {@link #INSTANCE} is assigned.
      * This initialization order is required to support indirect recursion.
      * 
      * <p> The static initializer is defined using a helper field to work around limitations of the code generator.
@@ -785,7 +785,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
 
     private final PParameter parameter_name = new PParameter("name", "java.lang.String", new JavaTransitiveInstancesKey(java.lang.String.class), PParameterDirection.INOUT);
 
-    private final List<PParameter> parameters = Arrays.asList(parameter_named, parameter_name);
+    private final List <PParameter> parameters = Arrays.asList(parameter_named, parameter_name);
 
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -797,25 +797,25 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
     }
 
     @Override
-    public List<String> getParameterNames() {
+    public List <String> getParameterNames() {
       return Arrays.asList("named","name");
     }
 
     @Override
-    public List<PParameter> getParameters() {
+    public List <PParameter> getParameters() {
       return parameters;
     }
 
     @Override
-    public Set<PBody> doGetContainedBodies() {
+    public Set <PBody> doGetContainedBodies() {
       setEvaluationHints(new QueryEvaluationHint(null, QueryEvaluationHint.BackendRequirement.UNSPECIFIED));
-      Set<PBody> bodies = new LinkedHashSet<>();
+      Set <PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
           PVariable var_named = body.getOrCreateVariableByName("named");
           PVariable var_name = body.getOrCreateVariableByName("name");
           PVariable var_dtype = body.getOrCreateVariableByName("dtype");
-          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
+          PVariable var___0_ = body.getOrCreateVariableByName("_ <0>");
           new TypeConstraint(body, Tuples.flatTupleOf(var_named), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Relational", "Named")));
           new TypeFilterConstraint(body, Tuples.flatTupleOf(var_name), new JavaTransitiveInstancesKey(java.lang.String.class));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
@@ -839,7 +839,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
           PVariable var_named = body.getOrCreateVariableByName("named");
           PVariable var_name = body.getOrCreateVariableByName("name");
           PVariable var_class = body.getOrCreateVariableByName("class");
-          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
+          PVariable var___0_ = body.getOrCreateVariableByName("_ <0>");
           new TypeConstraint(body, Tuples.flatTupleOf(var_named), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Relational", "Named")));
           new TypeFilterConstraint(body, Tuples.flatTupleOf(var_name), new JavaTransitiveInstancesKey(java.lang.String.class));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
@@ -865,7 +865,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
           PVariable var_named = body.getOrCreateVariableByName("named");
           PVariable var_name = body.getOrCreateVariableByName("name");
           PVariable var_class = body.getOrCreateVariableByName("class");
-          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
+          PVariable var___0_ = body.getOrCreateVariableByName("_ <0>");
           new TypeConstraint(body, Tuples.flatTupleOf(var_named), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Relational", "Named")));
           new TypeFilterConstraint(body, Tuples.flatTupleOf(var_name), new JavaTransitiveInstancesKey(java.lang.String.class));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
@@ -891,7 +891,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
           PVariable var_named = body.getOrCreateVariableByName("named");
           PVariable var_name = body.getOrCreateVariableByName("name");
           PVariable var_attr = body.getOrCreateVariableByName("attr");
-          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
+          PVariable var___0_ = body.getOrCreateVariableByName("_ <0>");
           PVariable var_aname = body.getOrCreateVariableByName("aname");
           PVariable var_class = body.getOrCreateVariableByName("class");
           PVariable var_cname = body.getOrCreateVariableByName("cname");
@@ -941,7 +941,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
               }
               
               @Override
-              public Iterable<String> getInputParameterNames() {
+              public Iterable <String> getInputParameterNames() {
                   return Arrays.asList("aname", "cname");}
           
               @Override
@@ -959,7 +959,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
           PVariable var_named = body.getOrCreateVariableByName("named");
           PVariable var_name = body.getOrCreateVariableByName("name");
           PVariable var_attr = body.getOrCreateVariableByName("attr");
-          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
+          PVariable var___0_ = body.getOrCreateVariableByName("_ <0>");
           PVariable var_class = body.getOrCreateVariableByName("class");
           PVariable var_cname = body.getOrCreateVariableByName("cname");
           new TypeConstraint(body, Tuples.flatTupleOf(var_named), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Relational", "Named")));
@@ -1002,7 +1002,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
               }
               
               @Override
-              public Iterable<String> getInputParameterNames() {
+              public Iterable <String> getInputParameterNames() {
                   return Arrays.asList("cname");}
           
               @Override
@@ -1019,7 +1019,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
           PVariable var_named = body.getOrCreateVariableByName("named");
           PVariable var_name = body.getOrCreateVariableByName("name");
           PVariable var_attr = body.getOrCreateVariableByName("attr");
-          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
+          PVariable var___0_ = body.getOrCreateVariableByName("_ <0>");
           PVariable var_aname = body.getOrCreateVariableByName("aname");
           PVariable var_pname = body.getOrCreateVariableByName("pname");
           new TypeConstraint(body, Tuples.flatTupleOf(var_named), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Relational", "Named")));
@@ -1058,7 +1058,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
               }
               
               @Override
-              public Iterable<String> getInputParameterNames() {
+              public Iterable <String> getInputParameterNames() {
                   return Arrays.asList("aname", "pname");}
           
               @Override
@@ -1076,7 +1076,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
           PVariable var_named = body.getOrCreateVariableByName("named");
           PVariable var_name = body.getOrCreateVariableByName("name");
           PVariable var_attr = body.getOrCreateVariableByName("attr");
-          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
+          PVariable var___0_ = body.getOrCreateVariableByName("_ <0>");
           PVariable var_aname = body.getOrCreateVariableByName("aname");
           PVariable var_pname = body.getOrCreateVariableByName("pname");
           new TypeConstraint(body, Tuples.flatTupleOf(var_named), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Relational", "Named")));
@@ -1115,7 +1115,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
               }
               
               @Override
-              public Iterable<String> getInputParameterNames() {
+              public Iterable <String> getInputParameterNames() {
                   return Arrays.asList("aname", "pname");}
           
               @Override

@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * The <b>Adapter Factory</b> for the model.
- * It provides an adapter <code>createXXX</code> method for each class of the model.
+ * The <b>Adapter Factory </b> for the model.
+ * It provides an adapter <code>createXXX </code> method for each class of the model.
  * <!-- end-user-doc -->
  * @see class2relationalImperative.correspondence.class2relationalImperative.Class2relationalImperativePackage
  * @generated
@@ -43,7 +43,7 @@ public class Class2relationalImperativeAdapterFactory extends AdapterFactoryImpl
 	/**
 	 * Returns whether this factory is applicable for the type of the object.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
+	 * This implementation returns <code>true </code> if the object is either the model's package or is an instance object of the model.
 	 * <!-- end-user-doc -->
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
@@ -60,13 +60,13 @@ public class Class2relationalImperativeAdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
-	 * The switch that delegates to the <code>createXXX</code> methods.
+	 * The switch that delegates to the <code>createXXX </code> methods.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Class2relationalImperativeSwitch<Adapter> modelSwitch =
-		new Class2relationalImperativeSwitch<Adapter>() {
+	protected Class2relationalImperativeSwitch <Adapter> modelSwitch =
+		new Class2relationalImperativeSwitch <Adapter>() {
 			@Override
 			public Adapter caseTransformation(Transformation object) {
 				return createTransformationAdapter();
@@ -86,11 +86,11 @@ public class Class2relationalImperativeAdapterFactory extends AdapterFactoryImpl
 		};
 
 	/**
-	 * Creates an adapter for the <code>target</code>.
+	 * Creates an adapter for the <code>target </code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param target the object to adapt.
-	 * @return the adapter for the <code>target</code>.
+	 * @return the adapter for the <code>target </code>.
 	 * @generated
 	 */
 	@Override
@@ -100,7 +100,7 @@ public class Class2relationalImperativeAdapterFactory extends AdapterFactoryImpl
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link class2relationalImperative.correspondence.class2relationalImperative.Transformation <em>Transformation</em>}'.
+	 * Creates a new adapter for an object of class '{@link class2relationalImperative.correspondence.class2relationalImperative.Transformation <em>Transformation </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -114,7 +114,7 @@ public class Class2relationalImperativeAdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link class2relationalImperative.correspondence.class2relationalImperative.Corr <em>Corr</em>}'.
+	 * Creates a new adapter for an object of class '{@link class2relationalImperative.correspondence.class2relationalImperative.Corr <em>Corr </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -128,7 +128,7 @@ public class Class2relationalImperativeAdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link class2relationalImperative.correspondence.class2relationalImperative.BasicElem <em>Basic Elem</em>}'.
+	 * Creates a new adapter for an object of class '{@link class2relationalImperative.correspondence.class2relationalImperative.BasicElem <em>Basic Elem </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.

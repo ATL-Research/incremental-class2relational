@@ -28,7 +28,7 @@ public class DerivedVariableComputer {
 	@Named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)
 	private IScopeProvider scopeProvider;
 
-	public void installDerivedVariables(Problem problem, Set<String> nodeNames) {
+	public void installDerivedVariables(Problem problem, Set <String> nodeNames) {
 		for (Statement statement : problem.getStatements()) {
 			if (statement instanceof ParametricDefinition definition) {
 				installDerivedParametricDefinitionState(definition, nodeNames);
@@ -36,8 +36,8 @@ public class DerivedVariableComputer {
 		}
 	}
 
-	protected void installDerivedParametricDefinitionState(ParametricDefinition definition, Set<String> nodeNames) {
-		Set<String> knownVariables = new HashSet<>(nodeNames);
+	protected void installDerivedParametricDefinitionState(ParametricDefinition definition, Set <String> nodeNames) {
+		Set <String> knownVariables = new HashSet<>(nodeNames);
 		for (Parameter parameter : definition.getParameters()) {
 			String name = parameter.getName();
 			if (name != null) {
@@ -55,13 +55,13 @@ public class DerivedVariableComputer {
 		}
 	}
 
-	protected void installDerivedPredicateDefinitionState(PredicateDefinition definition, Set<String> knownVariables) {
+	protected void installDerivedPredicateDefinitionState(PredicateDefinition definition, Set <String> knownVariables) {
 		for (Conjunction body : definition.getBodies()) {
 			createVariablesForScope(new ImplicitVariableScope(body, knownVariables));
 		}
 	}
 
-	protected void installDerivedFunctionDefinitionState(FunctionDefinition definition, Set<String> knownVariables) {
+	protected void installDerivedFunctionDefinitionState(FunctionDefinition definition, Set <String> knownVariables) {
 		for (Case body : definition.getCases()) {
 			if (body instanceof Conjunction conjunction) {
 				createVariablesForScope(new ImplicitVariableScope(conjunction, knownVariables));
@@ -76,14 +76,14 @@ public class DerivedVariableComputer {
 		}
 	}
 
-	protected void installDerivedRuleDefinitionState(RuleDefinition definition, Set<String> knownVariables) {
+	protected void installDerivedRuleDefinitionState(RuleDefinition definition, Set <String> knownVariables) {
 		for (Conjunction precondition : definition.getPreconditions()) {
 			createVariablesForScope(new ImplicitVariableScope(precondition, knownVariables));
 		}
 	}
 
 	protected void createVariablesForScope(ImplicitVariableScope scope) {
-		var queue = new ArrayDeque<ImplicitVariableScope>();
+		var queue = new ArrayDeque <ImplicitVariableScope>();
 		queue.addLast(scope);
 		while (!queue.isEmpty()) {
 			var nextScope = queue.removeFirst();
@@ -100,8 +100,8 @@ public class DerivedVariableComputer {
 	}
 
 	protected void discardParametricDefinitionState(ParametricDefinition definition) {
-		List<ExistentialQuantifier> existentialQuantifiers = new ArrayList<>();
-		List<VariableOrNodeExpr> variableOrNodeExprs = new ArrayList<>();
+		List <ExistentialQuantifier> existentialQuantifiers = new ArrayList<>();
+		List <VariableOrNodeExpr> variableOrNodeExprs = new ArrayList<>();
 		var treeIterator = definition.eAllContents();
 		// We must collect the nodes where we are discarding derived state and only discard them after the iteration,
 		// because modifying the containment hierarchy during iteration causes the TreeIterator to fail with

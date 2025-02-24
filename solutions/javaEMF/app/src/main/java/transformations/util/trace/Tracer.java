@@ -11,10 +11,10 @@ import org.eclipse.emf.ecore.EObject;
 
 // TRACING
 public class Tracer {
-    private final HashMap<TraceSource, EObject> traces = new HashMap<>();
-    private final HashMap<TraceSource, List<? extends EObject>> multiTraces = new HashMap<>();
+    private final HashMap <TraceSource, EObject> traces = new HashMap<>();
+    private final HashMap <TraceSource, List <? extends EObject>> multiTraces = new HashMap<>();
 
-    public Optional<EObject> firstJust(List<Optional<EObject>> ms) {
+    public Optional <EObject> firstJust(List <Optional<EObject>> ms) {
         var js = ms.stream().filter(m -> m.isPresent()).collect(Collectors.toCollection(LinkedList::new));
 
         if (js.size() > 0) {
@@ -33,12 +33,12 @@ public class Tracer {
         addTrace(source, "", target);
     }
 
-    public void addTrace(EObject source, String method, List<? extends EObject> target) {
+    public void addTrace(EObject source, String method, List <? extends EObject> target) {
         var traceSource = new TraceSource(source, method);
         multiTraces.put(traceSource, target);
     }
 
-    public Optional<EObject> checkTrace(EObject source, String method) {
+    public Optional <EObject> checkTrace(EObject source, String method) {
         var target = traces.get(new TraceSource(source, method));
 
         var optional = Optional.ofNullable(target);
@@ -46,21 +46,21 @@ public class Tracer {
         return optional;
     }
 
-    public Optional<List<? extends EObject>> checkMultiTrace(EObject source, String method) {
+    public Optional <List<? extends EObject>> checkMultiTrace(EObject source, String method) {
         var target = multiTraces.get(new TraceSource(source, method));
 
 
-        Optional<List<? extends EObject>> optional = Optional.ofNullable(target);
+        Optional <List<? extends EObject>> optional = Optional.ofNullable(target);
 
         return optional;
     }
 
-    public Optional<EObject> checkTrace(EObject source) {
+    public Optional <EObject> checkTrace(EObject source) {
         EObject target = null;
         var entrySet = traces.entrySet();
 
         // find first TraceSourceObject that is the source Object
-        for (Entry<TraceSource, EObject> entry : entrySet) {
+        for (Entry <TraceSource, EObject> entry : entrySet) {
             if (entry.getKey().checkSourceObject(source)) {
                 target = entry.getValue();
                 break;
@@ -72,19 +72,19 @@ public class Tracer {
         return optional;
     }
 
-    public Optional<List<? extends EObject>> checkMultiTrace(EObject source) {
-        List<? extends EObject> target = null;
+    public Optional <List<? extends EObject>> checkMultiTrace(EObject source) {
+        List <? extends EObject> target = null;
         var entrySet = multiTraces.entrySet();
 
         // find first TraceSourceObject that is the source Object
-        for (Entry<TraceSource, List<? extends EObject>> entry : entrySet) {
+        for (Entry <TraceSource, List <? extends EObject>> entry : entrySet) {
             if (entry.getKey().checkSourceObject(source)) {
                 target = entry.getValue();
                 break;
             }
         }
 
-        Optional<List<? extends EObject>> optional = Optional.ofNullable(target);
+        Optional <List<? extends EObject>> optional = Optional.ofNullable(target);
 
         return optional;
     }
@@ -95,13 +95,13 @@ public class Tracer {
         return resolve(source, "", defaultObject);
     }
 
-    public <T extends EObject> T resolve(EObject source, Class<T> clazz) {
+    public <T extends EObject> T resolve(EObject source, Class <T> clazz) {
         // check if target already present then return
         // else use default (add to traces with "") and return
         return resolve(source, "", clazz);
     }
 
-    public List<? extends EObject> resolve(EObject source, List<EObject> defaultList) {
+    public List <? extends EObject> resolve(EObject source, List <EObject> defaultList) {
         return resolve(source, "", defaultList);
     }
 
@@ -116,7 +116,7 @@ public class Tracer {
         }
     }
 
-    public <T extends EObject> T resolve(EObject source, String nameInRule, Class<T> clazz) {
+    public <T extends EObject> T resolve(EObject source, String nameInRule, Class <T> clazz) {
         var mTarget = checkTrace(source, nameInRule);
 
         if (mTarget.isEmpty()) {
@@ -137,7 +137,7 @@ public class Tracer {
         }
     }
 
-    public List<? extends EObject> resolve(EObject source, String nameInRule, List<? extends EObject> defaultList) {
+    public List <? extends EObject> resolve(EObject source, String nameInRule, List <? extends EObject> defaultList) {
         var mTarget = checkMultiTrace(source, nameInRule);
 
         if (mTarget.isEmpty()) {
@@ -147,8 +147,8 @@ public class Tracer {
         }
     }
     
-    public List<EObject> resolveAll(EObject source) {
-    	var targets = new LinkedList<EObject>();
+    public List <EObject> resolveAll(EObject source) {
+    	var targets = new LinkedList <EObject>();
     	
     	traces.forEach((traceSource, target) -> {
     		if(traceSource.sourceObject == source) {targets.add(target);}

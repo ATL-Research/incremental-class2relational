@@ -7,7 +7,7 @@ package tools.refinery.store.adapter;
 import tools.refinery.store.model.ModelStore;
 import tools.refinery.store.model.ModelStoreBuilder;
 
-public abstract class AbstractModelAdapterBuilder<T extends ModelStoreAdapter> implements ModelAdapterBuilder {
+public abstract class AbstractModelAdapterBuilder <T extends ModelStoreAdapter> implements ModelAdapterBuilder {
 	private boolean configured;
 
 	@Override

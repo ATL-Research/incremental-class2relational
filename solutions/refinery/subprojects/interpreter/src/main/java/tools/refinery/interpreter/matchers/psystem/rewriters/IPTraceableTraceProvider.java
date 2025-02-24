@@ -30,7 +30,7 @@ public interface IPTraceableTraceProvider {
      * @param derivative a {@link PTraceable} which is contained by the {@link PQuery} produced by the associated rewriter
      * @since 2.0
      */
-    public Stream<PTraceable> getCanonicalTraceables(PTraceable derivative);
+    public Stream <PTraceable> getCanonicalTraceables(PTraceable derivative);
 
     /**
      * Find and return the {@link PTraceable}s in the rewritten query which are the destinations of the given source
@@ -39,7 +39,7 @@ public interface IPTraceableTraceProvider {
      * @param source a {@link PTraceable} which is contained by a {@link PQuery} before rewriting
      * @since 2.0
      */
-    public Stream<PTraceable> getRewrittenTraceables(PTraceable source);
+    public Stream <PTraceable> getRewrittenTraceables(PTraceable source);
 
     /**
      * Returns whether the given traceable element has been removed by every rewriter for a reason.
@@ -51,5 +51,5 @@ public interface IPTraceableTraceProvider {
      * @return the reasons of removal during rewriting
      * @since 2.0
      */
-    public Stream<IDerivativeModificationReason> getRemovalReasons(PTraceable traceable);
+    public Stream <IDerivativeModificationReason> getRemovalReasons(PTraceable traceable);
 }

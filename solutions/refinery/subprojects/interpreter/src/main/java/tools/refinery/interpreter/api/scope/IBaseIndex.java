@@ -28,7 +28,7 @@ public interface IBaseIndex {
      *
      * @param callable
      */
-    public <V> V coalesceTraversals(Callable<V> callable) throws InvocationTargetException;
+    public <V> V coalesceTraversals(Callable <V> callable) throws InvocationTargetException;
 
     /**
      * Adds a coarse-grained listener that will be invoked after the NavigationHelper index or the underlying model is changed. Can be used

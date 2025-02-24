@@ -13,11 +13,11 @@ import tools.refinery.store.query.term.Variable;
 import java.util.Set;
 
 public interface Literal {
-	Set<Variable> getOutputVariables();
+	Set <Variable> getOutputVariables();
 
-	Set<Variable> getInputVariables(Set<? extends Variable> positiveVariablesInClause);
+	Set <Variable> getInputVariables(Set <? extends Variable> positiveVariablesInClause);
 
-	Set<Variable> getPrivateVariables(Set<? extends Variable> positiveVariablesInClause);
+	Set <Variable> getPrivateVariables(Set <? extends Variable> positiveVariablesInClause);
 
 	Literal substitute(Substitution substitution);
 

@@ -29,11 +29,11 @@ import static tools.refinery.store.dse.modification.actions.ModificationActionLi
 import static tools.refinery.store.dse.transition.actions.ActionLiterals.add;
 
 class DebugTest {
-	private static final Symbol<Boolean> classModel = Symbol.of("ClassModel", 1);
-	private static final Symbol<Boolean> classElement = Symbol.of("ClassElement", 1);
-	private static final Symbol<Boolean> feature = Symbol.of("Feature", 1);
-	private static final Symbol<Boolean> features = Symbol.of("Features", 2);
-	private static final Symbol<Boolean> classes = Symbol.of("Classes", 2);
+	private static final Symbol <Boolean> classModel = Symbol.of("ClassModel", 1);
+	private static final Symbol <Boolean> classElement = Symbol.of("ClassElement", 1);
+	private static final Symbol <Boolean> feature = Symbol.of("Feature", 1);
+	private static final Symbol <Boolean> features = Symbol.of("Features", 2);
+	private static final Symbol <Boolean> classes = Symbol.of("Classes", 2);
 
 	private static final AnySymbolView classModelView = new KeyOnlyView<>(classModel);
 

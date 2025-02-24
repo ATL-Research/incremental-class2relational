@@ -20,7 +20,7 @@ public class TopologicalSorting {
 
     private TopologicalSorting() {/*Utility class constructor*/}
 
-    private static final class Pair<T> {
+    private static final class Pair <T> {
         public T element;
         public boolean isParent;
 
@@ -32,23 +32,23 @@ public class TopologicalSorting {
 
     /**
      * Returns a topological ordering for the given graph data source.
-     * Output format: if there is an a -> b (transitive) reachability, then node <code>a</code> will come before node <code>b</code> in the resulting list.
+     * Output format: if there is an a -> b (transitive) reachability, then node <code>a </code> will come before node <code>b </code> in the resulting list.
      *
      * @param gds the graph data source
      * @return a topological ordering
      */
-    public static <T> List<T> compute(final IGraphDataSource<T> gds) {
-        final Set<T> visited = new HashSet<T>();
-        final LinkedList<T> result = new LinkedList<T>();
-        final Deque<Pair<T>> dfsStack = new ArrayDeque<Pair<T>>();
+    public static <T> List <T> compute(final IGraphDataSource <T> gds) {
+        final Set <T> visited = new HashSet <T>();
+        final LinkedList <T> result = new LinkedList <T>();
+        final Deque <Pair<T>> dfsStack = new ArrayDeque <Pair<T>>();
 
         for (final T node : gds.getAllNodes()) {
             if (!visited.contains(node)) {
-                dfsStack.addLast(new Pair<T>(node, false));
+                dfsStack.addLast(new Pair <T>(node, false));
             }
 
             while (!dfsStack.isEmpty()) {
-                final Pair<T> head = dfsStack.removeLast();
+                final Pair <T> head = dfsStack.removeLast();
                 final T source = head.element;
 
                 if (head.isParent) {
@@ -57,11 +57,11 @@ public class TopologicalSorting {
                 } else {
                     // first time we see source, continue with its children
                     visited.add(source);
-                    dfsStack.addLast(new Pair<T>(source, true));
+                    dfsStack.addLast(new Pair <T>(source, true));
 
                     for (final T target : gds.getTargetNodes(source).distinctValues()) {
                         if (!visited.contains(target)) {
-                            dfsStack.addLast(new Pair<T>(target, false));
+                            dfsStack.addLast(new Pair <T>(target, false));
                         }
                     }
                 }

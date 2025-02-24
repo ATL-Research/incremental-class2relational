@@ -16,10 +16,10 @@ import java.util.Set;
 
 // {@link Object#equals(Object)} is implemented by {@link AbstractTerm}.
 @SuppressWarnings("squid:S2160")
-public final class ConstantTerm<T> extends AbstractTerm<T> {
+public final class ConstantTerm <T> extends AbstractTerm <T> {
 	private final T value;
 
-	public ConstantTerm(Class<T> type, T value) {
+	public ConstantTerm(Class <T> type, T value) {
 		super(type);
 		if (value != null && !type.isInstance(value)) {
 			throw new InvalidQueryException("Value %s is not an instance of %s".formatted(value, type.getName()));
@@ -37,7 +37,7 @@ public final class ConstantTerm<T> extends AbstractTerm<T> {
 	}
 
 	@Override
-	public Term<T> substitute(Substitution substitution) {
+	public Term <T> substitute(Substitution substitution) {
 		return this;
 	}
 
@@ -46,7 +46,7 @@ public final class ConstantTerm<T> extends AbstractTerm<T> {
 		if (!super.equalsWithSubstitution(helper, other)) {
 			return false;
 		}
-		var otherConstantTerm = (ConstantTerm<?>) other;
+		var otherConstantTerm = (ConstantTerm <?>) other;
 		return Objects.equals(value, otherConstantTerm.value);
 	}
 
@@ -56,7 +56,7 @@ public final class ConstantTerm<T> extends AbstractTerm<T> {
 	}
 
 	@Override
-	public Set<AnyDataVariable> getInputVariables() {
+	public Set <AnyDataVariable> getInputVariables() {
 		return Set.of();
 	}
 

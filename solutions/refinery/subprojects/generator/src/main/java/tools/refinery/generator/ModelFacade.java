@@ -52,7 +52,7 @@ public abstract class ModelFacade {
 		return concreteness;
 	}
 
-	public <A, C> PartialInterpretation<A, C> getPartialInterpretation(PartialSymbol<A, C> partialSymbol) {
+	public <A, C> PartialInterpretation <A, C> getPartialInterpretation(PartialSymbol <A, C> partialSymbol) {
 		return reasoningAdapter.getPartialInterpretation(concreteness, partialSymbol);
 	}
 }

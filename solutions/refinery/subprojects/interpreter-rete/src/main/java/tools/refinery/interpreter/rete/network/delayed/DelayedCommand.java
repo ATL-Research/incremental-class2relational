@@ -55,16 +55,16 @@ public abstract class DelayedCommand implements Runnable {
         final Mailbox mailbox = tracker.proxifyMailbox(this.supplier, this.receiver.getMailbox());
 
         if (this.isTimestampAware()) {
-            final Map<Tuple, Timeline<Timestamp>> contents = this.container.pullContentsWithTimeline(this.supplier,
+            final Map <Tuple, Timeline <Timestamp>> contents = this.container.pullContentsWithTimeline(this.supplier,
                     false);
-            for (final Entry<Tuple, Timeline<Timestamp>> entry : contents.entrySet()) {
-                for (final Signed<Timestamp> change : entry.getValue().asChangeSequence()) {
+            for (final Entry <Tuple, Timeline <Timestamp>> entry : contents.entrySet()) {
+                for (final Signed <Timestamp> change : entry.getValue().asChangeSequence()) {
                     mailbox.postMessage(change.getDirection().multiply(this.direction), entry.getKey(),
                             change.getPayload());
                 }
             }
         } else {
-            final Collection<Tuple> contents = this.container.pullContents(this.supplier, false);
+            final Collection <Tuple> contents = this.container.pullContents(this.supplier, false);
             for (final Tuple tuple : contents) {
                 mailbox.postMessage(this.direction, tuple, Timestamp.ZERO);
             }

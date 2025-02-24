@@ -24,11 +24,11 @@ import tools.refinery.interpreter.matchers.util.CollectionsFactory.MemoryType;
  * @author Gabor Bergmann
  * @since 2.0
  */
-public final class NullaryMaskedTupleMemory<Timestamp extends Comparable<Timestamp>> extends AbstractTrivialMaskedMemory<Timestamp> {
+public final class NullaryMaskedTupleMemory <Timestamp extends Comparable <Timestamp>> extends AbstractTrivialMaskedMemory <Timestamp> {
 
-    protected static final Set<Tuple> UNIT_RELATION =
+    protected static final Set <Tuple> UNIT_RELATION =
             Collections.singleton(Tuples.staticArityFlatTupleOf());
-    protected static final Set<Tuple> EMPTY_RELATION =
+    protected static final Set <Tuple> EMPTY_RELATION =
             Collections.emptySet();
     /**
      * @param mask
@@ -48,12 +48,12 @@ public final class NullaryMaskedTupleMemory<Timestamp extends Comparable<Timesta
     }
 
     @Override
-    public Iterable<Tuple> getSignatures() {
+    public Iterable <Tuple> getSignatures() {
         return tuples.isEmpty() ? EMPTY_RELATION : UNIT_RELATION;
     }
 
     @Override
-    public Collection<Tuple> get(ITuple signature) {
+    public Collection <Tuple> get(ITuple signature) {
         if (0 == signature.getSize())
             return tuples.distinctValues();
         else return null;

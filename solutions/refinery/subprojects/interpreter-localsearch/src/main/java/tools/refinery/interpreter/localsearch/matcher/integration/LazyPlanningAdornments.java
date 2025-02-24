@@ -34,7 +34,7 @@ import tools.refinery.interpreter.matchers.psystem.queries.PQuery;
 public class LazyPlanningAdornments implements IAdornmentProvider {
 
     @Override
-    public Iterable<Set<PParameter>> getAdornments(PQuery query) {
+    public Iterable <Set<PParameter>> getAdornments(PQuery query) {
         return Collections.emptySet();
     }
 

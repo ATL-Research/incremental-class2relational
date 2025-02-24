@@ -45,7 +45,7 @@ public enum LocalSearchGenericBackendFactory implements IQueryBackendFactory {
     }
 
     @Override
-    public Class<? extends IQueryBackend> getBackendClass() {
+    public Class <? extends IQueryBackend> getBackendClass() {
         return LocalSearchBackend.class;
     }
 

@@ -26,7 +26,7 @@ import tools.refinery.store.tuple.Tuple;
  * implementation for these methods.
  * Using this class with any other runtime context may lead to undefined behavior.
  */
-public class InterpretedRelationalMatcher extends AbstractInterpretedMatcher<Boolean> {
+public class InterpretedRelationalMatcher extends AbstractInterpretedMatcher <Boolean> {
 	private final TupleMask emptyMask;
 	private final TupleMask identityMask;
 	private final Indexer emptyMaskIndexer;
@@ -55,7 +55,7 @@ public class InterpretedRelationalMatcher extends AbstractInterpretedMatcher<Boo
 	}
 
 	@Override
-	public Cursor<Tuple, Boolean> getAll() {
+	public Cursor <Tuple, Boolean> getAll() {
 		if (emptyMaskIndexer == null) {
 			var allMatches = backend.getAllMatches(emptyMask, Tuples.staticArityFlatTupleOf());
 			return new RelationalCursor(allMatches.iterator());

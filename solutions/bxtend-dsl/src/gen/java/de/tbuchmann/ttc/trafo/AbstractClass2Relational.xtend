@@ -23,7 +23,7 @@ abstract class AbstractClass2Relational implements BXtendTransformation {
 	val protected Resource targetModel
 	val protected Resource corrModel
 	
-	val List<Elem2Elem> rules
+	val List <Elem2Elem> rules
 	
 	new() {
 		val ResourceSet set = new ResourceSetImpl()
@@ -48,9 +48,9 @@ abstract class AbstractClass2Relational implements BXtendTransformation {
 	}
 	
 	override void sourceToTarget() {
-		val createdElems = new HashMap<Elem2Elem, List<EObject>>()
-		val spareElems = new HashMap<Elem2Elem, List<EObject>>()
-		var Set<EObject> detachedCorrElems = new HashSet<EObject>()
+		val createdElems = new HashMap <Elem2Elem, List <EObject>>()
+		val spareElems = new HashMap <Elem2Elem, List <EObject>>()
+		var Set <EObject> detachedCorrElems = new HashSet <EObject>()
 		
 		for (rule : rules) {
 			val delta = rule.sourceToTarget(detachedCorrElems)
@@ -78,9 +78,9 @@ abstract class AbstractClass2Relational implements BXtendTransformation {
 		deleteUnreferencedTargetElements()
 	}
 	override void targetToSource() {
-		val createdElems = new HashMap<Elem2Elem, List<EObject>>()
-		val spareElems = new HashMap<Elem2Elem, List<EObject>>()
-		var Set<EObject> detachedCorrElems = new HashSet<EObject>()
+		val createdElems = new HashMap <Elem2Elem, List <EObject>>()
+		val spareElems = new HashMap <Elem2Elem, List <EObject>>()
+		var Set <EObject> detachedCorrElems = new HashSet <EObject>()
 		
 		for (rule : rules) {
 			val delta = rule.targetToSource(detachedCorrElems)
@@ -118,20 +118,20 @@ abstract class AbstractClass2Relational implements BXtendTransformation {
 		return targetModel
 	}
 	
-	def protected abstract List<Elem2Elem> createRules();
+	def protected abstract List <Elem2Elem> createRules();
 	
-	def private Iterator<Corr> detectSourceDeletions() {
+	def private Iterator <Corr> detectSourceDeletions() {
 		corrModel.allContents.filter(typeof(Corr)).filter[c |
 			c.flatSrc.empty
 		]
 	}
-	def private Iterator<Corr> detectTargetDeletions() {
+	def private Iterator <Corr> detectTargetDeletions() {
 		corrModel.allContents.filter(typeof(Corr)).filter[c |
 			c.flatTrg.empty
 		]
 	}
 	def private void deleteUnreferencedTargetElements() {
-		val List<EObject> deletionList = newArrayList;
+		val List <EObject> deletionList = newArrayList;
 		
 		detectSourceDeletions().forEach[c |
 			val rule = rules.findFirst[ruleId == c.ruleId]
@@ -142,7 +142,7 @@ abstract class AbstractClass2Relational implements BXtendTransformation {
 		deletionList.forEach[e | EcoreUtil.delete(e, true)]
 	}
 	def private void deleteUnreferencedSourceElements() {
-		val List<EObject> deletionList = newArrayList; 
+		val List <EObject> deletionList = newArrayList; 
 		
 		detectTargetDeletions().forEach[c |
 			val rule = rules.findFirst[ruleId == c.ruleId]

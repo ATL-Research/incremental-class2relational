@@ -24,7 +24,7 @@ import java.util.List;
 public abstract class BasePatternMatch implements IPatternMatch {
 
     @SafeVarargs
-    protected static <T> List<T> makeImmutableList(T... elements) {
+    protected static <T> List <T> makeImmutableList(T... elements) {
         return Collections.unmodifiableList(Arrays.asList(elements));
     }
 
@@ -57,7 +57,7 @@ public abstract class BasePatternMatch implements IPatternMatch {
 
     @Override
     public String toString() {
-        return "Match<" + patternName() + ">{" + prettyPrint() + "}";
+        return "Match <" + patternName() + ">{" + prettyPrint() + "}";
     }
 
     @Override
@@ -85,7 +85,7 @@ public abstract class BasePatternMatch implements IPatternMatch {
     }
 
     @Override
-    public List<String> parameterNames() {
+    public List <String> parameterNames() {
         return specification().getParameterNames();
     }
 }

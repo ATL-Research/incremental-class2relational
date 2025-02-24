@@ -12,7 +12,7 @@ import tools.refinery.store.model.ModelStore;
 import tools.refinery.store.model.ModelStoreBuilder;
 import tools.refinery.store.statecoding.StateCoderBuilder;
 
-public class ModificationBuilderImpl extends AbstractModelAdapterBuilder<ModificationStoreAdapter> implements ModificationBuilder {
+public class ModificationBuilderImpl extends AbstractModelAdapterBuilder <ModificationStoreAdapter> implements ModificationBuilder {
 
 	@Override
 	protected void doConfigure(ModelStoreBuilder storeBuilder) {

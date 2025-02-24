@@ -8,8 +8,8 @@ package tools.refinery.store.query.term.real;
 import tools.refinery.store.query.term.BinaryTerm;
 import tools.refinery.store.query.term.Term;
 
-public abstract class RealBinaryTerm extends BinaryTerm<Double, Double, Double> {
-	protected RealBinaryTerm(Term<Double> left, Term<Double> right) {
+public abstract class RealBinaryTerm extends BinaryTerm <Double, Double, Double> {
+	protected RealBinaryTerm(Term <Double> left, Term <Double> right) {
 		super(Double.class, Double.class, Double.class, left, right);
 	}
 }

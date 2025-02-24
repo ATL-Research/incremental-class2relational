@@ -33,17 +33,17 @@ public class ConstantLiteral extends AbstractLiteral {
 
 
 	@Override
-	public Set<Variable> getOutputVariables() {
+	public Set <Variable> getOutputVariables() {
 		return Set.of(variable);
 	}
 
 	@Override
-	public Set<Variable> getInputVariables(Set<? extends Variable> positiveVariablesInClause) {
+	public Set <Variable> getInputVariables(Set <? extends Variable> positiveVariablesInClause) {
 		return Set.of();
 	}
 
 	@Override
-	public Set<Variable> getPrivateVariables(Set<? extends Variable> positiveVariablesInClause) {
+	public Set <Variable> getPrivateVariables(Set <? extends Variable> positiveVariablesInClause) {
 		return Set.of();
 	}
 

@@ -13,20 +13,20 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Value Argument</b></em>'.
+ * An implementation of the model object ' <em> <b>Value Argument </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.ValueArgumentImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link Changes.impl.ValueArgumentImpl#getValue <em>Value </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class ValueArgumentImpl extends OperationArgumentImpl implements ValueArgument {
 	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The default value of the '{@link #getValue() <em>Value </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getValue()
@@ -36,7 +36,7 @@ public class ValueArgumentImpl extends OperationArgumentImpl implements ValueArg
 	protected static final String VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The cached value of the '{@link #getValue() <em>Value </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getValue()

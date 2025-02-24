@@ -17,7 +17,7 @@ import tools.refinery.interpreter.api.InterpreterEngine;
  * {@link InterpreterEngineImpl} class.
  * </p>
  *
- * <strong>Important note</strong>: this class must not introduce any public method, as it will be visible through
+ * <strong>Important note </strong>: this class must not introduce any public method, as it will be visible through
  * BaseMatcher as an API, although this class is not an API itself.
  *
  * @author Bergmann Gabor

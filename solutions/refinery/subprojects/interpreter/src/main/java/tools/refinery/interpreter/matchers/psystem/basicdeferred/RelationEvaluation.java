@@ -36,9 +36,9 @@ import tools.refinery.interpreter.matchers.tuple.Tuple;
 public class RelationEvaluation extends EnumerablePConstraint implements IMultiQueryReference {
 
     private final IRelationEvaluator evaluator;
-    private final List<PQuery> inputQueries;
+    private final List <PQuery> inputQueries;
 
-    public RelationEvaluation(final PBody body, final Tuple variablesTuple, final List<PQuery> inputQueries,
+    public RelationEvaluation(final PBody body, final Tuple variablesTuple, final List <PQuery> inputQueries,
             final IRelationEvaluator evaluator) {
         super(body, variablesTuple);
         this.evaluator = evaluator;
@@ -50,7 +50,7 @@ public class RelationEvaluation extends EnumerablePConstraint implements IMultiQ
     }
 
     @Override
-    public List<PQuery> getReferredQueries() {
+    public List <PQuery> getReferredQueries() {
         return this.inputQueries;
     }
 

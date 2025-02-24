@@ -9,13 +9,13 @@ import tools.refinery.store.query.substitution.Substitution;
 import tools.refinery.store.query.term.Term;
 import tools.refinery.store.query.term.UnaryTerm;
 
-public class BoolNotTerm extends UnaryTerm<Boolean, Boolean> {
-	protected BoolNotTerm(Term<Boolean> body) {
+public class BoolNotTerm extends UnaryTerm <Boolean, Boolean> {
+	protected BoolNotTerm(Term <Boolean> body) {
 		super(Boolean.class, Boolean.class, body);
 	}
 
 	@Override
-	protected Term<Boolean> doSubstitute(Substitution substitution, Term<Boolean> substitutedBody) {
+	protected Term <Boolean> doSubstitute(Substitution substitution, Term <Boolean> substitutedBody) {
 		return new BoolNotTerm(substitutedBody);
 	}
 

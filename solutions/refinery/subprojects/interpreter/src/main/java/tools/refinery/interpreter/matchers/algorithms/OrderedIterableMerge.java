@@ -27,10 +27,10 @@ public class OrderedIterableMerge {
      * Lazily merges two iterables, each ordered according to a given comparator.
      * Retains order in the result, and also eliminates any duplicates that appear in both arguments.
      */
-    public static <T> Iterable<T> mergeUniques(Iterable<T> first, Iterable<T> second, Comparator<T> comparator) {
-        return () -> new Iterator<T>() {
-            Iterator<T> firstIterator = first.iterator();
-            Iterator<T> secondIterator = second.iterator();
+    public static <T> Iterable <T> mergeUniques(Iterable <T> first, Iterable <T> second, Comparator <T> comparator) {
+        return () -> new Iterator <T>() {
+            Iterator <T> firstIterator = first.iterator();
+            Iterator <T> secondIterator = second.iterator();
             T firstItem;
             T secondItem;
 

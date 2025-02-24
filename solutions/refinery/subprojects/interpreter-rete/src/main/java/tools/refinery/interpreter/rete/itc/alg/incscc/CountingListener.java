@@ -15,11 +15,11 @@ import tools.refinery.interpreter.matchers.util.Direction;
  * @author Tamas Szabo
  *
  */
-public class CountingListener<V> implements ITcObserver<V> {
+public class CountingListener <V> implements ITcObserver <V> {
 
-    private IncSCCAlg<V> alg;
+    private IncSCCAlg <V> alg;
 
-    public CountingListener(IncSCCAlg<V> alg) {
+    public CountingListener(IncSCCAlg <V> alg) {
         this.alg = alg;
     }
 

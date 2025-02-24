@@ -28,15 +28,15 @@ import tools.refinery.interpreter.matchers.tuple.Tuples;
  * @author Tamas Szabo
  * @since 2.4
  */
-public class GroupedMap<GroupedKeyType, ValueType> implements Map<Tuple, ValueType> {
+public class GroupedMap <GroupedKeyType, ValueType> implements Map <Tuple, ValueType> {
 
     protected final Tuple group;
     // cached group size value is to be used in get()
     private final int groupSize;
-    protected final Map<GroupedKeyType, ValueType> mappings;
+    protected final Map <GroupedKeyType, ValueType> mappings;
     protected final IQueryRuntimeContext runtimeContext;
 
-    public GroupedMap(final Tuple group, final Map<GroupedKeyType, ValueType> mappings,
+    public GroupedMap(final Tuple group, final Map <GroupedKeyType, ValueType> mappings,
             final IQueryRuntimeContext runtimeContext) {
         this.group = group;
         this.groupSize = group.getSize();
@@ -86,7 +86,7 @@ public class GroupedMap<GroupedKeyType, ValueType> implements Map<Tuple, ValueTy
     }
 
     @Override
-    public void putAll(final Map<? extends Tuple, ? extends ValueType> map) {
+    public void putAll(final Map <? extends Tuple, ? extends ValueType> map) {
         throw new UnsupportedOperationException();
     }
 
@@ -96,24 +96,24 @@ public class GroupedMap<GroupedKeyType, ValueType> implements Map<Tuple, ValueTy
     }
 
     @Override
-    public Set<Tuple> keySet() {
-        return new GroupedSet<Tuple, GroupedKeyType, Tuple>(this.group, this.mappings.keySet(), (g, v) -> {
+    public Set <Tuple> keySet() {
+        return new GroupedSet <Tuple, GroupedKeyType, Tuple>(this.group, this.mappings.keySet(), (g, v) -> {
             return Tuples.staticArityLeftInheritanceTupleOf(g, this.runtimeContext.wrapElement(v));
         });
     }
 
     @Override
-    public Collection<ValueType> values() {
+    public Collection <ValueType> values() {
         return this.mappings.values();
     }
 
     @Override
-    public Set<Entry<Tuple, ValueType>> entrySet() {
-        return new GroupedSet<Tuple, GroupedKeyType, Entry<Tuple, ValueType>>(this.group, this.mappings.keySet(),
+    public Set <Entry<Tuple, ValueType>> entrySet() {
+        return new GroupedSet <Tuple, GroupedKeyType, Entry <Tuple, ValueType>>(this.group, this.mappings.keySet(),
                 (g, v) -> {
                     final Tuple key = Tuples.staticArityLeftInheritanceTupleOf(g, this.runtimeContext.wrapElement(v));
                     final ValueType value = this.mappings.get(v);
-                    return new SimpleEntry<Tuple, ValueType>(key, value);
+                    return new SimpleEntry <Tuple, ValueType>(key, value);
                 });
     }
 

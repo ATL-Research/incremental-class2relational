@@ -40,9 +40,9 @@ public class IdentifierTokenProvider {
 		@Inject
 		private ProblemGrammarAccess problemGrammarAccess;
 
-		private HashMap<String, Integer> valueToTokenIdMap;
+		private HashMap <String, Integer> valueToTokenIdMap;
 
-		private Set<Integer> identifierTokens;
+		private Set <Integer> identifierTokens;
 
 		public int[] getIdentifierTokesArray() {
 			createValueToTokenIdMap();

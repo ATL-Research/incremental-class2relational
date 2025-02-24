@@ -28,20 +28,20 @@ import static tools.refinery.store.map.tests.fuzz.utils.FuzzTestCollections.*;
 class RestoreFuzzTest {
 	private void runFuzzTest(String scenario, int seed, int steps, int maxKey, int maxValue,
 							 boolean nullDefault, int commitFrequency,
-							 VersionedMapStoreFactoryBuilder<Integer, String> builder) {
+							 VersionedMapStoreFactoryBuilder <Integer, String> builder) {
 		String[] values = MapTestEnvironment.prepareValues(maxValue, nullDefault);
 
-		VersionedMapStore<Integer, String> store = builder.defaultValue(values[0]).build().createOne();
+		VersionedMapStore <Integer, String> store = builder.defaultValue(values[0]).build().createOne();
 
 		iterativeRandomPutsAndCommitsThenRestore(scenario, store, steps, maxKey, values, seed, commitFrequency);
 	}
 
-	private void iterativeRandomPutsAndCommitsThenRestore(String scenario, VersionedMapStore<Integer, String> store,
+	private void iterativeRandomPutsAndCommitsThenRestore(String scenario, VersionedMapStore <Integer, String> store,
 														  int steps, int maxKey, String[] values, int seed, int commitFrequency) {
 		// 1. build a map with versions
 		Random r = new Random(seed);
-		VersionedMap<Integer, String> versioned = store.createMap();
-		Map<Integer, Version> index2Version = new HashMap<>();
+		VersionedMap <Integer, String> versioned = store.createMap();
+		Map <Integer, Version> index2Version = new HashMap<>();
 
 		for (int i = 0; i < steps; i++) {
 			int index = i + 1;
@@ -60,7 +60,7 @@ class RestoreFuzzTest {
 			MapTestEnvironment.printStatus(scenario, index, steps, "building");
 		}
 		// 2. create a non-versioned and
-		VersionedMap<Integer, String> reference = store.createMap();
+		VersionedMap <Integer, String> reference = store.createMap();
 		r = new Random(seed);
 
 		for (int i = 0; i < steps; i++) {
@@ -90,12 +90,12 @@ class RestoreFuzzTest {
 	@Timeout(value = 10)
 	@Tag("smoke")
 	void parametrizedFastFuzz(int ignoredTests, int steps, int noKeys, int noValues, boolean nullDefault, int commitFrequency,
-							  int seed, VersionedMapStoreFactoryBuilder<Integer, String> builder) {
+							  int seed, VersionedMapStoreFactoryBuilder <Integer, String> builder) {
 		runFuzzTest("RestoreS" + steps + "K" + noKeys + "V" + noValues + "s" + seed, seed, steps, noKeys, noValues,
 				nullDefault, commitFrequency, builder);
 	}
 
-	static Stream<Arguments> parametrizedFastFuzz() {
+	static Stream <Arguments> parametrizedFastFuzz() {
 		return FuzzTestUtils.permutationWithSize(stepCounts, keyCounts, valueCounts, nullDefaultOptions,
 				commitFrequencyOptions, randomSeedOptions, storeConfigs);
 	}
@@ -105,12 +105,12 @@ class RestoreFuzzTest {
 	@Tag("smoke")
 	@Tag("slow")
 	void parametrizedSlowFuzz(int ignoredTests, int steps, int noKeys, int noValues, boolean nullDefault, int commitFrequency,
-							  int seed, VersionedMapStoreFactoryBuilder<Integer, String> builder) {
+							  int seed, VersionedMapStoreFactoryBuilder <Integer, String> builder) {
 		runFuzzTest("RestoreS" + steps + "K" + noKeys + "V" + noValues + "s" + seed, seed, steps, noKeys, noValues,
 				nullDefault, commitFrequency, builder);
 	}
 
-	static Stream<Arguments> parametrizedSlowFuzz() {
+	static Stream <Arguments> parametrizedSlowFuzz() {
 		return FuzzTestUtils.changeStepCount(RestoreFuzzTest.parametrizedFastFuzz(), 1);
 	}
 }

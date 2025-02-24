@@ -18,9 +18,9 @@ import java.util.function.Consumer;
 
 public class ModelSeed {
 	private final int nodeCount;
-	private final Map<AnyPartialSymbol, Seed<?>> seeds;
+	private final Map <AnyPartialSymbol, Seed <?>> seeds;
 
-	private ModelSeed(int nodeCount, Map<AnyPartialSymbol, Seed<?>> seeds) {
+	private ModelSeed(int nodeCount, Map <AnyPartialSymbol, Seed <?>> seeds) {
 		this.nodeCount = nodeCount;
 		this.seeds = seeds;
 	}
@@ -29,14 +29,14 @@ public class ModelSeed {
 		return nodeCount;
 	}
 
-	public <A> Seed<A> getSeed(PartialSymbol<A, ?> partialSymbol) {
+	public <A> Seed <A> getSeed(PartialSymbol <A, ?> partialSymbol) {
 		var seed = seeds.get(partialSymbol);
 		if (seed == null) {
 			throw new IllegalArgumentException("No seed for partial symbol " + partialSymbol);
 		}
 		// The builder makes sure only well-typed seeds can be added.
 		@SuppressWarnings("unchecked")
-		var typedSeed = (Seed<A>) seed;
+		var typedSeed = (Seed <A>) seed;
 		return typedSeed;
 	}
 
@@ -44,11 +44,11 @@ public class ModelSeed {
 		return seeds.containsKey(symbol);
 	}
 
-	public Set<AnyPartialSymbol> getSeededSymbols() {
+	public Set <AnyPartialSymbol> getSeededSymbols() {
 		return Collections.unmodifiableSet(seeds.keySet());
 	}
 
-	public <A> Cursor<Tuple, A> getCursor(PartialSymbol<A, ?> partialSymbol, A defaultValue) {
+	public <A> Cursor <Tuple, A> getCursor(PartialSymbol <A, ?> partialSymbol, A defaultValue) {
 		return getSeed(partialSymbol).getCursor(defaultValue, nodeCount);
 	}
 
@@ -58,7 +58,7 @@ public class ModelSeed {
 
 	public static class Builder {
 		private final int nodeCount;
-		private final Map<AnyPartialSymbol, Seed<?>> seeds = new LinkedHashMap<>();
+		private final Map <AnyPartialSymbol, Seed <?>> seeds = new LinkedHashMap<>();
 
 		private Builder(int nodeCount) {
 			if (nodeCount < 0) {
@@ -67,7 +67,7 @@ public class ModelSeed {
 			this.nodeCount = nodeCount;
 		}
 
-		public <A> Builder seed(PartialSymbol<A, ?> partialSymbol, Seed<A> seed) {
+		public <A> Builder seed(PartialSymbol <A, ?> partialSymbol, Seed <A> seed) {
 			if (seed.arity() != partialSymbol.arity()) {
 				throw new IllegalStateException("Expected seed of arity %d for partial symbol %s, but got %d instead"
 						.formatted(partialSymbol.arity(), partialSymbol, seed.arity()));
@@ -82,7 +82,7 @@ public class ModelSeed {
 			return this;
 		}
 
-		public <A> Builder seed(PartialSymbol<A, ?> partialSymbol, Consumer<Seed.Builder<A>> callback) {
+		public <A> Builder seed(PartialSymbol <A, ?> partialSymbol, Consumer <Seed.Builder<A>> callback) {
 			var builder = Seed.builder(partialSymbol);
 			callback.accept(builder);
 			return seed(partialSymbol, builder.build());

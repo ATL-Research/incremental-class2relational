@@ -29,9 +29,9 @@ import tools.refinery.interpreter.matchers.psystem.queries.PQuery;
  */
 public class CallWithAdornment {
     private final IQueryReference call;
-    private final Set<PParameter> adornment;
+    private final Set <PParameter> adornment;
 
-    public CallWithAdornment(IQueryReference call, Set<PParameter> adornment) {
+    public CallWithAdornment(IQueryReference call, Set <PParameter> adornment) {
         this.call = call;
         this.adornment = new HashSet<>(adornment);
     }
@@ -40,7 +40,7 @@ public class CallWithAdornment {
         return call;
     }
 
-    public Set<PParameter> getAdornment() {
+    public Set <PParameter> getAdornment() {
         return adornment;
     }
 

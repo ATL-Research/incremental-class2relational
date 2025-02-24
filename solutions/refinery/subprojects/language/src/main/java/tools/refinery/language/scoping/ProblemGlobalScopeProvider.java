@@ -15,8 +15,8 @@ import tools.refinery.language.utils.ProblemUtil;
 
 public class ProblemGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	@Override
-	protected LinkedHashSet<URI> getImportedUris(Resource resource) {
-		LinkedHashSet<URI> importedUris = new LinkedHashSet<>();
+	protected LinkedHashSet <URI> getImportedUris(Resource resource) {
+		LinkedHashSet <URI> importedUris = new LinkedHashSet<>();
 		importedUris.add(ProblemUtil.BUILTIN_LIBRARY_URI);
 		return importedUris;
 	}

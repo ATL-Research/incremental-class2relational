@@ -26,15 +26,15 @@ public class ModelVisualizerAdapterImpl implements ModelVisualizerAdapter {
 
 	private final Model model;
 	private final ModelVisualizerStoreAdapterImpl storeAdapter;
-	private final Map<AnySymbol, Interpretation<?>> allInterpretations;
+	private final Map <AnySymbol, Interpretation <?>> allInterpretations;
 	private final StringBuilder designSpaceBuilder = new StringBuilder();
-	private final Map<Version, Integer> states = new HashMap<>();
+	private final Map <Version, Integer> states = new HashMap<>();
 	private final String outputPath;
-	private final Set<FileFormat> formats;
+	private final Set <FileFormat> formats;
 	private final boolean renderDesignSpace;
 	private final boolean renderStates;
 
-	private static final Map<Object, String> truthValueToDot = Map.of(
+	private static final Map <Object, String> truthValueToDot = Map.of(
 			TruthValue.TRUE, "1",
 			TruthValue.FALSE, "0",
 			TruthValue.UNKNOWN, "½",
@@ -60,7 +60,7 @@ public class ModelVisualizerAdapterImpl implements ModelVisualizerAdapter {
 			if (arity < 1 || arity > 2) {
 				continue;
 			}
-			var interpretation = (Interpretation<?>) model.getInterpretation(symbol);
+			var interpretation = (Interpretation <?>) model.getInterpretation(symbol);
 			allInterpretations.put(symbol, interpretation);
 		}
 		designSpaceBuilder.append("digraph designSpace {\n");
@@ -86,7 +86,7 @@ public class ModelVisualizerAdapterImpl implements ModelVisualizerAdapter {
 
 	private String createDotForCurrentModelState() {
 
-		var unaryTupleToInterpretationsMap = new HashMap<Tuple, LinkedHashSet<Interpretation<?>>>();
+		var unaryTupleToInterpretationsMap = new HashMap <Tuple, LinkedHashSet <Interpretation<?>>>();
 
 		var sb = new StringBuilder();
 
@@ -133,7 +133,7 @@ public class ModelVisualizerAdapterImpl implements ModelVisualizerAdapter {
 		return sb.toString();
 	}
 
-	private StringBuilder drawElement(Map.Entry<Tuple, LinkedHashSet<Interpretation<?>>> entry) {
+	private StringBuilder drawElement(Map.Entry <Tuple, LinkedHashSet <Interpretation<?>>> entry) {
 		var sb = new StringBuilder();
 
 		var tableStyle =  " CELLSPACING=\"0\" BORDER=\"2\" CELLBORDER=\"0\" CELLPADDING=\"4\" STYLE=\"ROUNDED\"";
@@ -149,11 +149,11 @@ public class ModelVisualizerAdapterImpl implements ModelVisualizerAdapter {
 		sb.append("\tfillcolor=\"").append(backgroundColor).append("\"\n");
 		sb.append("\tlabel=");
 		if (interpretations.isEmpty()) {
-			sb.append("<<TABLE").append(tableStyle).append(">\n\t<TR><TD>").append(mainLabel).append("</TD></TR>");
+			sb.append(" <<TABLE").append(tableStyle).append(">\n\t <TR> <TD>").append(mainLabel).append(" </TD> </TR>");
 		}
 		else {
-			sb.append("<<TABLE").append(tableStyle).append(">\n\t\t<TR><TD COLSPAN=\"3\" BORDER=\"2\" SIDES=\"B\">")
-					.append(mainLabel).append("</TD></TR>\n");
+			sb.append(" <<TABLE").append(tableStyle).append(">\n\t\t <TR> <TD COLSPAN=\"3\" BORDER=\"2\" SIDES=\"B\">")
+					.append(mainLabel).append(" </TD> </TR>\n");
 			for (var interpretation : interpretations) {
 				var rawValue = interpretation.get(key);
 
@@ -170,20 +170,20 @@ public class ModelVisualizerAdapterImpl implements ModelVisualizerAdapter {
 				if (symbol.valueType() == String.class) {
 					value = "\"" + value + "\"";
 				}
-				sb.append("\t\t<TR><TD><FONT COLOR=\"").append(color).append("\">")
+				sb.append("\t\t <TR> <TD> <FONT COLOR=\"").append(color).append("\">")
 						.append(interpretation.getSymbol().name())
-						.append("</FONT></TD><TD><FONT COLOR=\"").append(color).append("\">")
-						.append("=</FONT></TD><TD><FONT COLOR=\"").append(color).append("\">").append(value)
-						.append("</FONT></TD></TR>\n");
+						.append(" </FONT> </TD> <TD> <FONT COLOR=\"").append(color).append("\">")
+						.append("= </FONT> </TD> <TD> <FONT COLOR=\"").append(color).append("\">").append(value)
+						.append(" </FONT> </TD> </TR>\n");
 			}
 		}
-		sb.append("\t\t</TABLE>>\n");
+		sb.append("\t\t </TABLE>>\n");
 		sb.append("]\n");
 
 		return sb;
 	}
 
-	private String drawEdge(Tuple edge, AnySymbol symbol, Interpretation<?> interpretation) {
+	private String drawEdge(Tuple edge, AnySymbol symbol, Interpretation <?> interpretation) {
 		var value = interpretation.get(edge);
 
 		if (value == null || value.equals(TruthValue.FALSE) || value.equals(false)) {
@@ -228,7 +228,7 @@ public class ModelVisualizerAdapterImpl implements ModelVisualizerAdapter {
 		return new Integer[] { random.nextInt(128) + 128, random.nextInt(128) + 128, random.nextInt(128) + 128 };
 	}
 
-	private Integer[] averageColor(Set<Interpretation<?>> interpretations) {
+	private Integer[] averageColor(Set <Interpretation<?>> interpretations) {
 		if(interpretations.isEmpty()) {
 			return new Integer[]{256, 256, 256};
 		}
@@ -299,7 +299,7 @@ public class ModelVisualizerAdapterImpl implements ModelVisualizerAdapter {
 		return true;
 	}
 
-	private void renderDesignSpace(String path, Set<FileFormat> formats) {
+	private void renderDesignSpace(String path, Set <FileFormat> formats) {
 		File filePath = new File(path);
 		filePath.mkdirs();
 		if (renderStates) {

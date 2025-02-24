@@ -15,20 +15,20 @@ final class InferredContainment {
 	public static final InferredContainment UNKNOWN = new InferredContainment(
 			TruthValue.UNKNOWN, Set.of(), Set.of());
 	private final TruthValue contains;
-	private final Set<PartialRelation> mustLinks;
-	private final Set<PartialRelation> forbiddenLinks;
+	private final Set <PartialRelation> mustLinks;
+	private final Set <PartialRelation> forbiddenLinks;
 	private final int hashCode;
 
-	public InferredContainment(TruthValue contains, Set<PartialRelation> mustLinks,
-							   Set<PartialRelation> forbiddenLinks) {
+	public InferredContainment(TruthValue contains, Set <PartialRelation> mustLinks,
+							   Set <PartialRelation> forbiddenLinks) {
 		this.contains = adjustContains(contains, mustLinks, forbiddenLinks);
 		this.mustLinks = mustLinks;
 		this.forbiddenLinks = forbiddenLinks;
 		hashCode = Objects.hash(this.contains, mustLinks, forbiddenLinks);
 	}
 
-	private static TruthValue adjustContains(TruthValue contains, Set<PartialRelation> mustLinks,
-											 Set<PartialRelation> forbiddenLinks) {
+	private static TruthValue adjustContains(TruthValue contains, Set <PartialRelation> mustLinks,
+											 Set <PartialRelation> forbiddenLinks) {
 		var result = contains;
 		if (!mustLinks.isEmpty()) {
 			result = result.merge(TruthValue.TRUE);
@@ -44,11 +44,11 @@ final class InferredContainment {
 		return contains;
 	}
 
-	public Set<PartialRelation> mustLinks() {
+	public Set <PartialRelation> mustLinks() {
 		return mustLinks;
 	}
 
-	public Set<PartialRelation> forbiddenLinks() {
+	public Set <PartialRelation> forbiddenLinks() {
 		return forbiddenLinks;
 	}
 

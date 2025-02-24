@@ -18,10 +18,10 @@ import java.util.function.BiConsumer;
  * @author Gabor Bergmann
  * @since 2.0
  */
-public interface ISetMemory<T> extends IMemory<T> {
+public interface ISetMemory <T> extends IMemory <T> {
 
     @Override
-    default void forEachEntryWithMultiplicities(BiConsumer<T, Integer> entryConsumer) {
+    default void forEachEntryWithMultiplicities(BiConsumer <T, Integer> entryConsumer) {
         for (T t : this.distinctValues()) entryConsumer.accept(t, 1);
     }
 

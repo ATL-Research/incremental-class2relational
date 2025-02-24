@@ -54,14 +54,14 @@ public class CD2DB extends YAMTLModule {
                             t.getCol().add(key());
                             t.getKey().add(key());
                             // model navigation
-                            List<Attribute> list = c.getAttr()
+                            List <Attribute> list = c.getAttr()
                             		.stream()
                             		.filter(a -> !a.getMultiValued())
                             		.collect(Collectors.toList());
                             // transformation 
                             t.getCol().addAll(
                             		// trace
-                            		(List<Column>)fetch(list, "col" )
+                            		(List <Column>)fetch(list, "col" )
                             );
                         })
                         // transformation	

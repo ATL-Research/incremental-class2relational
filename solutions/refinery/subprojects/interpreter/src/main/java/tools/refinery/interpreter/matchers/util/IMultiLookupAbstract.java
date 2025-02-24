@@ -34,7 +34,7 @@ import java.util.stream.StreamSupport;
  * Realized as an interface with default implementations, instead of an abstract class,
  *  to ensure that implementors can easily choose a base class such as UnifiedMap to augment.
  *
- *  <p> Implementor should inherit from a Map<Key, Object>-like class (primitive map possible)
+ *  <p> Implementor should inherit from a Map <Key, Object>-like class (primitive map possible)
  *      and bind the lowLevel* methods accordingly.
  *
  * @noreference This interface is not intended to be referenced by clients.
@@ -45,9 +45,9 @@ import java.util.stream.StreamSupport;
  *
  *
  */
-public interface IMultiLookupAbstract<Key, Value, Bucket extends MarkedMemory<Value>> extends IMultiLookup<Key, Value> {
+public interface IMultiLookupAbstract <Key, Value, Bucket extends MarkedMemory <Value>> extends IMultiLookup <Key, Value> {
 
-    // the following methods must be bound to a concrete Map<Key,Object>-like structure (primitive implementation allowed)
+    // the following methods must be bound to a concrete Map <Key,Object>-like structure (primitive implementation allowed)
 
     /**
      * Implementor shall bind to the low-level get() or equivalent of the underlying Key-to-Object map
@@ -77,12 +77,12 @@ public interface IMultiLookupAbstract<Key, Value, Bucket extends MarkedMemory<Va
     /**
      * Implementor shall bind to the low-level values() or equivalent of the underlying Key-to-Object map
      */
-    abstract Iterable<Object> lowLevelValues();
+    abstract Iterable <Object> lowLevelValues();
 
     /**
      * Implementor shall bind to the low-level keySet() or equivalent of the underlying Key-to-Object map
      */
-    abstract Iterable<Key> lowLevelKeySet();
+    abstract Iterable <Key> lowLevelKeySet();
 
     /**
      * Implementor shall bind to the low-level size() or equivalent of the underlying Key-to-Object map
@@ -99,7 +99,7 @@ public interface IMultiLookupAbstract<Key, Value, Bucket extends MarkedMemory<Va
     }
 
     @Override
-    public default IMemoryView<Value> lookup(Key key) {
+    public default IMemoryView <Value> lookup(Key key) {
         Object object = lowLevelGet(key);
         if (object == null) return null;
         if (object instanceof MarkedMemory) return (Bucket) object;
@@ -107,7 +107,7 @@ public interface IMultiLookupAbstract<Key, Value, Bucket extends MarkedMemory<Va
     }
 
     @Override
-    default IMemoryView<Value> lookupAndRemoveAll(Key key) {
+    default IMemoryView <Value> lookupAndRemoveAll(Key key) {
         Object object = lowLevelRemove(key);
         if (object == null) return EmptyMemory.instance();
         if (object instanceof MarkedMemory) return (Bucket) object;
@@ -115,7 +115,7 @@ public interface IMultiLookupAbstract<Key, Value, Bucket extends MarkedMemory<Va
     }
 
     @Override
-    public default IMemoryView<Value> lookupUnsafe(Object key) {
+    public default IMemoryView <Value> lookupUnsafe(Object key) {
         Object object = lowLevelGetUnsafe(key);
         if (object == null) return null;
         if (object instanceof MarkedMemory) return (Bucket) object;
@@ -243,14 +243,14 @@ public interface IMultiLookupAbstract<Key, Value, Bucket extends MarkedMemory<Va
     }
 
     @Override
-    public default Iterable<Value> distinctValues() {
-        return new Iterable<Value>() {
-            private final Iterator<Value> EMPTY_ITERATOR = Collections.<Value>emptySet().iterator();
+    public default Iterable <Value> distinctValues() {
+        return new Iterable <Value>() {
+            private final Iterator <Value> EMPTY_ITERATOR = Collections.<Value>emptySet().iterator();
             @Override
-            public Iterator<Value> iterator() {
-                return new Iterator<Value>() {
-                    Iterator<Object> bucketIterator = lowLevelValues().iterator();
-                    Iterator<Value> elementIterator = EMPTY_ITERATOR;
+            public Iterator <Value> iterator() {
+                return new Iterator <Value>() {
+                    Iterator <Object> bucketIterator = lowLevelValues().iterator();
+                    Iterator <Value> elementIterator = EMPTY_ITERATOR;
 
                     @Override
                     public boolean hasNext() {
@@ -289,17 +289,17 @@ public interface IMultiLookupAbstract<Key, Value, Bucket extends MarkedMemory<Va
     }
 
     @Override
-    default Stream<Value> distinctValuesStream() {
+    default Stream <Value> distinctValuesStream() {
         return StreamSupport.stream(distinctValues().spliterator(), false);
     }
 
     @Override
-    default Iterable<Key> distinctKeys() {
+    default Iterable <Key> distinctKeys() {
         return lowLevelKeySet();
     }
 
     @Override
-    default Stream<Key> distinctKeysStream() {
+    default Stream <Key> distinctKeysStream() {
         return StreamSupport.stream(distinctKeys().spliterator(), false);
     }
 
@@ -348,7 +348,7 @@ public interface IMultiLookupAbstract<Key, Value, Bucket extends MarkedMemory<Va
     /**
      * @return a read-only bucket consisting of a sole value, to be returned to the user
      */
-    default IMemoryView<Value> yieldSingleton(Value value) {
+    default IMemoryView <Value> yieldSingleton(Value value) {
         return new SingletonMemoryView<>(value);
     }
 
@@ -366,18 +366,18 @@ public interface IMultiLookupAbstract<Key, Value, Bucket extends MarkedMemory<Va
      * Realized as an interface with default implementations, instead of an abstract class,
      *  to ensure that implementors can easily choose a base class such as UnifiedMap to augment.
      *
-     *  <p> Implementor should inherit from a Map<Key, Object>-like class (primitive map possible)
+     *  <p> Implementor should inherit from a Map <Key, Object>-like class (primitive map possible)
      *      and bind the lowLevel* methods accordingly.
      *
      * @noreference This interface is not intended to be referenced by clients.
      * @noimplement This interface is not intended to be implemented by clients.
      * @author Gabor Bergmann
      */
-    public static interface ToSetsAbstract<Key, Value> extends IMultiLookupAbstract<Key, Value, MarkedMemory.MarkedSet<Value>> {
+    public static interface ToSetsAbstract <Key, Value> extends IMultiLookupAbstract <Key, Value, MarkedMemory.MarkedSet <Value>> {
         /**
          * @return a fresh, empty marked set
          */
-        public MarkedMemory.MarkedSet<Value> createMarkedSet();
+        public MarkedMemory.MarkedSet <Value> createMarkedSet();
 
         @Override
         public default boolean negativesAllowed() {
@@ -389,31 +389,31 @@ public interface IMultiLookupAbstract<Key, Value, Bucket extends MarkedMemory<Va
         }
 
         @Override
-        public default boolean addToBucket(MarkedMemory.MarkedSet<Value> bucket, Value value, boolean throwIfImpossible) {
+        public default boolean addToBucket(MarkedMemory.MarkedSet <Value> bucket, Value value, boolean throwIfImpossible) {
             if (bucket.addOne(value)) return true;
             else if (throwIfImpossible) throw new IllegalStateException();
             else return false;
         }
 
         @Override
-        public default boolean removeFromBucket(MarkedMemory.MarkedSet<Value> bucket, Value value, boolean throwIfImpossible) {
+        public default boolean removeFromBucket(MarkedMemory.MarkedSet <Value> bucket, Value value, boolean throwIfImpossible) {
             return throwIfImpossible ? bucket.removeOne(value) : bucket.removeOneOrNop(value);
         }
 
         @Override
-        public default Value asSingleton(MarkedMemory.MarkedSet<Value> bucket) {
+        public default Value asSingleton(MarkedMemory.MarkedSet <Value> bucket) {
             return bucket.size() == 1 ? bucket.iterator().next() : null;
         }
 
         @Override
-        public default MarkedMemory.MarkedSet<Value> createSingletonBucket(Value value) {
-            MarkedMemory.MarkedSet<Value> result = createMarkedSet();
+        public default MarkedMemory.MarkedSet <Value> createSingletonBucket(Value value) {
+            MarkedMemory.MarkedSet <Value> result = createMarkedSet();
             result.addOne(value);
             return result;
         }
 
         @Override
-        public default MarkedMemory.MarkedSet<Value> createDeltaBucket(Value positive, Value negative) {
+        public default MarkedMemory.MarkedSet <Value> createDeltaBucket(Value positive, Value negative) {
             throw new IllegalStateException();
         }
     }
@@ -425,18 +425,18 @@ public interface IMultiLookupAbstract<Key, Value, Bucket extends MarkedMemory<Va
      * Realized as an interface with default implementations, instead of an abstract class,
      *  to ensure that implementors can easily choose a base class such as UnifiedMap to augment.
      *
-     *  <p> Implementor should inherit from a Map<Key, Object>-like class (primitive map possible)
+     *  <p> Implementor should inherit from a Map <Key, Object>-like class (primitive map possible)
      *      and bind the lowLevel* methods accordingly.
      *
      * @noreference This interface is not intended to be referenced by clients.
      * @noimplement This interface is not intended to be implemented by clients.
      * @author Gabor Bergmann
      */
-    public static interface ToMultisetsAbstract<Key, Value> extends IMultiLookupAbstract<Key, Value, MarkedMemory.MarkedMultiset<Value>> {
+    public static interface ToMultisetsAbstract <Key, Value> extends IMultiLookupAbstract <Key, Value, MarkedMemory.MarkedMultiset <Value>> {
         /**
          * @return a fresh, empty marked multiset
          */
-        public MarkedMemory.MarkedMultiset<Value> createMarkedMultiset();
+        public MarkedMemory.MarkedMultiset <Value> createMarkedMultiset();
 
         @Override
         public default boolean negativesAllowed() {
@@ -448,31 +448,31 @@ public interface IMultiLookupAbstract<Key, Value, Bucket extends MarkedMemory<Va
         }
 
         @Override
-        public default boolean addToBucket(MarkedMemory.MarkedMultiset<Value> bucket, Value value, boolean throwIfImpossible) {
+        public default boolean addToBucket(MarkedMemory.MarkedMultiset <Value> bucket, Value value, boolean throwIfImpossible) {
             return bucket.addOne(value);
         }
 
         @Override
-        public default boolean removeFromBucket(MarkedMemory.MarkedMultiset<Value> bucket, Value value, boolean throwIfImpossible) {
+        public default boolean removeFromBucket(MarkedMemory.MarkedMultiset <Value> bucket, Value value, boolean throwIfImpossible) {
             return throwIfImpossible ? bucket.removeOne(value) : bucket.removeOneOrNop(value);
         }
 
         @Override
-        public default Value asSingleton(MarkedMemory.MarkedMultiset<Value> bucket) {
+        public default Value asSingleton(MarkedMemory.MarkedMultiset <Value> bucket) {
             if (bucket.size() != 1) return null;
             Value candidate = bucket.iterator().next();
             return bucket.getCount(candidate) == 1 ? candidate : null;
         }
 
         @Override
-        public default MarkedMemory.MarkedMultiset<Value> createSingletonBucket(Value value) {
-            MarkedMemory.MarkedMultiset<Value> result = createMarkedMultiset();
+        public default MarkedMemory.MarkedMultiset <Value> createSingletonBucket(Value value) {
+            MarkedMemory.MarkedMultiset <Value> result = createMarkedMultiset();
             result.addOne(value);
             return result;
         }
 
         @Override
-        public default MarkedMemory.MarkedMultiset<Value> createDeltaBucket(Value positive, Value negative) {
+        public default MarkedMemory.MarkedMultiset <Value> createDeltaBucket(Value positive, Value negative) {
             throw new IllegalStateException();
         }
     }

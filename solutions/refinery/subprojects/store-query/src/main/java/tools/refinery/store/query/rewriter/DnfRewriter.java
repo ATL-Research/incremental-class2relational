@@ -14,10 +14,10 @@ public interface DnfRewriter {
 	Dnf rewrite(Dnf dnf);
 
 	default AnyQuery rewrite(AnyQuery query) {
-		return rewrite((Query<?>) query);
+		return rewrite((Query <?>) query);
 	}
 
-	default <T> Query<T> rewrite(Query<T> query) {
+	default <T> Query <T> rewrite(Query <T> query) {
 		var rewrittenDnf = rewrite(query.getDnf());
 		return query.withDnf(rewrittenDnf);
 	}

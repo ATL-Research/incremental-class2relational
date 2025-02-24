@@ -17,13 +17,13 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Model Change</b></em>'.
+ * An implementation of the model object ' <em> <b>Model Change </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.ModelChangeImpl#getChangeSet <em>Change Set</em>}</li>
+ *   <li>{@link Changes.impl.ModelChangeImpl#getChangeSet <em>Change Set </em>} </li>
  * </ul>
  *
  * @generated

@@ -34,22 +34,22 @@ import tools.refinery.store.statecoding.StateCoderBuilder;
 
 import java.util.*;
 
-public class ReasoningBuilderImpl extends AbstractModelAdapterBuilder<ReasoningStoreAdapterImpl>
+public class ReasoningBuilderImpl extends AbstractModelAdapterBuilder <ReasoningStoreAdapterImpl>
 		implements ReasoningBuilder {
 	private final DnfLifter lifter = new DnfLifter();
 	private final PartialQueryRewriter queryRewriter = new PartialQueryRewriter(lifter);
-	private Set<Concreteness> requiredInterpretations = Set.of(Concreteness.values());
-	private final Map<AnyPartialSymbol, AnyPartialSymbolTranslator> translators = new LinkedHashMap<>();
-	private final Map<AnyPartialSymbol, PartialInterpretation.Factory<?, ?>> symbolInterpreters =
+	private Set <Concreteness> requiredInterpretations = Set.of(Concreteness.values());
+	private final Map <AnyPartialSymbol, AnyPartialSymbolTranslator> translators = new LinkedHashMap<>();
+	private final Map <AnyPartialSymbol, PartialInterpretation.Factory <?, ?>> symbolInterpreters =
 			new LinkedHashMap<>();
-	private final Map<AnyPartialSymbol, PartialInterpretationRefiner.Factory<?, ?>> symbolRefiners =
+	private final Map <AnyPartialSymbol, PartialInterpretationRefiner.Factory <?, ?>> symbolRefiners =
 			new LinkedHashMap<>();
-	private final Map<AnySymbol, StorageRefiner.Factory<?>> registeredStorageRefiners = new LinkedHashMap<>();
-	private final List<PartialModelInitializer> initializers = new ArrayList<>();
-	private final List<Objective> objectives = new ArrayList<>();
+	private final Map <AnySymbol, StorageRefiner.Factory <?>> registeredStorageRefiners = new LinkedHashMap<>();
+	private final List <PartialModelInitializer> initializers = new ArrayList<>();
+	private final List <Objective> objectives = new ArrayList<>();
 
 	@Override
-	public ReasoningBuilder requiredInterpretations(Collection<Concreteness> requiredInterpretations) {
+	public ReasoningBuilder requiredInterpretations(Collection <Concreteness> requiredInterpretations) {
 		this.requiredInterpretations = Set.copyOf(requiredInterpretations);
 		return this;
 	}
@@ -65,7 +65,7 @@ public class ReasoningBuilderImpl extends AbstractModelAdapterBuilder<ReasoningS
 	}
 
 	@Override
-	public <T> ReasoningBuilder storageRefiner(Symbol<T> symbol, StorageRefiner.Factory<T> refiner) {
+	public <T> ReasoningBuilder storageRefiner(Symbol <T> symbol, StorageRefiner.Factory <T> refiner) {
 		checkNotConfigured();
 		if (registeredStorageRefiners.put(symbol, refiner) != null) {
 			throw new IllegalArgumentException("Duplicate representation refiner for symbol: " + symbol);
@@ -88,7 +88,7 @@ public class ReasoningBuilderImpl extends AbstractModelAdapterBuilder<ReasoningS
 	}
 
 	@Override
-	public <T> Query<T> lift(Modality modality, Concreteness concreteness, Query<T> query) {
+	public <T> Query <T> lift(Modality modality, Concreteness concreteness, Query <T> query) {
 		return lifter.lift(modality, concreteness, query);
 	}
 
@@ -98,7 +98,7 @@ public class ReasoningBuilderImpl extends AbstractModelAdapterBuilder<ReasoningS
 	}
 
 	@Override
-	public <T> FunctionalQuery<T> lift(Modality modality, Concreteness concreteness, FunctionalQuery<T> query) {
+	public <T> FunctionalQuery <T> lift(Modality modality, Concreteness concreteness, FunctionalQuery <T> query) {
 		return lifter.lift(modality, concreteness, query);
 	}
 
@@ -149,9 +149,9 @@ public class ReasoningBuilderImpl extends AbstractModelAdapterBuilder<ReasoningS
 				getStorageRefiners(store), Collections.unmodifiableList(initializers));
 	}
 
-	private Map<AnySymbol, StorageRefiner.Factory<?>> getStorageRefiners(ModelStore store) {
+	private Map <AnySymbol, StorageRefiner.Factory <?>> getStorageRefiners(ModelStore store) {
 		var symbols = store.getSymbols();
-		var storageRefiners = new LinkedHashMap<AnySymbol, StorageRefiner.Factory<?>>(symbols.size());
+		var storageRefiners = new LinkedHashMap <AnySymbol, StorageRefiner.Factory <?>>(symbols.size());
 		for (var symbol : symbols) {
 			var refiner = registeredStorageRefiners.remove(symbol);
 			if (refiner == null) {

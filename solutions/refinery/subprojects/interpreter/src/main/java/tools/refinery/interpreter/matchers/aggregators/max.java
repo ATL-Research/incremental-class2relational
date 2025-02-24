@@ -35,7 +35,7 @@ import tools.refinery.interpreter.matchers.psystem.aggregations.IAggregatorFacto
 public final class max implements IAggregatorFactory {
 
     @Override
-    public BoundAggregator getAggregatorLogic(Class<?> domainClass) {
+    public BoundAggregator getAggregatorLogic(Class <?> domainClass) {
         if (Comparable.class.isAssignableFrom(domainClass))
             return new BoundAggregator(ExtremumOperator.getMax(), domainClass, domainClass);
         else throw new IllegalArgumentException();

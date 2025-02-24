@@ -24,10 +24,10 @@ import java.util.stream.Stream;
  * @author Bergmann Gábor
  * @noimplement This interface is not intended to be implemented by clients. Implement BaseMatcher instead.
  */
-public interface InterpreterMatcher<Match extends IPatternMatch> {
+public interface InterpreterMatcher <Match extends IPatternMatch> {
     // REFLECTION
     /** The pattern that will be matched. */
-    IQuerySpecification<? extends InterpreterMatcher<Match>> getSpecification();
+    IQuerySpecification <? extends InterpreterMatcher <Match>> getSpecification();
 
     /** Fully qualified name of the pattern. */
     String getPatternName();
@@ -36,7 +36,7 @@ public interface InterpreterMatcher<Match extends IPatternMatch> {
     Integer getPositionOfParameter(String parameterName);
 
     /** Returns the array of symbolic parameter names. */
-    List<String> getParameterNames();
+    List <String> getParameterNames();
 
     // ALL MATCHES
     /**
@@ -44,7 +44,7 @@ public interface InterpreterMatcher<Match extends IPatternMatch> {
      *
      * @return matches represented as a Match object.
      */
-    Collection<Match> getAllMatches();
+    Collection <Match> getAllMatches();
 
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
@@ -54,24 +54,24 @@ public interface InterpreterMatcher<Match extends IPatternMatch> {
      *            a fixed value.
      * @return matches represented as a Match object.
      */
-    Collection<Match> getAllMatches(Match partialMatch);
+    Collection <Match> getAllMatches(Match partialMatch);
 
     /**
      * Returns a stream of all pattern matches.
      * <p>
-     * <strong>WARNING</strong> If the result set changes while the stream is evaluated, the set of matches included in
+     * <strong>WARNING </strong> If the result set changes while the stream is evaluated, the set of matches included in
      * the stream are unspecified. In such cases, either rely on {@link #getAllMatches()} or collect the results of the
      * stream in end-user code.
      *
      * @return matches represented as a Match object.
      * @since 2.0
      */
-    Stream<Match> streamAllMatches();
+    Stream <Match> streamAllMatches();
 
     /**
      * Returns a stream of all matches of the pattern that conform to the given fixed values of some parameters.
      * <p>
-     * <strong>WARNING</strong> If the result set changes while the stream is evaluated, the set of matches included in
+     * <strong>WARNING </strong> If the result set changes while the stream is evaluated, the set of matches included in
      * the stream are unspecified. In such cases, either rely on {@link #getAllMatches()} or collect the results of the
      * stream in end-user code.
      *
@@ -81,7 +81,7 @@ public interface InterpreterMatcher<Match extends IPatternMatch> {
      * @return matches represented as a Match object.
      * @since 2.0
      */
-    Stream<Match> streamAllMatches(Match partialMatch);
+    Stream <Match> streamAllMatches(Match partialMatch);
 
     // variant(s) with input binding as pattern-specific parameters: not declared in interface
 
@@ -92,7 +92,7 @@ public interface InterpreterMatcher<Match extends IPatternMatch> {
      * @return a match represented as a Match object, or an empty Optional if no match is found.
      * @since 2.0
      */
-    Optional<Match> getOneArbitraryMatch();
+    Optional <Match> getOneArbitraryMatch();
 
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
@@ -104,7 +104,7 @@ public interface InterpreterMatcher<Match extends IPatternMatch> {
      * @return a match represented as a Match object, or an empty Optional if no match is found.
      * @since 2.0
      */
-    Optional<Match> getOneArbitraryMatch(Match partialMatch);
+    Optional <Match> getOneArbitraryMatch(Match partialMatch);
 
     // variant(s) with input binding as pattern-specific parameters: not declared in interface
 
@@ -158,7 +158,7 @@ public interface InterpreterMatcher<Match extends IPatternMatch> {
      *            the action that will process each pattern match.
      * @since 2.0
      */
-    void forEachMatch(Consumer<? super Match> processor);
+    void forEachMatch(Consumer <? super Match> processor);
 
     /**
      * Executes the given processor on each match of the pattern that conforms to the given fixed values of some
@@ -170,7 +170,7 @@ public interface InterpreterMatcher<Match extends IPatternMatch> {
      *            the action that will process each pattern match.
      * @since 2.0
      */
-    void forEachMatch(Match partialMatch, Consumer<? super Match> processor);
+    void forEachMatch(Match partialMatch, Consumer <? super Match> processor);
 
     // variant(s) with input binding as pattern-specific parameters: not declared in interface
 
@@ -184,7 +184,7 @@ public interface InterpreterMatcher<Match extends IPatternMatch> {
      * @return true if the pattern has at least one match, false if the processor was not invoked
      * @since 2.0
      */
-    boolean forOneArbitraryMatch(Consumer<? super Match> processor);
+    boolean forOneArbitraryMatch(Consumer <? super Match> processor);
 
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed
@@ -198,7 +198,7 @@ public interface InterpreterMatcher<Match extends IPatternMatch> {
      *         not invoked
      * @since 2.0
      */
-    boolean forOneArbitraryMatch(Match partialMatch, Consumer<? super Match> processor);
+    boolean forOneArbitraryMatch(Match partialMatch, Consumer <? super Match> processor);
 
     // variant(s) with input binding as pattern-specific parameters: not declared in interface
 
@@ -233,7 +233,7 @@ public interface InterpreterMatcher<Match extends IPatternMatch> {
      * @return the Set of all values for the given parameter, null if the parameter with the given name does not exists,
      *         empty set if there are no matches
      */
-    Set<Object> getAllValues(final String parameterName);
+    Set <Object> getAllValues(final String parameterName);
 
     /**
      * Retrieve the set of values that occur in matches for the given parameterName, that conforms to the given fixed
@@ -247,7 +247,7 @@ public interface InterpreterMatcher<Match extends IPatternMatch> {
      * @return the Set of all values for the given parameter, null if the parameter with the given name does not exists
      *         or if the parameter with the given name is set in partialMatch, empty set if there are no matches
      */
-    Set<Object> getAllValues(final String parameterName, Match partialMatch);
+    Set <Object> getAllValues(final String parameterName, Match partialMatch);
 
     /**
      * Returns the engine that the matcher uses.

@@ -8,8 +8,8 @@ package tools.refinery.store.map.internal.delta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UncommittedDeltaArrayStore<K, V> implements UncommittedDeltaStore<K, V> {
-	final List<MapDelta<K, V>> uncommittedOldValues = new ArrayList<>();
+public class UncommittedDeltaArrayStore <K, V> implements UncommittedDeltaStore <K, V> {
+	final List <MapDelta<K, V>> uncommittedOldValues = new ArrayList<>();
 
 	@Override
 	public void processChange(K key, V oldValue, V newValue) {
@@ -17,19 +17,19 @@ public class UncommittedDeltaArrayStore<K, V> implements UncommittedDeltaStore<K
 	}
 
 	@Override
-	public MapDelta<K, V>[] extractDeltas() {
+	public MapDelta <K, V>[] extractDeltas() {
 		if (uncommittedOldValues.isEmpty()) {
 			return null;
 		} else {
 			@SuppressWarnings("unchecked")
-			MapDelta<K, V>[] result = uncommittedOldValues.toArray(new MapDelta[0]);
+			MapDelta <K, V>[] result = uncommittedOldValues.toArray(new MapDelta[0]);
 			return result;
 		}
 	}
 
 	@Override
-	public MapDelta<K, V>[] extractAndDeleteDeltas() {
-		MapDelta<K, V>[] res = extractDeltas();
+	public MapDelta <K, V>[] extractAndDeleteDeltas() {
+		MapDelta <K, V>[] res = extractDeltas();
 		this.uncommittedOldValues.clear();
 		return res;
 	}

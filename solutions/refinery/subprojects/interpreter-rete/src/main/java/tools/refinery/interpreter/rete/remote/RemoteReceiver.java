@@ -30,33 +30,33 @@ import tools.refinery.interpreter.matchers.util.timeline.Timeline;
  */
 public class RemoteReceiver extends SingleInputNode {
 
-    List<Address<? extends Receiver>> targets;
+    List <Address<? extends Receiver>> targets;
 
     public RemoteReceiver(ReteContainer reteContainer) {
         super(reteContainer);
-        targets = new ArrayList<Address<? extends Receiver>>();
+        targets = new ArrayList <Address<? extends Receiver>>();
     }
 
-    public void addTarget(Address<? extends Receiver> target) {
+    public void addTarget(Address <? extends Receiver> target) {
         targets.add(target);
     }
 
     @Override
-    public void pullInto(Collection<Tuple> collector, boolean flush) {
+    public void pullInto(Collection <Tuple> collector, boolean flush) {
         propagatePullInto(collector, flush);
     }
 
     @Override
-    public void pullIntoWithTimeline(Map<Tuple, Timeline<Timestamp>> collector, boolean flush) {
+    public void pullIntoWithTimeline(Map <Tuple, Timeline <Timestamp>> collector, boolean flush) {
         throw new UnsupportedOperationException();
     }
 
-    public Collection<Tuple> remotePull(boolean flush) {
+    public Collection <Tuple> remotePull(boolean flush) {
         return reteContainer.pullContents(this, flush);
     }
 
     public void update(Direction direction, Tuple updateElement, Timestamp timestamp) {
-        for (Address<? extends Receiver> ad : targets)
+        for (Address <? extends Receiver> ad : targets)
             reteContainer.sendUpdateToRemoteAddress(ad, direction, updateElement);
     }
 

@@ -15,21 +15,21 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Association Property Change</b></em>'.
+ * An implementation of the model object ' <em> <b>Association Property Change </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.AssociationPropertyChangeImpl#getNewValue <em>New Value</em>}</li>
- *   <li>{@link Changes.impl.AssociationPropertyChangeImpl#getOldValue <em>Old Value</em>}</li>
+ *   <li>{@link Changes.impl.AssociationPropertyChangeImpl#getNewValue <em>New Value </em>} </li>
+ *   <li>{@link Changes.impl.AssociationPropertyChangeImpl#getOldValue <em>Old Value </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class AssociationPropertyChangeImpl extends AssociationChangeImpl implements AssociationPropertyChange {
 	/**
-	 * The cached value of the '{@link #getNewValue() <em>New Value</em>}' reference.
+	 * The cached value of the '{@link #getNewValue() <em>New Value </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getNewValue()
@@ -39,7 +39,7 @@ public class AssociationPropertyChangeImpl extends AssociationChangeImpl impleme
 	protected EObject newValue;
 
 	/**
-	 * The cached value of the '{@link #getOldValue() <em>Old Value</em>}' reference.
+	 * The cached value of the '{@link #getOldValue() <em>Old Value </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getOldValue()

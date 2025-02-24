@@ -7,15 +7,15 @@ package tools.refinery.store.map;
 
 import tools.refinery.store.map.internal.VersionedMapStoreFactoryBuilderImpl;
 
-public interface VersionedMapStore<K, V> {
+public interface VersionedMapStore <K, V> {
 
-	VersionedMap<K, V> createMap();
+	VersionedMap <K, V> createMap();
 
-	VersionedMap<K, V> createMap(Version state);
+	VersionedMap <K, V> createMap(Version state);
 
-	DiffCursor<K,V> getDiffCursor(Version fromState, Version toState);
+	DiffCursor <K,V> getDiffCursor(Version fromState, Version toState);
 
-	static <K,V> VersionedMapStoreFactoryBuilder<K,V> builder() {
+	static <K,V> VersionedMapStoreFactoryBuilder <K,V> builder() {
 		return new VersionedMapStoreFactoryBuilderImpl<>();
 	}
 }

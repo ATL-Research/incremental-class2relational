@@ -9,12 +9,12 @@ import tools.refinery.store.query.substitution.Substitution;
 import tools.refinery.store.query.term.Term;
 
 public class IntMinusTerm extends IntUnaryTerm {
-	public IntMinusTerm(Term<Integer> body) {
+	public IntMinusTerm(Term <Integer> body) {
 		super(body);
 	}
 
 	@Override
-	protected Term<Integer> doSubstitute(Substitution substitution, Term<Integer> substitutedBody) {
+	protected Term <Integer> doSubstitute(Substitution substitution, Term <Integer> substitutedBody) {
 		return new IntMinusTerm(substitutedBody);
 	}
 

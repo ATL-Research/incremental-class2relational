@@ -18,13 +18,13 @@ import java.util.Set;
 
 // {@link Object#equals(Object)} is implemented by {@link AbstractTerm}.
 @SuppressWarnings("squid:S2160")
-public abstract class BinaryTerm<R, T1, T2> extends AbstractTerm<R> {
-	private final Class<T1> leftType;
-	private final Class<T2> rightType;
-	private final Term<T1> left;
-	private final Term<T2> right;
+public abstract class BinaryTerm <R, T1, T2> extends AbstractTerm <R> {
+	private final Class <T1> leftType;
+	private final Class <T2> rightType;
+	private final Term <T1> left;
+	private final Term <T2> right;
 
-	protected BinaryTerm(Class<R> type, Class<T1> leftType, Class<T2> rightType, Term<T1> left, Term<T2> right) {
+	protected BinaryTerm(Class <R> type, Class <T1> leftType, Class <T2> rightType, Term <T1> left, Term <T2> right) {
 		super(type);
 		if (!left.getType().equals(leftType)) {
 			throw new InvalidQueryException("Expected left %s to be of type %s, got %s instead".formatted(
@@ -40,19 +40,19 @@ public abstract class BinaryTerm<R, T1, T2> extends AbstractTerm<R> {
 		this.right = right;
 	}
 
-	public Class<T1> getLeftType() {
+	public Class <T1> getLeftType() {
 		return leftType;
 	}
 
-	public Class<T2> getRightType() {
+	public Class <T2> getRightType() {
 		return rightType;
 	}
 
-	public Term<T1> getLeft() {
+	public Term <T1> getLeft() {
 		return left;
 	}
 
-	public Term<T2> getRight() {
+	public Term <T2> getRight() {
 		return right;
 	}
 
@@ -76,7 +76,7 @@ public abstract class BinaryTerm<R, T1, T2> extends AbstractTerm<R> {
 		if (!super.equalsWithSubstitution(helper, other)) {
 			return false;
 		}
-		var otherBinaryTerm = (BinaryTerm<?, ?, ?>) other;
+		var otherBinaryTerm = (BinaryTerm <?, ?, ?>) other;
 		return leftType.equals(otherBinaryTerm.leftType) &&
 				rightType.equals(otherBinaryTerm.rightType) &&
 				left.equalsWithSubstitution(helper, otherBinaryTerm.left) &&
@@ -90,15 +90,15 @@ public abstract class BinaryTerm<R, T1, T2> extends AbstractTerm<R> {
 	}
 
 	@Override
-	public Term<R> substitute(Substitution substitution) {
+	public Term <R> substitute(Substitution substitution) {
 		return doSubstitute(substitution, left.substitute(substitution), right.substitute(substitution));
 	}
 
-	public abstract Term<R> doSubstitute(Substitution substitution, Term<T1> substitutedLeft,
-										 Term<T2> substitutedRight);
+	public abstract Term <R> doSubstitute(Substitution substitution, Term <T1> substitutedLeft,
+										 Term <T2> substitutedRight);
 
 	@Override
-	public Set<AnyDataVariable> getInputVariables() {
+	public Set <AnyDataVariable> getInputVariables() {
 		var inputVariables = new HashSet<>(left.getInputVariables());
 		inputVariables.addAll(right.getInputVariables());
 		return Collections.unmodifiableSet(inputVariables);

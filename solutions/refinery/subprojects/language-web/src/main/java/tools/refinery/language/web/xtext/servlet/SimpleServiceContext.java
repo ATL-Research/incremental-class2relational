@@ -13,9 +13,9 @@ import org.eclipse.xtext.web.server.ISession;
 
 import com.google.common.collect.ImmutableSet;
 
-public record SimpleServiceContext(ISession session, Map<String, String> parameters) implements IServiceContext {
+public record SimpleServiceContext(ISession session, Map <String, String> parameters) implements IServiceContext {
 	@Override
-	public Set<String> getParameterKeys() {
+	public Set <String> getParameterKeys() {
 		return ImmutableSet.copyOf(parameters.keySet());
 	}
 

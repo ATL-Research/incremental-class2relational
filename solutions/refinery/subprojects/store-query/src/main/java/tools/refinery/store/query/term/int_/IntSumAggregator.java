@@ -7,19 +7,19 @@ package tools.refinery.store.query.term.int_;
 
 import tools.refinery.store.query.term.StatelessAggregator;
 
-public final class IntSumAggregator implements StatelessAggregator<Integer, Integer> {
+public final class IntSumAggregator implements StatelessAggregator <Integer, Integer> {
 	public static final IntSumAggregator INSTANCE = new IntSumAggregator();
 
 	private IntSumAggregator() {
 	}
 
 	@Override
-	public Class<Integer> getResultType() {
+	public Class <Integer> getResultType() {
 		return Integer.class;
 	}
 
 	@Override
-	public Class<Integer> getInputType() {
+	public Class <Integer> getInputType() {
 		return Integer.class;
 	}
 

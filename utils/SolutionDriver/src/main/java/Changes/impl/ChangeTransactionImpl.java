@@ -23,21 +23,21 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Change Transaction</b></em>'.
+ * An implementation of the model object ' <em> <b>Change Transaction </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.ChangeTransactionImpl#getSourceChange <em>Source Change</em>}</li>
- *   <li>{@link Changes.impl.ChangeTransactionImpl#getNestedChanges <em>Nested Changes</em>}</li>
+ *   <li>{@link Changes.impl.ChangeTransactionImpl#getSourceChange <em>Source Change </em>} </li>
+ *   <li>{@link Changes.impl.ChangeTransactionImpl#getNestedChanges <em>Nested Changes </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class ChangeTransactionImpl extends ModelChangeImpl implements ChangeTransaction {
 	/**
-	 * The cached value of the '{@link #getSourceChange() <em>Source Change</em>}' containment reference.
+	 * The cached value of the '{@link #getSourceChange() <em>Source Change </em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSourceChange()
@@ -47,14 +47,14 @@ public class ChangeTransactionImpl extends ModelChangeImpl implements ChangeTran
 	protected ModelChange sourceChange;
 
 	/**
-	 * The cached value of the '{@link #getNestedChanges() <em>Nested Changes</em>}' containment reference list.
+	 * The cached value of the '{@link #getNestedChanges() <em>Nested Changes </em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getNestedChanges()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ModelChange> nestedChanges;
+	protected EList <ModelChange> nestedChanges;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -123,9 +123,9 @@ public class ChangeTransactionImpl extends ModelChangeImpl implements ChangeTran
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ModelChange> getNestedChanges() {
+	public EList <ModelChange> getNestedChanges() {
 		if (nestedChanges == null) {
-			nestedChanges = new EObjectContainmentEList<ModelChange>(ModelChange.class, this, ChangesPackage.CHANGE_TRANSACTION__NESTED_CHANGES);
+			nestedChanges = new EObjectContainmentEList <ModelChange>(ModelChange.class, this, ChangesPackage.CHANGE_TRANSACTION__NESTED_CHANGES);
 		}
 		return nestedChanges;
 	}
@@ -141,7 +141,7 @@ public class ChangeTransactionImpl extends ModelChangeImpl implements ChangeTran
 			case ChangesPackage.CHANGE_TRANSACTION__SOURCE_CHANGE:
 				return basicSetSourceChange(null, msgs);
 			case ChangesPackage.CHANGE_TRANSACTION__NESTED_CHANGES:
-				return ((InternalEList<?>)getNestedChanges()).basicRemove(otherEnd, msgs);
+				return ((InternalEList <?>)getNestedChanges()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -176,7 +176,7 @@ public class ChangeTransactionImpl extends ModelChangeImpl implements ChangeTran
 				return;
 			case ChangesPackage.CHANGE_TRANSACTION__NESTED_CHANGES:
 				getNestedChanges().clear();
-				getNestedChanges().addAll((Collection<? extends ModelChange>)newValue);
+				getNestedChanges().addAll((Collection <? extends ModelChange>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

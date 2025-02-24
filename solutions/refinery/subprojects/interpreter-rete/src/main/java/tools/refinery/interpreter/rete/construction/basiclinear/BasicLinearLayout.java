@@ -71,7 +71,7 @@ public class BasicLinearLayout implements IQueryPlannerStrategy {
             // STARTING THE LINE
             SubPlan plan = planFactory.createSubPlan(new PStart());
 
-            Set<PConstraint> pQueue = CollectionsFactory.createSet(pSystem.getConstraints());
+            Set <PConstraint> pQueue = CollectionsFactory.createSet(pSystem.getConstraints());
 
             // MAIN LOOP
             while (!pQueue.isEmpty()) {
@@ -158,7 +158,7 @@ public class BasicLinearLayout implements IQueryPlannerStrategy {
         }
     }
     private void raiseForeverDeferredError(VariableDeferredPConstraint constraint, SubPlan plan) {
-        Set<PVariable> missing = CollectionsFactory.createSet(constraint.getDeferringVariables());//new HashSet<PVariable>(getDeferringVariables());
+        Set <PVariable> missing = CollectionsFactory.createSet(constraint.getDeferringVariables());//new HashSet <PVariable>(getDeferringVariables());
         missing.removeAll(plan.getVisibleVariables());
         String[] args = { toString(), Arrays.toString(missing.toArray()) };
         String msg = "The checking of pattern constraint {1} requires the values of variables {2}, but it cannot be deferred further. "

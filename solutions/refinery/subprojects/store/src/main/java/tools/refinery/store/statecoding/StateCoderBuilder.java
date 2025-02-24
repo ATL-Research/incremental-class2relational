@@ -16,7 +16,7 @@ import java.util.List;
 
 public interface StateCoderBuilder extends ModelAdapterBuilder {
 	StateCoderBuilder exclude(AnySymbol symbol);
-	default StateCoderBuilder excludeAll(Collection<? extends AnySymbol> symbols) {
+	default StateCoderBuilder excludeAll(Collection <? extends AnySymbol> symbols) {
 		for(var symbol : symbols) {
 			exclude(symbol);
 		}
@@ -27,7 +27,7 @@ public interface StateCoderBuilder extends ModelAdapterBuilder {
 	}
 
 	StateCoderBuilder individual(Tuple1 tuple);
-	default StateCoderBuilder individual(Collection<Tuple1> tuple1s) {
+	default StateCoderBuilder individual(Collection <Tuple1> tuple1s) {
 		for(Tuple1 tuple : tuple1s){
 			individual(tuple);
 		}

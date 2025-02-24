@@ -15,20 +15,20 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Reference Argument</b></em>'.
+ * An implementation of the model object ' <em> <b>Reference Argument </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.ReferenceArgumentImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link Changes.impl.ReferenceArgumentImpl#getValue <em>Value </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class ReferenceArgumentImpl extends OperationArgumentImpl implements ReferenceArgument {
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
+	 * The cached value of the '{@link #getValue() <em>Value </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getValue()

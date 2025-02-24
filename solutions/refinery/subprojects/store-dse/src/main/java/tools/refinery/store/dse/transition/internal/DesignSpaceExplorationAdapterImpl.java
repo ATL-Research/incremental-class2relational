@@ -19,17 +19,17 @@ public class DesignSpaceExplorationAdapterImpl implements DesignSpaceExploration
 	final Model model;
 	final DesignSpaceExplorationStoreAdapter designSpaceExplorationStoreAdapter;
 
-	final List<Transformation> transformations;
-	final List<CriterionCalculator> accepts;
-	final List<CriterionCalculator> excludes;
-	final List<ObjectiveCalculator> objectives;
+	final List <Transformation> transformations;
+	final List <CriterionCalculator> accepts;
+	final List <CriterionCalculator> excludes;
+	final List <ObjectiveCalculator> objectives;
 
 	public DesignSpaceExplorationAdapterImpl(Model model,
 											 DesignSpaceExplorationStoreAdapter designSpaceExplorationStoreAdapter,
-											 List<Transformation> transformations,
-											 List<CriterionCalculator> accepts,
-											 List<CriterionCalculator> excludes,
-											 List<ObjectiveCalculator> objectives) {
+											 List <Transformation> transformations,
+											 List <CriterionCalculator> accepts,
+											 List <CriterionCalculator> excludes,
+											 List <ObjectiveCalculator> objectives) {
 		this.model = model;
 		this.designSpaceExplorationStoreAdapter = designSpaceExplorationStoreAdapter;
 
@@ -49,7 +49,7 @@ public class DesignSpaceExplorationAdapterImpl implements DesignSpaceExploration
 		return designSpaceExplorationStoreAdapter;
 	}
 
-	public List<Transformation> getTransformations() {
+	public List <Transformation> getTransformations() {
 		return transformations;
 	}
 

@@ -30,16 +30,16 @@ import java.util.function.BinaryOperator;
 
 class PartialClauseRewriter {
 	private final PartialQueryRewriter rewriter;
-	private final List<Literal> completedLiterals = new ArrayList<>();
-	private final Deque<Literal> workList = new ArrayDeque<>();
-	private final Set<Variable> positiveVariables = new LinkedHashSet<>();
-	private final Set<Variable> unmodifiablePositiveVariables = Collections.unmodifiableSet(positiveVariables);
+	private final List <Literal> completedLiterals = new ArrayList<>();
+	private final Deque <Literal> workList = new ArrayDeque<>();
+	private final Set <Variable> positiveVariables = new LinkedHashSet<>();
+	private final Set <Variable> unmodifiablePositiveVariables = Collections.unmodifiableSet(positiveVariables);
 
 	public PartialClauseRewriter(PartialQueryRewriter rewriter) {
 		this.rewriter = rewriter;
 	}
 
-	public List<Literal> rewriteClause(DnfClause clause) {
+	public List <Literal> rewriteClause(DnfClause clause) {
 		workList.addAll(clause.literals());
 		while (!workList.isEmpty()) {
 			var literal = workList.removeFirst();
@@ -98,15 +98,15 @@ class PartialClauseRewriter {
 				UpperCardinalities.ONE, UpperCardinalityTerms::mul, UpperCardinalityTerms.UPPER_CARDINALITY_SUM);
 	}
 
-	private <T> void rewritePartialCount(AbstractCountLiteral<T> literal, String name, Modality modality,
-										 Constraint view, T one, BinaryOperator<Term<T>> mul, Aggregator<T, T> sum) {
+	private <T> void rewritePartialCount(AbstractCountLiteral <T> literal, String name, Modality modality,
+										 Constraint view, T one, BinaryOperator <Term<T>> mul, Aggregator <T, T> sum) {
 		var type = literal.getResultType();
 		var countResult = computeCountVariables(literal, Concreteness.PARTIAL, name);
 		var builder = countResult.builder();
 		var outputVariable = builder.parameter(type);
 		var variablesToCount = countResult.variablesToCount();
 
-		var literals = new ArrayList<Literal>();
+		var literals = new ArrayList <Literal>();
 		literals.add(new ModalConstraint(modality, Concreteness.PARTIAL, literal.getTarget())
 				.call(CallPolarity.POSITIVE, countResult.rewrittenArguments()));
 		switch (variablesToCount.size()) {
@@ -117,7 +117,7 @@ class PartialClauseRewriter {
 			var firstCount = Variable.of(type);
 			literals.add(view.call(variablesToCount.get(0), firstCount));
 			int length = variablesToCount.size();
-			Term<T> accumulator = firstCount;
+			Term <T> accumulator = firstCount;
 			for (int i = 1; i < length; i++) {
 				var countVariable = Variable.of(type);
 				literals.add(view.call(variablesToCount.get(i), countVariable));
@@ -144,11 +144,11 @@ class PartialClauseRewriter {
 		rewriteCandidateCount(literal, "upper", Modality.MUST);
 	}
 
-	private void rewriteCandidateCount(AbstractCountLiteral<Integer> literal, String name, Modality modality) {
+	private void rewriteCandidateCount(AbstractCountLiteral <Integer> literal, String name, Modality modality) {
 		var countResult = computeCountVariables(literal, Concreteness.CANDIDATE, name);
 		var builder = countResult.builder();
 
-		var literals = new ArrayList<Literal>();
+		var literals = new ArrayList <Literal>();
 		literals.add(new ModalConstraint(modality, Concreteness.CANDIDATE, literal.getTarget())
 				.call(CallPolarity.POSITIVE, countResult.rewrittenArguments()));
 		for (var variable : countResult.variablesToCount()) {
@@ -161,7 +161,7 @@ class PartialClauseRewriter {
 		workList.addFirst(literal.getResultVariable().assign(helperQuery.count(countResult.helperArguments())));
 	}
 
-	private CountResult computeCountVariables(AbstractCountLiteral<?> literal, Concreteness concreteness,
+	private CountResult computeCountVariables(AbstractCountLiteral <?> literal, Concreteness concreteness,
 											  String name) {
 		var target = literal.getTarget();
 		int arity = target.arity();
@@ -169,10 +169,10 @@ class PartialClauseRewriter {
 		var literalArguments = literal.getArguments();
 		var privateVariables = literal.getPrivateVariables(positiveVariables);
 		var builder = Dnf.builder("%s#%s#%s".formatted(target.name(), concreteness, name));
-		var rewrittenArguments = new ArrayList<Variable>(parameters.size());
-		var variablesToCount = new ArrayList<Variable>();
-		var helperArguments = new ArrayList<Variable>();
-		var literalToRewrittenArgumentMap = new HashMap<Variable, Variable>();
+		var rewrittenArguments = new ArrayList <Variable>(parameters.size());
+		var variablesToCount = new ArrayList <Variable>();
+		var helperArguments = new ArrayList <Variable>();
+		var literalToRewrittenArgumentMap = new HashMap <Variable, Variable>();
 		for (int i = 0; i < arity; i++) {
 			var literalArgument = literalArguments.get(i);
 			var parameter = parameters.get(i);
@@ -217,7 +217,7 @@ class PartialClauseRewriter {
 		}
 	}
 
-	private record CountResult(DnfBuilder builder, List<Variable> rewrittenArguments, List<Variable> helperArguments,
-							   List<Variable> variablesToCount) {
+	private record CountResult(DnfBuilder builder, List <Variable> rewrittenArguments, List <Variable> helperArguments,
+							   List <Variable> variablesToCount) {
 	}
 }

@@ -21,7 +21,7 @@ public class FlatCostFunction extends StatisticsBasedConstraintCostFunction {
 	}
 
 	@Override
-	public Optional<Long> projectionSize(IConstraintEvaluationContext input, IInputKey supplierKey, TupleMask groupMask, Accuracy requiredAccuracy) {
+	public Optional <Long> projectionSize(IConstraintEvaluationContext input, IInputKey supplierKey, TupleMask groupMask, Accuracy requiredAccuracy) {
 		// We always start from an empty model, where every projection is of size 0.
 		// Therefore, projection size estimation is meaningless.
 		return Optional.empty();

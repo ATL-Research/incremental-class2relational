@@ -25,11 +25,11 @@ import tools.refinery.interpreter.matchers.util.Direction;
  */
 public class Bag extends SimpleReceiver {
 
-    public Collection<Tuple> contents;
+    public Collection <Tuple> contents;
 
     public Bag(ReteContainer reteContainer) {
         super(reteContainer);
-        contents = new LinkedList<Tuple>();
+        contents = new LinkedList <Tuple>();
     }
 
     @Override

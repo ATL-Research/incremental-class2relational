@@ -6,7 +6,7 @@ import org.eclipse.emf.ecore.EFactory;
 
 /**
  * <!-- begin-user-doc -->
- * The <b>Factory</b> for the model.
+ * The <b>Factory </b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
  * @see class_.Class_Package
@@ -22,28 +22,28 @@ public interface Class_Factory extends EFactory {
 	Class_Factory eINSTANCE = class_.impl.Class_FactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Data Type</em>'.
+	 * Returns a new object of class ' <em>Data Type </em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Type</em>'.
+	 * @return a new object of class ' <em>Data Type </em>'.
 	 * @generated
 	 */
 	DataType createDataType();
 
 	/**
-	 * Returns a new object of class '<em>Class</em>'.
+	 * Returns a new object of class ' <em>Class </em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Class</em>'.
+	 * @return a new object of class ' <em>Class </em>'.
 	 * @generated
 	 */
 	Class createClass();
 
 	/**
-	 * Returns a new object of class '<em>Attribute</em>'.
+	 * Returns a new object of class ' <em>Attribute </em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Attribute</em>'.
+	 * @return a new object of class ' <em>Attribute </em>'.
 	 * @generated
 	 */
 	Attribute createAttribute();

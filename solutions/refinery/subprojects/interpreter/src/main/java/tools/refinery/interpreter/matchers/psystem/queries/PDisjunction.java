@@ -25,14 +25,14 @@ import tools.refinery.interpreter.matchers.psystem.PBody;
  */
 public class PDisjunction {
 
-    private Set<PBody> bodies;
+    private Set <PBody> bodies;
     private PQuery query;
 
-    public PDisjunction(Set<PBody> bodies) {
+    public PDisjunction(Set <PBody> bodies) {
         this(bodies.iterator().next().getPattern(), bodies);
     }
 
-    public PDisjunction(PQuery query, Set<PBody> bodies) {
+    public PDisjunction(PQuery query, Set <PBody> bodies) {
         super();
         this.query = query;
         this.bodies = Collections.unmodifiableSet(new LinkedHashSet<>(bodies));
@@ -44,7 +44,7 @@ public class PDisjunction {
      *
      * @return the bodies
      */
-    public Set<PBody> getBodies() {
+    public Set <PBody> getBodies() {
         return bodies;
     }
 
@@ -60,7 +60,7 @@ public class PDisjunction {
      *
      * @return a non-null, but possibly empty list of query definitions
      */
-    public Set<PQuery> getDirectReferredQueries() {
+    public Set <PQuery> getDirectReferredQueries() {
         return this.getBodies().stream().
                 flatMap(PQueries.directlyReferencedQueriesFunction()). // flatten stream of streams
                 collect(Collectors.toCollection(LinkedHashSet::new));
@@ -71,17 +71,17 @@ public class PDisjunction {
      *
      * @return a non-null, but possibly empty list of query definitions
      */
-    public Set<PQuery> getAllReferredQueries() {
-        Set<PQuery> processedQueries = new LinkedHashSet<>();
+    public Set <PQuery> getAllReferredQueries() {
+        Set <PQuery> processedQueries = new LinkedHashSet<>();
         processedQueries.add(this.getQuery());
-        Set<PQuery> foundQueries = getDirectReferredQueries();
-        Set<PQuery> newQueries = new LinkedHashSet<>(foundQueries);
+        Set <PQuery> foundQueries = getDirectReferredQueries();
+        Set <PQuery> newQueries = new LinkedHashSet<>(foundQueries);
 
         while(!processedQueries.containsAll(newQueries)) {
             PQuery query = newQueries.iterator().next();
             processedQueries.add(query);
             newQueries.remove(query);
-            Set<PQuery> referred = query.getDirectReferredQueries();
+            Set <PQuery> referred = query.getDirectReferredQueries();
             referred.removeAll(processedQueries);
             foundQueries.addAll(referred);
             newQueries.addAll(referred);

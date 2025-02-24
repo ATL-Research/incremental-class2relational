@@ -48,7 +48,7 @@ public class RelationalRuntimeContext implements IQueryRuntimeContext {
 	}
 
 	@Override
-	public <V> V coalesceTraversals(Callable<V> callable) throws InvocationTargetException {
+	public <V> V coalesceTraversals(Callable <V> callable) throws InvocationTargetException {
 		try {
 			return callable.call();
 		} catch (Exception e) {
@@ -93,7 +93,7 @@ public class RelationalRuntimeContext implements IQueryRuntimeContext {
 
 	@Override
 	public int countTuples(IInputKey key, TupleMask seedMask, ITuple seed) {
-		Iterator<Object[]> iterator = enumerate(key, seedMask, seed).iterator();
+		Iterator <Object[]> iterator = enumerate(key, seedMask, seed).iterator();
 		int result = 0;
 		while (iterator.hasNext()) {
 			iterator.next();
@@ -103,31 +103,31 @@ public class RelationalRuntimeContext implements IQueryRuntimeContext {
 	}
 
 	@Override
-	public Optional<Long> estimateCardinality(IInputKey key, TupleMask groupMask, Accuracy requiredAccuracy) {
+	public Optional <Long> estimateCardinality(IInputKey key, TupleMask groupMask, Accuracy requiredAccuracy) {
 		return Optional.empty();
 	}
 
 	@Override
-	public Iterable<Tuple> enumerateTuples(IInputKey key, TupleMask seedMask, ITuple seed) {
+	public Iterable <Tuple> enumerateTuples(IInputKey key, TupleMask seedMask, ITuple seed) {
 		var filteredBySeed = enumerate(key, seedMask, seed);
 		return map(filteredBySeed, Tuples::flatTupleOf);
 	}
 
 	@Override
-	public Iterable<?> enumerateValues(IInputKey key, TupleMask seedMask, ITuple seed) {
+	public Iterable <?> enumerateValues(IInputKey key, TupleMask seedMask, ITuple seed) {
 		var index = seedMask.getFirstOmittedIndex().orElseThrow(
 				() -> new IllegalArgumentException("Seed mask does not omit a value"));
 		var filteredBySeed = enumerate(key, seedMask, seed);
 		return map(filteredBySeed, array -> array[index]);
 	}
 
-	private Iterable<Object[]> enumerate(IInputKey key, TupleMask seedMask, ITuple seed) {
+	private Iterable <Object[]> enumerate(IInputKey key, TupleMask seedMask, ITuple seed) {
 		var relationViewKey = checkKey(key);
-		Iterable<Object[]> allObjects = getAllObjects(relationViewKey, seedMask, seed);
+		Iterable <Object[]> allObjects = getAllObjects(relationViewKey, seedMask, seed);
 		return filter(allObjects, objectArray -> isMatching(objectArray, seedMask, seed));
 	}
 
-	private Iterable<Object[]> getAllObjects(AnySymbolView key, TupleMask seedMask, ITuple seed) {
+	private Iterable <Object[]> getAllObjects(AnySymbolView key, TupleMask seedMask, ITuple seed) {
 		for (int i = 0; i < seedMask.indices.length; i++) {
 			int slot = seedMask.indices[i];
 			if (key.canIndexSlot(slot)) {

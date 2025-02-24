@@ -34,18 +34,18 @@ import tools.refinery.interpreter.api.InterpreterMatcher;
  *
  * @param <Match>
  */
-public abstract class BaseMatcher<Match extends IPatternMatch> extends QueryResultWrapper implements InterpreterMatcher<Match> {
+public abstract class BaseMatcher <Match extends IPatternMatch> extends QueryResultWrapper implements InterpreterMatcher <Match> {
 
     // FIELDS AND CONSTRUCTOR
 
     protected InterpreterEngine engine;
-    protected IQuerySpecification<? extends BaseMatcher<Match>> querySpecification;
+    protected IQuerySpecification <? extends BaseMatcher <Match>> querySpecification;
     private IMatcherCapability capabilities;
 
     /**
      * @since 1.4
      */
-    public BaseMatcher(IQuerySpecification<? extends BaseMatcher<Match>> querySpecification) {
+    public BaseMatcher(IQuerySpecification <? extends BaseMatcher <Match>> querySpecification) {
         this.querySpecification = querySpecification;
         this.querySpecification.getInternalQueryRepresentation().ensureInitialized();
     }
@@ -91,19 +91,19 @@ public abstract class BaseMatcher<Match extends IPatternMatch> extends QueryResu
     }
 
     @Override
-    public List<String> getParameterNames() {
+    public List <String> getParameterNames() {
         return getSpecification().getParameterNames();
     }
 
     // BASE IMPLEMENTATION
 
     @Override
-    public Collection<Match> getAllMatches() {
+    public Collection <Match> getAllMatches() {
         return rawStreamAllMatches(emptyArray()).collect(Collectors.toSet());
     }
 
     @Override
-    public Stream<Match> streamAllMatches() {
+    public Stream <Match> streamAllMatches() {
         return rawStreamAllMatches(emptyArray());
     }
 
@@ -116,25 +116,25 @@ public abstract class BaseMatcher<Match extends IPatternMatch> extends QueryResu
      * @return matches represented as a Match object.
      * @since 2.0
      */
-    protected Stream<Match> rawStreamAllMatches(Object[] parameters) {
+    protected Stream <Match> rawStreamAllMatches(Object[] parameters) {
         // clones the tuples into a match object to protect the Tuples from modifications outside of the ReteMatcher
         return backend.getAllMatches(parameters).map(this::tupleToMatch);
     }
 
     @Override
-    public Collection<Match> getAllMatches(Match partialMatch) {
+    public Collection <Match> getAllMatches(Match partialMatch) {
         return rawStreamAllMatches(partialMatch.toArray()).collect(Collectors.toSet());
     }
 
     @Override
-    public Stream<Match> streamAllMatches(Match partialMatch) {
+    public Stream <Match> streamAllMatches(Match partialMatch) {
         return rawStreamAllMatches(partialMatch.toArray());
     }
 
     // with input binding as pattern-specific parameters: not declared in interface
 
     @Override
-    public Optional<Match> getOneArbitraryMatch() {
+    public Optional <Match> getOneArbitraryMatch() {
         return rawGetOneArbitraryMatch(emptyArray());
     }
 
@@ -148,12 +148,12 @@ public abstract class BaseMatcher<Match extends IPatternMatch> extends QueryResu
      * @return a match represented as a Match object, or null if no match is found.
      * @since 2.0
      */
-    protected Optional<Match> rawGetOneArbitraryMatch(Object[] parameters) {
+    protected Optional <Match> rawGetOneArbitraryMatch(Object[] parameters) {
         return backend.getOneArbitraryMatch(parameters).map(this::tupleToMatch);
     }
 
     @Override
-    public Optional<Match> getOneArbitraryMatch(Match partialMatch) {
+    public Optional <Match> getOneArbitraryMatch(Match partialMatch) {
         return rawGetOneArbitraryMatch(partialMatch.toArray());
     }
 
@@ -218,29 +218,29 @@ public abstract class BaseMatcher<Match extends IPatternMatch> extends QueryResu
      *            the action that will process each pattern match.
      * @since 2.0
      */
-    protected void rawForEachMatch(Object[] parameters, Consumer<? super Match> processor) {
+    protected void rawForEachMatch(Object[] parameters, Consumer <? super Match> processor) {
         backend.getAllMatches(parameters).map(this::tupleToMatch).forEach(processor);
     }
 
     @Override
-    public void forEachMatch(Consumer<? super Match> processor) {
+    public void forEachMatch(Consumer <? super Match> processor) {
         rawForEachMatch(emptyArray(), processor);
     }
 
     @Override
-    public void forEachMatch(Match match, Consumer<? super Match> processor) {
+    public void forEachMatch(Match match, Consumer <? super Match> processor) {
         rawForEachMatch(match.toArray(), processor);
     }
 
     // with input binding as pattern-specific parameters: not declared in interface
 
     @Override
-    public boolean forOneArbitraryMatch(Consumer<? super Match> processor) {
+    public boolean forOneArbitraryMatch(Consumer <? super Match> processor) {
         return rawForOneArbitraryMatch(emptyArray(), processor);
     }
 
     @Override
-    public boolean forOneArbitraryMatch(Match partialMatch, Consumer<? super Match> processor) {
+    public boolean forOneArbitraryMatch(Match partialMatch, Consumer <? super Match> processor) {
         return rawForOneArbitraryMatch(partialMatch.toArray(), processor);
     }
 
@@ -257,7 +257,7 @@ public abstract class BaseMatcher<Match extends IPatternMatch> extends QueryResu
      *         not invoked
      * @since 2.0
      */
-    protected boolean rawForOneArbitraryMatch(Object[] parameters, Consumer<? super Match> processor) {
+    protected boolean rawForOneArbitraryMatch(Object[] parameters, Consumer <? super Match> processor) {
         return backend.getOneArbitraryMatch(parameters).map(this::tupleToMatch).map(m -> {
             processor.accept(m);
             return true;
@@ -278,12 +278,12 @@ public abstract class BaseMatcher<Match extends IPatternMatch> extends QueryResu
     }
 
     @Override
-    public Set<Object> getAllValues(final String parameterName) {
+    public Set <Object> getAllValues(final String parameterName) {
         return rawStreamAllValues(getPositionOfParameter(parameterName), emptyArray()).collect(Collectors.toSet());
     }
 
     @Override
-    public Set<Object> getAllValues(final String parameterName, Match partialMatch) {
+    public Set <Object> getAllValues(final String parameterName, Match partialMatch) {
         return rawStreamAllValues(getPositionOfParameter(parameterName), partialMatch.toArray()).collect(Collectors.toSet());
     }
 
@@ -303,7 +303,7 @@ public abstract class BaseMatcher<Match extends IPatternMatch> extends QueryResu
      *             if position is not appropriate for the current parameter size
      * @since 2.0
      */
-    protected Stream<Object> rawStreamAllValues(final int position, Object[] parameters) {
+    protected Stream <Object> rawStreamAllValues(final int position, Object[] parameters) {
         Preconditions.checkElementIndex(position, getParameterNames().size());
         Preconditions.checkArgument(parameters.length == getParameterNames().size());
         return rawStreamAllMatches(parameters).map(match -> match.get(position));
@@ -322,7 +322,7 @@ public abstract class BaseMatcher<Match extends IPatternMatch> extends QueryResu
      *            the existing set to fill with the values
      */
     @SuppressWarnings("unchecked")
-    protected <T> void rawAccumulateAllValues(final int position, Object[] parameters, final Set<T> accumulator) {
+    protected <T> void rawAccumulateAllValues(final int position, Object[] parameters, final Set <T> accumulator) {
         rawForEachMatch(parameters, match -> accumulator.add((T) match.get(position)));
     }
 
@@ -332,7 +332,7 @@ public abstract class BaseMatcher<Match extends IPatternMatch> extends QueryResu
     }
 
     @Override
-    public IQuerySpecification<? extends BaseMatcher<Match>> getSpecification() {
+    public IQuerySpecification <? extends BaseMatcher <Match>> getSpecification() {
         return querySpecification;
     }
 

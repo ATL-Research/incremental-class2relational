@@ -57,15 +57,15 @@ public class BuildHelper {
      */
     public static SubPlan trimUnneccessaryVariables(SubPlanFactory planFactory, /*IOperationCompiler buildable,*/
             SubPlan plan, boolean onlyIfNotDetermined, QueryAnalyzer analyzer) {
-        Set<PVariable> canBeTrimmed = new HashSet<PVariable>();
-        Set<PVariable> variablesInPlan = plan.getVisibleVariables();
+        Set <PVariable> canBeTrimmed = new HashSet <PVariable>();
+        Set <PVariable> variablesInPlan = plan.getVisibleVariables();
         for (PVariable trimCandidate : variablesInPlan) {
             if (trimCandidate.getReferringConstraintsOfType(ExportedParameter.class).isEmpty()) {
                 if (plan.getAllEnforcedConstraints().containsAll(trimCandidate.getReferringConstraints()))
                     canBeTrimmed.add(trimCandidate);
             }
         }
-        final Set<PVariable> retainedVars = setMinus(variablesInPlan, canBeTrimmed);
+        final Set <PVariable> retainedVars = setMinus(variablesInPlan, canBeTrimmed);
         if (!canBeTrimmed.isEmpty() && !(onlyIfNotDetermined && areVariablesDetermined(plan, retainedVars, canBeTrimmed, analyzer, false))) {
             // TODO add smart ordering?
             plan = planFactory.createSubPlan(new PProject(retainedVars), plan);
@@ -80,7 +80,7 @@ public class BuildHelper {
      *  use true if superfluous dependencies may taint the correctness of a computation, false if they would merely impact performance
      * @since 1.5
      */
-    public static boolean areAllVariablesDetermined(SubPlan plan, Collection<PVariable> determining, QueryAnalyzer analyzer, boolean strict) {
+    public static boolean areAllVariablesDetermined(SubPlan plan, Collection <PVariable> determining, QueryAnalyzer analyzer, boolean strict) {
         return areVariablesDetermined(plan, determining, plan.getVisibleVariables(), analyzer, strict);
     }
 
@@ -91,16 +91,16 @@ public class BuildHelper {
      *  use true if superfluous dependencies may taint the correctness of a computation, false if they would merely impact performance
      * @since 1.5
      */
-    public static boolean areVariablesDetermined(SubPlan plan, Collection<PVariable> determining, Collection<PVariable> determined,
+    public static boolean areVariablesDetermined(SubPlan plan, Collection <PVariable> determining, Collection <PVariable> determined,
             QueryAnalyzer analyzer, boolean strict) {
-        Map<Set<PVariable>, Set<PVariable>> dependencies = analyzer.getFunctionalDependencies(plan.getAllEnforcedConstraints(), strict);
-        final Set<PVariable> closure = FunctionalDependencyHelper.closureOf(determining, dependencies);
+        Map <Set<PVariable>, Set <PVariable>> dependencies = analyzer.getFunctionalDependencies(plan.getAllEnforcedConstraints(), strict);
+        final Set <PVariable> closure = FunctionalDependencyHelper.closureOf(determining, dependencies);
         final boolean isDetermined = closure.containsAll(determined);
         return isDetermined;
     }
 
-    private static <T> Set<T> setMinus(Set<T> a, Set<T> b) {
-        Set<T> difference = new HashSet<T>(a);
+    private static <T> Set <T> setMinus(Set <T> a, Set <T> b) {
+        Set <T> difference = new HashSet <T>(a);
         difference.removeAll(b);
         return difference;
     }
@@ -114,8 +114,8 @@ public class BuildHelper {
      */
     public static PConstraint getAnyUnenforcedConstraint(PBody pSystem,
             SubPlan plan) {
-        Set<PConstraint> allEnforcedConstraints = plan.getAllEnforcedConstraints();
-        Set<PConstraint> constraints = pSystem.getConstraints();
+        Set <PConstraint> allEnforcedConstraints = plan.getAllEnforcedConstraints();
+        Set <PConstraint> constraints = pSystem.getConstraints();
         for (PConstraint pConstraint : constraints) {
             if (!allEnforcedConstraints.contains(pConstraint))
                 return pConstraint;

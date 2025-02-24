@@ -18,7 +18,7 @@ package tools.refinery.interpreter.api;
  * @author Bergmann Gabor
  *
  */
-public interface IMatchUpdateListener<Match extends IPatternMatch> {
+public interface IMatchUpdateListener <Match extends IPatternMatch> {
     /**
      * Will be invoked on each new match that appears.
      *

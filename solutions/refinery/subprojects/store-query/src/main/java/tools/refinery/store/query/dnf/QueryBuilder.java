@@ -7,7 +7,7 @@ package tools.refinery.store.query.dnf;
 
 import tools.refinery.store.query.term.DataVariable;
 
-public final class QueryBuilder extends AbstractQueryBuilder<QueryBuilder> {
+public final class QueryBuilder extends AbstractQueryBuilder <QueryBuilder> {
 	QueryBuilder(String name) {
 		super(Dnf.builder(name));
 	}
@@ -17,7 +17,7 @@ public final class QueryBuilder extends AbstractQueryBuilder<QueryBuilder> {
 		return this;
 	}
 
-	public <T> FunctionalQueryBuilder<T> output(DataVariable<T> outputVariable) {
+	public <T> FunctionalQueryBuilder <T> output(DataVariable <T> outputVariable) {
 		return new FunctionalQueryBuilder<>(outputVariable, dnfBuilder, outputVariable.getType());
 	}
 

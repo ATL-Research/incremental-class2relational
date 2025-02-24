@@ -26,7 +26,7 @@ import static tools.refinery.store.reasoning.literal.PartialLiterals.candidateMu
 import static tools.refinery.store.reasoning.literal.PartialLiterals.may;
 
 public class TypeHierarchyTranslator implements ModelStoreConfiguration {
-	public static final Symbol<InferredType> TYPE_SYMBOL = Symbol.of("TYPE", 1, InferredType.class,
+	public static final Symbol <InferredType> TYPE_SYMBOL = Symbol.of("TYPE", 1, InferredType.class,
 			InferredType.UNTYPED);
 	private final TypeHierarchy typeHierarchy;
 
@@ -91,7 +91,7 @@ public class TypeHierarchyTranslator implements ModelStoreConfiguration {
 							not(MultiObjectTranslator.MULTI_VIEW.call(instance))
 					)
 					.action(() -> {
-						var actionLiterals = new ArrayList<ActionLiteral>();
+						var actionLiterals = new ArrayList <ActionLiteral>();
 						actionLiterals.add(PartialActionLiterals.add(type, instance));
 						for (var subtype : result.getDirectSubtypes()) {
 							actionLiterals.add(PartialActionLiterals.remove(subtype, instance));

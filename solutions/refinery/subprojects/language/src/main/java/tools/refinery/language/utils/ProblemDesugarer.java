@@ -20,19 +20,19 @@ public class ProblemDesugarer {
 	@Inject
 	private IResourceScopeCache cache = IResourceScopeCache.NullImpl.INSTANCE;
 
-	public Optional<Problem> getBuiltinProblem(EObject context) {
+	public Optional <Problem> getBuiltinProblem(EObject context) {
 		return Optional.ofNullable(context).map(EObject::eResource).flatMap(resource ->
 				cache.get("builtinProblem", resource, () -> doGetBuiltinProblem(resource)));
 	}
 
-	private Optional<Problem> doGetBuiltinProblem(Resource resource) {
+	private Optional <Problem> doGetBuiltinProblem(Resource resource) {
 		return Optional.ofNullable(resource).map(Resource::getResourceSet)
 				.map(resourceSet -> resourceSet.getResource(ProblemUtil.BUILTIN_LIBRARY_URI, true))
 				.map(Resource::getContents).filter(contents -> !contents.isEmpty()).map(contents -> contents.get(0))
 				.filter(Problem.class::isInstance).map(Problem.class::cast);
 	}
 
-	public Optional<BuiltinSymbols> getBuiltinSymbols(EObject context) {
+	public Optional <BuiltinSymbols> getBuiltinSymbols(EObject context) {
 		return getBuiltinProblem(context).map(builtin ->
 				cache.get("builtinSymbols", builtin.eResource(), () -> doGetBuiltinSymbols(builtin)));
 	}
@@ -47,22 +47,22 @@ public class ProblemDesugarer {
 		return new BuiltinSymbols(builtin, node, equals, exists, contained, contains, invalidContainer);
 	}
 
-	private <T extends Statement & NamedElement> T doGetDeclaration(Problem builtin, Class<T> type, String name) {
+	private <T extends Statement & NamedElement> T doGetDeclaration(Problem builtin, Class <T> type, String name) {
 		return builtin.getStatements().stream().filter(type::isInstance).map(type::cast)
 				.filter(declaration -> name.equals(declaration.getName())).findFirst()
 				.orElseThrow(() -> new IllegalArgumentException("Built-in declaration " + name + " was not found"));
 	}
 
-	public Collection<ClassDeclaration> getSuperclassesAndSelf(ClassDeclaration classDeclaration) {
+	public Collection <ClassDeclaration> getSuperclassesAndSelf(ClassDeclaration classDeclaration) {
 		return cache.get(Tuples.create(classDeclaration, "superclassesAndSelf"), classDeclaration.eResource(),
 				() -> doGetSuperclassesAndSelf(classDeclaration));
 	}
 
-	private Collection<ClassDeclaration> doGetSuperclassesAndSelf(ClassDeclaration classDeclaration) {
+	private Collection <ClassDeclaration> doGetSuperclassesAndSelf(ClassDeclaration classDeclaration) {
 		var builtinSymbols = getBuiltinSymbols(classDeclaration);
-		Set<ClassDeclaration> found = new HashSet<>();
+		Set <ClassDeclaration> found = new HashSet<>();
 		builtinSymbols.ifPresent(symbols -> found.add(symbols.node()));
-		Deque<ClassDeclaration> queue = new ArrayDeque<>();
+		Deque <ClassDeclaration> queue = new ArrayDeque<>();
 		queue.addLast(classDeclaration);
 		while (!queue.isEmpty()) {
 			ClassDeclaration current = queue.removeFirst();
@@ -78,13 +78,13 @@ public class ProblemDesugarer {
 		return found;
 	}
 
-	public Collection<ReferenceDeclaration> getAllReferenceDeclarations(ClassDeclaration classDeclaration) {
+	public Collection <ReferenceDeclaration> getAllReferenceDeclarations(ClassDeclaration classDeclaration) {
 		return cache.get(Tuples.create(classDeclaration, "allReferenceDeclarations"), classDeclaration.eResource(),
 				() -> doGetAllReferenceDeclarations(classDeclaration));
 	}
 
-	private Collection<ReferenceDeclaration> doGetAllReferenceDeclarations(ClassDeclaration classDeclaration) {
-		Set<ReferenceDeclaration> referenceDeclarations = new HashSet<>();
+	private Collection <ReferenceDeclaration> doGetAllReferenceDeclarations(ClassDeclaration classDeclaration) {
+		Set <ReferenceDeclaration> referenceDeclarations = new HashSet<>();
 		for (ClassDeclaration superclass : getSuperclassesAndSelf(classDeclaration)) {
 			for (FeatureDeclaration featureDeclaration : superclass.getFeatureDeclarations()) {
 				if (featureDeclaration instanceof ReferenceDeclaration referenceDeclaration) {

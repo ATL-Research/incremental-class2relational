@@ -32,13 +32,13 @@ public abstract class PatternCallBasedDeferred extends VariableDeferredPConstrai
 
     protected abstract void doDoReplaceVariables(PVariable obsolete, PVariable replacement);
 
-    protected abstract Set<PVariable> getCandidateQuantifiedVariables();
+    protected abstract Set <PVariable> getCandidateQuantifiedVariables();
 
     protected PQuery query;
-    private Set<PVariable> deferringVariables;
+    private Set <PVariable> deferringVariables;
 
     public PatternCallBasedDeferred(PBody pBody, Tuple actualParametersTuple,
-            PQuery pattern, Set<PVariable> additionalAffectedVariables) {
+            PQuery pattern, Set <PVariable> additionalAffectedVariables) {
         super(pBody, union(actualParametersTuple.<PVariable> getDistinctElements(), additionalAffectedVariables));
         this.actualParametersTuple = actualParametersTuple;
         this.query = pattern;
@@ -49,17 +49,17 @@ public abstract class PatternCallBasedDeferred extends VariableDeferredPConstrai
         this(pBody, actualParametersTuple, pattern, Collections.<PVariable> emptySet());
     }
 
-    private static Set<PVariable> union(Set<PVariable> a, Set<PVariable> b) {
-        Set<PVariable> result = new HashSet<PVariable>();
+    private static Set <PVariable> union(Set <PVariable> a, Set <PVariable> b) {
+        Set <PVariable> result = new HashSet <PVariable>();
         result.addAll(a);
         result.addAll(b);
         return result;
     }
 
     @Override
-    public Set<PVariable> getDeferringVariables() {
+    public Set <PVariable> getDeferringVariables() {
         if (deferringVariables == null) {
-            deferringVariables = new HashSet<PVariable>();
+            deferringVariables = new HashSet <PVariable>();
             for (PVariable var : getCandidateQuantifiedVariables()) {
                 if (var.isDeducable())
                     deferringVariables.add(var);

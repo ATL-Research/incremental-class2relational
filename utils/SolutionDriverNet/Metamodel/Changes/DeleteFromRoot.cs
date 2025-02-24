@@ -41,7 +41,7 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
     public partial class DeleteFromRoot : NMF.Models.Changes.ElementaryChange, IDeleteFromRoot, NMF.Models.IModelElement
     {
         
-        private static Lazy<NMF.Models.Meta.ITypedElement> _deletedElementReference = new Lazy<NMF.Models.Meta.ITypedElement>(RetrieveDeletedElementReference);
+        private static Lazy <NMF.Models.Meta.ITypedElement> _deletedElementReference = new Lazy <NMF.Models.Meta.ITypedElement>(RetrieveDeletedElementReference);
         
         /// <summary>
         /// The backing field for the DeletedElement property
@@ -90,7 +90,7 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Gets the referenced model elements of this model element
         /// </summary>
-        public override IEnumerableExpression<NMF.Models.IModelElement> ReferencedElements
+        public override IEnumerableExpression <NMF.Models.IModelElement> ReferencedElements
         {
             get
             {
@@ -116,12 +116,12 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Gets fired before the DeletedElement property changes its value
         /// </summary>
-        public event System.EventHandler<ValueChangedEventArgs> DeletedElementChanging;
+        public event System.EventHandler <ValueChangedEventArgs> DeletedElementChanging;
         
         /// <summary>
         /// Gets fired when the DeletedElement property changed its value
         /// </summary>
-        public event System.EventHandler<ValueChangedEventArgs> DeletedElementChanged;
+        public event System.EventHandler <ValueChangedEventArgs> DeletedElementChanged;
         
         private static NMF.Models.Meta.ITypedElement RetrieveDeletedElementReference()
         {
@@ -131,10 +131,10 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Raises the DeletedElementChanging event
         /// </summary>
-        /// <param name="eventArgs">The event data</param>
+        /// <param name="eventArgs">The event data </param>
         protected virtual void OnDeletedElementChanging(ValueChangedEventArgs eventArgs)
         {
-            System.EventHandler<ValueChangedEventArgs> handler = this.DeletedElementChanging;
+            System.EventHandler <ValueChangedEventArgs> handler = this.DeletedElementChanging;
             if ((handler != null))
             {
                 handler.Invoke(this, eventArgs);
@@ -144,10 +144,10 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Raises the DeletedElementChanged event
         /// </summary>
-        /// <param name="eventArgs">The event data</param>
+        /// <param name="eventArgs">The event data </param>
         protected virtual void OnDeletedElementChanged(ValueChangedEventArgs eventArgs)
         {
-            System.EventHandler<ValueChangedEventArgs> handler = this.DeletedElementChanged;
+            System.EventHandler <ValueChangedEventArgs> handler = this.DeletedElementChanged;
             if ((handler != null))
             {
                 handler.Invoke(this, eventArgs);
@@ -157,8 +157,8 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Handles the event that the DeletedElement property must reset
         /// </summary>
-        /// <param name="sender">The object that sent this reset request</param>
-        /// <param name="eventArgs">The event data for the reset event</param>
+        /// <param name="sender">The object that sent this reset request </param>
+        /// <param name="eventArgs">The event data for the reset event </param>
         private void OnResetDeletedElement(object sender, System.EventArgs eventArgs)
         {
             this.DeletedElement = null;
@@ -167,9 +167,9 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Resolves the given URI to a child model element
         /// </summary>
-        /// <returns>The model element or null if it could not be found</returns>
-        /// <param name="reference">The requested reference name</param>
-        /// <param name="index">The index of this reference</param>
+        /// <returns>The model element or null if it could not be found </returns>
+        /// <param name="reference">The requested reference name </param>
+        /// <param name="index">The index of this reference </param>
         protected override NMF.Models.IModelElement GetModelElementForReference(string reference, int index)
         {
             if ((reference == "DELETEDELEMENT"))
@@ -182,8 +182,8 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Sets a value to the given feature
         /// </summary>
-        /// <param name="feature">The requested feature</param>
-        /// <param name="value">The value that should be set to that feature</param>
+        /// <param name="feature">The requested feature </param>
+        /// <param name="value">The value that should be set to that feature </param>
         protected override void SetFeature(string feature, object value)
         {
             if ((feature == "DELETEDELEMENT"))
@@ -197,9 +197,9 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Gets the property expression for the given reference
         /// </summary>
-        /// <returns>An incremental property expression</returns>
-        /// <param name="reference">The requested reference in upper case</param>
-        protected override NMF.Expressions.INotifyExpression<NMF.Models.IModelElement> GetExpressionForReference(string reference)
+        /// <returns>An incremental property expression </returns>
+        /// <param name="reference">The requested reference in upper case </param>
+        protected override NMF.Expressions.INotifyExpression <NMF.Models.IModelElement> GetExpressionForReference(string reference)
         {
             if ((reference == "DELETEDELEMENT"))
             {
@@ -223,7 +223,7 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// The collection class to to represent the children of the DeleteFromRoot class
         /// </summary>
-        public class DeleteFromRootReferencedElementsCollection : ReferenceCollection, ICollectionExpression<NMF.Models.IModelElement>, ICollection<NMF.Models.IModelElement>
+        public class DeleteFromRootReferencedElementsCollection : ReferenceCollection, ICollectionExpression <NMF.Models.IModelElement>, ICollection <NMF.Models.IModelElement>
         {
             
             private DeleteFromRoot _parent;
@@ -265,7 +265,7 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
             /// <summary>
             /// Adds the given element to the collection
             /// </summary>
-            /// <param name="item">The item to add</param>
+            /// <param name="item">The item to add </param>
             public override void Add(NMF.Models.IModelElement item)
             {
                 if ((this._parent.DeletedElement == null))
@@ -286,8 +286,8 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
             /// <summary>
             /// Gets a value indicating whether the given element is contained in the collection
             /// </summary>
-            /// <returns>True, if it is contained, otherwise False</returns>
-            /// <param name="item">The item that should be looked out for</param>
+            /// <returns>True, if it is contained, otherwise False </returns>
+            /// <param name="item">The item that should be looked out for </param>
             public override bool Contains(NMF.Models.IModelElement item)
             {
                 if ((item == this._parent.DeletedElement))
@@ -300,8 +300,8 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
             /// <summary>
             /// Copies the contents of the collection to the given array starting from the given array index
             /// </summary>
-            /// <param name="array">The array in which the elements should be copied</param>
-            /// <param name="arrayIndex">The starting index</param>
+            /// <param name="array">The array in which the elements should be copied </param>
+            /// <param name="arrayIndex">The starting index </param>
             public override void CopyTo(NMF.Models.IModelElement[] array, int arrayIndex)
             {
                 if ((this._parent.DeletedElement != null))
@@ -314,8 +314,8 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
             /// <summary>
             /// Removes the given item from the collection
             /// </summary>
-            /// <returns>True, if the item was removed, otherwise False</returns>
-            /// <param name="item">The item that should be removed</param>
+            /// <returns>True, if the item was removed, otherwise False </returns>
+            /// <param name="item">The item that should be removed </param>
             public override bool Remove(NMF.Models.IModelElement item)
             {
                 if ((this._parent.DeletedElement == item))
@@ -329,23 +329,23 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
             /// <summary>
             /// Gets an enumerator that enumerates the collection
             /// </summary>
-            /// <returns>A generic enumerator</returns>
-            public override IEnumerator<NMF.Models.IModelElement> GetEnumerator()
+            /// <returns>A generic enumerator </returns>
+            public override IEnumerator <NMF.Models.IModelElement> GetEnumerator()
             {
-                return Enumerable.Empty<NMF.Models.IModelElement>().Concat(this._parent.DeletedElement).GetEnumerator();
+                return Enumerable.Empty <NMF.Models.IModelElement>().Concat(this._parent.DeletedElement).GetEnumerator();
             }
         }
         
         /// <summary>
         /// Represents a proxy to represent an incremental access to the deletedElement property
         /// </summary>
-        private sealed class DeletedElementProxy : ModelPropertyChange<IDeleteFromRoot, NMF.Models.IModelElement>
+        private sealed class DeletedElementProxy : ModelPropertyChange <IDeleteFromRoot, NMF.Models.IModelElement>
         {
             
             /// <summary>
             /// Creates a new observable property access proxy
             /// </summary>
-            /// <param name="modelElement">The model instance element for which to create the property access proxy</param>
+            /// <param name="modelElement">The model instance element for which to create the property access proxy </param>
             public DeletedElementProxy(IDeleteFromRoot modelElement) : 
                     base(modelElement, "deletedElement")
             {

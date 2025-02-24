@@ -34,15 +34,15 @@ import tools.refinery.interpreter.matchers.util.Direction;
  */
 public abstract class IdentityIndexer extends SpecializedProjectionIndexer {
 
-    protected abstract Collection<Tuple> getTuples();
+    protected abstract Collection <Tuple> getTuples();
 
     public IdentityIndexer(ReteContainer reteContainer, int tupleWidth, Supplier parent,
-                           Node activeNode, List<ListenerSubscription> sharedSubscriptionList) {
+                           Node activeNode, List <ListenerSubscription> sharedSubscriptionList) {
         super(reteContainer, TupleMask.identity(tupleWidth), parent, activeNode, sharedSubscriptionList);
     }
 
     @Override
-    public Collection<Tuple> get(Tuple signature) {
+    public Collection <Tuple> get(Tuple signature) {
         if (contains(signature)) {
             return Collections.singleton(signature);
         } else
@@ -54,7 +54,7 @@ public abstract class IdentityIndexer extends SpecializedProjectionIndexer {
     }
 
     @Override
-    public Collection<Tuple> getSignatures() {
+    public Collection <Tuple> getSignatures() {
         return getTuples();
     }
 
@@ -64,7 +64,7 @@ public abstract class IdentityIndexer extends SpecializedProjectionIndexer {
     }
 
     @Override
-    public Iterator<Tuple> iterator() {
+    public Iterator <Tuple> iterator() {
         return getTuples().iterator();
     }
 

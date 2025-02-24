@@ -15,9 +15,9 @@ import tools.refinery.store.query.ModelQueryBuilder;
 import java.util.List;
 
 public class RuleBasedPropagator implements Propagator {
-	private final List<Rule> propagationRules;
+	private final List <Rule> propagationRules;
 
-	public RuleBasedPropagator(List<Rule> propagationRules) {
+	public RuleBasedPropagator(List <Rule> propagationRules) {
 		this.propagationRules = propagationRules;
 	}
 

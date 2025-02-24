@@ -48,11 +48,11 @@ public abstract class LocalSearchBackend implements IQueryBackend {
 
     IQueryBackendContext context;
     IPlanProvider planProvider;
-    private final Set<ILocalSearchAdapter> adapters = new HashSet<>();
+    private final Set <ILocalSearchAdapter> adapters = new HashSet<>();
 
     private final PurgableCache generalCache;
 
-    private final Map<PQuery, List<AbstractLocalSearchResultProvider>> resultProviderCache = CollectionsFactory.createMap();
+    private final Map <PQuery, List <AbstractLocalSearchResultProvider>> resultProviderCache = CollectionsFactory.createMap();
 
 
     /**
@@ -96,7 +96,7 @@ public abstract class LocalSearchBackend implements IQueryBackend {
     }
 
     /**
-     * Returns a requestor that this backend uses while processing pattern calls <i>from</i> this query.
+     * Returns a requestor that this backend uses while processing pattern calls <i>from </i> this query.
      * @noreference This method is not intended to be referenced by clients.
      * @since 2.1
      */
@@ -179,7 +179,7 @@ public abstract class LocalSearchBackend implements IQueryBackend {
      * Return a copy of the current adapters
      * @since 1.7
      */
-    public List<ILocalSearchAdapter> getAdapters() {
+    public List <ILocalSearchAdapter> getAdapters() {
         return new ArrayList<>(adapters);
     }
 
@@ -217,7 +217,7 @@ public abstract class LocalSearchBackend implements IQueryBackend {
      *
      * @since 2.0
      */
-    public void recomputePlans(Collection<PQuery> queries) {
+    public void recomputePlans(Collection <PQuery> queries) {
         recomputePlans(queries.stream().flatMap(query -> resultProviderCache.getOrDefault(query, Collections.emptyList()).stream()));
     }
 
@@ -232,7 +232,7 @@ public abstract class LocalSearchBackend implements IQueryBackend {
         recomputePlans(resultProviderCache.values().stream().flatMap(List::stream));
     }
 
-    private void recomputePlans(Stream<AbstractLocalSearchResultProvider> resultProviders) {
+    private void recomputePlans(Stream <AbstractLocalSearchResultProvider> resultProviders) {
         try {
             context.getRuntimeContext().coalesceTraversals(() -> {
                 resultProviders.forEach(resultProvider -> {
@@ -252,7 +252,7 @@ public abstract class LocalSearchBackend implements IQueryBackend {
      * @return a previously calculated search plan for the given query and adornment, or null if no such plan exists
      * @since 2.0
      */
-    public IPlanDescriptor getSearchPlan(PQuery query, Set<PParameter> adornment) {
+    public IPlanDescriptor getSearchPlan(PQuery query, Set <PParameter> adornment) {
         final AbstractLocalSearchResultProvider resultProvider = peekExistingResultProvider(query);
         return (resultProvider == null) ? null : resultProvider.getSearchPlan(adornment);
     }

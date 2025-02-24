@@ -17,7 +17,7 @@ import tools.refinery.interpreter.matchers.psystem.aggregations.AbstractMemoryle
  * @author Gabor Bergmann
  * @since 1.4
  */
-public class DoubleSumOperator extends AbstractMemorylessAggregationOperator<Double, Double> {
+public class DoubleSumOperator extends AbstractMemorylessAggregationOperator <Double, Double> {
     public static final DoubleSumOperator INSTANCE = new DoubleSumOperator();
 
     private DoubleSumOperator() {
@@ -26,11 +26,11 @@ public class DoubleSumOperator extends AbstractMemorylessAggregationOperator<Dou
 
     @Override
     public String getShortDescription() {
-        return "sum<Double> incrementally computes the sum of java.lang.Double values";
+        return "sum <Double> incrementally computes the sum of java.lang.Double values";
     }
     @Override
     public String getName() {
-        return "sum<Double>";
+        return "sum <Double>";
     }
 
     @Override
@@ -54,7 +54,7 @@ public class DoubleSumOperator extends AbstractMemorylessAggregationOperator<Dou
      * @since 2.0
      */
     @Override
-    public Double aggregateStream(Stream<Double> stream) {
+    public Double aggregateStream(Stream <Double> stream) {
         return stream.mapToDouble(Double::doubleValue).sum();
     }
 

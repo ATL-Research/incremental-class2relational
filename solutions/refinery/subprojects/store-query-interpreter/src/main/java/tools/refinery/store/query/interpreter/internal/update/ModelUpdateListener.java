@@ -16,17 +16,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ModelUpdateListener {
-	private final Map<AnySymbolView, SymbolViewUpdateListener<?>> symbolViewUpdateListeners;
+	private final Map <AnySymbolView, SymbolViewUpdateListener <?>> symbolViewUpdateListeners;
 
 	public ModelUpdateListener(QueryInterpreterAdapterImpl adapter) {
 		var symbolViews = adapter.getStoreAdapter().getInputKeys().keySet();
 		symbolViewUpdateListeners = new HashMap<>(symbolViews.size());
 		for (var symbolView : symbolViews) {
-			registerView(adapter, (SymbolView<?>) symbolView);
+			registerView(adapter, (SymbolView <?>) symbolView);
 		}
 	}
 
-	private <T> void registerView(QueryInterpreterAdapterImpl adapter, SymbolView<T> view) {
+	private <T> void registerView(QueryInterpreterAdapterImpl adapter, SymbolView <T> view) {
 		var model = adapter.getModel();
 		var interpretation = model.getInterpretation(view.getSymbol());
 		var listener = SymbolViewUpdateListener.of(adapter, view, interpretation);

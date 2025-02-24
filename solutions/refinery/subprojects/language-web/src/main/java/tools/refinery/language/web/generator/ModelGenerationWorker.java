@@ -61,9 +61,9 @@ public class ModelGenerationWorker implements Runnable {
 
 	private long timeoutSec;
 
-	private Future<?> future;
+	private Future <?> future;
 
-	private ScheduledFuture<?> timeoutFuture;
+	private ScheduledFuture <?> timeoutFuture;
 
 	private final CancellationToken cancellationToken = () -> {
 		if (cancelled || Thread.interrupted()) {

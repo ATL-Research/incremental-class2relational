@@ -11,6 +11,6 @@ import tools.refinery.language.web.semantics.metadata.RelationMetadata;
 
 import java.util.List;
 
-public record SemanticsSuccessResult(List<NodeMetadata> nodes, List<RelationMetadata> relations,
+public record SemanticsSuccessResult(List <NodeMetadata> nodes, List <RelationMetadata> relations,
 									 JsonObject partialInterpretation) implements SemanticsResult {
 }

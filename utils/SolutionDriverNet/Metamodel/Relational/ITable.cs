@@ -52,7 +52,7 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         [ContainmentAttribute()]
         [XmlOppositeAttribute("owner")]
         [ConstantAttribute()]
-        IOrderedSetExpression<IColumn> Col
+        IOrderedSetExpression <IColumn> Col
         {
             get;
         }
@@ -67,7 +67,7 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         [XmlAttributeAttribute(true)]
         [XmlOppositeAttribute("keyOf")]
         [ConstantAttribute()]
-        ISetExpression<IColumn> Key
+        ISetExpression <IColumn> Key
         {
             get;
         }

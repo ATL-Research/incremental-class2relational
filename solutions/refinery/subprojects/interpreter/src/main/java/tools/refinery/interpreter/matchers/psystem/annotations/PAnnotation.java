@@ -24,7 +24,7 @@ import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 public class PAnnotation {
 
     private final String name;
-    private MutableMultimap<String, Object> attributes = FastListMultimap.newMultimap();
+    private MutableMultimap <String, Object> attributes = FastListMultimap.newMultimap();
 
     public PAnnotation(String name) {
         this.name = name;
@@ -53,7 +53,7 @@ public class PAnnotation {
      * @return the attribute value, or null, if attribute is not available
      * @since 2.0
      */
-    public Optional<Object> getFirstValue(String attributeName) {
+    public Optional <Object> getFirstValue(String attributeName) {
         return getAllValues(attributeName).stream().findFirst();
     }
 
@@ -63,7 +63,7 @@ public class PAnnotation {
      * @return the attribute value, or null, if attribute is not available
      * @since 2.0
      */
-    public <T> Optional<T> getFirstValue(String attributeName, Class<T> clazz) {
+    public <T> Optional <T> getFirstValue(String attributeName, Class <T> clazz) {
         return getAllValues(attributeName).stream().filter(clazz::isInstance).map(clazz::cast).findFirst();
     }
 
@@ -72,7 +72,7 @@ public class PAnnotation {
      * @param attributeName
      * @return a non-null, but possibly empty list of attributes
      */
-    public List<Object> getAllValues(String attributeName) {
+    public List <Object> getAllValues(String attributeName) {
         return attributes.get(attributeName).toList();
     }
 
@@ -80,7 +80,7 @@ public class PAnnotation {
      * Executes a consumer over all attributes. A selected attribute name (key) can appear (and thus consumed) multiple times.
      * @since 2.0
      */
-    public void forEachValue(BiConsumer<String, Object> consumer) {
+    public void forEachValue(BiConsumer <String, Object> consumer) {
         attributes.forEachKeyValue(consumer::accept);
     }
 
@@ -88,7 +88,7 @@ public class PAnnotation {
      * Returns a set of all attribute names used in this annotation
      * @since 2.1
      */
-    public Set<String> getAllAttributeNames() {
+    public Set <String> getAllAttributeNames() {
         return attributes.keySet().toSet();
     }
 }

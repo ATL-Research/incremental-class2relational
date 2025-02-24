@@ -14,20 +14,20 @@ import relational_.Relational_Package;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Named</b></em>'.
+ * An implementation of the model object ' <em> <b>Named </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link relational_.impl.NamedImpl#getName <em>Name</em>}</li>
+ *   <li>{@link relational_.impl.NamedImpl#getName <em>Name </em>} </li>
  * </ul>
  *
  * @generated
  */
 public abstract class NamedImpl extends MinimalEObjectImpl.Container implements Named {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The default value of the '{@link #getName() <em>Name </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getName()
@@ -37,7 +37,7 @@ public abstract class NamedImpl extends MinimalEObjectImpl.Container implements 
 	protected static final String NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getName() <em>Name </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getName()

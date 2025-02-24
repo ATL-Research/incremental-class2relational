@@ -16,7 +16,7 @@ import tools.refinery.interpreter.localsearch.operations.ExtendOperationExecutor
  * @since 2.0
  * @noextend This class is not intended to be subclassed by clients.
  */
-public abstract class SingleValueExtendOperationExecutor<T> extends ExtendOperationExecutor<T> {
+public abstract class SingleValueExtendOperationExecutor <T> extends ExtendOperationExecutor <T> {
     protected int position;
 
     /**

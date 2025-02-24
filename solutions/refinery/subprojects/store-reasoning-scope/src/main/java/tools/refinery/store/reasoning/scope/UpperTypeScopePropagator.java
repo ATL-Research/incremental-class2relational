@@ -64,7 +64,7 @@ class UpperTypeScopePropagator extends TypeScopePropagator {
 		}
 
 		@Override
-		protected Collection<AnyQuery> getQueries() {
+		protected Collection <AnyQuery> getQueries() {
 			return List.of(allMust, multiMust);
 		}
 

@@ -14,14 +14,14 @@ import java.util.ArrayDeque;
 import java.util.ConcurrentModificationException;
 import java.util.Set;
 
-public class MapCursor<K, V> implements Cursor<K, V> {
+public class MapCursor <K, V> implements Cursor <K, V> {
 	// Constants
 	static final int INDEX_START = -1;
 	static final int INDEX_FINISH = -2;
 
 	// Tree stack
-	ArrayDeque<Node<K, V>> nodeStack;
-	ArrayDeque<Integer> nodeIndexStack;
+	ArrayDeque <Node<K, V>> nodeStack;
+	ArrayDeque <Integer> nodeIndexStack;
 	int dataIndex;
 
 	// Values
@@ -29,10 +29,10 @@ public class MapCursor<K, V> implements Cursor<K, V> {
 	V value;
 
 	// Hash code for checking concurrent modifications
-	final VersionedMap<K, V> map;
+	final VersionedMap <K, V> map;
 	final int creationHash;
 
-	public MapCursor(Node<K, V> root, VersionedMap<K, V> map) {
+	public MapCursor(Node <K, V> root, VersionedMap <K, V> map) {
 		// Initializing tree stack
 		super();
 		this.nodeStack = new ArrayDeque<>();
@@ -89,7 +89,7 @@ public class MapCursor<K, V> implements Cursor<K, V> {
 	}
 
 	@Override
-	public Set<AnyVersionedMap> getDependingMaps() {
+	public Set <AnyVersionedMap> getDependingMaps() {
 		return Set.of(this.map);
 	}
 }

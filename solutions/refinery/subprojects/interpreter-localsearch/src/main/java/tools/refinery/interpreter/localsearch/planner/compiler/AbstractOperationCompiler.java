@@ -70,17 +70,17 @@ public abstract class AbstractOperationCompiler implements IOperationCompiler {
 
     protected static final String UNSUPPORTED_TYPE_MESSAGE = "Unsupported type: ";
 
-    protected abstract void createExtend(TypeConstraint typeConstraint, Map<PVariable, Integer> variableMapping);
+    protected abstract void createExtend(TypeConstraint typeConstraint, Map <PVariable, Integer> variableMapping);
 
     /**
      * @throws InterpreterRuntimeException
      */
-    protected abstract void createCheck(TypeConstraint typeConstraint, Map<PVariable, Integer> variableMapping);
+    protected abstract void createCheck(TypeConstraint typeConstraint, Map <PVariable, Integer> variableMapping);
 
     /**
      * @throws InterpreterRuntimeException
      */
-    protected abstract void createCheck(TypeFilterConstraint typeConstraint, Map<PVariable, Integer> variableMapping);
+    protected abstract void createCheck(TypeFilterConstraint typeConstraint, Map <PVariable, Integer> variableMapping);
 
     /**
      * @since 2.0
@@ -88,10 +88,10 @@ public abstract class AbstractOperationCompiler implements IOperationCompiler {
      */
     protected abstract void createUnaryTypeCheck(IInputKey type, int position);
 
-    protected List<ISearchOperation> operations;
-    protected Set<CallWithAdornment> dependencies = new HashSet<>();
-    protected Map<PConstraint, Set<Integer>> variableBindings;
-    private Map<PVariable, Integer> variableMappings;
+    protected List <ISearchOperation> operations;
+    protected Set <CallWithAdornment> dependencies = new HashSet<>();
+    protected Map <PConstraint, Set <Integer>> variableBindings;
+    private Map <PVariable, Integer> variableMappings;
     protected final IQueryRuntimeContext runtimeContext;
 
     public AbstractOperationCompiler(IQueryRuntimeContext runtimeContext) {
@@ -99,7 +99,7 @@ public abstract class AbstractOperationCompiler implements IOperationCompiler {
     }
 
     /**
-     * Compiles a plan of <code>POperation</code>s to a list of type <code>List&ltISearchOperation></code>
+     * Compiles a plan of <code>POperation </code>s to a list of type <code>List&ltISearchOperation> </code>
      *
      * @param plan
      * @param boundParameters
@@ -107,14 +107,14 @@ public abstract class AbstractOperationCompiler implements IOperationCompiler {
      * @throws InterpreterRuntimeException
      */
     @Override
-    public List<ISearchOperation> compile(SubPlan plan, Set<PParameter> boundParameters) {
+    public List <ISearchOperation> compile(SubPlan plan, Set <PParameter> boundParameters) {
 
         variableMappings = CompilerHelper.createVariableMapping(plan);
         variableBindings = CompilerHelper.cacheVariableBindings(plan, variableMappings, boundParameters);
 
         operations = new ArrayList<>();
 
-        List<POperation> operationList = CompilerHelper.createOperationsList(plan);
+        List <POperation> operationList = CompilerHelper.createOperationsList(plan);
         for (POperation pOperation : operationList) {
             compile(pOperation, variableMappings);
         }
@@ -122,7 +122,7 @@ public abstract class AbstractOperationCompiler implements IOperationCompiler {
         return operations;
     }
 
-    private void compile(POperation pOperation, Map<PVariable, Integer> variableMapping) {
+    private void compile(POperation pOperation, Map <PVariable, Integer> variableMapping) {
 
         if (pOperation instanceof PApply) {
             PApply pApply = (PApply) pOperation;
@@ -146,7 +146,7 @@ public abstract class AbstractOperationCompiler implements IOperationCompiler {
 
     }
 
-    private void createCheckDispatcher(PConstraint pConstraint, Map<PVariable, Integer> variableMapping) {
+    private void createCheckDispatcher(PConstraint pConstraint, Map <PVariable, Integer> variableMapping) {
 
 
         // DeferredPConstraint subclasses
@@ -188,7 +188,7 @@ public abstract class AbstractOperationCompiler implements IOperationCompiler {
 
     }
 
-    protected void createExtendDispatcher(PConstraint pConstraint, Map<PVariable, Integer> variableMapping) {
+    protected void createExtendDispatcher(PConstraint pConstraint, Map <PVariable, Integer> variableMapping) {
 
         // DeferredPConstraint subclasses
 
@@ -221,12 +221,12 @@ public abstract class AbstractOperationCompiler implements IOperationCompiler {
         }
     }
 
-    private boolean isCheck(PConstraint pConstraint, final Map<PVariable, Integer> variableMapping) {
+    private boolean isCheck(PConstraint pConstraint, final Map <PVariable, Integer> variableMapping) {
         if (pConstraint instanceof NegativePatternCall){
             return true;
         }else if (pConstraint instanceof PositivePatternCall){
             // Positive pattern call is check if all non-single used variables are bound
-            List<Integer> callVariables = pConstraint.getAffectedVariables().stream()
+            List <Integer> callVariables = pConstraint.getAffectedVariables().stream()
                 .filter(input -> input.getReferringConstraints().size() > 1)
                 .map(variableMapping::get)
                 .collect(Collectors.toList());
@@ -242,8 +242,8 @@ public abstract class AbstractOperationCompiler implements IOperationCompiler {
             return outputvar == null || variableBindings.get(pConstraint).contains(variableMapping.get(outputvar));
         } else {
             // In other cases, all variables shall be bound to be a check
-            Set<PVariable> affectedVariables = pConstraint.getAffectedVariables();
-            Set<Integer> varIndices = new HashSet<>();
+            Set <PVariable> affectedVariables = pConstraint.getAffectedVariables();
+            Set <Integer> varIndices = new HashSet<>();
             for (PVariable variable : affectedVariables) {
                 varIndices.add(variableMapping.get(variable));
             }
@@ -252,7 +252,7 @@ public abstract class AbstractOperationCompiler implements IOperationCompiler {
     }
 
     @Override
-    public Set<CallWithAdornment> getDependencies() {
+    public Set <CallWithAdornment> getDependencies() {
         return dependencies;
     }
 
@@ -260,28 +260,28 @@ public abstract class AbstractOperationCompiler implements IOperationCompiler {
      * @return the cached variable bindings for the previously created plan
      */
     @Override
-    public Map<PVariable, Integer> getVariableMappings() {
+    public Map <PVariable, Integer> getVariableMappings() {
         return variableMappings;
     }
 
-    protected void createCheck(PatternMatchCounter counter, Map<PVariable, Integer> variableMapping) {
+    protected void createCheck(PatternMatchCounter counter, Map <PVariable, Integer> variableMapping) {
         CallInformation information = CallInformation.create(counter, variableMapping, variableBindings.get(counter));
         operations.add(new CountCheck(information, variableMapping.get(counter.getResultVariable())));
         dependencies.add(information.getCallWithAdornment());
     }
 
-    protected void createCheck(PositivePatternCall pCall, Map<PVariable, Integer> variableMapping) {
+    protected void createCheck(PositivePatternCall pCall, Map <PVariable, Integer> variableMapping) {
         CallInformation information = CallInformation.create(pCall, variableMapping, variableBindings.get(pCall));
         operations.add(new CheckPositivePatternCall(information));
         dependencies.add(information.getCallWithAdornment());
     }
 
-    protected void createCheck(ConstantValue constant, Map<PVariable, Integer> variableMapping) {
+    protected void createCheck(ConstantValue constant, Map <PVariable, Integer> variableMapping) {
         int position = variableMapping.get(constant.getVariablesTuple().get(0));
         operations.add(new CheckConstant(position, constant.getSupplierKey()));
     }
 
-    protected void createCheck(BinaryTransitiveClosure binaryTransitiveClosure, Map<PVariable, Integer> variableMapping) {
+    protected void createCheck(BinaryTransitiveClosure binaryTransitiveClosure, Map <PVariable, Integer> variableMapping) {
         int sourcePosition = variableMapping.get(binaryTransitiveClosure.getVariablesTuple().get(0));
         int targetPosition = variableMapping.get(binaryTransitiveClosure.getVariablesTuple().get(1));
 
@@ -294,7 +294,7 @@ public abstract class AbstractOperationCompiler implements IOperationCompiler {
     /**
      * @since 2.0
      */
-    protected void createCheck(BinaryReflexiveTransitiveClosure binaryTransitiveClosure, Map<PVariable, Integer> variableMapping) {
+    protected void createCheck(BinaryReflexiveTransitiveClosure binaryTransitiveClosure, Map <PVariable, Integer> variableMapping) {
         int sourcePosition = variableMapping.get(binaryTransitiveClosure.getVariablesTuple().get(0));
         int targetPosition = variableMapping.get(binaryTransitiveClosure.getVariablesTuple().get(1));
 
@@ -305,10 +305,10 @@ public abstract class AbstractOperationCompiler implements IOperationCompiler {
         dependencies.add(information.getCallWithAdornment());
     }
 
-    protected void createCheck(ExpressionEvaluation expressionEvaluation, Map<PVariable, Integer> variableMapping) {
+    protected void createCheck(ExpressionEvaluation expressionEvaluation, Map <PVariable, Integer> variableMapping) {
         // Fill unbound variables with null; simply copy all variables. Unbound variables will be null anyway
-        Iterable<String> inputParameterNames = expressionEvaluation.getEvaluator().getInputParameterNames();
-        Map<String, Integer> nameMap = new HashMap<>();
+        Iterable <String> inputParameterNames = expressionEvaluation.getEvaluator().getInputParameterNames();
+        Map <String, Integer> nameMap = new HashMap<>();
 
         for (String pVariableName : inputParameterNames) {
             PVariable pVariable = expressionEvaluation.getPSystem().getVariableByNameChecked(pVariableName);
@@ -323,29 +323,29 @@ public abstract class AbstractOperationCompiler implements IOperationCompiler {
         }
     }
 
-    protected void createCheck(AggregatorConstraint aggregator, Map<PVariable, Integer> variableMapping) {
+    protected void createCheck(AggregatorConstraint aggregator, Map <PVariable, Integer> variableMapping) {
         CallInformation information = CallInformation.create(aggregator, variableMapping, variableBindings.get(aggregator));
         operations.add(new AggregatorCheck(information, aggregator, variableMapping.get(aggregator.getResultVariable())));
         dependencies.add(information.getCallWithAdornment());
     }
 
-    protected void createCheck(NegativePatternCall negativePatternCall, Map<PVariable, Integer> variableMapping) {
+    protected void createCheck(NegativePatternCall negativePatternCall, Map <PVariable, Integer> variableMapping) {
         CallInformation information = CallInformation.create(negativePatternCall, variableMapping, variableBindings.get(negativePatternCall));
         operations.add(new NACOperation(information));
         dependencies.add(information.getCallWithAdornment());
     }
 
-    protected void createCheck(Inequality inequality, Map<PVariable, Integer> variableMapping) {
+    protected void createCheck(Inequality inequality, Map <PVariable, Integer> variableMapping) {
         operations.add(new InequalityCheck(variableMapping.get(inequality.getWho()), variableMapping.get(inequality.getWithWhom())));
     }
 
-    protected void createExtend(PositivePatternCall pCall, Map<PVariable, Integer> variableMapping) {
+    protected void createExtend(PositivePatternCall pCall, Map <PVariable, Integer> variableMapping) {
         CallInformation information = CallInformation.create(pCall, variableMapping, variableBindings.get(pCall));
         operations.add(new ExtendPositivePatternCall(information));
         dependencies.add(information.getCallWithAdornment());
     }
 
-    protected void createExtend(BinaryTransitiveClosure binaryTransitiveClosure, Map<PVariable, Integer> variableMapping) {
+    protected void createExtend(BinaryTransitiveClosure binaryTransitiveClosure, Map <PVariable, Integer> variableMapping) {
         int sourcePosition = variableMapping.get(binaryTransitiveClosure.getVariablesTuple().get(0));
         int targetPosition = variableMapping.get(binaryTransitiveClosure.getVariablesTuple().get(1));
 
@@ -369,7 +369,7 @@ public abstract class AbstractOperationCompiler implements IOperationCompiler {
     /**
      * @since 2.0
      */
-    protected void createExtend(BinaryReflexiveTransitiveClosure binaryTransitiveClosure, Map<PVariable, Integer> variableMapping) {
+    protected void createExtend(BinaryReflexiveTransitiveClosure binaryTransitiveClosure, Map <PVariable, Integer> variableMapping) {
         int sourcePosition = variableMapping.get(binaryTransitiveClosure.getVariablesTuple().get(0));
         int targetPosition = variableMapping.get(binaryTransitiveClosure.getVariablesTuple().get(1));
 
@@ -392,15 +392,15 @@ public abstract class AbstractOperationCompiler implements IOperationCompiler {
         }
     }
 
-    protected void createExtend(ConstantValue constant, Map<PVariable, Integer> variableMapping) {
+    protected void createExtend(ConstantValue constant, Map <PVariable, Integer> variableMapping) {
         int position = variableMapping.get(constant.getVariablesTuple().get(0));
         operations.add(new ExtendConstant(position, constant.getSupplierKey()));
     }
 
-    protected void createExtend(ExpressionEvaluation expressionEvaluation, Map<PVariable, Integer> variableMapping) {
+    protected void createExtend(ExpressionEvaluation expressionEvaluation, Map <PVariable, Integer> variableMapping) {
         // Fill unbound variables with null; simply copy all variables. Unbound variables will be null anyway
-        Iterable<String> inputParameterNames = expressionEvaluation.getEvaluator().getInputParameterNames();
-        Map<String, Integer> nameMap = new HashMap<>();
+        Iterable <String> inputParameterNames = expressionEvaluation.getEvaluator().getInputParameterNames();
+        Map <String, Integer> nameMap = new HashMap<>();
 
         for (String pVariableName : inputParameterNames) {
             PVariable pVariable = expressionEvaluation.getPSystem().getVariableByNameChecked(pVariableName);
@@ -415,13 +415,13 @@ public abstract class AbstractOperationCompiler implements IOperationCompiler {
         }
     }
 
-    protected void createExtend(AggregatorConstraint aggregator, Map<PVariable, Integer> variableMapping) {
+    protected void createExtend(AggregatorConstraint aggregator, Map <PVariable, Integer> variableMapping) {
         CallInformation information = CallInformation.create(aggregator, variableMapping, variableBindings.get(aggregator));
         operations.add(new AggregatorExtend(information, aggregator, variableMapping.get(aggregator.getResultVariable())));
         dependencies.add(information.getCallWithAdornment());
     }
 
-    protected void createExtend(PatternMatchCounter patternMatchCounter, Map<PVariable, Integer> variableMapping) {
+    protected void createExtend(PatternMatchCounter patternMatchCounter, Map <PVariable, Integer> variableMapping) {
         CallInformation information = CallInformation.create(patternMatchCounter, variableMapping, variableBindings.get(patternMatchCounter));
         operations.add(new CountOperation(information, variableMapping.get(patternMatchCounter.getResultVariable())));
         dependencies.add(information.getCallWithAdornment());

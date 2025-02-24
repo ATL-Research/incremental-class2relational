@@ -170,7 +170,7 @@ public class TupleMask {
      * Creates a TupleMask instance that selects given positions.
      * @since 1.7
      */
-    public static TupleMask fromSelectedIndices(int sourceArity, Collection<Integer> selectedIndices) {
+    public static TupleMask fromSelectedIndices(int sourceArity, Collection <Integer> selectedIndices) {
         int[] selected = integersToIntArray(selectedIndices);
         return fromSelectedIndicesInternal(selected, sourceArity, null, null);
     }
@@ -186,7 +186,7 @@ public class TupleMask {
      * @since 1.7
      */
     public static TupleMask fromNonNullIndices(ITuple tuple) {
-        List<Integer> indices = new ArrayList<>();
+        List <Integer> indices = new ArrayList<>();
         for (int i=0; i < tuple.getSize(); i++) {
             if (tuple.get(i) != null) {
                 indices.add(i);
@@ -198,7 +198,7 @@ public class TupleMask {
     /**
      * @since 1.7
      */
-    public static int[] integersToIntArray(Collection<Integer> selectedIndices) {
+    public static int[] integersToIntArray(Collection <Integer> selectedIndices) {
         int[] selected = new int[selectedIndices.size()];
         int k=0;
         for (Integer integer : selectedIndices) {
@@ -255,7 +255,7 @@ public class TupleMask {
     void ensureIndicesSorted() {
         if (indicesSorted == null) {
             indicesSorted = new int[indices.length];
-            List<Integer> list = new LinkedList<Integer>();
+            List <Integer> list = new LinkedList <Integer>();
             for (int i = 0; i < indices.length; ++i)
                 list.add(indices[i]);
             java.util.Collections.sort(list);
@@ -362,7 +362,7 @@ public class TupleMask {
      *   `this.transform(result).equals(this.transform(tuple))`.
      * Positions of the result tuple that are not determined this way will be filled with null.
      * <p> In other words, a copy of the original tuple is returned,
-     *   with null substituted at each position that is <em>not</em> selected by this mask.
+     *   with null substituted at each position that is <em>not </em> selected by this mask.
      *
      * @pre: all indices of the mask must be different, i.e {@link #isNonrepeating()} must return true
      * @since 2.1
@@ -379,8 +379,8 @@ public class TupleMask {
      * <p> The list will have arity {@link #getSize()},
      *  and will consist of the elements of the original tuple, at positions indicated by this mask.
      */
-    public <T> List<T> transform(List<T> original) {
-        List<T> signature = new ArrayList<T>(indices.length);
+    public <T> List <T> transform(List <T> original) {
+        List <T> signature = new ArrayList <T>(indices.length);
         for (int i = 0; i < indices.length; ++i)
             signature.add(original.get(indices[i]));
         return signature;
@@ -407,11 +407,11 @@ public class TupleMask {
     // */
     // public TupleMask complementer(Tuple reference)
     // {
-    // HashSet<Object> touched = new HashSet<Object>();
-    // LinkedList<Integer> untouched = new LinkedList<Integer>();
+    // HashSet <Object> touched = new HashSet <Object>();
+    // LinkedList <Integer> untouched = new LinkedList <Integer>();
     //
     // for (int index : indices) touched.add(reference.get(index));
-    // for (int index=0; index<reference.getSize(); ++index)
+    // for (int index=0; index <reference.getSize(); ++index)
     // {
     // if (touched.add(reference.get(index))) untouched.addLast(index);
     // }
@@ -539,8 +539,8 @@ public class TupleMask {
      *
      * @since 1.7
      */
-    public <T> Set<T> transformUnique(List<T> original) {
-        Set<T> signature = new HashSet<>();
+    public <T> Set <T> transformUnique(List <T> original) {
+        Set <T> signature = new HashSet<>();
         for (int i = 0; i < indices.length; ++i)
             signature.add(original.get(indices[i]));
         return signature;
@@ -550,8 +550,8 @@ public class TupleMask {
      * @return the list of selected indices
      * @since 2.1
      */
-    public List<Integer> getIndicesAsList() {
-        List<Integer> result = new ArrayList<Integer>(indices.length);
+    public List <Integer> getIndicesAsList() {
+        List <Integer> result = new ArrayList <Integer>(indices.length);
         for (int i = 0; i < indices.length; ++i)
             result.add(indices[i]);
         return result;

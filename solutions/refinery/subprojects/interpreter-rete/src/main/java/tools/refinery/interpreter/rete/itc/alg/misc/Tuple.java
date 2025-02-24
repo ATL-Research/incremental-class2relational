@@ -9,7 +9,7 @@
 
 package tools.refinery.interpreter.rete.itc.alg.misc;
 
-public class Tuple<V> {
+public class Tuple <V> {
 
     private V source;
     private V target;
@@ -44,7 +44,7 @@ public class Tuple<V> {
     @Override
     public boolean equals(Object o) {
         if (o instanceof Tuple) {
-            Tuple<?> t = (Tuple<?>) o;
+            Tuple <?> t = (Tuple <?>) o;
 
             if (t.getSource().equals(this.source) && t.getTarget().equals(this.target)) {
                 return true;

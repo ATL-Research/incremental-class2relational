@@ -31,11 +31,11 @@ public class CollectionHelper {
      * @return the intersection of the sets
      * @since 1.7
      */
-    public static <V> Set<V> intersection(Set<V> set1, Set<V> set2) {
+    public static <V> Set <V> intersection(Set <V> set1, Set <V> set2) {
         if (set1 == null || set2 == null)
             return CollectionsFactory.createSet();
 
-        Set<V> intersection = CollectionsFactory.createSet(set1);
+        Set <V> intersection = CollectionsFactory.createSet(set1);
         intersection.retainAll(set2);
         return intersection;
     }
@@ -52,11 +52,11 @@ public class CollectionHelper {
      * @return the difference of the sets
      * @since 1.7
      */
-    public static <V> Set<V> difference(Set<V> set1, Set<V> set2) {
+    public static <V> Set <V> difference(Set <V> set1, Set <V> set2) {
         if (set1 == null)
             return CollectionsFactory.createSet();
 
-        Set<V> difference = CollectionsFactory.createSet(set1);
+        Set <V> difference = CollectionsFactory.createSet(set1);
         if (set2 != null) difference.removeAll(set2);
         return difference;
     }

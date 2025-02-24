@@ -16,20 +16,20 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Composition Collection Insertion</b></em>'.
+ * An implementation of the model object ' <em> <b>Composition Collection Insertion </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.CompositionCollectionInsertionImpl#getAddedElement <em>Added Element</em>}</li>
+ *   <li>{@link Changes.impl.CompositionCollectionInsertionImpl#getAddedElement <em>Added Element </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class CompositionCollectionInsertionImpl extends CompositionChangeImpl implements CompositionCollectionInsertion {
 	/**
-	 * The cached value of the '{@link #getAddedElement() <em>Added Element</em>}' containment reference.
+	 * The cached value of the '{@link #getAddedElement() <em>Added Element </em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAddedElement()
@@ -175,7 +175,7 @@ public class CompositionCollectionInsertionImpl extends CompositionChangeImpl im
 	@Override
 	public void apply() {
 
-		EList<EObject> collection = (EList<EObject>)this.getAffectedElement().eGet(this.getFeature());
+		EList <EObject> collection = (EList <EObject>)this.getAffectedElement().eGet(this.getFeature());
 		collection.add(this.getAddedElement());
 	}
 

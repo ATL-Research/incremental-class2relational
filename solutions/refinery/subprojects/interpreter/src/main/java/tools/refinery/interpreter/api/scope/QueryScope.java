@@ -27,7 +27,7 @@ public abstract class QueryScope extends EngineContextFactory {
      * @param queryScopeClass the scope class returned by invoking {@link IQuerySpecification#getPreferredScopeClass()} on a query specification
      * @return true if an {@link InterpreterEngine} initialized on this scope can consume an {@link IQuerySpecification}
      */
-    public boolean isCompatibleWithQueryScope(Class<? extends QueryScope> queryScopeClass) {
+    public boolean isCompatibleWithQueryScope(Class <? extends QueryScope> queryScopeClass) {
         return queryScopeClass.isAssignableFrom(this.getClass());
     }
 

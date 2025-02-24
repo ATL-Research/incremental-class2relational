@@ -10,7 +10,7 @@ import tools.refinery.store.representation.Symbol;
 import tools.refinery.store.tuple.Tuple;
 
 class MustContainmentLinkView extends InferredContainmentLinkView {
-	public MustContainmentLinkView(Symbol<InferredContainment> symbol, PartialRelation link) {
+	public MustContainmentLinkView(Symbol <InferredContainment> symbol, PartialRelation link) {
 		super(symbol, "must", link);
 	}
 

@@ -30,7 +30,7 @@ import tools.refinery.interpreter.rete.matcher.ReteBackendFactory;
 import java.util.*;
 import java.util.function.Function;
 
-public class QueryInterpreterBuilderImpl extends AbstractModelAdapterBuilder<QueryInterpreterStoreAdapterImpl>
+public class QueryInterpreterBuilderImpl extends AbstractModelAdapterBuilder <QueryInterpreterStoreAdapterImpl>
 		implements QueryInterpreterBuilder {
 	private InterpreterEngineOptions.Builder engineOptionsBuilder;
 	private QueryEvaluationHint defaultHint = new QueryEvaluationHint(Map.of(
@@ -39,7 +39,7 @@ public class QueryInterpreterBuilderImpl extends AbstractModelAdapterBuilder<Que
 	), (IQueryBackendFactory) null);
 	private final CompositeRewriter rewriter;
 	private final Dnf2PQuery dnf2PQuery = new Dnf2PQuery();
-	private final Set<AnyQuery> queries = new LinkedHashSet<>();
+	private final Set <AnyQuery> queries = new LinkedHashSet<>();
 
 	public QueryInterpreterBuilderImpl() {
 		EPackage.Registry.INSTANCE.put(RecipesPackage.eNS_URI, RecipesPackage.eINSTANCE);
@@ -88,7 +88,7 @@ public class QueryInterpreterBuilderImpl extends AbstractModelAdapterBuilder<Que
 	}
 
 	@Override
-	public QueryInterpreterBuilder queries(Collection<? extends AnyQuery> queries) {
+	public QueryInterpreterBuilder queries(Collection <? extends AnyQuery> queries) {
 		checkNotConfigured();
 		this.queries.addAll(queries);
 		return this;
@@ -108,7 +108,7 @@ public class QueryInterpreterBuilderImpl extends AbstractModelAdapterBuilder<Que
 	}
 
 	@Override
-	public QueryInterpreterBuilder computeHint(Function<Dnf, QueryEvaluationHint> computeHint) {
+	public QueryInterpreterBuilder computeHint(Function <Dnf, QueryEvaluationHint> computeHint) {
 		checkNotConfigured();
 		dnf2PQuery.setComputeHint(computeHint);
 		return this;
@@ -116,9 +116,9 @@ public class QueryInterpreterBuilderImpl extends AbstractModelAdapterBuilder<Que
 
 	@Override
 	public QueryInterpreterStoreAdapterImpl doBuild(ModelStore store) {
-		var canonicalQueryMap = new HashMap<AnyQuery, AnyQuery>();
-		var querySpecifications = new LinkedHashMap<AnyQuery, IQuerySpecification<RawPatternMatcher>>();
-		var vacuousQueries = new LinkedHashSet<AnyQuery>();
+		var canonicalQueryMap = new HashMap <AnyQuery, AnyQuery>();
+		var querySpecifications = new LinkedHashMap <AnyQuery, IQuerySpecification <RawPatternMatcher>>();
+		var vacuousQueries = new LinkedHashSet <AnyQuery>();
 		for (var query : queries) {
 			var canonicalQuery = rewriter.rewrite(query);
 			canonicalQueryMap.put(query, canonicalQuery);

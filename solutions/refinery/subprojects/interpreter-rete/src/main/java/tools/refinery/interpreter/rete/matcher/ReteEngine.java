@@ -60,9 +60,9 @@ public class ReteEngine implements IQueryBackend {
     private Logger logger;
     protected IQueryRuntimeContext runtimeContext;
 
-    protected Collection<Disconnectable> disconnectables;
+    protected Collection <Disconnectable> disconnectables;
 
-    protected Map<PQuery, RetePatternMatcher> matchers;
+    protected Map <PQuery, RetePatternMatcher> matchers;
 
     protected ReteRecipeCompiler compiler;
 
@@ -125,8 +125,8 @@ public class ReteEngine implements IQueryBackend {
      */
     private synchronized void initEngine() {
         this.disposedOrUninitialized = false;
-        this.disconnectables = new LinkedList<Disconnectable>();
-        // this.caughtExceptions = new LinkedBlockingQueue<Throwable>();
+        this.disconnectables = new LinkedList <Disconnectable>();
+        // this.caughtExceptions = new LinkedBlockingQueue <Throwable>();
 
 
         this.hintConfigurator = new HintConfigurator(context.getHintProvider());
@@ -135,7 +135,7 @@ public class ReteEngine implements IQueryBackend {
         this.boundary = new ReteBoundary(this); // prerequisite: network
 
         this.matchers = CollectionsFactory.createMap();
-        /* this.matchersScoped = new HashMap<PatternDescription, Map<Map<Integer,Scope>,RetePatternMatcher>>(); */
+        /* this.matchersScoped = new HashMap <PatternDescription, Map <Map<Integer,Scope>,RetePatternMatcher>>(); */
 
         // prerequisite: network, framework, boundary, disconnectables
         //context.subscribeBackendForUpdates(this.boundary);
@@ -248,7 +248,7 @@ public class ReteEngine implements IQueryBackend {
      * @throws InterpreterRuntimeException
      *             if construction fails.
      */
-    public synchronized void buildMatchersCoalesced(final Collection<PQuery> specifications) {
+    public synchronized void buildMatchersCoalesced(final Collection <PQuery> specifications) {
         ensureInitialized();
         constructionWrapper(() -> {
             for (PQuery specification : specifications) {
@@ -261,7 +261,7 @@ public class ReteEngine implements IQueryBackend {
     /**
      * @since 2.4
      */
-    public <T> T constructionWrapper(final Callable<T> payload) {
+    public <T> T constructionWrapper(final Callable <T> payload) {
         T result = null;
 //		context.modelReadLock();
 //		    try {
@@ -309,16 +309,16 @@ public class ReteEngine implements IQueryBackend {
     // * @throws PatternMatcherCompileTimeException
     // * if construction fails.
     // */
-    // public synchronized RetePatternMatcher accessMatcherScoped(PatternDescription gtPattern, Map<Integer, Scope>
+    // public synchronized RetePatternMatcher accessMatcherScoped(PatternDescription gtPattern, Map <Integer, Scope>
     // additionalScopeMap)
     // throws PatternMatcherCompileTimeException {
     // if (additionalScopeMap.isEmpty()) return accessMatcher(gtPattern);
     //
     // RetePatternMatcher matcher;
     //
-    // Map<Map<Integer, Scope>, RetePatternMatcher> scopes = matchersScoped.get(gtPattern);
+    // Map <Map<Integer, Scope>, RetePatternMatcher> scopes = matchersScoped.get(gtPattern);
     // if (scopes == null) {
-    // scopes = new HashMap<Map<Integer, Scope>, RetePatternMatcher>();
+    // scopes = new HashMap <Map<Integer, Scope>, RetePatternMatcher>();
     // matchersScoped.put(gtPattern, scopes);
     // }
     //
@@ -328,7 +328,7 @@ public class ReteEngine implements IQueryBackend {
     // try {
     // reteNet.getStructuralChangeLock().lock();
     // try {
-    // Address<? extends Production> prodNode;
+    // Address <? extends Production> prodNode;
     // prodNode = boundary.accessProductionScoped(gtPattern, additionalScopeMap);
     //
     // matcher = new RetePatternMatcher(this, prodNode);

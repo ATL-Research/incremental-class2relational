@@ -34,7 +34,7 @@ public class GenericOperationCompiler extends AbstractOperationCompiler {
     }
 
     @Override
-    protected void createCheck(TypeFilterConstraint typeConstraint, Map<PVariable, Integer> variableMapping) {
+    protected void createCheck(TypeFilterConstraint typeConstraint, Map <PVariable, Integer> variableMapping) {
         IInputKey inputKey = typeConstraint.getInputKey();
         Tuple tuple = typeConstraint.getVariablesTuple();
         int[] positions = new int[tuple.getSize()];
@@ -47,7 +47,7 @@ public class GenericOperationCompiler extends AbstractOperationCompiler {
     }
 
     @Override
-    protected void createCheck(TypeConstraint typeConstraint, Map<PVariable, Integer> variableMapping) {
+    protected void createCheck(TypeConstraint typeConstraint, Map <PVariable, Integer> variableMapping) {
         IInputKey inputKey = typeConstraint.getSupplierKey();
         Tuple tuple = typeConstraint.getVariablesTuple();
         int[] positions = new int[tuple.getSize()];
@@ -65,14 +65,14 @@ public class GenericOperationCompiler extends AbstractOperationCompiler {
     }
 
     @Override
-    protected void createExtend(TypeConstraint typeConstraint, Map<PVariable, Integer> variableMapping) {
+    protected void createExtend(TypeConstraint typeConstraint, Map <PVariable, Integer> variableMapping) {
         IInputKey inputKey = typeConstraint.getSupplierKey();
         Tuple tuple = typeConstraint.getVariablesTuple();
 
         int[] positions = new int[tuple.getSize()];
-        List<Integer> boundVariableIndices = new ArrayList<>();
-        List<Integer> boundVariables = new ArrayList<>();
-        Set<Integer> unboundVariables = new HashSet<>();
+        List <Integer> boundVariableIndices = new ArrayList<>();
+        List <Integer> boundVariables = new ArrayList<>();
+        Set <Integer> unboundVariables = new HashSet<>();
         for (int i = 0; i < tuple.getSize(); i++) {
             PVariable variable = (PVariable) tuple.get(i);
             Integer position = variableMapping.get(variable);

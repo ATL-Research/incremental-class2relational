@@ -39,9 +39,9 @@ public class PBodyCopier extends AbstractRewriterTraceSource {
     /**
      * Mapping between the original and the copied variables
      */
-    protected Map<PVariable, PVariable> variableMapping = new HashMap<>();
+    protected Map <PVariable, PVariable> variableMapping = new HashMap<>();
 
-    public Map<PVariable, PVariable> getVariableMapping() {
+    public Map <PVariable, PVariable> getVariableMapping() {
         return variableMapping;
     }
 
@@ -74,7 +74,7 @@ public class PBodyCopier extends AbstractRewriterTraceSource {
     public void mergeBody(PBody sourceBody, IVariableRenamer namingTool, IConstraintFilter filter) {
 
         // Copy variables
-        Set<PVariable> allVariables = sourceBody.getAllVariables();
+        Set <PVariable> allVariables = sourceBody.getAllVariables();
         for (PVariable pVariable : allVariables) {
             if (pVariable.isUnique()) {
                 copyVariable(pVariable, namingTool.createVariableName(pVariable, sourceBody.getPattern()));
@@ -86,7 +86,7 @@ public class PBodyCopier extends AbstractRewriterTraceSource {
                 .map(this::copyExportedParameterConstraint).collect(Collectors.toList()));
 
         // Copy constraints which are not filtered
-        Set<PConstraint> constraints = sourceBody.getConstraints();
+        Set <PConstraint> constraints = sourceBody.getConstraints();
         for (PConstraint pConstraint : constraints) {
             if (!(pConstraint instanceof ExportedParameter) && !filter.filter(pConstraint)) {
                 copyConstraint(pConstraint);
@@ -294,7 +294,7 @@ public class PBodyCopier extends AbstractRewriterTraceSource {
     }
 
     private PVariable[] mapVariableList(Object[] pVariables) {
-        List<PVariable> list = new ArrayList<PVariable>();
+        List <PVariable> list = new ArrayList <PVariable>();
         for (int i = 0; i < pVariables.length; i++) {
             PVariable mappedVariable = variableMapping.get(pVariables[i]);
             list.add(mappedVariable);

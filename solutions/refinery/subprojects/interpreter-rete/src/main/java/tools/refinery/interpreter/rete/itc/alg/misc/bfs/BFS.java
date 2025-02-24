@@ -14,7 +14,7 @@ import tools.refinery.interpreter.rete.itc.igraph.IGraphDataSource;
 
 import java.util.*;
 
-public class BFS<V> {
+public class BFS <V> {
 
     private BFS() {/*Utility class constructor*/}
 
@@ -31,9 +31,9 @@ public class BFS<V> {
      *            the graph data source
      * @return true if source is reachable from target, false otherwise
      */
-    public static <V> boolean isReachable(V source, V target, IGraphDataSource<V> graph) {
-        Deque<V> nodeQueue = new ArrayDeque<V>();
-        Set<V> visited = new HashSet<V>();
+    public static <V> boolean isReachable(V source, V target, IGraphDataSource <V> graph) {
+        Deque <V> nodeQueue = new ArrayDeque <V>();
+        Set <V> visited = new HashSet <V>();
 
         nodeQueue.add(source);
         visited.add(source);
@@ -42,7 +42,7 @@ public class BFS<V> {
         return ret;
     }
 
-    private static <V> boolean _isReachable(V target, IGraphDataSource<V> graph, Deque<V> nodeQueue, Set<V> visited) {
+    private static <V> boolean _isReachable(V target, IGraphDataSource <V> graph, Deque <V> nodeQueue, Set <V> visited) {
 
         while (!nodeQueue.isEmpty()) {
             V node = nodeQueue.removeFirst();
@@ -59,10 +59,10 @@ public class BFS<V> {
         return false;
     }
 
-    public static <V> Set<V> reachableSources(IBiDirectionalGraphDataSource<V> graph, V target) {
-        Set<V> retSet = new HashSet<V>();
+    public static <V> Set <V> reachableSources(IBiDirectionalGraphDataSource <V> graph, V target) {
+        Set <V> retSet = new HashSet <V>();
         retSet.add(target);
-        Deque<V> nodeQueue = new ArrayDeque<V>();
+        Deque <V> nodeQueue = new ArrayDeque <V>();
         nodeQueue.add(target);
 
         _reachableSources(graph, nodeQueue, retSet);
@@ -70,8 +70,8 @@ public class BFS<V> {
         return retSet;
     }
 
-    private static <V> void _reachableSources(IBiDirectionalGraphDataSource<V> graph, Deque<V> nodeQueue,
-            Set<V> retSet) {
+    private static <V> void _reachableSources(IBiDirectionalGraphDataSource <V> graph, Deque <V> nodeQueue,
+            Set <V> retSet) {
         while (!nodeQueue.isEmpty()) {
             V node = nodeQueue.removeFirst();
             for (V _node : graph.getSourceNodes(node).distinctValues()) {
@@ -83,10 +83,10 @@ public class BFS<V> {
         }
     }
 
-    public static <V> Set<V> reachableTargets(IGraphDataSource<V> graph, V source) {
-        Set<V> retSet = new HashSet<V>();
+    public static <V> Set <V> reachableTargets(IGraphDataSource <V> graph, V source) {
+        Set <V> retSet = new HashSet <V>();
         retSet.add(source);
-        Deque<V> nodeQueue = new ArrayDeque<V>();
+        Deque <V> nodeQueue = new ArrayDeque <V>();
         nodeQueue.add(source);
 
         _reachableTargets(graph, nodeQueue, retSet);
@@ -94,7 +94,7 @@ public class BFS<V> {
         return retSet;
     }
 
-    private static <V> void _reachableTargets(IGraphDataSource<V> graph, Deque<V> nodeQueue, Set<V> retSet) {
+    private static <V> void _reachableTargets(IGraphDataSource <V> graph, Deque <V> nodeQueue, Set <V> retSet) {
         while (!nodeQueue.isEmpty()) {
             V node = nodeQueue.removeFirst();
 
@@ -122,13 +122,13 @@ public class BFS<V> {
      *            the graph data source
      * @return the set of nodes along the path
      */
-    public static <V> Set<V> collectNodesAlongPath(V source, V target, IGraphDataSource<V> graph) {
-        Set<V> path = new HashSet<V>();
+    public static <V> Set <V> collectNodesAlongPath(V source, V target, IGraphDataSource <V> graph) {
+        Set <V> path = new HashSet <V>();
         _collectNodesAlongPath(source, target, graph, path);
         return path;
     }
 
-    private static <V> boolean _collectNodesAlongPath(V node, V target, IGraphDataSource<V> graph, Set<V> path) {
+    private static <V> boolean _collectNodesAlongPath(V node, V target, IGraphDataSource <V> graph, Set <V> path) {
 
         boolean res = false;
 

@@ -48,7 +48,7 @@ public class VersionedMapStoreStateConfiguration {
 	 * If true, all sub-nodes are cached within a group of
 	 * {@link VersionedMapStoreStateImpl#createSharedVersionedMapStores(int, ContinuousHashProvider, Object, VersionedMapStoreStateConfiguration)}.
 	 * If {@link VersionedMapStoreStateConfiguration#sharedNodeCacheInStore} is
-	 * <code>false</code>, then it has currently no impact.
+	 * <code>false </code>, then it has currently no impact.
 	 */
 	private boolean sharedNodeCacheInStoreGroups = true;
 	public boolean isSharedNodeCacheInStoreGroups() {

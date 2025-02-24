@@ -11,8 +11,8 @@ import tools.refinery.store.representation.cardinality.CardinalityInterval;
 import tools.refinery.store.representation.cardinality.CardinalityIntervals;
 import tools.refinery.store.tuple.Tuple;
 
-class MultiView extends TuplePreservingView<CardinalityInterval> {
-	protected MultiView(Symbol<CardinalityInterval> symbol) {
+class MultiView extends TuplePreservingView <CardinalityInterval> {
+	protected MultiView(Symbol <CardinalityInterval> symbol) {
 		super(symbol, "multi");
 	}
 

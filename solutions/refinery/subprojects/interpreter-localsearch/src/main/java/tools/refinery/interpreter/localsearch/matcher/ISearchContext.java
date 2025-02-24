@@ -51,7 +51,7 @@ public interface ISearchContext {
      *
      * @since 1.7
      */
-    <T> T accessBackendLevelCache(Object key, Class<? extends T> clazz, IProvider<T> valueProvider);
+    <T> T accessBackendLevelCache(Object key, Class <? extends T> clazz, IProvider <T> valueProvider);
 
     /**
      * Returns the engine-specific logger
@@ -103,7 +103,7 @@ public interface ISearchContext {
         }
 
         @Override
-        public <T> T accessBackendLevelCache(Object key, Class<? extends T> clazz, IProvider<T> valueProvider) {
+        public <T> T accessBackendLevelCache(Object key, Class <? extends T> clazz, IProvider <T> valueProvider) {
             return backendLevelCache.getValue(key, clazz, valueProvider);
         }
 

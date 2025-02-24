@@ -50,7 +50,7 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         [DebuggerBrowsableAttribute(DebuggerBrowsableState.Never)]
         private string _name;
         
-        private static Lazy<ITypedElement> _nameAttribute = new Lazy<ITypedElement>(RetrieveNameAttribute);
+        private static Lazy <ITypedElement> _nameAttribute = new Lazy <ITypedElement>(RetrieveNameAttribute);
         
         private static IClass _classInstance;
         
@@ -113,12 +113,12 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Gets fired before the Name property changes its value
         /// </summary>
-        public event System.EventHandler<ValueChangedEventArgs> NameChanging;
+        public event System.EventHandler <ValueChangedEventArgs> NameChanging;
         
         /// <summary>
         /// Gets fired when the Name property changed its value
         /// </summary>
-        public event System.EventHandler<ValueChangedEventArgs> NameChanged;
+        public event System.EventHandler <ValueChangedEventArgs> NameChanged;
         
         private static ITypedElement RetrieveNameAttribute()
         {
@@ -128,10 +128,10 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Raises the NameChanging event
         /// </summary>
-        /// <param name="eventArgs">The event data</param>
+        /// <param name="eventArgs">The event data </param>
         protected virtual void OnNameChanging(ValueChangedEventArgs eventArgs)
         {
-            System.EventHandler<ValueChangedEventArgs> handler = this.NameChanging;
+            System.EventHandler <ValueChangedEventArgs> handler = this.NameChanging;
             if ((handler != null))
             {
                 handler.Invoke(this, eventArgs);
@@ -141,10 +141,10 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Raises the NameChanged event
         /// </summary>
-        /// <param name="eventArgs">The event data</param>
+        /// <param name="eventArgs">The event data </param>
         protected virtual void OnNameChanged(ValueChangedEventArgs eventArgs)
         {
-            System.EventHandler<ValueChangedEventArgs> handler = this.NameChanged;
+            System.EventHandler <ValueChangedEventArgs> handler = this.NameChanged;
             if ((handler != null))
             {
                 handler.Invoke(this, eventArgs);
@@ -154,9 +154,9 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Resolves the given attribute name
         /// </summary>
-        /// <returns>The attribute value or null if it could not be found</returns>
-        /// <param name="attribute">The requested attribute name</param>
-        /// <param name="index">The index of this attribute</param>
+        /// <returns>The attribute value or null if it could not be found </returns>
+        /// <param name="attribute">The requested attribute name </param>
+        /// <param name="index">The index of this attribute </param>
         protected override object GetAttributeValue(string attribute, int index)
         {
             if ((attribute == "NAME"))
@@ -169,8 +169,8 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Sets a value to the given feature
         /// </summary>
-        /// <param name="feature">The requested feature</param>
-        /// <param name="value">The value that should be set to that feature</param>
+        /// <param name="feature">The requested feature </param>
+        /// <param name="value">The value that should be set to that feature </param>
         protected override void SetFeature(string feature, object value)
         {
             if ((feature == "NAME"))
@@ -184,9 +184,9 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Gets the property expression for the given attribute
         /// </summary>
-        /// <returns>An incremental property expression</returns>
-        /// <param name="attribute">The requested attribute in upper case</param>
-        protected override NMF.Expressions.INotifyExpression<object> GetExpressionForAttribute(string attribute)
+        /// <returns>An incremental property expression </returns>
+        /// <param name="attribute">The requested attribute in upper case </param>
+        protected override NMF.Expressions.INotifyExpression <object> GetExpressionForAttribute(string attribute)
         {
             if ((attribute == "NAME"))
             {
@@ -211,7 +211,7 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Gets the identifier string for this model element
         /// </summary>
-        /// <returns>The identifier string</returns>
+        /// <returns>The identifier string </returns>
         public override string ToIdentifierString()
         {
             if ((this.Name == null))
@@ -224,13 +224,13 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Represents a proxy to represent an incremental access to the name property
         /// </summary>
-        private sealed class NameProxy : ModelPropertyChange<INamed, string>
+        private sealed class NameProxy : ModelPropertyChange <INamed, string>
         {
             
             /// <summary>
             /// Creates a new observable property access proxy
             /// </summary>
-            /// <param name="modelElement">The model instance element for which to create the property access proxy</param>
+            /// <param name="modelElement">The model instance element for which to create the property access proxy </param>
             public NameProxy(INamed modelElement) : 
                     base(modelElement, "name")
             {

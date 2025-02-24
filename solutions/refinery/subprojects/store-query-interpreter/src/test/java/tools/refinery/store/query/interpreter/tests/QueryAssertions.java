@@ -21,18 +21,18 @@ public final class QueryAssertions {
 		throw new IllegalStateException("This is a static utility class and should not be instantiated directly");
 	}
 
-	public static <T> void assertNullableResults(Map<Tuple, Optional<T>> expected, ResultSet<T> resultSet) {
-		var nullableValuesMap = new LinkedHashMap<Tuple, T>(expected.size());
+	public static <T> void assertNullableResults(Map <Tuple, Optional <T>> expected, ResultSet <T> resultSet) {
+		var nullableValuesMap = new LinkedHashMap <Tuple, T>(expected.size());
 		for (var entry : expected.entrySet()) {
 			nullableValuesMap.put(entry.getKey(), entry.getValue().orElse(null));
 		}
 		assertResults(nullableValuesMap, resultSet);
 	}
 
-	public static <T> void assertResults(Map<Tuple, T> expected, ResultSet<T> resultSet) {
+	public static <T> void assertResults(Map <Tuple, T> expected, ResultSet <T> resultSet) {
 		var defaultValue = resultSet.getCanonicalQuery().defaultValue();
-		var filteredExpected = new LinkedHashMap<Tuple, T>();
-		var executables = new ArrayList<Executable>();
+		var filteredExpected = new LinkedHashMap <Tuple, T>();
+		var executables = new ArrayList <Executable>();
 		for (var entry : expected.entrySet()) {
 			var key = entry.getKey();
 			var value = entry.getValue();
@@ -43,7 +43,7 @@ public final class QueryAssertions {
 		}
 		executables.add(() -> assertThat("results size", resultSet.size(), is(filteredExpected.size())));
 
-		var actual = new LinkedHashMap<Tuple, T>();
+		var actual = new LinkedHashMap <Tuple, T>();
 		var cursor = resultSet.getAll();
 		while (cursor.move()) {
 			var key = cursor.getKey();

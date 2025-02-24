@@ -43,12 +43,12 @@ public interface Indexer extends Node {
      * @return all stored tuples that conform to the specified signature, null if there are none such. CONTRACT: do not
      *         modify!
      */
-    public Collection<Tuple> get(Tuple signature);
+    public Collection <Tuple> get(Tuple signature);
 
     /**
      * @since 2.4
      */
-    default public Map<Tuple, Timeline<Timestamp>> getTimeline(Tuple signature) {
+    default public Map <Tuple, Timeline <Timestamp>> getTimeline(Tuple signature) {
         throw new UnsupportedOperationException();
     }
 
@@ -62,7 +62,7 @@ public interface Indexer extends Node {
     public Node getActiveNode();
 
 
-    public Collection<IndexerListener> getListeners();
+    public Collection <IndexerListener> getListeners();
 
     public void attachListener(IndexerListener listener);
 

@@ -35,12 +35,12 @@ import static tools.refinery.store.query.literal.Literals.check;
 import static tools.refinery.store.query.term.int_.IntTerms.*;
 
 public class MultiObjectTranslator implements ModelStoreConfiguration {
-	public static final Symbol<CardinalityInterval> COUNT_STORAGE = Symbol.of("COUNT", 1, CardinalityInterval.class,
+	public static final Symbol <CardinalityInterval> COUNT_STORAGE = Symbol.of("COUNT", 1, CardinalityInterval.class,
 			null);
 	public static final AnySymbolView LOWER_CARDINALITY_VIEW = new LowerCardinalityView(COUNT_STORAGE);
 	public static final AnySymbolView UPPER_CARDINALITY_VIEW = new UpperCardinalityView(COUNT_STORAGE);
 	public static final AnySymbolView MULTI_VIEW = new MultiView(COUNT_STORAGE);
-	public static final PartialFunction<CardinalityInterval, Integer> COUNT_SYMBOL = new PartialFunction<>("COUNT", 1,
+	public static final PartialFunction <CardinalityInterval, Integer> COUNT_SYMBOL = new PartialFunction<>("COUNT", 1,
 			CardinalityDomain.INSTANCE);
 
 	@Override

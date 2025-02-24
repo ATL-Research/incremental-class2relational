@@ -27,12 +27,12 @@ import static org.hamcrest.Matchers.is;
 import static tools.refinery.store.query.interpreter.tests.QueryAssertions.assertNullableResults;
 
 class AggregatorBatchingTest {
-	private static final Symbol<Boolean> person = Symbol.of("Person", 1);
-	private static final Symbol<Integer> values = Symbol.of("values", 2, Integer.class, null);
+	private static final Symbol <Boolean> person = Symbol.of("Person", 1);
+	private static final Symbol <Integer> values = Symbol.of("values", 2, Integer.class, null);
 	private static final AnySymbolView personView = new KeyOnlyView<>(person);
-	private static final FunctionView<Integer> valuesView = new FunctionView<>(values);
+	private static final FunctionView <Integer> valuesView = new FunctionView<>(values);
 
-	private final Query<Integer> query = Query.of(Integer.class, (builder, p1, output) -> builder
+	private final Query <Integer> query = Query.of(Integer.class, (builder, p1, output) -> builder
 			.clause(
 					personView.call(p1),
 					output.assign(valuesView.aggregate(new InstrumentedAggregator(), p1, Variable.of()))
@@ -128,24 +128,24 @@ class AggregatorBatchingTest {
 		return store.createEmptyModel();
 	}
 
-	class InstrumentedAggregator implements StatefulAggregator<Integer, Integer> {
+	class InstrumentedAggregator implements StatefulAggregator <Integer, Integer> {
 		@Override
-		public Class<Integer> getResultType() {
+		public Class <Integer> getResultType() {
 			return Integer.class;
 		}
 
 		@Override
-		public Class<Integer> getInputType() {
+		public Class <Integer> getInputType() {
 			return Integer.class;
 		}
 
 		@Override
-		public StatefulAggregate<Integer, Integer> createEmptyAggregate() {
+		public StatefulAggregate <Integer, Integer> createEmptyAggregate() {
 			return new InstrumentedAggregate();
 		}
 	}
 
-	class InstrumentedAggregate implements StatefulAggregate<Integer, Integer> {
+	class InstrumentedAggregate implements StatefulAggregate <Integer, Integer> {
 		private int sum;
 
 		public InstrumentedAggregate() {
@@ -179,7 +179,7 @@ class AggregatorBatchingTest {
 		}
 
 		@Override
-		public StatefulAggregate<Integer, Integer> deepCopy() {
+		public StatefulAggregate <Integer, Integer> deepCopy() {
 			return new InstrumentedAggregate(sum);
 		}
 	}

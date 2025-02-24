@@ -19,13 +19,13 @@ import java.util.*;
 @SuppressWarnings("squid:S2160")
 public abstract class AbstractCallLiteral extends AbstractLiteral {
 	private final Constraint target;
-	private final List<Variable> arguments;
-	private final Set<Variable> inArguments;
-	private final Set<Variable> outArguments;
+	private final List <Variable> arguments;
+	private final Set <Variable> inArguments;
+	private final Set <Variable> outArguments;
 
 	// Use exhaustive switch over enums.
 	@SuppressWarnings("squid:S1301")
-	protected AbstractCallLiteral(Constraint target, List<Variable> arguments) {
+	protected AbstractCallLiteral(Constraint target, List <Variable> arguments) {
 		int arity = target.arity();
 		if (arguments.size() != arity) {
 			throw new InvalidQueryException("%s needs %d arguments, but got %s".formatted(target.name(),
@@ -33,8 +33,8 @@ public abstract class AbstractCallLiteral extends AbstractLiteral {
 		}
 		this.target = target;
 		this.arguments = arguments;
-		var mutableInArguments = new LinkedHashSet<Variable>();
-		var mutableOutArguments = new LinkedHashSet<Variable>();
+		var mutableInArguments = new LinkedHashSet <Variable>();
+		var mutableOutArguments = new LinkedHashSet <Variable>();
 		var parameters = target.getParameters();
 		for (int i = 0; i < arity; i++) {
 			var argument = arguments.get(i);
@@ -63,11 +63,11 @@ public abstract class AbstractCallLiteral extends AbstractLiteral {
 		return target;
 	}
 
-	public List<Variable> getArguments() {
+	public List <Variable> getArguments() {
 		return arguments;
 	}
 
-	protected Set<Variable> getArgumentsOfDirection(ParameterDirection direction) {
+	protected Set <Variable> getArgumentsOfDirection(ParameterDirection direction) {
 		return switch (direction) {
 			case IN -> inArguments;
 			case OUT -> outArguments;
@@ -75,7 +75,7 @@ public abstract class AbstractCallLiteral extends AbstractLiteral {
 	}
 
 	@Override
-	public Set<Variable> getInputVariables(Set<? extends Variable> positiveVariablesInClause) {
+	public Set <Variable> getInputVariables(Set <? extends Variable> positiveVariablesInClause) {
 		var inputVariables = new LinkedHashSet<>(getArgumentsOfDirection(ParameterDirection.OUT));
 		inputVariables.retainAll(positiveVariablesInClause);
 		inputVariables.addAll(getArgumentsOfDirection(ParameterDirection.IN));
@@ -83,7 +83,7 @@ public abstract class AbstractCallLiteral extends AbstractLiteral {
 	}
 
 	@Override
-	public Set<Variable> getPrivateVariables(Set<? extends Variable> positiveVariablesInClause) {
+	public Set <Variable> getPrivateVariables(Set <? extends Variable> positiveVariablesInClause) {
 		var privateVariables = new LinkedHashSet<>(getArgumentsOfDirection(ParameterDirection.OUT));
 		privateVariables.removeAll(positiveVariablesInClause);
 		return Collections.unmodifiableSet(privateVariables);
@@ -95,7 +95,7 @@ public abstract class AbstractCallLiteral extends AbstractLiteral {
 		return doSubstitute(substitution, substitutedArguments);
 	}
 
-	protected abstract Literal doSubstitute(Substitution substitution, List<Variable> substitutedArguments);
+	protected abstract Literal doSubstitute(Substitution substitution, List <Variable> substitutedArguments);
 
 	public AbstractCallLiteral withTarget(Constraint newTarget) {
 		if (Objects.equals(target, newTarget)) {
@@ -104,7 +104,7 @@ public abstract class AbstractCallLiteral extends AbstractLiteral {
 		return withArguments(newTarget, arguments);
 	}
 
-	public abstract AbstractCallLiteral withArguments(Constraint newTarget, List<Variable> newArguments);
+	public abstract AbstractCallLiteral withArguments(Constraint newTarget, List <Variable> newArguments);
 
 	@Override
 	public boolean equalsWithSubstitution(LiteralEqualityHelper helper, Literal other) {

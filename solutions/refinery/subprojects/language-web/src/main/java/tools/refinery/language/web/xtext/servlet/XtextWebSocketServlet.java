@@ -37,7 +37,7 @@ public abstract class XtextWebSocketServlet extends JettyWebSocketServlet implem
 
 	private final transient Logger log = LoggerFactory.getLogger(getClass());
 
-	private transient Set<String> allowedOrigins = null;
+	private transient Set <String> allowedOrigins = null;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {

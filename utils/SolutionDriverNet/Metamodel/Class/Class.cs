@@ -42,7 +42,7 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
     public partial class Class : Classifier, HSRM.TTC2023.ClassToRelational.Class_.IClass, IModelElement
     {
         
-        private static Lazy<ITypedElement> _attrReference = new Lazy<ITypedElement>(RetrieveAttrReference);
+        private static Lazy <ITypedElement> _attrReference = new Lazy <ITypedElement>(RetrieveAttrReference);
         
         /// <summary>
         /// The backing field for the Attr property
@@ -69,7 +69,7 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         [ContainmentAttribute()]
         [XmlOppositeAttribute("owner")]
         [ConstantAttribute()]
-        public IOrderedSetExpression<HSRM.TTC2023.ClassToRelational.Class_.IAttribute> Attr
+        public IOrderedSetExpression <HSRM.TTC2023.ClassToRelational.Class_.IAttribute> Attr
         {
             get
             {
@@ -80,7 +80,7 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Gets the child model elements of this model element
         /// </summary>
-        public override IEnumerableExpression<IModelElement> Children
+        public override IEnumerableExpression <IModelElement> Children
         {
             get
             {
@@ -91,7 +91,7 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Gets the referenced model elements of this model element
         /// </summary>
-        public override IEnumerableExpression<IModelElement> ReferencedElements
+        public override IEnumerableExpression <IModelElement> ReferencedElements
         {
             get
             {
@@ -122,8 +122,8 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Forwards CollectionChanging notifications for the Attr property to the parent model element
         /// </summary>
-        /// <param name="sender">The collection that raised the change</param>
-        /// <param name="e">The original event data</param>
+        /// <param name="sender">The collection that raised the change </param>
+        /// <param name="e">The original event data </param>
         private void AttrCollectionChanging(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.OnCollectionChanging("Attr", e, _attrReference);
@@ -132,8 +132,8 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Forwards CollectionChanged notifications for the Attr property to the parent model element
         /// </summary>
-        /// <param name="sender">The collection that raised the change</param>
-        /// <param name="e">The original event data</param>
+        /// <param name="sender">The collection that raised the change </param>
+        /// <param name="e">The original event data </param>
         private void AttrCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.OnCollectionChanged("Attr", e, _attrReference);
@@ -142,8 +142,8 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Gets the relative URI fragment for the given child model element
         /// </summary>
-        /// <returns>A fragment of the relative URI</returns>
-        /// <param name="element">The element that should be looked for</param>
+        /// <returns>A fragment of the relative URI </returns>
+        /// <param name="element">The element that should be looked for </param>
         protected override string GetRelativePathForNonIdentifiedChild(IModelElement element)
         {
             int attrIndex = ModelHelper.IndexOfReference(this.Attr, element);
@@ -157,9 +157,9 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Resolves the given URI to a child model element
         /// </summary>
-        /// <returns>The model element or null if it could not be found</returns>
-        /// <param name="reference">The requested reference name</param>
-        /// <param name="index">The index of this reference</param>
+        /// <returns>The model element or null if it could not be found </returns>
+        /// <param name="reference">The requested reference name </param>
+        /// <param name="index">The index of this reference </param>
         protected override IModelElement GetModelElementForReference(string reference, int index)
         {
             if ((reference == "ATTR"))
@@ -179,8 +179,8 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Gets the Model element collection for the given feature
         /// </summary>
-        /// <returns>A non-generic list of elements</returns>
-        /// <param name="feature">The requested feature</param>
+        /// <returns>A non-generic list of elements </returns>
+        /// <param name="feature">The requested feature </param>
         protected override System.Collections.IList GetCollectionForFeature(string feature)
         {
             if ((feature == "ATTR"))
@@ -193,8 +193,8 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Gets the property name for the given container
         /// </summary>
-        /// <returns>The name of the respective container reference</returns>
-        /// <param name="container">The container object</param>
+        /// <returns>The name of the respective container reference </returns>
+        /// <param name="container">The container object </param>
         protected override string GetCompositionName(object container)
         {
             if ((container == this._attr))
@@ -219,7 +219,7 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// The collection class to to represent the children of the Class class
         /// </summary>
-        public class ClassChildrenCollection : ReferenceCollection, ICollectionExpression<IModelElement>, ICollection<IModelElement>
+        public class ClassChildrenCollection : ReferenceCollection, ICollectionExpression <IModelElement>, ICollection <IModelElement>
         {
             
             private Class _parent;
@@ -258,10 +258,10 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
             /// <summary>
             /// Adds the given element to the collection
             /// </summary>
-            /// <param name="item">The item to add</param>
+            /// <param name="item">The item to add </param>
             public override void Add(IModelElement item)
             {
-                HSRM.TTC2023.ClassToRelational.Class_.IAttribute attrCasted = item.As<HSRM.TTC2023.ClassToRelational.Class_.IAttribute>();
+                HSRM.TTC2023.ClassToRelational.Class_.IAttribute attrCasted = item.As <HSRM.TTC2023.ClassToRelational.Class_.IAttribute>();
                 if ((attrCasted != null))
                 {
                     this._parent.Attr.Add(attrCasted);
@@ -279,8 +279,8 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
             /// <summary>
             /// Gets a value indicating whether the given element is contained in the collection
             /// </summary>
-            /// <returns>True, if it is contained, otherwise False</returns>
-            /// <param name="item">The item that should be looked out for</param>
+            /// <returns>True, if it is contained, otherwise False </returns>
+            /// <param name="item">The item that should be looked out for </param>
             public override bool Contains(IModelElement item)
             {
                 if (this._parent.Attr.Contains(item))
@@ -293,11 +293,11 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
             /// <summary>
             /// Copies the contents of the collection to the given array starting from the given array index
             /// </summary>
-            /// <param name="array">The array in which the elements should be copied</param>
-            /// <param name="arrayIndex">The starting index</param>
+            /// <param name="array">The array in which the elements should be copied </param>
+            /// <param name="arrayIndex">The starting index </param>
             public override void CopyTo(IModelElement[] array, int arrayIndex)
             {
-                IEnumerator<IModelElement> attrEnumerator = this._parent.Attr.GetEnumerator();
+                IEnumerator <IModelElement> attrEnumerator = this._parent.Attr.GetEnumerator();
                 try
                 {
                     for (
@@ -317,11 +317,11 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
             /// <summary>
             /// Removes the given item from the collection
             /// </summary>
-            /// <returns>True, if the item was removed, otherwise False</returns>
-            /// <param name="item">The item that should be removed</param>
+            /// <returns>True, if the item was removed, otherwise False </returns>
+            /// <param name="item">The item that should be removed </param>
             public override bool Remove(IModelElement item)
             {
-                HSRM.TTC2023.ClassToRelational.Class_.IAttribute attributeItem = item.As<HSRM.TTC2023.ClassToRelational.Class_.IAttribute>();
+                HSRM.TTC2023.ClassToRelational.Class_.IAttribute attributeItem = item.As <HSRM.TTC2023.ClassToRelational.Class_.IAttribute>();
                 if (((attributeItem != null) 
                             && this._parent.Attr.Remove(attributeItem)))
                 {
@@ -333,17 +333,17 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
             /// <summary>
             /// Gets an enumerator that enumerates the collection
             /// </summary>
-            /// <returns>A generic enumerator</returns>
-            public override IEnumerator<IModelElement> GetEnumerator()
+            /// <returns>A generic enumerator </returns>
+            public override IEnumerator <IModelElement> GetEnumerator()
             {
-                return Enumerable.Empty<IModelElement>().Concat(this._parent.Attr).GetEnumerator();
+                return Enumerable.Empty <IModelElement>().Concat(this._parent.Attr).GetEnumerator();
             }
         }
         
         /// <summary>
         /// The collection class to to represent the children of the Class class
         /// </summary>
-        public class ClassReferencedElementsCollection : ReferenceCollection, ICollectionExpression<IModelElement>, ICollection<IModelElement>
+        public class ClassReferencedElementsCollection : ReferenceCollection, ICollectionExpression <IModelElement>, ICollection <IModelElement>
         {
             
             private Class _parent;
@@ -382,10 +382,10 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
             /// <summary>
             /// Adds the given element to the collection
             /// </summary>
-            /// <param name="item">The item to add</param>
+            /// <param name="item">The item to add </param>
             public override void Add(IModelElement item)
             {
-                HSRM.TTC2023.ClassToRelational.Class_.IAttribute attrCasted = item.As<HSRM.TTC2023.ClassToRelational.Class_.IAttribute>();
+                HSRM.TTC2023.ClassToRelational.Class_.IAttribute attrCasted = item.As <HSRM.TTC2023.ClassToRelational.Class_.IAttribute>();
                 if ((attrCasted != null))
                 {
                     this._parent.Attr.Add(attrCasted);
@@ -403,8 +403,8 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
             /// <summary>
             /// Gets a value indicating whether the given element is contained in the collection
             /// </summary>
-            /// <returns>True, if it is contained, otherwise False</returns>
-            /// <param name="item">The item that should be looked out for</param>
+            /// <returns>True, if it is contained, otherwise False </returns>
+            /// <param name="item">The item that should be looked out for </param>
             public override bool Contains(IModelElement item)
             {
                 if (this._parent.Attr.Contains(item))
@@ -417,11 +417,11 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
             /// <summary>
             /// Copies the contents of the collection to the given array starting from the given array index
             /// </summary>
-            /// <param name="array">The array in which the elements should be copied</param>
-            /// <param name="arrayIndex">The starting index</param>
+            /// <param name="array">The array in which the elements should be copied </param>
+            /// <param name="arrayIndex">The starting index </param>
             public override void CopyTo(IModelElement[] array, int arrayIndex)
             {
-                IEnumerator<IModelElement> attrEnumerator = this._parent.Attr.GetEnumerator();
+                IEnumerator <IModelElement> attrEnumerator = this._parent.Attr.GetEnumerator();
                 try
                 {
                     for (
@@ -441,11 +441,11 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
             /// <summary>
             /// Removes the given item from the collection
             /// </summary>
-            /// <returns>True, if the item was removed, otherwise False</returns>
-            /// <param name="item">The item that should be removed</param>
+            /// <returns>True, if the item was removed, otherwise False </returns>
+            /// <param name="item">The item that should be removed </param>
             public override bool Remove(IModelElement item)
             {
-                HSRM.TTC2023.ClassToRelational.Class_.IAttribute attributeItem = item.As<HSRM.TTC2023.ClassToRelational.Class_.IAttribute>();
+                HSRM.TTC2023.ClassToRelational.Class_.IAttribute attributeItem = item.As <HSRM.TTC2023.ClassToRelational.Class_.IAttribute>();
                 if (((attributeItem != null) 
                             && this._parent.Attr.Remove(attributeItem)))
                 {
@@ -457,10 +457,10 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
             /// <summary>
             /// Gets an enumerator that enumerates the collection
             /// </summary>
-            /// <returns>A generic enumerator</returns>
-            public override IEnumerator<IModelElement> GetEnumerator()
+            /// <returns>A generic enumerator </returns>
+            public override IEnumerator <IModelElement> GetEnumerator()
             {
-                return Enumerable.Empty<IModelElement>().Concat(this._parent.Attr).GetEnumerator();
+                return Enumerable.Empty <IModelElement>().Concat(this._parent.Attr).GetEnumerator();
             }
         }
     }

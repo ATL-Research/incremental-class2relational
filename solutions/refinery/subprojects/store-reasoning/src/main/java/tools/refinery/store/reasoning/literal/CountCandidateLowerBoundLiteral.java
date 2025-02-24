@@ -15,9 +15,9 @@ import tools.refinery.store.query.term.Variable;
 
 import java.util.List;
 
-public class CountCandidateLowerBoundLiteral extends AbstractCountLiteral<Integer> {
-	public CountCandidateLowerBoundLiteral(DataVariable<Integer> resultVariable, Constraint target,
-										   List<Variable> arguments) {
+public class CountCandidateLowerBoundLiteral extends AbstractCountLiteral <Integer> {
+	public CountCandidateLowerBoundLiteral(DataVariable <Integer> resultVariable, Constraint target,
+										   List <Variable> arguments) {
 		super(Integer.class, resultVariable, target, arguments);
 	}
 
@@ -32,13 +32,13 @@ public class CountCandidateLowerBoundLiteral extends AbstractCountLiteral<Intege
 	}
 
 	@Override
-	protected Literal doSubstitute(Substitution substitution, List<Variable> substitutedArguments) {
+	protected Literal doSubstitute(Substitution substitution, List <Variable> substitutedArguments) {
 		return new CountCandidateLowerBoundLiteral(substitution.getTypeSafeSubstitute(getResultVariable()), getTarget(),
 				substitutedArguments);
 	}
 
 	@Override
-	public AbstractCallLiteral withArguments(Constraint newTarget, List<Variable> newArguments) {
+	public AbstractCallLiteral withArguments(Constraint newTarget, List <Variable> newArguments) {
 		return new CountCandidateLowerBoundLiteral(getResultVariable(), newTarget, newArguments);
 	}
 

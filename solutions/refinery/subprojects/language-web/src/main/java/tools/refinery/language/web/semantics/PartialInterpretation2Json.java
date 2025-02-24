@@ -46,8 +46,8 @@ public class PartialInterpretation2Json {
 		return getTuplesJson(cursor);
 	}
 
-	private static JsonArray getTuplesJson(Cursor<Tuple, ?> cursor) {
-		var map = new TreeMap<Tuple, Object>();
+	private static JsonArray getTuplesJson(Cursor <Tuple, ?> cursor) {
+		var map = new TreeMap <Tuple, Object>();
 		while (cursor.move()) {
 			map.put(cursor.getKey(), cursor.getValue());
 		}

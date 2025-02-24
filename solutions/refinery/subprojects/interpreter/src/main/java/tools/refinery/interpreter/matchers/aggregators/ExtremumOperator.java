@@ -21,8 +21,8 @@ import tools.refinery.interpreter.matchers.psystem.aggregations.IMultisetAggrega
  * @author Gabor Bergmann
  * @since 1.4
  */
-public class ExtremumOperator<T extends Comparable<T>>
-        implements IMultisetAggregationOperator<T, SortedMap<T, Integer>, T> {
+public class ExtremumOperator <T extends Comparable <T>>
+        implements IMultisetAggregationOperator <T, SortedMap <T, Integer>, T> {
 
     public enum Extreme {
         MIN, MAX;
@@ -30,7 +30,7 @@ public class ExtremumOperator<T extends Comparable<T>>
         /**
          * @since 2.0
          */
-        public <T> T pickFrom(SortedMap<T, Integer> nonEmptyMultiSet) {
+        public <T> T pickFrom(SortedMap <T, Integer> nonEmptyMultiSet) {
             switch(this) {
             case MIN:
                 return nonEmptyMultiSet.firstKey();
@@ -45,10 +45,10 @@ public class ExtremumOperator<T extends Comparable<T>>
     private static final ExtremumOperator MIN_OP = new ExtremumOperator<>(Extreme.MIN);
     private static final ExtremumOperator MAX_OP = new ExtremumOperator<>(Extreme.MAX);
 
-    public static <T extends Comparable<T>> ExtremumOperator<T> getMin() {
+    public static <T extends Comparable <T>> ExtremumOperator <T> getMin() {
         return MIN_OP;
     }
-    public static <T extends Comparable<T>> ExtremumOperator<T> getMax() {
+    public static <T extends Comparable <T>> ExtremumOperator <T> getMax() {
         return MAX_OP;
     }
 
@@ -75,7 +75,7 @@ public class ExtremumOperator<T extends Comparable<T>>
      * @since 2.0
      */
     @Override
-    public SortedMap<T, Integer> createNeutral() {
+    public SortedMap <T, Integer> createNeutral() {
         return new TreeMap<>();
     }
 
@@ -83,7 +83,7 @@ public class ExtremumOperator<T extends Comparable<T>>
      * @since 2.0
      */
     @Override
-    public boolean isNeutral(SortedMap<T, Integer> result) {
+    public boolean isNeutral(SortedMap <T, Integer> result) {
         return result.isEmpty();
     }
 
@@ -91,7 +91,7 @@ public class ExtremumOperator<T extends Comparable<T>>
      * @since 2.0
      */
     @Override
-    public SortedMap<T, Integer> update(SortedMap<T, Integer> oldResult, T updateValue, boolean isInsertion) {
+    public SortedMap <T, Integer> update(SortedMap <T, Integer> oldResult, T updateValue, boolean isInsertion) {
         oldResult.compute(updateValue, (value, c) -> {
             int count = (c == null) ? 0 : c;
             int result = (isInsertion) ? count+1 : count-1;
@@ -104,7 +104,7 @@ public class ExtremumOperator<T extends Comparable<T>>
      * @since 2.0
      */
     @Override
-    public T getAggregate(SortedMap<T, Integer> result) {
+    public T getAggregate(SortedMap <T, Integer> result) {
         return result.isEmpty() ? null :
             extreme.pickFrom(result);
     }
@@ -113,7 +113,7 @@ public class ExtremumOperator<T extends Comparable<T>>
      * @since 2.0
      */
     @Override
-    public T aggregateStream(Stream<T> stream) {
+    public T aggregateStream(Stream <T> stream) {
         switch (extreme) {
         case MIN:
             return stream.min(Comparator.naturalOrder()).orElse(null);
@@ -128,8 +128,8 @@ public class ExtremumOperator<T extends Comparable<T>>
      * @since 2.4
      */
     @Override
-    public SortedMap<T, Integer> clone(SortedMap<T, Integer> original) {
-        return new TreeMap<T, Integer>(original);
+    public SortedMap <T, Integer> clone(SortedMap <T, Integer> original) {
+        return new TreeMap <T, Integer>(original);
     }
 
 }

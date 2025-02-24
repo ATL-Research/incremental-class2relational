@@ -9,15 +9,15 @@ import tools.refinery.store.map.*;
 
 import java.util.List;
 
-public class StateBasedVersionedMapStoreFactory<K, V> implements VersionedMapStoreFactory<K, V> {
+public class StateBasedVersionedMapStoreFactory <K, V> implements VersionedMapStoreFactory <K, V> {
 	private final V defaultValue;
-	private final ContinuousHashProvider<K> continuousHashProvider;
+	private final ContinuousHashProvider <K> continuousHashProvider;
 	private final VersionedMapStoreStateConfiguration config;
 
 	public StateBasedVersionedMapStoreFactory(V defaultValue, Boolean transformToImmutable,
 											  VersionedMapStoreFactoryBuilder.SharingStrategy sharingStrategy,
 											  boolean versionFreeingEnabled,
-											  ContinuousHashProvider<K> continuousHashProvider) {
+											  ContinuousHashProvider <K> continuousHashProvider) {
 		this.defaultValue = defaultValue;
 		this.continuousHashProvider = continuousHashProvider;
 
@@ -30,13 +30,13 @@ public class StateBasedVersionedMapStoreFactory<K, V> implements VersionedMapSto
 	}
 
 	@Override
-	public VersionedMapStore<K, V> createOne() {
+	public VersionedMapStore <K, V> createOne() {
 		return new VersionedMapStoreStateImpl<>(continuousHashProvider, defaultValue, config);
 
 	}
 
 	@Override
-	public List<VersionedMapStore<K, V>> createGroup(int amount) {
+	public List <VersionedMapStore<K, V>> createGroup(int amount) {
 		return VersionedMapStoreStateImpl.createSharedVersionedMapStores(amount, continuousHashProvider, defaultValue,
 				config);
 	}

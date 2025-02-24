@@ -15,7 +15,7 @@ import tools.refinery.interpreter.matchers.tuple.Tuple;
  * @author Gabor Bergmann
  *
  */
-public abstract class KeyedEnumerablePConstraint<KeyType> extends EnumerablePConstraint {
+public abstract class KeyedEnumerablePConstraint <KeyType> extends EnumerablePConstraint {
 
     protected KeyType supplierKey;
 

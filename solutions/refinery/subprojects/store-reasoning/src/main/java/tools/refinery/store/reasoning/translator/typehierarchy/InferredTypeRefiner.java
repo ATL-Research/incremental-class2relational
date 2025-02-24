@@ -13,12 +13,12 @@ import tools.refinery.store.representation.Symbol;
 import tools.refinery.store.representation.TruthValue;
 import tools.refinery.store.tuple.Tuple;
 
-class InferredTypeRefiner extends AbstractPartialInterpretationRefiner<TruthValue, Boolean> {
-	private final Interpretation<InferredType> interpretation;
+class InferredTypeRefiner extends AbstractPartialInterpretationRefiner <TruthValue, Boolean> {
+	private final Interpretation <InferredType> interpretation;
 	private final TypeAnalysisResult result;
 
-	private InferredTypeRefiner(ReasoningAdapter adapter, PartialSymbol<TruthValue, Boolean> partialSymbol,
-								Symbol<InferredType> symbol, TypeAnalysisResult result) {
+	private InferredTypeRefiner(ReasoningAdapter adapter, PartialSymbol <TruthValue, Boolean> partialSymbol,
+								Symbol <InferredType> symbol, TypeAnalysisResult result) {
 		super(adapter, partialSymbol);
 		interpretation = adapter.getModel().getInterpretation(symbol);
 		this.result = result;
@@ -32,7 +32,7 @@ class InferredTypeRefiner extends AbstractPartialInterpretationRefiner<TruthValu
 		return true;
 	}
 
-	public static Factory<TruthValue, Boolean> of(Symbol<InferredType> symbol, TypeAnalysisResult result) {
+	public static Factory <TruthValue, Boolean> of(Symbol <InferredType> symbol, TypeAnalysisResult result) {
 		return (adapter, partialSymbol) -> new InferredTypeRefiner(adapter, partialSymbol, symbol, result);
 	}
 }

@@ -18,12 +18,12 @@ class ClauseInputParameterResolver {
 	private final InputParameterResolver rewriter;
 	private final String dnfName;
 	private final int clauseIndex;
-	private final Set<Variable> positiveVariables = new LinkedHashSet<>();
-	private final List<Literal> inlinedLiterals = new ArrayList<>();
-	private final Deque<Literal> workList;
+	private final Set <Variable> positiveVariables = new LinkedHashSet<>();
+	private final List <Literal> inlinedLiterals = new ArrayList<>();
+	private final Deque <Literal> workList;
 	private int helperIndex = 0;
 
-	public ClauseInputParameterResolver(InputParameterResolver rewriter, List<Literal> context, DnfClause clause,
+	public ClauseInputParameterResolver(InputParameterResolver rewriter, List <Literal> context, DnfClause clause,
 										String dnfName, int clauseIndex) {
 		this.rewriter = rewriter;
 		this.dnfName = dnfName;
@@ -37,7 +37,7 @@ class ClauseInputParameterResolver {
 		}
 	}
 
-	public List<Literal> rewriteClause() {
+	public List <Literal> rewriteClause() {
 		while (!workList.isEmpty()) {
 			var literal = workList.removeFirst();
 			processLiteral(literal);
@@ -105,7 +105,7 @@ class ClauseInputParameterResolver {
 		var contextCall = new CallLiteral(CallPolarity.POSITIVE, contextDnf, List.copyOf(positiveVariables));
 		inlinedLiterals.clear();
 		var substitution = Substitution.builder().renewing().build();
-		var context = new ArrayList<Literal>();
+		var context = new ArrayList <Literal>();
 		context.add(contextCall.substitute(substitution));
 		int arity = targetDnf.arity();
 		for (int i = 0; i < arity; i++) {

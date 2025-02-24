@@ -70,7 +70,7 @@ class IncrementalC2R_v2 {
 		this.manipulation = new SimpleModelManipulations(engine)
 		
 		// Helper
-		val List<EventDrivenTransformationRule<?, ?>> rules = #[
+		val List <EventDrivenTransformationRule<?, ?>> rules = #[
 			// Setup
 			createCleanupRule,
 			// Setup

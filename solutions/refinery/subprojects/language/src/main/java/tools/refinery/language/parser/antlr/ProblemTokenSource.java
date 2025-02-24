@@ -22,7 +22,7 @@ public class ProblemTokenSource implements TokenSource {
 
 	private final TokenSource delegate;
 
-	private final Deque<Token> buffer = new ArrayDeque<>();
+	private final Deque <Token> buffer = new ArrayDeque<>();
 
 	private boolean recursive;
 

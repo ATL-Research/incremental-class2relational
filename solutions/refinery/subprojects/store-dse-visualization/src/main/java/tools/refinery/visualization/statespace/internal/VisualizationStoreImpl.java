@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class VisualizationStoreImpl implements VisualizationStore {
 
-	private final Map<Version, Integer> states = new HashMap<>();
+	private final Map <Version, Integer> states = new HashMap<>();
 	private int transitionCounter = 0;
 	private Integer numberOfStates = 0;
 	private final StringBuilder designSpaceBuilder = new StringBuilder();
@@ -45,7 +45,7 @@ public class VisualizationStoreImpl implements VisualizationStore {
 	}
 
 	@Override
-	public Map<Version, Integer> getStates() {
+	public Map <Version, Integer> getStates() {
 		return states;
 	}
 }

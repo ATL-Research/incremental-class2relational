@@ -9,7 +9,7 @@ import tools.refinery.store.query.term.Variable;
 
 import java.util.Map;
 
-public record MapBasedSubstitution(Map<Variable, Variable> map, Substitution fallback) implements Substitution {
+public record MapBasedSubstitution(Map <Variable, Variable> map, Substitution fallback) implements Substitution {
 	@Override
 	public Variable getSubstitute(Variable variable) {
 		var value = map.get(variable);

@@ -7,7 +7,7 @@ package tools.refinery.store.query.view;
 
 import java.util.List;
 
-public record ViewImplication(AnySymbolView implyingView, AnySymbolView impliedView, List<Integer> impliedIndices) {
+public record ViewImplication(AnySymbolView implyingView, AnySymbolView impliedView, List <Integer> impliedIndices) {
 	public ViewImplication {
 		if (impliedIndices.size() != impliedView.arity()) {
 			throw new IllegalArgumentException("Expected %d implied indices for %s, but %d are provided"

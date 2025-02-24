@@ -32,7 +32,7 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
 {
     
     
-    public class TableKeyCollection : ObservableOppositeSet<ITable, IColumn>
+    public class TableKeyCollection : ObservableOppositeSet <ITable, IColumn>
     {
         
         public TableKeyCollection(ITable parent) : 

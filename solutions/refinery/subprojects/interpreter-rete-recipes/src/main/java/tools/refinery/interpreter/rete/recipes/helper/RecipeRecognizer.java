@@ -21,7 +21,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Stores a set of known <em>canonical</em> recipes, each representing a disjoint equivalence class of recipes, modulo
+ * Stores a set of known <em>canonical </em> recipes, each representing a disjoint equivalence class of recipes, modulo
  * {@link #isEquivalentRecipe(ReteNodeRecipe, ReteNodeRecipe)}.
  *
  * @author Gabor Bergmann
@@ -33,9 +33,9 @@ public class RecipeRecognizer {
 	/**
 	 * if EcoreUtil.equals(recipe1, recipe2), only one of them will be included here
 	 */
-	Map<Long, Set<ReteNodeRecipe>> canonicalRecipesByHashCode = new HashMap<>();
-	Map<Long, ReteNodeRecipe> canonicalRecipeByEquivalenceClassID = new HashMap<>();
-	Set<ReteNodeRecipe> canonicalRecipesWithoutHashCode = new LinkedHashSet<>();
+	Map <Long, Set <ReteNodeRecipe>> canonicalRecipesByHashCode = new HashMap<>();
+	Map <Long, ReteNodeRecipe> canonicalRecipeByEquivalenceClassID = new HashMap<>();
+	Set <ReteNodeRecipe> canonicalRecipesWithoutHashCode = new LinkedHashSet<>();
 
 	private final IQueryRuntimeContext runtimeContext;
 
@@ -127,10 +127,10 @@ public class RecipeRecognizer {
 		return null;
 	}
 
-	private final Deque<EObject> hashCodeStack = new ArrayDeque<>();
+	private final Deque <EObject> hashCodeStack = new ArrayDeque<>();
 
 	private Long computeHashCode(Object object) {
-		if (object instanceof List<?> list) {
+		if (object instanceof List <?> list) {
 			return computeListHashCode(list);
 		}
 		if (object instanceof ReteNodeRecipe recipe) {
@@ -158,7 +158,7 @@ public class RecipeRecognizer {
 		}
 	}
 
-	private Long computeListHashCode(List<?> list) {
+	private Long computeListHashCode(List <?> list) {
 		long result = 1;
 		for (var item : list) {
 			var update = computeHashCodeOrEquivalenceClassId(item);
@@ -322,8 +322,8 @@ public class RecipeRecognizer {
 			// short-circuit if already known to be equivalent
 			if (eObject1 instanceof ReteNodeRecipe) {
 				if (eObject2 instanceof ReteNodeRecipe) {
-					EList<Long> eqClassIDs1 = ((ReteNodeRecipe) eObject1).getEquivalenceClassIDs();
-					EList<Long> eqClassIDs2 = ((ReteNodeRecipe) eObject2).getEquivalenceClassIDs();
+					EList <Long> eqClassIDs1 = ((ReteNodeRecipe) eObject1).getEquivalenceClassIDs();
+					EList <Long> eqClassIDs2 = ((ReteNodeRecipe) eObject2).getEquivalenceClassIDs();
 
 					if (!Collections.disjoint(eqClassIDs1, eqClassIDs2))
 						return true;

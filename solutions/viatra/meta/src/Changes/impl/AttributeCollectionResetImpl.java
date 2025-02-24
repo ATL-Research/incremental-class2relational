@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Attribute Collection Reset</b></em>'.
+ * An implementation of the model object ' <em> <b>Attribute Collection Reset </b> </em>'.
  * <!-- end-user-doc -->
  *
  * @generated
@@ -38,7 +38,7 @@ public class AttributeCollectionResetImpl extends AttributeChangeImpl implements
 	@Override
 	public void apply() {
 
-		EList<?> collection = (EList<?>)this.getAffectedElement().eGet(this.getFeature());
+		EList <?> collection = (EList <?>)this.getAffectedElement().eGet(this.getFeature());
 		collection.clear();
 	}
 

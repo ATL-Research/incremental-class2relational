@@ -34,7 +34,7 @@ public class ResultProviderRequestor {
      * @param hintProvider
      * @param delegationStrategy
      * @param callerHint  a hint under which the calling pattern is evaluated,
-     * @param universalOverride if non-null, overrides the hint with extra options <i>after</i> the {@link ICallDelegationStrategy}
+     * @param universalOverride if non-null, overrides the hint with extra options <i>after </i> the {@link ICallDelegationStrategy}
      */
     public ResultProviderRequestor(IQueryBackend callerBackend, IQueryResultProviderAccess resultProviderAccess,
             IQueryBackendHintProvider hintProvider, ICallDelegationStrategy delegationStrategy,
@@ -54,7 +54,7 @@ public class ResultProviderRequestor {
     /**
      *
      * @param call a {@link PConstraint} in a query that calls another query.
-     * @param spotOverride if non-null, overrides the hint with extra options <i>after</i> the {@link ICallDelegationStrategy}
+     * @param spotOverride if non-null, overrides the hint with extra options <i>after </i> the {@link ICallDelegationStrategy}
      * and the universal override specified in the constructor
      * @return the obtained result provider
      */

@@ -47,7 +47,7 @@ class Run extends AbstractDriver implements AOFExtensions {
 			r as EObject
 		].select[ e | e !== null ]
 		// Setup 50
-		res.addObserver(new DefaultObserver<EObject> {
+		res.addObserver(new DefaultObserver <EObject> {
 			override added(int index, EObject element) {
 				target.contents.add(element)
 			}

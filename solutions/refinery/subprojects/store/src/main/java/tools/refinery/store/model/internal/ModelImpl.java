@@ -20,9 +20,9 @@ import java.util.*;
 public class ModelImpl implements Model {
 	private final ModelStoreImpl store;
 	private Version state;
-	private LinkedHashMap<? extends AnySymbol, ? extends VersionedInterpretation<?>> interpretations;
-	private final List<ModelAdapter> adapters;
-	private final List<ModelListener> listeners = new ArrayList<>();
+	private LinkedHashMap <? extends AnySymbol, ? extends VersionedInterpretation <?>> interpretations;
+	private final List <ModelAdapter> adapters;
+	private final List <ModelListener> listeners = new ArrayList<>();
 	private final CancellationToken cancellationToken;
 	private boolean uncommittedChanges;
 	private ModelAction pendingAction = ModelAction.NONE;
@@ -35,7 +35,7 @@ public class ModelImpl implements Model {
 		cancellationToken = store.getCancellationToken();
 	}
 
-	void setInterpretations(LinkedHashMap<? extends AnySymbol, ? extends VersionedInterpretation<?>> interpretations) {
+	void setInterpretations(LinkedHashMap <? extends AnySymbol, ? extends VersionedInterpretation <?>> interpretations) {
 		this.interpretations = interpretations;
 	}
 
@@ -50,19 +50,19 @@ public class ModelImpl implements Model {
 	}
 
 	@Override
-	public <T> Interpretation<T> getInterpretation(Symbol<T> symbol) {
+	public <T> Interpretation <T> getInterpretation(Symbol <T> symbol) {
 		var interpretation = interpretations.get(symbol);
 		if (interpretation == null) {
 			throw new IllegalArgumentException("No interpretation for symbol %s in model".formatted(symbol));
 		}
 		@SuppressWarnings("unchecked")
-		var typedInterpretation = (Interpretation<T>) interpretation;
+		var typedInterpretation = (Interpretation <T>) interpretation;
 		return typedInterpretation;
 	}
 
 	@Override
 	public ModelDiffCursor getDiffCursor(Version to) {
-		var diffCursors = new HashMap<AnySymbol, DiffCursor<Tuple, ?>>(interpretations.size());
+		var diffCursors = new HashMap <AnySymbol, DiffCursor <Tuple, ?>>(interpretations.size());
 		for (var entry : interpretations.entrySet()) {
 			diffCursors.put(entry.getKey(), entry.getValue().getDiffCursor(to));
 		}
@@ -172,12 +172,12 @@ public class ModelImpl implements Model {
 	}
 
 	@Override
-	public <T extends ModelAdapter> Optional<T> tryGetAdapter(Class<? extends T> adapterType) {
+	public <T extends ModelAdapter> Optional <T> tryGetAdapter(Class <? extends T> adapterType) {
 		return AdapterUtils.tryGetAdapter(adapters, adapterType);
 	}
 
 	@Override
-	public <T extends ModelAdapter> T getAdapter(Class<T> adapterType) {
+	public <T extends ModelAdapter> T getAdapter(Class <T> adapterType) {
 		return AdapterUtils.getAdapter(adapters, adapterType);
 	}
 

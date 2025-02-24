@@ -19,22 +19,22 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Column</b></em>'.
+ * An implementation of the model object ' <em> <b>Column </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link atl.research.relational_.impl.ColumnImpl#getOwner <em>Owner</em>}</li>
- *   <li>{@link atl.research.relational_.impl.ColumnImpl#getKeyOf <em>Key Of</em>}</li>
- *   <li>{@link atl.research.relational_.impl.ColumnImpl#getType <em>Type</em>}</li>
+ *   <li>{@link atl.research.relational_.impl.ColumnImpl#getOwner <em>Owner </em>} </li>
+ *   <li>{@link atl.research.relational_.impl.ColumnImpl#getKeyOf <em>Key Of </em>} </li>
+ *   <li>{@link atl.research.relational_.impl.ColumnImpl#getType <em>Type </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class ColumnImpl extends NamedImpl implements Column {
 	/**
-	 * The cached value of the '{@link #getKeyOf() <em>Key Of</em>}' reference.
+	 * The cached value of the '{@link #getKeyOf() <em>Key Of </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getKeyOf()
@@ -44,7 +44,7 @@ public class ColumnImpl extends NamedImpl implements Column {
 	protected Table keyOf;
 
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * The cached value of the '{@link #getType() <em>Type </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getType()

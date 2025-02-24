@@ -81,7 +81,7 @@ public abstract class SimpleReceiver extends BaseNode implements Receiver {
     }
 
     @Override
-    public Collection<Supplier> getParents() {
+    public Collection <Supplier> getParents() {
         if (parent == null)
             return Collections.emptySet();
         else

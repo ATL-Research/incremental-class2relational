@@ -18,13 +18,13 @@ import java.util.Set;
 
 // {@link Object#equals(Object)} is implemented by {@link AbstractLiteral}.
 @SuppressWarnings("squid:S2160")
-public class AggregationLiteral<R, T> extends AbstractCallLiteral {
-	private final DataVariable<R> resultVariable;
-	private final DataVariable<T> inputVariable;
-	private final Aggregator<R, T> aggregator;
+public class AggregationLiteral <R, T> extends AbstractCallLiteral {
+	private final DataVariable <R> resultVariable;
+	private final DataVariable <T> inputVariable;
+	private final Aggregator <R, T> aggregator;
 
-	public AggregationLiteral(DataVariable<R> resultVariable, Aggregator<R, T> aggregator,
-							  DataVariable<T> inputVariable, Constraint target, List<Variable> arguments) {
+	public AggregationLiteral(DataVariable <R> resultVariable, Aggregator <R, T> aggregator,
+							  DataVariable <T> inputVariable, Constraint target, List <Variable> arguments) {
 		super(target, arguments);
 		if (!inputVariable.getType().equals(aggregator.getInputType())) {
 			throw new InvalidQueryException("Input variable %s must of type %s, got %s instead".formatted(
@@ -47,25 +47,25 @@ public class AggregationLiteral<R, T> extends AbstractCallLiteral {
 		this.aggregator = aggregator;
 	}
 
-	public DataVariable<R> getResultVariable() {
+	public DataVariable <R> getResultVariable() {
 		return resultVariable;
 	}
 
-	public DataVariable<T> getInputVariable() {
+	public DataVariable <T> getInputVariable() {
 		return inputVariable;
 	}
 
-	public Aggregator<R, T> getAggregator() {
+	public Aggregator <R, T> getAggregator() {
 		return aggregator;
 	}
 
 	@Override
-	public Set<Variable> getOutputVariables() {
+	public Set <Variable> getOutputVariables() {
 		return Set.of(resultVariable);
 	}
 
 	@Override
-	public Set<Variable> getInputVariables(Set<? extends Variable> positiveVariablesInClause) {
+	public Set <Variable> getInputVariables(Set <? extends Variable> positiveVariablesInClause) {
 		if (positiveVariablesInClause.contains(inputVariable)) {
 			throw new InvalidQueryException("Aggregation variable %s must not be bound".formatted(inputVariable));
 		}
@@ -87,13 +87,13 @@ public class AggregationLiteral<R, T> extends AbstractCallLiteral {
 	}
 
 	@Override
-	protected Literal doSubstitute(Substitution substitution, List<Variable> substitutedArguments) {
+	protected Literal doSubstitute(Substitution substitution, List <Variable> substitutedArguments) {
 		return new AggregationLiteral<>(substitution.getTypeSafeSubstitute(resultVariable), aggregator,
 				substitution.getTypeSafeSubstitute(inputVariable), getTarget(), substitutedArguments);
 	}
 
 	@Override
-	public AbstractCallLiteral withArguments(Constraint newTarget, List<Variable> newArguments) {
+	public AbstractCallLiteral withArguments(Constraint newTarget, List <Variable> newArguments) {
 		return new AggregationLiteral<>(resultVariable, aggregator, inputVariable, newTarget, newArguments);
 	}
 
@@ -102,7 +102,7 @@ public class AggregationLiteral<R, T> extends AbstractCallLiteral {
 		if (!super.equalsWithSubstitution(helper, other)) {
 			return false;
 		}
-		var otherAggregationLiteral = (AggregationLiteral<?, ?>) other;
+		var otherAggregationLiteral = (AggregationLiteral <?, ?>) other;
 		return helper.variableEqual(resultVariable, otherAggregationLiteral.resultVariable) &&
 				aggregator.equals(otherAggregationLiteral.aggregator) &&
 				helper.variableEqual(inputVariable, otherAggregationLiteral.inputVariable);

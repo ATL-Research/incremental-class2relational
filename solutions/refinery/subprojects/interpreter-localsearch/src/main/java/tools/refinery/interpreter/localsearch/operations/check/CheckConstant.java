@@ -53,7 +53,7 @@ public class CheckConstant implements ISearchOperation {
     }
 
     @Override
-    public List<Integer> getVariablePositions() {
+    public List <Integer> getVariablePositions() {
         return Collections.singletonList(position);
     }
 
@@ -63,7 +63,7 @@ public class CheckConstant implements ISearchOperation {
     }
 
     @Override
-    public String toString(Function<Integer, String> variableMapping) {
+    public String toString(Function <Integer, String> variableMapping) {
         return "check     constant "+variableMapping.apply(position)+"='"+value+"'";
     }
 

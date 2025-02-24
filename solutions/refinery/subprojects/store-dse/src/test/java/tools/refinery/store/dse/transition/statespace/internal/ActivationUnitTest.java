@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 class ActivationUnitTest {
 	private final static int SMALL_SIZE = 5;
 
-	private static Stream<ActivationStoreEntry> entries() {
+	private static Stream <ActivationStoreEntry> entries() {
 		return Stream.of(
 				new ActivationStoreBitVectorEntry(SMALL_SIZE),
 				new ActivationStoreListEntry(SMALL_SIZE)
@@ -78,7 +78,7 @@ class ActivationUnitTest {
 	}
 
 	void randomDifferentTestCase(ActivationStoreEntry entry, int seed) {
-		List<Integer> elements = new ArrayList<>(SMALL_SIZE);
+		List <Integer> elements = new ArrayList<>(SMALL_SIZE);
 		for (int i = 0; i < SMALL_SIZE; i++) {
 			elements.add(i);
 		}
@@ -96,7 +96,7 @@ class ActivationUnitTest {
 
 	@ParameterizedTest
 	@MethodSource("entryFactories")
-	void randomDifferentTest(Supplier<ActivationStoreEntry> entry) {
+	void randomDifferentTest(Supplier <ActivationStoreEntry> entry) {
 		for (int i = 0; i < fuzzNumber; i++) {
 			randomDifferentTestCase(entry.get(), i);
 		}
@@ -116,13 +116,13 @@ class ActivationUnitTest {
 
 	@ParameterizedTest
 	@MethodSource("entryFactories")
-	void randomSameTest(Supplier<ActivationStoreEntry> entry) {
+	void randomSameTest(Supplier <ActivationStoreEntry> entry) {
 		for (int i = 0; i < fuzzNumber; i++) {
 			randomSameTestCase(entry.get(), i);
 		}
 	}
 
-	private static Stream<Supplier<ActivationStoreEntry>> entryFactories() {
+	private static Stream <Supplier<ActivationStoreEntry>> entryFactories() {
 		return Stream.of(
 				() -> new ActivationStoreBitVectorEntry(SMALL_SIZE),
 				() -> new ActivationStoreListEntry(SMALL_SIZE)

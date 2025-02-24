@@ -22,7 +22,7 @@ import tools.refinery.interpreter.matchers.context.IQueryMetaContext;
  */
 public abstract class DeferredPConstraint extends BasePConstraint {
 
-    public DeferredPConstraint(PBody pBody, Set<PVariable> affectedVariables) {
+    public DeferredPConstraint(PBody pBody, Set <PVariable> affectedVariables) {
         super(pBody, affectedVariables);
     }
 

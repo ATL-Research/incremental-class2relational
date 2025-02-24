@@ -22,7 +22,7 @@ import tools.refinery.interpreter.matchers.util.CollectionsFactory.MemoryType;
  * @author Gabor Bergmann
  * @since 2.0
  */
-public final class IdentityMaskedTupleMemory<Timestamp extends Comparable<Timestamp>> extends AbstractTrivialMaskedMemory<Timestamp> {
+public final class IdentityMaskedTupleMemory <Timestamp extends Comparable <Timestamp>> extends AbstractTrivialMaskedMemory <Timestamp> {
 
     /**
      * @param mask
@@ -42,12 +42,12 @@ public final class IdentityMaskedTupleMemory<Timestamp extends Comparable<Timest
     }
 
     @Override
-    public Iterable<Tuple> getSignatures() {
+    public Iterable <Tuple> getSignatures() {
         return tuples;
     }
 
     @Override
-    public Collection<Tuple> get(ITuple signature) {
+    public Collection <Tuple> get(ITuple signature) {
         Tuple contained = tuples.theContainedVersionOfUnsafe(signature);
         return contained != null ?
                         Collections.singleton(contained) :

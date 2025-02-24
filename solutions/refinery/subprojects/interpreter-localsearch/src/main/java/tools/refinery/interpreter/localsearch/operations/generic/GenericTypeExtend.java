@@ -35,7 +35,7 @@ import tools.refinery.interpreter.matchers.util.Preconditions;
  */
 public class GenericTypeExtend implements IIteratingSearchOperation {
 
-    private class Executor extends ExtendOperationExecutor<Tuple> {
+    private class Executor extends ExtendOperationExecutor <Tuple> {
         private final VolatileMaskedTuple maskedTuple;
 
         public Executor() {
@@ -43,7 +43,7 @@ public class GenericTypeExtend implements IIteratingSearchOperation {
         }
 
         @Override
-        protected Iterator<? extends Tuple> getIterator(MatchingFrame frame, ISearchContext context) {
+        protected Iterator <? extends Tuple> getIterator(MatchingFrame frame, ISearchContext context) {
             maskedTuple.updateTuple(frame);
             return context.getRuntimeContext().enumerateTuples(type, indexerMask, maskedTuple).iterator();
         }
@@ -82,8 +82,8 @@ public class GenericTypeExtend implements IIteratingSearchOperation {
 
     private final IInputKey type;
     private final int[] positions;
-    private final List<Integer> positionList;
-    private final Set<Integer> unboundVariableIndices;
+    private final List <Integer> positionList;
+    private final Set <Integer> unboundVariableIndices;
     private final TupleMask indexerMask;
     private final TupleMask callMask;
 
@@ -96,11 +96,11 @@ public class GenericTypeExtend implements IIteratingSearchOperation {
      * @param unboundVariableIndices
      *            the set of positions that are bound at the start of the operation
      */
-    public GenericTypeExtend(IInputKey type, int[] positions, TupleMask callMask, TupleMask indexerMask, Set<Integer> unboundVariableIndices) {
+    public GenericTypeExtend(IInputKey type, int[] positions, TupleMask callMask, TupleMask indexerMask, Set <Integer> unboundVariableIndices) {
         Preconditions.checkArgument(positions.length == type.getArity(),
                 "The type %s requires %d parameters, but %d positions are provided", type.getPrettyPrintableName(),
                 type.getArity(), positions.length);
-        List<Integer> modifiablePositionList = new ArrayList<>();
+        List <Integer> modifiablePositionList = new ArrayList<>();
         for (int position : positions) {
             modifiablePositionList.add(position);
         }
@@ -124,7 +124,7 @@ public class GenericTypeExtend implements IIteratingSearchOperation {
     }
 
     @Override
-    public List<Integer> getVariablePositions() {
+    public List <Integer> getVariablePositions() {
         return positionList;
     }
 
@@ -134,7 +134,7 @@ public class GenericTypeExtend implements IIteratingSearchOperation {
     }
 
     @Override
-    public String toString(Function<Integer, String> variableMapping) {
+    public String toString(Function <Integer, String> variableMapping) {
         return "extend    " + type.getPrettyPrintableName() + "("
                 + positionList.stream()
                         .map(input -> String.format("%s%s", unboundVariableIndices.contains(input) ? "-" : "+", variableMapping.apply(input)))

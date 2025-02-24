@@ -42,9 +42,9 @@ public class AnalysisScanner {
     protected final File labelCountFile;
     protected final Path labelCountFileAbsPath; 
     protected String skippedSymbolsRegex = "";
-    protected List<String> commentSymbols = new LinkedList<String>();
-    protected List<String> importTokens = new LinkedList<String>();
-    protected List<String> filesToScan = new LinkedList<String>();
+    protected List <String> commentSymbols = new LinkedList <String>();
+    protected List <String> importTokens = new LinkedList <String>();
+    protected List <String> filesToScan = new LinkedList <String>();
 
 
     public AnalysisScanner(Config config) {
@@ -218,7 +218,7 @@ public class AnalysisScanner {
     }
     String[] getCleanedArray(String preprocessed) {
         String[] array = preprocessed.split(" ");
-        List<String> arraylist = new LinkedList<>();
+        List <String> arraylist = new LinkedList<>();
         for (String a : array) {
             if (!a.equals(""))
                 arraylist.add(a);
@@ -262,11 +262,11 @@ public class AnalysisScanner {
         return -1;
     }
 
-    public List<String> extractFilesFromPath(String path) {
+    public List <String> extractFilesFromPath(String path) {
 
-        List<String> filesToScan = new LinkedList<String>();
+        List <String> filesToScan = new LinkedList <String>();
         // get all files in directory
-        FileIterator<Path> fiMV = new FileIterator<Path>();
+        FileIterator <Path> fiMV = new FileIterator <Path>();
         try {
             Files.walkFileTree(Paths.get(path), fiMV);
         } catch (IOException e) {
@@ -316,8 +316,8 @@ public class AnalysisScanner {
     }
 }
 
-class FileIterator<Path> implements FileVisitor<Path> {
-    private List<Path> regFiles = new LinkedList<Path>();
+class FileIterator <Path> implements FileVisitor <Path> {
+    private List <Path> regFiles = new LinkedList <Path>();
 
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
@@ -337,7 +337,7 @@ class FileIterator<Path> implements FileVisitor<Path> {
 
     }
 
-    public List<Path> getRegFiles() {
+    public List <Path> getRegFiles() {
         return regFiles;
     }
 

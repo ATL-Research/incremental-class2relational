@@ -29,17 +29,17 @@ import tools.refinery.interpreter.matchers.psystem.PVariable;
  */
 public class PStart extends POperation {
 
-    private Set<PVariable> aPrioriVariables;
+    private Set <PVariable> aPrioriVariables;
 
 
-    public PStart(Set<PVariable> aPrioriVariables) {
+    public PStart(Set <PVariable> aPrioriVariables) {
         super();
         this.aPrioriVariables = aPrioriVariables;
     }
     public PStart(PVariable... aPrioriVariables) {
-        this(new HashSet<PVariable>(Arrays.asList(aPrioriVariables)));
+        this(new HashSet <PVariable>(Arrays.asList(aPrioriVariables)));
     }
-    public Set<PVariable> getAPrioriVariables() {
+    public Set <PVariable> getAPrioriVariables() {
         return aPrioriVariables;
     }
 
@@ -53,7 +53,7 @@ public class PStart extends POperation {
     }
 
     @Override
-    public Set<? extends PConstraint> getDeltaConstraints() {
+    public Set <? extends PConstraint> getDeltaConstraints() {
         return Collections.emptySet();
     }
 

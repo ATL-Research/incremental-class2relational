@@ -20,10 +20,10 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Tests for an order statistic tree which is based on AVL-trees.
  * <p>
- * This class was copied into <i>Refinery</i> from
- * <a href="https://github.com/coderodde/OrderStatisticTree/tree/546c343b9f5d868e394a079ff32691c9dbfd83e3">https://github.com/coderodde/OrderStatisticTree</a>
+ * This class was copied into <i>Refinery </i> from
+ * <a href="https://github.com/coderodde/OrderStatisticTree/tree/546c343b9f5d868e394a079ff32691c9dbfd83e3">https://github.com/coderodde/OrderStatisticTree </a>
  * and is available under the
- * <a href="https://github.com/coderodde/OrderStatisticTree/blob/master/LICENSE">MIT License</a>.
+ * <a href="https://github.com/coderodde/OrderStatisticTree/blob/master/LICENSE">MIT License </a>.
  * We also migrated the code to Junit 5, cleaned up some linter warnings, and made the tests deterministic by fixing
  * the random seeds.
  *
@@ -31,9 +31,9 @@ import static org.junit.jupiter.api.Assertions.*;
  * @version based on 1.6 (Feb 11, 2016)
  */
 class OrderStatisticTreeTest {
-	private final OrderStatisticTree<Integer> tree = new OrderStatisticTree<>();
+	private final OrderStatisticTree <Integer> tree = new OrderStatisticTree<>();
 
-	private final TreeSet<Integer> set = new TreeSet<>();
+	private final TreeSet <Integer> set = new TreeSet<>();
 
 	@BeforeEach
 	void before() {
@@ -63,7 +63,7 @@ class OrderStatisticTreeTest {
 			assertEquals(set.add(i), tree.add(i));
 		}
 
-		Collection<Integer> coll = Arrays.asList(10, 9, 7, 11, 12);
+		Collection <Integer> coll = Arrays.asList(10, 9, 7, 11, 12);
 
 		assertEquals(set.addAll(coll), tree.addAll(coll));
 		assertEquals(set.size(), tree.size());
@@ -110,7 +110,7 @@ class OrderStatisticTreeTest {
 			tree.add(i);
 		}
 
-		Collection<Integer> coll = new HashSet<>();
+		Collection <Integer> coll = new HashSet<>();
 
 		for (int i = 10; i < 20; ++i) {
 			coll.add(i);
@@ -151,7 +151,7 @@ class OrderStatisticTreeTest {
 			tree.add(i);
 		}
 
-		Collection<Integer> coll = new HashSet<>();
+		Collection <Integer> coll = new HashSet<>();
 
 		for (int i = 10; i < 20; ++i) {
 			coll.add(i);
@@ -278,7 +278,7 @@ class OrderStatisticTreeTest {
 	@MethodSource("seedSource")
 	void tryReproduceTheCounterBug(long seed) {
 		Random random = new Random(seed);
-		List<Integer> list = new ArrayList<>();
+		List <Integer> list = new ArrayList<>();
 
 		for (int i = 0; i < 10; ++i) {
 			int number = random.nextInt(1000);
@@ -307,8 +307,8 @@ class OrderStatisticTreeTest {
 			tree.add(i);
 		}
 
-		Iterator<Integer> iterator1 = set.iterator();
-		Iterator<Integer> iterator2 = tree.iterator();
+		Iterator <Integer> iterator1 = set.iterator();
+		Iterator <Integer> iterator2 = tree.iterator();
 
 		for (int i = 0; i < 3; ++i) {
 			assertEquals(iterator1.next(), iterator2.next());
@@ -328,8 +328,8 @@ class OrderStatisticTreeTest {
 			set.add(i);
 		}
 
-		Iterator<Integer> iterator1 = set.iterator();
-		Iterator<Integer> iterator2 = tree.iterator();
+		Iterator <Integer> iterator1 = set.iterator();
+		Iterator <Integer> iterator2 = tree.iterator();
 
 		for (int i = 0; i < 5; ++i) {
 			assertEquals(iterator1.hasNext(), iterator2.hasNext());
@@ -358,8 +358,8 @@ class OrderStatisticTreeTest {
 			set.add(i);
 		}
 
-		Iterator<Integer> iterator1 = set.iterator();
-		Iterator<Integer> iterator2 = tree.iterator();
+		Iterator <Integer> iterator1 = set.iterator();
+		Iterator <Integer> iterator2 = tree.iterator();
 
 		for (int i = 0; i < 4; ++i) {
 			assertEquals(iterator1.hasNext(), iterator2.hasNext());
@@ -380,7 +380,7 @@ class OrderStatisticTreeTest {
 			tree.add(i);
 		}
 
-		Collection<Integer> coll = Arrays.asList(26, 29, 25);
+		Collection <Integer> coll = Arrays.asList(26, 29, 25);
 
 		assertEquals(set.retainAll(coll), tree.retainAll(coll));
 		assertEquals(set.size(), tree.size());
@@ -395,8 +395,8 @@ class OrderStatisticTreeTest {
 			assertEquals(set.add(i), tree.add(i));
 		}
 
-		Iterator<Integer> iterator1 = set.iterator();
-		Iterator<Integer> iterator2 = tree.iterator();
+		Iterator <Integer> iterator1 = set.iterator();
+		Iterator <Integer> iterator2 = tree.iterator();
 
 		assertEquals(iterator1.hasNext(), iterator2.hasNext());
 		assertEquals(iterator1.next(), iterator2.next());
@@ -430,8 +430,8 @@ class OrderStatisticTreeTest {
 			assertEquals(set.add(i), tree.add(i));
 		}
 
-		Iterator<Integer> iterator1 = set.iterator();
-		Iterator<Integer> iterator2 = tree.iterator();
+		Iterator <Integer> iterator1 = set.iterator();
+		Iterator <Integer> iterator2 = tree.iterator();
 
 		Random random = new Random(seed);
 
@@ -481,8 +481,8 @@ class OrderStatisticTreeTest {
 			tree.add(i);
 		}
 
-		Iterator<Integer> iterator1 = set.iterator();
-		Iterator<Integer> iterator2 = tree.iterator();
+		Iterator <Integer> iterator1 = set.iterator();
+		Iterator <Integer> iterator2 = tree.iterator();
 
 		set.remove(10);
 		tree.remove(10);
@@ -511,8 +511,8 @@ class OrderStatisticTreeTest {
 			tree.add(i);
 		}
 
-		Iterator<Integer> iterator1 = set.iterator();
-		Iterator<Integer> iterator2 = tree.iterator();
+		Iterator <Integer> iterator1 = set.iterator();
+		Iterator <Integer> iterator2 = tree.iterator();
 
 		for (int i = 0; i < 4; ++i) {
 			iterator1.next();
@@ -544,8 +544,8 @@ class OrderStatisticTreeTest {
 			tree.add(i);
 		}
 
-		Iterator<Integer> iterator1 = set.iterator();
-		Iterator<Integer> iterator2 = tree.iterator();
+		Iterator <Integer> iterator1 = set.iterator();
+		Iterator <Integer> iterator2 = tree.iterator();
 
 		set.add(100);
 		tree.add(100);
@@ -561,10 +561,10 @@ class OrderStatisticTreeTest {
 			tree.add(i);
 		}
 
-		Iterator<Integer> iterator1a = set.iterator();
-		Iterator<Integer> iterator1b = set.iterator();
-		Iterator<Integer> iterator2a = tree.iterator();
-		Iterator<Integer> iterator2b = tree.iterator();
+		Iterator <Integer> iterator1a = set.iterator();
+		Iterator <Integer> iterator1b = set.iterator();
+		Iterator <Integer> iterator2a = tree.iterator();
+		Iterator <Integer> iterator2b = tree.iterator();
 
 		for (int i = 0; i < 3; ++i) {
 			iterator1a.next();
@@ -622,7 +622,7 @@ class OrderStatisticTreeTest {
 		assertArrayEquals(array1after, array2after);
 	}
 
-	static Stream<Arguments> seedSource() {
+	static Stream <Arguments> seedSource() {
 		return Stream.of(
 				Arguments.of(0L),
 				Arguments.of(1L),

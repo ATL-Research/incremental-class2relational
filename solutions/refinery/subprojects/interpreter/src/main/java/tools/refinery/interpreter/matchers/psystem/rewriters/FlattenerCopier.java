@@ -34,11 +34,11 @@ import tools.refinery.interpreter.matchers.util.Preconditions;
  */
 class FlattenerCopier extends PBodyCopier {
 
-    private final Map<PositivePatternCall, CallInformation> calls;
+    private final Map <PositivePatternCall, CallInformation> calls;
 
     private static class CallInformation {
         final PBody body;
-        final Map<PVariable, PVariable> variableMapping;
+        final Map <PVariable, PVariable> variableMapping;
 
         private CallInformation(PBody body) {
             this.body = body;
@@ -46,7 +46,7 @@ class FlattenerCopier extends PBodyCopier {
         }
     }
 
-    public FlattenerCopier(PQuery query, Map<PositivePatternCall, PBody> callsToFlatten) {
+    public FlattenerCopier(PQuery query, Map <PositivePatternCall, PBody> callsToFlatten) {
         super(query);
         this.calls = callsToFlatten.entrySet().stream().collect(Collectors.toMap(Entry::getKey, entry -> new CallInformation(entry.getValue())));
     }
@@ -71,7 +71,7 @@ class FlattenerCopier extends PBodyCopier {
         PBody sourceBody = calls.get(contextPatternCall).body;
 
         // Copy variables
-        Set<PVariable> allVariables = sourceBody.getAllVariables();
+        Set <PVariable> allVariables = sourceBody.getAllVariables();
         for (PVariable pVariable : allVariables) {
             if (pVariable.isUnique()) {
                 copyVariable(contextPatternCall, pVariable,
@@ -80,7 +80,7 @@ class FlattenerCopier extends PBodyCopier {
         }
 
         // Copy constraints which are not filtered
-        Set<PConstraint> constraints = sourceBody.getConstraints();
+        Set <PConstraint> constraints = sourceBody.getConstraints();
         for (PConstraint pConstraint : constraints) {
             if (!(pConstraint instanceof ExportedParameter) && !filter.filter(pConstraint)) {
                 copyConstraint(pConstraint);
@@ -98,7 +98,7 @@ class FlattenerCopier extends PBodyCopier {
             PBody calledBody = Objects.requireNonNull(calls.get(positivePatternCall).body);
             Preconditions.checkArgument(positivePatternCall.getReferredQuery().equals(calledBody.getPattern()));
 
-            List<PVariable> symbolicParameters = calledBody.getSymbolicParameterVariables();
+            List <PVariable> symbolicParameters = calledBody.getSymbolicParameterVariables();
             Object[] elements = positivePatternCall.getVariablesTuple().getElements();
             for (int i = 0; i < elements.length; i++) {
                 // Create equality constraints between the caller PositivePatternCall and the corresponding body
@@ -118,7 +118,7 @@ class FlattenerCopier extends PBodyCopier {
 
     @Override
     protected void copyExpressionEvaluationConstraint(final ExpressionEvaluation expressionEvaluation) {
-        Map<PVariable, PVariable> variableMapping = this.variableMapping.entrySet().stream()
+        Map <PVariable, PVariable> variableMapping = this.variableMapping.entrySet().stream()
                 .filter(input -> expressionEvaluation.getPSystem().getAllVariables().contains(input.getKey()))
                 .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
 

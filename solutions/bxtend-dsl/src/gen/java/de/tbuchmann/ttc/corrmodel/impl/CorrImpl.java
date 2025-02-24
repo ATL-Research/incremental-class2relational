@@ -25,22 +25,22 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Corr</b></em>'.
+ * An implementation of the model object ' <em> <b>Corr </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.tbuchmann.ttc.corrmodel.impl.CorrImpl#getRuleId <em>Rule Id</em>}</li>
- *   <li>{@link de.tbuchmann.ttc.corrmodel.impl.CorrImpl#getSource <em>Source</em>}</li>
- *   <li>{@link de.tbuchmann.ttc.corrmodel.impl.CorrImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link de.tbuchmann.ttc.corrmodel.impl.CorrImpl#getRuleId <em>Rule Id </em>} </li>
+ *   <li>{@link de.tbuchmann.ttc.corrmodel.impl.CorrImpl#getSource <em>Source </em>} </li>
+ *   <li>{@link de.tbuchmann.ttc.corrmodel.impl.CorrImpl#getTarget <em>Target </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class CorrImpl extends EObjectImpl implements Corr {
 	/**
-	 * The default value of the '{@link #getRuleId() <em>Rule Id</em>}' attribute.
+	 * The default value of the '{@link #getRuleId() <em>Rule Id </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getRuleId()
@@ -50,7 +50,7 @@ public class CorrImpl extends EObjectImpl implements Corr {
 	protected static final String RULE_ID_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getRuleId() <em>Rule Id</em>}' attribute.
+	 * The cached value of the '{@link #getRuleId() <em>Rule Id </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getRuleId()
@@ -60,24 +60,24 @@ public class CorrImpl extends EObjectImpl implements Corr {
 	protected String ruleId = RULE_ID_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}' containment reference list.
+	 * The cached value of the '{@link #getSource() <em>Source </em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSource()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CorrElem> source;
+	protected EList <CorrElem> source;
 
 	/**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference list.
+	 * The cached value of the '{@link #getTarget() <em>Target </em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTarget()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CorrElem> target;
+	protected EList <CorrElem> target;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -127,9 +127,9 @@ public class CorrImpl extends EObjectImpl implements Corr {
 	 * @generated
 	 */
 	@Override
-	public EList<CorrElem> getSource() {
+	public EList <CorrElem> getSource() {
 		if (source == null) {
-			source = new EObjectContainmentEList<CorrElem>(CorrElem.class, this, CorrModelPackage.CORR__SOURCE);
+			source = new EObjectContainmentEList <CorrElem>(CorrElem.class, this, CorrModelPackage.CORR__SOURCE);
 		}
 		return source;
 	}
@@ -140,9 +140,9 @@ public class CorrImpl extends EObjectImpl implements Corr {
 	 * @generated
 	 */
 	@Override
-	public EList<CorrElem> getTarget() {
+	public EList <CorrElem> getTarget() {
 		if (target == null) {
-			target = new EObjectContainmentEList<CorrElem>(CorrElem.class, this, CorrModelPackage.CORR__TARGET);
+			target = new EObjectContainmentEList <CorrElem>(CorrElem.class, this, CorrModelPackage.CORR__TARGET);
 		}
 		return target;
 	}
@@ -153,8 +153,8 @@ public class CorrImpl extends EObjectImpl implements Corr {
 	 * @generated
 	 */
 	@Override
-	public EList<EObject> flatSrc() {
-		EList<EObject> flatSource = new org.eclipse.emf.common.util.BasicEList<>();
+	public EList <EObject> flatSrc() {
+		EList <EObject> flatSource = new org.eclipse.emf.common.util.BasicEList<>();
 		for (CorrElem element : getSource()) {
 			if (element instanceof de.tbuchmann.ttc.corrmodel.SingleElem) {
 				if (((de.tbuchmann.ttc.corrmodel.SingleElem) element).getElement() != null) {
@@ -173,8 +173,8 @@ public class CorrImpl extends EObjectImpl implements Corr {
 	 * @generated
 	 */
 	@Override
-	public EList<EObject> flatTrg() {
-		EList<EObject> flatTarget = new org.eclipse.emf.common.util.BasicEList<>();
+	public EList <EObject> flatTrg() {
+		EList <EObject> flatTarget = new org.eclipse.emf.common.util.BasicEList<>();
 		for (CorrElem element : getTarget()) {
 			if (element instanceof de.tbuchmann.ttc.corrmodel.SingleElem) {
 				if (((de.tbuchmann.ttc.corrmodel.SingleElem) element).getElement() != null) {
@@ -196,9 +196,9 @@ public class CorrImpl extends EObjectImpl implements Corr {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case CorrModelPackage.CORR__SOURCE:
-				return ((InternalEList<?>)getSource()).basicRemove(otherEnd, msgs);
+				return ((InternalEList <?>)getSource()).basicRemove(otherEnd, msgs);
 			case CorrModelPackage.CORR__TARGET:
-				return ((InternalEList<?>)getTarget()).basicRemove(otherEnd, msgs);
+				return ((InternalEList <?>)getTarget()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -235,11 +235,11 @@ public class CorrImpl extends EObjectImpl implements Corr {
 				return;
 			case CorrModelPackage.CORR__SOURCE:
 				getSource().clear();
-				getSource().addAll((Collection<? extends CorrElem>)newValue);
+				getSource().addAll((Collection <? extends CorrElem>)newValue);
 				return;
 			case CorrModelPackage.CORR__TARGET:
 				getTarget().clear();
-				getTarget().addAll((Collection<? extends CorrElem>)newValue);
+				getTarget().addAll((Collection <? extends CorrElem>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

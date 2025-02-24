@@ -34,12 +34,12 @@ public interface IConstraintEvaluationContext {
     /**
      * Unbound variables at the time of evaluating the constraint
      */
-    public Collection<PVariable> getFreeVariables();
+    public Collection <PVariable> getFreeVariables();
 
     /**
      * Bound variables at the time of evaluating the constraint
      */
-    public Collection<PVariable> getBoundVariables();
+    public Collection <PVariable> getBoundVariables();
 
     public IQueryRuntimeContext getRuntimeContext();
 

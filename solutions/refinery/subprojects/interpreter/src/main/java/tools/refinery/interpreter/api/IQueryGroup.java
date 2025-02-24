@@ -41,6 +41,6 @@ public interface IQueryGroup {
     /**
      * Returns the currently assigned {@link IQuerySpecification}s.
      */
-    public Set<IQuerySpecification<?>> getSpecifications();
+    public Set <IQuerySpecification<?>> getSpecifications();
 
 }

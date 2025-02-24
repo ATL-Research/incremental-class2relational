@@ -52,13 +52,13 @@ public class ProblemResource extends DerivedStateAwareResource {
 	 * @throws AssertionError If the URI fragment is unresolvable.
 	 */
 	@Override
-	protected EObject getEObject(String uriFragment, Triple<EObject, EReference, INode> triple) throws AssertionError {
+	protected EObject getEObject(String uriFragment, Triple <EObject, EReference, INode> triple) throws AssertionError {
 		cyclicLinkingDetectionCounter++;
 		if (cyclicLinkingDetectionCounter > cyclicLinkingDectectionCounterLimit && !resolving.add(triple)) {
 			return handleCyclicResolution(triple);
 		}
 		try {
-			Set<String> unresolvableProxies = getUnresolvableURIFragments();
+			Set <String> unresolvableProxies = getUnresolvableURIFragments();
 			if (unresolvableProxies.contains(uriFragment)) {
 				return null;
 			}
@@ -84,10 +84,10 @@ public class ProblemResource extends DerivedStateAwareResource {
 	}
 
 	@Nullable
-	private EObject doGetEObject(Triple<EObject, EReference, INode> triple) {
+	private EObject doGetEObject(Triple <EObject, EReference, INode> triple) {
 		EReference reference = triple.getSecond();
 		try {
-			List<EObject> linkedObjects = getLinkingService().getLinkedObjects(triple.getFirst(), reference,
+			List <EObject> linkedObjects = getLinkingService().getLinkedObjects(triple.getFirst(), reference,
 					triple.getThird());
 			if (linkedObjects.isEmpty()) {
 				createAndAddDiagnostic(triple);
@@ -118,14 +118,14 @@ public class ProblemResource extends DerivedStateAwareResource {
 	}
 
 	@Override
-	protected EObject handleCyclicResolution(Triple<EObject, EReference, INode> triple) throws AssertionError {
+	protected EObject handleCyclicResolution(Triple <EObject, EReference, INode> triple) throws AssertionError {
 		// Throw our own version of {@link LazyLinkingResource.CyclicLinkingException}.
 		throw new CyclicLinkingError("Cyclic resolution of lazy links : %s in resource '%s'.".formatted(
 				getReferences(triple, resolving), getURI()), triple);
 	}
 
 	@Override
-	protected void createAndAddDiagnostic(Triple<EObject, EReference, INode> triple) {
+	protected void createAndAddDiagnostic(Triple <EObject, EReference, INode> triple) {
 		if (isValidationDisabled()) {
 			return;
 		}
@@ -134,7 +134,7 @@ public class ProblemResource extends DerivedStateAwareResource {
 	}
 
 	@Override
-	protected void createAndAddDiagnostic(Triple<EObject, EReference, INode> triple, IllegalNodeException ex) {
+	protected void createAndAddDiagnostic(Triple <EObject, EReference, INode> triple, IllegalNodeException ex) {
 		if (isValidationDisabled()) {
 			return;
 		}
@@ -143,7 +143,7 @@ public class ProblemResource extends DerivedStateAwareResource {
 		addOrReplaceDiagnostic(triple, message);
 	}
 
-	protected void createAndAddAmbiguousReferenceDiagnostic(Triple<EObject, EReference, INode> triple) {
+	protected void createAndAddAmbiguousReferenceDiagnostic(Triple <EObject, EReference, INode> triple) {
 		if (isValidationDisabled()) {
 			return;
 		}
@@ -168,7 +168,7 @@ public class ProblemResource extends DerivedStateAwareResource {
 	 * @param triple  The triple to add the diagnostic for.
 	 * @param message The diagnostic message. Must have {@link Severity#ERROR}.
 	 */
-	protected void addOrReplaceDiagnostic(Triple<EObject, EReference, INode> triple, DiagnosticMessage message) {
+	protected void addOrReplaceDiagnostic(Triple <EObject, EReference, INode> triple, DiagnosticMessage message) {
 		if (message == null) {
 			return;
 		}
@@ -199,7 +199,7 @@ public class ProblemResource extends DerivedStateAwareResource {
 	 * @param triple The triple to add the diagnostic for.
 	 */
 	@Override
-	protected void removeDiagnostic(Triple<EObject, EReference, INode> triple) {
+	protected void removeDiagnostic(Triple <EObject, EReference, INode> triple) {
 		if (getErrors().isEmpty()) {
 			return;
 		}
@@ -219,7 +219,7 @@ public class ProblemResource extends DerivedStateAwareResource {
 	}
 
 	@Override
-	protected Diagnostic createDiagnostic(Triple<EObject, EReference, INode> triple, DiagnosticMessage message) {
+	protected Diagnostic createDiagnostic(Triple <EObject, EReference, INode> triple, DiagnosticMessage message) {
 		return new ProblemResourceLinkingDiagnostic(triple.getThird(), message.getMessage(),
 				message.getIssueCode(), message.getIssueData());
 	}
@@ -231,9 +231,9 @@ public class ProblemResource extends DerivedStateAwareResource {
 	 * Renamed from {@code CyclicLinkingException} to satisfy naming conventions enforced by Sonar.
 	 */
 	public static final class CyclicLinkingError extends AssertionError {
-		private final transient Triple<EObject, EReference, INode> triple;
+		private final transient Triple <EObject, EReference, INode> triple;
 
-		private CyclicLinkingError(Object detailMessage, Triple<EObject, EReference, INode> triple) {
+		private CyclicLinkingError(Object detailMessage, Triple <EObject, EReference, INode> triple) {
 			super(detailMessage);
 			this.triple = triple;
 		}

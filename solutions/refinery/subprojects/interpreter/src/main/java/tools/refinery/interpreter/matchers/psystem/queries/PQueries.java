@@ -39,14 +39,14 @@ public final class PQueries {
      * Predicate checking for the status of selected queries
      *
      */
-    public static Predicate<PQuery> queryStatusPredicate(final PQuery.PQueryStatus status) {
+    public static Predicate <PQuery> queryStatusPredicate(final PQuery.PQueryStatus status) {
         return query -> query.getStatus().equals(status);
     }
 
     /**
      * Enumerates referred queries (without duplicates) for the given body
      */
-    public static Function<PBody, Stream<PQuery>> directlyReferencedQueriesFunction() {
+    public static Function <PBody, Stream <PQuery>> directlyReferencedQueriesFunction() {
         return body -> (body.getConstraintsOfType(IMultiQueryReference.class).stream()
                 .flatMap(e -> e.getReferredQueries().stream()).distinct());
     }
@@ -58,7 +58,7 @@ public final class PQueries {
      *                            only enumerable type constraints are considered
      * @since 2.0
      */
-    public static Stream<IInputKey> directlyRequiredTypesOfQuery(PQuery query, boolean enumerablesOnly) {
+    public static Stream <IInputKey> directlyRequiredTypesOfQuery(PQuery query, boolean enumerablesOnly) {
         return directlyRequiredTypesOfDisjunction(query.getDisjunctBodies(), enumerablesOnly);
     }
 
@@ -69,9 +69,9 @@ public final class PQueries {
      *                            only enumerable type constraints are considered
      * @since 2.0
      */
-    public static Stream<IInputKey> directlyRequiredTypesOfDisjunction(PDisjunction disjunctBodies,
+    public static Stream <IInputKey> directlyRequiredTypesOfDisjunction(PDisjunction disjunctBodies,
             boolean enumerablesOnly) {
-        Class<? extends ITypeConstraint> filterClass = enumerablesOnly ? TypeConstraint.class : ITypeConstraint.class;
+        Class <? extends ITypeConstraint> filterClass = enumerablesOnly ? TypeConstraint.class : ITypeConstraint.class;
         return disjunctBodies.getBodies().stream().flatMap(body -> body.getConstraintsOfType(filterClass).stream())
                 .map(constraint -> constraint.getEquivalentJudgement().getInputKey()).distinct();
     }
@@ -79,7 +79,7 @@ public final class PQueries {
     /**
      * @since 1.4
      */
-    public static Predicate<PParameter> parameterDirectionPredicate(final PParameterDirection direction) {
+    public static Predicate <PParameter> parameterDirectionPredicate(final PParameterDirection direction) {
         return input -> input.getDirection() == direction;
     }
 
@@ -88,8 +88,8 @@ public final class PQueries {
      *
      * @since 1.6
      */
-    public static Set<PTraceable> getTraceables(PQuery query) {
-        final Set<PTraceable> traceables = new HashSet<>();
+    public static Set <PTraceable> getTraceables(PQuery query) {
+        final Set <PTraceable> traceables = new HashSet<>();
         traceables.add(query);
         query.getDisjunctBodies().getBodies().forEach(body -> {
             traceables.add(body);

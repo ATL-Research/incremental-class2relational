@@ -23,9 +23,9 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class StateCoderBuilderImpl extends AbstractModelAdapterBuilder<StateCoderStoreAdapter>
+public class StateCoderBuilderImpl extends AbstractModelAdapterBuilder <StateCoderStoreAdapter>
 		implements StateCoderBuilder {
-	private final Set<AnySymbol> excluded = new HashSet<>();
+	private final Set <AnySymbol> excluded = new HashSet<>();
 	private final MutableIntSet individuals = IntSets.mutable.empty();
 	private StateCodeCalculatorFactory calculator = NeighbourhoodCalculator::new;
 	private StateEquivalenceChecker checker = new StateEquivalenceCheckerImpl();
@@ -60,9 +60,9 @@ public class StateCoderBuilderImpl extends AbstractModelAdapterBuilder<StateCode
 
 	@Override
 	protected StateCoderStoreAdapter doBuild(ModelStore store) {
-		Set<Symbol<?>> symbols = new LinkedHashSet<>();
+		Set <Symbol<?>> symbols = new LinkedHashSet<>();
 		for (AnySymbol symbol : store.getSymbols()) {
-			if (!excluded.contains(symbol) && (symbol instanceof Symbol<?> typed)) {
+			if (!excluded.contains(symbol) && (symbol instanceof Symbol <?> typed)) {
 				symbols.add(typed);
 			}
 		}

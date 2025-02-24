@@ -27,7 +27,7 @@ public class OnetimeIndexer extends GenericProjectionIndexer {
     }
 
     @Override
-    public Collection<Tuple> get(Tuple signature) {
+    public Collection <Tuple> get(Tuple signature) {
         if (Options.releaseOnetimeIndexers) {
             reteContainer.unregisterClearable(memory);
             reteContainer.unregisterNode(this);

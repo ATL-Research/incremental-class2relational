@@ -147,7 +147,7 @@ public final class LeftInheritanceTuple extends BaseLeftInheritanceTuple {
             if (localElements.length != other.getLocalSize())
                 return false;
             int index = inheritedIndex;
-            for (int i = 0; i<localElements.length; ++i) {
+            for (int i = 0; i <localElements.length; ++i) {
                 if (! Objects.equals(localElements[i], other.get(index++)))
                     return false;
             }
@@ -160,7 +160,7 @@ public final class LeftInheritanceTuple extends BaseLeftInheritanceTuple {
     //
     // int retVal = cachedHash - other.cachedHash;
     // if (retVal==0) retVal = elements.length - other.elements.length;
-    // for (int i=0; retVal==0 && i<elements.length; ++i)
+    // for (int i=0; retVal==0 && i <elements.length; ++i)
     // {
     // if (elements[i] == null && other.elements[i] != null) retVal = -1;
     // else if (other.elements[i] == null) retVal = 1;

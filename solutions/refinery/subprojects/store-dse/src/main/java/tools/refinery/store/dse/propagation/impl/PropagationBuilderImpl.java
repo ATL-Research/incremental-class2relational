@@ -16,10 +16,10 @@ import tools.refinery.store.model.ModelStoreBuilder;
 
 import java.util.*;
 
-public class PropagationBuilderImpl extends AbstractModelAdapterBuilder<PropagationStoreAdapter>
+public class PropagationBuilderImpl extends AbstractModelAdapterBuilder <PropagationStoreAdapter>
 		implements PropagationBuilder {
-	private final Set<Rule> propagationRules = new LinkedHashSet<>();
-	private final Deque<Propagator> propagators = new ArrayDeque<>();
+	private final Set <Rule> propagationRules = new LinkedHashSet<>();
+	private final Deque <Propagator> propagators = new ArrayDeque<>();
 
 	@Override
 	public PropagationBuilder rule(Rule propagationRule) {

@@ -9,14 +9,14 @@ import tools.refinery.store.map.Cursor;
 import tools.refinery.store.query.dnf.Query;
 import tools.refinery.store.tuple.Tuple;
 
-public non-sealed interface ResultSet<T> extends AnyResultSet {
-	Query<T> getCanonicalQuery();
+public non-sealed interface ResultSet <T> extends AnyResultSet {
+	Query <T> getCanonicalQuery();
 
 	T get(Tuple parameters);
 
-	Cursor<Tuple, T> getAll();
+	Cursor <Tuple, T> getAll();
 
-	void addListener(ResultSetListener<T> listener);
+	void addListener(ResultSetListener <T> listener);
 
-	void removeListener(ResultSetListener<T> listener);
+	void removeListener(ResultSetListener <T> listener);
 }

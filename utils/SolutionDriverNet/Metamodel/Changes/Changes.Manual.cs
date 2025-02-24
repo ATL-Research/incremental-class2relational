@@ -10,7 +10,7 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
             AffectedElement.Model.RootElements.Add(NewObject);
         }
 
-        public override IEnumerable<IModelChange> Invert()
+        public override IEnumerable <IModelChange> Invert()
         {
             throw new NotSupportedException();
         }
@@ -23,7 +23,7 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
             DeletedElement.Delete();
         }
 
-        public override IEnumerable<IModelChange> Invert()
+        public override IEnumerable <IModelChange> Invert()
         {
             throw new NotSupportedException();
         }
@@ -36,7 +36,7 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
             AffectedElement.SetReferencedElement((IReference)Feature, null);
         }
 
-        public override IEnumerable<IModelChange> Invert()
+        public override IEnumerable <IModelChange> Invert()
         {
             throw new NotSupportedException();
         }

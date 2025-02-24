@@ -18,10 +18,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static tools.refinery.store.query.tests.QueryMatchers.structurallyEqualTo;
 
 class DnfBuilderVariableUnificationTest {
-	private final Symbol<Boolean> friend = Symbol.of("friend", 2);
-	private final Symbol<Boolean> children = Symbol.of("children", 2);
-	private final SymbolView<Boolean> friendView = new KeyOnlyView<>(friend);
-	private final SymbolView<Boolean> childrenView = new KeyOnlyView<>(children);
+	private final Symbol <Boolean> friend = Symbol.of("friend", 2);
+	private final Symbol <Boolean> children = Symbol.of("children", 2);
+	private final SymbolView <Boolean> friendView = new KeyOnlyView<>(friend);
+	private final SymbolView <Boolean> childrenView = new KeyOnlyView<>(children);
 
 	@Test
 	void equalToParameterTest() {

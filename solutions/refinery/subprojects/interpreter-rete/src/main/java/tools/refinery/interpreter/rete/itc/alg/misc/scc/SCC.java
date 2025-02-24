@@ -22,7 +22,7 @@ import java.util.*;
  * @param <V>
  *            the type parameter of the nodes in the graph
  */
-public class SCC<V> {
+public class SCC <V> {
 
     private SCC() {/*Utility class constructor*/}
 
@@ -35,29 +35,29 @@ public class SCC<V> {
      *            the directed graph data source
      * @return the set of SCCs
      */
-    public static <V> SCCResult<V> computeSCC(IGraphDataSource<V> g) {
+    public static <V> SCCResult <V> computeSCC(IGraphDataSource <V> g) {
         int index = 0;
-        Set<Set<V>> ret = new HashSet<Set<V>>();
+        Set <Set<V>> ret = new HashSet <Set<V>>();
 
         // stores the lowlink and index information for the given node
-        Map<V, SCCProperty> nodeMap = CollectionsFactory.createMap();
+        Map <V, SCCProperty> nodeMap = CollectionsFactory.createMap();
 
         // stores all target nodes of a given node - the list will be modified
-        Map<V, Set<V>> targetNodeMap = CollectionsFactory.createMap();
+        Map <V, Set <V>> targetNodeMap = CollectionsFactory.createMap();
 
         // stores those target nodes for a given node which have not been visited
-        Map<V, Set<V>> notVisitedMap = CollectionsFactory.createMap();
+        Map <V, Set <V>> notVisitedMap = CollectionsFactory.createMap();
 
         // stores the nodes during the traversal
-        Deque<V> nodeStack = new ArrayDeque<V>();
+        Deque <V> nodeStack = new ArrayDeque <V>();
 
         // stores the nodes which belong to an scc (there can be many sccs in the stack at the same time)
-        Deque<V> sccStack = new  ArrayDeque<V>();
+        Deque <V> sccStack = new  ArrayDeque <V>();
 
         boolean sink = false, finishedTraversal = true;
 
         // initialize all nodes with 0 index and 0 lowlink
-        Set<V> allNodes = g.getAllNodes();
+        Set <V> allNodes = g.getAllNodes();
         for (V n : allNodes) {
             nodeMap.put(n, new SCCProperty(0, 0));
         }
@@ -79,11 +79,11 @@ public class SCC<V> {
                         prop.setIndex(index);
                         prop.setLowlink(index);
 
-                        notVisitedMap.put(currentNode, new HashSet<V>());
+                        notVisitedMap.put(currentNode, new HashSet <V>());
 
                         // storing the target nodes of the actual node
                         if (g.getTargetNodes(currentNode) != null) {
-                            Set<V> targets = g.getTargetNodes(currentNode).distinctValues();
+                            Set <V> targets = g.getTargetNodes(currentNode).distinctValues();
                             targetNodeMap.put(currentNode, CollectionsFactory.createSet(targets));
                         }
                     }
@@ -124,7 +124,7 @@ public class SCC<V> {
 
                     // create scc if node is a sink or an scc has been found
                     if ((sink || finishedTraversal) && (prop.getLowlink() == prop.getIndex())) {
-                        Set<V> sc = new HashSet<V>();
+                        Set <V> sc = new HashSet <V>();
                         V targetNode = null;
 
                         do {
@@ -138,6 +138,6 @@ public class SCC<V> {
             }
         }
 
-        return new SCCResult<V>(ret, g);
+        return new SCCResult <V>(ret, g);
     }
 }

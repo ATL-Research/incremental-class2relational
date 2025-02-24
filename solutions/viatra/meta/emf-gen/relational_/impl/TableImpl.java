@@ -21,38 +21,38 @@ import relational_.Table;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Table</b></em>'.
+ * An implementation of the model object ' <em> <b>Table </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link relational_.impl.TableImpl#getCol <em>Col</em>}</li>
- *   <li>{@link relational_.impl.TableImpl#getKey <em>Key</em>}</li>
+ *   <li>{@link relational_.impl.TableImpl#getCol <em>Col </em>} </li>
+ *   <li>{@link relational_.impl.TableImpl#getKey <em>Key </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class TableImpl extends NamedImpl implements Table {
 	/**
-	 * The cached value of the '{@link #getCol() <em>Col</em>}' containment reference list.
+	 * The cached value of the '{@link #getCol() <em>Col </em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getCol()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Column> col;
+	protected EList <Column> col;
 
 	/**
-	 * The cached value of the '{@link #getKey() <em>Key</em>}' reference list.
+	 * The cached value of the '{@link #getKey() <em>Key </em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getKey()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Column> key;
+	protected EList <Column> key;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -78,9 +78,9 @@ public class TableImpl extends NamedImpl implements Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Column> getCol() {
+	public EList <Column> getCol() {
 		if (col == null) {
-			col = new EObjectContainmentWithInverseEList<Column>(Column.class, this, Relational_Package.TABLE__COL, Relational_Package.COLUMN__OWNER);
+			col = new EObjectContainmentWithInverseEList <Column>(Column.class, this, Relational_Package.TABLE__COL, Relational_Package.COLUMN__OWNER);
 		}
 		return col;
 	}
@@ -90,9 +90,9 @@ public class TableImpl extends NamedImpl implements Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Column> getKey() {
+	public EList <Column> getKey() {
 		if (key == null) {
-			key = new EObjectWithInverseResolvingEList<Column>(Column.class, this, Relational_Package.TABLE__KEY, Relational_Package.COLUMN__KEY_OF);
+			key = new EObjectWithInverseResolvingEList <Column>(Column.class, this, Relational_Package.TABLE__KEY, Relational_Package.COLUMN__KEY_OF);
 		}
 		return key;
 	}
@@ -107,9 +107,9 @@ public class TableImpl extends NamedImpl implements Table {
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case Relational_Package.TABLE__COL:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getCol()).basicAdd(otherEnd, msgs);
+				return ((InternalEList <InternalEObject>)(InternalEList <?>)getCol()).basicAdd(otherEnd, msgs);
 			case Relational_Package.TABLE__KEY:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getKey()).basicAdd(otherEnd, msgs);
+				return ((InternalEList <InternalEObject>)(InternalEList <?>)getKey()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -123,9 +123,9 @@ public class TableImpl extends NamedImpl implements Table {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case Relational_Package.TABLE__COL:
-				return ((InternalEList<?>)getCol()).basicRemove(otherEnd, msgs);
+				return ((InternalEList <?>)getCol()).basicRemove(otherEnd, msgs);
 			case Relational_Package.TABLE__KEY:
-				return ((InternalEList<?>)getKey()).basicRemove(otherEnd, msgs);
+				return ((InternalEList <?>)getKey()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -157,11 +157,11 @@ public class TableImpl extends NamedImpl implements Table {
 		switch (featureID) {
 			case Relational_Package.TABLE__COL:
 				getCol().clear();
-				getCol().addAll((Collection<? extends Column>)newValue);
+				getCol().addAll((Collection <? extends Column>)newValue);
 				return;
 			case Relational_Package.TABLE__KEY:
 				getKey().clear();
-				getKey().addAll((Collection<? extends Column>)newValue);
+				getKey().addAll((Collection <? extends Column>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

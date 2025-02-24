@@ -16,7 +16,7 @@ import java.util.Set;
 
 // {@link Object#equals(Object)} is implemented by {@link AbstractLiteral}.
 @SuppressWarnings("squid:S2160")
-public final class EquivalenceLiteral extends AbstractLiteral implements CanNegate<EquivalenceLiteral> {
+public final class EquivalenceLiteral extends AbstractLiteral implements CanNegate <EquivalenceLiteral> {
 	private final boolean positive;
 	private final Variable left;
 	private final Variable right;
@@ -44,17 +44,17 @@ public final class EquivalenceLiteral extends AbstractLiteral implements CanNega
 	}
 
 	@Override
-	public Set<Variable> getOutputVariables() {
+	public Set <Variable> getOutputVariables() {
 		return Set.of(left);
 	}
 
 	@Override
-	public Set<Variable> getInputVariables(Set<? extends Variable> positiveVariablesInClause) {
+	public Set <Variable> getInputVariables(Set <? extends Variable> positiveVariablesInClause) {
 		return Set.of(right);
 	}
 
 	@Override
-	public Set<Variable> getPrivateVariables(Set<? extends Variable> positiveVariablesInClause) {
+	public Set <Variable> getPrivateVariables(Set <? extends Variable> positiveVariablesInClause) {
 		return Set.of();
 	}
 

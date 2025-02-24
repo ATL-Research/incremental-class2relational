@@ -26,7 +26,7 @@ public class ModelGenerationService {
 	private OperationCanceledManager operationCanceledManager;
 
 	@Inject
-	private Provider<ModelGenerationWorker> workerProvider;
+	private Provider <ModelGenerationWorker> workerProvider;
 
 	private final long timeoutSec;
 

@@ -19,27 +19,27 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Model Change Set</b></em>'.
+ * An implementation of the model object ' <em> <b>Model Change Set </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link changes_new.Changes.impl.ModelChangeSetImpl#getChanges <em>Changes</em>}</li>
+ *   <li>{@link changes_new.Changes.impl.ModelChangeSetImpl#getChanges <em>Changes </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class ModelChangeSetImpl extends MinimalEObjectImpl.Container implements ModelChangeSet {
 	/**
-	 * The cached value of the '{@link #getChanges() <em>Changes</em>}' containment reference list.
+	 * The cached value of the '{@link #getChanges() <em>Changes </em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getChanges()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ModelChange> changes;
+	protected EList <ModelChange> changes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -65,9 +65,9 @@ public class ModelChangeSetImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ModelChange> getChanges() {
+	public EList <ModelChange> getChanges() {
 		if (changes == null) {
-			changes = new EObjectContainmentWithInverseEList<ModelChange>(ModelChange.class, this, ChangesPackage.MODEL_CHANGE_SET__CHANGES, ChangesPackage.MODEL_CHANGE__CHANGE_SET);
+			changes = new EObjectContainmentWithInverseEList <ModelChange>(ModelChange.class, this, ChangesPackage.MODEL_CHANGE_SET__CHANGES, ChangesPackage.MODEL_CHANGE__CHANGE_SET);
 		}
 		return changes;
 	}
@@ -82,7 +82,7 @@ public class ModelChangeSetImpl extends MinimalEObjectImpl.Container implements 
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ChangesPackage.MODEL_CHANGE_SET__CHANGES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getChanges()).basicAdd(otherEnd, msgs);
+				return ((InternalEList <InternalEObject>)(InternalEList <?>)getChanges()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -96,7 +96,7 @@ public class ModelChangeSetImpl extends MinimalEObjectImpl.Container implements 
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ChangesPackage.MODEL_CHANGE_SET__CHANGES:
-				return ((InternalEList<?>)getChanges()).basicRemove(otherEnd, msgs);
+				return ((InternalEList <?>)getChanges()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -126,7 +126,7 @@ public class ModelChangeSetImpl extends MinimalEObjectImpl.Container implements 
 		switch (featureID) {
 			case ChangesPackage.MODEL_CHANGE_SET__CHANGES:
 				getChanges().clear();
-				getChanges().addAll((Collection<? extends ModelChange>)newValue);
+				getChanges().addAll((Collection <? extends ModelChange>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

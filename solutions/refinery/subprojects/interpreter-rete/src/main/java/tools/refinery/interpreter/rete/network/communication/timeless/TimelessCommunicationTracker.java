@@ -63,9 +63,9 @@ public class TimelessCommunicationTracker extends CommunicationTracker {
     }
 
     @Override
-    protected void reconstructQueueContents(final Set<CommunicationGroup> oldActiveGroups) {
+    protected void reconstructQueueContents(final Set <CommunicationGroup> oldActiveGroups) {
         for (final CommunicationGroup oldGroup : oldActiveGroups) {
-            for (final Entry<MessageSelector, Collection<Mailbox>> entry : oldGroup.getMailboxes().entrySet()) {
+            for (final Entry <MessageSelector, Collection <Mailbox>> entry : oldGroup.getMailboxes().entrySet()) {
                 for (final Mailbox mailbox : entry.getValue()) {
                     final CommunicationGroup newGroup = this.groupMap.get(mailbox.getReceiver());
                     newGroup.notifyHasMessage(mailbox, entry.getKey());
@@ -124,7 +124,7 @@ public class TimelessCommunicationTracker extends CommunicationTracker {
         final CommunicationGroup ownGroup = this.groupMap.get(node);
         assert ownGroup != null;
         for (final Node source : this.dependencyGraph.getSourceNodes(node).distinctValues()) {
-            final Set<Node> sourcesToCheck = new HashSet<Node>();
+            final Set <Node> sourcesToCheck = new HashSet <Node>();
             sourcesToCheck.add(source);
             // DualInputNodes must be checked additionally because they do not use a mailbox directly.
             // It can happen that their indexers actually belong to other SCCs.

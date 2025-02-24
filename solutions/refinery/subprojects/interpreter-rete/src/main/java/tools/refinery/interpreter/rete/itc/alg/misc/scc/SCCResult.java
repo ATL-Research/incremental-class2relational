@@ -14,17 +14,17 @@ import java.util.Set;
 
 import tools.refinery.interpreter.rete.itc.igraph.IGraphDataSource;
 
-public class SCCResult<V> {
+public class SCCResult <V> {
 
-    private Set<Set<V>> sccs;
-    private IGraphDataSource<V> gds;
+    private Set <Set<V>> sccs;
+    private IGraphDataSource <V> gds;
 
-    public SCCResult(Set<Set<V>> sccs, IGraphDataSource<V> gds) {
+    public SCCResult(Set <Set<V>> sccs, IGraphDataSource <V> gds) {
         this.sccs = sccs;
         this.gds = gds;
     }
 
-    public Set<Set<V>> getSccs() {
+    public Set <Set<V>> getSccs() {
         return sccs;
     }
 
@@ -35,7 +35,7 @@ public class SCCResult<V> {
     public double getAverageNodeCount() {
         double a = 0;
 
-        for (Set<V> s : sccs) {
+        for (Set <V> s : sccs) {
             a += s.size();
         }
 
@@ -45,9 +45,9 @@ public class SCCResult<V> {
     public double getAverageEdgeCount() {
         long edgeSum = 0;
 
-        for (Set<V> scc : sccs) {
+        for (Set <V> scc : sccs) {
             for (V source : scc) {
-                for (Entry<V, Integer> entry : gds.getTargetNodes(source).entriesWithMultiplicities()) {
+                for (Entry <V, Integer> entry : gds.getTargetNodes(source).entriesWithMultiplicities()) {
                     if (scc.contains(entry.getKey())) {
                         edgeSum += entry.getValue();
                     }
@@ -61,7 +61,7 @@ public class SCCResult<V> {
     public int getBiggestSCCSize() {
         int max = 0;
 
-        for (Set<V> scc : sccs) {
+        for (Set <V> scc : sccs) {
             if (scc.size() > max)
                 max = scc.size();
         }
@@ -72,7 +72,7 @@ public class SCCResult<V> {
     public long getSumOfSquares() {
         long sum = 0;
 
-        for (Set<V> scc : sccs) {
+        for (Set <V> scc : sccs) {
             sum += scc.size() * scc.size();
         }
 

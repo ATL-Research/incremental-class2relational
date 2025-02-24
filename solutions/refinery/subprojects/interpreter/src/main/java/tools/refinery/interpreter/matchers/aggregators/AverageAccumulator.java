@@ -11,7 +11,7 @@ package tools.refinery.interpreter.matchers.aggregators;
 /**
  * @since 2.0
  */
-class AverageAccumulator<Domain> {
+class AverageAccumulator <Domain> {
     Domain value;
     long count;
 

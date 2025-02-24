@@ -9,7 +9,7 @@
 
 package tools.refinery.interpreter.matchers.algorithms;
 
-public class UnionFindNodeProperty<V> {
+public class UnionFindNodeProperty <V> {
 
     public int rank;
     public V parent;

@@ -15,9 +15,9 @@ import java.util.List;
 
 class PropagationStoreAdapterImpl implements PropagationStoreAdapter {
 	private final ModelStore store;
-	private final List<Propagator> propagators;
+	private final List <Propagator> propagators;
 
-	PropagationStoreAdapterImpl(ModelStore store, List<Propagator> propagators) {
+	PropagationStoreAdapterImpl(ModelStore store, List <Propagator> propagators) {
 		this.store = store;
 		this.propagators = propagators;
 	}
@@ -32,7 +32,7 @@ class PropagationStoreAdapterImpl implements PropagationStoreAdapter {
 		return new PropagationAdapterImpl(model, this);
 	}
 
-	List<Propagator> getPropagators() {
+	List <Propagator> getPropagators() {
 		return propagators;
 	}
 }

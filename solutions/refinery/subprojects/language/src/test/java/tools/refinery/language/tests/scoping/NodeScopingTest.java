@@ -97,7 +97,7 @@ class NodeScopingTest {
 		assertThat(problem.pred("predicate").conj(0).lit(0).arg(0).node(), equalTo(problem.individualNode("b")));
 	}
 
-	static Stream<Arguments> individualNodeReferenceSource() {
+	static Stream <Arguments> individualNodeReferenceSource() {
 		return Stream.of(Arguments.of("", false), Arguments.of("", true), Arguments.of("test::", true));
 	}
 
@@ -127,7 +127,7 @@ class NodeScopingTest {
 				equalTo(problem.builtin().findClass("int").get().getNewNode()));
 	}
 
-	static Stream<Arguments> builtInNodeReferencesSource() {
+	static Stream <Arguments> builtInNodeReferencesSource() {
 		return Stream.of(Arguments.of("int::new"), Arguments.of("builtin::int::new"));
 	}
 
@@ -157,7 +157,7 @@ class NodeScopingTest {
 				equalTo(problem.findClass("Foo").get().getNewNode()));
 	}
 
-	static Stream<Arguments> classNewNodeReferencesSource() {
+	static Stream <Arguments> classNewNodeReferencesSource() {
 		return Stream.of(Arguments.of("Foo::new", false), Arguments.of("Foo::new", true),
 				Arguments.of("test::Foo::new", true));
 	}
@@ -200,7 +200,7 @@ class NodeScopingTest {
 				equalTo(problem.findEnum("Foo").literal("alpha")));
 	}
 
-	static Stream<Arguments> enumLiteralReferencesSource() {
+	static Stream <Arguments> enumLiteralReferencesSource() {
 		return Stream.of(Arguments.of("alpha", false), Arguments.of("alpha", true), Arguments.of("Foo::alpha", false),
 				Arguments.of("Foo::alpha", true), Arguments.of("test::alpha", true),
 				Arguments.of("test::Foo::alpha", true));
@@ -232,7 +232,7 @@ class NodeScopingTest {
 				equalTo(problem.builtin().findEnum("bool").literal("true")));
 	}
 
-	static Stream<Arguments> builtInEnumLiteralReferencesSource() {
+	static Stream <Arguments> builtInEnumLiteralReferencesSource() {
 		return Stream.of(Arguments.of("true"), Arguments.of("bool::true"), Arguments.of("builtin::true"),
 				Arguments.of("builtin::bool::true"));
 	}

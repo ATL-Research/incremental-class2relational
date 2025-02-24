@@ -21,7 +21,7 @@ import tools.refinery.interpreter.matchers.util.CollectionsFactory.MemoryType;
  * @since 2.0
  * @noimplement This interface is not intended to be implemented by clients.
  */
-public interface IMultiLookup<Key, Value> {
+public interface IMultiLookup <Key, Value> {
 
     /**
      * Returns true if this collection is empty, false otherwise.
@@ -43,7 +43,7 @@ public interface IMultiLookup<Key, Value> {
      * @param key a key for which associated values are sought
      * @return null if key not found, a bucket of values otherwise
      */
-    IMemoryView<Value> lookup(Key key);
+    IMemoryView <Value> lookup(Key key);
 
     /**
      * Returns a (read-only) bucket of values associated with the given key.
@@ -51,8 +51,8 @@ public interface IMultiLookup<Key, Value> {
      * @param key a key for which associated values are sought
      * @return a bucket of values, never null
      */
-    default IMemoryView<Value> lookupOrEmpty(Key key) {
-        IMemoryView<Value> bucket = lookup(key);
+    default IMemoryView <Value> lookupOrEmpty(Key key) {
+        IMemoryView <Value> bucket = lookup(key);
         return bucket == null ? EmptyMemory.instance() : bucket;
     }
 
@@ -63,7 +63,7 @@ public interface IMultiLookup<Key, Value> {
      * @return a bucket of values, never null
      * @since 2.3
      */
-    IMemoryView<Value> lookupAndRemoveAll(Key key);
+    IMemoryView <Value> lookupAndRemoveAll(Key key);
 
     /**
      * Returns a (read-only) bucket of values associated with the given key, which can be of any type.
@@ -71,7 +71,7 @@ public interface IMultiLookup<Key, Value> {
      * @param key a key for which associated values are sought (may or may not be of Key type)
      * @return null if key not found, a bucket of values otherwise
      */
-    IMemoryView<Value> lookupUnsafe(Object key);
+    IMemoryView <Value> lookupUnsafe(Object key);
 
     /**
      * Returns a (read-only) bucket of values associated with the given key.
@@ -79,8 +79,8 @@ public interface IMultiLookup<Key, Value> {
      * @param key a key for which associated values are sought (may or may not be of Key type)
      * @return a bucket of values, never null
      */
-    default IMemoryView<Value> lookupUnsafeOrEmpty(Object key) {
-        IMemoryView<Value> bucket = lookupUnsafe(key);
+    default IMemoryView <Value> lookupUnsafeOrEmpty(Object key) {
+        IMemoryView <Value> bucket = lookupUnsafe(key);
         return bucket == null ? EmptyMemory.instance() : bucket;
     }
 
@@ -89,13 +89,13 @@ public interface IMultiLookup<Key, Value> {
     /**
      * @return the set of distinct keys that have values associated.
      */
-    Iterable<Key> distinctKeys();
+    Iterable <Key> distinctKeys();
 
     /**
      * @return the set of distinct keys that have values associated.
      * @since 2.3
      */
-    Stream<Key> distinctKeysStream();
+    Stream <Key> distinctKeysStream();
 
     /**
      * @return the number of distinct keys that have values associated.
@@ -105,13 +105,13 @@ public interface IMultiLookup<Key, Value> {
     /**
      * Iterates once over each distinct value.
      */
-    Iterable<Value> distinctValues();
+    Iterable <Value> distinctValues();
 
     /**
      * Iterates once over each distinct value.
      * @since 2.3
      */
-    Stream<Value> distinctValuesStream();
+    Stream <Value> distinctValuesStream();
 
 
 
@@ -189,9 +189,9 @@ public interface IMultiLookup<Key, Value> {
     /**
      * Provides semantic equality comparison.
      */
-    public static <Key, Value> boolean equals(IMultiLookup<Key, Value> self, Object obj) {
-        if (obj instanceof IMultiLookup<?, ?>) {
-            IMultiLookup<?, ?> other = (IMultiLookup<?, ?>) obj;
+    public static <Key, Value> boolean equals(IMultiLookup <Key, Value> self, Object obj) {
+        if (obj instanceof IMultiLookup <?, ?>) {
+            IMultiLookup <?, ?> other = (IMultiLookup <?, ?>) obj;
             if (other.countKeys() != self.countKeys()) return false;
             for (Object key : other.distinctKeys()) {
                 if (! other.lookupUnsafe(key).equals(self.lookupUnsafe(key)))
@@ -205,7 +205,7 @@ public interface IMultiLookup<Key, Value> {
     /**
      * Provides semantic hashCode() comparison.
      */
-    public static <Key, Value> int hashCode(IMultiLookup<Key, Value> memory) {
+    public static <Key, Value> int hashCode(IMultiLookup <Key, Value> memory) {
         int hashCode = 0;
         for (Key key : memory.distinctKeys()) {
             hashCode += key.hashCode() ^ memory.lookup(key).hashCode();

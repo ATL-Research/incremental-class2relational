@@ -24,11 +24,11 @@ import tools.refinery.interpreter.rete.network.communication.Timestamp;
  * @author Tamas Szabo
  * @since 2.4
  */
-public class FirstOnlySequentialTimelyColumnAggregatorNode<Domain, Accumulator, AggregateResult>
-        extends FirstOnlyTimelyColumnAggregatorNode<Domain, Accumulator, AggregateResult> {
+public class FirstOnlySequentialTimelyColumnAggregatorNode <Domain, Accumulator, AggregateResult>
+        extends FirstOnlyTimelyColumnAggregatorNode <Domain, Accumulator, AggregateResult> {
 
     public FirstOnlySequentialTimelyColumnAggregatorNode(final ReteContainer reteContainer,
-            final IMultisetAggregationOperator<Domain, Accumulator, AggregateResult> operator,
+            final IMultisetAggregationOperator <Domain, Accumulator, AggregateResult> operator,
             final TupleMask groupMask, final TupleMask columnMask) {
         super(reteContainer, operator, groupMask, columnMask);
     }
@@ -67,7 +67,7 @@ public class FirstOnlySequentialTimelyColumnAggregatorNode<Domain, Accumulator, 
             AggregateResult previousNewResult = newResult;
             AggregateResult currentOldResult = null;
             AggregateResult currentNewResult = null;
-            final TreeMap<Timestamp, CumulativeAggregate<Accumulator, AggregateResult>> groupEntries = this.memory
+            final TreeMap <Timestamp, CumulativeAggregate <Accumulator, AggregateResult>> groupEntries = this.memory
                     .get(group);
 
             Timestamp currentTimestamp = groupEntries == null ? null : groupEntries.higherKey(timestamp);
@@ -101,11 +101,11 @@ public class FirstOnlySequentialTimelyColumnAggregatorNode<Domain, Accumulator, 
 
     @Override
     protected Accumulator getAccumulator(final Tuple group, final Timestamp timestamp) {
-        final TreeMap<Timestamp, CumulativeAggregate<Accumulator, AggregateResult>> entryMap = this.memory.get(group);
+        final TreeMap <Timestamp, CumulativeAggregate <Accumulator, AggregateResult>> entryMap = this.memory.get(group);
         if (entryMap == null) {
             return operator.createNeutral();
         } else {
-            final CumulativeAggregate<Accumulator, AggregateResult> entry = entryMap.get(timestamp);
+            final CumulativeAggregate <Accumulator, AggregateResult> entry = entryMap.get(timestamp);
             if (entry == null) {
                 return operator.createNeutral();
             } else {

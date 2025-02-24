@@ -14,20 +14,20 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Operation Argument</b></em>'.
+ * An implementation of the model object ' <em> <b>Operation Argument </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.OperationArgumentImpl#getName <em>Name</em>}</li>
+ *   <li>{@link Changes.impl.OperationArgumentImpl#getName <em>Name </em>} </li>
  * </ul>
  *
  * @generated
  */
 public abstract class OperationArgumentImpl extends MinimalEObjectImpl.Container implements OperationArgument {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The default value of the '{@link #getName() <em>Name </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getName()
@@ -37,7 +37,7 @@ public abstract class OperationArgumentImpl extends MinimalEObjectImpl.Container
 	protected static final String NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getName() <em>Name </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getName()

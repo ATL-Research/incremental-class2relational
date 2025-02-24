@@ -13,11 +13,11 @@ import java.util.function.Consumer;
 
 public class ActivationStoreImpl implements ActivationStore {
 	final int numberOfTransformations;
-	final Consumer<VersionWithObjectiveValue> actionWhenAllActivationVisited;
-	final Map<VersionWithObjectiveValue, List<ActivationStoreEntry>> versionToActivations;
+	final Consumer <VersionWithObjectiveValue> actionWhenAllActivationVisited;
+	final Map <VersionWithObjectiveValue, List <ActivationStoreEntry>> versionToActivations;
 
 	public ActivationStoreImpl(final int numberOfTransformations,
-							   Consumer<VersionWithObjectiveValue> actionWhenAllActivationVisited) {
+							   Consumer <VersionWithObjectiveValue> actionWhenAllActivationVisited) {
 		this.numberOfTransformations = numberOfTransformations;
 		this.actionWhenAllActivationVisited = actionWhenAllActivationVisited;
 		versionToActivations = new HashMap<>();
@@ -27,7 +27,7 @@ public class ActivationStoreImpl implements ActivationStore {
 		boolean[] successful = new boolean[]{false};
 		var entries = versionToActivations.computeIfAbsent(to, x -> {
 			successful[0] = true;
-			List<ActivationStoreEntry> result = new ArrayList<>(emptyEntrySizes.length);
+			List <ActivationStoreEntry> result = new ArrayList<>(emptyEntrySizes.length);
 			for (int emptyEntrySize : emptyEntrySizes) {
 				result.add(ActivationStoreEntry.create(emptyEntrySize));
 			}

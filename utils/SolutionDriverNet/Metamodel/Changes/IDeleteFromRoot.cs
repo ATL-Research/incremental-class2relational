@@ -57,12 +57,12 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Gets fired before the DeletedElement property changes its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> DeletedElementChanging;
+        event System.EventHandler <ValueChangedEventArgs> DeletedElementChanging;
         
         /// <summary>
         /// Gets fired when the DeletedElement property changed its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> DeletedElementChanged;
+        event System.EventHandler <ValueChangedEventArgs> DeletedElementChanged;
     }
 }
 

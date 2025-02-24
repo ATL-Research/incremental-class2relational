@@ -16,13 +16,13 @@ import tools.refinery.store.query.term.NodeVariable;
 import java.util.*;
 
 public class Action {
-	private final List<NodeVariable> parameters;
-	private final Set<NodeVariable> localVariables;
-	private final List<ActionLiteral> actionLiterals;
+	private final List <NodeVariable> parameters;
+	private final Set <NodeVariable> localVariables;
+	private final List <ActionLiteral> actionLiterals;
 	private final int[] @Nullable [] inputAllocations;
 	private final int[] @Nullable [] outputAllocations;
 
-	public Action(List<NodeVariable> parameters, List<? extends ActionLiteral> actionLiterals) {
+	public Action(List <NodeVariable> parameters, List <? extends ActionLiteral> actionLiterals) {
 		this.parameters = List.copyOf(parameters);
 		this.actionLiterals = List.copyOf(actionLiterals);
 		var allocation = ObjectIntMaps.mutable.<NodeVariable>empty();
@@ -30,7 +30,7 @@ public class Action {
 		for (int i = 0; i < arity; i++) {
 			allocation.put(parameters.get(i), i);
 		}
-		var mutableLocalVariables = new LinkedHashSet<NodeVariable>();
+		var mutableLocalVariables = new LinkedHashSet <NodeVariable>();
 		int size = actionLiterals.size();
 		inputAllocations = new int[size][];
 		outputAllocations = new int[size][];
@@ -41,8 +41,8 @@ public class Action {
 		this.localVariables = Collections.unmodifiableSet(mutableLocalVariables);
 	}
 
-	private void computeInputAllocation(int actionIndex, List<NodeVariable> parameters,
-										MutableObjectIntMap<NodeVariable> allocation) {
+	private void computeInputAllocation(int actionIndex, List <NodeVariable> parameters,
+										MutableObjectIntMap <NodeVariable> allocation) {
 		var actionLiteral = actionLiterals.get(actionIndex);
 		var inputVariables = actionLiteral.getInputVariables();
 		if (inputVariables.equals(parameters)) {
@@ -61,8 +61,8 @@ public class Action {
 		inputAllocations[actionIndex] = inputs;
 	}
 
-	private void computeOutputAllocation(int actionIndex, Set<NodeVariable> mutableLocalVariable,
-										 MutableObjectIntMap<NodeVariable> allocation) {
+	private void computeOutputAllocation(int actionIndex, Set <NodeVariable> mutableLocalVariable,
+										 MutableObjectIntMap <NodeVariable> allocation) {
 		var actionLiteral = actionLiterals.get(actionIndex);
 		var outputVariables = actionLiteral.getOutputVariables();
 		int size = outputVariables.size();
@@ -90,7 +90,7 @@ public class Action {
 		outputAllocations[actionIndex] = outputs;
 	}
 
-	public List<NodeVariable> getParameters() {
+	public List <NodeVariable> getParameters() {
 		return parameters;
 	}
 
@@ -98,11 +98,11 @@ public class Action {
 		return parameters.size();
 	}
 
-	public Set<NodeVariable> getLocalVariables() {
+	public Set <NodeVariable> getLocalVariables() {
 		return localVariables;
 	}
 
-	public List<ActionLiteral> getActionLiterals() {
+	public List <ActionLiteral> getActionLiterals() {
 		return actionLiterals;
 	}
 
@@ -118,15 +118,15 @@ public class Action {
 		return new BoundAction(this, model);
 	}
 
-	public static Action ofSymbolicParameters(List<SymbolicParameter> symbolicParameters,
-											  List<? extends ActionLiteral> actionLiterals) {
+	public static Action ofSymbolicParameters(List <SymbolicParameter> symbolicParameters,
+											  List <? extends ActionLiteral> actionLiterals) {
 		var nodeVariables = symbolicParameters.stream()
 				.map(symbolicParameter -> symbolicParameter.getVariable().asNodeVariable())
 				.toList();
 		return new Action(nodeVariables, actionLiterals);
 	}
 
-	public static Action ofPrecondition(RelationalQuery precondition, List<? extends ActionLiteral> actionLiterals) {
+	public static Action ofPrecondition(RelationalQuery precondition, List <? extends ActionLiteral> actionLiterals) {
 		return ofSymbolicParameters(precondition.getDnf().getSymbolicParameters(), actionLiterals);
 	}
 }

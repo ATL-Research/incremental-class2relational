@@ -22,7 +22,7 @@ public class NeighbourhoodCalculator extends AbstractNeighbourhoodCalculator imp
 	private ObjectCodeImpl previousObjectCode = new ObjectCodeImpl();
 	private ObjectCodeImpl nextObjectCode = new ObjectCodeImpl();
 
-	public NeighbourhoodCalculator(Model model, List<? extends Interpretation<?>> interpretations, IntSet individuals) {
+	public NeighbourhoodCalculator(Model model, List <? extends Interpretation <?>> interpretations, IntSet individuals) {
 		super(model, interpretations, individuals);
 	}
 
@@ -50,7 +50,7 @@ public class NeighbourhoodCalculator extends AbstractNeighbourhoodCalculator imp
 	private long calculateLastSum(ObjectCode codes) {
 		long result = 0;
 		for (var nullImpactValue : nullImpactValues) {
-			result = result * PRIME + Objects.hashCode(((Interpretation<?>) nullImpactValue).get(Tuple0.INSTANCE));
+			result = result * PRIME + Objects.hashCode(((Interpretation <?>) nullImpactValue).get(Tuple0.INSTANCE));
 		}
 
 		for (int i = 0; i < codes.getSize(); i++) {
@@ -64,7 +64,7 @@ public class NeighbourhoodCalculator extends AbstractNeighbourhoodCalculator imp
 	private void constructNextObjectCodes(ObjectCodeImpl previous, ObjectCodeImpl next) {
 		for (var impactValueEntry : this.impactValues.entrySet()) {
 			model.checkCancelled();
-			Interpretation<?> interpretation = (Interpretation<?>) impactValueEntry.getKey();
+			Interpretation <?> interpretation = (Interpretation <?>) impactValueEntry.getKey();
 			var cursor = interpretation.getAll();
 			int arity = interpretation.getSymbol().arity();
 			long[] impactValue = impactValueEntry.getValue();
@@ -87,7 +87,7 @@ public class NeighbourhoodCalculator extends AbstractNeighbourhoodCalculator imp
 
 
 	private void impactCalculation1(ObjectCodeImpl previous, ObjectCodeImpl next, long[] impactValues,
-									Cursor<Tuple, ?> cursor) {
+									Cursor <Tuple, ?> cursor) {
 
 		Tuple tuple = cursor.getKey();
 		int o = tuple.get(0);
@@ -97,7 +97,7 @@ public class NeighbourhoodCalculator extends AbstractNeighbourhoodCalculator imp
 	}
 
 	private void impactCalculation2(ObjectCodeImpl previous, ObjectCodeImpl next, long[] impactValues,
-									Cursor<Tuple, ?> cursor) {
+									Cursor <Tuple, ?> cursor) {
 		final Tuple tuple = cursor.getKey();
 		final int o1 = tuple.get(0);
 		final int o2 = tuple.get(1);
@@ -110,7 +110,7 @@ public class NeighbourhoodCalculator extends AbstractNeighbourhoodCalculator imp
 	}
 
 	private void impactCalculationN(ObjectCodeImpl previous, ObjectCodeImpl next, long[] impactValues,
-									Cursor<Tuple, ?> cursor) {
+									Cursor <Tuple, ?> cursor) {
 		final Tuple tuple = cursor.getKey();
 
 		Object value = cursor.getValue();

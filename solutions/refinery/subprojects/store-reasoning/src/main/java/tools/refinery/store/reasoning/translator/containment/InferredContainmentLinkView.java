@@ -11,10 +11,10 @@ import tools.refinery.store.representation.Symbol;
 
 import java.util.Objects;
 
-abstract class InferredContainmentLinkView extends TuplePreservingView<InferredContainment> {
+abstract class InferredContainmentLinkView extends TuplePreservingView <InferredContainment> {
 	protected final PartialRelation link;
 
-	protected InferredContainmentLinkView(Symbol<InferredContainment> symbol, String name, PartialRelation link) {
+	protected InferredContainmentLinkView(Symbol <InferredContainment> symbol, String name, PartialRelation link) {
 		super(symbol, link.name() + "#" + name);
 		this.link = link;
 	}

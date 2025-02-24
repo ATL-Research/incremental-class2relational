@@ -20,7 +20,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 class OrderedResultSetTest {
-	private static final Symbol<Boolean> friend = Symbol.of("friend", 2);
+	private static final Symbol <Boolean> friend = Symbol.of("friend", 2);
 	private static final AnySymbolView friendView = new KeyOnlyView<>(friend);
 
 	@Test

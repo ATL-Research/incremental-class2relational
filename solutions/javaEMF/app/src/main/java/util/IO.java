@@ -53,7 +53,7 @@ public class IO {
         }
     }
 
-    public static void persistModel(List<? extends EObject> models, String uri) {
+    public static void persistModel(List <? extends EObject> models, String uri) {
         var resource = createResource(uri);
 
         resource.getContents().addAll(models);
@@ -68,7 +68,7 @@ public class IO {
         persist(resource);
     }
 
-    public static List<EObject> readModels(String uri) {
+    public static List <EObject> readModels(String uri) {
         // have to somehow register the families metamodel
         ResourceSet resSet = new ResourceSetImpl();
 

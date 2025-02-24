@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * The <b>Adapter Factory</b> for the model.
- * It provides an adapter <code>createXXX</code> method for each class of the model.
+ * The <b>Adapter Factory </b> for the model.
+ * It provides an adapter <code>createXXX </code> method for each class of the model.
  * <!-- end-user-doc -->
  * @see Trace.TracePackage
  * @generated
@@ -43,7 +43,7 @@ public class TraceAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * Returns whether this factory is applicable for the type of the object.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
+	 * This implementation returns <code>true </code> if the object is either the model's package or is an instance object of the model.
 	 * <!-- end-user-doc -->
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
@@ -60,13 +60,13 @@ public class TraceAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * The switch that delegates to the <code>createXXX</code> methods.
+	 * The switch that delegates to the <code>createXXX </code> methods.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TraceSwitch<Adapter> modelSwitch =
-		new TraceSwitch<Adapter>() {
+	protected TraceSwitch <Adapter> modelSwitch =
+		new TraceSwitch <Adapter>() {
 			@Override
 			public Adapter caseTraceEntry(TraceEntry object) {
 				return createTraceEntryAdapter();
@@ -78,11 +78,11 @@ public class TraceAdapterFactory extends AdapterFactoryImpl {
 		};
 
 	/**
-	 * Creates an adapter for the <code>target</code>.
+	 * Creates an adapter for the <code>target </code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param target the object to adapt.
-	 * @return the adapter for the <code>target</code>.
+	 * @return the adapter for the <code>target </code>.
 	 * @generated
 	 */
 	@Override
@@ -92,7 +92,7 @@ public class TraceAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Trace.TraceEntry <em>Entry</em>}'.
+	 * Creates a new adapter for an object of class '{@link Trace.TraceEntry <em>Entry </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.

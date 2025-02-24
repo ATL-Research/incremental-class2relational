@@ -45,7 +45,7 @@ import relational_.Named;
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
  * 
  * <p>Original source:
- *         <code><pre>
+ *         <code> <pre>
  *         Find traces and images that has no source.
  *           (Model change removes the source from the trace too)
  *          
@@ -53,14 +53,14 @@ import relational_.Named;
  *         	neg TraceEntry.source(trace, _);
  *         	TraceEntry.target(trace,named);
  *         }
- * </pre></code>
+ * </pre> </code>
  * 
  * @see Matcher
  * @see Match
  * 
  */
 @SuppressWarnings("all")
-public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<SourcelessTrace.Matcher> {
+public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification <SourcelessTrace.Matcher> {
   /**
    * Pattern-specific match representation of the c2r.version2.sourcelessTrace pattern,
    * to be used in conjunction with {@link Matcher}.
@@ -78,7 +78,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
 
     private Named fNamed;
 
-    private static List<String> parameterNames = makeImmutableList("trace", "named");
+    private static List <String> parameterNames = makeImmutableList("trace", "named");
 
     private Match(final TraceEntry pTrace, final Named pNamed) {
       this.fTrace = pTrace;
@@ -141,7 +141,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
     }
 
     @Override
-    public List<String> parameterNames() {
+    public List <String> parameterNames() {
       return SourcelessTrace.Match.parameterNames;
     }
 
@@ -263,7 +263,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
    * <p>Matches of the pattern will be represented as {@link Match}.
    * 
    * <p>Original source:
-   * <code><pre>
+   * <code> <pre>
    * Find traces and images that has no source.
    *   (Model change removes the source from the trace too)
    *  
@@ -271,13 +271,13 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
    * 	neg TraceEntry.source(trace, _);
    * 	TraceEntry.target(trace,named);
    * }
-   * </pre></code>
+   * </pre> </code>
    * 
    * @see Match
    * @see SourcelessTrace
    * 
    */
-  public static class Matcher extends BaseMatcher<SourcelessTrace.Match> {
+  public static class Matcher extends BaseMatcher <SourcelessTrace.Match> {
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
@@ -330,22 +330,22 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<SourcelessTrace.Match> getAllMatches(final TraceEntry pTrace, final Named pNamed) {
+    public Collection <SourcelessTrace.Match> getAllMatches(final TraceEntry pTrace, final Named pNamed) {
       return rawStreamAllMatches(new Object[]{pTrace, pNamed}).collect(Collectors.toSet());
     }
 
     /**
      * Returns a stream of all matches of the pattern that conform to the given fixed values of some parameters.
      * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      * @param pTrace the fixed value of pattern parameter trace, or null if not bound.
      * @param pNamed the fixed value of pattern parameter named, or null if not bound.
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<SourcelessTrace.Match> streamAllMatches(final TraceEntry pTrace, final Named pNamed) {
+    public Stream <SourcelessTrace.Match> streamAllMatches(final TraceEntry pTrace, final Named pNamed) {
       return rawStreamAllMatches(new Object[]{pTrace, pNamed});
     }
 
@@ -357,7 +357,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<SourcelessTrace.Match> getOneArbitraryMatch(final TraceEntry pTrace, final Named pNamed) {
+    public Optional <SourcelessTrace.Match> getOneArbitraryMatch(final TraceEntry pTrace, final Named pNamed) {
       return rawGetOneArbitraryMatch(new Object[]{pTrace, pNamed});
     }
 
@@ -393,7 +393,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final TraceEntry pTrace, final Named pNamed, final Consumer<? super SourcelessTrace.Match> processor) {
+    public boolean forOneArbitraryMatch(final TraceEntry pTrace, final Named pNamed, final Consumer <? super SourcelessTrace.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pTrace, pNamed}, processor);
     }
 
@@ -415,7 +415,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<TraceEntry> rawStreamAllValuesOftrace(final Object[] parameters) {
+    protected Stream <TraceEntry> rawStreamAllValuesOftrace(final Object[] parameters) {
       return rawStreamAllValues(POSITION_TRACE, parameters).map(TraceEntry.class::cast);
     }
 
@@ -424,7 +424,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceEntry> getAllValuesOftrace() {
+    public Set <TraceEntry> getAllValuesOftrace() {
       return rawStreamAllValuesOftrace(emptyArray()).collect(Collectors.toSet());
     }
 
@@ -433,35 +433,35 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<TraceEntry> streamAllValuesOftrace() {
+    public Stream <TraceEntry> streamAllValuesOftrace() {
       return rawStreamAllValuesOftrace(emptyArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for trace.
      * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<TraceEntry> streamAllValuesOftrace(final SourcelessTrace.Match partialMatch) {
+    public Stream <TraceEntry> streamAllValuesOftrace(final SourcelessTrace.Match partialMatch) {
       return rawStreamAllValuesOftrace(partialMatch.toArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for trace.
      * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<TraceEntry> streamAllValuesOftrace(final Named pNamed) {
+    public Stream <TraceEntry> streamAllValuesOftrace(final Named pNamed) {
       return rawStreamAllValuesOftrace(new Object[]{null, pNamed});
     }
 
@@ -470,7 +470,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceEntry> getAllValuesOftrace(final SourcelessTrace.Match partialMatch) {
+    public Set <TraceEntry> getAllValuesOftrace(final SourcelessTrace.Match partialMatch) {
       return rawStreamAllValuesOftrace(partialMatch.toArray()).collect(Collectors.toSet());
     }
 
@@ -479,7 +479,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceEntry> getAllValuesOftrace(final Named pNamed) {
+    public Set <TraceEntry> getAllValuesOftrace(final Named pNamed) {
       return rawStreamAllValuesOftrace(new Object[]{null, pNamed}).collect(Collectors.toSet());
     }
 
@@ -488,7 +488,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<Named> rawStreamAllValuesOfnamed(final Object[] parameters) {
+    protected Stream <Named> rawStreamAllValuesOfnamed(final Object[] parameters) {
       return rawStreamAllValues(POSITION_NAMED, parameters).map(Named.class::cast);
     }
 
@@ -497,7 +497,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Named> getAllValuesOfnamed() {
+    public Set <Named> getAllValuesOfnamed() {
       return rawStreamAllValuesOfnamed(emptyArray()).collect(Collectors.toSet());
     }
 
@@ -506,35 +506,35 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<Named> streamAllValuesOfnamed() {
+    public Stream <Named> streamAllValuesOfnamed() {
       return rawStreamAllValuesOfnamed(emptyArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for named.
      * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Named> streamAllValuesOfnamed(final SourcelessTrace.Match partialMatch) {
+    public Stream <Named> streamAllValuesOfnamed(final SourcelessTrace.Match partialMatch) {
       return rawStreamAllValuesOfnamed(partialMatch.toArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for named.
      * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Named> streamAllValuesOfnamed(final TraceEntry pTrace) {
+    public Stream <Named> streamAllValuesOfnamed(final TraceEntry pTrace) {
       return rawStreamAllValuesOfnamed(new Object[]{pTrace, null});
     }
 
@@ -543,7 +543,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Named> getAllValuesOfnamed(final SourcelessTrace.Match partialMatch) {
+    public Set <Named> getAllValuesOfnamed(final SourcelessTrace.Match partialMatch) {
       return rawStreamAllValuesOfnamed(partialMatch.toArray()).collect(Collectors.toSet());
     }
 
@@ -552,7 +552,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Named> getAllValuesOfnamed(final TraceEntry pTrace) {
+    public Set <Named> getAllValuesOfnamed(final TraceEntry pTrace) {
       return rawStreamAllValuesOfnamed(new Object[]{pTrace, null}).collect(Collectors.toSet());
     }
 
@@ -591,7 +591,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
      * 
      */
-    public static IQuerySpecification<SourcelessTrace.Matcher> querySpecification() {
+    public static IQuerySpecification <SourcelessTrace.Matcher> querySpecification() {
       return SourcelessTrace.instance();
     }
   }
@@ -635,7 +635,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
 
   /**
    * Inner class allowing the singleton instance of {@link SourcelessTrace} to be created 
-   *     <b>not</b> at the class load time of the outer class, 
+   *     <b>not </b> at the class load time of the outer class, 
    *     but rather at the first call to {@link SourcelessTrace#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
@@ -645,7 +645,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
     private static final SourcelessTrace INSTANCE = new SourcelessTrace();
 
     /**
-     * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
+     * Statically initializes the query specification <b>after </b> the field {@link #INSTANCE} is assigned.
      * This initialization order is required to support indirect recursion.
      * 
      * <p> The static initializer is defined using a helper field to work around limitations of the code generator.
@@ -666,14 +666,14 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
 
     private final PParameter parameter_named = new PParameter("named", "relational_.Named", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("Relational", "Named")), PParameterDirection.INOUT);
 
-    private final List<PParameter> parameters = Arrays.asList(parameter_trace, parameter_named);
+    private final List <PParameter> parameters = Arrays.asList(parameter_trace, parameter_named);
 
     private class Embedded_1_TraceEntry_source extends BaseGeneratedEMFPQuery {
       private final PParameter parameter_p0 = new PParameter("p0", "Trace.TraceEntry", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("Trace", "TraceEntry")), PParameterDirection.INOUT);
 
       private final PParameter parameter_p1 = new PParameter("p1", "org.eclipse.emf.ecore.EObject", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.eclipse.org/emf/2002/Ecore", "EObject")), PParameterDirection.INOUT);
 
-      private final List<PParameter> embeddedParameters = Arrays.asList(parameter_p0, parameter_p1);
+      private final List <PParameter> embeddedParameters = Arrays.asList(parameter_p0, parameter_p1);
 
       public Embedded_1_TraceEntry_source() {
         super(PVisibility.EMBEDDED);
@@ -685,12 +685,12 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
       }
 
       @Override
-      public List<PParameter> getParameters() {
+      public List <PParameter> getParameters() {
         return embeddedParameters;
       }
 
       @Override
-      public Set<PBody> doGetContainedBodies() {
+      public Set <PBody> doGetContainedBodies() {
         PBody body = new PBody(this);
         PVariable var_p0 = body.getOrCreateVariableByName("p0");
         PVariable var_p1 = body.getOrCreateVariableByName("p1");
@@ -718,24 +718,24 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
     }
 
     @Override
-    public List<String> getParameterNames() {
+    public List <String> getParameterNames() {
       return Arrays.asList("trace","named");
     }
 
     @Override
-    public List<PParameter> getParameters() {
+    public List <PParameter> getParameters() {
       return parameters;
     }
 
     @Override
-    public Set<PBody> doGetContainedBodies() {
+    public Set <PBody> doGetContainedBodies() {
       setEvaluationHints(new QueryEvaluationHint(null, QueryEvaluationHint.BackendRequirement.UNSPECIFIED));
-      Set<PBody> bodies = new LinkedHashSet<>();
+      Set <PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
           PVariable var_trace = body.getOrCreateVariableByName("trace");
           PVariable var_named = body.getOrCreateVariableByName("named");
-          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
+          PVariable var___0_ = body.getOrCreateVariableByName("_ <0>");
           new TypeConstraint(body, Tuples.flatTupleOf(var_trace), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Trace", "TraceEntry")));
           new TypeConstraint(body, Tuples.flatTupleOf(var_named), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Relational", "Named")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(

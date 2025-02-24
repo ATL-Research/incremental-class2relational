@@ -13,7 +13,7 @@ import java.util.List;
 public interface NodePairing {
 	int size();
 
-	List<IntIntMap> permutations();
+	List <IntIntMap> permutations();
 
 	boolean isComplete();
 

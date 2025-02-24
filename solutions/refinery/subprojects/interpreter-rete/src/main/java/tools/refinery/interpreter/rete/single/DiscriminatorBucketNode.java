@@ -42,14 +42,14 @@ public class DiscriminatorBucketNode extends SingleInputNode {
     }
 
     @Override
-    public void pullInto(final Collection<Tuple> collector, final boolean flush) {
+    public void pullInto(final Collection <Tuple> collector, final boolean flush) {
        if (parent != null) {
            getDispatcher().pullIntoFiltered(collector, bucketKey, flush);
        }
     }
 
     @Override
-    public void pullIntoWithTimeline(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush) {
+    public void pullIntoWithTimeline(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush) {
         if (parent != null) {
             getDispatcher().pullIntoWithTimestampFiltered(collector, bucketKey, flush);
         }
@@ -77,7 +77,7 @@ public class DiscriminatorBucketNode extends SingleInputNode {
 
     @Override
     protected String toStringCore() {
-        return String.format("%s<%s=='%s'>",
+        return String.format("%s <%s=='%s'>",
                 super.toStringCore(),
                 (getDispatcher() == null) ? "?" : getDispatcher().getDiscriminationColumnIndex(),
                 bucketKey);

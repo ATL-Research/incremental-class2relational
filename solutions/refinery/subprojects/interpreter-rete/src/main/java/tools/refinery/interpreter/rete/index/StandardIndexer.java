@@ -32,8 +32,8 @@ import tools.refinery.interpreter.matchers.util.Direction;
 public abstract class StandardIndexer extends BaseNode implements Indexer, NetworkStructureChangeSensitiveNode {
 
     protected Supplier parent;
-    private final List<IndexerListener> originalListeners;
-    private final List<IndexerListener> proxyListeners;
+    private final List <IndexerListener> originalListeners;
+    private final List <IndexerListener> proxyListeners;
     protected TupleMask mask;
 
     public StandardIndexer(ReteContainer reteContainer, TupleMask mask) {
@@ -101,7 +101,7 @@ public abstract class StandardIndexer extends BaseNode implements Indexer, Netwo
     }
 
     @Override
-    public Collection<IndexerListener> getListeners() {
+    public Collection <IndexerListener> getListeners() {
         return proxyListeners;
     }
 

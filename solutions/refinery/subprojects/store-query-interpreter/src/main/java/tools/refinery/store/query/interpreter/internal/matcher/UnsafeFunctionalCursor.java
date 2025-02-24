@@ -16,13 +16,13 @@ import java.util.Iterator;
  * functional dependency of the output on the inputs is obeyed.
  * @param <T> The output type.
  */
-class UnsafeFunctionalCursor<T> implements Cursor<Tuple, T> {
-	private final Iterator<? extends ITuple> tuplesIterator;
+class UnsafeFunctionalCursor <T> implements Cursor <Tuple, T> {
+	private final Iterator <? extends ITuple> tuplesIterator;
 	private boolean terminated;
 	private Tuple key;
 	private T value;
 
-	public UnsafeFunctionalCursor(Iterator<? extends ITuple> tuplesIterator) {
+	public UnsafeFunctionalCursor(Iterator <? extends ITuple> tuplesIterator) {
 		this.tuplesIterator = tuplesIterator;
 	}
 

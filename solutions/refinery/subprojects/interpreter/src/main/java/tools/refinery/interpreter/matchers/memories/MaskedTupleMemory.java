@@ -38,13 +38,13 @@ import tools.refinery.interpreter.matchers.util.timeline.Timeline;
  * @author Tamas Szabo
  * @since 2.0
  */
-public abstract class MaskedTupleMemory<Timestamp extends Comparable<Timestamp>>
-        implements Clearable, MaskedResumable<Timestamp> {
+public abstract class MaskedTupleMemory <Timestamp extends Comparable <Timestamp>>
+        implements Clearable, MaskedResumable <Timestamp> {
 
     /**
      * Creates a new memory for the given owner that indexes tuples according to the given mask.
      */
-    public static <T extends Comparable<T>> MaskedTupleMemory<T> create(final TupleMask mask,
+    public static <T extends Comparable <T>> MaskedTupleMemory <T> create(final TupleMask mask,
             final MemoryType bucketType, final Object owner) {
         return create(mask, bucketType, owner, false);
     }
@@ -57,7 +57,7 @@ public abstract class MaskedTupleMemory<Timestamp extends Comparable<Timestamp>>
      *
      * @since 2.3
      */
-    public static <T extends Comparable<T>> MaskedTupleMemory<T> create(final TupleMask mask,
+    public static <T extends Comparable <T>> MaskedTupleMemory <T> create(final TupleMask mask,
             final MemoryType bucketType, final Object owner, final boolean isTimely) {
         return create(mask, bucketType, owner, isTimely, false);
     }
@@ -75,44 +75,44 @@ public abstract class MaskedTupleMemory<Timestamp extends Comparable<Timestamp>>
      *
      * @since 2.4
      */
-    public static <T extends Comparable<T>> MaskedTupleMemory<T> create(final TupleMask mask,
+    public static <T extends Comparable <T>> MaskedTupleMemory <T> create(final TupleMask mask,
             final MemoryType bucketType, final Object owner, final boolean isTimely, final boolean isLazy) {
         if (isTimely) {
             if (bucketType != MemoryType.SETS) {
                 throw new IllegalArgumentException("Timely memories only support SETS as the bucket type!");
             }
             if (mask.isIdentity()) {
-                return new TimelyIdentityMaskedTupleMemory<T>(mask, owner, isLazy);
+                return new TimelyIdentityMaskedTupleMemory <T>(mask, owner, isLazy);
             } else if (0 == mask.getSize()) {
-                return new TimelyNullaryMaskedTupleMemory<T>(mask, owner, isLazy);
+                return new TimelyNullaryMaskedTupleMemory <T>(mask, owner, isLazy);
             } else if (1 == mask.getSize()) {
-                return new TimelyUnaryMaskedTupleMemory<T>(mask, owner, isLazy);
+                return new TimelyUnaryMaskedTupleMemory <T>(mask, owner, isLazy);
             } else {
-                return new TimelyDefaultMaskedTupleMemory<T>(mask, owner, isLazy);
+                return new TimelyDefaultMaskedTupleMemory <T>(mask, owner, isLazy);
             }
         } else {
             if (isLazy) {
                 throw new IllegalArgumentException("Lazy maintenance is only supported by timely memories!");
             }
             if (mask.isIdentity()) {
-                return new IdentityMaskedTupleMemory<T>(mask, bucketType, owner);
+                return new IdentityMaskedTupleMemory <T>(mask, bucketType, owner);
             } else if (0 == mask.getSize()) {
-                return new NullaryMaskedTupleMemory<T>(mask, bucketType, owner);
+                return new NullaryMaskedTupleMemory <T>(mask, bucketType, owner);
             } else if (1 == mask.getSize()) {
-                return new UnaryMaskedTupleMemory<T>(mask, bucketType, owner);
+                return new UnaryMaskedTupleMemory <T>(mask, bucketType, owner);
             } else {
-                return new DefaultMaskedTupleMemory<T>(mask, bucketType, owner);
+                return new DefaultMaskedTupleMemory <T>(mask, bucketType, owner);
             }
         }
     }
 
     @Override
-    public Map<Tuple, Map<Tuple, Diff<Timestamp>>> resumeAt(final Timestamp timestamp) {
+    public Map <Tuple, Map <Tuple, Diff <Timestamp>>> resumeAt(final Timestamp timestamp) {
         throw new UnsupportedOperationException("This is only supported by lazy timely memory implementations!");
     }
 
     @Override
-    public Iterable<Tuple> getResumableSignatures() {
+    public Iterable <Tuple> getResumableSignatures() {
         throw new UnsupportedOperationException("This is only supported by lazy timely memory implementations!");
     }
 
@@ -127,7 +127,7 @@ public abstract class MaskedTupleMemory<Timestamp extends Comparable<Timestamp>>
      *
      * @since 2.3
      */
-    public void initializeWith(final MaskedTupleMemory<Timestamp> other, final Timestamp defaultValue) {
+    public void initializeWith(final MaskedTupleMemory <Timestamp> other, final Timestamp defaultValue) {
         throw new UnsupportedOperationException("This is only supported by timely memory implementations!");
     }
 
@@ -197,21 +197,21 @@ public abstract class MaskedTupleMemory<Timestamp extends Comparable<Timestamp>>
     /**
      * Iterates over distinct tuples stored in the memory, regardless of their signatures.
      */
-    public abstract Iterator<Tuple> iterator();
+    public abstract Iterator <Tuple> iterator();
 
     /**
      * Retrieves a read-only view of exactly those signatures for which at least one tuple is stored
      *
      * @since 2.0
      */
-    public abstract Iterable<Tuple> getSignatures();
+    public abstract Iterable <Tuple> getSignatures();
 
     /**
      * Retrieves tuples that have the specified signature
      *
      * @return collection of tuples found, null if none
      */
-    public abstract Collection<Tuple> get(final ITuple signature);
+    public abstract Collection <Tuple> get(final ITuple signature);
 
     /**
      * Retrieves the tuples and their associated timelines that have the specified signature.
@@ -219,7 +219,7 @@ public abstract class MaskedTupleMemory<Timestamp extends Comparable<Timestamp>>
      * @return the mappings from tuples to timelines, null if there is no mapping for the signature
      * @since 2.4
      */
-    public abstract Map<Tuple, Timeline<Timestamp>> getWithTimeline(final ITuple signature);
+    public abstract Map <Tuple, Timeline <Timestamp>> getWithTimeline(final ITuple signature);
 
     /**
      * Retrieves tuples that have the specified signature.
@@ -227,8 +227,8 @@ public abstract class MaskedTupleMemory<Timestamp extends Comparable<Timestamp>>
      * @return collection of tuples found, never null
      * @since 2.1
      */
-    public Collection<Tuple> getOrEmpty(final ITuple signature) {
-        final Collection<Tuple> result = get(signature);
+    public Collection <Tuple> getOrEmpty(final ITuple signature) {
+        final Collection <Tuple> result = get(signature);
         return result == null ? Collections.emptySet() : result;
     }
 
@@ -238,8 +238,8 @@ public abstract class MaskedTupleMemory<Timestamp extends Comparable<Timestamp>>
      * @return map of tuples and timelines found, never null
      * @since 2.4
      */
-    public Map<Tuple, Timeline<Timestamp>> getOrEmptyWithTimeline(final ITuple signature) {
-        final Map<Tuple, Timeline<Timestamp>> result = getWithTimeline(signature);
+    public Map <Tuple, Timeline <Timestamp>> getOrEmptyWithTimeline(final ITuple signature) {
+        final Map <Tuple, Timeline <Timestamp>> result = getWithTimeline(signature);
         return result == null ? Collections.emptyMap() : result;
     }
 
@@ -271,7 +271,7 @@ public abstract class MaskedTupleMemory<Timestamp extends Comparable<Timestamp>>
      *
      * @since 2.4
      */
-    public Diff<Timestamp> removeWithTimestamp(final Tuple tuple, final Tuple signature, final Timestamp timestamp) {
+    public Diff <Timestamp> removeWithTimestamp(final Tuple tuple, final Tuple signature, final Timestamp timestamp) {
         throw new UnsupportedOperationException("This is only supported by timely memory implementations!");
     }
 
@@ -299,7 +299,7 @@ public abstract class MaskedTupleMemory<Timestamp extends Comparable<Timestamp>>
      *
      * @since 2.4
      */
-    public Diff<Timestamp> removeWithTimestamp(final Tuple tuple, final Timestamp timestamp) {
+    public Diff <Timestamp> removeWithTimestamp(final Tuple tuple, final Timestamp timestamp) {
         throw new UnsupportedOperationException("This is only supported by timely memory implementations!");
     }
 
@@ -331,7 +331,7 @@ public abstract class MaskedTupleMemory<Timestamp extends Comparable<Timestamp>>
      *
      * @since 2.4
      */
-    public Diff<Timestamp> addWithTimestamp(final Tuple tuple, final Tuple signature, final Timestamp timestamp) {
+    public Diff <Timestamp> addWithTimestamp(final Tuple tuple, final Tuple signature, final Timestamp timestamp) {
         throw new UnsupportedOperationException("This is only supported by timely memory implementations!");
     }
 
@@ -359,7 +359,7 @@ public abstract class MaskedTupleMemory<Timestamp extends Comparable<Timestamp>>
      *
      * @since 2.4
      */
-    public Diff<Timestamp> addWithTimestamp(final Tuple tuple, final Timestamp timestamp) {
+    public Diff <Timestamp> addWithTimestamp(final Tuple tuple, final Timestamp timestamp) {
         throw new UnsupportedOperationException("This is only supported by timely memory implementations!");
     }
 
@@ -379,7 +379,7 @@ public abstract class MaskedTupleMemory<Timestamp extends Comparable<Timestamp>>
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "<" + mask + ">@" + owner;
+        return getClass().getSimpleName() + " <" + mask + ">@" + owner;
     }
 
 }

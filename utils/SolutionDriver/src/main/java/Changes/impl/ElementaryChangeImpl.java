@@ -16,21 +16,21 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Elementary Change</b></em>'.
+ * An implementation of the model object ' <em> <b>Elementary Change </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.ElementaryChangeImpl#getAffectedElement <em>Affected Element</em>}</li>
- *   <li>{@link Changes.impl.ElementaryChangeImpl#getFeature <em>Feature</em>}</li>
+ *   <li>{@link Changes.impl.ElementaryChangeImpl#getAffectedElement <em>Affected Element </em>} </li>
+ *   <li>{@link Changes.impl.ElementaryChangeImpl#getFeature <em>Feature </em>} </li>
  * </ul>
  *
  * @generated
  */
 public abstract class ElementaryChangeImpl extends ModelChangeImpl implements ElementaryChange {
 	/**
-	 * The cached value of the '{@link #getAffectedElement() <em>Affected Element</em>}' reference.
+	 * The cached value of the '{@link #getAffectedElement() <em>Affected Element </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAffectedElement()
@@ -40,7 +40,7 @@ public abstract class ElementaryChangeImpl extends ModelChangeImpl implements El
 	protected EObject affectedElement;
 
 	/**
-	 * The cached value of the '{@link #getFeature() <em>Feature</em>}' reference.
+	 * The cached value of the '{@link #getFeature() <em>Feature </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getFeature()

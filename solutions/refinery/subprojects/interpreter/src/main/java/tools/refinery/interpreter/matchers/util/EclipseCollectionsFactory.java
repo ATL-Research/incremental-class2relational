@@ -27,56 +27,56 @@ import org.eclipse.collections.impl.factory.Sets;
 public class EclipseCollectionsFactory implements CollectionsFactory.ICollectionsFramework {
 
     @Override
-    public <K, V> Map<K, V> createMap() {
+    public <K, V> Map <K, V> createMap() {
         return Maps.mutable.empty();
     }
 
     @Override
-    public <K, V> Map<K, V> createMap(Map<K, V> initial) {
-        MutableMap<K, V> result = Maps.mutable.ofInitialCapacity(initial.size());
+    public <K, V> Map <K, V> createMap(Map <K, V> initial) {
+        MutableMap <K, V> result = Maps.mutable.ofInitialCapacity(initial.size());
         result.putAll(initial);
         return result;
     }
 
     @Override
-    public <K, V> TreeMap<K, V> createTreeMap() {
+    public <K, V> TreeMap <K, V> createTreeMap() {
         // eclipse collections is doing the same
         return new TreeMap<>();
     }
 
     @Override
-    public <E> Set<E> createSet() {
+    public <E> Set <E> createSet() {
         return Sets.mutable.empty();
     }
 
     @Override
-    public <E> Set<E> createSet(Collection<E> initial) {
+    public <E> Set <E> createSet(Collection <E> initial) {
         return Sets.mutable.ofAll(initial);
     }
 
     @Override
-    public <T> IMultiset<T> createMultiset() {
-        return new EclipseCollectionsMultiset<T>();
+    public <T> IMultiset <T> createMultiset() {
+        return new EclipseCollectionsMultiset <T>();
     }
 
     @Override
-    public <T> IDeltaBag<T> createDeltaBag() {
-        return new EclipseCollectionsDeltaBag<T>();
+    public <T> IDeltaBag <T> createDeltaBag() {
+        return new EclipseCollectionsDeltaBag <T>();
     }
 
     @Override
-    public <O> List<O> createObserverList() {
-        return new ArrayList<O>(1); // keep concurrent modification exceptions for error detection
+    public <O> List <O> createObserverList() {
+        return new ArrayList <O>(1); // keep concurrent modification exceptions for error detection
         // Lists.mutable.empty
 
     }
 
     @Override
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    public <K, V> IMultiLookup<K, V> createMultiLookup(
-            Class<? super K> fromKeys,
+    public <K, V> IMultiLookup <K, V> createMultiLookup(
+            Class <? super K> fromKeys,
             CollectionsFactory.MemoryType toBuckets,
-            Class<? super V> ofValues)
+            Class <? super V> ofValues)
     {
         boolean longKeys = Long.class.equals(fromKeys);
         boolean objectKeys = Object.class.equals(fromKeys);
@@ -89,9 +89,9 @@ public class EclipseCollectionsFactory implements CollectionsFactory.ICollection
             if (longValues) { // V == java.lang.Long
                 switch(toBuckets) {
                 case MULTISETS:
-                    return (IMultiLookup<K, V>) new EclipseCollectionsMultiLookup.FromLongs.ToMultisets.OfLongs();
+                    return (IMultiLookup <K, V>) new EclipseCollectionsMultiLookup.FromLongs.ToMultisets.OfLongs();
                 case SETS:
-                    return (IMultiLookup<K, V>) new EclipseCollectionsMultiLookup.FromLongs.ToSets.OfLongs();
+                    return (IMultiLookup <K, V>) new EclipseCollectionsMultiLookup.FromLongs.ToSets.OfLongs();
                 default:
                     throw new IllegalArgumentException(toBuckets.toString());
                 }
@@ -130,13 +130,13 @@ public class EclipseCollectionsFactory implements CollectionsFactory.ICollection
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T> IMemory<T> createMemory(Class<? super T> values, CollectionsFactory.MemoryType memoryType) {
+    public <T> IMemory <T> createMemory(Class <? super T> values, CollectionsFactory.MemoryType memoryType) {
         if (Long.class.equals(values)) { // T == java.lang.Long
             switch(memoryType) {
             case MULTISETS:
-                return (IMemory<T>) new EclipseCollectionsLongMultiset();
+                return (IMemory <T>) new EclipseCollectionsLongMultiset();
             case SETS:
-                return (IMemory<T>) new EclipseCollectionsLongSetMemory();
+                return (IMemory <T>) new EclipseCollectionsLongSetMemory();
             default:
                 throw new IllegalArgumentException(memoryType.toString());
             }

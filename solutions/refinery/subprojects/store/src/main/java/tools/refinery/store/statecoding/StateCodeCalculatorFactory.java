@@ -12,5 +12,5 @@ import tools.refinery.store.model.Model;
 import java.util.List;
 
 public interface StateCodeCalculatorFactory {
-	StateCodeCalculator create(Model model, List<? extends Interpretation<?>> interpretations, IntSet individuals);
+	StateCodeCalculator create(Model model, List <? extends Interpretation <?>> interpretations, IntSet individuals);
 }

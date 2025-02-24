@@ -31,7 +31,7 @@ public class PVariable {
     /**
      * Set of constraints that mention this variable
      */
-    private Set<PConstraint> referringConstraints;
+    private Set <PConstraint> referringConstraints;
 
     /**
      * Determines whether there are any constraints that can deduce this variable
@@ -54,7 +54,7 @@ public class PVariable {
         this.name = name;
         this.virtual = virtual;
         // this.exportedParameter = false;
-        this.referringConstraints = new HashSet<PConstraint>();
+        this.referringConstraints = new HashSet <PConstraint>();
         this.unifiedInto = null;
         this.deducable = false;
     }
@@ -83,8 +83,8 @@ public class PVariable {
                 replacement.deducable |= this.deducable;
             else
                 replacement.deducable = null;
-            Set<PConstraint> snapshotConstraints = // avoid ConcurrentModificationX
-                    new HashSet<PConstraint>(this.referringConstraints);
+            Set <PConstraint> snapshotConstraints = // avoid ConcurrentModificationX
+                    new HashSet <PConstraint>(this.referringConstraints);
             for (PConstraint constraint : snapshotConstraints) {
                 constraint.replaceVariable(this, replacement);
             }
@@ -154,15 +154,15 @@ public class PVariable {
     /**
      * @return the referringConstraints
      */
-    public Set<PConstraint> getReferringConstraints() {
+    public Set <PConstraint> getReferringConstraints() {
         replacementCheck();
         return referringConstraints;
     }
 
     @SuppressWarnings("unchecked")
-    public <ConstraintType> Set<ConstraintType> getReferringConstraintsOfType(Class<ConstraintType> constraintClass) {
+    public <ConstraintType> Set <ConstraintType> getReferringConstraintsOfType(Class <ConstraintType> constraintClass) {
         replacementCheck();
-        Set<ConstraintType> result = new HashSet<ConstraintType>();
+        Set <ConstraintType> result = new HashSet <ConstraintType>();
         for (PConstraint pConstraint : referringConstraints) {
             if (constraintClass.isInstance(pConstraint))
                 result.add((ConstraintType) pConstraint);

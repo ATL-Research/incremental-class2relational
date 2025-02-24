@@ -13,11 +13,11 @@ import tools.refinery.interpreter.matchers.tuple.Tuples;
 
 import java.util.Arrays;
 
-public class TupleChangingViewUpdateListener<T> extends SymbolViewUpdateListener<T> {
-	private final SymbolView<T> view;
+public class TupleChangingViewUpdateListener <T> extends SymbolViewUpdateListener <T> {
+	private final SymbolView <T> view;
 
-	TupleChangingViewUpdateListener(QueryInterpreterAdapterImpl adapter, SymbolView<T> view,
-                                    Interpretation<T> interpretation) {
+	TupleChangingViewUpdateListener(QueryInterpreterAdapterImpl adapter, SymbolView <T> view,
+                                    Interpretation <T> interpretation) {
         super(adapter, interpretation);
         this.view = view;
 	}

@@ -70,7 +70,7 @@ public class SingletonCommunicationGroup extends CommunicationGroup {
     }
 
     @Override
-    public Map<MessageSelector, Collection<Mailbox>> getMailboxes() {
+    public Map <MessageSelector, Collection <Mailbox>> getMailboxes() {
         if (mailbox != null) {
             return Collections.singletonMap(PhasedSelector.DEFAULT, Collections.singleton(mailbox));
         } else {

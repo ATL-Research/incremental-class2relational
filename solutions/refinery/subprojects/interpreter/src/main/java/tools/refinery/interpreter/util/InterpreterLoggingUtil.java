@@ -34,7 +34,7 @@ public class InterpreterLoggingUtil {
         return defaultRuntimeLogger;
     }
 
-    private static String getLoggerClassname(Class<?> clazz) {
+    private static String getLoggerClassname(Class <?> clazz) {
         return clazz.getName().startsWith(getDefaultLogger().getName())
                 ? clazz.getName()
                 : getDefaultLogger().getName() + "." + clazz.getName();
@@ -44,7 +44,7 @@ public class InterpreterLoggingUtil {
      * Provides a class-specific logger that also stores the global logger settings of the Refinery Interpreter runtime
      * @param clazz
      */
-    public static Logger getLogger(Class<?> clazz) {
+    public static Logger getLogger(Class <?> clazz) {
         return Logger.getLogger(getLoggerClassname(clazz));
     }
 
@@ -54,7 +54,7 @@ public class InterpreterLoggingUtil {
      * @param name a non-empty name to append to the class names
      * @since 2.5
      */
-    public static Logger getLogger(Class<?> clazz, String name) {
+    public static Logger getLogger(Class <?> clazz, String name) {
         return Logger.getLogger(getLoggerClassname(clazz) + '.' + name);
     }
 

@@ -16,27 +16,27 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Multi Elem</b></em>'.
+ * An implementation of the model object ' <em> <b>Multi Elem </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.tbuchmann.ttc.corrmodel.impl.MultiElemImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link de.tbuchmann.ttc.corrmodel.impl.MultiElemImpl#getElements <em>Elements </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class MultiElemImpl extends CorrElemImpl implements MultiElem {
 	/**
-	 * The cached value of the '{@link #getElements() <em>Elements</em>}' reference list.
+	 * The cached value of the '{@link #getElements() <em>Elements </em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getElements()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<EObject> elements;
+	protected EList <EObject> elements;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,9 +63,9 @@ public class MultiElemImpl extends CorrElemImpl implements MultiElem {
 	 * @generated
 	 */
 	@Override
-	public EList<EObject> getElements() {
+	public EList <EObject> getElements() {
 		if (elements == null) {
-			elements = new EObjectResolvingEList<EObject>(EObject.class, this, CorrModelPackage.MULTI_ELEM__ELEMENTS);
+			elements = new EObjectResolvingEList <EObject>(EObject.class, this, CorrModelPackage.MULTI_ELEM__ELEMENTS);
 		}
 		return elements;
 	}
@@ -95,7 +95,7 @@ public class MultiElemImpl extends CorrElemImpl implements MultiElem {
 		switch (featureID) {
 			case CorrModelPackage.MULTI_ELEM__ELEMENTS:
 				getElements().clear();
-				getElements().addAll((Collection<? extends EObject>)newValue);
+				getElements().addAll((Collection <? extends EObject>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

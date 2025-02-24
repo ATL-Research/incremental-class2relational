@@ -41,7 +41,7 @@ import tools.refinery.interpreter.matchers.util.timeline.Diff;
 public abstract class IndexerWithMemory extends StandardIndexer
         implements Receiver, NetworkStructureChangeSensitiveNode, ResumableNode {
 
-    protected MaskedTupleMemory<Timestamp> memory;
+    protected MaskedTupleMemory <Timestamp> memory;
 
     /**
      * @since 2.3
@@ -87,7 +87,7 @@ public abstract class IndexerWithMemory extends StandardIndexer
         final boolean isTimely = this.reteContainer.isTimelyEvaluation()
                 && this.reteContainer.getCommunicationTracker().isInRecursiveGroup(this);
         if (wasTimely != isTimely) {
-            final MaskedTupleMemory<Timestamp> newMemory = MaskedTupleMemory.create(mask, MemoryType.SETS, this,
+            final MaskedTupleMemory <Timestamp> newMemory = MaskedTupleMemory.create(mask, MemoryType.SETS, this,
                     isTimely, isTimely && reteContainer.getTimelyConfiguration()
                             .getTimelineRepresentation() == TimelyConfiguration.TimelineRepresentation.FAITHFUL);
             newMemory.initializeWith(this.memory, Timestamp.ZERO);
@@ -120,7 +120,7 @@ public abstract class IndexerWithMemory extends StandardIndexer
     /**
      * @since 2.0
      */
-    public MaskedTupleMemory<Timestamp> getMemory() {
+    public MaskedTupleMemory <Timestamp> getMemory() {
         return memory;
     }
 
@@ -161,7 +161,7 @@ public abstract class IndexerWithMemory extends StandardIndexer
      * @since 2.4
      */
     @Override
-    public Collection<Supplier> getParents() {
+    public Collection <Supplier> getParents() {
         return Collections.singleton(parent);
     }
 
@@ -214,26 +214,26 @@ public abstract class IndexerWithMemory extends StandardIndexer
 
         @Override
         public void resumeAt(final Timestamp timestamp) {
-            final Iterable<Tuple> signatures = memory.getResumableSignatures();
+            final Iterable <Tuple> signatures = memory.getResumableSignatures();
 
-            final Map<Tuple, Boolean> wasPresent = CollectionsFactory.createMap();
+            final Map <Tuple, Boolean> wasPresent = CollectionsFactory.createMap();
             for (final Tuple signature : signatures) {
                 wasPresent.put(signature, memory.isPresentAtInfinity(signature));
             }
 
-            final Map<Tuple, Map<Tuple, Diff<Timestamp>>> signatureMap = memory.resumeAt(timestamp);
+            final Map <Tuple, Map <Tuple, Diff <Timestamp>>> signatureMap = memory.resumeAt(timestamp);
 
-            for (final Entry<Tuple, Map<Tuple, Diff<Timestamp>>> outerEntry : signatureMap.entrySet()) {
+            for (final Entry <Tuple, Map <Tuple, Diff <Timestamp>>> outerEntry : signatureMap.entrySet()) {
                 final Tuple signature = outerEntry.getKey();
-                final Map<Tuple, Diff<Timestamp>> diffMap = outerEntry.getValue();
+                final Map <Tuple, Diff <Timestamp>> diffMap = outerEntry.getValue();
                 final boolean isPresent = memory.isPresentAtInfinity(signature);
                 // only send out a potential true value the first time for a given signature, then set it to false
                 boolean change = wasPresent.get(signature) ^ isPresent;
 
-                for (final Entry<Tuple, Diff<Timestamp>> innerEntry : diffMap.entrySet()) {
+                for (final Entry <Tuple, Diff <Timestamp>> innerEntry : diffMap.entrySet()) {
                     final Tuple tuple = innerEntry.getKey();
-                    final Diff<Timestamp> diffs = innerEntry.getValue();
-                    for (final Signed<Timestamp> signed : diffs) {
+                    final Diff <Timestamp> diffs = innerEntry.getValue();
+                    for (final Signed <Timestamp> signed : diffs) {
                         IndexerWithMemory.this.update(signed.getDirection(), tuple, signature, change,
                                 signed.getPayload());
                     }
@@ -252,12 +252,12 @@ public abstract class IndexerWithMemory extends StandardIndexer
         public void update(final Direction direction, final Tuple update, final Timestamp timestamp) {
             final Tuple signature = mask.transform(update);
             final boolean wasPresent = memory.isPresentAtInfinity(signature);
-            final Diff<Timestamp> resultDiff = direction == Direction.INSERT
+            final Diff <Timestamp> resultDiff = direction == Direction.INSERT
                     ? memory.addWithTimestamp(update, signature, timestamp)
                     : memory.removeWithTimestamp(update, signature, timestamp);
             final boolean isPresent = memory.isPresentAtInfinity(signature);
             final boolean change = wasPresent ^ isPresent;
-            for (final Signed<Timestamp> signed : resultDiff) {
+            for (final Signed <Timestamp> signed : resultDiff) {
                 IndexerWithMemory.this.update(signed.getDirection(), update, signature, change, signed.getPayload());
             }
         }

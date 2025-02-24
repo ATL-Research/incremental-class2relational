@@ -74,10 +74,10 @@ public class QuasiTreeLayout implements IQueryPlannerStrategy {
         //SubPlanProcessor planProcessor = new SubPlanProcessor();
         SubPlanFactory planFactory;
 
-        Set<DeferredPConstraint> deferredConstraints = null;
-        Set<EnumerablePConstraint> enumerableConstraints = null;
-        Set<ConstantValue> constantConstraints = null;
-        Set<SubPlan> forefront = new LinkedHashSet<SubPlan>();
+        Set <DeferredPConstraint> deferredConstraints = null;
+        Set <EnumerablePConstraint> enumerableConstraints = null;
+        Set <ConstantValue> constantConstraints = null;
+        Set <SubPlan> forefront = new LinkedHashSet <SubPlan>();
         Logger logger;
 
         Scaffold(PBody pSystem, Logger logger, /*IOperationCompiler compiler,*/ IQueryMetaContext context) {
@@ -120,7 +120,7 @@ public class QuasiTreeLayout implements IQueryPlannerStrategy {
                 while (forefront.size() > 1) {
                     // TODO QUASI-TREE TRIVIAL JOINS?
 
-                    List<JoinCandidate> candidates = generateJoinCandidates();
+                    List <JoinCandidate> candidates = generateJoinCandidates();
                     JoinOrderingHeuristics ordering = new JoinOrderingHeuristics();
                     JoinCandidate selectedJoin = Collections.min(candidates, ordering);
                     doJoin(selectedJoin);
@@ -147,8 +147,8 @@ public class QuasiTreeLayout implements IQueryPlannerStrategy {
             }
         }
 
-        public List<JoinCandidate> generateJoinCandidates() {
-            List<JoinCandidate> candidates = new ArrayList<JoinCandidate>();
+        public List <JoinCandidate> generateJoinCandidates() {
+            List <JoinCandidate> candidates = new ArrayList <JoinCandidate>();
             int bIndex = 0;
             for (SubPlan b : forefront) {
                 int aIndex = 0;

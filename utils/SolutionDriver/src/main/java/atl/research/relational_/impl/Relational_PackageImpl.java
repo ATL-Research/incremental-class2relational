@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model <b>Package</b>.
+ * An implementation of the model <b>Package </b>.
  * <!-- end-user-doc -->
  * @generated
  */
@@ -53,7 +53,7 @@ public class Relational_PackageImpl extends EPackageImpl implements Relational_P
 	private EClass typeEClass = null;
 
 	/**
-	 * Creates an instance of the model <b>Package</b>, registered with
+	 * Creates an instance of the model <b>Package </b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
 	 * <p>Note: the correct way to create the package is via the static
@@ -79,7 +79,7 @@ public class Relational_PackageImpl extends EPackageImpl implements Relational_P
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * Creates, registers, and initializes the <b>Package </b> for this model, and for any others upon which it depends.
 	 *
 	 * <p>This method is used to initialize {@link Relational_Package#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.

@@ -44,7 +44,7 @@ public final class RelationViewFilter {
 		return true;
 	}
 
-	// Use <code>null</code> instead of an empty array to speed up comparisons.
+	// Use <code>null </code> instead of an empty array to speed up comparisons.
 	@SuppressWarnings("squid:S1168")
 	private static Object[] seedToArray(ITuple seed) {
 		for (var element : seed.getElements()) {

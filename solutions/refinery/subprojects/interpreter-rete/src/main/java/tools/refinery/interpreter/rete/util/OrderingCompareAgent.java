@@ -17,7 +17,7 @@ import java.util.Comparator;
  * @author Gabor Bergmann
  *
  */
-public abstract class OrderingCompareAgent<T> {
+public abstract class OrderingCompareAgent <T> {
     protected T a;
     protected T b;
 
@@ -74,19 +74,19 @@ public abstract class OrderingCompareAgent<T> {
         return (b1 ^ b2) ? (b2 ? -1 : +1) : 0;
     }
 
-    protected static <U> int preferLess(Comparable<U> c1, U c2) {
+    protected static <U> int preferLess(Comparable <U> c1, U c2) {
         return c1.compareTo(c2);
     }
 
-    protected static <U> int preferLess(U c1, U c2, Comparator<U> comp) {
+    protected static <U> int preferLess(U c1, U c2, Comparator <U> comp) {
         return comp.compare(c1, c2);
     }
 
-    protected static <U> int preferMore(Comparable<U> c1, U c2) {
+    protected static <U> int preferMore(Comparable <U> c1, U c2) {
         return reverse(c1.compareTo(c2));
     }
 
-    protected static <U> int preferMore(U c1, U c2, Comparator<U> comp) {
+    protected static <U> int preferMore(U c1, U c2, Comparator <U> comp) {
         return reverse(comp.compare(c1, c2));
     }
 

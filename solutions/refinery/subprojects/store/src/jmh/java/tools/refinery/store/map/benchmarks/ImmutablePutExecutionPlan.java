@@ -36,7 +36,7 @@ public class ImmutablePutExecutionPlan {
 
 	private String[] values;
 
-	private ContinuousHashProvider<Integer> hashProvider = MapTestEnvironment.prepareHashProvider(false);
+	private ContinuousHashProvider <Integer> hashProvider = MapTestEnvironment.prepareHashProvider(false);
 
 	@Setup(Level.Trial)
 	public void setUpTrial() {
@@ -44,9 +44,9 @@ public class ImmutablePutExecutionPlan {
 		values = MapTestEnvironment.prepareValues(nValues, true);
 	}
 
-	public VersionedMapStateImpl<Integer, String> createSut() {
-		VersionedMapStore<Integer, String> store = new VersionedMapStoreStateImpl<>(hashProvider, values[0]);
-		return (VersionedMapStateImpl<Integer, String>) store.createMap();
+	public VersionedMapStateImpl <Integer, String> createSut() {
+		VersionedMapStore <Integer, String> store = new VersionedMapStoreStateImpl<>(hashProvider, values[0]);
+		return (VersionedMapStateImpl <Integer, String>) store.createMap();
 	}
 
 	public Integer nextKey() {

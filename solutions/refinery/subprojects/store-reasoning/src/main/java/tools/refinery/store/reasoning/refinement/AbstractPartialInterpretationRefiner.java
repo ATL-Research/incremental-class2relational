@@ -8,11 +8,11 @@ package tools.refinery.store.reasoning.refinement;
 import tools.refinery.store.reasoning.ReasoningAdapter;
 import tools.refinery.store.reasoning.representation.PartialSymbol;
 
-public abstract class AbstractPartialInterpretationRefiner<A, C> implements PartialInterpretationRefiner<A, C> {
+public abstract class AbstractPartialInterpretationRefiner <A, C> implements PartialInterpretationRefiner <A, C> {
 	private final ReasoningAdapter adapter;
-	private final PartialSymbol<A, C> partialSymbol;
+	private final PartialSymbol <A, C> partialSymbol;
 
-	protected AbstractPartialInterpretationRefiner(ReasoningAdapter adapter, PartialSymbol<A, C> partialSymbol) {
+	protected AbstractPartialInterpretationRefiner(ReasoningAdapter adapter, PartialSymbol <A, C> partialSymbol) {
 		this.adapter = adapter;
 		this.partialSymbol = partialSymbol;
 	}
@@ -23,7 +23,7 @@ public abstract class AbstractPartialInterpretationRefiner<A, C> implements Part
 	}
 
 	@Override
-	public PartialSymbol<A, C> getPartialSymbol() {
+	public PartialSymbol <A, C> getPartialSymbol() {
 		return partialSymbol;
 	}
 }

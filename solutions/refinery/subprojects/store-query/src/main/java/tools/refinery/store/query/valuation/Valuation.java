@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 public interface Valuation {
-	<T> T getValue(DataVariable<T> variable);
+	 <T> T getValue(DataVariable <T> variable);
 
 	default Valuation substitute(@Nullable Substitution substitution) {
 		if (substitution == null) {
@@ -23,7 +23,7 @@ public interface Valuation {
 		return new SubstitutedValuation(this, substitution);
 	}
 
-	default Valuation restrict(Set<? extends AnyDataVariable> allowedVariables) {
+	default Valuation restrict(Set <? extends AnyDataVariable> allowedVariables) {
 		return new RestrictedValuation(this, Set.copyOf(allowedVariables));
 	}
 

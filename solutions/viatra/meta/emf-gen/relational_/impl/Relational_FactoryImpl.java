@@ -14,7 +14,7 @@ import relational_.*;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model <b>Factory</b>.
+ * An implementation of the model <b>Factory </b>.
  * <!-- end-user-doc -->
  * @generated
  */

@@ -35,27 +35,27 @@ public final class Sets {
     /**
      * @since 2.4
      */
-    public static <A> Set<A> newSet(Iterable<A> elements) {
+    public static <A> Set <A> newSet(Iterable <A> elements) {
         return org.eclipse.collections.impl.factory.Sets.mutable.ofAll(elements);
     }
 
-    public static <A> Set<A> intersection(Set<A> left, Set<A> right) {
+    public static <A> Set <A> intersection(Set <A> left, Set <A> right) {
         return org.eclipse.collections.impl.factory.Sets.intersect(left, right);
     }
 
-    public static <A> Set<A> difference(Set<A> left, Set<A> right) {
+    public static <A> Set <A> difference(Set <A> left, Set <A> right) {
         return org.eclipse.collections.impl.factory.Sets.difference(left, right);
     }
 
-    public static <A> Set<A> union(Set<A> left, Set<A> right) {
+    public static <A> Set <A> union(Set <A> left, Set <A> right) {
         return org.eclipse.collections.impl.factory.Sets.union(left, right);
     }
 
-    public static <A> Set<? extends Set<A>> powerSet(Set<A> set) {
+    public static <A> Set <? extends Set <A>> powerSet(Set <A> set) {
         return org.eclipse.collections.impl.factory.Sets.powerSet(set);
     }
 
-    public static <A> Set<List<A>> cartesianProduct(List<? extends Set<? extends A>> setsList) {
+    public static <A> Set <List<A>> cartesianProduct(List <? extends Set <? extends A>> setsList) {
 
         class Suffix { // simple immutable linked list
             private A head;
@@ -67,8 +67,8 @@ public final class Sets {
                 this.next = next;
             }
 
-            public List<A> toList() {
-                ArrayList<A> result = new ArrayList<>();
+            public List <A> toList() {
+                ArrayList <A> result = new ArrayList<>();
                 for (Suffix cursor = this; cursor!=null; cursor = cursor.next)
                     result.add(cursor.head);
                 return result;
@@ -76,9 +76,9 @@ public final class Sets {
         }
 
         // build result lists from end to start, in the form of suffixes
-        Stream<Suffix> suffixes = Stream.of((Suffix) null /* empty suffix*/);
+        Stream <Suffix> suffixes = Stream.of((Suffix) null /* empty suffix*/);
         for (int i = setsList.size()-1; i>=0; --i) { // iterate sets in reverse order
-            Set<? extends A> set = setsList.get(i);
+            Set <? extends A> set = setsList.get(i);
             suffixes = suffixes.flatMap(suffix -> set.stream().map(newElement -> new Suffix(newElement, suffix)));
         }
 

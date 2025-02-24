@@ -11,7 +11,7 @@ import org.eclipse.papyrus.aof.core.IBox
 ])
 class Class2Relational {
 	// Helper 9
-	def firstToLower(IBox<String> it) {
+	def firstToLower(IBox <String> it) {
 		it.collect[toFirstLower]
 	}
 }

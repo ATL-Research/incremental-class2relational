@@ -25,19 +25,19 @@ import tools.refinery.interpreter.api.impl.BaseQueryGroup;
  */
 public class GenericQueryGroup extends BaseQueryGroup {
 
-    private final Set<IQuerySpecification<?>> patterns;
+    private final Set <IQuerySpecification<?>> patterns;
 
     /**
      * Creates a GenericQueryGroup object with a set of patterns.
      *
      * @param patterns
      */
-    public GenericQueryGroup(Set<IQuerySpecification<?>> patterns) {
+    public GenericQueryGroup(Set <IQuerySpecification<?>> patterns) {
         this.patterns = patterns;
     }
 
     @Override
-    public Set<IQuerySpecification<?>> getSpecifications() {
+    public Set <IQuerySpecification<?>> getSpecifications() {
         return patterns;
     }
 
@@ -46,7 +46,7 @@ public class GenericQueryGroup extends BaseQueryGroup {
      *
      * @since 2.0
      */
-    public static IQueryGroup of(Stream<IQuerySpecification<?>> querySpecifications) {
+    public static IQueryGroup of(Stream <IQuerySpecification<?>> querySpecifications) {
         return new GenericQueryGroup(querySpecifications.collect(Collectors.toSet()));
     }
 
@@ -55,7 +55,7 @@ public class GenericQueryGroup extends BaseQueryGroup {
      *
      * @param querySpecifications
      */
-    public static IQueryGroup of(Set<IQuerySpecification<?>> querySpecifications) {
+    public static IQueryGroup of(Set <IQuerySpecification<?>> querySpecifications) {
         return new GenericQueryGroup(querySpecifications);
     }
 
@@ -64,8 +64,8 @@ public class GenericQueryGroup extends BaseQueryGroup {
      *
      * @param querySpecifications
      */
-    public static IQueryGroup of(IQuerySpecification<?>... querySpecifications) {
-        return of(new HashSet<IQuerySpecification<?>>(Arrays.asList(querySpecifications)));
+    public static IQueryGroup of(IQuerySpecification <?>... querySpecifications) {
+        return of(new HashSet <IQuerySpecification<?>>(Arrays.asList(querySpecifications)));
     }
 
     /**
@@ -73,7 +73,7 @@ public class GenericQueryGroup extends BaseQueryGroup {
      *
      */
     public static IQueryGroup of(IQueryGroup... subGroups) {
-        Set<IQuerySpecification<?>> patterns = new HashSet<IQuerySpecification<?>>();
+        Set <IQuerySpecification<?>> patterns = new HashSet <IQuerySpecification<?>>();
         for (IQueryGroup group : subGroups) {
             patterns.addAll(group.getSpecifications());
         }

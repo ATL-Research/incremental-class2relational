@@ -31,19 +31,19 @@ public interface PConstraint extends PTraceable {
     /**
      * All variables affected by this constraint.
      */
-    public Set<PVariable> getAffectedVariables();
+    public Set <PVariable> getAffectedVariables();
 
     /**
      * The set of variables whose potential values can be enumerated (once all non-deduced variables have known values).
      */
-    public Set<PVariable> getDeducedVariables();
+    public Set <PVariable> getDeducedVariables();
 
     /**
      * A (preferably minimal) cover of known functional dependencies between variables.
      * @noreference Use {@link QueryAnalyzer} instead to properly handle dependencies of pattern calls.
      * @return non-trivial functional dependencies in the form of {variables} --> {variables}, where dependencies with the same lhs are unified.
      */
-    public Map<Set<PVariable>,Set<PVariable>> getFunctionalDependencies(IQueryMetaContext context);
+    public Map <Set<PVariable>,Set <PVariable>> getFunctionalDependencies(IQueryMetaContext context);
 
     public void replaceVariable(PVariable obsolete, PVariable replacement);
 
@@ -63,7 +63,7 @@ public interface PConstraint extends PTraceable {
      *
      * @since 2.0
      */
-    public static final Comparator<PConstraint> COMPARE_BY_MONOTONOUS_ID = (arg0, arg1) -> arg0.getMonotonousID() - arg1.getMonotonousID();
+    public static final Comparator <PConstraint> COMPARE_BY_MONOTONOUS_ID = (arg0, arg1) -> arg0.getMonotonousID() - arg1.getMonotonousID();
 
 
 

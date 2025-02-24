@@ -44,16 +44,16 @@ public class PushWebDocumentAccess extends XtextWebDocumentAccess {
 			super.performPrecomputation(cancelIndicator);
 			return;
 		}
-		for (AbstractCachedService<? extends IServiceResult> service : preComputedServiceRegistry
+		for (AbstractCachedService <? extends IServiceResult> service : preComputedServiceRegistry
 				.getPrecomputedServices()) {
 			operationCanceledManager.checkCanceled(cancelIndicator);
 			precomputeServiceResult(service, false);
 		}
 	}
 
-	protected <T extends IServiceResult> void precomputeServiceResult(AbstractCachedService<T> service, boolean logCacheMiss) {
+	protected <T extends IServiceResult> void precomputeServiceResult(AbstractCachedService <T> service, boolean logCacheMiss) {
 		var serviceName = getPrecomputedServiceName(service);
-		readOnly(new CancelableUnitOfWork<Void, IXtextWebDocument>() {
+		readOnly(new CancelableUnitOfWork <Void, IXtextWebDocument>() {
 			@Override
 			public java.lang.Void exec(IXtextWebDocument d, CancelIndicator cancelIndicator) throws Exception {
 				pushDocument.precomputeServiceResult(service, serviceName, cancelIndicator, logCacheMiss);
@@ -62,7 +62,7 @@ public class PushWebDocumentAccess extends XtextWebDocumentAccess {
 		});
 	}
 
-	protected String getPrecomputedServiceName(AbstractCachedService<? extends IServiceResult> service) {
+	protected String getPrecomputedServiceName(AbstractCachedService <? extends IServiceResult> service) {
 		if (service instanceof ValidationService) {
 			return "validate";
 		}

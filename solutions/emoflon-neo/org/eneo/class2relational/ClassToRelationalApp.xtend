@@ -32,7 +32,7 @@ def static void main(String[] args) {
 	  // Setup 5
       val apiRel = new API_Relational(builder)
       // Setup 5
-	  var apiArray = new ArrayList<Model>()
+	  var apiArray = new ArrayList <Model>()
       
 	  // Setup 78 (13*6)
       apiArray.add(new API_change1(builder).model_Class1)
@@ -58,7 +58,7 @@ def static void main(String[] args) {
 	  builder.exportEMSLEntityToNeo4j(apiRel.metamodel_Relational_)
       
 	  // Setup 7
-      for (var i=1; i<=13; i++) {
+      for (var i=1; i <=13; i++) {
 		// Setup 7
 		builder.exportEMSLEntityToNeo4j(apiArray.get(i-1))
 		// Setup 13		

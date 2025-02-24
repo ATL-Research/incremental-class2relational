@@ -24,7 +24,7 @@ public interface ILocalSearchPlanner {
 
     /**
      * Creates executable plans for the provided query. It is required to call one of the
-     * <code>initializePlanner()</code> methods before calling this method.
+     * <code>initializePlanner() </code> methods before calling this method.
      *
      * @param querySpec
      * @param boundParameters
@@ -33,6 +33,6 @@ public interface ILocalSearchPlanner {
      *         list of ISearchOperations
      * @throws InterpreterRuntimeException
      */
-    Collection<SearchPlanForBody> plan(PQuery querySpec, Set<PParameter> boundParameters);
+    Collection <SearchPlanForBody> plan(PQuery querySpec, Set <PParameter> boundParameters);
 
 }

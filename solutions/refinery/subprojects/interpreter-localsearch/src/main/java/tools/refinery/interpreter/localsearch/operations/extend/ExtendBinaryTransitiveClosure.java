@@ -35,22 +35,22 @@ import tools.refinery.interpreter.matchers.tuple.Tuple;
  */
 public abstract class ExtendBinaryTransitiveClosure implements ISearchOperation, IPatternMatcherOperation {
 
-    private class Executor extends SingleValueExtendOperationExecutor<Object> {
+    private class Executor extends SingleValueExtendOperationExecutor <Object> {
 
         public Executor(int position) {
             super(position);
         }
 
         @Override
-        public Iterator<?> getIterator(MatchingFrame frame, ISearchContext context) {
+        public Iterator <?> getIterator(MatchingFrame frame, ISearchContext context) {
             // Note: second parameter is NOT bound during execution, but the first is
             IQueryResultProvider matcher = context.getMatcher(information.getCallWithAdornment());
 
-            Queue<Object> seedsToEvaluate = new LinkedList<>();
+            Queue <Object> seedsToEvaluate = new LinkedList<>();
             final Object seedValue = frame.get(seedPosition);
             seedsToEvaluate.add(seedValue);
-            Set<Object> seedsEvaluated = new HashSet<>();
-            Set<Object> targetsFound = new HashSet<>();
+            Set <Object> seedsEvaluated = new HashSet<>();
+            Set <Object> targetsFound = new HashSet<>();
             if (reflexive) {
                 targetsFound.add(seedValue);
             }
@@ -81,7 +81,7 @@ public abstract class ExtendBinaryTransitiveClosure implements ISearchOperation,
      * Calculates the transitive closure of a pattern match in a forward direction (first parameter bound, second
      * unbound).
      * </p>
-     * <strong>Note</strong>: In case the call is reflexive, it is expected that the bound parameter already matches the universe type of the call.
+     * <strong>Note </strong>: In case the call is reflexive, it is expected that the bound parameter already matches the universe type of the call.
      *
      * @since 1.7
      */
@@ -111,7 +111,7 @@ public abstract class ExtendBinaryTransitiveClosure implements ISearchOperation,
      * Calculates the transitive closure of a pattern match in a backward direction (first parameter unbound, second
      * bound)
      * </p>
-     * <strong>Note</strong>: In case the call is reflexive, it is expected that the bound parameter already matches the universe type of the call.
+     * <strong>Note </strong>: In case the call is reflexive, it is expected that the bound parameter already matches the universe type of the call.
      *
      * @since 2.0
      */
@@ -167,14 +167,14 @@ public abstract class ExtendBinaryTransitiveClosure implements ISearchOperation,
     }
 
     @Override
-    public String toString(Function<Integer, String> variableMapping) {
+    public String toString(Function <Integer, String> variableMapping) {
         String c = information.toString(variableMapping);
         int p = c.indexOf('(');
         return "extend    find " + c.substring(0, p) + "+" + c.substring(p);
     }
 
     @Override
-    public List<Integer> getVariablePositions() {
+    public List <Integer> getVariablePositions() {
         return Arrays.asList(seedPosition, targetPosition);
     }
 

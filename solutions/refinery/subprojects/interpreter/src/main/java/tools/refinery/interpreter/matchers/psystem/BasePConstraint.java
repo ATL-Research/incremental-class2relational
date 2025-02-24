@@ -25,7 +25,7 @@ public abstract class BasePConstraint implements PConstraint {
 
 
     protected PBody pBody;
-    private final Set<PVariable> affectedVariables;
+    private final Set <PVariable> affectedVariables;
 
 
     private final int sequentialID = nextID.getAndIncrement();
@@ -33,10 +33,10 @@ public abstract class BasePConstraint implements PConstraint {
 	// Use a static atomic integer to avoid race conditions when creating new constraints.
     private static AtomicInteger nextID = new AtomicInteger(0);
 
-    public BasePConstraint(PBody pBody, Set<PVariable> affectedVariables) {
+    public BasePConstraint(PBody pBody, Set <PVariable> affectedVariables) {
         super();
         this.pBody = pBody;
-        this.affectedVariables = new HashSet<PVariable>(affectedVariables);
+        this.affectedVariables = new HashSet <PVariable>(affectedVariables);
 
         for (PVariable pVariable : affectedVariables) {
             pVariable.refer(this);
@@ -52,12 +52,12 @@ public abstract class BasePConstraint implements PConstraint {
     protected abstract String toStringRest();
 
     @Override
-    public Set<PVariable> getAffectedVariables() {
+    public Set <PVariable> getAffectedVariables() {
         return affectedVariables;
     }
 
     @Override
-    public Map<Set<PVariable>, Set<PVariable>> getFunctionalDependencies(IQueryMetaContext context) {
+    public Map <Set<PVariable>, Set <PVariable>> getFunctionalDependencies(IQueryMetaContext context) {
         return Collections.emptyMap();
     }
 

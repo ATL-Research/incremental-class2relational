@@ -29,7 +29,7 @@ public class NopTraceCollector implements IRewriterTraceCollector {
      * @since 2.0
      */
     @Override
-    public Stream<PTraceable> getCanonicalTraceables(PTraceable derivative) {
+    public Stream <PTraceable> getCanonicalTraceables(PTraceable derivative) {
         return Stream.empty();
     }
 
@@ -37,7 +37,7 @@ public class NopTraceCollector implements IRewriterTraceCollector {
      * @since 2.0
      */
     @Override
-    public Stream<PTraceable> getRewrittenTraceables(PTraceable source) {
+    public Stream <PTraceable> getRewrittenTraceables(PTraceable source) {
         return Stream.empty();
     }
 
@@ -61,7 +61,7 @@ public class NopTraceCollector implements IRewriterTraceCollector {
      * @since 2.0
      */
     @Override
-    public Stream<IDerivativeModificationReason> getRemovalReasons(PTraceable traceable) {
+    public Stream <IDerivativeModificationReason> getRemovalReasons(PTraceable traceable) {
         return Stream.empty();
     }
 

@@ -52,7 +52,7 @@ public class Runner extends AbstractDriver {
 	private String output;
 
 	private static class IdProvider {
-		Map<EObject, String> ids = new HashMap<>();
+		Map <EObject, String> ids = new HashMap<>();
 		int nextId = 0;
 		public String getId(EObject eo) {
 			String id = ids.get(eo);
@@ -124,7 +124,7 @@ public class Runner extends AbstractDriver {
 					ret.append(" '");
 					ret.append(sf.getName());
 					ret.append(" nullv,");
-				} else if(value instanceof Collection<?> col) {
+				} else if(value instanceof Collection <?> col) {
 					for(var val : col) {
 						convertValue(idProvider, eo, ret, sf, val);
 					}
@@ -255,10 +255,10 @@ public class Runner extends AbstractDriver {
 			output = toLowerPattern.matcher(output).replaceAll(match -> match.group(1).toLowerCase());
 			if(debug) System.out.println("OUTPUT: " + output);
 			PrintStream out = new PrintStream(new FileOutputStream(System.getenv("TARGET_PATH")));
-			out.println("<?xml version=\"1.0\" encoding=\"ASCII\"?>");
-			out.println("<xmi:XMI xmi:version=\"2.0\" xmlns:xmi=\"http://www.omg.org/XMI\" xmlns=\"Relational\">");
+			out.println(" <?xml version=\"1.0\" encoding=\"ASCII\"?>");
+			out.println(" <xmi:XMI xmi:version=\"2.0\" xmlns:xmi=\"http://www.omg.org/XMI\" xmlns=\"Relational\">");
 			out.print(output);
-			out.println("</xmi:XMI>");
+			out.println(" </xmi:XMI>");
 			out.close();
 		} else {
 			System.out.println("ERROR: finished without output");

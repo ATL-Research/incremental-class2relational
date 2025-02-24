@@ -14,13 +14,13 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class RepresentativeElectionAlgorithm<T> implements IGraphObserver<T> {
-	protected final Graph<T> graph;
-	protected final Map<T, T> representatives = new HashMap<>();
-	protected final Map<T, Set<T>> components = new HashMap<>();
-	private RepresentativeObserver<? super T> observer;
+public abstract class RepresentativeElectionAlgorithm <T> implements IGraphObserver <T> {
+	protected final Graph <T> graph;
+	protected final Map <T, T> representatives = new HashMap<>();
+	protected final Map <T, Set <T>> components = new HashMap<>();
+	private RepresentativeObserver <? super T> observer;
 
-	protected RepresentativeElectionAlgorithm(Graph<T> graph) {
+	protected RepresentativeElectionAlgorithm(Graph <T> graph) {
 		this.graph = graph;
 		initializeComponents();
 		graph.attachObserver(this);
@@ -28,7 +28,7 @@ public abstract class RepresentativeElectionAlgorithm<T> implements IGraphObserv
 
 	protected abstract void initializeComponents();
 
-	protected void initializeSet(Set<T> set) {
+	protected void initializeSet(Set <T> set) {
 		var iterator = set.iterator();
 		if (!iterator.hasNext()) {
 			// Set is empty.
@@ -45,13 +45,13 @@ public abstract class RepresentativeElectionAlgorithm<T> implements IGraphObserv
 		components.put(representative, set);
 	}
 
-	protected void merge(Set<T> toMerge) {
+	protected void merge(Set <T> toMerge) {
 		if (toMerge.isEmpty()) {
 			return;
 		}
-		var representativesToMerge = new HashSet<T>();
+		var representativesToMerge = new HashSet <T>();
 		T bestRepresentative = null;
-		Set<T> bestSet = null;
+		Set <T> bestSet = null;
 		for (var object : toMerge) {
 			var representative = getRepresentative(object);
 			if (representativesToMerge.add(representative)) {
@@ -92,7 +92,7 @@ public abstract class RepresentativeElectionAlgorithm<T> implements IGraphObserv
 		}
 	}
 
-	private void merge(T preservedRepresentative, Set<T> preservedSet, T removedRepresentative, Set<T> removedSet) {
+	private void merge(T preservedRepresentative, Set <T> preservedSet, T removedRepresentative, Set <T> removedSet) {
 		components.remove(removedRepresentative);
 		for (var node : removedSet) {
 			representatives.put(node, preservedRepresentative);
@@ -101,7 +101,7 @@ public abstract class RepresentativeElectionAlgorithm<T> implements IGraphObserv
 		}
 	}
 
-	protected void assignNewRepresentative(T oldRepresentative, Set<T> set) {
+	protected void assignNewRepresentative(T oldRepresentative, Set <T> set) {
 		var iterator = set.iterator();
 		if (!iterator.hasNext()) {
 			return;
@@ -118,11 +118,11 @@ public abstract class RepresentativeElectionAlgorithm<T> implements IGraphObserv
 		}
 	}
 
-	public void setObserver(RepresentativeObserver<? super T> observer) {
+	public void setObserver(RepresentativeObserver <? super T> observer) {
 		this.observer = observer;
 	}
 
-	public Map<T, Set<T>> getComponents() {
+	public Map <T, Set <T>> getComponents() {
 		return components;
 	}
 
@@ -130,7 +130,7 @@ public abstract class RepresentativeElectionAlgorithm<T> implements IGraphObserv
 		return representatives.get(node);
 	}
 
-	public Set<T> getComponent(T representative) {
+	public Set <T> getComponent(T representative) {
 		return components.get(representative);
 	}
 
@@ -140,7 +140,7 @@ public abstract class RepresentativeElectionAlgorithm<T> implements IGraphObserv
 
 	@Override
 	public void nodeInserted(T n) {
-		var component = new HashSet<T>(1);
+		var component = new HashSet <T>(1);
 		component.add(n);
 		initializeSet(component);
 		notifyToObservers(n, n, Direction.INSERT);
@@ -169,6 +169,6 @@ public abstract class RepresentativeElectionAlgorithm<T> implements IGraphObserv
 
 	@FunctionalInterface
 	public interface Factory {
-		<T> RepresentativeElectionAlgorithm<T> create(Graph<T> graph);
+		 <T> RepresentativeElectionAlgorithm <T> create(Graph <T> graph);
 	}
 }

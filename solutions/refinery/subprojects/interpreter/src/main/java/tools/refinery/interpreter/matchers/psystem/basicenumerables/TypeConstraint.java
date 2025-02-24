@@ -30,7 +30,7 @@ import tools.refinery.interpreter.matchers.tuple.Tuple;
  * @author Zoltan Ujhelyi
  *
  */
-public class TypeConstraint extends KeyedEnumerablePConstraint<IInputKey> implements ITypeConstraint {
+public class TypeConstraint extends KeyedEnumerablePConstraint <IInputKey> implements ITypeConstraint {
 
     private TypeJudgement equivalentJudgement;
 
@@ -61,13 +61,13 @@ public class TypeConstraint extends KeyedEnumerablePConstraint<IInputKey> implem
     }
 
     @Override
-    public Set<TypeJudgement> getImpliedJudgements(IQueryMetaContext context) {
+    public Set <TypeJudgement> getImpliedJudgements(IQueryMetaContext context) {
         return Collections.singleton(equivalentJudgement);
         //return equivalentJudgement.getDirectlyImpliedJudgements(context);
     }
 
     @Override
-    public Map<Set<PVariable>, Set<PVariable>> getFunctionalDependencies(IQueryMetaContext context) {
+    public Map <Set<PVariable>, Set <PVariable>> getFunctionalDependencies(IQueryMetaContext context) {
         return TypeConstraintUtil.getFunctionalDependencies(context, supplierKey, variablesTuple);
     }
 

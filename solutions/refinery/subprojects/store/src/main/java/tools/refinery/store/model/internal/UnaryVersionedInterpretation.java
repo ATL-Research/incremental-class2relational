@@ -13,8 +13,8 @@ import tools.refinery.store.tuple.Tuple;
 
 import java.util.Objects;
 
-class UnaryVersionedInterpretation<T> extends VersionedInterpretation<T> {
-	public UnaryVersionedInterpretation(ModelImpl model, Symbol<T> symbol, VersionedMap<Tuple, T> map) {
+class UnaryVersionedInterpretation <T> extends VersionedInterpretation <T> {
+	public UnaryVersionedInterpretation(ModelImpl model, Symbol <T> symbol, VersionedMap <Tuple, T> map) {
 		super(model, symbol, map);
 	}
 
@@ -25,7 +25,7 @@ class UnaryVersionedInterpretation<T> extends VersionedInterpretation<T> {
 	}
 
 	@Override
-	public Cursor<Tuple, T> getAdjacent(int slot, int node) {
+	public Cursor <Tuple, T> getAdjacent(int slot, int node) {
 		validateSlot(slot);
 		var key = Tuple.of(node);
 		var value = get(key);

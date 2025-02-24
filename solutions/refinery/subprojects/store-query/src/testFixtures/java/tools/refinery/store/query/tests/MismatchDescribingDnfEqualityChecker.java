@@ -27,7 +27,7 @@ class MismatchDescribingDnfEqualityChecker extends DeepDnfEqualityChecker {
 	}
 
 	@Override
-	public boolean dnfEqualRaw(List<SymbolicParameter> symbolicParameters, List<? extends List<? extends Literal>> clauses, Dnf other) {
+	public boolean dnfEqualRaw(List <SymbolicParameter> symbolicParameters, List <? extends List <? extends Literal>> clauses, Dnf other) {
 		try {
 			raw = true;
 			boolean result = super.dnfEqualRaw(symbolicParameters, clauses, other);

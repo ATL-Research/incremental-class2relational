@@ -28,9 +28,9 @@ abstract class Elem2Elem {
 	val protected Resource targetModel
 	val protected Resource corrModel
 	
-	protected List<EObject> createdElems
-	protected List<EObject> spareElems
-	protected Set<EObject> detachedCorrElems
+	protected List <EObject> createdElems
+	protected List <EObject> spareElems
+	protected Set <EObject> detachedCorrElems
 	
 	val static sourcePackage = atl.research.class_.Class_Package::eINSTANCE
 	val static targetPackage = atl.research.relational_.Relational_Package::eINSTANCE
@@ -38,7 +38,7 @@ abstract class Elem2Elem {
 	val static targetFactory = atl.research.relational_.Relational_Factory::eINSTANCE
 	val static corrFactory = CorrModelFactory::eINSTANCE
 	
-	static Map<EObject, Corr> elementsToCorr = newHashMap()
+	static Map <EObject, Corr> elementsToCorr = newHashMap()
 	
 	new(String ruleId, Class2Relational trafo) {
 		this.ruleId = ruleId
@@ -53,16 +53,16 @@ abstract class Elem2Elem {
 	}
 	
 	@Data static class CorrModelDelta {
-		List<EObject> createdElems
-		List<EObject> spareElems
-		Set<EObject> detachedCorrElems
+		List <EObject> createdElems
+		List <EObject> spareElems
+		Set <EObject> detachedCorrElems
 	}
 	
-	def abstract CorrModelDelta sourceToTarget(Set<EObject> _detachedCorrElems);
+	def abstract CorrModelDelta sourceToTarget(Set <EObject> _detachedCorrElems);
 	def void onTrgElemCreation(EObject trgElem) {}
 	def void onTrgElemDeletion(EObject trgElem) {}
 	
-	def abstract CorrModelDelta targetToSource(Set<EObject> _detachedCorrElems);
+	def abstract CorrModelDelta targetToSource(Set <EObject> _detachedCorrElems);
 	def void onSrcElemCreation(EObject srcElem) {}
 	def void onSrcElemDeletion(EObject srcElem) {}
 	
@@ -107,12 +107,12 @@ abstract class Elem2Elem {
 	def protected static dispatch EObject unwrap(SingleElem elem) {
 		return elem.element
 	}
-	def protected MultiElem wrap(List<? extends EObject> objs) {
+	def protected MultiElem wrap(List <? extends EObject> objs) {
 		val multiElem = corrFactory.createMultiElem() => [it.elements += objs]
 		corrModel.contents += multiElem
 		return multiElem
 	}
-	def protected static dispatch List<? extends EObject> unwrap(MultiElem elem) {
+	def protected static dispatch List <? extends EObject> unwrap(MultiElem elem) {
 		return elem.elements
 	}
 	
@@ -133,10 +133,10 @@ abstract class Elem2Elem {
 		String clazz
 		boolean multivalued
 	}
-	def protected List<CorrElem> getOrCreateSrc(Corr corr, CorrElemType... srcTypes) {
+	def protected List <CorrElem> getOrCreateSrc(Corr corr, CorrElemType... srcTypes) {
 		if (srcTypes.empty) throw new IllegalArgumentException("The source elements to create may not be empty!")
 		
-		var List<CorrElem> source = corr.source
+		var List <CorrElem> source = corr.source
 		if (corr.flatSrc.empty) {
 			for (type : srcTypes) {
 				val corrElem = if (!type.multivalued) {
@@ -152,10 +152,10 @@ abstract class Elem2Elem {
 		}
 		return source
 	}
-	def protected List<CorrElem> getOrCreateTrg(Corr corr, CorrElemType... trgTypes) {
+	def protected List <CorrElem> getOrCreateTrg(Corr corr, CorrElemType... trgTypes) {
 		if (trgTypes.empty) throw new IllegalArgumentException("The target elements to create may not be empty!")
 		
-		var List<CorrElem> target = corr.target
+		var List <CorrElem> target = corr.target
 		if (corr.flatTrg.empty) {
 			for (type : trgTypes) {
 				val corrElem = if (!type.multivalued) {
@@ -172,15 +172,15 @@ abstract class Elem2Elem {
 		return target
 	}
 	
-	protected static abstract class MultiElemUpdater<T extends EObject> {
-		List<T> outdated
-		List<T> updated
-		val Function0<T> elemFactory
+	protected static abstract class MultiElemUpdater <T extends EObject> {
+		List <T> outdated
+		List <T> updated
+		val Function0 <T> elemFactory
 		val Elem2Elem rule
 		val Corr corr
 		var boolean finished
 		
-		new(List<T> outdated, Function0<T> elemFactory, Elem2Elem rule, Corr corr) {
+		new(List <T> outdated, Function0 <T> elemFactory, Elem2Elem rule, Corr corr) {
 			this.outdated = newArrayList() => [it += outdated]
 			this.updated = newArrayList()
 			this.elemFactory = elemFactory
@@ -189,7 +189,7 @@ abstract class Elem2Elem {
 			this.finished = false
 		}
 		
-		def protected T update(Function1<? super T, Boolean> predicate) {
+		def protected T update(Function1 <? super T, Boolean> predicate) {
 			if (finished) throw new IllegalStateException("Finish was already called on this MultiElemUpdater!")
 			
 			val existing = outdated.findFirst[predicate.apply(it)]
@@ -205,7 +205,7 @@ abstract class Elem2Elem {
 			}
 		}
 		
-		def protected List<T> finish() {
+		def protected List <T> finish() {
 			if (finished) throw new IllegalStateException("Finish was already called on this MultiElemUpdater!")
 			finished = true
 			
@@ -213,13 +213,13 @@ abstract class Elem2Elem {
 			return updated
 		}
 	}
-	protected static class SrcMultiElemUpdater<T extends EObject> extends MultiElemUpdater<T> {
-		new(List<T> outdated, String elemClass, Elem2Elem rule, Corr corr) {
+	protected static class SrcMultiElemUpdater <T extends EObject> extends MultiElemUpdater <T> {
+		new(List <T> outdated, String elemClass, Elem2Elem rule, Corr corr) {
 			super(outdated, [sourceFactory.create(sourcePackage.getEClassifier(elemClass) as EClass) as T], rule, corr)
 		}
 	}
-	protected static class TrgMultiElemUpdater<T extends EObject> extends MultiElemUpdater<T> {
-		new(List<T> outdated, String elemClass, Elem2Elem rule, Corr corr) {
+	protected static class TrgMultiElemUpdater <T extends EObject> extends MultiElemUpdater <T> {
+		new(List <T> outdated, String elemClass, Elem2Elem rule, Corr corr) {
 			super(outdated, [targetFactory.create(targetPackage.getEClassifier(elemClass) as EClass) as T], rule, corr)
 		}
 	}
@@ -231,7 +231,7 @@ abstract class Elem2Elem {
 			throw new IllegalArgumentException("The additional elements must not contain null!")
 		}
 		
-		val elems = new ArrayList<CorrElem>() => [
+		val elems = new ArrayList <CorrElem>() => [
 			it += elem
 			it += additionalElems
 		]
@@ -240,7 +240,7 @@ abstract class Elem2Elem {
 			throw new IllegalArgumentException("A corr must not be created from a null element!")
 		}
 		
-		var corrCount = new HashMap<Corr, Integer>
+		var corrCount = new HashMap <Corr, Integer>
 		for (e : flatElems) {
 			val corr = elementsToCorr.get(e)
 			if (corr !== null && corrCount.containsKey(corr)) {

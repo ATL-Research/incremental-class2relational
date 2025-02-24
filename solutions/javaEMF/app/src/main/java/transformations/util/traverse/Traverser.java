@@ -10,22 +10,22 @@ import org.eclipse.emf.ecore.EObject;
 import transformations.util.trace.Tracer;
 // MODEL_TRAVERSAL
 public class Traverser {
-    private HashMap<Class<?>, Consumer<EObject>> functions = new HashMap<>();
+    private HashMap <Class<?>, Consumer <EObject>> functions = new HashMap<>();
     private Tracer tracer;
 
     public Traverser(Tracer tracer) {
         this.tracer = tracer;
     }
 
-    public void addFunction(Class<?> class_, Consumer<EObject> function) {
+    public void addFunction(Class <?> class_, Consumer <EObject> function) {
         functions.put(class_, function);
     }
 
-    private void traverseAndAccept(Iterator<EObject> iterator, Function<EObject, Boolean> condition) {
+    private void traverseAndAccept(Iterator <EObject> iterator, Function <EObject, Boolean> condition) {
         while (iterator.hasNext()) {
             var next = iterator.next();
             var nClass = next.getClass();
-            Consumer<EObject> fun = functions.get(nClass);
+            Consumer <EObject> fun = functions.get(nClass);
             if (condition.apply(next)) {
                 boolean accepted = false;
                 do {
@@ -35,7 +35,7 @@ public class Traverser {
                     } else {
                         var superClass = nClass.getSuperclass();
                         if (superClass != null) {
-                            nClass = (Class<? extends EObject>) superClass;
+                            nClass = (Class <? extends EObject>) superClass;
                             fun = functions.get(nClass);
                         } else {
                             accepted = true;
@@ -46,12 +46,12 @@ public class Traverser {
         }
     }
 
-    public void traverseAndAccept(Iterator<EObject> iterator) {
+    public void traverseAndAccept(Iterator <EObject> iterator) {
         traverseAndAccept(iterator, next -> tracer.checkTrace(next, "").isPresent());
     }
 
 
-    public void traverseAndAcceptPre(Iterator<EObject> iterator) {
+    public void traverseAndAcceptPre(Iterator <EObject> iterator) {
         traverseAndAccept(iterator, next -> true);
     }
 }

@@ -15,11 +15,11 @@ class ProblemNavigationUtil {
 		throw new IllegalStateException("This is a static utility class and should not be instantiated directly");
 	}
 
-	public static <T extends NamedElement> T named(Stream<? extends T> stream, String name) {
+	public static <T extends NamedElement> T named(Stream <? extends T> stream, String name) {
 		return stream.filter(statement -> name.equals(statement.getName())).findAny().get();
 	}
 
-	public static <T extends NamedElement> T named(List<? extends T> list, String name) {
+	public static <T extends NamedElement> T named(List <? extends T> list, String name) {
 		return named(list.stream(), name);
 	}
 }

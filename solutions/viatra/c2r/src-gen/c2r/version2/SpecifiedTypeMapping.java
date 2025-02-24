@@ -48,7 +48,7 @@ import relational_.Type;
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
  * 
  * <p>Original source:
- *         <code><pre>
+ *         <code> <pre>
  *         Type is specified
  *           	(a) objectId column has Integer type (for classes)
  *           	(b) source model specified a type for the column
@@ -63,14 +63,14 @@ import relational_.Type;
  *         	DataType.name(stype,typename);
  *         	Type.name(type,typename);
  *         }
- * </pre></code>
+ * </pre> </code>
  * 
  * @see Matcher
  * @see Match
  * 
  */
 @SuppressWarnings("all")
-public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecification<SpecifiedTypeMapping.Matcher> {
+public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecification <SpecifiedTypeMapping.Matcher> {
   /**
    * Pattern-specific match representation of the c2r.version2.specifiedTypeMapping pattern,
    * to be used in conjunction with {@link Matcher}.
@@ -88,7 +88,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
 
     private Type fType;
 
-    private static List<String> parameterNames = makeImmutableList("column", "type");
+    private static List <String> parameterNames = makeImmutableList("column", "type");
 
     private Match(final Column pColumn, final Type pType) {
       this.fColumn = pColumn;
@@ -151,7 +151,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
     }
 
     @Override
-    public List<String> parameterNames() {
+    public List <String> parameterNames() {
       return SpecifiedTypeMapping.Match.parameterNames;
     }
 
@@ -273,7 +273,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
    * <p>Matches of the pattern will be represented as {@link Match}.
    * 
    * <p>Original source:
-   * <code><pre>
+   * <code> <pre>
    * Type is specified
    *   	(a) objectId column has Integer type (for classes)
    *   	(b) source model specified a type for the column
@@ -288,13 +288,13 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
    * 	DataType.name(stype,typename);
    * 	Type.name(type,typename);
    * }
-   * </pre></code>
+   * </pre> </code>
    * 
    * @see Match
    * @see SpecifiedTypeMapping
    * 
    */
-  public static class Matcher extends BaseMatcher<SpecifiedTypeMapping.Match> {
+  public static class Matcher extends BaseMatcher <SpecifiedTypeMapping.Match> {
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
@@ -347,22 +347,22 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<SpecifiedTypeMapping.Match> getAllMatches(final Column pColumn, final Type pType) {
+    public Collection <SpecifiedTypeMapping.Match> getAllMatches(final Column pColumn, final Type pType) {
       return rawStreamAllMatches(new Object[]{pColumn, pType}).collect(Collectors.toSet());
     }
 
     /**
      * Returns a stream of all matches of the pattern that conform to the given fixed values of some parameters.
      * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      * @param pColumn the fixed value of pattern parameter column, or null if not bound.
      * @param pType the fixed value of pattern parameter type, or null if not bound.
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<SpecifiedTypeMapping.Match> streamAllMatches(final Column pColumn, final Type pType) {
+    public Stream <SpecifiedTypeMapping.Match> streamAllMatches(final Column pColumn, final Type pType) {
       return rawStreamAllMatches(new Object[]{pColumn, pType});
     }
 
@@ -374,7 +374,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<SpecifiedTypeMapping.Match> getOneArbitraryMatch(final Column pColumn, final Type pType) {
+    public Optional <SpecifiedTypeMapping.Match> getOneArbitraryMatch(final Column pColumn, final Type pType) {
       return rawGetOneArbitraryMatch(new Object[]{pColumn, pType});
     }
 
@@ -410,7 +410,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final Column pColumn, final Type pType, final Consumer<? super SpecifiedTypeMapping.Match> processor) {
+    public boolean forOneArbitraryMatch(final Column pColumn, final Type pType, final Consumer <? super SpecifiedTypeMapping.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pColumn, pType}, processor);
     }
 
@@ -432,7 +432,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<Column> rawStreamAllValuesOfcolumn(final Object[] parameters) {
+    protected Stream <Column> rawStreamAllValuesOfcolumn(final Object[] parameters) {
       return rawStreamAllValues(POSITION_COLUMN, parameters).map(Column.class::cast);
     }
 
@@ -441,7 +441,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Column> getAllValuesOfcolumn() {
+    public Set <Column> getAllValuesOfcolumn() {
       return rawStreamAllValuesOfcolumn(emptyArray()).collect(Collectors.toSet());
     }
 
@@ -450,35 +450,35 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<Column> streamAllValuesOfcolumn() {
+    public Stream <Column> streamAllValuesOfcolumn() {
       return rawStreamAllValuesOfcolumn(emptyArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for column.
      * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Column> streamAllValuesOfcolumn(final SpecifiedTypeMapping.Match partialMatch) {
+    public Stream <Column> streamAllValuesOfcolumn(final SpecifiedTypeMapping.Match partialMatch) {
       return rawStreamAllValuesOfcolumn(partialMatch.toArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for column.
      * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Column> streamAllValuesOfcolumn(final Type pType) {
+    public Stream <Column> streamAllValuesOfcolumn(final Type pType) {
       return rawStreamAllValuesOfcolumn(new Object[]{null, pType});
     }
 
@@ -487,7 +487,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Column> getAllValuesOfcolumn(final SpecifiedTypeMapping.Match partialMatch) {
+    public Set <Column> getAllValuesOfcolumn(final SpecifiedTypeMapping.Match partialMatch) {
       return rawStreamAllValuesOfcolumn(partialMatch.toArray()).collect(Collectors.toSet());
     }
 
@@ -496,7 +496,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Column> getAllValuesOfcolumn(final Type pType) {
+    public Set <Column> getAllValuesOfcolumn(final Type pType) {
       return rawStreamAllValuesOfcolumn(new Object[]{null, pType}).collect(Collectors.toSet());
     }
 
@@ -505,7 +505,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<Type> rawStreamAllValuesOftype(final Object[] parameters) {
+    protected Stream <Type> rawStreamAllValuesOftype(final Object[] parameters) {
       return rawStreamAllValues(POSITION_TYPE, parameters).map(Type.class::cast);
     }
 
@@ -514,7 +514,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Type> getAllValuesOftype() {
+    public Set <Type> getAllValuesOftype() {
       return rawStreamAllValuesOftype(emptyArray()).collect(Collectors.toSet());
     }
 
@@ -523,35 +523,35 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<Type> streamAllValuesOftype() {
+    public Stream <Type> streamAllValuesOftype() {
       return rawStreamAllValuesOftype(emptyArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for type.
      * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Type> streamAllValuesOftype(final SpecifiedTypeMapping.Match partialMatch) {
+    public Stream <Type> streamAllValuesOftype(final SpecifiedTypeMapping.Match partialMatch) {
       return rawStreamAllValuesOftype(partialMatch.toArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for type.
      * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Type> streamAllValuesOftype(final Column pColumn) {
+    public Stream <Type> streamAllValuesOftype(final Column pColumn) {
       return rawStreamAllValuesOftype(new Object[]{pColumn, null});
     }
 
@@ -560,7 +560,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Type> getAllValuesOftype(final SpecifiedTypeMapping.Match partialMatch) {
+    public Set <Type> getAllValuesOftype(final SpecifiedTypeMapping.Match partialMatch) {
       return rawStreamAllValuesOftype(partialMatch.toArray()).collect(Collectors.toSet());
     }
 
@@ -569,7 +569,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Type> getAllValuesOftype(final Column pColumn) {
+    public Set <Type> getAllValuesOftype(final Column pColumn) {
       return rawStreamAllValuesOftype(new Object[]{pColumn, null}).collect(Collectors.toSet());
     }
 
@@ -608,7 +608,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
      * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
      * 
      */
-    public static IQuerySpecification<SpecifiedTypeMapping.Matcher> querySpecification() {
+    public static IQuerySpecification <SpecifiedTypeMapping.Matcher> querySpecification() {
       return SpecifiedTypeMapping.instance();
     }
   }
@@ -652,7 +652,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
 
   /**
    * Inner class allowing the singleton instance of {@link SpecifiedTypeMapping} to be created 
-   *     <b>not</b> at the class load time of the outer class, 
+   *     <b>not </b> at the class load time of the outer class, 
    *     but rather at the first call to {@link SpecifiedTypeMapping#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
@@ -662,7 +662,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
     private static final SpecifiedTypeMapping INSTANCE = new SpecifiedTypeMapping();
 
     /**
-     * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
+     * Statically initializes the query specification <b>after </b> the field {@link #INSTANCE} is assigned.
      * This initialization order is required to support indirect recursion.
      * 
      * <p> The static initializer is defined using a helper field to work around limitations of the code generator.
@@ -683,7 +683,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
 
     private final PParameter parameter_type = new PParameter("type", "relational_.Type", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("Relational", "Type")), PParameterDirection.INOUT);
 
-    private final List<PParameter> parameters = Arrays.asList(parameter_column, parameter_type);
+    private final List <PParameter> parameters = Arrays.asList(parameter_column, parameter_type);
 
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -695,19 +695,19 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
     }
 
     @Override
-    public List<String> getParameterNames() {
+    public List <String> getParameterNames() {
       return Arrays.asList("column","type");
     }
 
     @Override
-    public List<PParameter> getParameters() {
+    public List <PParameter> getParameters() {
       return parameters;
     }
 
     @Override
-    public Set<PBody> doGetContainedBodies() {
+    public Set <PBody> doGetContainedBodies() {
       setEvaluationHints(new QueryEvaluationHint(null, QueryEvaluationHint.BackendRequirement.UNSPECIFIED));
-      Set<PBody> bodies = new LinkedHashSet<>();
+      Set <PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
           PVariable var_column = body.getOrCreateVariableByName("column");
@@ -741,7 +741,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
           PVariable var_column = body.getOrCreateVariableByName("column");
           PVariable var_type = body.getOrCreateVariableByName("type");
           PVariable var_attr = body.getOrCreateVariableByName("attr");
-          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
+          PVariable var___0_ = body.getOrCreateVariableByName("_ <0>");
           PVariable var_index = body.getOrCreateVariableByName("index");
           PVariable var_stype = body.getOrCreateVariableByName("stype");
           PVariable var_typename = body.getOrCreateVariableByName("typename");

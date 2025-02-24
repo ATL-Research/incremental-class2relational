@@ -46,21 +46,21 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
  * 
  * <p>Original source:
- *         <code><pre>
+ *         <code> <pre>
  *         Other DataTypes to be mapped to Type
  *          
  *         pattern fromDataType(dtype: DataType){
  *         	DataType.name(dtype,name);
  *         	name != "Integer";
  *         }
- * </pre></code>
+ * </pre> </code>
  * 
  * @see Matcher
  * @see Match
  * 
  */
 @SuppressWarnings("all")
-public final class FromDataType extends BaseGeneratedEMFQuerySpecification<FromDataType.Matcher> {
+public final class FromDataType extends BaseGeneratedEMFQuerySpecification <FromDataType.Matcher> {
   /**
    * Pattern-specific match representation of the c2r.version2.fromDataType pattern,
    * to be used in conjunction with {@link Matcher}.
@@ -76,7 +76,7 @@ public final class FromDataType extends BaseGeneratedEMFQuerySpecification<FromD
   public static abstract class Match extends BasePatternMatch {
     private DataType fDtype;
 
-    private static List<String> parameterNames = makeImmutableList("dtype");
+    private static List <String> parameterNames = makeImmutableList("dtype");
 
     private Match(final DataType pDtype) {
       this.fDtype = pDtype;
@@ -123,7 +123,7 @@ public final class FromDataType extends BaseGeneratedEMFQuerySpecification<FromD
     }
 
     @Override
-    public List<String> parameterNames() {
+    public List <String> parameterNames() {
       return FromDataType.Match.parameterNames;
     }
 
@@ -242,20 +242,20 @@ public final class FromDataType extends BaseGeneratedEMFQuerySpecification<FromD
    * <p>Matches of the pattern will be represented as {@link Match}.
    * 
    * <p>Original source:
-   * <code><pre>
+   * <code> <pre>
    * Other DataTypes to be mapped to Type
    *  
    * pattern fromDataType(dtype: DataType){
    * 	DataType.name(dtype,name);
    * 	name != "Integer";
    * }
-   * </pre></code>
+   * </pre> </code>
    * 
    * @see Match
    * @see FromDataType
    * 
    */
-  public static class Matcher extends BaseMatcher<FromDataType.Match> {
+  public static class Matcher extends BaseMatcher <FromDataType.Match> {
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
@@ -305,21 +305,21 @@ public final class FromDataType extends BaseGeneratedEMFQuerySpecification<FromD
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<FromDataType.Match> getAllMatches(final DataType pDtype) {
+    public Collection <FromDataType.Match> getAllMatches(final DataType pDtype) {
       return rawStreamAllMatches(new Object[]{pDtype}).collect(Collectors.toSet());
     }
 
     /**
      * Returns a stream of all matches of the pattern that conform to the given fixed values of some parameters.
      * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      * @param pDtype the fixed value of pattern parameter dtype, or null if not bound.
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<FromDataType.Match> streamAllMatches(final DataType pDtype) {
+    public Stream <FromDataType.Match> streamAllMatches(final DataType pDtype) {
       return rawStreamAllMatches(new Object[]{pDtype});
     }
 
@@ -330,7 +330,7 @@ public final class FromDataType extends BaseGeneratedEMFQuerySpecification<FromD
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<FromDataType.Match> getOneArbitraryMatch(final DataType pDtype) {
+    public Optional <FromDataType.Match> getOneArbitraryMatch(final DataType pDtype) {
       return rawGetOneArbitraryMatch(new Object[]{pDtype});
     }
 
@@ -363,7 +363,7 @@ public final class FromDataType extends BaseGeneratedEMFQuerySpecification<FromD
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final DataType pDtype, final Consumer<? super FromDataType.Match> processor) {
+    public boolean forOneArbitraryMatch(final DataType pDtype, final Consumer <? super FromDataType.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pDtype}, processor);
     }
 
@@ -384,7 +384,7 @@ public final class FromDataType extends BaseGeneratedEMFQuerySpecification<FromD
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<DataType> rawStreamAllValuesOfdtype(final Object[] parameters) {
+    protected Stream <DataType> rawStreamAllValuesOfdtype(final Object[] parameters) {
       return rawStreamAllValues(POSITION_DTYPE, parameters).map(DataType.class::cast);
     }
 
@@ -393,7 +393,7 @@ public final class FromDataType extends BaseGeneratedEMFQuerySpecification<FromD
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<DataType> getAllValuesOfdtype() {
+    public Set <DataType> getAllValuesOfdtype() {
       return rawStreamAllValuesOfdtype(emptyArray()).collect(Collectors.toSet());
     }
 
@@ -402,7 +402,7 @@ public final class FromDataType extends BaseGeneratedEMFQuerySpecification<FromD
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<DataType> streamAllValuesOfdtype() {
+    public Stream <DataType> streamAllValuesOfdtype() {
       return rawStreamAllValuesOfdtype(emptyArray());
     }
 
@@ -441,7 +441,7 @@ public final class FromDataType extends BaseGeneratedEMFQuerySpecification<FromD
      * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
      * 
      */
-    public static IQuerySpecification<FromDataType.Matcher> querySpecification() {
+    public static IQuerySpecification <FromDataType.Matcher> querySpecification() {
       return FromDataType.instance();
     }
   }
@@ -485,7 +485,7 @@ public final class FromDataType extends BaseGeneratedEMFQuerySpecification<FromD
 
   /**
    * Inner class allowing the singleton instance of {@link FromDataType} to be created 
-   *     <b>not</b> at the class load time of the outer class, 
+   *     <b>not </b> at the class load time of the outer class, 
    *     but rather at the first call to {@link FromDataType#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
@@ -495,7 +495,7 @@ public final class FromDataType extends BaseGeneratedEMFQuerySpecification<FromD
     private static final FromDataType INSTANCE = new FromDataType();
 
     /**
-     * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
+     * Statically initializes the query specification <b>after </b> the field {@link #INSTANCE} is assigned.
      * This initialization order is required to support indirect recursion.
      * 
      * <p> The static initializer is defined using a helper field to work around limitations of the code generator.
@@ -514,7 +514,7 @@ public final class FromDataType extends BaseGeneratedEMFQuerySpecification<FromD
 
     private final PParameter parameter_dtype = new PParameter("dtype", "class_.DataType", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("Class", "DataType")), PParameterDirection.INOUT);
 
-    private final List<PParameter> parameters = Arrays.asList(parameter_dtype);
+    private final List <PParameter> parameters = Arrays.asList(parameter_dtype);
 
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -526,19 +526,19 @@ public final class FromDataType extends BaseGeneratedEMFQuerySpecification<FromD
     }
 
     @Override
-    public List<String> getParameterNames() {
+    public List <String> getParameterNames() {
       return Arrays.asList("dtype");
     }
 
     @Override
-    public List<PParameter> getParameters() {
+    public List <PParameter> getParameters() {
       return parameters;
     }
 
     @Override
-    public Set<PBody> doGetContainedBodies() {
+    public Set <PBody> doGetContainedBodies() {
       setEvaluationHints(new QueryEvaluationHint(null, QueryEvaluationHint.BackendRequirement.UNSPECIFIED));
-      Set<PBody> bodies = new LinkedHashSet<>();
+      Set <PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
           PVariable var_dtype = body.getOrCreateVariableByName("dtype");

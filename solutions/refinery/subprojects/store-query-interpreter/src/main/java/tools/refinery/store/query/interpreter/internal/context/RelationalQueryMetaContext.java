@@ -18,9 +18,9 @@ import java.util.*;
  * The meta context information for String scopes.
  */
 public class RelationalQueryMetaContext extends AbstractQueryMetaContext {
-	private final Map<AnySymbolView, IInputKey> inputKeys;
+	private final Map <AnySymbolView, IInputKey> inputKeys;
 
-	RelationalQueryMetaContext(Map<AnySymbolView, IInputKey> inputKeys) {
+	RelationalQueryMetaContext(Map <AnySymbolView, IInputKey> inputKeys) {
 		this.inputKeys = inputKeys;
 	}
 
@@ -42,13 +42,13 @@ public class RelationalQueryMetaContext extends AbstractQueryMetaContext {
 	}
 
 	@Override
-	public Collection<InputKeyImplication> getImplications(IInputKey implyingKey) {
+	public Collection <InputKeyImplication> getImplications(IInputKey implyingKey) {
 		if (implyingKey instanceof JavaTransitiveInstancesKey) {
 			return List.of();
 		}
 		var symbolView = checkKey(implyingKey);
 		var relationViewImplications = symbolView.getImpliedRelationViews();
-		var inputKeyImplications = new HashSet<InputKeyImplication>(relationViewImplications.size());
+		var inputKeyImplications = new HashSet <InputKeyImplication>(relationViewImplications.size());
 		for (var relationViewImplication : relationViewImplications) {
 			if (!symbolView.equals(relationViewImplication.implyingView())) {
 				throw new IllegalArgumentException("Relation view %s returned unrelated implication %s".formatted(
@@ -76,13 +76,13 @@ public class RelationalQueryMetaContext extends AbstractQueryMetaContext {
 	}
 
 	@Override
-	public Map<Set<Integer>, Set<Integer>> getFunctionalDependencies(IInputKey key) {
+	public Map <Set<Integer>, Set <Integer>> getFunctionalDependencies(IInputKey key) {
 		if (key instanceof JavaTransitiveInstancesKey) {
 			return Map.of();
 		}
 		var relationView = checkKey(key);
 		var functionalDependencies = relationView.getFunctionalDependencies();
-		var flattened = new HashMap<Set<Integer>, Set<Integer>>(functionalDependencies.size());
+		var flattened = new HashMap <Set<Integer>, Set <Integer>>(functionalDependencies.size());
 		for (var functionalDependency : functionalDependencies) {
 			var forEach = functionalDependency.forEach();
 			checkValidIndices(relationView, forEach);
@@ -98,7 +98,7 @@ public class RelationalQueryMetaContext extends AbstractQueryMetaContext {
 		return flattened;
 	}
 
-	private static void checkValidIndices(AnySymbolView relationView, Collection<Integer> indices) {
+	private static void checkValidIndices(AnySymbolView relationView, Collection <Integer> indices) {
 		indices.stream().filter(relationView::invalidIndex).findAny().ifPresent(i -> {
 			throw new IllegalArgumentException("Index %d is invalid for %s".formatted(i, relationView));
 		});

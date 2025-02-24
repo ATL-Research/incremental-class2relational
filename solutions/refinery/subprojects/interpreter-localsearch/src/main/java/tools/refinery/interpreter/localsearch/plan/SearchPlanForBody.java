@@ -30,19 +30,19 @@ import tools.refinery.interpreter.matchers.tuple.TupleMask;
 public class SearchPlanForBody {
 
     private final PBody body;
-    private final Map<PVariable, Integer> variableKeys;
+    private final Map <PVariable, Integer> variableKeys;
     private final int[] parameterKeys;
     private final SubPlan plan;
-    private final List<ISearchOperation> compiledOperations;
-    private final Collection<CallWithAdornment> dependencies;
+    private final List <ISearchOperation> compiledOperations;
+    private final Collection <CallWithAdornment> dependencies;
     private final double cost;
     private final Object internalRepresentation;
 
     /**
      * @since 2.1
      */
-    public SearchPlanForBody(PBody body, Map<PVariable, Integer> variableKeys,
-            SubPlan plan, List<ISearchOperation> compiledOperations, Collection<CallWithAdornment> dependencies,
+    public SearchPlanForBody(PBody body, Map <PVariable, Integer> variableKeys,
+            SubPlan plan, List <ISearchOperation> compiledOperations, Collection <CallWithAdornment> dependencies,
             Object internalRepresentation, double cost) {
         super();
         this.body = body;
@@ -50,9 +50,9 @@ public class SearchPlanForBody {
         this.plan = plan;
         this.internalRepresentation = internalRepresentation;
         this.cost = cost;
-        List<PVariable> parameters = body.getSymbolicParameterVariables();
+        List <PVariable> parameters = body.getSymbolicParameterVariables();
         parameterKeys = new int[parameters.size()];
-        for (int i=0; i<parameters.size(); i++) {
+        for (int i=0; i <parameters.size(); i++) {
             parameterKeys[i] = variableKeys.get(parameters.get(i));
         }
         this.compiledOperations = new ArrayList<>(compiledOperations.size()+1);
@@ -65,7 +65,7 @@ public class SearchPlanForBody {
         return body;
     }
 
-    public Map<PVariable, Integer> getVariableKeys() {
+    public Map <PVariable, Integer> getVariableKeys() {
         return variableKeys;
     }
 
@@ -73,7 +73,7 @@ public class SearchPlanForBody {
         return Arrays.copyOf(parameterKeys, parameterKeys.length);
     }
 
-    public List<ISearchOperation> getCompiledOperations() {
+    public List <ISearchOperation> getCompiledOperations() {
         return compiledOperations;
     }
 
@@ -81,7 +81,7 @@ public class SearchPlanForBody {
         return plan;
     }
 
-    public Collection<CallWithAdornment> getDependencies() {
+    public Collection <CallWithAdornment> getDependencies() {
         return dependencies;
     }
 

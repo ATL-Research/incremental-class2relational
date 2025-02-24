@@ -24,7 +24,7 @@ abstract class Elem2Elem {
 
 	protected var String ruleID
 
-	protected static Map<EObject, Corr> elementsToCorr = newHashMap
+	protected static Map <EObject, Corr> elementsToCorr = newHashMap
 
 	new(Resource src, Resource trgt, Resource corr) {
 		sourceModel = src

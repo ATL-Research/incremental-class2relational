@@ -10,16 +10,16 @@ import tools.refinery.store.query.valuation.Valuation;
 import java.util.Set;
 import java.util.stream.Stream;
 
-public class StringTerm extends AbstractTerm<String> {
+public class StringTerm extends AbstractTerm <String> {
 	private final String format;
-	private final DataVariable<?>[] vars;
-	public StringTerm(String format, DataVariable<?>... vars){
+	private final DataVariable <?>[] vars;
+	public StringTerm(String format, DataVariable <?>... vars){
 		super(String.class);
 		this.format = format;
 		this.vars = vars;
 	}
 	@Override
-	public Set<AnyDataVariable> getInputVariables() {
+	public Set <AnyDataVariable> getInputVariables() {
 		return Set.of(vars);
 	}
 
@@ -30,7 +30,7 @@ public class StringTerm extends AbstractTerm<String> {
 	}
 
 	@Override
-	public Term<String> substitute(Substitution substitution) {
+	public Term <String> substitute(Substitution substitution) {
 		return null;
 	}
 }

@@ -21,9 +21,9 @@ import tools.refinery.interpreter.matchers.aggregators.ExtremumOperator;
  *  <li>Incremental aggregation, provided by {@link #createNeutral()}, {@link #update(Object, Object, boolean)}, {@link #isNeutral(Object)}, {@link #getAggregate(Object)}.
  * </ul>
  *
- * <p> In case of incremental computation, the aggregable multiset is conceptual; it is not represented by an explicit Collection<Domain> object, but its update operations are tracked.
+ * <p> In case of incremental computation, the aggregable multiset is conceptual; it is not represented by an explicit Collection <Domain> object, but its update operations are tracked.
  *
- * <p> In case of incremental computation, internal results, potentially distinct from the final aggregate result, may be stored in a helper data structure called <b>accumulator</b>.
+ * <p> In case of incremental computation, internal results, potentially distinct from the final aggregate result, may be stored in a helper data structure called <b>accumulator </b>.
  * The goal of this distinction is that the final result may not be sufficient for incremental updates (see e.g. {@link ExtremumOperator}).
  *
  * @author Gabor Bergmann
@@ -35,7 +35,7 @@ import tools.refinery.interpreter.matchers.aggregators.ExtremumOperator;
  *
  * @since 1.4
  */
-public interface IMultisetAggregationOperator<Domain, Accumulator, AggregateResult> {
+public interface IMultisetAggregationOperator <Domain, Accumulator, AggregateResult> {
 
     /**
      * A textual description of the operator.
@@ -76,7 +76,7 @@ public interface IMultisetAggregationOperator<Domain, Accumulator, AggregateResu
      * @return the aggregate result, or null if no result can be calculated (e.g. because of an empty stream)
      * @since 2.0
      */
-    AggregateResult aggregateStream(Stream<Domain> stream);
+    AggregateResult aggregateStream(Stream <Domain> stream);
 
     /**
      * Clones the given accumulator (with all its internal contents).

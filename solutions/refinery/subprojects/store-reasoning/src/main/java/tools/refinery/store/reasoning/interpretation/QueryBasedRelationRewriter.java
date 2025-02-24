@@ -46,7 +46,7 @@ public class QueryBasedRelationRewriter implements PartialRelationRewriter {
 	}
 
 	@Override
-	public List<Literal> rewriteLiteral(Set<Variable> positiveVariables, AbstractCallLiteral literal,
+	public List <Literal> rewriteLiteral(Set <Variable> positiveVariables, AbstractCallLiteral literal,
 										Modality modality, Concreteness concreteness) {
 		var query = switch (concreteness) {
 			case PARTIAL -> switch (modality) {

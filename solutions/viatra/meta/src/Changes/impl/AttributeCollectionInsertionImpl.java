@@ -13,20 +13,20 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Attribute Collection Insertion</b></em>'.
+ * An implementation of the model object ' <em> <b>Attribute Collection Insertion </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.AttributeCollectionInsertionImpl#getAddedValue <em>Added Value</em>}</li>
+ *   <li>{@link Changes.impl.AttributeCollectionInsertionImpl#getAddedValue <em>Added Value </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class AttributeCollectionInsertionImpl extends AttributeChangeImpl implements AttributeCollectionInsertion {
 	/**
-	 * The default value of the '{@link #getAddedValue() <em>Added Value</em>}' attribute.
+	 * The default value of the '{@link #getAddedValue() <em>Added Value </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAddedValue()
@@ -36,7 +36,7 @@ public class AttributeCollectionInsertionImpl extends AttributeChangeImpl implem
 	protected static final String ADDED_VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getAddedValue() <em>Added Value</em>}' attribute.
+	 * The cached value of the '{@link #getAddedValue() <em>Added Value </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAddedValue()
@@ -162,7 +162,7 @@ public class AttributeCollectionInsertionImpl extends AttributeChangeImpl implem
 	@Override
 	public void apply() {
 
-		EList<String> collection = (EList<String>)this.getAffectedElement().eGet(this.getFeature());
+		EList <String> collection = (EList <String>)this.getAffectedElement().eGet(this.getFeature());
 		collection.add(this.getAddedValue());
 	}
 

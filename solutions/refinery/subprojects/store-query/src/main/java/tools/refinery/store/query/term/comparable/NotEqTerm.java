@@ -8,8 +8,8 @@ package tools.refinery.store.query.term.comparable;
 import tools.refinery.store.query.substitution.Substitution;
 import tools.refinery.store.query.term.Term;
 
-public class NotEqTerm<T> extends ComparisonTerm<T> {
-	public NotEqTerm(Class<T> argumentType, Term<T> left, Term<T> right) {
+public class NotEqTerm <T> extends ComparisonTerm <T> {
+	public NotEqTerm(Class <T> argumentType, Term <T> left, Term <T> right) {
 		super(argumentType, left, right);
 	}
 
@@ -19,7 +19,7 @@ public class NotEqTerm<T> extends ComparisonTerm<T> {
 	}
 
 	@Override
-	public Term<Boolean> doSubstitute(Substitution substitution, Term<T> substitutedLeft, Term<T> substitutedRight) {
+	public Term <Boolean> doSubstitute(Substitution substitution, Term <T> substitutedLeft, Term <T> substitutedRight) {
 		return new NotEqTerm<>(getArgumentType(), substitutedLeft, substitutedRight);
 	}
 

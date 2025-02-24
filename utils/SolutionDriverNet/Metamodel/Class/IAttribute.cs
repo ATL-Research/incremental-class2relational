@@ -87,32 +87,32 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Gets fired before the MultiValued property changes its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> MultiValuedChanging;
+        event System.EventHandler <ValueChangedEventArgs> MultiValuedChanging;
         
         /// <summary>
         /// Gets fired when the MultiValued property changed its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> MultiValuedChanged;
+        event System.EventHandler <ValueChangedEventArgs> MultiValuedChanged;
         
         /// <summary>
         /// Gets fired before the Type property changes its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> TypeChanging;
+        event System.EventHandler <ValueChangedEventArgs> TypeChanging;
         
         /// <summary>
         /// Gets fired when the Type property changed its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> TypeChanged;
+        event System.EventHandler <ValueChangedEventArgs> TypeChanged;
         
         /// <summary>
         /// Gets fired before the Owner property changes its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> OwnerChanging;
+        event System.EventHandler <ValueChangedEventArgs> OwnerChanging;
         
         /// <summary>
         /// Gets fired when the Owner property changed its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> OwnerChanged;
+        event System.EventHandler <ValueChangedEventArgs> OwnerChanged;
     }
 }
 

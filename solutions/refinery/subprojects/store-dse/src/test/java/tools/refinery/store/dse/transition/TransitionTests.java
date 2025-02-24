@@ -31,8 +31,8 @@ import static tools.refinery.store.query.literal.Literals.check;
 import static tools.refinery.store.query.literal.Literals.not;
 
 class TransitionBuildTests {
-	Symbol<Boolean> person = new Symbol<>("Person", 1, Boolean.class, false);
-	Symbol<Boolean> friend = new Symbol<>("friend", 2, Boolean.class, false);
+	Symbol <Boolean> person = new Symbol<>("Person", 1, Boolean.class, false);
+	Symbol <Boolean> friend = new Symbol<>("friend", 2, Boolean.class, false);
 
 	AnySymbolView personView = new KeyOnlyView<>(person);
 	AnySymbolView friendView = new KeyOnlyView<>(friend);
@@ -50,7 +50,7 @@ class TransitionBuildTests {
 					not(friendView.call(lonely, Variable.of()))
 			));
 
-	FunctionalQuery<Integer> numberOfFriends = Query.of(Integer.class, (builder, output) -> builder
+	FunctionalQuery <Integer> numberOfFriends = Query.of(Integer.class, (builder, output) -> builder
 			.clause(
 					output.assign(friendView.count(Variable.of(), Variable.of()))
 			));

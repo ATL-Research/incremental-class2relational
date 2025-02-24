@@ -42,7 +42,7 @@ public class IndexerBasedConstraintCostFunction extends StatisticsBasedConstrain
     }
 
     @Override
-    public Optional<Long> projectionSize(IConstraintEvaluationContext input, IInputKey supplierKey, TupleMask groupMask, Accuracy requiredAccuracy) {
+    public Optional <Long> projectionSize(IConstraintEvaluationContext input, IInputKey supplierKey, TupleMask groupMask, Accuracy requiredAccuracy) {
         return input.getRuntimeContext().estimateCardinality(supplierKey, groupMask, requiredAccuracy);
     }
 

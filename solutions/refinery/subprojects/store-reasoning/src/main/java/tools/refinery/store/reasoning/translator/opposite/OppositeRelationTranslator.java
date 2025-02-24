@@ -51,7 +51,7 @@ public class OppositeRelationTranslator implements ModelStoreConfiguration, Part
 	}
 
 	@Override
-	public List<Literal> rewriteLiteral(Set<Variable> positiveVariables, AbstractCallLiteral literal,
+	public List <Literal> rewriteLiteral(Set <Variable> positiveVariables, AbstractCallLiteral literal,
 										Modality modality, Concreteness concreteness) {
 		var arguments = literal.getArguments();
 		var newArguments = List.of(arguments.get(1), arguments.get(0));

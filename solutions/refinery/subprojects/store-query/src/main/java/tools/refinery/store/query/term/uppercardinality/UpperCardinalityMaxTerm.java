@@ -10,7 +10,7 @@ import tools.refinery.store.query.term.Term;
 import tools.refinery.store.representation.cardinality.UpperCardinality;
 
 public class UpperCardinalityMaxTerm extends UpperCardinalityBinaryTerm {
-	protected UpperCardinalityMaxTerm(Term<UpperCardinality> left, Term<UpperCardinality> right) {
+	protected UpperCardinalityMaxTerm(Term <UpperCardinality> left, Term <UpperCardinality> right) {
 		super(left, right);
 	}
 
@@ -20,7 +20,7 @@ public class UpperCardinalityMaxTerm extends UpperCardinalityBinaryTerm {
 	}
 
 	@Override
-	public Term<UpperCardinality> doSubstitute(Substitution substitution, Term<UpperCardinality> substitutedLeft, Term<UpperCardinality> substitutedRight) {
+	public Term <UpperCardinality> doSubstitute(Substitution substitution, Term <UpperCardinality> substitutedLeft, Term <UpperCardinality> substitutedRight) {
 		return new UpperCardinalityMaxTerm(substitutedLeft, substitutedRight);
 	}
 

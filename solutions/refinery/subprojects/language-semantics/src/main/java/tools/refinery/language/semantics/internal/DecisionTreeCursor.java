@@ -12,7 +12,7 @@ import tools.refinery.store.tuple.Tuple;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-class DecisionTreeCursor implements Cursor<Tuple, TruthValue> {
+class DecisionTreeCursor implements Cursor <Tuple, TruthValue> {
 	static final int STATE_FINISH = Integer.MAX_VALUE;
 
 	private final int levels;
@@ -29,7 +29,7 @@ class DecisionTreeCursor implements Cursor<Tuple, TruthValue> {
 
 	final int[] rawTuple;
 
-	final Deque<DecisionTreeNode> path = new ArrayDeque<>();
+	final Deque <DecisionTreeNode> path = new ArrayDeque<>();
 
 	private Tuple key;
 

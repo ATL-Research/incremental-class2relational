@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PrintActionLiteral extends AbstractActionLiteral {
-	private List<NodeVariable> parameters;
+	private List <NodeVariable> parameters;
 	private final String message;
 	public PrintActionLiteral(String message, NodeVariable... datatype) {
 		super();
@@ -20,12 +20,12 @@ public class PrintActionLiteral extends AbstractActionLiteral {
 	}
 
 	@Override
-	public List<NodeVariable> getInputVariables() {
+	public List <NodeVariable> getInputVariables() {
 		return parameters;
 	}
 
 	@Override
-	public List<NodeVariable> getOutputVariables() {
+	public List <NodeVariable> getOutputVariables() {
 		return List.of();
 	}
 

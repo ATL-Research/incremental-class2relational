@@ -44,16 +44,16 @@ import tools.refinery.interpreter.rete.network.mailbox.timely.TimelyMailbox;
  * @author Tamas Szabo
  * @since 2.4
  */
-public abstract class FaithfulTimelyColumnAggregatorNode<Domain, Accumulator, AggregateResult, CumulativeAggregate, FoldingState extends MergeableFoldingState<FoldingState>>
-        extends AbstractColumnAggregatorNode<Domain, Accumulator, AggregateResult> implements ResumableNode {
+public abstract class FaithfulTimelyColumnAggregatorNode <Domain, Accumulator, AggregateResult, CumulativeAggregate, FoldingState extends MergeableFoldingState <FoldingState>>
+        extends AbstractColumnAggregatorNode <Domain, Accumulator, AggregateResult> implements ResumableNode {
 
-    protected final Map<Tuple, TreeMap<Timestamp, CumulativeAggregate>> aggregates;
-    protected final Map<Tuple, Map<AggregateResult, Timeline<Timestamp>>> timelines;
-    protected final TreeMap<Timestamp, Map<Tuple, FoldingState>> foldingState;
+    protected final Map <Tuple, TreeMap <Timestamp, CumulativeAggregate>> aggregates;
+    protected final Map <Tuple, Map <AggregateResult, Timeline <Timestamp>>> timelines;
+    protected final TreeMap <Timestamp, Map <Tuple, FoldingState>> foldingState;
     protected CommunicationGroup communicationGroup;
 
     public FaithfulTimelyColumnAggregatorNode(final ReteContainer reteContainer,
-            final IMultisetAggregationOperator<Domain, Accumulator, AggregateResult> operator,
+            final IMultisetAggregationOperator <Domain, Accumulator, AggregateResult> operator,
             final TupleMask groupMask, final TupleMask columnMask) {
         super(reteContainer, operator, groupMask, columnMask);
         this.aggregates = CollectionsFactory.createMap();
@@ -86,7 +86,7 @@ public abstract class FaithfulTimelyColumnAggregatorNode<Domain, Accumulator, Ag
      */
     protected void addFoldingState(final Tuple group, final FoldingState state, final Timestamp timestamp) {
         // assert !state.delta.isEmpty();
-        final Map<Tuple, FoldingState> tupleMap = this.foldingState.computeIfAbsent(timestamp,
+        final Map <Tuple, FoldingState> tupleMap = this.foldingState.computeIfAbsent(timestamp,
                 k -> CollectionsFactory.createMap());
         tupleMap.compute(group, (k, v) -> {
             return v == null ? state : v.merge(state);
@@ -111,13 +111,13 @@ public abstract class FaithfulTimelyColumnAggregatorNode<Domain, Accumulator, Ag
             throw new IllegalStateException("Expected to continue folding at " + timestamp + "!");
         }
 
-        final Map<Tuple, FoldingState> tupleMap = this.foldingState.remove(timestamp);
-        for (final Entry<Tuple, FoldingState> groupEntry : tupleMap.entrySet()) {
+        final Map <Tuple, FoldingState> tupleMap = this.foldingState.remove(timestamp);
+        for (final Entry <Tuple, FoldingState> groupEntry : tupleMap.entrySet()) {
             final Tuple group = groupEntry.getKey();
             final FoldingState value = groupEntry.getValue();
-            final Map<AggregateResult, Diff<Timestamp>> diffMap = doFoldingStep(group, value, timestamp);
-            for (final Entry<AggregateResult, Diff<Timestamp>> resultEntry : diffMap.entrySet()) {
-                for (final Signed<Timestamp> signed : resultEntry.getValue()) {
+            final Map <AggregateResult, Diff <Timestamp>> diffMap = doFoldingStep(group, value, timestamp);
+            for (final Entry <AggregateResult, Diff <Timestamp>> resultEntry : diffMap.entrySet()) {
+                for (final Signed <Timestamp> signed : resultEntry.getValue()) {
                     propagate(signed.getDirection(), group, resultEntry.getKey(), signed.getPayload());
                 }
             }
@@ -132,26 +132,26 @@ public abstract class FaithfulTimelyColumnAggregatorNode<Domain, Accumulator, Ag
         }
     }
 
-    protected abstract Map<AggregateResult, Diff<Timestamp>> doFoldingStep(final Tuple group, final FoldingState state,
+    protected abstract Map <AggregateResult, Diff <Timestamp>> doFoldingStep(final Tuple group, final FoldingState state,
             final Timestamp timestamp);
 
     /**
      * Updates and garbage collects the timeline of the given tuple based on the given diffs.
      */
-    protected void updateTimeline(final Tuple group, final Map<AggregateResult, Diff<Timestamp>> diffs) {
+    protected void updateTimeline(final Tuple group, final Map <AggregateResult, Diff <Timestamp>> diffs) {
         if (!diffs.isEmpty()) {
             this.timelines.compute(group, (k, resultTimelines) -> {
                 if (resultTimelines == null) {
                     resultTimelines = CollectionsFactory.createMap();
                 }
-                for (final Entry<AggregateResult, Diff<Timestamp>> entry : diffs.entrySet()) {
+                for (final Entry <AggregateResult, Diff <Timestamp>> entry : diffs.entrySet()) {
                     final AggregateResult result = entry.getKey();
                     resultTimelines.compute(result, (k2, oldResultTimeline) -> {
-                        final Diff<Timestamp> currentResultDiffs = entry.getValue();
+                        final Diff <Timestamp> currentResultDiffs = entry.getValue();
                         if (oldResultTimeline == null) {
                             oldResultTimeline = getInitialTimeline(result);
                         }
-                        final Timeline<Timestamp> timeline = oldResultTimeline.mergeAdditive(currentResultDiffs);
+                        final Timeline <Timestamp> timeline = oldResultTimeline.mergeAdditive(currentResultDiffs);
                         if (timeline.isEmpty()) {
                             return null;
                         } else {
@@ -179,10 +179,10 @@ public abstract class FaithfulTimelyColumnAggregatorNode<Domain, Accumulator, Ag
      */
     protected abstract CumulativeAggregate getAggregate(final Tuple group, final Timestamp timestamp);
 
-    protected static final Timeline<Timestamp> NEUTRAL_INITIAL_TIMELINE = Timestamp.INSERT_AT_ZERO_TIMELINE;
-    protected static final Timeline<Timestamp> NON_NEUTRAL_INITIAL_TIMELINE = Timelines.createEmpty();
+    protected static final Timeline <Timestamp> NEUTRAL_INITIAL_TIMELINE = Timestamp.INSERT_AT_ZERO_TIMELINE;
+    protected static final Timeline <Timestamp> NON_NEUTRAL_INITIAL_TIMELINE = Timelines.createEmpty();
 
-    protected Timeline<Timestamp> getInitialTimeline(final AggregateResult result) {
+    protected Timeline <Timestamp> getInitialTimeline(final AggregateResult result) {
         if (NEUTRAL == result) {
             return NEUTRAL_INITIAL_TIMELINE;
         } else {
@@ -190,8 +190,8 @@ public abstract class FaithfulTimelyColumnAggregatorNode<Domain, Accumulator, Ag
         }
     }
 
-    protected static <AggregateResult> void appendDiff(final AggregateResult result, final Signed<Timestamp> diff,
-            final Map<AggregateResult, Diff<Timestamp>> diffs) {
+    protected static <AggregateResult> void appendDiff(final AggregateResult result, final Signed <Timestamp> diff,
+            final Map <AggregateResult, Diff <Timestamp>> diffs) {
         if (result != null) {
             diffs.compute(result, (k, timeLineDiff) -> {
                 if (timeLineDiff == null) {
@@ -209,8 +209,8 @@ public abstract class FaithfulTimelyColumnAggregatorNode<Domain, Accumulator, Ag
     }
 
     @Override
-    public Map<AggregateResult, Timeline<Timestamp>> getAggregateResultTimeline(final Tuple group) {
-        final Map<AggregateResult, Timeline<Timestamp>> resultTimelines = this.timelines.get(group);
+    public Map <AggregateResult, Timeline <Timestamp>> getAggregateResultTimeline(final Tuple group) {
+        final Map <AggregateResult, Timeline <Timestamp>> resultTimelines = this.timelines.get(group);
         if (resultTimelines == null) {
             if (NEUTRAL == null) {
                 return Collections.emptyMap();
@@ -223,9 +223,9 @@ public abstract class FaithfulTimelyColumnAggregatorNode<Domain, Accumulator, Ag
     }
 
     @Override
-    public Map<Tuple, Timeline<Timestamp>> getAggregateTupleTimeline(final Tuple group) {
-        final Map<AggregateResult, Timeline<Timestamp>> resultTimelines = getAggregateResultTimeline(group);
-        return new GroupedMap<AggregateResult, Timeline<Timestamp>>(group, resultTimelines, this.runtimeContext);
+    public Map <Tuple, Timeline <Timestamp>> getAggregateTupleTimeline(final Tuple group) {
+        final Map <AggregateResult, Timeline <Timestamp>> resultTimelines = getAggregateResultTimeline(group);
+        return new GroupedMap <AggregateResult, Timeline <Timestamp>>(group, resultTimelines, this.runtimeContext);
     }
 
     @Override
@@ -238,7 +238,7 @@ public abstract class FaithfulTimelyColumnAggregatorNode<Domain, Accumulator, Ag
         this.communicationGroup = currentGroup;
     }
 
-    protected interface MergeableFoldingState<T> {
+    protected interface MergeableFoldingState <T> {
 
         public abstract T merge(final T that);
 

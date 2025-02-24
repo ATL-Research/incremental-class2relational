@@ -53,7 +53,7 @@ public class ActivationStoreListEntry extends ActivationStoreEntry {
 
 		// Otherwise, try to add to the last space
 		int last = this.visitedActivations.get(this.visitedActivations.size()-1);
-		if(last<this.numberOfActivations-1) {
+		if(last <this.numberOfActivations-1) {
 			this.visitedActivations.add(last+1);
 			return last+1;
 		}

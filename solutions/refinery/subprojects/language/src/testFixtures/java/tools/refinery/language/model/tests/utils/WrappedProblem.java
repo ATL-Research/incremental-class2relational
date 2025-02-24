@@ -19,15 +19,15 @@ public record WrappedProblem(Problem problem) {
 		return problem;
 	}
 
-	public List<Diagnostic> getResourceErrors() {
+	public List <Diagnostic> getResourceErrors() {
 		return problem.eResource().getErrors();
 	}
 
-	public List<Diagnostic> getResourceWarnings() {
+	public List <Diagnostic> getResourceWarnings() {
 		return problem.eResource().getWarnings();
 	}
 
-	public List<org.eclipse.emf.common.util.Diagnostic> validate() {
+	public List <org.eclipse.emf.common.util.Diagnostic> validate() {
 		return Diagnostician.INSTANCE.validate(problem).getChildren();
 	}
 
@@ -39,7 +39,7 @@ public record WrappedProblem(Problem problem) {
 		return new ProblemDesugarer().getBuiltinSymbols(problem).orElseThrow();
 	}
 
-	public List<String> nodeNames() {
+	public List <String> nodeNames() {
 		return problem.getNodes().stream().map(Node::getName).toList();
 	}
 
@@ -73,15 +73,15 @@ public record WrappedProblem(Problem problem) {
 		return ProblemNavigationUtil.named(uniqueNodes, name);
 	}
 
-	private <T extends Statement> Stream<T> statementsOfType(Class<? extends T> type) {
+	private <T extends Statement> Stream <T> statementsOfType(Class <? extends T> type) {
 		return problem.getStatements().stream().filter(type::isInstance).map(type::cast);
 	}
 
-	private <T extends Statement & NamedElement> T namedStatementOfType(Class<? extends T> type, String name) {
+	private <T extends Statement & NamedElement> T namedStatementOfType(Class <? extends T> type, String name) {
 		return ProblemNavigationUtil.named(statementsOfType(type), name);
 	}
 
-	private <T extends Statement> T nthStatementOfType(Class<? extends T> type, int n) {
+	private <T extends Statement> T nthStatementOfType(Class <? extends T> type, int n) {
 		return statementsOfType(type).skip(n).findFirst().orElseThrow();
 	}
 }

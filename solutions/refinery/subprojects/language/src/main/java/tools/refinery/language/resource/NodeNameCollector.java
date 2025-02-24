@@ -33,11 +33,11 @@ public class NodeNameCollector {
 	@Named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)
 	private IScopeProvider scopeProvider;
 
-	private final ImmutableSet.Builder<String> nodeNames = ImmutableSet.builder();
+	private final ImmutableSet.Builder <String> nodeNames = ImmutableSet.builder();
 
 	private IScope nodeScope;
 
-	public Set<String> getNodeNames() {
+	public Set <String> getNodeNames() {
 		return nodeNames.build();
 	}
 
@@ -63,7 +63,7 @@ public class NodeNameCollector {
 	}
 
 	private void collectNodeNames(EObject eObject) {
-		List<INode> nodes = NodeModelUtils.findNodesForFeature(eObject,
+		List <INode> nodes = NodeModelUtils.findNodesForFeature(eObject,
 				ProblemPackage.Literals.NODE_ASSERTION_ARGUMENT__NODE);
 		for (INode node : nodes) {
 			var nodeName = linkingHelper.getCrossRefNodeAsString(node, true);

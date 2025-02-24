@@ -15,20 +15,20 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Composition Collection Deletion</b></em>'.
+ * An implementation of the model object ' <em> <b>Composition Collection Deletion </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.CompositionCollectionDeletionImpl#getDeletedElement <em>Deleted Element</em>}</li>
+ *   <li>{@link Changes.impl.CompositionCollectionDeletionImpl#getDeletedElement <em>Deleted Element </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class CompositionCollectionDeletionImpl extends CompositionChangeImpl implements CompositionCollectionDeletion {
 	/**
-	 * The cached value of the '{@link #getDeletedElement() <em>Deleted Element</em>}' reference.
+	 * The cached value of the '{@link #getDeletedElement() <em>Deleted Element </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDeletedElement()
@@ -156,7 +156,7 @@ public class CompositionCollectionDeletionImpl extends CompositionChangeImpl imp
 	@Override
 	public void apply() {
 
-		EList<?> collection = (EList<?>)this.getAffectedElement().eGet(this.getFeature());
+		EList <?> collection = (EList <?>)this.getAffectedElement().eGet(this.getFeature());
 		collection.remove(this.getDeletedElement());
 	}
 

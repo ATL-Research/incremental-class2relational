@@ -15,12 +15,12 @@ import static tools.refinery.interpreter.matchers.util.Preconditions.checkArgume
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class ListenerContainer<Listener> {
+public abstract class ListenerContainer <Listener> {
 
-    protected final Set<Listener> listeners;
+    protected final Set <Listener> listeners;
 
     public ListenerContainer() {
-        this.listeners = new HashSet<Listener>();
+        this.listeners = new HashSet <Listener>();
     }
 
     public synchronized void addListener(Listener listener) {

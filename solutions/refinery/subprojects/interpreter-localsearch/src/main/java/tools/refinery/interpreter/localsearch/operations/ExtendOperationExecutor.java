@@ -20,15 +20,15 @@ import java.util.Iterator;
  * @noextend This class is not intended to be subclassed by clients.
  * @since 2.0
  */
-public abstract class ExtendOperationExecutor<T> implements ISearchOperation.ISearchOperationExecutor {
+public abstract class ExtendOperationExecutor <T> implements ISearchOperation.ISearchOperationExecutor {
 
-    private Iterator<? extends T> it;
+    private Iterator <? extends T> it;
 
     /**
      * Returns an iterator with the possible options from the current state
      * @since 2.0
      */
-    protected abstract Iterator<? extends T> getIterator(MatchingFrame frame, ISearchContext context);
+    protected abstract Iterator <? extends T> getIterator(MatchingFrame frame, ISearchContext context);
     /**
      * Updates the frame with the next element of the iterator. Called during {@link #execute(MatchingFrame, ISearchContext)}.
      *

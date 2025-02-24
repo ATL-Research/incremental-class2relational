@@ -27,14 +27,14 @@ import static tools.refinery.store.query.interpreter.tests.QueryAssertions.asser
 import static tools.refinery.store.query.interpreter.tests.QueryAssertions.assertResults;
 
 class DiagonalQueryTest {
-	private static final Symbol<Boolean> person = Symbol.of("Person", 1);
-	private static final Symbol<Boolean> friend = Symbol.of("friend", 2);
-	private static final Symbol<Boolean> symbol = Symbol.of("symbol", 4);
-	private static final Symbol<Integer> intSymbol = Symbol.of("intSymbol", 4, Integer.class);
+	private static final Symbol <Boolean> person = Symbol.of("Person", 1);
+	private static final Symbol <Boolean> friend = Symbol.of("friend", 2);
+	private static final Symbol <Boolean> symbol = Symbol.of("symbol", 4);
+	private static final Symbol <Integer> intSymbol = Symbol.of("intSymbol", 4, Integer.class);
 	private static final AnySymbolView personView = new KeyOnlyView<>(person);
 	private static final AnySymbolView friendView = new KeyOnlyView<>(friend);
 	private static final AnySymbolView symbolView = new KeyOnlyView<>(symbol);
-	private static final FunctionView<Integer> intSymbolView = new FunctionView<>(intSymbol);
+	private static final FunctionView <Integer> intSymbolView = new FunctionView<>(intSymbol);
 
 	@QueryEngineTest
 	void inputKeyNegationTest(QueryEvaluationHint hint) {

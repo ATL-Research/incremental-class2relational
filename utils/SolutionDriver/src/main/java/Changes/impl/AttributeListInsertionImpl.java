@@ -13,21 +13,21 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Attribute List Insertion</b></em>'.
+ * An implementation of the model object ' <em> <b>Attribute List Insertion </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.AttributeListInsertionImpl#getAddedValue <em>Added Value</em>}</li>
- *   <li>{@link Changes.impl.AttributeListInsertionImpl#getIndex <em>Index</em>}</li>
+ *   <li>{@link Changes.impl.AttributeListInsertionImpl#getAddedValue <em>Added Value </em>} </li>
+ *   <li>{@link Changes.impl.AttributeListInsertionImpl#getIndex <em>Index </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class AttributeListInsertionImpl extends AttributeChangeImpl implements AttributeListInsertion {
 	/**
-	 * The default value of the '{@link #getAddedValue() <em>Added Value</em>}' attribute.
+	 * The default value of the '{@link #getAddedValue() <em>Added Value </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAddedValue()
@@ -37,7 +37,7 @@ public class AttributeListInsertionImpl extends AttributeChangeImpl implements A
 	protected static final String ADDED_VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getAddedValue() <em>Added Value</em>}' attribute.
+	 * The cached value of the '{@link #getAddedValue() <em>Added Value </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAddedValue()
@@ -47,7 +47,7 @@ public class AttributeListInsertionImpl extends AttributeChangeImpl implements A
 	protected String addedValue = ADDED_VALUE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
+	 * The default value of the '{@link #getIndex() <em>Index </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getIndex()
@@ -57,7 +57,7 @@ public class AttributeListInsertionImpl extends AttributeChangeImpl implements A
 	protected static final int INDEX_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
+	 * The cached value of the '{@link #getIndex() <em>Index </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getIndex()
@@ -216,7 +216,7 @@ public class AttributeListInsertionImpl extends AttributeChangeImpl implements A
 	@Override
 	public void apply() {
 
-		EList<String> collection = (EList<String>)this.getAffectedElement().eGet(this.getFeature());
+		EList <String> collection = (EList <String>)this.getAffectedElement().eGet(this.getFeature());
 		collection.add(this.getIndex(), this.getAddedValue());
 	}
 

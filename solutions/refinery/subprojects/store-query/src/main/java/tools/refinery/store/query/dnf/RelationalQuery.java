@@ -14,7 +14,7 @@ import tools.refinery.store.query.term.NodeVariable;
 import java.util.Collections;
 import java.util.List;
 
-public final class RelationalQuery extends Query<Boolean> {
+public final class RelationalQuery extends Query <Boolean> {
 	RelationalQuery(Dnf dnf) {
 		super(dnf);
 		for (var parameter : dnf.getSymbolicParameters()) {
@@ -32,7 +32,7 @@ public final class RelationalQuery extends Query<Boolean> {
 	}
 
 	@Override
-	public Class<Boolean> valueType() {
+	public Class <Boolean> valueType() {
 		return Boolean.class;
 	}
 
@@ -51,7 +51,7 @@ public final class RelationalQuery extends Query<Boolean> {
 		return (RelationalQuery) super.withDnf(newDnf);
 	}
 
-	public CallLiteral call(CallPolarity polarity, List<NodeVariable> arguments) {
+	public CallLiteral call(CallPolarity polarity, List <NodeVariable> arguments) {
 		return getDnf().call(polarity, Collections.unmodifiableList(arguments));
 	}
 
@@ -67,11 +67,11 @@ public final class RelationalQuery extends Query<Boolean> {
 		return getDnf().callTransitive(left, right);
 	}
 
-	public AssignedValue<Integer> count(List<NodeVariable> arguments) {
+	public AssignedValue <Integer> count(List <NodeVariable> arguments) {
 		return getDnf().count(Collections.unmodifiableList(arguments));
 	}
 
-	public AssignedValue<Integer> count(NodeVariable... arguments) {
+	public AssignedValue <Integer> count(NodeVariable... arguments) {
 		return getDnf().count(arguments);
 	}
 }

@@ -15,22 +15,22 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Entry</b></em>'.
+ * An implementation of the model object ' <em> <b>Entry </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Trace.impl.TraceEntryImpl#getSource <em>Source</em>}</li>
- *   <li>{@link Trace.impl.TraceEntryImpl#getTarget <em>Target</em>}</li>
- *   <li>{@link Trace.impl.TraceEntryImpl#getIndex <em>Index</em>}</li>
+ *   <li>{@link Trace.impl.TraceEntryImpl#getSource <em>Source </em>} </li>
+ *   <li>{@link Trace.impl.TraceEntryImpl#getTarget <em>Target </em>} </li>
+ *   <li>{@link Trace.impl.TraceEntryImpl#getIndex <em>Index </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class TraceEntryImpl extends MinimalEObjectImpl.Container implements TraceEntry {
 	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
+	 * The cached value of the '{@link #getSource() <em>Source </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSource()
@@ -40,7 +40,7 @@ public class TraceEntryImpl extends MinimalEObjectImpl.Container implements Trac
 	protected EObject source;
 
 	/**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
+	 * The cached value of the '{@link #getTarget() <em>Target </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTarget()
@@ -50,7 +50,7 @@ public class TraceEntryImpl extends MinimalEObjectImpl.Container implements Trac
 	protected EObject target;
 
 	/**
-	 * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
+	 * The default value of the '{@link #getIndex() <em>Index </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getIndex()
@@ -60,7 +60,7 @@ public class TraceEntryImpl extends MinimalEObjectImpl.Container implements Trac
 	protected static final int INDEX_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
+	 * The cached value of the '{@link #getIndex() <em>Index </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getIndex()

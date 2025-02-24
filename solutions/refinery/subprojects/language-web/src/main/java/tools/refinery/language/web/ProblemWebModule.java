@@ -24,23 +24,23 @@ import tools.refinery.language.web.xtext.server.push.PushWebDocumentProvider;
  * Use this class to register additional components to be used within the web application.
  */
 public class ProblemWebModule extends AbstractProblemWebModule {
-	public Class<? extends IWebDocumentProvider> bindIWebDocumentProvider() {
+	public Class <? extends IWebDocumentProvider> bindIWebDocumentProvider() {
 		return PushWebDocumentProvider.class;
 	}
 
-	public Class<? extends XtextWebDocumentAccess> bindXtextWebDocumentAccess() {
+	public Class <? extends XtextWebDocumentAccess> bindXtextWebDocumentAccess() {
 		return PushWebDocumentAccess.class;
 	}
 
-	public Class<? extends XtextServiceDispatcher> bindXtextServiceDispatcher() {
+	public Class <? extends XtextServiceDispatcher> bindXtextServiceDispatcher() {
 		return PushServiceDispatcher.class;
 	}
 
-	public Class<? extends OccurrencesService> bindOccurrencesService() {
+	public Class <? extends OccurrencesService> bindOccurrencesService() {
 		return ProblemOccurrencesService.class;
 	}
 
-	public Class<? extends ExecutorServiceProvider> bindExecutorServiceProvider() {
+	public Class <? extends ExecutorServiceProvider> bindExecutorServiceProvider() {
 		return ThreadPoolExecutorServiceProvider.class;
 	}
 }

@@ -15,7 +15,7 @@ import org.antlr.runtime.TokenSource;
  * Duplicates the logic from {@link tools.refinery.language.parser.antlr.ProblemTokenSource} to satisfy the Xtext
  * generator.
  * <p>
- * Naming this class <code>ProblemTokenSource</code> is required by Xtext, so we have to silence the naming warning.
+ * Naming this class <code>ProblemTokenSource </code> is required by Xtext, so we have to silence the naming warning.
  */
 @SuppressWarnings("squid:S2176")
 public class ProblemTokenSource extends tools.refinery.language.parser.antlr.ProblemTokenSource {

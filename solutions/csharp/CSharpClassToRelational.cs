@@ -10,7 +10,7 @@ namespace HSRM.TTC2023.ClassToRelational
     internal class CSharpClassToRelational
     {
         // Tracing
-        private Dictionary<object, IModelElement> _trace = new();
+        private Dictionary <object, IModelElement> _trace = new();
 
         // Tracing
         private object? TraceOrTransform(object item)
@@ -44,7 +44,7 @@ namespace HSRM.TTC2023.ClassToRelational
                 result.RootElements.Add((IModelElement)TraceOrTransform(item));
             }
             // Model_Navigation
-            foreach (var tableValuedAttribute in from cl in classModel.RootElements.OfType<IClass>()
+            foreach (var tableValuedAttribute in from cl in classModel.RootElements.OfType <IClass>()
                                                  from att in cl.Attr
                                                  where att.MultiValued
                                                  select att)
@@ -80,7 +80,7 @@ namespace HSRM.TTC2023.ClassToRelational
                 }
             };
             // Model_Navigation
-            foreach (var attr in @class.Attr.Where(att => !att.MultiValued))
+            foreach (var attr in @class.Attr.Where(att => ! att.MultiValued))
             {
                 //  Transformation
                 table.Col.Add((IColumn)TraceOrTransform(attr));

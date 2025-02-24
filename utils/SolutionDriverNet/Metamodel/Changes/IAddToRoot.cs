@@ -57,12 +57,12 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Gets fired before the NewObject property changes its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> NewObjectChanging;
+        event System.EventHandler <ValueChangedEventArgs> NewObjectChanging;
         
         /// <summary>
         /// Gets fired when the NewObject property changed its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> NewObjectChanged;
+        event System.EventHandler <ValueChangedEventArgs> NewObjectChanged;
     }
 }
 

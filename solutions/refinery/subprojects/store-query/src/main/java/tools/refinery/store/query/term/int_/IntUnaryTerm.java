@@ -8,8 +8,8 @@ package tools.refinery.store.query.term.int_;
 import tools.refinery.store.query.term.Term;
 import tools.refinery.store.query.term.UnaryTerm;
 
-public abstract class IntUnaryTerm extends UnaryTerm<Integer, Integer> {
-	protected IntUnaryTerm(Term<Integer> body) {
+public abstract class IntUnaryTerm extends UnaryTerm <Integer, Integer> {
+	protected IntUnaryTerm(Term <Integer> body) {
 		super(Integer.class, Integer.class, body);
 	}
 }

@@ -22,7 +22,7 @@ class RoundingUtilTest {
 		assertThat(actual, is(expected));
 	}
 
-	static Stream<Arguments> roundUpTest() {
+	static Stream <Arguments> roundUpTest() {
 		return Stream.of(
 				Arguments.of(0.0, 0),
 				Arguments.of(-0.0, 0),
@@ -48,7 +48,7 @@ class RoundingUtilTest {
 		assertThat(actual, is(expected));
 	}
 
-	static Stream<Arguments> roundDownTest() {
+	static Stream <Arguments> roundDownTest() {
 		return Stream.of(
 				Arguments.of(0.0, 0),
 				Arguments.of(-0.0, 0),

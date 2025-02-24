@@ -17,7 +17,7 @@ public class BoundRuleBasedPropagator implements BoundPropagator {
 	private final ModelQueryAdapter queryEngine;
 	private final BoundPropagationRule[] boundRules;
 
-	public BoundRuleBasedPropagator(Model model, List<Rule> propagationRules) {
+	public BoundRuleBasedPropagator(Model model, List <Rule> propagationRules) {
 		queryEngine = model.getAdapter(ModelQueryAdapter.class);
 		boundRules = new BoundPropagationRule[propagationRules.size()];
 		for (int i = 0; i < boundRules.length; i++) {

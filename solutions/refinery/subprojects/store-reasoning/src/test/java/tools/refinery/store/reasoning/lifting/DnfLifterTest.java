@@ -31,11 +31,11 @@ import static tools.refinery.store.query.term.int_.IntTerms.*;
 import static tools.refinery.store.query.tests.QueryMatchers.structurallyEqualTo;
 
 class DnfLifterTest {
-	private static final Symbol<TruthValue> friendSymbol = Symbol.of("friend", 2, TruthValue.class,
+	private static final Symbol <TruthValue> friendSymbol = Symbol.of("friend", 2, TruthValue.class,
 			TruthValue.UNKNOWN);
 	private static final AnySymbolView friendMustView = new MustView(friendSymbol);
-	private static final Symbol<Integer> age = Symbol.of("age", 1, Integer.class);
-	private static final FunctionView<Integer> ageView = new FunctionView<>(age);
+	private static final Symbol <Integer> age = Symbol.of("age", 1, Integer.class);
+	private static final FunctionView <Integer> ageView = new FunctionView<>(age);
 	private static final PartialRelation person = PartialSymbol.of("Person", 1);
 	private static final PartialRelation friend = PartialSymbol.of("friend", 2);
 

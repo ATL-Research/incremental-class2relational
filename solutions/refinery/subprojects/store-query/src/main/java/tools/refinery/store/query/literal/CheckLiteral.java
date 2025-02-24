@@ -21,10 +21,10 @@ import java.util.Set;
 
 // {@link Object#equals(Object)} is implemented by {@link AbstractLiteral}.
 @SuppressWarnings("squid:S2160")
-public class CheckLiteral extends AbstractLiteral implements CanNegate<CheckLiteral> {
-	private final Term<Boolean> term;
+public class CheckLiteral extends AbstractLiteral implements CanNegate <CheckLiteral> {
+	private final Term <Boolean> term;
 
-	public CheckLiteral(Term<Boolean> term) {
+	public CheckLiteral(Term <Boolean> term) {
 		if (!term.getType().equals(Boolean.class)) {
 			throw new InvalidQueryException("Term %s must be of type %s, got %s instead".formatted(
 					term, Boolean.class.getName(), term.getType().getName()));
@@ -32,22 +32,22 @@ public class CheckLiteral extends AbstractLiteral implements CanNegate<CheckLite
 		this.term = term;
 	}
 
-	public Term<Boolean> getTerm() {
+	public Term <Boolean> getTerm() {
 		return term;
 	}
 
 	@Override
-	public Set<Variable> getOutputVariables() {
+	public Set <Variable> getOutputVariables() {
 		return Set.of();
 	}
 
 	@Override
-	public Set<Variable> getInputVariables(Set<? extends Variable> positiveVariablesInClause) {
+	public Set <Variable> getInputVariables(Set <? extends Variable> positiveVariablesInClause) {
 		return Collections.unmodifiableSet(term.getInputVariables());
 	}
 
 	@Override
-	public Set<Variable> getPrivateVariables(Set<? extends Variable> positiveVariablesInClause) {
+	public Set <Variable> getPrivateVariables(Set <? extends Variable> positiveVariablesInClause) {
 		return Set.of();
 	}
 
@@ -80,7 +80,7 @@ public class CheckLiteral extends AbstractLiteral implements CanNegate<CheckLite
 
 	@Override
 	public Literal reduce() {
-		if (term instanceof ConstantTerm<Boolean> constantTerm) {
+		if (term instanceof ConstantTerm <Boolean> constantTerm) {
 			// Return {@link BooleanLiteral#FALSE} for {@code false} or {@code null} literals.
 			return Boolean.TRUE.equals(constantTerm.getValue()) ? BooleanLiteral.TRUE :
 					BooleanLiteral.FALSE;

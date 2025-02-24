@@ -23,17 +23,17 @@ import tools.refinery.interpreter.rete.index.NullIndexer;
 
 public class TimelyMemoryNullIndexer extends NullIndexer {
 
-    protected final TimelyMemory<Timestamp> memory;
+    protected final TimelyMemory <Timestamp> memory;
 
     public TimelyMemoryNullIndexer(final ReteContainer reteContainer, final int tupleWidth,
-                                   final TimelyMemory<Timestamp> memory, final Supplier parent,
-                                   final Receiver activeNode, final List<ListenerSubscription> sharedSubscriptionList) {
+                                   final TimelyMemory <Timestamp> memory, final Supplier parent,
+                                   final Receiver activeNode, final List <ListenerSubscription> sharedSubscriptionList) {
         super(reteContainer, tupleWidth, parent, activeNode, sharedSubscriptionList);
         this.memory = memory;
     }
 
     @Override
-    public Map<Tuple, Timeline<Timestamp>> getTimeline(final Tuple signature) {
+    public Map <Tuple, Timeline <Timestamp>> getTimeline(final Tuple signature) {
         if (nullSignature.equals(signature)) {
             return isEmpty() ? null : this.memory.asMap();
         } else {
@@ -42,7 +42,7 @@ public class TimelyMemoryNullIndexer extends NullIndexer {
     }
 
     @Override
-    protected Collection<Tuple> getTuples() {
+    protected Collection <Tuple> getTuples() {
         return this.memory.getTuplesAtInfinity();
     }
 

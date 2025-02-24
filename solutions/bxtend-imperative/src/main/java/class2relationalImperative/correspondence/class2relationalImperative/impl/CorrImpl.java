@@ -16,22 +16,22 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Corr</b></em>'.
+ * An implementation of the model object ' <em> <b>Corr </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link class2relationalImperative.correspondence.class2relationalImperative.impl.CorrImpl#getSourceElement <em>Source Element</em>}</li>
- *   <li>{@link class2relationalImperative.correspondence.class2relationalImperative.impl.CorrImpl#getTargetElement <em>Target Element</em>}</li>
- *   <li>{@link class2relationalImperative.correspondence.class2relationalImperative.impl.CorrImpl#getDesc <em>Desc</em>}</li>
+ *   <li>{@link class2relationalImperative.correspondence.class2relationalImperative.impl.CorrImpl#getSourceElement <em>Source Element </em>} </li>
+ *   <li>{@link class2relationalImperative.correspondence.class2relationalImperative.impl.CorrImpl#getTargetElement <em>Target Element </em>} </li>
+ *   <li>{@link class2relationalImperative.correspondence.class2relationalImperative.impl.CorrImpl#getDesc <em>Desc </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class CorrImpl extends EObjectImpl implements Corr {
 	/**
-	 * The cached value of the '{@link #getSourceElement() <em>Source Element</em>}' reference.
+	 * The cached value of the '{@link #getSourceElement() <em>Source Element </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSourceElement()
@@ -41,7 +41,7 @@ public class CorrImpl extends EObjectImpl implements Corr {
 	protected EObject sourceElement;
 
 	/**
-	 * The cached value of the '{@link #getTargetElement() <em>Target Element</em>}' reference.
+	 * The cached value of the '{@link #getTargetElement() <em>Target Element </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTargetElement()
@@ -51,7 +51,7 @@ public class CorrImpl extends EObjectImpl implements Corr {
 	protected EObject targetElement;
 
 	/**
-	 * The default value of the '{@link #getDesc() <em>Desc</em>}' attribute.
+	 * The default value of the '{@link #getDesc() <em>Desc </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDesc()
@@ -61,7 +61,7 @@ public class CorrImpl extends EObjectImpl implements Corr {
 	protected static final String DESC_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getDesc() <em>Desc</em>}' attribute.
+	 * The cached value of the '{@link #getDesc() <em>Desc </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDesc()

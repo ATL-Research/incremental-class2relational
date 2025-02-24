@@ -45,11 +45,11 @@ public class PBody implements PTraceable {
      */
     private PQuery.PQueryStatus status = PQuery.PQueryStatus.UNINITIALIZED;
 
-    private Set<PVariable> allVariables;
-    private Set<PVariable> uniqueVariables;
-    private List<ExportedParameter> symbolicParameters;
-    private Map<Object, PVariable> variablesByName;
-    private Set<PConstraint> constraints;
+    private Set <PVariable> allVariables;
+    private Set <PVariable> uniqueVariables;
+    private List <ExportedParameter> symbolicParameters;
+    private Map <Object, PVariable> variablesByName;
+    private Set <PConstraint> constraints;
     private int nextVirtualNodeID;
     private PDisjunction containerDisjunction;
 
@@ -100,8 +100,8 @@ public class PBody implements PTraceable {
     }
 
     @SuppressWarnings("unchecked")
-    public <ConstraintType> Set<ConstraintType> getConstraintsOfType(Class<ConstraintType> constraintClass) {
-        Set<ConstraintType> result = new HashSet<ConstraintType>();
+    public <ConstraintType> Set <ConstraintType> getConstraintsOfType(Class <ConstraintType> constraintClass) {
+        Set <ConstraintType> result = new HashSet <ConstraintType>();
         for (PConstraint pConstraint : constraints) {
             if (constraintClass.isInstance(pConstraint))
                 result.add((ConstraintType) pConstraint);
@@ -136,11 +136,11 @@ public class PBody implements PTraceable {
         return virtual;
     }
 
-    public Set<PVariable> getAllVariables() {
+    public Set <PVariable> getAllVariables() {
         return allVariables;
     }
 
-    public Set<PVariable> getUniqueVariables() {
+    public Set <PVariable> getUniqueVariables() {
         return uniqueVariables;
     }
 
@@ -178,7 +178,7 @@ public class PBody implements PTraceable {
         return getVariableByName(name);
     }
 
-    public Set<PConstraint> getConstraints() {
+    public Set <PConstraint> getConstraints() {
         return constraints;
     }
 
@@ -195,12 +195,12 @@ public class PBody implements PTraceable {
      * Returns the symbolic parameters of the body. </p>
      *
      * <p>
-     * <strong>Warning</strong>: if two PVariables are unified, the returned list changes. If you want to have a stable
+     * <strong>Warning </strong>: if two PVariables are unified, the returned list changes. If you want to have a stable
      * version, consider using {@link #getSymbolicParameters()}.
      *
      * @return a non-null, but possibly empty list
      */
-    public List<PVariable> getSymbolicParameterVariables() {
+    public List <PVariable> getSymbolicParameterVariables() {
         return getSymbolicParameters().stream().map(ExportedParameter::getParameterVariable)
                 .collect(Collectors.toList());
     }
@@ -210,7 +210,7 @@ public class PBody implements PTraceable {
      *
      * @return a non-null, but possibly empty list
      */
-    public List<ExportedParameter> getSymbolicParameters() {
+    public List <ExportedParameter> getSymbolicParameters() {
         if (symbolicParameters == null)
             symbolicParameters = new ArrayList<>();
         return symbolicParameters;
@@ -220,7 +220,7 @@ public class PBody implements PTraceable {
      * Sets the exported parameter constraints of the body, if this instance is mutable.
      * @param symbolicParameters the new value
      */
-    public void setSymbolicParameters(List<ExportedParameter> symbolicParameters) {
+    public void setSymbolicParameters(List <ExportedParameter> symbolicParameters) {
         checkMutability();
         this.symbolicParameters = new ArrayList<>(symbolicParameters);
     }
@@ -275,14 +275,14 @@ public class PBody implements PTraceable {
      * All unary input keys directly prescribed by constraints, grouped by variable.
      * <p> to supertype inference or subsumption applied at this point.
      */
-    public Map<PVariable, Set<TypeJudgement>> getAllUnaryTypeRestrictions(IQueryMetaContext context) {
-        Map<PVariable, Set<TypeJudgement>> currentRestrictions = allUnaryTypeRestrictions.get(context);
+    public Map <PVariable, Set <TypeJudgement>> getAllUnaryTypeRestrictions(IQueryMetaContext context) {
+        Map <PVariable, Set <TypeJudgement>> currentRestrictions = allUnaryTypeRestrictions.get(context);
         if (currentRestrictions == null) {
             currentRestrictions = TypeHelper.inferUnaryTypes(getConstraints(), context);
             allUnaryTypeRestrictions.put(context, currentRestrictions);
         }
         return currentRestrictions;
     }
-    private WeakHashMap<IQueryMetaContext, Map<PVariable, Set<TypeJudgement>>> allUnaryTypeRestrictions = new WeakHashMap<IQueryMetaContext, Map<PVariable,Set<TypeJudgement>>>();
+    private WeakHashMap <IQueryMetaContext, Map <PVariable, Set <TypeJudgement>>> allUnaryTypeRestrictions = new WeakHashMap <IQueryMetaContext, Map <PVariable,Set <TypeJudgement>>>();
 
 }

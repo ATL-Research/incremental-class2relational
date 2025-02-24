@@ -20,12 +20,12 @@ import tools.refinery.interpreter.api.IQuerySpecification;
 public abstract class BaseGeneratedPatternGroup extends BaseQueryGroup {
 
     @Override
-    public Set<IQuerySpecification<?>> getSpecifications() {
+    public Set <IQuerySpecification<?>> getSpecifications() {
         return querySpecifications;
     }
 
     /**
      * Returns {@link IQuerySpecification} objects for handling them as a group. To be filled by constructors of subclasses.
      */
-    protected Set<IQuerySpecification<?>> querySpecifications = new HashSet<IQuerySpecification<?>>();
+    protected Set <IQuerySpecification<?>> querySpecifications = new HashSet <IQuerySpecification<?>>();
 }

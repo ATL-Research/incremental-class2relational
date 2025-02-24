@@ -66,7 +66,7 @@ class LowerTypeScopePropagator extends TypeScopePropagator {
 		}
 
 		@Override
-		protected Collection<AnyQuery> getQueries() {
+		protected Collection <AnyQuery> getQueries() {
 			return List.of(allMay, multiMay);
 		}
 

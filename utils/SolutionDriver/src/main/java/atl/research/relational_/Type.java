@@ -5,7 +5,7 @@ package atl.research.relational_;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Type</b></em>'.
+ * A representation of the model object ' <em> <b>Type </b> </em>'.
  * <!-- end-user-doc -->
  *
  *

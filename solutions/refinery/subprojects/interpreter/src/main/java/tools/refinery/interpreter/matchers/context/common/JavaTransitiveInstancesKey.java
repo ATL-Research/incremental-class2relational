@@ -20,23 +20,23 @@ package tools.refinery.interpreter.matchers.context.common;
  * @author Bergmann Gabor
  *
 */
-public class JavaTransitiveInstancesKey extends BaseInputKeyWrapper<String> {
+public class JavaTransitiveInstancesKey extends BaseInputKeyWrapper <String> {
 
     /**
      * The actual Class whose (transitive) instances this relation contains. Can be null at compile time, if only the name is available.
      * Can be a primitive.
      */
-    private Class<?> cachedOriginalInstanceClass;
+    private Class <?> cachedOriginalInstanceClass;
 
     /**
      * Same as {@link #cachedOriginalInstanceClass}, but primitive classes are replaced with their wrapper classes (e.g. int --> java.lang.Integer).
      */
-    private Class<?> cachedWrapperInstanceClass;
+    private Class <?> cachedWrapperInstanceClass;
 
     /**
      * Preferred constructor.
      */
-    public JavaTransitiveInstancesKey(Class<?> instanceClass) {
+    public JavaTransitiveInstancesKey(Class <?> instanceClass) {
         this(getName(instanceClass));
         this.cachedOriginalInstanceClass = instanceClass;
     }
@@ -52,7 +52,7 @@ public class JavaTransitiveInstancesKey extends BaseInputKeyWrapper<String> {
     /**
      * Returns null if class cannot be loaded.
      */
-    private Class<?> getOriginalInstanceClass() {
+    private Class <?> getOriginalInstanceClass() {
         if (cachedOriginalInstanceClass == null) {
             try {
                 resolveClassInternal();
@@ -68,7 +68,7 @@ public class JavaTransitiveInstancesKey extends BaseInputKeyWrapper<String> {
      * @return non-null instance class
      * @throws ClassNotFoundException
      */
-    private Class<?> forceGetOriginalInstanceClass() throws ClassNotFoundException {
+    private Class <?> forceGetOriginalInstanceClass() throws ClassNotFoundException {
         if (cachedOriginalInstanceClass == null) {
             resolveClassInternal();
         }
@@ -79,7 +79,7 @@ public class JavaTransitiveInstancesKey extends BaseInputKeyWrapper<String> {
      * @return non-null instance class, wrapped if primitive class
      * @throws ClassNotFoundException
      */
-    public Class<?> forceGetWrapperInstanceClass() throws ClassNotFoundException {
+    public Class <?> forceGetWrapperInstanceClass() throws ClassNotFoundException {
         forceGetOriginalInstanceClass();
         return getWrapperInstanceClass();
     }
@@ -87,14 +87,14 @@ public class JavaTransitiveInstancesKey extends BaseInputKeyWrapper<String> {
      * @return non-null instance class, wrapped if primitive class
      * @throws ClassNotFoundException
      */
-    public Class<?> forceGetInstanceClass() throws ClassNotFoundException {
+    public Class <?> forceGetInstanceClass() throws ClassNotFoundException {
         return forceGetWrapperInstanceClass();
     }
 
     /**
      * @return instance class, wrapped if primitive class, null if class cannot be loaded
      */
-    public Class<?> getWrapperInstanceClass()  {
+    public Class <?> getWrapperInstanceClass()  {
         if (cachedWrapperInstanceClass == null) {
             cachedWrapperInstanceClass = primitiveTypeToWrapperClass(getOriginalInstanceClass());
         }
@@ -103,7 +103,7 @@ public class JavaTransitiveInstancesKey extends BaseInputKeyWrapper<String> {
     /**
      * @return instance class, wrapped if primitive class, null if class cannot be loaded
      */
-    public Class<?> getInstanceClass()  {
+    public Class <?> getInstanceClass()  {
         return getWrapperInstanceClass();
     }
 
@@ -115,7 +115,7 @@ public class JavaTransitiveInstancesKey extends BaseInputKeyWrapper<String> {
     public String getPrettyPrintableName() {
         getWrapperInstanceClass();
 		if (cachedWrapperInstanceClass == null) {
-			return wrappedKey == null ? "<null>" : wrappedKey;
+			return wrappedKey == null ? " <null>" : wrappedKey;
 		}
 		return cachedWrapperInstanceClass.getName();
 	}
@@ -140,7 +140,7 @@ public class JavaTransitiveInstancesKey extends BaseInputKeyWrapper<String> {
         return this.getPrettyPrintableName();
     }
 
-    private static Class<?> primitiveTypeToWrapperClass(Class<?> instanceClass) {
+    private static Class <?> primitiveTypeToWrapperClass(Class <?> instanceClass) {
         if (instanceClass != null && instanceClass.isPrimitive()) {
             if (Void.TYPE.equals(instanceClass))
                 return Void.class;
@@ -164,10 +164,10 @@ public class JavaTransitiveInstancesKey extends BaseInputKeyWrapper<String> {
         return instanceClass;
     }
 
-	private static String getName(Class<?> instanceClass) {
-		Class<?> wrapperClass = primitiveTypeToWrapperClass(instanceClass);
+	private static String getName(Class <?> instanceClass) {
+		Class <?> wrapperClass = primitiveTypeToWrapperClass(instanceClass);
 		if (wrapperClass == null) {
-			return "<null>";
+			return " <null>";
 		}
 		return wrapperClass.getName();
 	}

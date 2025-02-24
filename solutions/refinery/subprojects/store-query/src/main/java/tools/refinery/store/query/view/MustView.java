@@ -9,8 +9,8 @@ import tools.refinery.store.representation.Symbol;
 import tools.refinery.store.representation.TruthValue;
 import tools.refinery.store.tuple.Tuple;
 
-public class MustView extends TuplePreservingView<TruthValue> {
-	public MustView(Symbol<TruthValue> symbol) {
+public class MustView extends TuplePreservingView <TruthValue> {
+	public MustView(Symbol <TruthValue> symbol) {
 		super(symbol, "must");
 	}
 

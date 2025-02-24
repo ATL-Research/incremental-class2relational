@@ -43,7 +43,7 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
     public partial class Table : Named, ITable, IModelElement
     {
         
-        private static Lazy<ITypedElement> _colReference = new Lazy<ITypedElement>(RetrieveColReference);
+        private static Lazy <ITypedElement> _colReference = new Lazy <ITypedElement>(RetrieveColReference);
         
         /// <summary>
         /// The backing field for the Col property
@@ -51,7 +51,7 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         [DebuggerBrowsableAttribute(DebuggerBrowsableState.Never)]
         private TableColCollection _col;
         
-        private static Lazy<ITypedElement> _keyReference = new Lazy<ITypedElement>(RetrieveKeyReference);
+        private static Lazy <ITypedElement> _keyReference = new Lazy <ITypedElement>(RetrieveKeyReference);
         
         /// <summary>
         /// The backing field for the Key property
@@ -81,7 +81,7 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         [ContainmentAttribute()]
         [XmlOppositeAttribute("owner")]
         [ConstantAttribute()]
-        public IOrderedSetExpression<IColumn> Col
+        public IOrderedSetExpression <IColumn> Col
         {
             get
             {
@@ -99,7 +99,7 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         [XmlAttributeAttribute(true)]
         [XmlOppositeAttribute("keyOf")]
         [ConstantAttribute()]
-        public ISetExpression<IColumn> Key
+        public ISetExpression <IColumn> Key
         {
             get
             {
@@ -110,7 +110,7 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Gets the child model elements of this model element
         /// </summary>
-        public override IEnumerableExpression<IModelElement> Children
+        public override IEnumerableExpression <IModelElement> Children
         {
             get
             {
@@ -121,7 +121,7 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Gets the referenced model elements of this model element
         /// </summary>
-        public override IEnumerableExpression<IModelElement> ReferencedElements
+        public override IEnumerableExpression <IModelElement> ReferencedElements
         {
             get
             {
@@ -153,8 +153,8 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Forwards CollectionChanging notifications for the Col property to the parent model element
         /// </summary>
-        /// <param name="sender">The collection that raised the change</param>
-        /// <param name="e">The original event data</param>
+        /// <param name="sender">The collection that raised the change </param>
+        /// <param name="e">The original event data </param>
         private void ColCollectionChanging(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.OnCollectionChanging("Col", e, _colReference);
@@ -163,8 +163,8 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Forwards CollectionChanged notifications for the Col property to the parent model element
         /// </summary>
-        /// <param name="sender">The collection that raised the change</param>
-        /// <param name="e">The original event data</param>
+        /// <param name="sender">The collection that raised the change </param>
+        /// <param name="e">The original event data </param>
         private void ColCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.OnCollectionChanged("Col", e, _colReference);
@@ -178,8 +178,8 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Forwards CollectionChanging notifications for the Key property to the parent model element
         /// </summary>
-        /// <param name="sender">The collection that raised the change</param>
-        /// <param name="e">The original event data</param>
+        /// <param name="sender">The collection that raised the change </param>
+        /// <param name="e">The original event data </param>
         private void KeyCollectionChanging(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.OnCollectionChanging("Key", e, _keyReference);
@@ -188,8 +188,8 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Forwards CollectionChanged notifications for the Key property to the parent model element
         /// </summary>
-        /// <param name="sender">The collection that raised the change</param>
-        /// <param name="e">The original event data</param>
+        /// <param name="sender">The collection that raised the change </param>
+        /// <param name="e">The original event data </param>
         private void KeyCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.OnCollectionChanged("Key", e, _keyReference);
@@ -198,8 +198,8 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Gets the relative URI fragment for the given child model element
         /// </summary>
-        /// <returns>A fragment of the relative URI</returns>
-        /// <param name="element">The element that should be looked for</param>
+        /// <returns>A fragment of the relative URI </returns>
+        /// <param name="element">The element that should be looked for </param>
         protected override string GetRelativePathForNonIdentifiedChild(IModelElement element)
         {
             int colIndex = ModelHelper.IndexOfReference(this.Col, element);
@@ -213,9 +213,9 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Resolves the given URI to a child model element
         /// </summary>
-        /// <returns>The model element or null if it could not be found</returns>
-        /// <param name="reference">The requested reference name</param>
-        /// <param name="index">The index of this reference</param>
+        /// <returns>The model element or null if it could not be found </returns>
+        /// <param name="reference">The requested reference name </param>
+        /// <param name="index">The index of this reference </param>
         protected override IModelElement GetModelElementForReference(string reference, int index)
         {
             if ((reference == "COL"))
@@ -235,8 +235,8 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Gets the Model element collection for the given feature
         /// </summary>
-        /// <returns>A non-generic list of elements</returns>
-        /// <param name="feature">The requested feature</param>
+        /// <returns>A non-generic list of elements </returns>
+        /// <param name="feature">The requested feature </param>
         protected override System.Collections.IList GetCollectionForFeature(string feature)
         {
             if ((feature == "COL"))
@@ -253,8 +253,8 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Gets the property name for the given container
         /// </summary>
-        /// <returns>The name of the respective container reference</returns>
-        /// <param name="container">The container object</param>
+        /// <returns>The name of the respective container reference </returns>
+        /// <param name="container">The container object </param>
         protected override string GetCompositionName(object container)
         {
             if ((container == this._col))
@@ -280,7 +280,7 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// The collection class to to represent the children of the Table class
         /// </summary>
-        public class TableChildrenCollection : ReferenceCollection, ICollectionExpression<IModelElement>, ICollection<IModelElement>
+        public class TableChildrenCollection : ReferenceCollection, ICollectionExpression <IModelElement>, ICollection <IModelElement>
         {
             
             private Table _parent;
@@ -319,10 +319,10 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
             /// <summary>
             /// Adds the given element to the collection
             /// </summary>
-            /// <param name="item">The item to add</param>
+            /// <param name="item">The item to add </param>
             public override void Add(IModelElement item)
             {
-                IColumn colCasted = item.As<IColumn>();
+                IColumn colCasted = item.As <IColumn>();
                 if ((colCasted != null))
                 {
                     this._parent.Col.Add(colCasted);
@@ -340,8 +340,8 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
             /// <summary>
             /// Gets a value indicating whether the given element is contained in the collection
             /// </summary>
-            /// <returns>True, if it is contained, otherwise False</returns>
-            /// <param name="item">The item that should be looked out for</param>
+            /// <returns>True, if it is contained, otherwise False </returns>
+            /// <param name="item">The item that should be looked out for </param>
             public override bool Contains(IModelElement item)
             {
                 if (this._parent.Col.Contains(item))
@@ -354,11 +354,11 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
             /// <summary>
             /// Copies the contents of the collection to the given array starting from the given array index
             /// </summary>
-            /// <param name="array">The array in which the elements should be copied</param>
-            /// <param name="arrayIndex">The starting index</param>
+            /// <param name="array">The array in which the elements should be copied </param>
+            /// <param name="arrayIndex">The starting index </param>
             public override void CopyTo(IModelElement[] array, int arrayIndex)
             {
-                IEnumerator<IModelElement> colEnumerator = this._parent.Col.GetEnumerator();
+                IEnumerator <IModelElement> colEnumerator = this._parent.Col.GetEnumerator();
                 try
                 {
                     for (
@@ -378,11 +378,11 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
             /// <summary>
             /// Removes the given item from the collection
             /// </summary>
-            /// <returns>True, if the item was removed, otherwise False</returns>
-            /// <param name="item">The item that should be removed</param>
+            /// <returns>True, if the item was removed, otherwise False </returns>
+            /// <param name="item">The item that should be removed </param>
             public override bool Remove(IModelElement item)
             {
-                IColumn columnItem = item.As<IColumn>();
+                IColumn columnItem = item.As <IColumn>();
                 if (((columnItem != null) 
                             && this._parent.Col.Remove(columnItem)))
                 {
@@ -394,17 +394,17 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
             /// <summary>
             /// Gets an enumerator that enumerates the collection
             /// </summary>
-            /// <returns>A generic enumerator</returns>
-            public override IEnumerator<IModelElement> GetEnumerator()
+            /// <returns>A generic enumerator </returns>
+            public override IEnumerator <IModelElement> GetEnumerator()
             {
-                return Enumerable.Empty<IModelElement>().Concat(this._parent.Col).GetEnumerator();
+                return Enumerable.Empty <IModelElement>().Concat(this._parent.Col).GetEnumerator();
             }
         }
         
         /// <summary>
         /// The collection class to to represent the children of the Table class
         /// </summary>
-        public class TableReferencedElementsCollection : ReferenceCollection, ICollectionExpression<IModelElement>, ICollection<IModelElement>
+        public class TableReferencedElementsCollection : ReferenceCollection, ICollectionExpression <IModelElement>, ICollection <IModelElement>
         {
             
             private Table _parent;
@@ -446,15 +446,15 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
             /// <summary>
             /// Adds the given element to the collection
             /// </summary>
-            /// <param name="item">The item to add</param>
+            /// <param name="item">The item to add </param>
             public override void Add(IModelElement item)
             {
-                IColumn colCasted = item.As<IColumn>();
+                IColumn colCasted = item.As <IColumn>();
                 if ((colCasted != null))
                 {
                     this._parent.Col.Add(colCasted);
                 }
-                IColumn keyCasted = item.As<IColumn>();
+                IColumn keyCasted = item.As <IColumn>();
                 if ((keyCasted != null))
                 {
                     this._parent.Key.Add(keyCasted);
@@ -473,8 +473,8 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
             /// <summary>
             /// Gets a value indicating whether the given element is contained in the collection
             /// </summary>
-            /// <returns>True, if it is contained, otherwise False</returns>
-            /// <param name="item">The item that should be looked out for</param>
+            /// <returns>True, if it is contained, otherwise False </returns>
+            /// <param name="item">The item that should be looked out for </param>
             public override bool Contains(IModelElement item)
             {
                 if (this._parent.Col.Contains(item))
@@ -491,11 +491,11 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
             /// <summary>
             /// Copies the contents of the collection to the given array starting from the given array index
             /// </summary>
-            /// <param name="array">The array in which the elements should be copied</param>
-            /// <param name="arrayIndex">The starting index</param>
+            /// <param name="array">The array in which the elements should be copied </param>
+            /// <param name="arrayIndex">The starting index </param>
             public override void CopyTo(IModelElement[] array, int arrayIndex)
             {
-                IEnumerator<IModelElement> colEnumerator = this._parent.Col.GetEnumerator();
+                IEnumerator <IModelElement> colEnumerator = this._parent.Col.GetEnumerator();
                 try
                 {
                     for (
@@ -510,7 +510,7 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
                 {
                     colEnumerator.Dispose();
                 }
-                IEnumerator<IModelElement> keyEnumerator = this._parent.Key.GetEnumerator();
+                IEnumerator <IModelElement> keyEnumerator = this._parent.Key.GetEnumerator();
                 try
                 {
                     for (
@@ -530,11 +530,11 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
             /// <summary>
             /// Removes the given item from the collection
             /// </summary>
-            /// <returns>True, if the item was removed, otherwise False</returns>
-            /// <param name="item">The item that should be removed</param>
+            /// <returns>True, if the item was removed, otherwise False </returns>
+            /// <param name="item">The item that should be removed </param>
             public override bool Remove(IModelElement item)
             {
-                IColumn columnItem = item.As<IColumn>();
+                IColumn columnItem = item.As <IColumn>();
                 if (((columnItem != null) 
                             && this._parent.Col.Remove(columnItem)))
                 {
@@ -551,10 +551,10 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
             /// <summary>
             /// Gets an enumerator that enumerates the collection
             /// </summary>
-            /// <returns>A generic enumerator</returns>
-            public override IEnumerator<IModelElement> GetEnumerator()
+            /// <returns>A generic enumerator </returns>
+            public override IEnumerator <IModelElement> GetEnumerator()
             {
-                return Enumerable.Empty<IModelElement>().Concat(this._parent.Col).Concat(this._parent.Key).GetEnumerator();
+                return Enumerable.Empty <IModelElement>().Concat(this._parent.Col).Concat(this._parent.Key).GetEnumerator();
             }
         }
     }

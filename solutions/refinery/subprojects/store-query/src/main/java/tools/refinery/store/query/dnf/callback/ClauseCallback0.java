@@ -11,5 +11,5 @@ import java.util.Collection;
 
 @FunctionalInterface
 public interface ClauseCallback0 {
-	Collection<Literal> toLiterals();
+	Collection <Literal> toLiterals();
 }

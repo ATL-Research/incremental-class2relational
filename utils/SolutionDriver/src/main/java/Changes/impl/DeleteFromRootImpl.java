@@ -19,20 +19,20 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Delete From Root</b></em>'.
+ * An implementation of the model object ' <em> <b>Delete From Root </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link changes_new.Changes.impl.DeleteFromRootImpl#getDeletedElement <em>Deleted Element</em>}</li>
+ *   <li>{@link changes_new.Changes.impl.DeleteFromRootImpl#getDeletedElement <em>Deleted Element </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class DeleteFromRootImpl extends ElementaryChangeImpl implements DeleteFromRoot {
 	/**
-	 * The cached value of the '{@link #getDeletedElement() <em>Deleted Element</em>}' reference.
+	 * The cached value of the '{@link #getDeletedElement() <em>Deleted Element </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDeletedElement()
@@ -161,7 +161,7 @@ public class DeleteFromRootImpl extends ElementaryChangeImpl implements DeleteFr
 	public void apply() {
 		Resource sourceModel = deletedElement.eResource();
 		if (sourceModel != null) {
-			List<EObject> contents = sourceModel.getContents();
+			List <EObject> contents = sourceModel.getContents();
 			
 			if (contents != null && contents.size() > 0) {
 				EcoreUtil.delete(deletedElement, true);

@@ -16,7 +16,7 @@ import tools.refinery.interpreter.matchers.context.IInputKey;
  * @author Bergmann Gabor
  *
  */
-public abstract class BaseInputKeyWrapper<Wrapped> implements IInputKey {
+public abstract class BaseInputKeyWrapper <Wrapped> implements IInputKey {
     protected Wrapped wrappedKey;
 
     public BaseInputKeyWrapper(Wrapped wrappedKey) {

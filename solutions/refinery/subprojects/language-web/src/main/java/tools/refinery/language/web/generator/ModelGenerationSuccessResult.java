@@ -12,6 +12,6 @@ import tools.refinery.language.web.semantics.metadata.RelationMetadata;
 import java.util.List;
 import java.util.UUID;
 
-public record ModelGenerationSuccessResult(UUID uuid, List<NodeMetadata> nodes, List<RelationMetadata> relations,
+public record ModelGenerationSuccessResult(UUID uuid, List <NodeMetadata> nodes, List <RelationMetadata> relations,
 										   JsonObject partialInterpretation) implements ModelGenerationResult {
 }

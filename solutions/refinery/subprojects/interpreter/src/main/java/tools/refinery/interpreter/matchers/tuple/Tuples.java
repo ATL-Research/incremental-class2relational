@@ -25,7 +25,7 @@ public class Tuples {
      * For low-arity tuples, specialized implementations
      * (such as {@link FlatTuple2}) will be instantiated.
      *
-     * <p> In case the exact arity is <i>statically</i> known,
+     * <p> In case the exact arity is <i>statically </i> known,
      * it may be more efficient for the client to instantiate
      * the appropriate specialized implementation
      * (via {@link #staticArityFlatTupleOf(Object, Object)} etc.
@@ -56,7 +56,7 @@ public class Tuples {
      * For locally low-arity tuples, specialized implementations
      * (such as {@link LeftInheritanceTuple2}) will be instantiated.
      *
-     * <p> In case the exact arity is <i>statically</i> known,
+     * <p> In case the exact arity is <i>statically </i> known,
      * it may be more efficient for the client to instantiate
      * the appropriate specialized implementation
      * (via {@link #staticArityLeftInheritanceTupleOf(Object, Object)} etc.

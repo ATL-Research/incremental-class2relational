@@ -15,7 +15,7 @@ import de.tbuchmann.ttc.rules.Class2TableImpl
 class Class2Relational extends AbstractClass2Relational {
 	static val options = #{}
 	
-	val configuration = new HashMap<String, Object>()
+	val configuration = new HashMap <String, Object>()
 	
 	new() {
 		super()
@@ -37,8 +37,8 @@ class Class2Relational extends AbstractClass2Relational {
 		configuration.put(option, value)
 	}
 	
-	override protected List<Elem2Elem> createRules() {
-		var result = new ArrayList<Elem2Elem>()
+	override protected List <Elem2Elem> createRules() {
+		var result = new ArrayList <Elem2Elem>()
 		result += new DataType2Type(this)
 		result += new SingleAttribute2ColumnImpl(this)
 		result += new MultiAttribute2TableImpl(this)

@@ -27,11 +27,11 @@ import tools.refinery.interpreter.matchers.aggregators.count;
  * Such an aggregate operation can be defined over multiple types, where each possible parameter type has a corresponding return type declared.</li>
  * </ol>
  *
- * <strong>Important!</strong> The parameterTypes and returnTypes arrays must have
+ * <strong>Important! </strong> The parameterTypes and returnTypes arrays must have
  * <ul>
  * <li>The same number of classes defined each.</li>
  * <li>Items are corresponded by index.</li>
- * <li>Items should represent data types</li>
+ * <li>Items should represent data types </li>
  * </ul>
  *
  * @author Zoltan Ujhelyi
@@ -43,7 +43,7 @@ import tools.refinery.interpreter.matchers.aggregators.count;
 @Inherited
 public @interface AggregatorType {
 
-    Class<?>[] parameterTypes();
+    Class <?>[] parameterTypes();
 
-    Class<?>[] returnTypes();
+    Class <?>[] returnTypes();
 }

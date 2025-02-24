@@ -44,7 +44,7 @@ public interface Node {
     /**
      * @return unmodifiable view of the list of traceability infos assigned to this node
      */
-    Set<TraceInfo> getTraceInfos();
+    Set <TraceInfo> getTraceInfos();
 
     /**
      * assigns new traceability info to this node

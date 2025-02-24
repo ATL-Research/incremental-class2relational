@@ -51,8 +51,8 @@ public class NodeProvisioner {
     IQueryRuntimeContext runtimeContext;
 
     // TODO as recipe?
-    Map<Supplier, RemoteReceiver> remoteReceivers = CollectionsFactory.createMap();
-    Map<Address<? extends Supplier>, RemoteSupplier> remoteSuppliers = CollectionsFactory.createMap();
+    Map <Supplier, RemoteReceiver> remoteReceivers = CollectionsFactory.createMap();
+    Map <Address<? extends Supplier>, RemoteSupplier> remoteSuppliers = CollectionsFactory.createMap();
 
     private RecipeRecognizer recognizer;
 
@@ -72,9 +72,9 @@ public class NodeProvisioner {
         recognizer = new RecipeRecognizer(runtimeContext);
     }
 
-    public synchronized Address<? extends Node> getOrCreateNodeByRecipe(RecipeTraceInfo recipeTrace) {
+    public synchronized Address <? extends Node> getOrCreateNodeByRecipe(RecipeTraceInfo recipeTrace) {
         ReteNodeRecipe recipe = recipeTrace.getRecipe();
-        Address<? extends Node> result = getNodesByRecipe().get(recipe);
+        Address <? extends Node> result = getNodesByRecipe().get(recipe);
         if (result == null) {
             // No node for this recipe object - but equivalent recipes still
             // reusable
@@ -100,7 +100,7 @@ public class NodeProvisioner {
         return result;
     }
 
-    private Set<RecipeTraceInfo> getRecipeTraces() {
+    private Set <RecipeTraceInfo> getRecipeTraces() {
         return reteContainer.network.recipeTraces;
     }
 
@@ -115,7 +115,7 @@ public class NodeProvisioner {
             final ReteNodeRecipe parentRecipe = recipeTrace.getParentRecipeTraces().iterator().next().getRecipe();
             final Indexer result = nodeFactory.createIndexer(reteContainer, (IndexerRecipe) recipe,
                     asSupplier(
-                            (Address<? extends Supplier>) reteContainer.network.getExistingNodeByRecipe(parentRecipe)),
+                            (Address <? extends Supplier>) reteContainer.network.getExistingNodeByRecipe(parentRecipe)),
                     recipeTrace);
 
             // REMEMBER
@@ -148,7 +148,7 @@ public class NodeProvisioner {
         }
     }
 
-    private Map<ReteNodeRecipe, Address<? extends Node>> getNodesByRecipe() {
+    private Map <ReteNodeRecipe, Address <? extends Node>> getNodesByRecipe() {
         return reteContainer.network.nodesByRecipe;
     }
 
@@ -160,7 +160,7 @@ public class NodeProvisioner {
 
     //// Remoting - TODO eliminate?
 
-    synchronized RemoteReceiver accessRemoteReceiver(Address<? extends Supplier> address) {
+    synchronized RemoteReceiver accessRemoteReceiver(Address <? extends Supplier> address) {
         throw new UnsupportedOperationException("Multi-container Rete not supported yet");
         // if (!reteContainer.isLocal(address))
         // return
@@ -181,7 +181,7 @@ public class NodeProvisioner {
     /**
      * @pre: address is NOT local
      */
-    synchronized RemoteSupplier accessRemoteSupplier(Address<? extends Supplier> address) {
+    synchronized RemoteSupplier accessRemoteSupplier(Address <? extends Supplier> address) {
         throw new UnsupportedOperationException("Multi-container Rete not supported yet");
         // RemoteSupplier result = remoteSuppliers.get(address);
         // if (result == null) {
@@ -199,7 +199,7 @@ public class NodeProvisioner {
     /**
      * The powerful method for accessing any (supplier) Address as a local supplier.
      */
-    public Supplier asSupplier(Address<? extends Supplier> address) {
+    public Supplier asSupplier(Address <? extends Supplier> address) {
         if (!reteContainer.isLocal(address))
             return accessRemoteSupplier(address);
         else
@@ -207,7 +207,7 @@ public class NodeProvisioner {
     }
 
     /** the composite key tuple is formed as (RecipeTraceInfo, TupleMask) */
-    private Map<Tuple, UserRequestTrace> projectionIndexerUserRequests = CollectionsFactory.createMap();
+    private Map <Tuple, UserRequestTrace> projectionIndexerUserRequests = CollectionsFactory.createMap();
 
     // local version
     // TODO remove?
@@ -218,7 +218,7 @@ public class NodeProvisioner {
                     productionTrace, mask);
             return new UserRequestTrace(projectionIndexerRecipe, productionTrace);
         });
-        final Address<? extends Node> address = getOrCreateNodeByRecipe(indexerTrace);
+        final Address <? extends Node> address = getOrCreateNodeByRecipe(indexerTrace);
         return (ProjectionIndexer) reteContainer.resolveLocal(address);
     }
 
@@ -228,7 +228,7 @@ public class NodeProvisioner {
         if (Options.nodeSharingOption != Options.NodeSharingOption.NEVER)
             return accessProjectionIndexer(supplierTrace, mask);
 
-        final Address<? extends Node> supplierAddress = getOrCreateNodeByRecipe(supplierTrace);
+        final Address <? extends Node> supplierAddress = getOrCreateNodeByRecipe(supplierTrace);
         Supplier supplier = (Supplier) reteContainer.resolveLocal(supplierAddress);
 
         OnetimeIndexer result = new OnetimeIndexer(reteContainer, mask);
@@ -239,7 +239,7 @@ public class NodeProvisioner {
 
     // local, read-only version
     public synchronized ProjectionIndexer peekProjectionIndexer(RecipeTraceInfo supplierTrace, TupleMask mask) {
-        final Address<? extends Node> address = getNodesByRecipe().get(projectionIndexerRecipe(supplierTrace, mask));
+        final Address <? extends Node> address = getNodesByRecipe().get(projectionIndexerRecipe(supplierTrace, mask));
         return address == null ? null : (ProjectionIndexer) reteContainer.resolveLocal(address);
     }
 
@@ -254,11 +254,11 @@ public class NodeProvisioner {
     }
 
     /** the composite key tuple is formed as (ReteNodeRecipe, TupleMask) */
-    private Map<Tuple, ProjectionIndexerRecipe> resultSeedRecipes = CollectionsFactory.createMap();
+    private Map <Tuple, ProjectionIndexerRecipe> resultSeedRecipes = CollectionsFactory.createMap();
 
-    // public synchronized Address<? extends Supplier>
+    // public synchronized Address <? extends Supplier>
     // accessValueBinderFilterNode(
-    // Address<? extends Supplier> supplierAddress, int bindingIndex, Object
+    // Address <? extends Supplier> supplierAddress, int bindingIndex, Object
     // bindingValue) {
     // Supplier supplier = asSupplier(supplierAddress);
     // Object[] paramsArray = { supplier.getNodeId(), bindingIndex, bindingValue

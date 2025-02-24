@@ -24,7 +24,7 @@ import tools.refinery.interpreter.matchers.psystem.queries.PQuery;
 class HintConfigurator implements IQueryBackendHintProvider {
 
     private IQueryBackendHintProvider defaultHintProvider;
-    private Map<PQuery, QueryEvaluationHint> storedHints = new HashMap<PQuery, QueryEvaluationHint>();
+    private Map <PQuery, QueryEvaluationHint> storedHints = new HashMap <PQuery, QueryEvaluationHint>();
 
     public HintConfigurator(IQueryBackendHintProvider defaultHintProvider) {
         this.defaultHintProvider = defaultHintProvider;

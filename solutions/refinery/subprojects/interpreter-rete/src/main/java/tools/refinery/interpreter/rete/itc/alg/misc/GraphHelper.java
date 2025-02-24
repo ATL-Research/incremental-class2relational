@@ -34,17 +34,17 @@ public class GraphHelper {
      *            the graph data source for the original graph
      * @return the subgraph associated to the given nodes
      */
-    public static <V> Graph<V> getSubGraph(Collection<V> nodesInSubGraph,
-                                           IBiDirectionalGraphDataSource<V> graphDataSource) {
-        Graph<V> g = new Graph<V>();
+    public static <V> Graph <V> getSubGraph(Collection <V> nodesInSubGraph,
+                                           IBiDirectionalGraphDataSource <V> graphDataSource) {
+        Graph <V> g = new Graph <V>();
         if (nodesInSubGraph != null) {
             for (V node : nodesInSubGraph) {
                 g.insertNode(node);
             }
 
             for (V node : nodesInSubGraph) {
-                IMemoryView<V> sources = graphDataSource.getSourceNodes(node);
-                for (Entry<V, Integer> entry : sources.entriesWithMultiplicities()) {
+                IMemoryView <V> sources = graphDataSource.getSourceNodes(node);
+                for (Entry <V, Integer> entry : sources.entriesWithMultiplicities()) {
                     for (int i = 0; i < entry.getValue(); i++) {
                         V s = entry.getKey();
                         if (nodesInSubGraph.contains(s)) {
@@ -76,10 +76,10 @@ public class GraphHelper {
      *            the graph data source
      * @return the path between the two nodes
      */
-    public static <V> List<V> constructPath(V source, V target, Set<V> nodesInGraph,
-            IGraphDataSource<V> graphDataSource) {
-        Set<V> visitedNodes = new HashSet<V>();
-        List<V> path = new ArrayList<V>();
+    public static <V> List <V> constructPath(V source, V target, Set <V> nodesInGraph,
+            IGraphDataSource <V> graphDataSource) {
+        Set <V> visitedNodes = new HashSet <V>();
+        List <V> path = new ArrayList <V>();
 
         visitedNodes.add(source);
         path.add(source);
@@ -120,10 +120,10 @@ public class GraphHelper {
         }
     }
 
-    private static <V> V getNextNodeToVisit(V act, IGraphDataSource<V> graphDataSource, Set<V> nodesInSubGraph,
-            Set<V> visitedNodes) {
-        IMemoryView<V> targetNodes = graphDataSource.getTargetNodes(act);
-        for (Entry<V, Integer> entry : targetNodes.entriesWithMultiplicities()) {
+    private static <V> V getNextNodeToVisit(V act, IGraphDataSource <V> graphDataSource, Set <V> nodesInSubGraph,
+            Set <V> visitedNodes) {
+        IMemoryView <V> targetNodes = graphDataSource.getTargetNodes(act);
+        for (Entry <V, Integer> entry : targetNodes.entriesWithMultiplicities()) {
             for (int i = 0; i < entry.getValue(); i++) {
                 V node = entry.getKey();
                 if (nodesInSubGraph.contains(node) && !visitedNodes.contains(node)) {
@@ -143,7 +143,7 @@ public class GraphHelper {
      *            the graph data source
      * @return the number of self-loop edges
      */
-    public static <V> int getEdgeCount(V node, IGraphDataSource<V> graphDataSource) {
+    public static <V> int getEdgeCount(V node, IGraphDataSource <V> graphDataSource) {
         return getEdgeCount(node, node, graphDataSource);
     }
 
@@ -158,7 +158,7 @@ public class GraphHelper {
      *            the graph data source
      * @return the number of parallel edges between the two nodes
      */
-    public static <V> int getEdgeCount(V source, V target, IGraphDataSource<V> graphDataSource) {
+    public static <V> int getEdgeCount(V source, V target, IGraphDataSource <V> graphDataSource) {
         Integer count = graphDataSource.getTargetNodes(source).getCount(target);
         if (count == null) {
             return 0;

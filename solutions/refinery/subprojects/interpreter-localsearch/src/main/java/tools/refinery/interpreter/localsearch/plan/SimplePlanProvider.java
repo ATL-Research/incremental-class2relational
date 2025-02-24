@@ -40,7 +40,7 @@ public class SimplePlanProvider implements IPlanProvider {
 
         LocalSearchPlanner planner = new LocalSearchPlanner(backend, compiler, logger, configuration, resultRequestor);
 
-        Collection<SearchPlanForBody> plansForBodies = planner.plan(key.getQuery(), key.getAdornment());
+        Collection <SearchPlanForBody> plansForBodies = planner.plan(key.getQuery(), key.getAdornment());
 
         IPlanDescriptor plan = new PlanDescriptor(key.getQuery(), plansForBodies, key.getAdornment());
         return plan;

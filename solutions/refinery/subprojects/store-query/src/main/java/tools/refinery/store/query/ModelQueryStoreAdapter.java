@@ -14,15 +14,15 @@ import tools.refinery.store.query.view.AnySymbolView;
 import java.util.Collection;
 
 public interface ModelQueryStoreAdapter extends ModelStoreAdapter {
-	Collection<AnySymbolView> getSymbolViews();
+	Collection <AnySymbolView> getSymbolViews();
 
-	Collection<AnyQuery> getQueries();
+	Collection <AnyQuery> getQueries();
 
 	default AnyQuery getCanonicalQuery(AnyQuery query) {
-		return getCanonicalQuery((Query<?>) query);
+		return getCanonicalQuery((Query <?>) query);
 	}
 
-	<T> Query<T> getCanonicalQuery(Query<T> query);
+	 <T> Query <T> getCanonicalQuery(Query <T> query);
 
 	@Override
 	ModelQueryAdapter createModelAdapter(Model model);

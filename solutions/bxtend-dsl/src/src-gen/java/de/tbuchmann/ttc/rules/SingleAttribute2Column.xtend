@@ -14,12 +14,12 @@ abstract class SingleAttribute2Column extends Elem2Elem {
 		super("SingleAttribute2Column", trafo)
 	}
 	
-	override CorrModelDelta sourceToTarget(Set<EObject> _detachedCorrElems) {
-		this.createdElems = new ArrayList<EObject>()
-		this.spareElems = new ArrayList<EObject>()
+	override CorrModelDelta sourceToTarget(Set <EObject> _detachedCorrElems) {
+		this.createdElems = new ArrayList <EObject>()
+		this.spareElems = new ArrayList <EObject>()
 		this.detachedCorrElems = _detachedCorrElems
 				
-		val _matches = new ArrayList<Source>()
+		val _matches = new ArrayList <Source>()
 		for (att : sourceModel.allContents.filter(typeof(atl.research.class_.Attribute)).filter[filterAtt(it)].toIterable()) {
 			_matches += new Source(att)
 		}
@@ -42,12 +42,12 @@ abstract class SingleAttribute2Column extends Elem2Elem {
 		return new CorrModelDelta(this.createdElems, this.spareElems, this.detachedCorrElems)
 	}
 	
-	override CorrModelDelta targetToSource(Set<EObject> _detachedCorrElems) {
-		this.createdElems = new ArrayList<EObject>()
-		this.spareElems = new ArrayList<EObject>()
+	override CorrModelDelta targetToSource(Set <EObject> _detachedCorrElems) {
+		this.createdElems = new ArrayList <EObject>()
+		this.spareElems = new ArrayList <EObject>()
 		this.detachedCorrElems = _detachedCorrElems
 				
-		val _matches = new ArrayList<Target>()
+		val _matches = new ArrayList <Target>()
 		for (col : targetModel.allContents.filter(typeof(atl.research.relational_.Column)).toIterable()) {
 			_matches += new Target(col)
 		}

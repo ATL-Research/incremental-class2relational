@@ -19,27 +19,27 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Class</b></em>'.
+ * An implementation of the model object ' <em> <b>Class </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link atl.research.class_.impl.ClassImpl#getAttr <em>Attr</em>}</li>
+ *   <li>{@link atl.research.class_.impl.ClassImpl#getAttr <em>Attr </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class ClassImpl extends ClassifierImpl implements atl.research.class_.Class {
 	/**
-	 * The cached value of the '{@link #getAttr() <em>Attr</em>}' containment reference list.
+	 * The cached value of the '{@link #getAttr() <em>Attr </em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAttr()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Attribute> attr;
+	protected EList <Attribute> attr;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -66,9 +66,9 @@ public class ClassImpl extends ClassifierImpl implements atl.research.class_.Cla
 	 * @generated
 	 */
 	@Override
-	public EList<Attribute> getAttr() {
+	public EList <Attribute> getAttr() {
 		if (attr == null) {
-			attr = new EObjectContainmentWithInverseEList<Attribute>(Attribute.class, this, Class_Package.CLASS__ATTR, Class_Package.ATTRIBUTE__OWNER);
+			attr = new EObjectContainmentWithInverseEList <Attribute>(Attribute.class, this, Class_Package.CLASS__ATTR, Class_Package.ATTRIBUTE__OWNER);
 		}
 		return attr;
 	}
@@ -83,7 +83,7 @@ public class ClassImpl extends ClassifierImpl implements atl.research.class_.Cla
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case Class_Package.CLASS__ATTR:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAttr()).basicAdd(otherEnd, msgs);
+				return ((InternalEList <InternalEObject>)(InternalEList <?>)getAttr()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -97,7 +97,7 @@ public class ClassImpl extends ClassifierImpl implements atl.research.class_.Cla
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case Class_Package.CLASS__ATTR:
-				return ((InternalEList<?>)getAttr()).basicRemove(otherEnd, msgs);
+				return ((InternalEList <?>)getAttr()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -127,7 +127,7 @@ public class ClassImpl extends ClassifierImpl implements atl.research.class_.Cla
 		switch (featureID) {
 			case Class_Package.CLASS__ATTR:
 				getAttr().clear();
-				getAttr().addAll((Collection<? extends Attribute>)newValue);
+				getAttr().addAll((Collection <? extends Attribute>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

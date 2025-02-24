@@ -28,7 +28,7 @@ import static tools.refinery.store.reasoning.translator.multiobject.MultiObjectT
 public class UndirectedCrossReferenceTranslator implements ModelStoreConfiguration {
 	private final PartialRelation linkType;
 	private final UndirectedCrossReferenceInfo info;
-	private final Symbol<TruthValue> symbol;
+	private final Symbol <TruthValue> symbol;
 
 	public UndirectedCrossReferenceTranslator(PartialRelation linkType, UndirectedCrossReferenceInfo info) {
 		this.linkType = linkType;

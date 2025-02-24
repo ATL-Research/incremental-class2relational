@@ -11,14 +11,14 @@ import tools.refinery.store.query.ModelQueryAdapter;
 import tools.refinery.store.query.dnf.Query;
 import tools.refinery.store.tuple.Tuple;
 
-public record EmptyResultSet<T>(ModelQueryAdapter adapter, Query<T> query) implements ResultSet<T> {
+public record EmptyResultSet <T>(ModelQueryAdapter adapter, Query <T> query) implements ResultSet <T> {
 	@Override
 	public ModelQueryAdapter getAdapter() {
 		return adapter;
 	}
 
 	@Override
-	public Query<T> getCanonicalQuery() {
+	public Query <T> getCanonicalQuery() {
 		return query;
 	}
 
@@ -28,7 +28,7 @@ public record EmptyResultSet<T>(ModelQueryAdapter adapter, Query<T> query) imple
 	}
 
 	@Override
-	public Cursor<Tuple, T> getAll() {
+	public Cursor <Tuple, T> getAll() {
 		return Cursors.empty();
 	}
 
@@ -38,12 +38,12 @@ public record EmptyResultSet<T>(ModelQueryAdapter adapter, Query<T> query) imple
 	}
 
 	@Override
-	public void addListener(ResultSetListener<T> listener) {
+	public void addListener(ResultSetListener <T> listener) {
 		// No need to store the listener, because the empty result set will never change.
 	}
 
 	@Override
-	public void removeListener(ResultSetListener<T> listener) {
+	public void removeListener(ResultSetListener <T> listener) {
 		// No need to remove the listener, because we never stored it.
 	}
 }

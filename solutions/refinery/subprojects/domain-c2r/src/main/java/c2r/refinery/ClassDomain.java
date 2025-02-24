@@ -21,27 +21,27 @@ import java.util.Map;
 import static tools.refinery.store.dse.modification.DanglingEdges.DELETE;
 
 public class ClassDomain {
-	public static final Symbol<String> class_name;
-	public static final FunctionView<String> class_nameView;
-	public final Interpretation<String> name;
-	public static final Symbol<Boolean> class_Class;
+	public static final Symbol <String> class_name;
+	public static final FunctionView <String> class_nameView;
+	public final Interpretation <String> name;
+	public static final Symbol <Boolean> class_Class;
 	public static final AnySymbolView class_ClassView;
-	public final Interpretation<Boolean> Class;
-	public static final Symbol<Boolean> class_DataType;
+	public final Interpretation <Boolean> Class;
+	public static final Symbol <Boolean> class_DataType;
 	public static final AnySymbolView class_DataTypeView;
-	public final Interpretation<Boolean> DataType;
-	public static final Symbol<Boolean> class_Attribute;
+	public final Interpretation <Boolean> DataType;
+	public static final Symbol <Boolean> class_Attribute;
 	public static final AnySymbolView class_AttributeView;
-	public final Interpretation<Boolean> Attribute;
-	public static final Symbol<Boolean> class_att;
+	public final Interpretation <Boolean> Attribute;
+	public static final Symbol <Boolean> class_att;
 	public static final AnySymbolView class_attView;
-	public final Interpretation<Boolean> att;
-	public static final Symbol<Boolean> class_type;
+	public final Interpretation <Boolean> att;
+	public static final Symbol <Boolean> class_type;
 	public static final AnySymbolView class_typeView;
-	public final Interpretation<Boolean> type;
-	public static final Symbol<Boolean> class_multiValued;
+	public final Interpretation <Boolean> type;
+	public static final Symbol <Boolean> class_multiValued;
 	public static final AnySymbolView class_multivaluedView;
-	public final Interpretation<Boolean> multiValued;
+	public final Interpretation <Boolean> multiValued;
 	static {
 		class_name = Symbol.of("name:String@class.NamedElt",1, String.class,null);
 		class_nameView = new FunctionView<>(class_name);
@@ -65,7 +65,7 @@ public class ClassDomain {
 		class_multiValued = Symbol.of("multiValued:Boolean@class.Attribute",1);
 		class_multivaluedView = new KeyOnlyView<>(class_multiValued);
 	}
-	private final Map<EObject,Tuple> trace = new HashMap<>();
+	private final Map <EObject,Tuple> trace = new HashMap<>();
 	private final ModificationAdapter mod;
 
 	public String toString() {

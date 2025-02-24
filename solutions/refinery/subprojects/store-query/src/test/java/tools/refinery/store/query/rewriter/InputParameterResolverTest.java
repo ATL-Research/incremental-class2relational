@@ -23,8 +23,8 @@ import static tools.refinery.store.query.literal.Literals.not;
 import static tools.refinery.store.query.tests.QueryMatchers.structurallyEqualTo;
 
 class InputParameterResolverTest {
-	private final static Symbol<Boolean> person = Symbol.of("Person", 1);
-	private final static Symbol<Boolean> friend = Symbol.of("friend", 2);
+	private final static Symbol <Boolean> person = Symbol.of("Person", 1);
+	private final static Symbol <Boolean> friend = Symbol.of("friend", 2);
 	private final static AnySymbolView personView = new KeyOnlyView<>(person);
 	private final static AnySymbolView friendView = new KeyOnlyView<>(friend);
 

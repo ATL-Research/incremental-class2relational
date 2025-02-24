@@ -40,7 +40,7 @@ import tools.refinery.interpreter.rete.index.timely.TimelyMemoryNullIndexer;
  */
 public class TimelyUniquenessEnforcerNode extends AbstractUniquenessEnforcerNode implements ResumableNode {
 
-    protected final TimelyMemory<Timestamp> memory;
+    protected final TimelyMemory <Timestamp> memory;
     /**
      * @since 2.4
      */
@@ -48,7 +48,7 @@ public class TimelyUniquenessEnforcerNode extends AbstractUniquenessEnforcerNode
 
     public TimelyUniquenessEnforcerNode(final ReteContainer container, final int tupleWidth) {
         super(container, tupleWidth);
-        this.memory = new TimelyMemory<Timestamp>(
+        this.memory = new TimelyMemory <Timestamp>(
                 container.getTimelyConfiguration().getTimelineRepresentation() == TimelyConfiguration.TimelineRepresentation.FAITHFUL);
         container.registerClearable(this.memory);
         this.mailbox = instantiateMailbox();
@@ -60,7 +60,7 @@ public class TimelyUniquenessEnforcerNode extends AbstractUniquenessEnforcerNode
     }
 
     @Override
-    public void pullInto(final Collection<Tuple> collector, final boolean flush) {
+    public void pullInto(final Collection <Tuple> collector, final boolean flush) {
         for (final Tuple tuple : this.memory.getTuplesAtInfinity()) {
             collector.add(tuple);
         }
@@ -77,7 +77,7 @@ public class TimelyUniquenessEnforcerNode extends AbstractUniquenessEnforcerNode
     }
 
     @Override
-    public Set<Tuple> getTuples() {
+    public Set <Tuple> getTuples() {
         return this.memory.getTuplesAtInfinity();
     }
 
@@ -94,9 +94,9 @@ public class TimelyUniquenessEnforcerNode extends AbstractUniquenessEnforcerNode
      */
     @Override
     public void resumeAt(final Timestamp timestamp) {
-        final Map<Tuple, Diff<Timestamp>> diffMap = this.memory.resumeAt(timestamp);
-        for (final Entry<Tuple, Diff<Timestamp>> entry : diffMap.entrySet()) {
-            for (final Signed<Timestamp> signed : entry.getValue()) {
+        final Map <Tuple, Diff <Timestamp>> diffMap = this.memory.resumeAt(timestamp);
+        for (final Entry <Tuple, Diff <Timestamp>> entry : diffMap.entrySet()) {
+            for (final Signed <Timestamp> signed : entry.getValue()) {
                 propagate(signed.getDirection(), entry.getKey(), signed.getPayload());
             }
         }
@@ -108,7 +108,7 @@ public class TimelyUniquenessEnforcerNode extends AbstractUniquenessEnforcerNode
 
     @Override
     public void update(final Direction direction, final Tuple update, final Timestamp timestamp) {
-        Diff<Timestamp> resultDiff = null;
+        Diff <Timestamp> resultDiff = null;
         if (direction == Direction.INSERT) {
             resultDiff = this.memory.put(update, timestamp);
         } else {
@@ -123,13 +123,13 @@ public class TimelyUniquenessEnforcerNode extends AbstractUniquenessEnforcerNode
             }
         }
 
-        for (final Signed<Timestamp> signed : resultDiff) {
+        for (final Signed <Timestamp> signed : resultDiff) {
             propagate(signed.getDirection(), update, signed.getPayload());
         }
     }
 
     @Override
-    public void pullIntoWithTimeline(final Map<Tuple, Timeline<Timestamp>> collector, final boolean flush) {
+    public void pullIntoWithTimeline(final Map <Tuple, Timeline <Timestamp>> collector, final boolean flush) {
         collector.putAll(this.memory.asMap());
     }
 

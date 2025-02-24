@@ -19,9 +19,9 @@ public class RestartableCachedThreadPool implements ExecutorService {
 
 	private ExecutorService delegate;
 
-	private final Provider<ExecutorService> executorServiceProvider;
+	private final Provider <ExecutorService> executorServiceProvider;
 
-	public RestartableCachedThreadPool(Provider<ExecutorService> executorServiceProvider) {
+	public RestartableCachedThreadPool(Provider <ExecutorService> executorServiceProvider) {
 		this.executorServiceProvider = executorServiceProvider;
 		delegate = executorServiceProvider.get();
 	}
@@ -55,25 +55,25 @@ public class RestartableCachedThreadPool implements ExecutorService {
 	}
 
 	@Override
-	public <T> List<Future<T>> invokeAll(@NotNull Collection<? extends Callable<T>> arg0, long arg1,
+	public <T> List <Future<T>> invokeAll(@NotNull Collection <? extends Callable <T>> arg0, long arg1,
 										 @NotNull TimeUnit arg2)
 			throws InterruptedException {
 		return delegate.invokeAll(arg0, arg1, arg2);
 	}
 
 	@Override
-	public <T> List<Future<T>> invokeAll(@NotNull Collection<? extends Callable<T>> arg0) throws InterruptedException {
+	public <T> List <Future<T>> invokeAll(@NotNull Collection <? extends Callable <T>> arg0) throws InterruptedException {
 		return delegate.invokeAll(arg0);
 	}
 
 	@Override
-	public <T> T invokeAny(@NotNull Collection<? extends Callable<T>> arg0, long arg1, @NotNull TimeUnit arg2)
+	public <T> T invokeAny(@NotNull Collection <? extends Callable <T>> arg0, long arg1, @NotNull TimeUnit arg2)
 			throws InterruptedException, ExecutionException, TimeoutException {
 		return delegate.invokeAny(arg0, arg1, arg2);
 	}
 
 	@Override
-	public <T> T invokeAny(@NotNull Collection<? extends Callable<T>> arg0) throws InterruptedException,
+	public <T> T invokeAny(@NotNull Collection <? extends Callable <T>> arg0) throws InterruptedException,
 			ExecutionException {
 		return delegate.invokeAny(arg0);
 	}
@@ -94,22 +94,22 @@ public class RestartableCachedThreadPool implements ExecutorService {
 	}
 
 	@Override
-	public List<Runnable> shutdownNow() {
+	public List <Runnable> shutdownNow() {
 		return delegate.shutdownNow();
 	}
 
 	@Override
-	public <T> Future<T> submit(@NotNull Callable<T> arg0) {
+	public <T> Future <T> submit(@NotNull Callable <T> arg0) {
 		return delegate.submit(arg0);
 	}
 
 	@Override
-	public <T> Future<T> submit(@NotNull Runnable arg0, T arg1) {
+	public <T> Future <T> submit(@NotNull Runnable arg0, T arg1) {
 		return delegate.submit(arg0, arg1);
 	}
 
 	@Override
-	public Future<?> submit(@NotNull Runnable arg0) {
+	public Future <?> submit(@NotNull Runnable arg0) {
 		return delegate.submit(arg0);
 	}
 }

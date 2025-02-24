@@ -22,18 +22,18 @@ import java.util.*;
 public class QueryInterpreterStoreAdapterImpl implements QueryInterpreterStoreAdapter {
 	private final ModelStore store;
 	private final InterpreterEngineOptions engineOptions;
-	private final Map<AnySymbolView, IInputKey> inputKeys;
-	private final Map<AnyQuery, AnyQuery> canonicalQueryMap;
-	private final Map<AnyQuery, IQuerySpecification<RawPatternMatcher>> querySpecifications;
-	private final Set<AnyQuery> vacuousQueries;
-	private final Set<AnyQuery> allQueries;
+	private final Map <AnySymbolView, IInputKey> inputKeys;
+	private final Map <AnyQuery, AnyQuery> canonicalQueryMap;
+	private final Map <AnyQuery, IQuerySpecification <RawPatternMatcher>> querySpecifications;
+	private final Set <AnyQuery> vacuousQueries;
+	private final Set <AnyQuery> allQueries;
 	private final CancellationToken cancellationToken;
 
 	QueryInterpreterStoreAdapterImpl(ModelStore store, InterpreterEngineOptions engineOptions,
-									 Map<AnySymbolView, IInputKey> inputKeys,
-									 Map<AnyQuery, AnyQuery> canonicalQueryMap,
-									 Map<AnyQuery, IQuerySpecification<RawPatternMatcher>> querySpecifications,
-									 Set<AnyQuery> vacuousQueries, CancellationToken cancellationToken) {
+									 Map <AnySymbolView, IInputKey> inputKeys,
+									 Map <AnyQuery, AnyQuery> canonicalQueryMap,
+									 Map <AnyQuery, IQuerySpecification <RawPatternMatcher>> querySpecifications,
+									 Set <AnyQuery> vacuousQueries, CancellationToken cancellationToken) {
 		this.store = store;
 		this.engineOptions = engineOptions;
 		this.inputKeys = inputKeys;
@@ -41,7 +41,7 @@ public class QueryInterpreterStoreAdapterImpl implements QueryInterpreterStoreAd
 		this.querySpecifications = querySpecifications;
 		this.vacuousQueries = vacuousQueries;
 		this.cancellationToken = cancellationToken;
-		var mutableAllQueries = new LinkedHashSet<AnyQuery>(querySpecifications.size() + vacuousQueries.size());
+		var mutableAllQueries = new LinkedHashSet <AnyQuery>(querySpecifications.size() + vacuousQueries.size());
 		mutableAllQueries.addAll(querySpecifications.keySet());
 		mutableAllQueries.addAll(vacuousQueries);
 		this.allQueries = Collections.unmodifiableSet(mutableAllQueries);
@@ -52,16 +52,16 @@ public class QueryInterpreterStoreAdapterImpl implements QueryInterpreterStoreAd
 		return store;
 	}
 
-	public Collection<AnySymbolView> getSymbolViews() {
+	public Collection <AnySymbolView> getSymbolViews() {
 		return inputKeys.keySet();
 	}
 
-	public Map<AnySymbolView, IInputKey> getInputKeys() {
+	public Map <AnySymbolView, IInputKey> getInputKeys() {
 		return inputKeys;
 	}
 
 	@Override
-	public Collection<AnyQuery> getQueries() {
+	public Collection <AnyQuery> getQueries() {
 		return allQueries;
 	}
 
@@ -70,21 +70,21 @@ public class QueryInterpreterStoreAdapterImpl implements QueryInterpreterStoreAd
 	}
 
 	@Override
-	public <T> Query<T> getCanonicalQuery(Query<T> query) {
+	public <T> Query <T> getCanonicalQuery(Query <T> query) {
 		// We know that canonical forms of queries do not change output types.
 		@SuppressWarnings("unchecked")
-		var canonicalQuery = (Query<T>) canonicalQueryMap.get(query);
+		var canonicalQuery = (Query <T>) canonicalQueryMap.get(query);
 		if (canonicalQuery == null) {
 			throw new IllegalArgumentException("Unknown query: " + query);
 		}
 		return canonicalQuery;
 	}
 
-	Map<AnyQuery, IQuerySpecification<RawPatternMatcher>> getQuerySpecifications() {
+	Map <AnyQuery, IQuerySpecification <RawPatternMatcher>> getQuerySpecifications() {
 		return querySpecifications;
 	}
 
-	Set<AnyQuery> getVacuousQueries() {
+	Set <AnyQuery> getVacuousQueries() {
 		return vacuousQueries;
 	}
 

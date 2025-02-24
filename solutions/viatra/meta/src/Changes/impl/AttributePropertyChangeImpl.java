@@ -12,22 +12,22 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object
- * '<em><b>Attribute Property Change</b></em>'. <!-- end-user-doc -->
+ * ' <em> <b>Attribute Property Change </b> </em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
  * <li>{@link Changes.impl.AttributePropertyChangeImpl#getNewValue <em>New
- * Value</em>}</li>
+ * Value </em>} </li>
  * <li>{@link Changes.impl.AttributePropertyChangeImpl#getOldValue <em>Old
- * Value</em>}</li>
+ * Value </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class AttributePropertyChangeImpl extends AttributeChangeImpl implements AttributePropertyChange {
 	/**
-	 * The default value of the '{@link #getNewValue() <em>New Value</em>}'
+	 * The default value of the '{@link #getNewValue() <em>New Value </em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getNewValue()
@@ -37,7 +37,7 @@ public class AttributePropertyChangeImpl extends AttributeChangeImpl implements 
 	protected static final String NEW_VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getNewValue() <em>New Value</em>}'
+	 * The cached value of the '{@link #getNewValue() <em>New Value </em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getNewValue()
@@ -47,7 +47,7 @@ public class AttributePropertyChangeImpl extends AttributeChangeImpl implements 
 	protected String newValue = NEW_VALUE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getOldValue() <em>Old Value</em>}'
+	 * The default value of the '{@link #getOldValue() <em>Old Value </em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getOldValue()
@@ -57,7 +57,7 @@ public class AttributePropertyChangeImpl extends AttributeChangeImpl implements 
 	protected static final String OLD_VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getOldValue() <em>Old Value</em>}'
+	 * The cached value of the '{@link #getOldValue() <em>Old Value </em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getOldValue()

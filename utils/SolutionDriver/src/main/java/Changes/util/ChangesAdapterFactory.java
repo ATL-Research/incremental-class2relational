@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * The <b>Adapter Factory</b> for the model.
- * It provides an adapter <code>createXXX</code> method for each class of the model.
+ * The <b>Adapter Factory </b> for the model.
+ * It provides an adapter <code>createXXX </code> method for each class of the model.
  * <!-- end-user-doc -->
  * @see Changes.ChangesPackage
  * @generated
@@ -43,7 +43,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * Returns whether this factory is applicable for the type of the object.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
+	 * This implementation returns <code>true </code> if the object is either the model's package or is an instance object of the model.
 	 * <!-- end-user-doc -->
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
@@ -60,13 +60,13 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * The switch that delegates to the <code>createXXX</code> methods.
+	 * The switch that delegates to the <code>createXXX </code> methods.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ChangesSwitch<Adapter> modelSwitch =
-		new ChangesSwitch<Adapter>() {
+	protected ChangesSwitch <Adapter> modelSwitch =
+		new ChangesSwitch <Adapter>() {
 			@Override
 			public Adapter caseModelChangeSet(ModelChangeSet object) {
 				return createModelChangeSetAdapter();
@@ -202,11 +202,11 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 		};
 
 	/**
-	 * Creates an adapter for the <code>target</code>.
+	 * Creates an adapter for the <code>target </code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param target the object to adapt.
-	 * @return the adapter for the <code>target</code>.
+	 * @return the adapter for the <code>target </code>.
 	 * @generated
 	 */
 	@Override
@@ -216,7 +216,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.ModelChangeSet <em>Model Change Set</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.ModelChangeSet <em>Model Change Set </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -230,7 +230,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.ModelChange <em>Model Change</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.ModelChange <em>Model Change </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -244,7 +244,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.ElementaryChange <em>Elementary Change</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.ElementaryChange <em>Elementary Change </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -258,7 +258,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.ChangeTransaction <em>Change Transaction</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.ChangeTransaction <em>Change Transaction </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -272,7 +272,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.CompositionChange <em>Composition Change</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.CompositionChange <em>Composition Change </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -286,7 +286,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.AssociationChange <em>Association Change</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.AssociationChange <em>Association Change </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -300,7 +300,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.AttributeChange <em>Attribute Change</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.AttributeChange <em>Attribute Change </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -314,7 +314,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.AssociationCollectionDeletion <em>Association Collection Deletion</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.AssociationCollectionDeletion <em>Association Collection Deletion </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -328,7 +328,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.CompositionCollectionDeletion <em>Composition Collection Deletion</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.CompositionCollectionDeletion <em>Composition Collection Deletion </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -342,7 +342,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.AttributeCollectionDeletion <em>Attribute Collection Deletion</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.AttributeCollectionDeletion <em>Attribute Collection Deletion </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -356,7 +356,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.AssociationCollectionInsertion <em>Association Collection Insertion</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.AssociationCollectionInsertion <em>Association Collection Insertion </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -370,7 +370,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.CompositionCollectionInsertion <em>Composition Collection Insertion</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.CompositionCollectionInsertion <em>Composition Collection Insertion </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -384,7 +384,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.AttributeCollectionInsertion <em>Attribute Collection Insertion</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.AttributeCollectionInsertion <em>Attribute Collection Insertion </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -398,7 +398,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.AssociationCollectionReset <em>Association Collection Reset</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.AssociationCollectionReset <em>Association Collection Reset </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -412,7 +412,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.CompositionCollectionReset <em>Composition Collection Reset</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.CompositionCollectionReset <em>Composition Collection Reset </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -426,7 +426,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.AttributeCollectionReset <em>Attribute Collection Reset</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.AttributeCollectionReset <em>Attribute Collection Reset </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -440,7 +440,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.AssociationListDeletion <em>Association List Deletion</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.AssociationListDeletion <em>Association List Deletion </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -454,7 +454,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.CompositionListDeletion <em>Composition List Deletion</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.CompositionListDeletion <em>Composition List Deletion </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -468,7 +468,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.AttributeListDeletion <em>Attribute List Deletion</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.AttributeListDeletion <em>Attribute List Deletion </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -482,7 +482,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.AssociationListInsertion <em>Association List Insertion</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.AssociationListInsertion <em>Association List Insertion </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -496,7 +496,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.CompositionListInsertion <em>Composition List Insertion</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.CompositionListInsertion <em>Composition List Insertion </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -510,7 +510,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.AttributeListInsertion <em>Attribute List Insertion</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.AttributeListInsertion <em>Attribute List Insertion </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -524,7 +524,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.AttributePropertyChange <em>Attribute Property Change</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.AttributePropertyChange <em>Attribute Property Change </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -538,7 +538,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.AssociationPropertyChange <em>Association Property Change</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.AssociationPropertyChange <em>Association Property Change </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -552,7 +552,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.CompositionPropertyChange <em>Composition Property Change</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.CompositionPropertyChange <em>Composition Property Change </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -566,7 +566,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.CompositionMoveIntoProperty <em>Composition Move Into Property</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.CompositionMoveIntoProperty <em>Composition Move Into Property </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -580,7 +580,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.CompositionMoveToList <em>Composition Move To List</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.CompositionMoveToList <em>Composition Move To List </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -594,7 +594,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.CompositionMoveToCollection <em>Composition Move To Collection</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.CompositionMoveToCollection <em>Composition Move To Collection </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -608,7 +608,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.OperationCall <em>Operation Call</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.OperationCall <em>Operation Call </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -622,7 +622,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.OperationArgument <em>Operation Argument</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.OperationArgument <em>Operation Argument </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -636,7 +636,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.ValueArgument <em>Value Argument</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.ValueArgument <em>Value Argument </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -650,7 +650,7 @@ public class ChangesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Changes.ReferenceArgument <em>Reference Argument</em>}'.
+	 * Creates a new adapter for an object of class '{@link Changes.ReferenceArgument <em>Reference Argument </em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.

@@ -25,7 +25,7 @@ public class TrivialNodePairing implements NodePairing {
 	}
 
 	@Override
-	public List<IntIntMap> permutations() {
+	public List <IntIntMap> permutations() {
 		return List.of(IntIntMaps.immutable.of(left,right));
 	}
 

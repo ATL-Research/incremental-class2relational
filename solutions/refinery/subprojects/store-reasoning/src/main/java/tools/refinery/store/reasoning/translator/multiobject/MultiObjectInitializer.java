@@ -22,9 +22,9 @@ import java.util.HashMap;
 import java.util.function.Function;
 
 class MultiObjectInitializer implements PartialModelInitializer {
-	private final Symbol<CardinalityInterval> countSymbol;
+	private final Symbol <CardinalityInterval> countSymbol;
 
-	public MultiObjectInitializer(Symbol<CardinalityInterval> countSymbol) {
+	public MultiObjectInitializer(Symbol <CardinalityInterval> countSymbol) {
 		this.countSymbol = countSymbol;
 	}
 
@@ -34,7 +34,7 @@ class MultiObjectInitializer implements PartialModelInitializer {
 		initializeExists(intervals, model, modelSeed);
 		initializeEquals(intervals, model, modelSeed);
 		var countInterpretation = model.getInterpretation(countSymbol);
-		var uniqueTable = new HashMap<CardinalityInterval, CardinalityInterval>();
+		var uniqueTable = new HashMap <CardinalityInterval, CardinalityInterval>();
 		for (int i = 0; i < intervals.length; i++) {
 			var interval = intervals[i];
 			if (interval.isEmpty()) {

@@ -15,12 +15,12 @@ abstract class Class2Table extends Elem2Elem {
 		super("Class2Table", trafo)
 	}
 	
-	override CorrModelDelta sourceToTarget(Set<EObject> _detachedCorrElems) {
-		this.createdElems = new ArrayList<EObject>()
-		this.spareElems = new ArrayList<EObject>()
+	override CorrModelDelta sourceToTarget(Set <EObject> _detachedCorrElems) {
+		this.createdElems = new ArrayList <EObject>()
+		this.spareElems = new ArrayList <EObject>()
 		this.detachedCorrElems = _detachedCorrElems
 				
-		val _matches = new ArrayList<Source>()
+		val _matches = new ArrayList <Source>()
 		for (clz : sourceModel.allContents.filter(typeof(atl.research.class_.Class)).toIterable()) {
 			_matches += new Source(clz)
 		}
@@ -63,12 +63,12 @@ abstract class Class2Table extends Elem2Elem {
 	}
 	def protected abstract void onTblCreation(atl.research.relational_.Table tbl);
 	
-	override CorrModelDelta targetToSource(Set<EObject> _detachedCorrElems) {
-		this.createdElems = new ArrayList<EObject>()
-		this.spareElems = new ArrayList<EObject>()
+	override CorrModelDelta targetToSource(Set <EObject> _detachedCorrElems) {
+		this.createdElems = new ArrayList <EObject>()
+		this.spareElems = new ArrayList <EObject>()
 		this.detachedCorrElems = _detachedCorrElems
 				
-		val _matches = new ArrayList<Target>()
+		val _matches = new ArrayList <Target>()
 		for (tbl : targetModel.allContents.filter(typeof(atl.research.relational_.Table)).toIterable()) {
 			_matches += new Target(tbl)
 		}
@@ -85,9 +85,9 @@ abstract class Class2Table extends Elem2Elem {
 	}
 	
 	@Data protected static class Type4col {
-		List<atl.research.relational_.Column> col
+		List <atl.research.relational_.Column> col
 	}
-	def protected abstract Type4col colFrom(List<atl.research.relational_.Column> attSinCol, List<atl.research.relational_.Column> attSinCol_2, List<atl.research.relational_.Table> attMulTbl, atl.research.relational_.Table parent);
+	def protected abstract Type4col colFrom(List <atl.research.relational_.Column> attSinCol, List <atl.research.relational_.Column> attSinCol_2, List <atl.research.relational_.Table> attMulTbl, atl.research.relational_.Table parent);
 	
 	@Data protected static class Source {
 		atl.research.class_.Class clz

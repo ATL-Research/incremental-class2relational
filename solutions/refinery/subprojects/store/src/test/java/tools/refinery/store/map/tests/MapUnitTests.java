@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MapUnitTests {
 	@Test
 	void defaultTest() {
-		VersionedMapStore<Tuple, Boolean> store = new VersionedMapStoreStateImpl<>(TupleHashProvider.INSTANCE, false);
+		VersionedMapStore <Tuple, Boolean> store = new VersionedMapStoreStateImpl<>(TupleHashProvider.INSTANCE, false);
 		var map = store.createMap();
 		var out1 = map.put(Tuple.of(0), true);
 		assertEquals(false, out1);
@@ -26,7 +26,7 @@ class MapUnitTests {
 
 	@Test
 	void deltaRestoreTest() {
-		VersionedMapStore<Integer,String> store =
+		VersionedMapStore <Integer,String> store =
 				VersionedMapStore.<Integer,String>builder().defaultValue("x").build().createOne();
 		var map = store.createMap();
 		map.put(1,"val");
@@ -39,7 +39,7 @@ class MapUnitTests {
 
 	@Test
 	void deltaRestoreTest2() {
-		VersionedMapStore<Integer,String> store =
+		VersionedMapStore <Integer,String> store =
 				VersionedMapStore.<Integer,String>builder().defaultValue("x").build().createOne();
 		var map = store.createMap();
 		map.put(1,"x");
@@ -51,7 +51,7 @@ class MapUnitTests {
 	}
 	@Test
 	void deltaRestoreTest3() {
-		VersionedMapStore<Integer,String> store =
+		VersionedMapStore <Integer,String> store =
 				VersionedMapStore.<Integer,String>builder().defaultValue("x").build().createOne();
 		var map = store.createMap();
 		map.commit();
@@ -74,7 +74,7 @@ class MapUnitTests {
 
 	@Test
 	void deltaRestoreTest4() {
-		VersionedMapStore<Integer,String> store =
+		VersionedMapStore <Integer,String> store =
 				VersionedMapStore.<Integer,String>builder().defaultValue("x").build().createOne();
 		var map = store.createMap();
 		map.commit();

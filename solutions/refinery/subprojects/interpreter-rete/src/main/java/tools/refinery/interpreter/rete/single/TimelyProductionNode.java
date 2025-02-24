@@ -26,20 +26,20 @@ import tools.refinery.interpreter.rete.traceability.CompiledQuery;
  */
 public class TimelyProductionNode extends TimelyUniquenessEnforcerNode implements ProductionNode {
 
-    protected final Map<String, Integer> posMapping;
+    protected final Map <String, Integer> posMapping;
 
-    public TimelyProductionNode(final ReteContainer reteContainer, final Map<String, Integer> posMapping) {
+    public TimelyProductionNode(final ReteContainer reteContainer, final Map <String, Integer> posMapping) {
         super(reteContainer, posMapping.size());
         this.posMapping = posMapping;
     }
 
     @Override
-    public Map<String, Integer> getPosMapping() {
+    public Map <String, Integer> getPosMapping() {
         return this.posMapping;
     }
 
     @Override
-    public Iterator<Tuple> iterator() {
+    public Iterator <Tuple> iterator() {
         return this.memory.keySet().iterator();
     }
 
@@ -55,7 +55,7 @@ public class TimelyProductionNode extends TimelyUniquenessEnforcerNode implement
         for (final TraceInfo traceInfo : this.traceInfos) {
             if (traceInfo instanceof CompiledQuery) {
                 final String patternName = ((CompiledQuery) traceInfo).getPatternName();
-                return String.format(this.getClass().getName() + "<%s>=%s", patternName, super.toString());
+                return String.format(this.getClass().getName() + " <%s>=%s", patternName, super.toString());
             }
         }
         return super.toString();

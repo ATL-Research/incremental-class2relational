@@ -14,12 +14,12 @@ abstract class MultiClassAttribute2Column extends Elem2Elem {
 		super("MultiClassAttribute2Column", trafo)
 	}
 	
-	override CorrModelDelta sourceToTarget(Set<EObject> _detachedCorrElems) {
-		this.createdElems = new ArrayList<EObject>()
-		this.spareElems = new ArrayList<EObject>()
+	override CorrModelDelta sourceToTarget(Set <EObject> _detachedCorrElems) {
+		this.createdElems = new ArrayList <EObject>()
+		this.spareElems = new ArrayList <EObject>()
 		this.detachedCorrElems = _detachedCorrElems
 				
-		val _matches = new ArrayList<Source>()
+		val _matches = new ArrayList <Source>()
 		for (att : sourceModel.allContents.filter(typeof(atl.research.class_.Attribute)).filter[filterAtt(it)].toIterable()) {
 			_matches += new Source(att)
 		}
@@ -58,12 +58,12 @@ abstract class MultiClassAttribute2Column extends Elem2Elem {
 	def protected abstract void onIdCreation(atl.research.relational_.Column id);
 	def protected abstract void onFkCreation(atl.research.relational_.Column fk);
 	
-	override CorrModelDelta targetToSource(Set<EObject> _detachedCorrElems) {
-		this.createdElems = new ArrayList<EObject>()
-		this.spareElems = new ArrayList<EObject>()
+	override CorrModelDelta targetToSource(Set <EObject> _detachedCorrElems) {
+		this.createdElems = new ArrayList <EObject>()
+		this.spareElems = new ArrayList <EObject>()
 		this.detachedCorrElems = _detachedCorrElems
 				
-		val _matches = new ArrayList<Target>()
+		val _matches = new ArrayList <Target>()
 		for (t : targetModel.allContents.filter(typeof(atl.research.relational_.Table)).toIterable()) {
 			for (id : targetModel.allContents.filter(typeof(atl.research.relational_.Column)).toIterable()) {
 				for (fk : targetModel.allContents.filter(typeof(atl.research.relational_.Column)).toIterable()) {

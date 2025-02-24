@@ -26,13 +26,13 @@ import tools.refinery.interpreter.matchers.util.IMultiLookup;
  * @param <V>
  *            the type parameter of the nodes in the graph data source
  */
-public class IBiDirectionalWrapper<V> implements IBiDirectionalGraphDataSource<V>, IGraphObserver<V> {
+public class IBiDirectionalWrapper <V> implements IBiDirectionalGraphDataSource <V>, IGraphObserver <V> {
 
-    private IGraphDataSource<V> wrappedDataSource;
+    private IGraphDataSource <V> wrappedDataSource;
     // target -> source -> count
-    private IMultiLookup<V, V> incomingEdges;
+    private IMultiLookup <V, V> incomingEdges;
 
-    public IBiDirectionalWrapper(IGraphDataSource<V> gds) {
+    public IBiDirectionalWrapper(IGraphDataSource <V> gds) {
         this.wrappedDataSource = gds;
 
         this.incomingEdges = CollectionsFactory.createMultiLookup(
@@ -40,7 +40,7 @@ public class IBiDirectionalWrapper<V> implements IBiDirectionalGraphDataSource<V
 
         if (gds.getAllNodes() != null) {
             for (V source : gds.getAllNodes()) {
-                IMemoryView<V> targets = gds.getTargetNodes(source);
+                IMemoryView <V> targets = gds.getTargetNodes(source);
                 for (V target : targets.distinctValues()) {
                     int count = targets.getCount(target);
                     for (int i = 0; i < count; i++) {
@@ -54,32 +54,32 @@ public class IBiDirectionalWrapper<V> implements IBiDirectionalGraphDataSource<V
     }
 
     @Override
-    public void attachObserver(IGraphObserver<V> observer) {
+    public void attachObserver(IGraphObserver <V> observer) {
         wrappedDataSource.attachObserver(observer);
     }
 
     @Override
-    public void attachAsFirstObserver(IGraphObserver<V> observer) {
+    public void attachAsFirstObserver(IGraphObserver <V> observer) {
         wrappedDataSource.attachAsFirstObserver(observer);
     }
 
     @Override
-    public void detachObserver(IGraphObserver<V> observer) {
+    public void detachObserver(IGraphObserver <V> observer) {
         wrappedDataSource.detachObserver(observer);
     }
 
     @Override
-    public Set<V> getAllNodes() {
+    public Set <V> getAllNodes() {
         return wrappedDataSource.getAllNodes();
     }
 
     @Override
-    public IMemoryView<V> getTargetNodes(V source) {
+    public IMemoryView <V> getTargetNodes(V source) {
         return wrappedDataSource.getTargetNodes(source);
     }
 
     @Override
-    public IMemoryView<V> getSourceNodes(V target) {
+    public IMemoryView <V> getSourceNodes(V target) {
         return incomingEdges.lookupOrEmpty(target);
     }
 

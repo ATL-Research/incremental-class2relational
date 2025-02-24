@@ -20,15 +20,15 @@ import tools.refinery.store.map.tests.utils.MapTestEnvironment;
 
 public class MultiThreadTestRunnable implements Runnable {
 	final String scenario;
-	final VersionedMapStore<Integer, String> store;
+	final VersionedMapStore <Integer, String> store;
 	final int steps;
 	final int maxKey;
 	final String[] values;
 	final int seed;
 	final int commitFrequency;
-	final List<Throwable> errors = new LinkedList<>();
+	final List <Throwable> errors = new LinkedList<>();
 
-	public MultiThreadTestRunnable(String scenario, VersionedMapStore<Integer, String> store, int steps,
+	public MultiThreadTestRunnable(String scenario, VersionedMapStore <Integer, String> store, int steps,
 								   int maxKey, String[] values, int seed, int commitFrequency) {
 		super();
 		this.scenario = scenario;
@@ -45,7 +45,7 @@ public class MultiThreadTestRunnable implements Runnable {
 		errors.add(error);
 	}
 
-	public List<Throwable> getErrors() {
+	public List <Throwable> getErrors() {
 		return errors;
 	}
 
@@ -61,8 +61,8 @@ public class MultiThreadTestRunnable implements Runnable {
 	private void task() {
 		// 1. build a map with versions
 		Random r = new Random(seed);
-		VersionedMap<Integer, String> versioned =  store.createMap();
-		Map<Integer, Version> index2Version = new HashMap<>();
+		VersionedMap <Integer, String> versioned =  store.createMap();
+		Map <Integer, Version> index2Version = new HashMap<>();
 
 		for (int i = 0; i < steps; i++) {
 			int index = i + 1;
@@ -81,7 +81,7 @@ public class MultiThreadTestRunnable implements Runnable {
 			MapTestEnvironment.printStatus(scenario, index, steps, "building");
 		}
 		// 2. create a non-versioned
-		VersionedMap<Integer, String> reference = store.createMap();
+		VersionedMap <Integer, String> reference = store.createMap();
 		r = new Random(seed);
 		Random r2 = new Random(seed + 1);
 
@@ -101,7 +101,7 @@ public class MultiThreadTestRunnable implements Runnable {
 				MapTestEnvironment.compareTwoMaps(scenario + ":" + index, reference, versioned, null);
 
 				// go back to a random state (probably created by another thread)
-				List<Version> states = new ArrayList<>(index2Version.values());
+				List <Version> states = new ArrayList<>(index2Version.values());
 				//states.sort(Long::compare);
 				Collections.shuffle(states, r2);
 				for (Version state : states.subList(0, Math.min(states.size(), 100))) {

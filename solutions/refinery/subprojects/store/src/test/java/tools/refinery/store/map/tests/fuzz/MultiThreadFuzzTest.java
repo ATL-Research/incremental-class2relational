@@ -27,10 +27,10 @@ import static tools.refinery.store.map.tests.fuzz.utils.FuzzTestCollections.*;
 class MultiThreadFuzzTest {
 	public static final int noThreads = 10;
 
-	private void runFuzzTest(String scenario, int seed, int steps, int maxKey, int maxValue, boolean nullDefault, int commitFrequency, VersionedMapStoreFactoryBuilder<Integer, String> builder) {
+	private void runFuzzTest(String scenario, int seed, int steps, int maxKey, int maxValue, boolean nullDefault, int commitFrequency, VersionedMapStoreFactoryBuilder <Integer, String> builder) {
 		String[] values = MapTestEnvironment.prepareValues(maxValue, nullDefault);
 
-		VersionedMapStore<Integer, String> store = builder.defaultValue(values[0]).build().createOne();
+		VersionedMapStore <Integer, String> store = builder.defaultValue(values[0]).build().createOne();
 
 		// initialize runnables
 		MultiThreadTestRunnable[] runnables = new MultiThreadTestRunnable[noThreads];
@@ -61,7 +61,7 @@ class MultiThreadFuzzTest {
 		}
 
 		// collect errors
-		List<Throwable> errors = new LinkedList<>();
+		List <Throwable> errors = new LinkedList<>();
 		for (int i = 0; i < noThreads; i++) {
 			errors.addAll(runnables[i].getErrors());
 		}
@@ -77,12 +77,12 @@ class MultiThreadFuzzTest {
 	@Timeout(value = 10)
 	@Tag("fuzz")
 	void parametrizedFastFuzz(int ignoredTests, int steps, int noKeys, int noValues, boolean defaultNull,
-							   int commitFrequency, int seed, VersionedMapStoreFactoryBuilder<Integer, String> builder) {
+							   int commitFrequency, int seed, VersionedMapStoreFactoryBuilder <Integer, String> builder) {
 		runFuzzTest("MultiThreadS" + steps + "K" + noKeys + "V" + noValues + defaultNull + "CF" + commitFrequency +
 				 "s" + seed, seed, steps, noKeys, noValues, defaultNull, commitFrequency, builder);
 	}
 
-	static Stream<Arguments> parametrizedFastFuzz() {
+	static Stream <Arguments> parametrizedFastFuzz() {
 		return FuzzTestUtils.permutationWithSize(stepCounts, keyCounts, valueCounts, nullDefaultOptions,
 				 new Object[]{10, 100}, randomSeedOptions, storeConfigs);
 	}
@@ -92,12 +92,12 @@ class MultiThreadFuzzTest {
 	@Tag("fuzz")
 	@Tag("slow")
 	void parametrizedSlowFuzz(int ignoredTests, int steps, int noKeys, int noValues, boolean nullDefault,
-							  int commitFrequency, int seed, VersionedMapStoreFactoryBuilder<Integer, String> builder) {
+							  int commitFrequency, int seed, VersionedMapStoreFactoryBuilder <Integer, String> builder) {
 		runFuzzTest("RestoreS" + steps + "K" + noKeys + "V" + noValues + "s" + seed, seed, steps, noKeys, noValues,
 				nullDefault, commitFrequency, builder);
 	}
 
-	static Stream<Arguments> parametrizedSlowFuzz() {
+	static Stream <Arguments> parametrizedSlowFuzz() {
 		return FuzzTestUtils.changeStepCount(RestoreFuzzTest.parametrizedFastFuzz(), 1);
 	}
 }

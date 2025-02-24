@@ -9,14 +9,14 @@ import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
- * The <b>Package</b> for the model.
+ * The <b>Package </b> for the model.
  * It contains accessors for the meta objects to represent
  * <ul>
- *   <li>each class,</li>
- *   <li>each feature of each class,</li>
- *   <li>each operation of each class,</li>
- *   <li>each enum,</li>
- *   <li>and each data type</li>
+ *   <li>each class, </li>
+ *   <li>each feature of each class, </li>
+ *   <li>each operation of each class, </li>
+ *   <li>each enum, </li>
+ *   <li>and each data type </li>
  * </ul>
  * <!-- end-user-doc -->
  * @see Trace.TraceFactory
@@ -57,7 +57,7 @@ public interface TracePackage extends EPackage {
 	TracePackage eINSTANCE = Trace.impl.TracePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link Trace.impl.TraceEntryImpl <em>Entry</em>}' class.
+	 * The meta object id for the '{@link Trace.impl.TraceEntryImpl <em>Entry </em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see Trace.impl.TraceEntryImpl
@@ -67,7 +67,7 @@ public interface TracePackage extends EPackage {
 	int TRACE_ENTRY = 0;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * The feature id for the ' <em> <b>Source </b> </em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -76,7 +76,7 @@ public interface TracePackage extends EPackage {
 	int TRACE_ENTRY__SOURCE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * The feature id for the ' <em> <b>Target </b> </em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -85,7 +85,7 @@ public interface TracePackage extends EPackage {
 	int TRACE_ENTRY__TARGET = 1;
 
 	/**
-	 * The feature id for the '<em><b>Index</b></em>' attribute.
+	 * The feature id for the ' <em> <b>Index </b> </em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -94,7 +94,7 @@ public interface TracePackage extends EPackage {
 	int TRACE_ENTRY__INDEX = 2;
 
 	/**
-	 * The number of structural features of the '<em>Entry</em>' class.
+	 * The number of structural features of the ' <em>Entry </em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -103,7 +103,7 @@ public interface TracePackage extends EPackage {
 	int TRACE_ENTRY_FEATURE_COUNT = 3;
 
 	/**
-	 * The number of operations of the '<em>Entry</em>' class.
+	 * The number of operations of the ' <em>Entry </em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -113,20 +113,20 @@ public interface TracePackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link Trace.TraceEntry <em>Entry</em>}'.
+	 * Returns the meta object for class '{@link Trace.TraceEntry <em>Entry </em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Entry</em>'.
+	 * @return the meta object for class ' <em>Entry </em>'.
 	 * @see Trace.TraceEntry
 	 * @generated
 	 */
 	EClass getTraceEntry();
 
 	/**
-	 * Returns the meta object for the reference '{@link Trace.TraceEntry#getSource <em>Source</em>}'.
+	 * Returns the meta object for the reference '{@link Trace.TraceEntry#getSource <em>Source </em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Source</em>'.
+	 * @return the meta object for the reference ' <em>Source </em>'.
 	 * @see Trace.TraceEntry#getSource()
 	 * @see #getTraceEntry()
 	 * @generated
@@ -134,10 +134,10 @@ public interface TracePackage extends EPackage {
 	EReference getTraceEntry_Source();
 
 	/**
-	 * Returns the meta object for the reference '{@link Trace.TraceEntry#getTarget <em>Target</em>}'.
+	 * Returns the meta object for the reference '{@link Trace.TraceEntry#getTarget <em>Target </em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Target</em>'.
+	 * @return the meta object for the reference ' <em>Target </em>'.
 	 * @see Trace.TraceEntry#getTarget()
 	 * @see #getTraceEntry()
 	 * @generated
@@ -145,10 +145,10 @@ public interface TracePackage extends EPackage {
 	EReference getTraceEntry_Target();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Trace.TraceEntry#getIndex <em>Index</em>}'.
+	 * Returns the meta object for the attribute '{@link Trace.TraceEntry#getIndex <em>Index </em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Index</em>'.
+	 * @return the meta object for the attribute ' <em>Index </em>'.
 	 * @see Trace.TraceEntry#getIndex()
 	 * @see #getTraceEntry()
 	 * @generated
@@ -168,18 +168,18 @@ public interface TracePackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * Defines literals for the meta objects that represent
 	 * <ul>
-	 *   <li>each class,</li>
-	 *   <li>each feature of each class,</li>
-	 *   <li>each operation of each class,</li>
-	 *   <li>each enum,</li>
-	 *   <li>and each data type</li>
+	 *   <li>each class, </li>
+	 *   <li>each feature of each class, </li>
+	 *   <li>each operation of each class, </li>
+	 *   <li>each enum, </li>
+	 *   <li>and each data type </li>
 	 * </ul>
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link Trace.impl.TraceEntryImpl <em>Entry</em>}' class.
+		 * The meta object literal for the '{@link Trace.impl.TraceEntryImpl <em>Entry </em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see Trace.impl.TraceEntryImpl
@@ -189,7 +189,7 @@ public interface TracePackage extends EPackage {
 		EClass TRACE_ENTRY = eINSTANCE.getTraceEntry();
 
 		/**
-		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
+		 * The meta object literal for the ' <em> <b>Source </b> </em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -197,7 +197,7 @@ public interface TracePackage extends EPackage {
 		EReference TRACE_ENTRY__SOURCE = eINSTANCE.getTraceEntry_Source();
 
 		/**
-		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
+		 * The meta object literal for the ' <em> <b>Target </b> </em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -205,7 +205,7 @@ public interface TracePackage extends EPackage {
 		EReference TRACE_ENTRY__TARGET = eINSTANCE.getTraceEntry_Target();
 
 		/**
-		 * The meta object literal for the '<em><b>Index</b></em>' attribute feature.
+		 * The meta object literal for the ' <em> <b>Index </b> </em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

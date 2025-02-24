@@ -12,7 +12,7 @@ import tools.refinery.store.query.substitution.Substitution;
 import java.util.Set;
 
 public sealed interface AnyTerm permits AnyDataVariable, Term {
-	Class<?> getType();
+	Class <?> getType();
 
 	AnyTerm substitute(Substitution substitution);
 
@@ -20,5 +20,5 @@ public sealed interface AnyTerm permits AnyDataVariable, Term {
 
 	int hashCodeWithSubstitution(LiteralHashCodeHelper helper);
 
-	Set<AnyDataVariable> getInputVariables();
+	Set <AnyDataVariable> getInputVariables();
 }

@@ -12,5 +12,5 @@ import java.util.Collection;
 
 @FunctionalInterface
 public interface ClauseCallback2Data0 {
-	Collection<Literal> toLiterals(NodeVariable v1, NodeVariable v2);
+	Collection <Literal> toLiterals(NodeVariable v1, NodeVariable v2);
 }

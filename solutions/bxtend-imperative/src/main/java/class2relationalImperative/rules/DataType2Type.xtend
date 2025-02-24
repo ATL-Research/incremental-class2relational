@@ -10,7 +10,7 @@ import atl.research.class_.Classifier
 // Setup
 class DataType2Type extends Elem2Elem {
 	// Helper
-	static Map<DataType, Type> typeMap = new HashMap<DataType, Type>()
+	static Map <DataType, Type> typeMap = new HashMap <DataType, Type>()
 
 	// Setup
 	new(Resource src, Resource trgt, Resource corr) {

@@ -30,7 +30,7 @@ import static tools.refinery.store.reasoning.translator.multiobject.MultiObjectT
 public class DirectedCrossReferenceTranslator implements ModelStoreConfiguration {
 	private final PartialRelation linkType;
 	private final DirectedCrossReferenceInfo info;
-	private final Symbol<TruthValue> symbol;
+	private final Symbol <TruthValue> symbol;
 
 	public DirectedCrossReferenceTranslator(PartialRelation linkType, DirectedCrossReferenceInfo info) {
 		this.linkType = linkType;

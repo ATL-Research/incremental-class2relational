@@ -41,13 +41,13 @@ public interface IQueryMetaContext {
      * <p> Must follow directly or transitively from implications of {@link #getImplications(IInputKey)}.
      * @since 1.6
      */
-    Collection<InputKeyImplication> getWeakenedAlternatives(IInputKey implyingKey);
+    Collection <InputKeyImplication> getWeakenedAlternatives(IInputKey implyingKey);
 
 	/**
 	 * Returns known direct implications, e.g. edge supertypes, edge opposites, node type constraints, etc.
      * <p> Note that for the obvious reasons, enumerable keys can only be implied by enumerable keys.
 	 */
-	Collection<InputKeyImplication> getImplications(IInputKey implyingKey);
+	Collection <InputKeyImplication> getImplications(IInputKey implyingKey);
 
     /**
      * Returns known "double dispatch" implications, where the given implying key implies other input keys under certain additional conditions (themselves input keys).
@@ -58,20 +58,20 @@ public interface IQueryMetaContext {
      * @return multi-map, where the keys are additional conditions and the values are input key implications jointly implied by the condition and the given implying key.
      * @since 2.0
      */
-    Map<InputKeyImplication, Set<InputKeyImplication>> getConditionalImplications(IInputKey implyingKey);
+    Map <InputKeyImplication, Set <InputKeyImplication>> getConditionalImplications(IInputKey implyingKey);
 
 	/**
 	 * Returns functional dependencies of the input key expressed in terms of column indices.
 	 *
 	 * <p> Each entry of the map is a functional dependency rule, where the entry key specifies source columns and the entry value specifies target columns.
 	 */
-	Map<Set<Integer>, Set<Integer>> getFunctionalDependencies(IInputKey key);
+	Map <Set<Integer>, Set <Integer>> getFunctionalDependencies(IInputKey key);
 
 	/**
 	 * For query normalizing, this is the order suggested for trying to eliminate input keys.
 	 * @since 1.6
 	 */
-	Comparator<IInputKey> getSuggestedEliminationOrdering();
+	Comparator <IInputKey> getSuggestedEliminationOrdering();
 
 	/**
 	 * Tells whether the given {@link IInputKey} is an edge and may lead out of scope.
@@ -93,6 +93,6 @@ public interface IQueryMetaContext {
 	 * @return the poset comparator
 	 * @since 1.6
 	 */
-	IPosetComparator getPosetComparator(Iterable<IInputKey> keys);
+	IPosetComparator getPosetComparator(Iterable <IInputKey> keys);
 
 }

@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.Map;
 
 public class DnfLifter {
-	private final Map<ModalDnf, Dnf> cache = new HashMap<>();
+	private final Map <ModalDnf, Dnf> cache = new HashMap<>();
 
-	public <T> Query<T> lift(Modality modality, Concreteness concreteness, Query<T> query) {
+	public <T> Query <T> lift(Modality modality, Concreteness concreteness, Query <T> query) {
 		var liftedDnf = lift(modality, concreteness, query.getDnf());
 		return query.withDnf(liftedDnf);
 	}
@@ -28,7 +28,7 @@ public class DnfLifter {
 		return query.withDnf(liftedDnf);
 	}
 
-	public <T> FunctionalQuery<T> lift(Modality modality, Concreteness concreteness, FunctionalQuery<T> query) {
+	public <T> FunctionalQuery <T> lift(Modality modality, Concreteness concreteness, FunctionalQuery <T> query) {
 		var liftedDnf = lift(modality, concreteness, query.getDnf());
 		return query.withDnf(liftedDnf);
 	}
@@ -54,7 +54,7 @@ public class DnfLifter {
 		return liftedDnf;
 	}
 
-	private List<Literal> liftClause(Modality modality, Concreteness concreteness, Dnf dnf, DnfClause clause) {
+	private List <Literal> liftClause(Modality modality, Concreteness concreteness, Dnf dnf, DnfClause clause) {
 		var lifter = new ClauseLifter(modality, concreteness, dnf, clause);
 		return lifter.liftClause();
 	}

@@ -51,7 +51,7 @@ class TransactionExecutorTest {
 			friend(a, b).
 			""";
 
-	private static final Map<String, String> UPDATE_FULL_TEXT_PARAMS = Map.of("resource", RESOURCE_NAME, "serviceType",
+	private static final Map <String, String> UPDATE_FULL_TEXT_PARAMS = Map.of("resource", RESOURCE_NAME, "serviceType",
 			"update", "fullText", TEST_PROBLEM);
 
 	@Inject
@@ -84,7 +84,7 @@ class TransactionExecutorTest {
 		var stateId = updateFullText();
 		var responseHandler = sendRequestAndWaitForAllResponses(
 				new XtextWebRequest("bar", Map.of("resource", RESOURCE_NAME, "serviceType", "update", "requiredStateId",
-						stateId, "deltaText", "individual q.\nnode(q).\n<invalid text>\n", "deltaOffset", "0", "deltaReplaceLength", "0")));
+						stateId, "deltaText", "individual q.\nnode(q).\n <invalid text>\n", "deltaOffset", "0", "deltaReplaceLength", "0")));
 
 		var captor = newCaptor();
 		verify(responseHandler, times(3)).onResponse(captor.capture());
@@ -121,7 +121,7 @@ class TransactionExecutorTest {
 		assertThat(response, hasProperty("responseData", instanceOf(ValidationResult.class)));
 	}
 
-	private ArgumentCaptor<XtextWebResponse> newCaptor() {
+	private ArgumentCaptor <XtextWebResponse> newCaptor() {
 		return ArgumentCaptor.forClass(XtextWebResponse.class);
 	}
 
@@ -129,7 +129,7 @@ class TransactionExecutorTest {
 		return updateFullText(newCaptor());
 	}
 
-	private String updateFullText(ArgumentCaptor<XtextWebResponse> captor) throws ResponseHandlerException {
+	private String updateFullText(ArgumentCaptor <XtextWebResponse> captor) throws ResponseHandlerException {
 		var responseHandler = sendRequestAndWaitForAllResponses(new XtextWebRequest("foo", UPDATE_FULL_TEXT_PARAMS));
 
 		verify(responseHandler, times(4)).onResponse(captor.capture());
@@ -150,7 +150,7 @@ class TransactionExecutorTest {
 		return ((DocumentStateResult) ((XtextWebOkResponse) okResponse).getResponseData()).getStateId();
 	}
 
-	private void assertThatPrecomputedMessagesAreReceived(String stateId, List<XtextWebResponse> responses) {
+	private void assertThatPrecomputedMessagesAreReceived(String stateId, List <XtextWebResponse> responses) {
 		assertHighlightingResponse(stateId, responses.get(1));
 		assertValidationResponse(stateId, responses.get(2));
 	}

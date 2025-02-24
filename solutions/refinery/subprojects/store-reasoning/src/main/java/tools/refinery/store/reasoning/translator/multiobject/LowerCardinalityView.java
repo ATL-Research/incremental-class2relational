@@ -10,8 +10,8 @@ import tools.refinery.store.query.view.AbstractFunctionView;
 import tools.refinery.store.representation.Symbol;
 import tools.refinery.store.representation.cardinality.CardinalityInterval;
 
-class LowerCardinalityView extends AbstractFunctionView<CardinalityInterval> {
-	public LowerCardinalityView(Symbol<CardinalityInterval> symbol) {
+class LowerCardinalityView extends AbstractFunctionView <CardinalityInterval> {
+	public LowerCardinalityView(Symbol <CardinalityInterval> symbol) {
 		super(symbol, "lower", new Parameter(Integer.class));
 	}
 

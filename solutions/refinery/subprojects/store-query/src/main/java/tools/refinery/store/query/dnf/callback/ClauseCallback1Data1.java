@@ -11,6 +11,6 @@ import tools.refinery.store.query.term.DataVariable;
 import java.util.Collection;
 
 @FunctionalInterface
-public interface ClauseCallback1Data1<T> {
-	Collection<Literal> toLiterals(DataVariable<T> d1);
+public interface ClauseCallback1Data1 <T> {
+	Collection <Literal> toLiterals(DataVariable <T> d1);
 }

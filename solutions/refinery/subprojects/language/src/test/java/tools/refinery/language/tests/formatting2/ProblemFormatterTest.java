@@ -30,10 +30,10 @@ import static org.hamcrest.Matchers.equalTo;
 @InjectWith(ProblemInjectorProvider.class)
 class ProblemFormatterTest {
 	@Inject
-	private ParseHelper<Problem> parseHelper;
+	private ParseHelper <Problem> parseHelper;
 
 	@Inject
-	private Provider<FormatterRequest> formatterRequestProvider;
+	private Provider <FormatterRequest> formatterRequestProvider;
 
 	@Inject
 	private TextRegionAccessBuilder regionBuilder;
@@ -231,7 +231,7 @@ class ProblemFormatterTest {
 		request.setFormatUndefinedHiddenRegionsOnly(false);
 		ITextRegionAccess regionAccess = regionBuilder.forNodeModel(resource).create();
 		request.setTextRegionAccess(regionAccess);
-		List<ITextReplacement> replacements = formatter2.format(request);
+		List <ITextReplacement> replacements = formatter2.format(request);
 		var formattedString = regionAccess.getRewriter().renderToString(replacements);
 		assertThat(formattedString.replace("\r\n", "\n"), equalTo(expected.replace("\r\n", "\n")));
 	}

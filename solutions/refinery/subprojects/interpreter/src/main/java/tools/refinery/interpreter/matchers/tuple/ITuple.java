@@ -37,7 +37,7 @@ public interface ITuple {
     /**
      * @return the set containing all distinct elements of this Tuple, cast as type T
      */
-    <T> Set<T> getDistinctElements();
+    <T> Set <T> getDistinctElements();
 
     /**
      * @return number of elements
@@ -50,7 +50,7 @@ public interface ITuple {
      *
      * @return the inverted index mapping each element of this pattern to its index in the array
      */
-    Map<Object, Integer> invertIndex();
+    Map <Object, Integer> invertIndex();
 
     /**
      * Calculates an inverted index of the elements of this pattern. For each element, the index of all of its
@@ -58,7 +58,7 @@ public interface ITuple {
      *
      * @return the inverted index mapping each element of this pattern to its index in the array
      */
-    Map<Object, List<Integer>> invertIndexWithMupliplicity();
+    Map <Object, List <Integer>> invertIndexWithMupliplicity();
 
     Tuple toImmutable();
 }

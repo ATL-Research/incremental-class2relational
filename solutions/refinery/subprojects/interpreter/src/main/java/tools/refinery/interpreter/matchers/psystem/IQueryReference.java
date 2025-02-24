@@ -27,7 +27,7 @@ public interface IQueryReference extends IMultiQueryReference {
      * @since 2.8
      */
     @Override
-    default List<PQuery> getReferredQueries() {
+    default List <PQuery> getReferredQueries() {
         return Collections.singletonList(getReferredQuery());
     }
 }

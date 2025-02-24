@@ -15,12 +15,12 @@ import tools.refinery.store.tuple.Tuple;
 
 import java.util.List;
 
-public class MergeActionLiteral<A, C> extends AbstractActionLiteral {
-	private final PartialSymbol<A, C> partialSymbol;
-	private final List<NodeVariable> parameters;
+public class MergeActionLiteral <A, C> extends AbstractActionLiteral {
+	private final PartialSymbol <A, C> partialSymbol;
+	private final List <NodeVariable> parameters;
 	private final A value;
 
-	public MergeActionLiteral(PartialSymbol<A, C> partialSymbol, A value, List<NodeVariable> parameters) {
+	public MergeActionLiteral(PartialSymbol <A, C> partialSymbol, A value, List <NodeVariable> parameters) {
 		if (partialSymbol.arity() != parameters.size()) {
 			throw new IllegalArgumentException("Expected %d parameters for partial symbol %s, got %d instead"
 					.formatted(partialSymbol.arity(), partialSymbol, parameters.size()));
@@ -30,11 +30,11 @@ public class MergeActionLiteral<A, C> extends AbstractActionLiteral {
 		this.value = value;
 	}
 
-	public PartialSymbol<A, C> getPartialSymbol() {
+	public PartialSymbol <A, C> getPartialSymbol() {
 		return partialSymbol;
 	}
 
-	public List<NodeVariable> getParameters() {
+	public List <NodeVariable> getParameters() {
 		return parameters;
 	}
 
@@ -43,12 +43,12 @@ public class MergeActionLiteral<A, C> extends AbstractActionLiteral {
 	}
 
 	@Override
-	public List<NodeVariable> getInputVariables() {
+	public List <NodeVariable> getInputVariables() {
 		return getParameters();
 	}
 
 	@Override
-	public List<NodeVariable> getOutputVariables() {
+	public List <NodeVariable> getOutputVariables() {
 		return List.of();
 	}
 

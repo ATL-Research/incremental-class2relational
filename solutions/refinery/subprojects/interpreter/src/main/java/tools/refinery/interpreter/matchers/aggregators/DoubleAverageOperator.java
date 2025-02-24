@@ -17,7 +17,7 @@ import tools.refinery.interpreter.matchers.psystem.aggregations.IMultisetAggrega
  * @author Zoltan Ujhelyi
  * @since 2.0
  */
-public class DoubleAverageOperator implements IMultisetAggregationOperator<Double, AverageAccumulator<Double>, Double> {
+public class DoubleAverageOperator implements IMultisetAggregationOperator <Double, AverageAccumulator <Double>, Double> {
 
     public static final DoubleAverageOperator INSTANCE = new DoubleAverageOperator();
 
@@ -27,26 +27,26 @@ public class DoubleAverageOperator implements IMultisetAggregationOperator<Doubl
 
     @Override
     public String getShortDescription() {
-        return "avg<Integer> incrementally computes the average of java.lang.Integer values";
+        return "avg <Integer> incrementally computes the average of java.lang.Integer values";
     }
 
     @Override
     public String getName() {
-        return "avg<Integer>";
+        return "avg <Integer>";
     }
 
     @Override
-    public AverageAccumulator<Double> createNeutral() {
-        return new AverageAccumulator<Double>(0d, 0l);
+    public AverageAccumulator <Double> createNeutral() {
+        return new AverageAccumulator <Double>(0d, 0l);
     }
 
     @Override
-    public boolean isNeutral(AverageAccumulator<Double> result) {
+    public boolean isNeutral(AverageAccumulator <Double> result) {
         return result.count == 0l;
     }
 
     @Override
-    public AverageAccumulator<Double> update(AverageAccumulator<Double> oldResult, Double updateValue,
+    public AverageAccumulator <Double> update(AverageAccumulator <Double> oldResult, Double updateValue,
             boolean isInsertion) {
         if (isInsertion) {
             oldResult.value += updateValue;
@@ -59,14 +59,14 @@ public class DoubleAverageOperator implements IMultisetAggregationOperator<Doubl
     }
 
     @Override
-    public Double getAggregate(AverageAccumulator<Double> result) {
+    public Double getAggregate(AverageAccumulator <Double> result) {
         return (result.count == 0)
                 ? null
                 : result.value/result.count;
     }
 
     @Override
-    public Double aggregateStream(Stream<Double> stream) {
+    public Double aggregateStream(Stream <Double> stream) {
         final OptionalDouble averageOpt = stream.mapToDouble(Double::doubleValue).average();
         return averageOpt.isPresent() ? averageOpt.getAsDouble() : null;
     }
@@ -75,8 +75,8 @@ public class DoubleAverageOperator implements IMultisetAggregationOperator<Doubl
      * @since 2.4
      */
     @Override
-    public AverageAccumulator<Double> clone(AverageAccumulator<Double> original) {
-        return new AverageAccumulator<Double>(original.value, original.count);
+    public AverageAccumulator <Double> clone(AverageAccumulator <Double> original) {
+        return new AverageAccumulator <Double>(original.value, original.count);
     }
 
 }

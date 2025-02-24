@@ -19,18 +19,18 @@ import java.util.Objects;
  * @param <V>
  * @author Oszkar Semerath
  */
-public class VersionedMapStateImpl<K, V> implements VersionedMap<K, V> {
-	protected final VersionedMapStoreStateImpl<K, V> store;
+public class VersionedMapStateImpl <K, V> implements VersionedMap <K, V> {
+	protected final VersionedMapStoreStateImpl <K, V> store;
 
-	protected final ContinuousHashProvider<K> hashProvider;
+	protected final ContinuousHashProvider <K> hashProvider;
 	protected final V defaultValue;
-	protected Node<K, V> root;
+	protected Node <K, V> root;
 
-	private final OldValueBox<V> oldValueBox = new OldValueBox<>();
+	private final OldValueBox <V> oldValueBox = new OldValueBox<>();
 
 	public VersionedMapStateImpl(
-			VersionedMapStoreStateImpl<K, V> store,
-			ContinuousHashProvider<K> hashProvider,
+			VersionedMapStoreStateImpl <K, V> store,
+			ContinuousHashProvider <K> hashProvider,
 			V defaultValue) {
 		this.store = store;
 		this.hashProvider = hashProvider;
@@ -39,9 +39,9 @@ public class VersionedMapStateImpl<K, V> implements VersionedMap<K, V> {
 	}
 
 	public VersionedMapStateImpl(
-			VersionedMapStoreStateImpl<K, V> store,
-			ContinuousHashProvider<K> hashProvider,
-			V defaultValue, Node<K, V> data) {
+			VersionedMapStoreStateImpl <K, V> store,
+			ContinuousHashProvider <K> hashProvider,
+			V defaultValue, Node <K, V> data) {
 		this.store = store;
 		this.hashProvider = hashProvider;
 		this.defaultValue = defaultValue;
@@ -53,7 +53,7 @@ public class VersionedMapStateImpl<K, V> implements VersionedMap<K, V> {
 		return defaultValue;
 	}
 
-	public ContinuousHashProvider<K> getHashProvider() {
+	public ContinuousHashProvider <K> getHashProvider() {
 		return hashProvider;
 	}
 
@@ -69,16 +69,16 @@ public class VersionedMapStateImpl<K, V> implements VersionedMap<K, V> {
 	}
 
 	@Override
-	public void putAll(Cursor<K, V> cursor) {
+	public void putAll(Cursor <K, V> cursor) {
 		if (cursor.getDependingMaps().contains(this)) {
-			List<K> keys = new LinkedList<>();
-			List<V> values = new LinkedList<>();
+			List <K> keys = new LinkedList<>();
+			List <V> values = new LinkedList<>();
 			while (cursor.move()) {
 				keys.add(cursor.getKey());
 				values.add(cursor.getValue());
 			}
-			Iterator<K> keyIterator = keys.iterator();
-			Iterator<V> valueIterator = values.iterator();
+			Iterator <K> keyIterator = keys.iterator();
+			Iterator <V> valueIterator = values.iterator();
 			while (keyIterator.hasNext()) {
 				var key = keyIterator.next();
 				var value = valueIterator.next();
@@ -110,15 +110,15 @@ public class VersionedMapStateImpl<K, V> implements VersionedMap<K, V> {
 	}
 
 	@Override
-	public Cursor<K, V> getAll() {
+	public Cursor <K, V> getAll() {
 		return new MapCursor<>(this.root, this);
 	}
 
 	@Override
-	public DiffCursor<K, V> getDiffCursor(Version toVersion) {
-		InOrderMapCursor<K, V> fromCursor = new InOrderMapCursor<>(this);
-		VersionedMapStateImpl<K, V> toMap = (VersionedMapStateImpl<K, V>) this.store.createMap(toVersion);
-		InOrderMapCursor<K, V> toCursor = new InOrderMapCursor<>(toMap);
+	public DiffCursor <K, V> getDiffCursor(Version toVersion) {
+		InOrderMapCursor <K, V> fromCursor = new InOrderMapCursor<>(this);
+		VersionedMapStateImpl <K, V> toMap = (VersionedMapStateImpl <K, V>) this.store.createMap(toVersion);
+		InOrderMapCursor <K, V> toCursor = new InOrderMapCursor<>(toMap);
 		return new MapDiffCursor<>(this.defaultValue, fromCursor, toCursor);
 	}
 
@@ -128,7 +128,7 @@ public class VersionedMapStateImpl<K, V> implements VersionedMap<K, V> {
 		return this.store.commit(root, this);
 	}
 
-	public void setRoot(Node<K, V> root) {
+	public void setRoot(Node <K, V> root) {
 		this.root = root;
 	}
 
@@ -166,6 +166,6 @@ public class VersionedMapStateImpl<K, V> implements VersionedMap<K, V> {
 
 	@Override
 	public boolean contentEquals(AnyVersionedMap other) {
-		return other instanceof VersionedMapStateImpl<?, ?> otherImpl && Objects.equals(root, otherImpl.root);
+		return other instanceof VersionedMapStateImpl <?, ?> otherImpl && Objects.equals(root, otherImpl.root);
 	}
 }

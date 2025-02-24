@@ -13,21 +13,21 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Attribute List Deletion</b></em>'.
+ * An implementation of the model object ' <em> <b>Attribute List Deletion </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.AttributeListDeletionImpl#getDeletedValue <em>Deleted Value</em>}</li>
- *   <li>{@link Changes.impl.AttributeListDeletionImpl#getIndex <em>Index</em>}</li>
+ *   <li>{@link Changes.impl.AttributeListDeletionImpl#getDeletedValue <em>Deleted Value </em>} </li>
+ *   <li>{@link Changes.impl.AttributeListDeletionImpl#getIndex <em>Index </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class AttributeListDeletionImpl extends AttributeChangeImpl implements AttributeListDeletion {
 	/**
-	 * The default value of the '{@link #getDeletedValue() <em>Deleted Value</em>}' attribute.
+	 * The default value of the '{@link #getDeletedValue() <em>Deleted Value </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDeletedValue()
@@ -37,7 +37,7 @@ public class AttributeListDeletionImpl extends AttributeChangeImpl implements At
 	protected static final String DELETED_VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getDeletedValue() <em>Deleted Value</em>}' attribute.
+	 * The cached value of the '{@link #getDeletedValue() <em>Deleted Value </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDeletedValue()
@@ -47,7 +47,7 @@ public class AttributeListDeletionImpl extends AttributeChangeImpl implements At
 	protected String deletedValue = DELETED_VALUE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
+	 * The default value of the '{@link #getIndex() <em>Index </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getIndex()
@@ -57,7 +57,7 @@ public class AttributeListDeletionImpl extends AttributeChangeImpl implements At
 	protected static final int INDEX_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
+	 * The cached value of the '{@link #getIndex() <em>Index </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getIndex()
@@ -216,7 +216,7 @@ public class AttributeListDeletionImpl extends AttributeChangeImpl implements At
 	@Override
 	public void apply() {
 
-		EList<?> collection = (EList<?>)this.getAffectedElement().eGet(this.getFeature());
+		EList <?> collection = (EList <?>)this.getAffectedElement().eGet(this.getFeature());
 		collection.remove(this.getIndex());
 	}
 

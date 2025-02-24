@@ -19,7 +19,7 @@ import tools.refinery.interpreter.matchers.tuple.Tuple;
  * @author Gabor Bergmann
  *
  */
-public class DefaultDeltaMonitor extends DeltaMonitor<Tuple> {
+public class DefaultDeltaMonitor extends DeltaMonitor <Tuple> {
 
     /**
      * @param reteContainer

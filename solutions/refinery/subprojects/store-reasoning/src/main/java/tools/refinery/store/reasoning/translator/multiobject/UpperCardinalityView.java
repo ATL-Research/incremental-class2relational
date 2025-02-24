@@ -11,8 +11,8 @@ import tools.refinery.store.representation.Symbol;
 import tools.refinery.store.representation.cardinality.CardinalityInterval;
 import tools.refinery.store.representation.cardinality.UpperCardinality;
 
-class UpperCardinalityView extends AbstractFunctionView<CardinalityInterval> {
-	public UpperCardinalityView(Symbol<CardinalityInterval> symbol) {
+class UpperCardinalityView extends AbstractFunctionView <CardinalityInterval> {
+	public UpperCardinalityView(Symbol <CardinalityInterval> symbol) {
 		super(symbol, "upper", new Parameter(UpperCardinality.class));
 	}
 

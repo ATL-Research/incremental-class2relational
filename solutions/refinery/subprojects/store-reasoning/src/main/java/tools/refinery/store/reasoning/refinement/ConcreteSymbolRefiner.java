@@ -13,11 +13,11 @@ import tools.refinery.store.tuple.Tuple;
 
 import java.util.Objects;
 
-public class ConcreteSymbolRefiner<A, C> extends AbstractPartialInterpretationRefiner<A, C> {
-	private final Interpretation<A> interpretation;
+public class ConcreteSymbolRefiner <A, C> extends AbstractPartialInterpretationRefiner <A, C> {
+	private final Interpretation <A> interpretation;
 
-	public ConcreteSymbolRefiner(ReasoningAdapter adapter, PartialSymbol<A, C> partialSymbol,
-								 Symbol<A> concreteSymbol) {
+	public ConcreteSymbolRefiner(ReasoningAdapter adapter, PartialSymbol <A, C> partialSymbol,
+								 Symbol <A> concreteSymbol) {
 		super(adapter, partialSymbol);
 		interpretation = adapter.getModel().getInterpretation(concreteSymbol);
 	}
@@ -32,7 +32,7 @@ public class ConcreteSymbolRefiner<A, C> extends AbstractPartialInterpretationRe
 		return true;
 	}
 
-	public static <A1, C1> Factory<A1, C1> of(Symbol<A1> concreteSymbol) {
+	public static <A1, C1> Factory <A1, C1> of(Symbol <A1> concreteSymbol) {
 		return (adapter, partialSymbol) -> new ConcreteSymbolRefiner<>(adapter, partialSymbol, concreteSymbol);
 	}
 }

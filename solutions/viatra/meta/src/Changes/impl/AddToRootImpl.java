@@ -17,20 +17,20 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Add To Root</b></em>'.
+ * An implementation of the model object ' <em> <b>Add To Root </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link changes_new.Changes.impl.AddToRootImpl#getNewObject <em>New Object</em>}</li>
+ *   <li>{@link changes_new.Changes.impl.AddToRootImpl#getNewObject <em>New Object </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class AddToRootImpl extends ElementaryChangeImpl implements AddToRoot {
 	/**
-	 * The cached value of the '{@link #getNewObject() <em>New Object</em>}' containment reference.
+	 * The cached value of the '{@link #getNewObject() <em>New Object </em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getNewObject()

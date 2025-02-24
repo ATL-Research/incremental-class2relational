@@ -27,14 +27,14 @@ import tools.refinery.interpreter.localsearch.operations.ISearchOperation;
  */
 public class ExtendConstant implements ISearchOperation {
 
-    private class Executor extends SingleValueExtendOperationExecutor<Object> {
+    private class Executor extends SingleValueExtendOperationExecutor <Object> {
 
         public Executor(int position) {
             super(position);
         }
 
         @Override
-        public Iterator<?> getIterator(MatchingFrame frame, ISearchContext context) {
+        public Iterator <?> getIterator(MatchingFrame frame, ISearchContext context) {
             return Collections.singletonList(value).iterator();
         }
 
@@ -58,7 +58,7 @@ public class ExtendConstant implements ISearchOperation {
     }
 
     @Override
-    public List<Integer> getVariablePositions() {
+    public List <Integer> getVariablePositions() {
         return Arrays.asList(position);
     }
 
@@ -68,7 +68,7 @@ public class ExtendConstant implements ISearchOperation {
     }
 
     @Override
-    public String toString(Function<Integer, String> variableMapping) {
+    public String toString(Function <Integer, String> variableMapping) {
         return "extend    constant -"+variableMapping.apply(position)+"='"+value+"'";
     }
 

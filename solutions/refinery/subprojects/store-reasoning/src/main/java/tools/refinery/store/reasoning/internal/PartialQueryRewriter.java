@@ -16,7 +16,7 @@ import java.util.Map;
 
 class PartialQueryRewriter extends AbstractRecursiveRewriter {
 	private final DnfLifter lifter;
-	private final Map<PartialRelation, PartialRelationRewriter> relationRewriterMap = new HashMap<>();
+	private final Map <PartialRelation, PartialRelationRewriter> relationRewriterMap = new HashMap<>();
 
 	PartialQueryRewriter(DnfLifter lifter) {
 		this.lifter = lifter;

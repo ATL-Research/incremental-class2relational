@@ -17,19 +17,19 @@ public sealed interface AnySymbolView extends Constraint permits SymbolView {
 
 	String getViewName();
 
-	default Set<FunctionalDependency<Integer>> getFunctionalDependencies() {
+	default Set <FunctionalDependency<Integer>> getFunctionalDependencies() {
 		return Set.of();
 	}
 
-	default Set<ViewImplication> getImpliedRelationViews() {
+	default Set <ViewImplication> getImpliedRelationViews() {
 		return Set.of();
 	}
 
 	boolean get(Model model, Object[] tuple);
 
-	Iterable<Object[]> getAll(Model model);
+	Iterable <Object[]> getAll(Model model);
 
-	default Iterable<Object[]> getAdjacent(Model model, int slot, Object value) {
+	default Iterable <Object[]> getAdjacent(Model model, int slot, Object value) {
 		throw new IllegalArgumentException("Cannot index slot " + slot);
 	}
 

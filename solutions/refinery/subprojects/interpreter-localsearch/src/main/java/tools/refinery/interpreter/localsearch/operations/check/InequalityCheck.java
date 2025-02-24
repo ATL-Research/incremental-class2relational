@@ -65,12 +65,12 @@ public class InequalityCheck implements ISearchOperation {
     }
 
     @Override
-    public String toString(Function<Integer, String> variableMapping) {
+    public String toString(Function <Integer, String> variableMapping) {
         return "check     "+variableMapping.apply(sourceLocation)+" != "+variableMapping.apply(targetLocation);
     }
 
     @Override
-    public List<Integer> getVariablePositions() {
+    public List <Integer> getVariablePositions() {
         return Arrays.asList(sourceLocation, targetLocation);
     }
 

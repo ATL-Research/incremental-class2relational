@@ -56,21 +56,21 @@ public class ExpressionEvaluation extends BaseTypeSafeConstraint {
 
     @Override
     protected String toStringRest() {
-        return Tuples.flatTupleOf(new ArrayList<PVariable>(inputVariables).toArray()).toString() + "|="
+        return Tuples.flatTupleOf(new ArrayList <PVariable>(inputVariables).toArray()).toString() + "|="
                 + evaluator.getShortDescription();
     }
 
     @Override
-    public Map<Set<PVariable>, Set<PVariable>> getFunctionalDependencies(IQueryMetaContext context) {
+    public Map <Set<PVariable>, Set <PVariable>> getFunctionalDependencies(IQueryMetaContext context) {
         if (outputVariable == null)
             return Collections.emptyMap();
         else
             return Collections.singletonMap(inputVariables, Collections.singleton(outputVariable));
     }
 
-    private static Set<PVariable> getPVariablesOfExpression(PBody pBody, IExpressionEvaluator evaluator) {
+    private static Set <PVariable> getPVariablesOfExpression(PBody pBody, IExpressionEvaluator evaluator) {
         // use a linked set, so that the variables will come in the order of the parameters
-        Set<PVariable> result = new LinkedHashSet<PVariable>();
+        Set <PVariable> result = new LinkedHashSet <PVariable>();
         for (String name : evaluator.getInputParameterNames()) {
             PVariable variable = pBody.getOrCreateVariableByName(name);
             result.add(variable);

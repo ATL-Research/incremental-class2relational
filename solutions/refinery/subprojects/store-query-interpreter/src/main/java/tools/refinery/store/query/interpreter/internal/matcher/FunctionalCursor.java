@@ -11,9 +11,9 @@ import tools.refinery.store.tuple.Tuple;
 
 import java.util.Iterator;
 
-class FunctionalCursor<T> implements Cursor<Tuple, T> {
+class FunctionalCursor <T> implements Cursor <Tuple, T> {
 	private final IterableIndexer indexer;
-	private final Iterator<tools.refinery.interpreter.matchers.tuple.Tuple> iterator;
+	private final Iterator <tools.refinery.interpreter.matchers.tuple.Tuple> iterator;
 	private boolean terminated;
 	private Tuple key;
 	private T value;

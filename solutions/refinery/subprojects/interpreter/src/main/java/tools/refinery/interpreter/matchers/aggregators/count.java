@@ -23,7 +23,7 @@ import tools.refinery.interpreter.matchers.psystem.aggregations.IAggregatorFacto
 public final class count implements IAggregatorFactory {
 
     @Override
-    public BoundAggregator getAggregatorLogic(Class<?> domainClass) {
+    public BoundAggregator getAggregatorLogic(Class <?> domainClass) {
         if (Void.class.equals(domainClass))
             return new BoundAggregator(null, Void.class, Integer.class);
         else throw new IllegalArgumentException();

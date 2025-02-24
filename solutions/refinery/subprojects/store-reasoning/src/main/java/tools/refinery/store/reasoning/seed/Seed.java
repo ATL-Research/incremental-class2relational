@@ -14,49 +14,49 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public interface Seed<T> {
+public interface Seed <T> {
 	int arity();
 
-	Class<T> valueType();
+	Class <T> valueType();
 
 	T reducedValue();
 
 	T get(Tuple key);
 
-	Cursor<Tuple, T> getCursor(T defaultValue, int nodeCount);
+	Cursor <Tuple, T> getCursor(T defaultValue, int nodeCount);
 
-	static <T> Builder<T> builder(int arity, Class<T> valueType, T reducedValue) {
+	static <T> Builder <T> builder(int arity, Class <T> valueType, T reducedValue) {
 		return new Builder<>(arity, valueType, reducedValue);
 	}
 
-	static <T> Builder<T> builder(Symbol<T> symbol) {
+	static <T> Builder <T> builder(Symbol <T> symbol) {
 		return builder(symbol.arity(), symbol.valueType(), symbol.defaultValue());
 	}
 
-	static <T> Builder<T> builder(PartialSymbol<T, ?> partialSymbol) {
+	static <T> Builder <T> builder(PartialSymbol <T, ?> partialSymbol) {
 		return builder(partialSymbol.arity(), partialSymbol.abstractDomain().abstractType(),
 				partialSymbol.defaultValue());
 	}
 
 	@SuppressWarnings("UnusedReturnValue")
-	class Builder<T> {
+	class Builder <T> {
 		private final int arity;
-		private final Class<T> valueType;
+		private final Class <T> valueType;
 		private T reducedValue;
-		private final Map<Tuple, T> map = new LinkedHashMap<>();
+		private final Map <Tuple, T> map = new LinkedHashMap<>();
 
-		private Builder(int arity, Class<T> valueType, T reducedValue) {
+		private Builder(int arity, Class <T> valueType, T reducedValue) {
 			this.arity = arity;
 			this.valueType = valueType;
 			this.reducedValue = reducedValue;
 		}
 
-		public Builder<T> reducedValue(T reducedValue) {
+		public Builder <T> reducedValue(T reducedValue) {
 			this.reducedValue = reducedValue;
 			return this;
 		}
 
-		public Builder<T> put(Tuple key, T value) {
+		public Builder <T> put(Tuple key, T value) {
 			if (key.getSize() != arity) {
 				throw new IllegalArgumentException("Expected %s to have %d elements".formatted(key, arity));
 			}
@@ -64,14 +64,14 @@ public interface Seed<T> {
 			return this;
 		}
 
-		public Builder<T> putAll(Map<Tuple, T> map) {
+		public Builder <T> putAll(Map <Tuple, T> map) {
 			for (var entry : map.entrySet()) {
 				put(entry.getKey(), entry.getValue());
 			}
 			return this;
 		}
 
-		public Seed<T> build() {
+		public Seed <T> build() {
 			return new MapBasedSeed<>(arity, valueType, reducedValue, Collections.unmodifiableMap(map));
 		}
 	}

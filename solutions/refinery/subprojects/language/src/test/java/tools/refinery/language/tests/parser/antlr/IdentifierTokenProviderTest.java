@@ -33,7 +33,7 @@ class IdentifierTokenProviderTest {
 		assertThat(identifierTokenProvider.isIdentifierToken(tokenId), equalTo(expected));
 	}
 
-	static Stream<Arguments> isIdentifierTokenTest() {
+	static Stream <Arguments> isIdentifierTokenTest() {
 		return Stream.of(
 				Arguments.of("RULE_ID", InternalProblemParser.RULE_ID, true),
 				Arguments.of("contained", InternalProblemParser.Contained, true),

@@ -5,7 +5,7 @@
  */
 package tools.refinery.store.map.internal.state;
 
-public class OldValueBox<V>{
+public class OldValueBox <V>{
 	V oldValue;
 	boolean isSet = false;
 

@@ -79,14 +79,14 @@ public interface PQuery extends PQueryHeader, PTraceable {
      *
      * @return a non-null, but possibly empty list of query definitions
      */
-    Set<PQuery> getDirectReferredQueries();
+    Set <PQuery> getDirectReferredQueries();
 
     /**
      * Returns all queries required to evaluate this query (transitively).
      *
      * @return a non-null, but possibly empty list of query definitions
      */
-    Set<PQuery> getAllReferredQueries();
+    Set <PQuery> getAllReferredQueries();
 
     /**
      * Returns the initialization status of the definition
@@ -101,7 +101,7 @@ public interface PQuery extends PQueryHeader, PTraceable {
      *
      * @return a non-null, but possibly empty list of problems
      */
-    List<PProblem> getPProblems();
+    List <PProblem> getPProblems();
 
     /**
      * Before a modification operation is executed, a mutability check is performed (via the {@link #getStatus()}
@@ -129,11 +129,11 @@ public interface PQuery extends PQueryHeader, PTraceable {
     /**
      * Type information, expressed on query parameters, that all matches of the query are guaranteed to respect.
      * <p> At the very minimum, this should include the declared types of the parameters.
-     * <p> The type judgement tuples shall contain the <i>parameter index</i>, NOT the {@link PParameter} object.
+     * <p> The type judgement tuples shall contain the <i>parameter index </i>, NOT the {@link PParameter} object.
      *
      * @return a non-null set of type judgements that the query guarantees for its matches
      */
-    public Set<TypeJudgement> getTypeGuarantees();
+    public Set <TypeJudgement> getTypeGuarantees();
 
     /**
      * If the query definition is uninitialized, initializes it.
@@ -149,6 +149,6 @@ public interface PQuery extends PQueryHeader, PTraceable {
      *
      * @return a non-null, but possibly empty list of query specification objects;
      */
-    List<Object> publishedAs();
+    List <Object> publishedAs();
 
 }

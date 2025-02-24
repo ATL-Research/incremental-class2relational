@@ -27,10 +27,10 @@ import java.util.Map;
 class VariableMappingExpressionEvaluatorWrapper implements IExpressionEvaluator {
 
     private final IExpressionEvaluator wrapped;
-    private final Map<String, String> variableMapping;
+    private final Map <String, String> variableMapping;
 
     public VariableMappingExpressionEvaluatorWrapper(IExpressionEvaluator wrapped,
-            Map<PVariable, PVariable> variableMapping) {
+            Map <PVariable, PVariable> variableMapping) {
 
         // Support to rewrap an already wrapped expression.
         boolean rewrap = wrapped instanceof VariableMappingExpressionEvaluatorWrapper;
@@ -42,13 +42,13 @@ class VariableMappingExpressionEvaluatorWrapper implements IExpressionEvaluator 
         this.variableMapping = new LinkedHashMap<>();
 
         // Index map by variable names
-        Map<String, PVariable> names = new HashMap<>();
+        Map <String, PVariable> names = new HashMap<>();
         for (PVariable originalVar : variableMapping.keySet()) {
             names.put(originalVar.getName(), originalVar);
         }
 
         // In case of rewrapping, current names are contained by the previous mapping
-        Map<String, String> previousMapping = null;
+        Map <String, String> previousMapping = null;
         if (rewrap){
             previousMapping = ((VariableMappingExpressionEvaluatorWrapper)wrapped).variableMapping;
         }
@@ -74,7 +74,7 @@ class VariableMappingExpressionEvaluatorWrapper implements IExpressionEvaluator 
     }
 
     @Override
-    public Iterable<String> getInputParameterNames() {
+    public Iterable <String> getInputParameterNames() {
         return variableMapping.values();
     }
 

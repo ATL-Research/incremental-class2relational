@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Composition Change</b></em>'.
+ * An implementation of the model object ' <em> <b>Composition Change </b> </em>'.
  * <!-- end-user-doc -->
  *
  * @generated

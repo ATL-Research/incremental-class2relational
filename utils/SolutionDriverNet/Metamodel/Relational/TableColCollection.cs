@@ -32,7 +32,7 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
 {
     
     
-    public class TableColCollection : ObservableOppositeOrderedSet<ITable, IColumn>
+    public class TableColCollection : ObservableOppositeOrderedSet <ITable, IColumn>
     {
         
         public TableColCollection(ITable parent) : 

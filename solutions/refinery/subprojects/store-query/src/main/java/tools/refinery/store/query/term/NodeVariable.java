@@ -18,7 +18,7 @@ public final class NodeVariable extends Variable {
 	}
 
 	@Override
-	public Optional<Class<?>> tryGetType() {
+	public Optional <Class<?>> tryGetType() {
 		return Optional.empty();
 	}
 
@@ -48,7 +48,7 @@ public final class NodeVariable extends Variable {
 	}
 
 	@Override
-	public <T> DataVariable<T> asDataVariable(Class<T> type) {
+	public <T> DataVariable <T> asDataVariable(Class <T> type) {
 		throw new InvalidQueryException("%s is a node variable".formatted(this));
 	}
 

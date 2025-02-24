@@ -49,9 +49,9 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         [DebuggerBrowsableAttribute(DebuggerBrowsableState.Never)]
         private bool _multiValued = false;
         
-        private static Lazy<ITypedElement> _multiValuedAttribute = new Lazy<ITypedElement>(RetrieveMultiValuedAttribute);
+        private static Lazy <ITypedElement> _multiValuedAttribute = new Lazy <ITypedElement>(RetrieveMultiValuedAttribute);
         
-        private static Lazy<ITypedElement> _typeReference = new Lazy<ITypedElement>(RetrieveTypeReference);
+        private static Lazy <ITypedElement> _typeReference = new Lazy <ITypedElement>(RetrieveTypeReference);
         
         /// <summary>
         /// The backing field for the Type property
@@ -59,7 +59,7 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         [DebuggerBrowsableAttribute(DebuggerBrowsableState.Never)]
         private IClassifier _type;
         
-        private static Lazy<ITypedElement> _ownerReference = new Lazy<ITypedElement>(RetrieveOwnerReference);
+        private static Lazy <ITypedElement> _ownerReference = new Lazy <ITypedElement>(RetrieveOwnerReference);
         
         private static NMF.Models.Meta.IClass _classInstance;
         
@@ -141,7 +141,7 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         {
             get
             {
-                return ModelHelper.CastAs<HSRM.TTC2023.ClassToRelational.Class_.IClass>(this.Parent);
+                return ModelHelper.CastAs <HSRM.TTC2023.ClassToRelational.Class_.IClass>(this.Parent);
             }
             set
             {
@@ -152,7 +152,7 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Gets the referenced model elements of this model element
         /// </summary>
-        public override IEnumerableExpression<IModelElement> ReferencedElements
+        public override IEnumerableExpression <IModelElement> ReferencedElements
         {
             get
             {
@@ -179,32 +179,32 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Gets fired before the MultiValued property changes its value
         /// </summary>
-        public event System.EventHandler<ValueChangedEventArgs> MultiValuedChanging;
+        public event System.EventHandler <ValueChangedEventArgs> MultiValuedChanging;
         
         /// <summary>
         /// Gets fired when the MultiValued property changed its value
         /// </summary>
-        public event System.EventHandler<ValueChangedEventArgs> MultiValuedChanged;
+        public event System.EventHandler <ValueChangedEventArgs> MultiValuedChanged;
         
         /// <summary>
         /// Gets fired before the Type property changes its value
         /// </summary>
-        public event System.EventHandler<ValueChangedEventArgs> TypeChanging;
+        public event System.EventHandler <ValueChangedEventArgs> TypeChanging;
         
         /// <summary>
         /// Gets fired when the Type property changed its value
         /// </summary>
-        public event System.EventHandler<ValueChangedEventArgs> TypeChanged;
+        public event System.EventHandler <ValueChangedEventArgs> TypeChanged;
         
         /// <summary>
         /// Gets fired before the Owner property changes its value
         /// </summary>
-        public event System.EventHandler<ValueChangedEventArgs> OwnerChanging;
+        public event System.EventHandler <ValueChangedEventArgs> OwnerChanging;
         
         /// <summary>
         /// Gets fired when the Owner property changed its value
         /// </summary>
-        public event System.EventHandler<ValueChangedEventArgs> OwnerChanged;
+        public event System.EventHandler <ValueChangedEventArgs> OwnerChanged;
         
         private static ITypedElement RetrieveMultiValuedAttribute()
         {
@@ -214,10 +214,10 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Raises the MultiValuedChanging event
         /// </summary>
-        /// <param name="eventArgs">The event data</param>
+        /// <param name="eventArgs">The event data </param>
         protected virtual void OnMultiValuedChanging(ValueChangedEventArgs eventArgs)
         {
-            System.EventHandler<ValueChangedEventArgs> handler = this.MultiValuedChanging;
+            System.EventHandler <ValueChangedEventArgs> handler = this.MultiValuedChanging;
             if ((handler != null))
             {
                 handler.Invoke(this, eventArgs);
@@ -227,10 +227,10 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Raises the MultiValuedChanged event
         /// </summary>
-        /// <param name="eventArgs">The event data</param>
+        /// <param name="eventArgs">The event data </param>
         protected virtual void OnMultiValuedChanged(ValueChangedEventArgs eventArgs)
         {
-            System.EventHandler<ValueChangedEventArgs> handler = this.MultiValuedChanged;
+            System.EventHandler <ValueChangedEventArgs> handler = this.MultiValuedChanged;
             if ((handler != null))
             {
                 handler.Invoke(this, eventArgs);
@@ -245,10 +245,10 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Raises the TypeChanging event
         /// </summary>
-        /// <param name="eventArgs">The event data</param>
+        /// <param name="eventArgs">The event data </param>
         protected virtual void OnTypeChanging(ValueChangedEventArgs eventArgs)
         {
-            System.EventHandler<ValueChangedEventArgs> handler = this.TypeChanging;
+            System.EventHandler <ValueChangedEventArgs> handler = this.TypeChanging;
             if ((handler != null))
             {
                 handler.Invoke(this, eventArgs);
@@ -258,10 +258,10 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Raises the TypeChanged event
         /// </summary>
-        /// <param name="eventArgs">The event data</param>
+        /// <param name="eventArgs">The event data </param>
         protected virtual void OnTypeChanged(ValueChangedEventArgs eventArgs)
         {
-            System.EventHandler<ValueChangedEventArgs> handler = this.TypeChanged;
+            System.EventHandler <ValueChangedEventArgs> handler = this.TypeChanged;
             if ((handler != null))
             {
                 handler.Invoke(this, eventArgs);
@@ -271,8 +271,8 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Handles the event that the Type property must reset
         /// </summary>
-        /// <param name="sender">The object that sent this reset request</param>
-        /// <param name="eventArgs">The event data for the reset event</param>
+        /// <param name="sender">The object that sent this reset request </param>
+        /// <param name="eventArgs">The event data for the reset event </param>
         private void OnResetType(object sender, System.EventArgs eventArgs)
         {
             this.Type = null;
@@ -286,10 +286,10 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Raises the OwnerChanging event
         /// </summary>
-        /// <param name="eventArgs">The event data</param>
+        /// <param name="eventArgs">The event data </param>
         protected virtual void OnOwnerChanging(ValueChangedEventArgs eventArgs)
         {
-            System.EventHandler<ValueChangedEventArgs> handler = this.OwnerChanging;
+            System.EventHandler <ValueChangedEventArgs> handler = this.OwnerChanging;
             if ((handler != null))
             {
                 handler.Invoke(this, eventArgs);
@@ -299,12 +299,12 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Gets called when the parent model element of the current model element is about to change
         /// </summary>
-        /// <param name="oldParent">The old parent model element</param>
-        /// <param name="newParent">The new parent model element</param>
+        /// <param name="oldParent">The old parent model element </param>
+        /// <param name="newParent">The new parent model element </param>
         protected override void OnParentChanging(IModelElement newParent, IModelElement oldParent)
         {
-            HSRM.TTC2023.ClassToRelational.Class_.IClass oldOwner = ModelHelper.CastAs<HSRM.TTC2023.ClassToRelational.Class_.IClass>(oldParent);
-            HSRM.TTC2023.ClassToRelational.Class_.IClass newOwner = ModelHelper.CastAs<HSRM.TTC2023.ClassToRelational.Class_.IClass>(newParent);
+            HSRM.TTC2023.ClassToRelational.Class_.IClass oldOwner = ModelHelper.CastAs <HSRM.TTC2023.ClassToRelational.Class_.IClass>(oldParent);
+            HSRM.TTC2023.ClassToRelational.Class_.IClass newOwner = ModelHelper.CastAs <HSRM.TTC2023.ClassToRelational.Class_.IClass>(newParent);
             ValueChangedEventArgs e = new ValueChangedEventArgs(oldOwner, newOwner);
             this.OnOwnerChanging(e);
             this.OnPropertyChanging("Owner", e, _ownerReference);
@@ -313,10 +313,10 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Raises the OwnerChanged event
         /// </summary>
-        /// <param name="eventArgs">The event data</param>
+        /// <param name="eventArgs">The event data </param>
         protected virtual void OnOwnerChanged(ValueChangedEventArgs eventArgs)
         {
-            System.EventHandler<ValueChangedEventArgs> handler = this.OwnerChanged;
+            System.EventHandler <ValueChangedEventArgs> handler = this.OwnerChanged;
             if ((handler != null))
             {
                 handler.Invoke(this, eventArgs);
@@ -326,12 +326,12 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Gets called when the parent model element of the current model element changes
         /// </summary>
-        /// <param name="oldParent">The old parent model element</param>
-        /// <param name="newParent">The new parent model element</param>
+        /// <param name="oldParent">The old parent model element </param>
+        /// <param name="newParent">The new parent model element </param>
         protected override void OnParentChanged(IModelElement newParent, IModelElement oldParent)
         {
-            HSRM.TTC2023.ClassToRelational.Class_.IClass oldOwner = ModelHelper.CastAs<HSRM.TTC2023.ClassToRelational.Class_.IClass>(oldParent);
-            HSRM.TTC2023.ClassToRelational.Class_.IClass newOwner = ModelHelper.CastAs<HSRM.TTC2023.ClassToRelational.Class_.IClass>(newParent);
+            HSRM.TTC2023.ClassToRelational.Class_.IClass oldOwner = ModelHelper.CastAs <HSRM.TTC2023.ClassToRelational.Class_.IClass>(oldParent);
+            HSRM.TTC2023.ClassToRelational.Class_.IClass newOwner = ModelHelper.CastAs <HSRM.TTC2023.ClassToRelational.Class_.IClass>(newParent);
             if ((oldOwner != null))
             {
                 oldOwner.Attr.Remove(this);
@@ -349,9 +349,9 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Resolves the given URI to a child model element
         /// </summary>
-        /// <returns>The model element or null if it could not be found</returns>
-        /// <param name="reference">The requested reference name</param>
-        /// <param name="index">The index of this reference</param>
+        /// <returns>The model element or null if it could not be found </returns>
+        /// <param name="reference">The requested reference name </param>
+        /// <param name="index">The index of this reference </param>
         protected override IModelElement GetModelElementForReference(string reference, int index)
         {
             if ((reference == "TYPE"))
@@ -368,9 +368,9 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Resolves the given attribute name
         /// </summary>
-        /// <returns>The attribute value or null if it could not be found</returns>
-        /// <param name="attribute">The requested attribute name</param>
-        /// <param name="index">The index of this attribute</param>
+        /// <returns>The attribute value or null if it could not be found </returns>
+        /// <param name="attribute">The requested attribute name </param>
+        /// <param name="index">The index of this attribute </param>
         protected override object GetAttributeValue(string attribute, int index)
         {
             if ((attribute == "MULTIVALUED"))
@@ -383,8 +383,8 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Sets a value to the given feature
         /// </summary>
-        /// <param name="feature">The requested feature</param>
-        /// <param name="value">The value that should be set to that feature</param>
+        /// <param name="feature">The requested feature </param>
+        /// <param name="value">The value that should be set to that feature </param>
         protected override void SetFeature(string feature, object value)
         {
             if ((feature == "TYPE"))
@@ -408,9 +408,9 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Gets the property expression for the given attribute
         /// </summary>
-        /// <returns>An incremental property expression</returns>
-        /// <param name="attribute">The requested attribute in upper case</param>
-        protected override NMF.Expressions.INotifyExpression<object> GetExpressionForAttribute(string attribute)
+        /// <returns>An incremental property expression </returns>
+        /// <param name="attribute">The requested attribute in upper case </param>
+        protected override NMF.Expressions.INotifyExpression <object> GetExpressionForAttribute(string attribute)
         {
             if ((attribute == "MULTIVALUED"))
             {
@@ -422,9 +422,9 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Gets the property expression for the given reference
         /// </summary>
-        /// <returns>An incremental property expression</returns>
-        /// <param name="reference">The requested reference in upper case</param>
-        protected override NMF.Expressions.INotifyExpression<NMF.Models.IModelElement> GetExpressionForReference(string reference)
+        /// <returns>An incremental property expression </returns>
+        /// <param name="reference">The requested reference in upper case </param>
+        protected override NMF.Expressions.INotifyExpression <NMF.Models.IModelElement> GetExpressionForReference(string reference)
         {
             if ((reference == "TYPE"))
             {
@@ -453,7 +453,7 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// The collection class to to represent the children of the Attribute class
         /// </summary>
-        public class AttributeReferencedElementsCollection : ReferenceCollection, ICollectionExpression<IModelElement>, ICollection<IModelElement>
+        public class AttributeReferencedElementsCollection : ReferenceCollection, ICollectionExpression <IModelElement>, ICollection <IModelElement>
         {
             
             private Attribute _parent;
@@ -501,12 +501,12 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
             /// <summary>
             /// Adds the given element to the collection
             /// </summary>
-            /// <param name="item">The item to add</param>
+            /// <param name="item">The item to add </param>
             public override void Add(IModelElement item)
             {
                 if ((this._parent.Type == null))
                 {
-                    IClassifier typeCasted = item.As<IClassifier>();
+                    IClassifier typeCasted = item.As <IClassifier>();
                     if ((typeCasted != null))
                     {
                         this._parent.Type = typeCasted;
@@ -515,7 +515,7 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
                 }
                 if ((this._parent.Owner == null))
                 {
-                    HSRM.TTC2023.ClassToRelational.Class_.IClass ownerCasted = item.As<HSRM.TTC2023.ClassToRelational.Class_.IClass>();
+                    HSRM.TTC2023.ClassToRelational.Class_.IClass ownerCasted = item.As <HSRM.TTC2023.ClassToRelational.Class_.IClass>();
                     if ((ownerCasted != null))
                     {
                         this._parent.Owner = ownerCasted;
@@ -536,8 +536,8 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
             /// <summary>
             /// Gets a value indicating whether the given element is contained in the collection
             /// </summary>
-            /// <returns>True, if it is contained, otherwise False</returns>
-            /// <param name="item">The item that should be looked out for</param>
+            /// <returns>True, if it is contained, otherwise False </returns>
+            /// <param name="item">The item that should be looked out for </param>
             public override bool Contains(IModelElement item)
             {
                 if ((item == this._parent.Type))
@@ -554,8 +554,8 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
             /// <summary>
             /// Copies the contents of the collection to the given array starting from the given array index
             /// </summary>
-            /// <param name="array">The array in which the elements should be copied</param>
-            /// <param name="arrayIndex">The starting index</param>
+            /// <param name="array">The array in which the elements should be copied </param>
+            /// <param name="arrayIndex">The starting index </param>
             public override void CopyTo(IModelElement[] array, int arrayIndex)
             {
                 if ((this._parent.Type != null))
@@ -573,8 +573,8 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
             /// <summary>
             /// Removes the given item from the collection
             /// </summary>
-            /// <returns>True, if the item was removed, otherwise False</returns>
-            /// <param name="item">The item that should be removed</param>
+            /// <returns>True, if the item was removed, otherwise False </returns>
+            /// <param name="item">The item that should be removed </param>
             public override bool Remove(IModelElement item)
             {
                 if ((this._parent.Type == item))
@@ -593,23 +593,23 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
             /// <summary>
             /// Gets an enumerator that enumerates the collection
             /// </summary>
-            /// <returns>A generic enumerator</returns>
-            public override IEnumerator<IModelElement> GetEnumerator()
+            /// <returns>A generic enumerator </returns>
+            public override IEnumerator <IModelElement> GetEnumerator()
             {
-                return Enumerable.Empty<IModelElement>().Concat(this._parent.Type).Concat(this._parent.Owner).GetEnumerator();
+                return Enumerable.Empty <IModelElement>().Concat(this._parent.Type).Concat(this._parent.Owner).GetEnumerator();
             }
         }
         
         /// <summary>
         /// Represents a proxy to represent an incremental access to the multiValued property
         /// </summary>
-        private sealed class MultiValuedProxy : ModelPropertyChange<HSRM.TTC2023.ClassToRelational.Class_.IAttribute, bool>
+        private sealed class MultiValuedProxy : ModelPropertyChange <HSRM.TTC2023.ClassToRelational.Class_.IAttribute, bool>
         {
             
             /// <summary>
             /// Creates a new observable property access proxy
             /// </summary>
-            /// <param name="modelElement">The model instance element for which to create the property access proxy</param>
+            /// <param name="modelElement">The model instance element for which to create the property access proxy </param>
             public MultiValuedProxy(HSRM.TTC2023.ClassToRelational.Class_.IAttribute modelElement) : 
                     base(modelElement, "multiValued")
             {
@@ -634,13 +634,13 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Represents a proxy to represent an incremental access to the type property
         /// </summary>
-        private sealed class TypeProxy : ModelPropertyChange<HSRM.TTC2023.ClassToRelational.Class_.IAttribute, IClassifier>
+        private sealed class TypeProxy : ModelPropertyChange <HSRM.TTC2023.ClassToRelational.Class_.IAttribute, IClassifier>
         {
             
             /// <summary>
             /// Creates a new observable property access proxy
             /// </summary>
-            /// <param name="modelElement">The model instance element for which to create the property access proxy</param>
+            /// <param name="modelElement">The model instance element for which to create the property access proxy </param>
             public TypeProxy(HSRM.TTC2023.ClassToRelational.Class_.IAttribute modelElement) : 
                     base(modelElement, "type")
             {
@@ -665,13 +665,13 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         /// <summary>
         /// Represents a proxy to represent an incremental access to the owner property
         /// </summary>
-        private sealed class OwnerProxy : ModelPropertyChange<HSRM.TTC2023.ClassToRelational.Class_.IAttribute, HSRM.TTC2023.ClassToRelational.Class_.IClass>
+        private sealed class OwnerProxy : ModelPropertyChange <HSRM.TTC2023.ClassToRelational.Class_.IAttribute, HSRM.TTC2023.ClassToRelational.Class_.IClass>
         {
             
             /// <summary>
             /// Creates a new observable property access proxy
             /// </summary>
-            /// <param name="modelElement">The model instance element for which to create the property access proxy</param>
+            /// <param name="modelElement">The model instance element for which to create the property access proxy </param>
             public OwnerProxy(HSRM.TTC2023.ClassToRelational.Class_.IAttribute modelElement) : 
                     base(modelElement, "owner")
             {

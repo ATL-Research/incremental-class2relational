@@ -52,7 +52,7 @@ public class LocalSearchRuntimeBasedStrategy {
     /**
      * Converts a plan to the standard format
      */
-    protected SubPlan convertPlan(Set<PVariable> initialBoundVariables, PlanState searchPlan) {
+    protected SubPlan convertPlan(Set <PVariable> initialBoundVariables, PlanState searchPlan) {
         PBody pBody;
         pBody = searchPlan.getAssociatedPBody();
 
@@ -62,7 +62,7 @@ public class LocalSearchRuntimeBasedStrategy {
         // We assume that the adornment (now the bound variables) is previously set
         SubPlan plan = subPlanFactory.createSubPlan(new PStart(initialBoundVariables));
 
-        List<PConstraintInfo> operations = searchPlan.getOperations();
+        List <PConstraintInfo> operations = searchPlan.getOperations();
         for (PConstraintInfo pConstraintPlanInfo : operations) {
             PConstraint pConstraint = pConstraintPlanInfo.getConstraint();
             plan = subPlanFactory.createSubPlan(new PApply(pConstraint), plan);
@@ -82,7 +82,7 @@ public class LocalSearchRuntimeBasedStrategy {
      * @return the complete search plan for the given {@link PBody}
      * @since 2.1
      */
-    protected PlanState plan(PBody pBody, Set<PVariable> initialBoundVariables,
+    protected PlanState plan(PBody pBody, Set <PVariable> initialBoundVariables,
             IQueryBackendContext context, final ResultProviderRequestor resultProviderRequestor,
             LocalSearchHints configuration) {
         final ICostFunction costFunction = configuration.getCostFunction();
@@ -90,8 +90,8 @@ public class LocalSearchRuntimeBasedStrategy {
                 configuration.isUseBase(), context, resultProviderRequestor, costFunction::apply);
 
         // Create mask infos
-        Set<PConstraint> constraintSet = pBody.getConstraints();
-        List<PConstraintInfo> constraintInfos =
+        Set <PConstraint> constraintSet = pBody.getConstraints();
+        List <PConstraintInfo> constraintInfos =
                 pConstraintInfoInferrer.createPConstraintInfos(constraintSet);
 
         // Calculate the characteristic function
@@ -99,19 +99,19 @@ public class LocalSearchRuntimeBasedStrategy {
         // each variable is bound.
         // The characteristic function is represented as a set of set of variables
         // TODO this calculation is not not implemented yet, thus the contents of the returned set is not considered later
-        List<Set<PVariable>> reachableBoundVariableSets = reachabilityAnalysis(pBody, constraintInfos);
+        List <Set<PVariable>> reachableBoundVariableSets = reachabilityAnalysis(pBody, constraintInfos);
         int k = configuration.getRowCount();
         PlanState searchPlan = calculateSearchPlan(pBody, initialBoundVariables, k, reachableBoundVariableSets, constraintInfos);
         return searchPlan;
     }
 
-    private PlanState calculateSearchPlan(PBody pBody, Set<PVariable> initialBoundVariables, int k,
-            List<Set<PVariable>> reachableBoundVariableSets, List<PConstraintInfo> allMaskInfos) {
+    private PlanState calculateSearchPlan(PBody pBody, Set <PVariable> initialBoundVariables, int k,
+            List <Set<PVariable>> reachableBoundVariableSets, List <PConstraintInfo> allMaskInfos) {
 
-        List<PConstraintInfo> allPotentialExtendInfos = new ArrayList<>();
-        List<PConstraintInfo> allPotentialCheckInfos = new ArrayList<>();
-        Map<PVariable, List<PConstraintInfo>> checkOpsByVariables = new HashMap<>();
-        Map<PVariable, Collection<PConstraintInfo>> extendOpsByBoundVariables = new HashMap<>();
+        List <PConstraintInfo> allPotentialExtendInfos = new ArrayList<>();
+        List <PConstraintInfo> allPotentialCheckInfos = new ArrayList<>();
+        Map <PVariable, List <PConstraintInfo>> checkOpsByVariables = new HashMap<>();
+        Map <PVariable, Collection <PConstraintInfo>> extendOpsByBoundVariables = new HashMap<>();
 
         for (PConstraintInfo op : allMaskInfos) {
             if (op.getFreeVariables().isEmpty()) { // CHECK
@@ -134,13 +134,13 @@ public class LocalSearchRuntimeBasedStrategy {
 
 
         // rename for better understanding
-        Set<PVariable> boundVariables = initialBoundVariables;
-        Set<PVariable> freeVariables = Sets.difference(pBody.getUniqueVariables(), initialBoundVariables);
+        Set <PVariable> boundVariables = initialBoundVariables;
+        Set <PVariable> freeVariables = Sets.difference(pBody.getUniqueVariables(), initialBoundVariables);
 
         int variableCount = pBody.getUniqueVariables().size();
         int n = freeVariables.size();
 
-        List<List<PlanState>> stateTable = initializeStateTable(k, n);
+        List <List<PlanState>> stateTable = initializeStateTable(k, n);
 
         // Set initial state: begin with an empty operation list
         PlanState initialState = new PlanState(pBody, boundVariables);
@@ -167,7 +167,7 @@ public class LocalSearchRuntimeBasedStrategy {
                     }
                     int i2 = variableCount - newState.getBoundVariables().size();
 
-                    List<Integer> newIndices = determineIndices(stateTable, i2, newState, k);
+                    List <Integer> newIndices = determineIndices(stateTable, i2, newState, k);
                     int a = newIndices.get(0);
                     int c = newIndices.get(1);
 
@@ -182,8 +182,8 @@ public class LocalSearchRuntimeBasedStrategy {
         return stateTable.get(0).get(0);
     }
 
-    private List<List<PlanState>> initializeStateTable(int k, int n) {
-        List<List<PlanState>> stateTable = new ArrayList<>();
+    private List <List<PlanState>> initializeStateTable(int k, int n) {
+        List <List<PlanState>> stateTable = new ArrayList<>();
         // Initialize state table and fill it with null
         for (int i = 0; i <= n ; i++) {
             stateTable.add(new ArrayList<>());
@@ -191,7 +191,7 @@ public class LocalSearchRuntimeBasedStrategy {
         return stateTable;
     }
 
-    private void insert(List<List<PlanState>> stateTable, int idx, PlanState newState, int a, int c, int k) {
+    private void insert(List <List<PlanState>> stateTable, int idx, PlanState newState, int a, int c, int k) {
         stateTable.get(idx).add(c, newState);
         while(stateTable.get(idx).size() > k){
             // Truncate back to size k when grows too big
@@ -200,9 +200,9 @@ public class LocalSearchRuntimeBasedStrategy {
     }
 
     private void updateExtends(PlanState newState, PlanState currentState,
-            Map<PVariable, ? extends Collection<PConstraintInfo>> extendOpsByBoundVariables)
+            Map <PVariable, ? extends Collection <PConstraintInfo>> extendOpsByBoundVariables)
     {
-        List<PConstraintInfo> presentExtends = currentState.getPresentExtends();
+        List <PConstraintInfo> presentExtends = currentState.getPresentExtends();
 
         // Recategorize operations
         newState.updateExtendsBasedOnDelta(presentExtends, extendOpsByBoundVariables);
@@ -210,8 +210,8 @@ public class LocalSearchRuntimeBasedStrategy {
         return;
     }
 
-    private boolean checkInsertCondition(List<PlanState> list, PlanState newState,
-            List<Set<PVariable>> reachableBoundVariableSets, int a, int c, int k) {
+    private boolean checkInsertCondition(List <PlanState> list, PlanState newState,
+            List <Set<PVariable>> reachableBoundVariableSets, int a, int c, int k) {
 //        boolean isAmongBestK = (a == (k + 1)) && c < a && reachableBoundVariableSets.contains(newState.getBoundVariables());
         boolean isAmongBestK = a == k && c < a ;
         boolean isBetterThanCurrent = a < k && c <= a;
@@ -219,10 +219,10 @@ public class LocalSearchRuntimeBasedStrategy {
         return isAmongBestK || isBetterThanCurrent;
     }
 
-    private List<Integer> determineIndices(List<List<PlanState>> stateTable, int i2, PlanState newState, int k) {
+    private List <Integer> determineIndices(List <List<PlanState>> stateTable, int i2, PlanState newState, int k) {
         int a = k;
         int c = 0;
-        List<Integer> acIndices = new ArrayList<>();
+        List <Integer> acIndices = new ArrayList<>();
         for (int j = 0; j < k; j++) {
             if (j < stateTable.get(i2).size()) {
                 PlanState stateInTable = stateTable.get(i2).get(j);
@@ -247,9 +247,9 @@ public class LocalSearchRuntimeBasedStrategy {
         return currentState.cloneWithApplied(constraintInfo);
     }
 
-    private List<Set<PVariable>> reachabilityAnalysis(PBody pBody, List<PConstraintInfo> constraintInfos) {
+    private List <Set<PVariable>> reachabilityAnalysis(PBody pBody, List <PConstraintInfo> constraintInfos) {
         // TODO implement reachability analisys, also save/persist the results somewhere
-        List<Set<PVariable>> reachableBoundVariableSets = new ArrayList<>();
+        List <Set<PVariable>> reachableBoundVariableSets = new ArrayList<>();
         return reachableBoundVariableSets;
     }
 

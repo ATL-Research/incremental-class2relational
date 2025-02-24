@@ -29,23 +29,23 @@ import tools.refinery.interpreter.matchers.util.timeline.Timeline;
  * @author Tamas Szabo
  * @since 2.3
  */
-abstract class AbstractTimelyTrivialMaskedMemory<Timestamp extends Comparable<Timestamp>> extends MaskedTupleMemory<Timestamp> {
+abstract class AbstractTimelyTrivialMaskedMemory <Timestamp extends Comparable <Timestamp>> extends MaskedTupleMemory <Timestamp> {
 
-    protected final TimelyMemory<Timestamp> memory;
+    protected final TimelyMemory <Timestamp> memory;
 
     protected AbstractTimelyTrivialMaskedMemory(final TupleMask mask, final Object owner, final boolean isLazy) {
         super(mask, owner);
-        this.memory = new TimelyMemory<Timestamp>(isLazy);
+        this.memory = new TimelyMemory <Timestamp>(isLazy);
     }
 
     @Override
-    public void initializeWith(final MaskedTupleMemory<Timestamp> other, final Timestamp defaultValue) {
-        final Iterable<Tuple> signatures = other.getSignatures();
+    public void initializeWith(final MaskedTupleMemory <Timestamp> other, final Timestamp defaultValue) {
+        final Iterable <Tuple> signatures = other.getSignatures();
         for (final Tuple signature : signatures) {
             if (other.isTimely()) {
-                final Map<Tuple, Timeline<Timestamp>> tupleMap = other.getWithTimeline(signature);
-                for (final Entry<Tuple, Timeline<Timestamp>> entry : tupleMap.entrySet()) {
-                    for (final Signed<Timestamp> signed : entry.getValue().asChangeSequence()) {
+                final Map <Tuple, Timeline <Timestamp>> tupleMap = other.getWithTimeline(signature);
+                for (final Entry <Tuple, Timeline <Timestamp>> entry : tupleMap.entrySet()) {
+                    for (final Signed <Timestamp> signed : entry.getValue().asChangeSequence()) {
                         if (signed.getDirection() == Direction.DELETE) {
                             this.removeWithTimestamp(entry.getKey(), signed.getPayload());
                         } else {
@@ -54,7 +54,7 @@ abstract class AbstractTimelyTrivialMaskedMemory<Timestamp extends Comparable<Ti
                     }
                 }
             } else {
-                final Collection<Tuple> tuples = other.get(signature);
+                final Collection <Tuple> tuples = other.get(signature);
                 for (final Tuple tuple : tuples) {
                     this.removeWithTimestamp(tuple, defaultValue);
                 }
@@ -73,17 +73,17 @@ abstract class AbstractTimelyTrivialMaskedMemory<Timestamp extends Comparable<Ti
     }
 
     @Override
-    public Iterator<Tuple> iterator() {
+    public Iterator <Tuple> iterator() {
         return this.memory.keySet().iterator();
     }
 
     @Override
-    public Diff<Timestamp> removeWithTimestamp(final Tuple tuple, final Timestamp timestamp) {
+    public Diff <Timestamp> removeWithTimestamp(final Tuple tuple, final Timestamp timestamp) {
         return removeWithTimestamp(tuple, null, timestamp);
     }
 
     @Override
-    public Diff<Timestamp> addWithTimestamp(final Tuple tuple, final Timestamp timestamp) {
+    public Diff <Timestamp> addWithTimestamp(final Tuple tuple, final Timestamp timestamp) {
         return addWithTimestamp(tuple, null, timestamp);
     }
 

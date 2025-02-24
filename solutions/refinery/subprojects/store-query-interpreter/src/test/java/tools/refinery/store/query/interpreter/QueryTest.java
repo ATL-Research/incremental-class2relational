@@ -32,8 +32,8 @@ import static tools.refinery.store.query.term.int_.IntTerms.greaterEq;
 import static tools.refinery.store.query.interpreter.tests.QueryAssertions.assertResults;
 
 class QueryTest {
-	private static final Symbol<Boolean> person = Symbol.of("Person", 1);
-	private static final Symbol<TruthValue> friend = Symbol.of("friend", 2, TruthValue.class, TruthValue.FALSE);
+	private static final Symbol <Boolean> person = Symbol.of("Person", 1);
+	private static final Symbol <TruthValue> friend = Symbol.of("friend", 2, TruthValue.class, TruthValue.FALSE);
 	private static final AnySymbolView personView = new KeyOnlyView<>(person);
 	private static final AnySymbolView friendMustView = new FilteredView<>(friend, "must", TruthValue::must);
 

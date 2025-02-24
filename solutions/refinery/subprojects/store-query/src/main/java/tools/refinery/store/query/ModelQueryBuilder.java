@@ -19,7 +19,7 @@ public interface ModelQueryBuilder extends ModelAdapterBuilder {
 		return queries(List.of(queries));
 	}
 
-	default ModelQueryBuilder queries(Collection<? extends AnyQuery> queries) {
+	default ModelQueryBuilder queries(Collection <? extends AnyQuery> queries) {
 		queries.forEach(this::query);
 		return this;
 	}

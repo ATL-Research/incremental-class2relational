@@ -86,32 +86,32 @@ namespace HSRM.TTC2023.ClassToRelational.Relational_
         /// <summary>
         /// Gets fired before the Owner property changes its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> OwnerChanging;
+        event System.EventHandler <ValueChangedEventArgs> OwnerChanging;
         
         /// <summary>
         /// Gets fired when the Owner property changed its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> OwnerChanged;
+        event System.EventHandler <ValueChangedEventArgs> OwnerChanged;
         
         /// <summary>
         /// Gets fired before the KeyOf property changes its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> KeyOfChanging;
+        event System.EventHandler <ValueChangedEventArgs> KeyOfChanging;
         
         /// <summary>
         /// Gets fired when the KeyOf property changed its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> KeyOfChanged;
+        event System.EventHandler <ValueChangedEventArgs> KeyOfChanged;
         
         /// <summary>
         /// Gets fired before the Type property changes its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> TypeChanging;
+        event System.EventHandler <ValueChangedEventArgs> TypeChanging;
         
         /// <summary>
         /// Gets fired when the Type property changed its value
         /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> TypeChanged;
+        event System.EventHandler <ValueChangedEventArgs> TypeChanged;
     }
 }
 

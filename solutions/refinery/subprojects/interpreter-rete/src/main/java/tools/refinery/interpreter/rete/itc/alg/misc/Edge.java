@@ -9,7 +9,7 @@
 
 package tools.refinery.interpreter.rete.itc.alg.misc;
 
-public class Edge<V> {
+public class Edge <V> {
     private V source;
     private V target;
 

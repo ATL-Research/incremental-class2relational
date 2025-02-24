@@ -26,7 +26,7 @@ class UpperCardinalityTermsEvaluateTest {
 		assertThat(term.evaluate(Valuation.empty()), is(expected));
 	}
 
-	static Stream<Arguments> minTest() {
+	static Stream <Arguments> minTest() {
 		return Stream.of(
 				Arguments.of(UpperCardinality.of(0), UpperCardinality.of(0), UpperCardinality.of(0)),
 				Arguments.of(UpperCardinality.of(0), UpperCardinality.of(1), UpperCardinality.of(0)),
@@ -48,7 +48,7 @@ class UpperCardinalityTermsEvaluateTest {
 		assertThat(term.evaluate(Valuation.empty()), is(expected));
 	}
 
-	static Stream<Arguments> maxTest() {
+	static Stream <Arguments> maxTest() {
 		return Stream.of(
 				Arguments.of(UpperCardinality.of(0), UpperCardinality.of(0), UpperCardinality.of(0)),
 				Arguments.of(UpperCardinality.of(0), UpperCardinality.of(1), UpperCardinality.of(1)),
@@ -70,7 +70,7 @@ class UpperCardinalityTermsEvaluateTest {
 		assertThat(term.evaluate(Valuation.empty()), is(expected));
 	}
 
-	static Stream<Arguments> addTest() {
+	static Stream <Arguments> addTest() {
 		return Stream.of(
 				Arguments.of(UpperCardinality.of(2), UpperCardinality.of(3), UpperCardinality.of(5)),
 				Arguments.of(UpperCardinality.of(2), UpperCardinalities.UNBOUNDED, UpperCardinalities.UNBOUNDED),
@@ -90,7 +90,7 @@ class UpperCardinalityTermsEvaluateTest {
 		assertThat(term.evaluate(Valuation.empty()), is(expected));
 	}
 
-	static Stream<Arguments> mulTest() {
+	static Stream <Arguments> mulTest() {
 		return Stream.of(
 				Arguments.of(UpperCardinality.of(2), UpperCardinality.of(3), UpperCardinality.of(6)),
 				Arguments.of(UpperCardinality.of(2), UpperCardinalities.UNBOUNDED, UpperCardinalities.UNBOUNDED),

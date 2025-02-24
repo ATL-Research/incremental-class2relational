@@ -10,12 +10,12 @@ import tools.refinery.store.tuple.Tuple;
 
 import java.util.Objects;
 
-public final class KeyOnlyView<T> extends TuplePreservingView<T> {
+public final class KeyOnlyView <T> extends TuplePreservingView <T> {
 	public static final String VIEW_NAME = "key";
 
 	private final T defaultValue;
 
-	public KeyOnlyView(Symbol<T> symbol) {
+	public KeyOnlyView(Symbol <T> symbol) {
 		super(symbol, VIEW_NAME);
 		defaultValue = symbol.defaultValue();
 	}
@@ -30,7 +30,7 @@ public final class KeyOnlyView<T> extends TuplePreservingView<T> {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		if (!super.equals(o)) return false;
-		KeyOnlyView<?> that = (KeyOnlyView<?>) o;
+		KeyOnlyView <?> that = (KeyOnlyView <?>) o;
 		return Objects.equals(defaultValue, that.defaultValue);
 	}
 

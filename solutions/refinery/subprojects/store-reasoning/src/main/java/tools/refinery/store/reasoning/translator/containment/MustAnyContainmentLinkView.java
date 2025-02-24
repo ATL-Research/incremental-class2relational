@@ -9,8 +9,8 @@ import tools.refinery.store.query.view.TuplePreservingView;
 import tools.refinery.store.representation.Symbol;
 import tools.refinery.store.tuple.Tuple;
 
-class MustAnyContainmentLinkView extends TuplePreservingView<InferredContainment> {
-	public MustAnyContainmentLinkView(Symbol<InferredContainment> symbol) {
+class MustAnyContainmentLinkView extends TuplePreservingView <InferredContainment> {
+	public MustAnyContainmentLinkView(Symbol <InferredContainment> symbol) {
 		super(symbol, "contains#mustAnyLink");
 	}
 

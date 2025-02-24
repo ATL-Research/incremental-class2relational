@@ -12,6 +12,6 @@ import java.util.concurrent.Future;
 
 public interface SolutionStore {
 	boolean submit(VersionWithObjectiveValue version);
-	List<VersionWithObjectiveValue> getSolutions();
+	List <VersionWithObjectiveValue> getSolutions();
 	boolean hasEnoughSolution();
 }

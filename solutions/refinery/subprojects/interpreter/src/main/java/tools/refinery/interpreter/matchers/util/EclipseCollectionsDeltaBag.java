@@ -12,7 +12,7 @@ package tools.refinery.interpreter.matchers.util;
  * @author Gabor Bergmann
  * @since 1.7
  */
-public class EclipseCollectionsDeltaBag<T> extends EclipseCollectionsBagMemory<T> implements IDeltaBag<T> {
+public class EclipseCollectionsDeltaBag <T> extends EclipseCollectionsBagMemory <T> implements IDeltaBag <T> {
 
     @Override
     public boolean addOne(T value) {

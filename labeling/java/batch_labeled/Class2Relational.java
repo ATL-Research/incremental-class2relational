@@ -28,7 +28,7 @@ public class Class2Relational {
     private static final Tracer TRACER = new Tracer();
 
     // Class Setup NA NA NA Value 9
-    private static final List<DataType> allDataTypes = new LinkedList<>();
+    private static final List <DataType> allDataTypes = new LinkedList<>();
 
     // Class Setup NA NA NA Value 5
     private static Type objectIdType;
@@ -55,7 +55,7 @@ public class Class2Relational {
     }
 
     // Class Traversal Entry NA NA Value 8
-    public static List<Named> transform(List<EObject> input)
+    public static List <Named> transform(List <EObject> input)
     {
         // Class Traversal Entry ControlFlow Vanilla Value 5
         for (EObject namedElt : input)
@@ -74,7 +74,7 @@ public class Class2Relational {
     }
 
     // Class Traversal PreActual NA NA Value 7
-    private static void preTransform(List<EObject> input) 
+    private static void preTransform(List <EObject> input) 
     {
         // Class Traversal PreActual VarDec Vanilla Value 5
         var iterator = input.iterator();
@@ -101,7 +101,7 @@ public class Class2Relational {
     }
 
     // Class Traversal PreActual NA NA Value 8
-    private static List<Named> actualTransform(List<EObject> input) 
+    private static List <Named> actualTransform(List <EObject> input) 
     {
         // Class Traversal PreActual VarDec Vanilla Value 5
         var newRoot = Classes2List(input);
@@ -132,10 +132,10 @@ public class Class2Relational {
     }
 
     // Class Transformation A2B NA NA Value 8
-    private static List<Named> Classes2List(List<EObject> input) 
+    private static List <Named> Classes2List(List <EObject> input) 
     {
         // Class Transformation A2B VarDec Vanilla Value 6
-        var nameds = new LinkedList<Named>();
+        var nameds = new LinkedList <Named>();
         // Class Transformation A2B ControlFlow Vanilla Value 5
         for (EObject eObject : input) 
         {

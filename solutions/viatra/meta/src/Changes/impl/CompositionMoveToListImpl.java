@@ -17,22 +17,22 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Composition Move To List</b></em>'.
+ * An implementation of the model object ' <em> <b>Composition Move To List </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.CompositionMoveToListImpl#getIndex <em>Index</em>}</li>
- *   <li>{@link Changes.impl.CompositionMoveToListImpl#getMovedElement <em>Moved Element</em>}</li>
- *   <li>{@link Changes.impl.CompositionMoveToListImpl#getOrigin <em>Origin</em>}</li>
+ *   <li>{@link Changes.impl.CompositionMoveToListImpl#getIndex <em>Index </em>} </li>
+ *   <li>{@link Changes.impl.CompositionMoveToListImpl#getMovedElement <em>Moved Element </em>} </li>
+ *   <li>{@link Changes.impl.CompositionMoveToListImpl#getOrigin <em>Origin </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class CompositionMoveToListImpl extends CompositionChangeImpl implements CompositionMoveToList {
 	/**
-	 * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
+	 * The default value of the '{@link #getIndex() <em>Index </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getIndex()
@@ -42,7 +42,7 @@ public class CompositionMoveToListImpl extends CompositionChangeImpl implements 
 	protected static final int INDEX_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
+	 * The cached value of the '{@link #getIndex() <em>Index </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getIndex()
@@ -52,7 +52,7 @@ public class CompositionMoveToListImpl extends CompositionChangeImpl implements 
 	protected int index = INDEX_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getMovedElement() <em>Moved Element</em>}' reference.
+	 * The cached value of the '{@link #getMovedElement() <em>Moved Element </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getMovedElement()
@@ -62,7 +62,7 @@ public class CompositionMoveToListImpl extends CompositionChangeImpl implements 
 	protected EObject movedElement;
 
 	/**
-	 * The cached value of the '{@link #getOrigin() <em>Origin</em>}' containment reference.
+	 * The cached value of the '{@link #getOrigin() <em>Origin </em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getOrigin()

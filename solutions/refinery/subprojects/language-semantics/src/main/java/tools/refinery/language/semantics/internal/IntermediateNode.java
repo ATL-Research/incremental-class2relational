@@ -13,11 +13,11 @@ import tools.refinery.store.tuple.Tuple;
 import tools.refinery.store.representation.TruthValue;
 
 final class IntermediateNode extends DecisionTreeNode {
-	private final MutableIntObjectMap<DecisionTreeNode> children;
+	private final MutableIntObjectMap <DecisionTreeNode> children;
 
 	private final DecisionTreeNode otherwise;
 
-	IntermediateNode(MutableIntObjectMap<DecisionTreeNode> children, DecisionTreeNode otherwise) {
+	IntermediateNode(MutableIntObjectMap <DecisionTreeNode> children, DecisionTreeNode otherwise) {
 		this.children = children;
 		this.otherwise = otherwise;
 	}

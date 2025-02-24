@@ -17,22 +17,22 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Composition Move Into Property</b></em>'.
+ * An implementation of the model object ' <em> <b>Composition Move Into Property </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.CompositionMoveIntoPropertyImpl#getNewValue <em>New Value</em>}</li>
- *   <li>{@link Changes.impl.CompositionMoveIntoPropertyImpl#getOldValue <em>Old Value</em>}</li>
- *   <li>{@link Changes.impl.CompositionMoveIntoPropertyImpl#getOrigin <em>Origin</em>}</li>
+ *   <li>{@link Changes.impl.CompositionMoveIntoPropertyImpl#getNewValue <em>New Value </em>} </li>
+ *   <li>{@link Changes.impl.CompositionMoveIntoPropertyImpl#getOldValue <em>Old Value </em>} </li>
+ *   <li>{@link Changes.impl.CompositionMoveIntoPropertyImpl#getOrigin <em>Origin </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class CompositionMoveIntoPropertyImpl extends CompositionChangeImpl implements CompositionMoveIntoProperty {
 	/**
-	 * The cached value of the '{@link #getNewValue() <em>New Value</em>}' reference.
+	 * The cached value of the '{@link #getNewValue() <em>New Value </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getNewValue()
@@ -42,7 +42,7 @@ public class CompositionMoveIntoPropertyImpl extends CompositionChangeImpl imple
 	protected EObject newValue;
 
 	/**
-	 * The cached value of the '{@link #getOldValue() <em>Old Value</em>}' reference.
+	 * The cached value of the '{@link #getOldValue() <em>Old Value </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getOldValue()
@@ -52,7 +52,7 @@ public class CompositionMoveIntoPropertyImpl extends CompositionChangeImpl imple
 	protected EObject oldValue;
 
 	/**
-	 * The cached value of the '{@link #getOrigin() <em>Origin</em>}' containment reference.
+	 * The cached value of the '{@link #getOrigin() <em>Origin </em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getOrigin()

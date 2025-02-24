@@ -15,20 +15,20 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Single Elem</b></em>'.
+ * An implementation of the model object ' <em> <b>Single Elem </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.tbuchmann.ttc.corrmodel.impl.SingleElemImpl#getElement <em>Element</em>}</li>
+ *   <li>{@link de.tbuchmann.ttc.corrmodel.impl.SingleElemImpl#getElement <em>Element </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class SingleElemImpl extends CorrElemImpl implements SingleElem {
 	/**
-	 * The cached value of the '{@link #getElement() <em>Element</em>}' reference.
+	 * The cached value of the '{@link #getElement() <em>Element </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getElement()

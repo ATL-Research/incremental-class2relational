@@ -13,12 +13,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ValuationBuilder {
-	private final Map<AnyDataVariable, Object> values = new HashMap<>();
+	private final Map <AnyDataVariable, Object> values = new HashMap<>();
 
 	ValuationBuilder() {
 	}
 
-	public <T> ValuationBuilder put(DataVariable<T> variable, T value) {
+	public <T> ValuationBuilder put(DataVariable <T> variable, T value) {
 		return putChecked(variable, value);
 	}
 

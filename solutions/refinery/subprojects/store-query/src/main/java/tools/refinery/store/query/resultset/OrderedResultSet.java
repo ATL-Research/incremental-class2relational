@@ -13,10 +13,10 @@ import tools.refinery.store.tuple.Tuple;
 
 import java.util.Objects;
 
-public class OrderedResultSet<T> implements AutoCloseable, ResultSet<T> {
-	private final ResultSet<T> resultSet;
-	private final OrderStatisticTree<Tuple> tree = new OrderStatisticTree<>();
-	private final ResultSetListener<T> listener = (key, fromValue, toValue) -> {
+public class OrderedResultSet <T> implements AutoCloseable, ResultSet <T> {
+	private final ResultSet <T> resultSet;
+	private final OrderStatisticTree <Tuple> tree = new OrderStatisticTree<>();
+	private final ResultSetListener <T> listener = (key, fromValue, toValue) -> {
 		var defaultValue = getCanonicalQuery().defaultValue();
 		if (Objects.equals(defaultValue, toValue)) {
 			tree.remove(key);
@@ -25,7 +25,7 @@ public class OrderedResultSet<T> implements AutoCloseable, ResultSet<T> {
 		}
 	};
 
-	public OrderedResultSet(ResultSet<T> resultSet) {
+	public OrderedResultSet(ResultSet <T> resultSet) {
 		this.resultSet = resultSet;
 		resultSet.addListener(listener);
 		var cursor = resultSet.getAll();
@@ -45,7 +45,7 @@ public class OrderedResultSet<T> implements AutoCloseable, ResultSet<T> {
 	}
 
 	@Override
-	public Query<T> getCanonicalQuery() {
+	public Query <T> getCanonicalQuery() {
 		return resultSet.getCanonicalQuery();
 	}
 
@@ -59,17 +59,17 @@ public class OrderedResultSet<T> implements AutoCloseable, ResultSet<T> {
 	}
 
 	@Override
-	public Cursor<Tuple, T> getAll() {
+	public Cursor <Tuple, T> getAll() {
 		return resultSet.getAll();
 	}
 
 	@Override
-	public void addListener(ResultSetListener<T> listener) {
+	public void addListener(ResultSetListener <T> listener) {
 		resultSet.addListener(listener);
 	}
 
 	@Override
-	public void removeListener(ResultSetListener<T> listener) {
+	public void removeListener(ResultSetListener <T> listener) {
 		resultSet.removeListener(listener);
 	}
 

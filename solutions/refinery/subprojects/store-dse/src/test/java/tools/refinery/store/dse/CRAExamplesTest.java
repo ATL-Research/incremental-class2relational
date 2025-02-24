@@ -39,13 +39,13 @@ import static tools.refinery.store.dse.transition.actions.ActionLiterals.remove;
 import static tools.refinery.store.query.literal.Literals.not;
 
 class CRAExamplesTest {
-	private static final Symbol<String> name = Symbol.of("Name", 1, String.class);
-	private static final Symbol<Boolean> classElement = Symbol.of("ClassElement", 1);
-	private static final Symbol<Boolean> attribute = Symbol.of("Attribute", 1);
-	private static final Symbol<Boolean> method = Symbol.of("Method", 1);
-	private static final Symbol<Boolean> encapsulates = Symbol.of("Encapsulates", 2);
-	private static final Symbol<Boolean> dataDependency = Symbol.of("DataDependency", 2);
-	private static final Symbol<Boolean> functionalDependency = Symbol.of("FunctionalDependency", 2);
+	private static final Symbol <String> name = Symbol.of("Name", 1, String.class);
+	private static final Symbol <Boolean> classElement = Symbol.of("ClassElement", 1);
+	private static final Symbol <Boolean> attribute = Symbol.of("Attribute", 1);
+	private static final Symbol <Boolean> method = Symbol.of("Method", 1);
+	private static final Symbol <Boolean> encapsulates = Symbol.of("Encapsulates", 2);
+	private static final Symbol <Boolean> dataDependency = Symbol.of("DataDependency", 2);
+	private static final Symbol <Boolean> functionalDependency = Symbol.of("FunctionalDependency", 2);
 
 	private static final AnySymbolView classElementView = new KeyOnlyView<>(classElement);
 	private static final AnySymbolView attributeView = new KeyOnlyView<>(attribute);

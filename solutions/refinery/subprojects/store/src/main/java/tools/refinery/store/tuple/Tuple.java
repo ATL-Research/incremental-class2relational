@@ -7,7 +7,7 @@ package tools.refinery.store.tuple;
 
 import org.jetbrains.annotations.NotNull;
 
-public sealed interface Tuple extends Comparable<Tuple> permits Tuple0, Tuple1, Tuple2, Tuple3, Tuple4, TupleN {
+public sealed interface Tuple extends Comparable <Tuple> permits Tuple0, Tuple1, Tuple2, Tuple3, Tuple4, TupleN {
 	int getSize();
 
 	int get(int element);

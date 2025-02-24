@@ -33,17 +33,17 @@ public interface IPlanDescriptor {
      * The executable search plans for each body in the query
      * @since 2.0
      */
-    public Collection<SearchPlanForBody> getPlan();
+    public Collection <SearchPlanForBody> getPlan();
 
     /**
      * The set of parameters this plan assumes to be bound
      */
-    public Set<PParameter> getAdornment();
+    public Set <PParameter> getAdornment();
 
     /**
      * The collection of {@link IInputKey}s which needs to be iterated during the execution of this plan. For optimal
      * performance, instances of these keys might be indexed.
      */
-    public Set<IInputKey> getIteratedKeys();
+    public Set <IInputKey> getIteratedKeys();
 
 }

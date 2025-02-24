@@ -22,10 +22,10 @@ import tools.refinery.interpreter.matchers.util.Preconditions;
  */
 public class MatchingFrameValueProvider implements IValueProvider {
 
-    final Map<String, Integer> nameMap;
+    final Map <String, Integer> nameMap;
     final MatchingFrame frame;
 
-    public MatchingFrameValueProvider(MatchingFrame frame, Map<String, Integer> nameMap) {
+    public MatchingFrameValueProvider(MatchingFrame frame, Map <String, Integer> nameMap) {
         super();
         this.frame = frame;
         this.nameMap = nameMap;

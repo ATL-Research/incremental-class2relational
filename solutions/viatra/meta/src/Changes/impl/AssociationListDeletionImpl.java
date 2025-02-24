@@ -15,21 +15,21 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Association List Deletion</b></em>'.
+ * An implementation of the model object ' <em> <b>Association List Deletion </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.AssociationListDeletionImpl#getDeletedElement <em>Deleted Element</em>}</li>
- *   <li>{@link Changes.impl.AssociationListDeletionImpl#getIndex <em>Index</em>}</li>
+ *   <li>{@link Changes.impl.AssociationListDeletionImpl#getDeletedElement <em>Deleted Element </em>} </li>
+ *   <li>{@link Changes.impl.AssociationListDeletionImpl#getIndex <em>Index </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class AssociationListDeletionImpl extends AssociationChangeImpl implements AssociationListDeletion {
 	/**
-	 * The cached value of the '{@link #getDeletedElement() <em>Deleted Element</em>}' reference.
+	 * The cached value of the '{@link #getDeletedElement() <em>Deleted Element </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDeletedElement()
@@ -39,7 +39,7 @@ public class AssociationListDeletionImpl extends AssociationChangeImpl implement
 	protected EObject deletedElement;
 
 	/**
-	 * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
+	 * The default value of the '{@link #getIndex() <em>Index </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getIndex()
@@ -49,7 +49,7 @@ public class AssociationListDeletionImpl extends AssociationChangeImpl implement
 	protected static final int INDEX_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
+	 * The cached value of the '{@link #getIndex() <em>Index </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getIndex()
@@ -224,7 +224,7 @@ public class AssociationListDeletionImpl extends AssociationChangeImpl implement
 	@Override
 	public void apply() {
 
-		EList<?> collection = (EList<?>)this.getAffectedElement().eGet(this.getFeature());
+		EList <?> collection = (EList <?>)this.getAffectedElement().eGet(this.getFeature());
 		collection.remove(this.getIndex());
 	}
 

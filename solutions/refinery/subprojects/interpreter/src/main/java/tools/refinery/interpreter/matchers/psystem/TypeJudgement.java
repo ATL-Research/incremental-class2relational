@@ -79,11 +79,11 @@ public class TypeJudgement {
         return true;
     }
 
-    public Set<TypeJudgement> getDirectlyImpliedJudgements(IQueryMetaContext context) {
-        Set<TypeJudgement> results = new HashSet<TypeJudgement>();
+    public Set <TypeJudgement> getDirectlyImpliedJudgements(IQueryMetaContext context) {
+        Set <TypeJudgement> results = new HashSet <TypeJudgement>();
         results.add(this);
 
-        Collection<InputKeyImplication> implications = context.getImplications(this.inputKey);
+        Collection <InputKeyImplication> implications = context.getImplications(this.inputKey);
         for (InputKeyImplication inputKeyImplication : implications) {
             results.add(
                 transcribeImplication(inputKeyImplication)
@@ -96,10 +96,10 @@ public class TypeJudgement {
     /**
      * @since 1.6
      */
-    public Set<TypeJudgement> getWeakenedAlternativeJudgements(IQueryMetaContext context) {
-        Set<TypeJudgement> results = new HashSet<TypeJudgement>();
+    public Set <TypeJudgement> getWeakenedAlternativeJudgements(IQueryMetaContext context) {
+        Set <TypeJudgement> results = new HashSet <TypeJudgement>();
 
-        Collection<InputKeyImplication> implications = context.getWeakenedAlternatives(this.inputKey);
+        Collection <InputKeyImplication> implications = context.getWeakenedAlternatives(this.inputKey);
         for (InputKeyImplication inputKeyImplication : implications) {
             results.add(
                 transcribeImplication(inputKeyImplication)
@@ -112,7 +112,7 @@ public class TypeJudgement {
     /**
      * @since 2.0
      */
-    public Map<TypeJudgement, Set<TypeJudgement>> getConditionalImpliedJudgements(IQueryMetaContext context) {
+    public Map <TypeJudgement, Set <TypeJudgement>> getConditionalImpliedJudgements(IQueryMetaContext context) {
         return context.getConditionalImplications(this.inputKey).entrySet().stream().collect(Collectors.toMap(
                 entry -> transcribeImplication(entry.getKey()),
                 entry -> entry.getValue().stream().map(this::transcribeImplication).collect(Collectors.toSet())));
@@ -126,7 +126,7 @@ public class TypeJudgement {
                 transcribeVariablesToTuple(inputKeyImplication.getImpliedIndices())
         );
     }
-    private Tuple transcribeVariablesToTuple(List<Integer> indices) {
+    private Tuple transcribeVariablesToTuple(List <Integer> indices) {
         Object[] elements = new Object[indices.size()];
         for (int i = 0; i < indices.size(); ++i)
             elements[i] = variablesTuple.get(indices.get(i));

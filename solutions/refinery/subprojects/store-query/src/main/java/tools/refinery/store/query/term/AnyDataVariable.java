@@ -18,7 +18,7 @@ public abstract sealed class AnyDataVariable extends Variable implements AnyTerm
 	}
 
 	@Override
-	public Optional<Class<?>> tryGetType() {
+	public Optional <Class<?>> tryGetType() {
 		return Optional.of(getType());
 	}
 
@@ -43,7 +43,7 @@ public abstract sealed class AnyDataVariable extends Variable implements AnyTerm
 	}
 
 	@Override
-	public Set<AnyDataVariable> getInputVariables() {
+	public Set <AnyDataVariable> getInputVariables() {
 		return Set.of(this);
 	}
 

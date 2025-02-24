@@ -43,8 +43,8 @@ public abstract class AbstractTuple implements ITuple {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public <T> Set<T> getDistinctElements() {
-        Set<T> result = new HashSet<T>();
+    public <T> Set <T> getDistinctElements() {
+        Set <T> result = new HashSet <T>();
         Object[] elements = getElements();
         for (Object object : elements) {
             result.add((T) object);
@@ -59,8 +59,8 @@ public abstract class AbstractTuple implements ITuple {
      * @return the inverted index mapping each element of this pattern to its index in the array
      */
     @Override
-    public Map<Object, Integer> invertIndex() {
-        Map<Object, Integer> result = new HashMap<Object, Integer>();
+    public Map <Object, Integer> invertIndex() {
+        Map <Object, Integer> result = new HashMap <Object, Integer>();
         for (int i = 0; i < getSize(); i++)
             result.put(get(i), i);
         return result;
@@ -73,11 +73,11 @@ public abstract class AbstractTuple implements ITuple {
      * @return the inverted index mapping each element of this pattern to its index in the array
      */
     @Override
-    public Map<Object, List<Integer>> invertIndexWithMupliplicity() {
-        Map<Object, List<Integer>> result = new HashMap<Object, List<Integer>>();
+    public Map <Object, List <Integer>> invertIndexWithMupliplicity() {
+        Map <Object, List <Integer>> result = new HashMap <Object, List <Integer>>();
         for (int i = 0; i < getSize(); i++) {
             Object value = get(i);
-            List<Integer> indices = result.computeIfAbsent(value, v -> new ArrayList<>());
+            List <Integer> indices = result.computeIfAbsent(value, v -> new ArrayList<>());
             indices.add(i);
         }
         return result;

@@ -26,9 +26,9 @@ import tools.refinery.interpreter.matchers.util.IMemory;
  * @author Gabor Bergmann
  * @since 2.0
  */
-abstract class AbstractTrivialMaskedMemory<Timestamp extends Comparable<Timestamp>> extends MaskedTupleMemory<Timestamp> {
+abstract class AbstractTrivialMaskedMemory <Timestamp extends Comparable <Timestamp>> extends MaskedTupleMemory <Timestamp> {
 
-    protected IMemory<Tuple> tuples;
+    protected IMemory <Tuple> tuples;
 
     protected AbstractTrivialMaskedMemory(TupleMask mask, MemoryType bucketType, Object owner) {
         super(mask, owner);
@@ -36,7 +36,7 @@ abstract class AbstractTrivialMaskedMemory<Timestamp extends Comparable<Timestam
     }
 
     @Override
-    public Map<Tuple, Timeline<Timestamp>> getWithTimeline(ITuple signature) {
+    public Map <Tuple, Timeline <Timestamp>> getWithTimeline(ITuple signature) {
         throw new UnsupportedOperationException("Timeless memories do not support timestamp-based lookup!");
     }
 
@@ -51,7 +51,7 @@ abstract class AbstractTrivialMaskedMemory<Timestamp extends Comparable<Timestam
     }
 
     @Override
-    public Iterator<Tuple> iterator() {
+    public Iterator <Tuple> iterator() {
         return tuples.iterator();
     }
 

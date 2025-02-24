@@ -32,7 +32,7 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
 {
     
     
-    public class ClassAttrCollection : ObservableOppositeOrderedSet<HSRM.TTC2023.ClassToRelational.Class_.IClass, HSRM.TTC2023.ClassToRelational.Class_.IAttribute>
+    public class ClassAttrCollection : ObservableOppositeOrderedSet <HSRM.TTC2023.ClassToRelational.Class_.IClass, HSRM.TTC2023.ClassToRelational.Class_.IAttribute>
     {
         
         public ClassAttrCollection(HSRM.TTC2023.ClassToRelational.Class_.IClass parent) : 

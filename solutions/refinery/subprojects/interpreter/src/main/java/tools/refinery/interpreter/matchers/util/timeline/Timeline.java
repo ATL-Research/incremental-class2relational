@@ -23,9 +23,9 @@ import tools.refinery.interpreter.matchers.util.Signed;
  * @author Tamas Szabo
  * @since 2.4
  */
-public abstract class Timeline<Timestamp extends Comparable<Timestamp>> {
+public abstract class Timeline <Timestamp extends Comparable <Timestamp>> {
 
-    public abstract Iterable<Signed<Timestamp>> asChangeSequence();
+    public abstract Iterable <Signed<Timestamp>> asChangeSequence();
 
     public abstract boolean isPresentAtInfinity();
 
@@ -33,12 +33,12 @@ public abstract class Timeline<Timestamp extends Comparable<Timestamp>> {
 
     public abstract int size();
 
-    public abstract Signed<Timestamp> getSigned(final int index);
+    public abstract Signed <Timestamp> getSigned(final int index);
 
     public abstract Timestamp getUnsigned(final int index);
 
-    public Timeline<Timestamp> mergeMultiplicative(final Timeline<Timestamp> that) {
-        final List<Timestamp> result = new ArrayList<>();
+    public Timeline <Timestamp> mergeMultiplicative(final Timeline <Timestamp> that) {
+        final List <Timestamp> result = new ArrayList<>();
         int thisIdx = 0, thatIdx = 0;
         Timestamp thisNext = thisIdx < this.size() ? this.getUnsigned(thisIdx) : null;
         Timestamp thatNext = thatIdx < that.size() ? that.getUnsigned(thatIdx) : null;
@@ -80,13 +80,13 @@ public abstract class Timeline<Timestamp extends Comparable<Timestamp>> {
      * the merge, cancellation can happen if at the same timestamp we observe different signs at the corresponding
      * timeline and diff elements.
      */
-    public Timeline<Timestamp> mergeAdditive(final Diff<Timestamp> diff) {
-        final Iterator<Signed<Timestamp>> thisItr = this.asChangeSequence().iterator();
-        final Iterator<Signed<Timestamp>> diffItr = diff.iterator();
-        final List<Timestamp> result = new ArrayList<>();
+    public Timeline <Timestamp> mergeAdditive(final Diff <Timestamp> diff) {
+        final Iterator <Signed<Timestamp>> thisItr = this.asChangeSequence().iterator();
+        final Iterator <Signed<Timestamp>> diffItr = diff.iterator();
+        final List <Timestamp> result = new ArrayList<>();
         Direction expected = Direction.INSERT;
-        Signed<Timestamp> thisNext = thisItr.hasNext() ? thisItr.next() : null;
-        Signed<Timestamp> diffNext = diffItr.hasNext() ? diffItr.next() : null;
+        Signed <Timestamp> thisNext = thisItr.hasNext() ? thisItr.next() : null;
+        Signed <Timestamp> diffNext = diffItr.hasNext() ? diffItr.next() : null;
 
         while (thisNext != null || diffNext != null) {
             int thisMinusDiff = 0;
@@ -131,7 +131,7 @@ public abstract class Timeline<Timestamp extends Comparable<Timestamp>> {
         final StringBuilder builder = new StringBuilder();
         builder.append("[");
         boolean first = true;
-        for (final Signed<Timestamp> element : this.asChangeSequence()) {
+        for (final Signed <Timestamp> element : this.asChangeSequence()) {
             if (first) {
                 first = false;
             } else {

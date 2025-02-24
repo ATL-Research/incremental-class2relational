@@ -20,7 +20,7 @@ import tools.refinery.interpreter.rete.network.mailbox.Mailbox;
  * @author Tamas Szabo
  * @since 1.6
  */
-public abstract class CommunicationGroup implements Comparable<CommunicationGroup> {
+public abstract class CommunicationGroup implements Comparable <CommunicationGroup> {
 
     public static final String UNSUPPORTED_MESSAGE_KIND = "Unsupported message kind ";
 
@@ -68,7 +68,7 @@ public abstract class CommunicationGroup implements Comparable<CommunicationGrou
      */
     public abstract void notifyHasMessage(final Mailbox mailbox, final MessageSelector kind);
 
-    public abstract Map<MessageSelector, Collection<Mailbox>> getMailboxes();
+    public abstract Map <MessageSelector, Collection <Mailbox>> getMailboxes();
 
     public abstract boolean isRecursive();
 

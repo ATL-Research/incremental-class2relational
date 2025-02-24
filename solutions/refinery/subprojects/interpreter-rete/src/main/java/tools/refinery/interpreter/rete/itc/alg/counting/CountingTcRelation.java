@@ -29,10 +29,10 @@ import tools.refinery.interpreter.matchers.util.IMultiLookup.ChangeGranularity;
  *
  * @param <V>
  */
-public class CountingTcRelation<V> implements ITcRelation<V> {
+public class CountingTcRelation <V> implements ITcRelation <V> {
 
-    private IMultiLookup<V, V> tuplesForward = null;
-    private IMultiLookup<V, V> tuplesBackward = null;
+    private IMultiLookup <V, V> tuplesForward = null;
+    private IMultiLookup <V, V> tuplesBackward = null;
 
     protected CountingTcRelation(boolean backwardIndexing) {
         tuplesForward = CollectionsFactory.createMultiLookup(Object.class, MemoryType.MULTISETS, Object.class);
@@ -52,10 +52,10 @@ public class CountingTcRelation<V> implements ITcRelation<V> {
         }
     }
 
-    protected void union(CountingTcRelation<V> rA) {
-        IMultiLookup<V, V> rForward = rA.tuplesForward;
+    protected void union(CountingTcRelation <V> rA) {
+        IMultiLookup <V, V> rForward = rA.tuplesForward;
         for (V source : rForward.distinctKeys()) {
-            IMemoryView<V> targetBag = rForward.lookup(source);
+            IMemoryView <V> targetBag = rForward.lookup(source);
             for (V target : targetBag.distinctValues()) {
                 this.addTuple(source, target, targetBag.getCount(target));
             }
@@ -63,7 +63,7 @@ public class CountingTcRelation<V> implements ITcRelation<V> {
     }
 
     public int getCount(V source, V target) {
-        IMemoryView<V> bucket = tuplesForward.lookup(source);
+        IMemoryView <V> bucket = tuplesForward.lookup(source);
         return bucket == null ? 0 : bucket.getCount(target);
     }
 
@@ -114,8 +114,8 @@ public class CountingTcRelation<V> implements ITcRelation<V> {
     }
 
     public void deleteTupleEnd(V deleted) {
-        Set<V> sourcesToDelete = CollectionsFactory.createSet();
-        Set<V> targetsToDelete = CollectionsFactory.createSet();
+        Set <V> sourcesToDelete = CollectionsFactory.createSet();
+        Set <V> targetsToDelete = CollectionsFactory.createSet();
 
         for (V target : tuplesForward.lookupOrEmpty(deleted).distinctValues()) {
             targetsToDelete.add(target);
@@ -157,7 +157,7 @@ public class CountingTcRelation<V> implements ITcRelation<V> {
         StringBuilder sb = new StringBuilder("TcRelation = ");
 
         for (V source : tuplesForward.distinctKeys()) {
-            IMemoryView<V> targets = tuplesForward.lookup(source);
+            IMemoryView <V> targets = tuplesForward.lookup(source);
             for (V target : targets.distinctValues()) {
                 sb.append("{(" + source + "," + target + ")," + targets.getCount(target) + "} ");
             }
@@ -167,8 +167,8 @@ public class CountingTcRelation<V> implements ITcRelation<V> {
     }
 
     @Override
-    public Set<V> getTupleEnds(V source) {
-        IMemoryView<V> tupEnds = tuplesForward.lookup(source);
+    public Set <V> getTupleEnds(V source) {
+        IMemoryView <V> tupEnds = tuplesForward.lookup(source);
         if (tupEnds == null)
             return null;
         return tupEnds.distinctValues();
@@ -182,9 +182,9 @@ public class CountingTcRelation<V> implements ITcRelation<V> {
      * @return the set of source nodes
      * @throws UnsupportedOperationException if backwards index not computed
      */
-    public Set<V> getTupleStarts(V target) {
+    public Set <V> getTupleStarts(V target) {
         if (tuplesBackward != null) {
-            IMemoryView<V> tupStarts = tuplesBackward.lookup(target);
+            IMemoryView <V> tupStarts = tuplesBackward.lookup(target);
             if (tupStarts == null)
                 return null;
             return tupStarts.distinctValues();
@@ -194,8 +194,8 @@ public class CountingTcRelation<V> implements ITcRelation<V> {
     }
 
     @Override
-    public Set<V> getTupleStarts() {
-        Set<V> nodes = CollectionsFactory.createSet();
+    public Set <V> getTupleStarts() {
+        Set <V> nodes = CollectionsFactory.createSet();
         for (V s : tuplesForward.distinctKeys()) {
             nodes.add(s);
         }
@@ -223,7 +223,7 @@ public class CountingTcRelation<V> implements ITcRelation<V> {
         } else if (obj == null || this.getClass() != obj.getClass()) {
             return false;
         } else {
-            CountingTcRelation<V> aTR = (CountingTcRelation<V>) obj;
+            CountingTcRelation <V> aTR = (CountingTcRelation <V>) obj;
 
             return tuplesForward.equals(aTR.tuplesForward);
         }
@@ -234,13 +234,13 @@ public class CountingTcRelation<V> implements ITcRelation<V> {
         return tuplesForward.hashCode();
     }
 
-    public static <V> CountingTcRelation<V> createFrom(IBiDirectionalGraphDataSource<V> gds) {
-        List<V> topologicalSorting = TopologicalSorting.compute(gds);
-        CountingTcRelation<V> tc = new CountingTcRelation<V>(true);
+    public static <V> CountingTcRelation <V> createFrom(IBiDirectionalGraphDataSource <V> gds) {
+        List <V> topologicalSorting = TopologicalSorting.compute(gds);
+        CountingTcRelation <V> tc = new CountingTcRelation <V>(true);
         Collections.reverse(topologicalSorting);
         for (V n : topologicalSorting) {
-            IMemoryView<V> sourceNodes = gds.getSourceNodes(n);
-            Set<V> tupEnds = tc.getTupleEnds(n);
+            IMemoryView <V> sourceNodes = gds.getSourceNodes(n);
+            Set <V> tupEnds = tc.getTupleEnds(n);
             for (V s : sourceNodes.distinctValues()) {
                 int count = sourceNodes.getCount(s);
                 for (int i = 0; i < count; i++) {

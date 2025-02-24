@@ -23,12 +23,12 @@ import tools.refinery.store.map.tests.utils.MapTestEnvironment;
 
 class MutableFuzzTest {
 	private void runFuzzTest(String scenario, int seed, int steps, int maxKey, int maxValue,
-							 boolean nullDefault, VersionedMapStoreFactoryBuilder<Integer, String> builder) {
+							 boolean nullDefault, VersionedMapStoreFactoryBuilder <Integer, String> builder) {
 		String[] values = MapTestEnvironment.prepareValues(maxValue, nullDefault);
 
-		VersionedMapStore<Integer, String> store = builder.defaultValue(values[0]).build().createOne();
-		VersionedMap<Integer, String> sut = store.createMap();
-		MapTestEnvironment<Integer, String> e = new MapTestEnvironment<>(sut);
+		VersionedMapStore <Integer, String> store = builder.defaultValue(values[0]).build().createOne();
+		VersionedMap <Integer, String> sut = store.createMap();
+		MapTestEnvironment <Integer, String> e = new MapTestEnvironment<>(sut);
 
 		Random r = new Random(seed);
 
@@ -36,7 +36,7 @@ class MutableFuzzTest {
 	}
 
 	private void iterativeRandomPuts(String scenario, int steps, int maxKey, String[] values,
-									 MapTestEnvironment<Integer, String> e, Random r) {
+									 MapTestEnvironment <Integer, String> e, Random r) {
 		for (int i = 0; i < steps; i++) {
 			int index = i + 1;
 			int nextKey = r.nextInt(maxKey);
@@ -61,13 +61,13 @@ class MutableFuzzTest {
 	@Timeout(value = 10)
 	@Tag("fuzz")
 	void parametrizedFuzz(int ignoredTests, int steps, int noKeys, int noValues, boolean defaultNull, int seed,
-						  VersionedMapStoreFactoryBuilder<Integer, String> builder) {
+						  VersionedMapStoreFactoryBuilder <Integer, String> builder) {
 		runFuzzTest(
 				"MutableS" + steps + "K" + noKeys + "V" + noValues + "s" + seed,
 				seed, steps, noKeys, noValues, defaultNull, builder);
 	}
 
-	static Stream<Arguments> parametrizedFuzz() {
+	static Stream <Arguments> parametrizedFuzz() {
 		return FuzzTestUtils.permutationWithSize(stepCounts, keyCounts, valueCounts, nullDefaultOptions,
 				randomSeedOptions, storeConfigs);
 	}
@@ -77,13 +77,13 @@ class MutableFuzzTest {
 	@Tag("fuzz")
 	@Tag("slow")
 	void parametrizedSlowFuzz(int ignoredTests, int steps, int noKeys, int noValues, boolean nullDefault, int seed,
-							  VersionedMapStoreFactoryBuilder<Integer, String> builder) {
+							  VersionedMapStoreFactoryBuilder <Integer, String> builder) {
 		runFuzzTest(
 				"MutableS" + steps + "K" + noKeys + "V" + noValues + "s" + seed,
 				seed, steps, noKeys, noValues, nullDefault, builder);
 	}
 
-	static Stream<Arguments> parametrizedSlowFuzz() {
+	static Stream <Arguments> parametrizedSlowFuzz() {
 		return FuzzTestUtils.changeStepCount(parametrizedFuzz(), 1);
 	}
 }

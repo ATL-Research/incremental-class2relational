@@ -22,9 +22,9 @@ import tools.refinery.interpreter.matchers.util.Signed;
  * @author Tamas Szabo
  * @since 2.4
  */
-public class CompactTimeline<Timestamp extends Comparable<Timestamp>> extends Timeline<Timestamp> {
+public class CompactTimeline <Timestamp extends Comparable <Timestamp>> extends Timeline <Timestamp> {
 
-    protected final List<Timestamp> elements;
+    protected final List <Timestamp> elements;
 
     CompactTimeline() {
         this.elements = new ArrayList<>();
@@ -35,15 +35,15 @@ public class CompactTimeline<Timestamp extends Comparable<Timestamp>> extends Ti
         this.elements.add(timestamp);
     }
 
-    CompactTimeline(final List<Timestamp> timestamps) {
+    CompactTimeline(final List <Timestamp> timestamps) {
         this.elements = new ArrayList<>(timestamps.size());
         this.elements.addAll(timestamps);
     }
 
-    CompactTimeline(final Diff<Timestamp> diff) {
+    CompactTimeline(final Diff <Timestamp> diff) {
         this.elements = new ArrayList<>(diff.size());
         Direction expected = Direction.INSERT;
-        for (Signed<Timestamp> signed : diff) {
+        for (Signed <Timestamp> signed : diff) {
             if (!expected.equals(signed.getDirection())) {
                 throw new IllegalStateException(String.format("Expected direction (%s) constraint violated! %s @%s",
                         expected, diff, signed.getPayload()));
@@ -54,7 +54,7 @@ public class CompactTimeline<Timestamp extends Comparable<Timestamp>> extends Ti
     }
 
     @Override
-    public Signed<Timestamp> getSigned(final int index) {
+    public Signed <Timestamp> getSigned(final int index) {
         final Direction direction = index % 2 == 0 ? Direction.INSERT : Direction.DELETE;
         return new Signed<>(direction, this.getUnsigned(index));
     }
@@ -81,11 +81,11 @@ public class CompactTimeline<Timestamp extends Comparable<Timestamp>> extends Ti
     }
 
     @Override
-    public Iterable<Signed<Timestamp>> asChangeSequence() {
-        Iterable<Timestamp> outer = this.elements;
+    public Iterable <Signed<Timestamp>> asChangeSequence() {
+        Iterable <Timestamp> outer = this.elements;
         return () -> {
-            final Iterator<Timestamp> itr = outer.iterator();
-            return new Iterator<Signed<Timestamp>>() {
+            final Iterator <Timestamp> itr = outer.iterator();
+            return new Iterator <Signed<Timestamp>>() {
                 Direction direction = Direction.INSERT;
 
                 @Override
@@ -94,8 +94,8 @@ public class CompactTimeline<Timestamp extends Comparable<Timestamp>> extends Ti
                 }
 
                 @Override
-                public Signed<Timestamp> next() {
-                    final Signed<Timestamp> result = new Signed<Timestamp>(direction, itr.next());
+                public Signed <Timestamp> next() {
+                    final Signed <Timestamp> result = new Signed <Timestamp>(direction, itr.next());
                     direction = direction.opposite();
                     return result;
                 }

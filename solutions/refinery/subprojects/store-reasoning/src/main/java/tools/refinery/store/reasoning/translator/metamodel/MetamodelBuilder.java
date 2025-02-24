@@ -19,12 +19,12 @@ import java.util.*;
 
 public class MetamodelBuilder {
 	private final ContainedTypeHierarchyBuilder typeHierarchyBuilder = new ContainedTypeHierarchyBuilder();
-	private final Map<PartialRelation, ReferenceInfo> referenceInfoMap = new LinkedHashMap<>();
-	private final Set<PartialRelation> containedTypes = new HashSet<>();
-	private final Map<PartialRelation, ContainmentInfo> containmentHierarchy = new LinkedHashMap<>();
-	private final Map<PartialRelation, DirectedCrossReferenceInfo> directedCrossReferences = new LinkedHashMap<>();
-	private final Map<PartialRelation, UndirectedCrossReferenceInfo> undirectedCrossReferences = new LinkedHashMap<>();
-	private final Map<PartialRelation, PartialRelation> oppositeReferences = new LinkedHashMap<>();
+	private final Map <PartialRelation, ReferenceInfo> referenceInfoMap = new LinkedHashMap<>();
+	private final Set <PartialRelation> containedTypes = new HashSet<>();
+	private final Map <PartialRelation, ContainmentInfo> containmentHierarchy = new LinkedHashMap<>();
+	private final Map <PartialRelation, DirectedCrossReferenceInfo> directedCrossReferences = new LinkedHashMap<>();
+	private final Map <PartialRelation, UndirectedCrossReferenceInfo> undirectedCrossReferences = new LinkedHashMap<>();
+	private final Map <PartialRelation, PartialRelation> oppositeReferences = new LinkedHashMap<>();
 
 	MetamodelBuilder() {
 		typeHierarchyBuilder.type(ContainmentHierarchyTranslator.CONTAINED_SYMBOL, true);
@@ -43,7 +43,7 @@ public class MetamodelBuilder {
 	}
 
 	public MetamodelBuilder type(PartialRelation partialRelation, boolean abstractType,
-								 Collection<PartialRelation> supertypes) {
+								 Collection <PartialRelation> supertypes) {
 		typeHierarchyBuilder.type(partialRelation, abstractType, supertypes);
 		return this;
 	}
@@ -53,17 +53,17 @@ public class MetamodelBuilder {
 		return this;
 	}
 
-	public MetamodelBuilder type(PartialRelation partialRelation, Collection<PartialRelation> supertypes) {
+	public MetamodelBuilder type(PartialRelation partialRelation, Collection <PartialRelation> supertypes) {
 		typeHierarchyBuilder.type(partialRelation, supertypes);
 		return this;
 	}
 
-	public MetamodelBuilder types(Collection<Map.Entry<PartialRelation, TypeInfo>> entries) {
+	public MetamodelBuilder types(Collection <Map.Entry<PartialRelation, TypeInfo>> entries) {
 		typeHierarchyBuilder.types(entries);
 		return this;
 	}
 
-	public MetamodelBuilder types(Map<PartialRelation, TypeInfo> map) {
+	public MetamodelBuilder types(Map <PartialRelation, TypeInfo> map) {
 		typeHierarchyBuilder.types(map);
 		return this;
 	}
@@ -122,14 +122,14 @@ public class MetamodelBuilder {
 		return reference(linkType, sourceType, targetType, null);
 	}
 
-	public MetamodelBuilder references(Collection<Map.Entry<PartialRelation, ReferenceInfo>> entries) {
+	public MetamodelBuilder references(Collection <Map.Entry<PartialRelation, ReferenceInfo>> entries) {
 		for (var entry : entries) {
 			reference(entry.getKey(), entry.getValue());
 		}
 		return this;
 	}
 
-	public MetamodelBuilder references(Map<PartialRelation, ReferenceInfo> map) {
+	public MetamodelBuilder references(Map <PartialRelation, ReferenceInfo> map) {
 		return references(map.entrySet());
 	}
 

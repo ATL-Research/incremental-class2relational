@@ -49,26 +49,26 @@ public final class ReteContainer {
 
     protected Network network;
 
-    protected LinkedList<Clearable> clearables;
-    protected Map<Long, Node> nodesById;
+    protected LinkedList <Clearable> clearables;
+    protected Map <Long, Node> nodesById;
     protected long nextId = 0;
 
     protected ConnectionFactory connectionFactory;
     protected NodeProvisioner nodeProvisioner;
 
-    protected Deque<UpdateMessage> internalMessageQueue = new ArrayDeque<UpdateMessage>();
-    protected/* volatile */Deque<UpdateMessage> externalMessageQueue = new ArrayDeque<UpdateMessage>();
+    protected Deque <UpdateMessage> internalMessageQueue = new ArrayDeque <UpdateMessage>();
+    protected/* volatile */Deque <UpdateMessage> externalMessageQueue = new ArrayDeque <UpdateMessage>();
     protected Object externalMessageLock = new Object();
     protected Long clock = 1L; // even: steady state, odd: active queue; access
                                // ONLY with messageQueue locked!
-    protected Map<ReteContainer, Long> terminationCriteria = null;
+    protected Map <ReteContainer, Long> terminationCriteria = null;
     protected final Logger logger;
     protected final CommunicationTracker tracker;
 
     protected final IQueryBackendContext backendContext;
 
-    protected Set<DelayedCommand> delayedCommandQueue;
-    protected Set<DelayedCommand> delayedCommandBuffer;
+    protected Set <DelayedCommand> delayedCommandQueue;
+    protected Set <DelayedCommand> delayedCommandBuffer;
     protected boolean executingDelayedCommands;
 
     protected final TimelyConfiguration timelyConfiguration;
@@ -86,8 +86,8 @@ public final class ReteContainer {
         this.timelyConfiguration = network.getEngine().getTimelyConfiguration();
 		cancellationToken = backendContext.getRuntimeContext().getCancellationToken();
 
-        this.delayedCommandQueue = new LinkedHashSet<DelayedCommand>();
-        this.delayedCommandBuffer = new LinkedHashSet<DelayedCommand>();
+        this.delayedCommandQueue = new LinkedHashSet <DelayedCommand>();
+        this.delayedCommandBuffer = new LinkedHashSet <DelayedCommand>();
         this.executingDelayedCommands = false;
 
 		this.logger = network.getEngine().getLogger();
@@ -99,7 +99,7 @@ public final class ReteContainer {
         }
 
         this.nodesById = CollectionsFactory.createMap();
-        this.clearables = new LinkedList<Clearable>();
+        this.clearables = new LinkedList <Clearable>();
 
         this.connectionFactory = new ConnectionFactory(this);
         this.nodeProvisioner = new NodeProvisioner(this);
@@ -154,7 +154,7 @@ public final class ReteContainer {
      * @param synchronise
      *            indicates whether the receiver should be synchronised to the current contents of the supplier
      */
-    public void connectRemoteNodes(Address<? extends Supplier> supplier, Address<? extends Receiver> receiver,
+    public void connectRemoteNodes(Address <? extends Supplier> supplier, Address <? extends Receiver> receiver,
             boolean synchronise) {
         if (!isLocal(receiver))
             receiver.getContainer().connectRemoteNodes(supplier, receiver, synchronise);
@@ -171,7 +171,7 @@ public final class ReteContainer {
      * @param desynchronise
      *            indicates whether the current contents of the supplier should be subtracted from the receiver
      */
-    public void disconnectRemoteNodes(Address<? extends Supplier> supplier, Address<? extends Receiver> receiver,
+    public void disconnectRemoteNodes(Address <? extends Supplier> supplier, Address <? extends Receiver> receiver,
             boolean desynchronise) {
         if (!isLocal(receiver))
             receiver.getContainer().disconnectRemoteNodes(supplier, receiver, desynchronise);
@@ -187,7 +187,7 @@ public final class ReteContainer {
      * @param synchronise
      *            indicates whether the receiver should be synchronised to the current contents of the supplier
      */
-    public void connectRemoteSupplier(Address<? extends Supplier> supplier, Receiver receiver, boolean synchronise) {
+    public void connectRemoteSupplier(Address <? extends Supplier> supplier, Receiver receiver, boolean synchronise) {
         Supplier parent = nodeProvisioner.asSupplier(supplier);
         if (synchronise)
             connectAndSynchronize(parent, receiver);
@@ -201,7 +201,7 @@ public final class ReteContainer {
      * @param desynchronise
      *            indicates whether the current contents of the supplier should be subtracted from the receiver
      */
-    public void disconnectRemoteSupplier(Address<? extends Supplier> supplier, Receiver receiver,
+    public void disconnectRemoteSupplier(Address <? extends Supplier> supplier, Receiver receiver,
             boolean desynchronise) {
         Supplier parent = nodeProvisioner.asSupplier(supplier);
         if (desynchronise)
@@ -238,7 +238,7 @@ public final class ReteContainer {
     /**
      * @since 2.3
      */
-    public Set<DelayedCommand> getDelayedCommandQueue() {
+    public Set <DelayedCommand> getDelayedCommandQueue() {
         if (this.executingDelayedCommands) {
             return this.delayedCommandBuffer;
         } else {
@@ -278,7 +278,7 @@ public final class ReteContainer {
                 command.run();
             }
             this.delayedCommandQueue = this.delayedCommandBuffer;
-            this.delayedCommandBuffer = new LinkedHashSet<DelayedCommand>();
+            this.delayedCommandBuffer = new LinkedHashSet <DelayedCommand>();
             flushUpdates();
             this.executingDelayedCommands = false;
         }
@@ -291,7 +291,7 @@ public final class ReteContainer {
      *
      * @return the value of the container's clock at the time when the message was accepted into the local message queue
      */
-    long sendUpdateToLocalAddress(Address<? extends Receiver> address, Direction direction, Tuple updateElement) {
+    long sendUpdateToLocalAddress(Address <? extends Receiver> address, Direction direction, Tuple updateElement) {
         long timestamp;
         Receiver receiver = resolveLocal(address);
         UpdateMessage message = new UpdateMessage(receiver, direction, updateElement);
@@ -312,8 +312,8 @@ public final class ReteContainer {
      *
      * @return the value of the container's clock at the time when the message was accepted into the local message queue
      */
-    long sendUpdatesToLocalAddress(Address<? extends Receiver> address, Direction direction,
-            Collection<Tuple> updateElements) {
+    long sendUpdatesToLocalAddress(Address <? extends Receiver> address, Direction direction,
+            Collection <Tuple> updateElements) {
 
         long timestamp;
         Receiver receiver = resolveLocal(address);
@@ -338,7 +338,7 @@ public final class ReteContainer {
      * indicated by the Address. Designed to be called by the Network in single-threaded operation, DO NOT use in any
      * other way.
      */
-    void sendUpdateToLocalAddressSingleThreaded(Address<? extends Receiver> address, Direction direction,
+    void sendUpdateToLocalAddressSingleThreaded(Address <? extends Receiver> address, Direction direction,
             Tuple updateElement) {
         Receiver receiver = resolveLocal(address);
         UpdateMessage message = new UpdateMessage(receiver, direction, updateElement);
@@ -352,8 +352,8 @@ public final class ReteContainer {
      *
      * @pre: address.container == this, e.g. address MUST be local
      */
-    void sendUpdatesToLocalAddressSingleThreaded(Address<? extends Receiver> address, Direction direction,
-            Collection<Tuple> updateElements) {
+    void sendUpdatesToLocalAddressSingleThreaded(Address <? extends Receiver> address, Direction direction,
+            Collection <Tuple> updateElements) {
         Receiver receiver = resolveLocal(address);
         for (Tuple ps : updateElements)
             internalMessageQueue.add(new UpdateMessage(receiver, direction, ps));
@@ -365,7 +365,7 @@ public final class ReteContainer {
      *
      * @since 2.4
      */
-    public void sendUpdateToRemoteAddress(Address<? extends Receiver> address, Direction direction,
+    public void sendUpdateToRemoteAddress(Address <? extends Receiver> address, Direction direction,
             Tuple updateElement) {
         ReteContainer otherContainer = address.getContainer();
         long otherClock = otherContainer.sendUpdateToLocalAddress(address, direction, updateElement);
@@ -399,11 +399,11 @@ public final class ReteContainer {
      * @param flush if true, a flush is performed before pulling the contents
      * @since 2.3
      */
-    public Collection<Tuple> pullContents(final Supplier supplier, final boolean flush) {
+    public Collection <Tuple> pullContents(final Supplier supplier, final boolean flush) {
         if (flush) {
             flushUpdates();
         }
-        final Collection<Tuple> collector = new ArrayList<Tuple>();
+        final Collection <Tuple> collector = new ArrayList <Tuple>();
         supplier.pullInto(collector, flush);
         return collector;
     }
@@ -411,11 +411,11 @@ public final class ReteContainer {
     /**
      * @since 2.4
      */
-    public Map<Tuple, Timeline<Timestamp>> pullContentsWithTimeline(final Supplier supplier, final boolean flush) {
+    public Map <Tuple, Timeline <Timestamp>> pullContentsWithTimeline(final Supplier supplier, final boolean flush) {
         if (flush) {
             flushUpdates();
         }
-        final Map<Tuple, Timeline<Timestamp>> collector = CollectionsFactory.createMap();
+        final Map <Tuple, Timeline <Timestamp>> collector = CollectionsFactory.createMap();
         supplier.pullIntoWithTimeline(collector, flush);
         return collector;
     }
@@ -425,11 +425,11 @@ public final class ReteContainer {
      *
      * @since 2.3
      */
-    public Collection<Tuple> pullPropagatedContents(final SingleInputNode supplier, final boolean flush) {
+    public Collection <Tuple> pullPropagatedContents(final SingleInputNode supplier, final boolean flush) {
         if (flush) {
             flushUpdates();
         }
-        final Collection<Tuple> collector = new LinkedList<Tuple>();
+        final Collection <Tuple> collector = new LinkedList <Tuple>();
         supplier.propagatePullInto(collector, flush);
         return collector;
     }
@@ -439,12 +439,12 @@ public final class ReteContainer {
      *
      * @since 2.3
      */
-    public Map<Tuple, Timeline<Timestamp>> pullPropagatedContentsWithTimestamp(final SingleInputNode supplier,
+    public Map <Tuple, Timeline <Timestamp>> pullPropagatedContentsWithTimestamp(final SingleInputNode supplier,
             final boolean flush) {
         if (flush) {
             flushUpdates();
         }
-        final Map<Tuple, Timeline<Timestamp>> collector = CollectionsFactory.createMap();
+        final Map <Tuple, Timeline <Timestamp>> collector = CollectionsFactory.createMap();
         supplier.propagatePullIntoWithTimestamp(collector, flush);
         return collector;
     }
@@ -457,7 +457,7 @@ public final class ReteContainer {
      *            the address of the supplier to be pulled.
      * @since 2.3
      */
-    public Collection<Tuple> remotePull(Address<? extends Supplier> supplier, boolean flush) {
+    public Collection <Tuple> remotePull(Address <? extends Supplier> supplier, boolean flush) {
         if (!isLocal(supplier))
             return supplier.getContainer().remotePull(supplier, flush);
         return pullContents(resolveLocal(supplier), flush);
@@ -467,7 +467,7 @@ public final class ReteContainer {
      * Proxies for the getPosMapping() of Production nodes. Retrieves the posmapping of a remote or local Production to
      * a remote or local caller.
      */
-    public Map<String, Integer> remotePosMapping(Address<? extends ProductionNode> production) {
+    public Map <String, Integer> remotePosMapping(Address <? extends ProductionNode> production) {
         if (!isLocal(production))
             return production.getContainer().remotePosMapping(production);
         return resolveLocal(production).getPosMapping();
@@ -535,7 +535,7 @@ public final class ReteContainer {
     /**
      * @since 1.6
      */
-    public static final Function<Node, String> NAME_MAPPER = input -> input.toString().substring(0,
+    public static final Function <Node, String> NAME_MAPPER = input -> input.toString().substring(0,
             Math.min(30, input.toString().length()));
 
     /**
@@ -549,7 +549,7 @@ public final class ReteContainer {
                 // known unreachable; enable for debugging only
 
                 CommunicationGroup lastGroup = null;
-                Set<CommunicationGroup> seenInThisCycle = new HashSet<>();
+                Set <CommunicationGroup> seenInThisCycle = new HashSet<>();
 
                 while (!tracker.isEmpty()) {
                     final CommunicationGroup group = tracker.getAndRemoveFirstGroup();
@@ -596,7 +596,7 @@ public final class ReteContainer {
         UpdateMessage message = externalMessageQueue.removeFirst();
         if (!externalMessageQueue.isEmpty()) { // copy the whole queue over
                                                // for speedup
-            Deque<UpdateMessage> temp = externalMessageQueue;
+            Deque <UpdateMessage> temp = externalMessageQueue;
             externalMessageQueue = internalMessageQueue;
             internalMessageQueue = temp;
         }
@@ -608,14 +608,14 @@ public final class ReteContainer {
      *
      * @pre node belongs to this container.
      */
-    public <N extends Node> Address<N> makeAddress(N node) {
-        return new Address<N>(node);
+    public <N extends Node> Address <N> makeAddress(N node) {
+        return new Address <N>(node);
     }
 
     /**
      * Checks whether a certain address points to a node at this container.
      */
-    public boolean isLocal(Address<? extends Node> address) {
+    public boolean isLocal(Address <? extends Node> address) {
         return address.getContainer() == this;
     }
 
@@ -627,7 +627,7 @@ public final class ReteContainer {
      *             if address is non-local
      */
     @SuppressWarnings("unchecked")
-    public <N extends Node> N resolveLocal(Address<N> address) {
+    public <N extends Node> N resolveLocal(Address <N> address) {
         if (this != address.getContainer())
             throw new IllegalArgumentException(String.format("Address %s non-local at container %s", address, this));
 
@@ -705,7 +705,7 @@ public final class ReteContainer {
         StringBuilder sb = new StringBuilder();
         String separator = System.getProperty("line.separator");
         sb.append(super.toString() + "[[[" + separator);
-        java.util.List<Long> keys = new java.util.ArrayList<Long>(nodesById.keySet());
+        java.util.List <Long> keys = new java.util.ArrayList <Long>(nodesById.keySet());
         java.util.Collections.sort(keys);
         for (Long key : keys) {
             sb.append(key + " -> " + nodesById.get(key) + separator);
@@ -719,7 +719,7 @@ public final class ReteContainer {
      *
      * @return the collection of {@link Node} instances
      */
-    public Collection<Node> getAllNodes() {
+    public Collection <Node> getAllNodes() {
         return nodesById.values();
     }
 

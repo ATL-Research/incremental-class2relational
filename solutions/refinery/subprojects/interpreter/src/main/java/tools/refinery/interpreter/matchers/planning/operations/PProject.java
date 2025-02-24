@@ -28,22 +28,22 @@ import tools.refinery.interpreter.matchers.util.Preconditions;
  */
 public class PProject extends POperation {
 
-    private Collection<PVariable> toVariables;
+    private Collection <PVariable> toVariables;
     private boolean ordered;
 
 
-    public PProject(Set<PVariable> toVariables) {
+    public PProject(Set <PVariable> toVariables) {
         super();
         this.toVariables = toVariables;
         this.ordered = false;
     }
-    public PProject(List<PVariable> toVariables) {
+    public PProject(List <PVariable> toVariables) {
         super();
         this.toVariables = toVariables;
         this.ordered = true;
     }
 
-    public Collection<PVariable> getToVariables() {
+    public Collection <PVariable> getToVariables() {
         return toVariables;
     }
     public boolean isOrdered() {
@@ -51,7 +51,7 @@ public class PProject extends POperation {
     }
 
     @Override
-    public Set<? extends PConstraint> getDeltaConstraints() {
+    public Set <? extends PConstraint> getDeltaConstraints() {
         return Collections.emptySet();
     }
     @Override

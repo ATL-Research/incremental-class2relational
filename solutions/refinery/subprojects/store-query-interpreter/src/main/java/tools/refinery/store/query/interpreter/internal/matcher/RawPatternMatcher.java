@@ -10,7 +10,7 @@ import tools.refinery.interpreter.api.GenericQuerySpecification;
 import tools.refinery.interpreter.matchers.backend.IQueryResultProvider;
 
 public class RawPatternMatcher extends GenericPatternMatcher {
-    public RawPatternMatcher(GenericQuerySpecification<? extends GenericPatternMatcher> specification) {
+    public RawPatternMatcher(GenericQuerySpecification <? extends GenericPatternMatcher> specification) {
         super(specification);
     }
 

@@ -45,8 +45,8 @@ public class RetePatternMatcher extends TransformerNode implements IQueryResultP
     protected IQueryRuntimeContext context;
     protected ProductionNode productionNode;
     protected RecipeTraceInfo productionNodeTrace;
-    protected Map<String, Integer> posMapping;
-    protected Map<Object, Receiver> taggedChildren = CollectionsFactory.createMap();
+    protected Map <String, Integer> posMapping;
+    protected Map <Object, Receiver> taggedChildren = CollectionsFactory.createMap();
     protected boolean connected = false; // is rete-wise connected to the
                                          // production node?
 
@@ -60,7 +60,7 @@ public class RetePatternMatcher extends TransformerNode implements IQueryResultP
         this.engine = engine;
         this.context = engine.getRuntimeContext();
         this.productionNodeTrace = productionNodeTrace;
-        final Address<? extends Node> productionAddress = reteContainer.getProvisioner()
+        final Address <? extends Node> productionAddress = reteContainer.getProvisioner()
                 .getOrCreateNodeByRecipe(productionNodeTrace);
         if (!reteContainer.isLocal(productionAddress))
             throw new IllegalArgumentException("@pre: Production must be local to the head container");
@@ -79,7 +79,7 @@ public class RetePatternMatcher extends TransformerNode implements IQueryResultP
     /**
      * @since 2.0
      */
-    public Stream<Tuple> matchAll(Object[] inputMapping, boolean[] fixed) {
+    public Stream <Tuple> matchAll(Object[] inputMapping, boolean[] fixed) {
         // retrieving the projection
         TupleMask mask = TupleMask.fromKeepIndicators(fixed);
         Tuple inputSignature = mask.transform(Tuples.flatTupleOf(inputMapping));
@@ -91,7 +91,7 @@ public class RetePatternMatcher extends TransformerNode implements IQueryResultP
     /**
      * @since 2.0
      */
-    public Stream<Tuple> matchAll(TupleMask mask, ITuple inputSignature) {
+    public Stream <Tuple> matchAll(TupleMask mask, ITuple inputSignature) {
         AllMatchFetcher fetcher = new AllMatchFetcher(engine.accessProjection(productionNodeTrace, mask),
                 context.wrapTuple(inputSignature.toImmutable()));
         engine.reteNet.waitForReteTermination(fetcher);
@@ -102,7 +102,7 @@ public class RetePatternMatcher extends TransformerNode implements IQueryResultP
     /**
      * @since 2.0
      */
-    public Optional<Tuple> matchOne(Object[] inputMapping, boolean[] fixed) {
+    public Optional <Tuple> matchOne(Object[] inputMapping, boolean[] fixed) {
         // retrieving the projection
         TupleMask mask = TupleMask.fromKeepIndicators(fixed);
         Tuple inputSignature = mask.transform(Tuples.flatTupleOf(inputMapping));
@@ -113,7 +113,7 @@ public class RetePatternMatcher extends TransformerNode implements IQueryResultP
     /**
      * @since 2.0
      */
-    public Optional<Tuple> matchOne(TupleMask mask, ITuple inputSignature) {
+    public Optional <Tuple> matchOne(TupleMask mask, ITuple inputSignature) {
         SingleMatchFetcher fetcher = new SingleMatchFetcher(engine.accessProjection(productionNodeTrace, mask),
                 context.wrapTuple(inputSignature.toImmutable()));
         engine.reteNet.waitForReteTermination(fetcher);
@@ -239,7 +239,7 @@ public class RetePatternMatcher extends TransformerNode implements IQueryResultP
             fetch(indexer.get(signature));
         }
 
-        protected abstract void fetch(Collection<Tuple> matches);
+        protected abstract void fetch(Collection <Tuple> matches);
 
     }
 
@@ -249,14 +249,14 @@ public class RetePatternMatcher extends TransformerNode implements IQueryResultP
             super(indexer, signature);
         }
 
-        Stream<Tuple> matches = null;
+        Stream <Tuple> matches = null;
 
-        public Stream<Tuple> getMatches() {
+        public Stream <Tuple> getMatches() {
             return matches;
         }
 
         @Override
-        protected void fetch(Collection<Tuple> matches) {
+        protected void fetch(Collection <Tuple> matches) {
             if (matches == null)
                 this.matches = Stream.of();
             else {
@@ -280,13 +280,13 @@ public class RetePatternMatcher extends TransformerNode implements IQueryResultP
         }
 
         @Override
-        protected void fetch(Collection<Tuple> matches) {
+        protected void fetch(Collection <Tuple> matches) {
             if (matches != null && !matches.isEmpty())
                 match = context.unwrapTuple(matches.iterator().next());
         }
 
         // public void run() {
-        // Collection<Tuple> unscopedMatches = indexer.get(signature);
+        // Collection <Tuple> unscopedMatches = indexer.get(signature);
         //
         // // checking scopes
         // if (unscopedMatches != null) {
@@ -342,7 +342,7 @@ public class RetePatternMatcher extends TransformerNode implements IQueryResultP
         }
 
         @Override
-        protected void fetch(Collection<Tuple> matches) {
+        protected void fetch(Collection <Tuple> matches) {
             count = matches == null ? 0 : matches.size();
         }
 
@@ -399,27 +399,27 @@ public class RetePatternMatcher extends TransformerNode implements IQueryResultP
 
 
     @Override
-    public Optional<Long> estimateCardinality(TupleMask groupMask, Accuracy requiredAccuracy) {
+    public Optional <Long> estimateCardinality(TupleMask groupMask, Accuracy requiredAccuracy) {
         return Optional.of((long)projectionSize(groupMask)); // always accurate
     }
 
     @Override
-    public Optional<Tuple> getOneArbitraryMatch(Object[] parameters) {
+    public Optional <Tuple> getOneArbitraryMatch(Object[] parameters) {
         return matchOne(parameters, notNull(parameters));
     }
 
     @Override
-    public Optional<Tuple> getOneArbitraryMatch(TupleMask parameterSeedMask, ITuple parameters) {
+    public Optional <Tuple> getOneArbitraryMatch(TupleMask parameterSeedMask, ITuple parameters) {
         return matchOne(parameterSeedMask, parameters);
     }
 
     @Override
-    public Stream<Tuple> getAllMatches(Object[] parameters) {
+    public Stream <Tuple> getAllMatches(Object[] parameters) {
         return matchAll(parameters, notNull(parameters));
     }
 
     @Override
-    public Stream<Tuple> getAllMatches(TupleMask parameterSeedMask, ITuple parameters) {
+    public Stream <Tuple> getAllMatches(TupleMask parameterSeedMask, ITuple parameters) {
         return matchAll(parameterSeedMask, parameters);
     }
 

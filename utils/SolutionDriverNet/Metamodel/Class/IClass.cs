@@ -51,7 +51,7 @@ namespace HSRM.TTC2023.ClassToRelational.Class_
         [ContainmentAttribute()]
         [XmlOppositeAttribute("owner")]
         [ConstantAttribute()]
-        IOrderedSetExpression<HSRM.TTC2023.ClassToRelational.Class_.IAttribute> Attr
+        IOrderedSetExpression <HSRM.TTC2023.ClassToRelational.Class_.IAttribute> Attr
         {
             get;
         }

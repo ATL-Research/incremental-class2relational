@@ -11,12 +11,12 @@ import tools.refinery.store.tuple.Tuple;
 
 import java.util.Iterator;
 
-class RelationalCursor implements Cursor<Tuple, Boolean> {
-    private final Iterator<? extends ITuple> tuplesIterator;
+class RelationalCursor implements Cursor <Tuple, Boolean> {
+    private final Iterator <? extends ITuple> tuplesIterator;
     private boolean terminated;
     private Tuple key;
 
-    public RelationalCursor(Iterator<? extends ITuple> tuplesIterator) {
+    public RelationalCursor(Iterator <? extends ITuple> tuplesIterator) {
         this.tuplesIterator = tuplesIterator;
     }
 

@@ -18,7 +18,7 @@ public class Class2relationalImperativeTransformation implements BXtendTransform
 	private Resource targetModel
 	private Resource corrModel
 
-	private List<Elem2Elem> rules = new ArrayList<Elem2Elem>();
+	private List <Elem2Elem> rules = new ArrayList <Elem2Elem>();
 
 	new(URI source, URI target, URI correspondence) {
 		val ResourceSet set = new ResourceSetImpl();
@@ -87,7 +87,7 @@ public class Class2relationalImperativeTransformation implements BXtendTransform
 	}
 
 	def deleteUnreferencedTargetElements(){
-		val List<EObject> deletionList = newArrayList; 
+		val List <EObject> deletionList = newArrayList; 
 
 		detectSourceDeletions().forEach[c |
 			// TODO: add handling of contained and referenced Elements here if appropriate			
@@ -99,7 +99,7 @@ public class Class2relationalImperativeTransformation implements BXtendTransform
 	}
 
 	def deleteUnreferencedSourceElements(){
-		val List<EObject> deletionList = newArrayList; 
+		val List <EObject> deletionList = newArrayList; 
 
 		detectTargetDeletions().forEach[c |
 			// TODO: add handling of contained and referenced Elements here if appropriate

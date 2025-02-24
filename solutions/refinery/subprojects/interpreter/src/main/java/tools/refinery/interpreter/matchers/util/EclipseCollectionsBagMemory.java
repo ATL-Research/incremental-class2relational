@@ -25,7 +25,7 @@ import org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap;
  * @since 1.7
  * @noreference
  */
-public abstract class EclipseCollectionsBagMemory<T> extends ObjectIntHashMap<T> implements IMemory<T> {
+public abstract class EclipseCollectionsBagMemory <T> extends ObjectIntHashMap <T> implements IMemory <T> {
 
     public EclipseCollectionsBagMemory() {
         super();
@@ -55,7 +55,7 @@ public abstract class EclipseCollectionsBagMemory<T> extends ObjectIntHashMap<T>
 
 
     @Override
-    public Iterator<T> iterator() {
+    public Iterator <T> iterator() {
         return super.keySet().iterator();
     }
 
@@ -65,12 +65,12 @@ public abstract class EclipseCollectionsBagMemory<T> extends ObjectIntHashMap<T>
     }
 
     @Override
-    public Set<T> distinctValues() {
+    public Set <T> distinctValues() {
         return super.keySet();
     }
 
     @Override
-    public void forEachEntryWithMultiplicities(BiConsumer<T, Integer> entryConsumer) {
+    public void forEachEntryWithMultiplicities(BiConsumer <T, Integer> entryConsumer) {
         super.forEachKeyValue(entryConsumer::accept);
     }
 

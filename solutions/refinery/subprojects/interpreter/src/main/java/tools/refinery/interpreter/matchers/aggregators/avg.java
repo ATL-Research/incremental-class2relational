@@ -27,7 +27,7 @@ import tools.refinery.interpreter.matchers.psystem.aggregations.IAggregatorFacto
 public final class avg implements IAggregatorFactory {
 
     @Override
-    public BoundAggregator getAggregatorLogic(Class<?> domainClass) {
+    public BoundAggregator getAggregatorLogic(Class <?> domainClass) {
         if (Integer.class.equals(domainClass))
             return new BoundAggregator(IntegerAverageOperator.INSTANCE, Integer.class, Double.class);
         if (Double.class.equals(domainClass))

@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RenewingSubstitution implements Substitution {
-	private final Map<Variable, Variable> alreadyRenewed = new HashMap<>();
+	private final Map <Variable, Variable> alreadyRenewed = new HashMap<>();
 
 	@Override
 	public Variable getSubstitute(Variable variable) {

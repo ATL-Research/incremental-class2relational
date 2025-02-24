@@ -14,12 +14,12 @@ class DataType2Type extends Elem2Elem {
 		super("DataType2Type", trafo)
 	}
 	
-	override CorrModelDelta sourceToTarget(Set<EObject> _detachedCorrElems) {
-		this.createdElems = new ArrayList<EObject>()
-		this.spareElems = new ArrayList<EObject>()
+	override CorrModelDelta sourceToTarget(Set <EObject> _detachedCorrElems) {
+		this.createdElems = new ArrayList <EObject>()
+		this.spareElems = new ArrayList <EObject>()
 		this.detachedCorrElems = _detachedCorrElems
 				
-		val _matches = new ArrayList<Source>()
+		val _matches = new ArrayList <Source>()
 		for (dt : sourceModel.allContents.filter(typeof(atl.research.class_.DataType)).toIterable()) {
 			_matches += new Source(dt)
 		}
@@ -38,12 +38,12 @@ class DataType2Type extends Elem2Elem {
 		return new CorrModelDelta(this.createdElems, this.spareElems, this.detachedCorrElems)
 	}
 	
-	override CorrModelDelta targetToSource(Set<EObject> _detachedCorrElems) {
-		this.createdElems = new ArrayList<EObject>()
-		this.spareElems = new ArrayList<EObject>()
+	override CorrModelDelta targetToSource(Set <EObject> _detachedCorrElems) {
+		this.createdElems = new ArrayList <EObject>()
+		this.spareElems = new ArrayList <EObject>()
 		this.detachedCorrElems = _detachedCorrElems
 				
-		val _matches = new ArrayList<Target>()
+		val _matches = new ArrayList <Target>()
 		for (t : targetModel.allContents.filter(typeof(atl.research.relational_.Type)).toIterable()) {
 			_matches += new Target(t)
 		}

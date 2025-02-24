@@ -5,7 +5,7 @@ package Changes;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Reference Set Null</b></em>'.
+ * A representation of the model object ' <em> <b>Reference Set Null </b> </em>'.
  * <!-- end-user-doc -->
  *
  *

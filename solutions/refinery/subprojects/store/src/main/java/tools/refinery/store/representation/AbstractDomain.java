@@ -8,16 +8,16 @@ package tools.refinery.store.representation;
 import java.util.Objects;
 import java.util.Optional;
 
-public non-sealed interface AbstractDomain<A, C> extends AnyAbstractDomain {
+public non-sealed interface AbstractDomain <A, C> extends AnyAbstractDomain {
 	@Override
-	Class<A> abstractType();
+	Class <A> abstractType();
 
 	@Override
-	Class<C> concreteType();
+	Class <C> concreteType();
 
 	A toAbstract(C concreteValue);
 
-	Optional<C> toConcrete(A abstractValue);
+	Optional <C> toConcrete(A abstractValue);
 
 	default boolean isConcrete(A abstractValue) {
 		return toConcrete(abstractValue).isPresent();

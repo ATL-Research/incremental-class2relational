@@ -12,10 +12,10 @@ namespace HSRM.TTC2023.ClassToRelational
     internal class CSharpClassToRelational
     {
         // Tracing 
-        private Dictionary<object, IModelElement> _trace = new();
+        private Dictionary <object, IModelElement> _trace = new();
 
         // Tracing 
-        private Dictionary<IAttribute, ITable> _attributeTables = new();
+        private Dictionary <IAttribute, ITable> _attributeTables = new();
 
         // Tracing 
         private Model _result = new Model();
@@ -38,7 +38,7 @@ namespace HSRM.TTC2023.ClassToRelational
         }
 
         // Change_Propagation 
-        private void Remove<T>(object original, ICollection<T> targetCollection)
+        private void Remove <T>(object original, ICollection <T> targetCollection)
         {
             // Change_Propagation 
             if (original != null && _trace.TryGetValue(original, out var transformed) && transformed is T target)

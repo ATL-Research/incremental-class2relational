@@ -58,7 +58,7 @@ public class ProblemScopeProvider extends AbstractProblemScopeProvider {
 	}
 
 	protected IScope getVariableScope(EObject context, IScope delegateScope) {
-		List<Variable> variables = new ArrayList<>();
+		List <Variable> variables = new ArrayList<>();
 		addSingletonVariableToScope(context, variables);
 		EObject currentContext = context;
 		while (currentContext != null && !(currentContext instanceof ParametricDefinition)) {
@@ -73,7 +73,7 @@ public class ProblemScopeProvider extends AbstractProblemScopeProvider {
 		return Scopes.scopeFor(variables, parentScope);
 	}
 
-	protected void addSingletonVariableToScope(EObject context, List<Variable> variables) {
+	protected void addSingletonVariableToScope(EObject context, List <Variable> variables) {
 		if (context instanceof VariableOrNodeExpr expr) {
 			Variable singletonVariable = expr.getSingletonVariable();
 			if (singletonVariable != null) {
@@ -82,7 +82,7 @@ public class ProblemScopeProvider extends AbstractProblemScopeProvider {
 		}
 	}
 
-	protected void addExistentiallyQualifiedVariableToScope(EObject currentContext, List<Variable> variables) {
+	protected void addExistentiallyQualifiedVariableToScope(EObject currentContext, List <Variable> variables) {
 		if (currentContext instanceof ExistentialQuantifier quantifier) {
 			variables.addAll(quantifier.getImplicitVariables());
 		} else if (currentContext instanceof Match match) {

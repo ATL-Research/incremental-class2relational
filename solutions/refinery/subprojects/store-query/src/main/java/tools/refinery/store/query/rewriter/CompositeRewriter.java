@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompositeRewriter implements DnfRewriter {
-	private final List<DnfRewriter> rewriterList = new ArrayList<>();
+	private final List <DnfRewriter> rewriterList = new ArrayList<>();
 
 	public void addFirst(DnfRewriter rewriter) {
 		rewriterList.add(rewriter);

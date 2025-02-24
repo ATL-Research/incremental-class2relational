@@ -9,13 +9,13 @@ import tools.refinery.store.query.substitution.Substitution;
 import tools.refinery.store.query.term.Term;
 
 public class RealAddTerm extends RealBinaryTerm {
-	public RealAddTerm(Term<Double> left, Term<Double> right) {
+	public RealAddTerm(Term <Double> left, Term <Double> right) {
 		super(left, right);
 	}
 
 	@Override
-	public Term<Double> doSubstitute(Substitution substitution, Term<Double> substitutedLeft,
-									 Term<Double> substitutedRight) {
+	public Term <Double> doSubstitute(Substitution substitution, Term <Double> substitutedLeft,
+									 Term <Double> substitutedRight) {
 		return new RealAddTerm(substitutedLeft, substitutedRight);
 	}
 

@@ -16,7 +16,7 @@ package tools.refinery.interpreter.matchers.util;
  * @author Gabor Bergmann
  * @since 1.7
  */
-public interface IMultiset<T> extends IMemory<T> {
+public interface IMultiset <T> extends IMemory <T> {
 
     /**
      * Adds the given number of occurrences to the memory. The count value must be a positive number.

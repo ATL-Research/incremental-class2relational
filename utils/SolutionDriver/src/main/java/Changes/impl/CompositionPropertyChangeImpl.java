@@ -16,21 +16,21 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Composition Property Change</b></em>'.
+ * An implementation of the model object ' <em> <b>Composition Property Change </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.CompositionPropertyChangeImpl#getNewValue <em>New Value</em>}</li>
- *   <li>{@link Changes.impl.CompositionPropertyChangeImpl#getOldValue <em>Old Value</em>}</li>
+ *   <li>{@link Changes.impl.CompositionPropertyChangeImpl#getNewValue <em>New Value </em>} </li>
+ *   <li>{@link Changes.impl.CompositionPropertyChangeImpl#getOldValue <em>Old Value </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class CompositionPropertyChangeImpl extends CompositionChangeImpl implements CompositionPropertyChange {
 	/**
-	 * The cached value of the '{@link #getNewValue() <em>New Value</em>}' containment reference.
+	 * The cached value of the '{@link #getNewValue() <em>New Value </em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getNewValue()
@@ -40,7 +40,7 @@ public class CompositionPropertyChangeImpl extends CompositionChangeImpl impleme
 	protected EObject newValue;
 
 	/**
-	 * The cached value of the '{@link #getOldValue() <em>Old Value</em>}' reference.
+	 * The cached value of the '{@link #getOldValue() <em>Old Value </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getOldValue()

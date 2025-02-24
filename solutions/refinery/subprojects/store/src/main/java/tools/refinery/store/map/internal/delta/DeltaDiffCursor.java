@@ -12,9 +12,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class DeltaDiffCursor<K, V> implements DiffCursor<K, V> {
-	final List<MapDelta<K, V>[]> backwardTransactions;
-	final List<MapDelta<K, V>[]> forwardTransactions;
+public class DeltaDiffCursor <K, V> implements DiffCursor <K, V> {
+	final List <MapDelta<K, V>[]> backwardTransactions;
+	final List <MapDelta<K, V>[]> forwardTransactions;
 
 	boolean started;
 	/**
@@ -25,7 +25,7 @@ public class DeltaDiffCursor<K, V> implements DiffCursor<K, V> {
 	int listIndex;
 	int arrayIndex;
 
-	public DeltaDiffCursor(List<MapDelta<K, V>[]> backwardTransactions, List<MapDelta<K, V>[]> forwardTransactions) {
+	public DeltaDiffCursor(List <MapDelta<K, V>[]> backwardTransactions, List <MapDelta<K, V>[]> forwardTransactions) {
 		this.backwardTransactions = backwardTransactions;
 		this.forwardTransactions = forwardTransactions;
 
@@ -44,8 +44,8 @@ public class DeltaDiffCursor<K, V> implements DiffCursor<K, V> {
 		started = false;
 	}
 
-	protected MapDelta<K, V> getCurrentDelta() {
-		final List<MapDelta<K, V>[]> list;
+	protected MapDelta <K, V> getCurrentDelta() {
+		final List <MapDelta<K, V>[]> list;
 		if (!direction) {
 			list = this.backwardTransactions;
 		} else {
@@ -123,7 +123,7 @@ public class DeltaDiffCursor<K, V> implements DiffCursor<K, V> {
 	}
 
 	@Override
-	public Set<AnyVersionedMap> getDependingMaps() {
+	public Set <AnyVersionedMap> getDependingMaps() {
 		return Collections.emptySet();
 	}
 

@@ -30,14 +30,14 @@ import tools.refinery.interpreter.matchers.util.timeline.Timeline;
  *
  * @since 2.0
  */
-public final class DefaultMaskedTupleMemory<Timestamp extends Comparable<Timestamp>>
-        extends MaskedTupleMemory<Timestamp> {
+public final class DefaultMaskedTupleMemory <Timestamp extends Comparable <Timestamp>>
+        extends MaskedTupleMemory <Timestamp> {
     /**
      * Maps a signature tuple to the bucket of tuples with the given signature.
      *
      * @since 2.0
      */
-    protected IMultiLookup<Tuple, Tuple> signatureToTuples;
+    protected IMultiLookup <Tuple, Tuple> signatureToTuples;
 
     /**
      * @param mask
@@ -85,13 +85,13 @@ public final class DefaultMaskedTupleMemory<Timestamp extends Comparable<Timesta
     }
 
     @Override
-    public Map<Tuple, Timeline<Timestamp>> getWithTimeline(ITuple signature) {
+    public Map <Tuple, Timeline <Timestamp>> getWithTimeline(ITuple signature) {
         throw new UnsupportedOperationException("Timeless memories do not support timestamp-based lookup!");
     }
 
     @Override
-    public Collection<Tuple> get(ITuple signature) {
-        IMemoryView<Tuple> bucket = signatureToTuples.lookupUnsafe(signature);
+    public Collection <Tuple> get(ITuple signature) {
+        IMemoryView <Tuple> bucket = signatureToTuples.lookupUnsafe(signature);
         return bucket == null ? null : bucket.distinctValues();
     }
 
@@ -101,12 +101,12 @@ public final class DefaultMaskedTupleMemory<Timestamp extends Comparable<Timesta
     }
 
     @Override
-    public Iterable<Tuple> getSignatures() {
+    public Iterable <Tuple> getSignatures() {
         return signatureToTuples.distinctKeys();
     }
 
     @Override
-    public Iterator<Tuple> iterator() {
+    public Iterator <Tuple> iterator() {
         return signatureToTuples.distinctValues().iterator();
     }
 

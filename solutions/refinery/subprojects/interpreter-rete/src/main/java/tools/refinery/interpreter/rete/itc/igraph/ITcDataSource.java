@@ -21,7 +21,7 @@ import tools.refinery.interpreter.rete.itc.alg.misc.IGraphPathFinder;
  * @param <V>
  *            the type parameter of the node
  */
-public interface ITcDataSource<V> {
+public interface ITcDataSource <V> {
 
     /**
      * Attach a transitive closure relation observer.
@@ -29,7 +29,7 @@ public interface ITcDataSource<V> {
      * @param to
      *            the observer object
      */
-    public void attachObserver(ITcObserver<V> to);
+    public void attachObserver(ITcObserver <V> to);
 
     /**
      * Detach a transitive closure relation observer.
@@ -37,7 +37,7 @@ public interface ITcDataSource<V> {
      * @param to
      *            the observer object
      */
-    public void detachObserver(ITcObserver<V> to);
+    public void detachObserver(ITcObserver <V> to);
 
     /**
      * Returns all nodes which are reachable from the source node.
@@ -46,7 +46,7 @@ public interface ITcDataSource<V> {
      *            the source node
      * @return the set of target nodes
      */
-    public Set<V> getAllReachableTargets(V source);
+    public Set <V> getAllReachableTargets(V source);
 
     /**
      * Returns all nodes from which the target node is reachable.
@@ -55,7 +55,7 @@ public interface ITcDataSource<V> {
      *            the target node
      * @return the set of source nodes
      */
-    public Set<V> getAllReachableSources(V target);
+    public Set <V> getAllReachableSources(V target);
 
     /**
      * Returns true if the target node is reachable from the source node.
@@ -73,7 +73,7 @@ public interface ITcDataSource<V> {
      *
      * @return a path finder for the graph.
      */
-    public IGraphPathFinder<V> getPathFinder();
+    public IGraphPathFinder <V> getPathFinder();
 
     /**
      * Call this method to properly dispose the data structures of a transitive closure algorithm.

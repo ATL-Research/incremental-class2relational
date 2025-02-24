@@ -15,7 +15,7 @@ import tools.refinery.language.web.xtext.server.push.PrecomputationListener;
 public record SubscribingServiceContext(IServiceContext delegate, PrecomputationListener subscriber)
 		implements IServiceContext {
 	@Override
-	public Set<String> getParameterKeys() {
+	public Set <String> getParameterKeys() {
 		return delegate.getParameterKeys();
 	}
 

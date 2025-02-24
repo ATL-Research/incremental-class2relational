@@ -15,12 +15,12 @@ import java.util.Map;
 
 public class SubstitutingLiteralEqualityHelper implements LiteralEqualityHelper {
 	private final DnfEqualityChecker dnfEqualityChecker;
-	private final Map<Variable, Variable> leftToRight;
-	private final Map<Variable, Variable> rightToLeft;
+	private final Map <Variable, Variable> leftToRight;
+	private final Map <Variable, Variable> rightToLeft;
 
 	public SubstitutingLiteralEqualityHelper(DnfEqualityChecker dnfEqualityChecker,
-											 List<SymbolicParameter> leftParameters,
-											 List<SymbolicParameter> rightParameters) {
+											 List <SymbolicParameter> leftParameters,
+											 List <SymbolicParameter> rightParameters) {
 		this.dnfEqualityChecker = dnfEqualityChecker;
 		var arity = leftParameters.size();
 		if (arity != rightParameters.size()) {
@@ -52,7 +52,7 @@ public class SubstitutingLiteralEqualityHelper implements LiteralEqualityHelper 
 		return false;
 	}
 
-	private static boolean checkMapping(Map<Variable, Variable> map, Variable key, Variable expectedValue) {
+	private static boolean checkMapping(Map <Variable, Variable> map, Variable key, Variable expectedValue) {
 		var currentValue = map.get(key);
 		return currentValue == null || currentValue.equals(expectedValue);
 	}

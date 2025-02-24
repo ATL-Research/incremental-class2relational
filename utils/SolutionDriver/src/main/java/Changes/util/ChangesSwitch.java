@@ -11,9 +11,9 @@ import org.eclipse.emf.ecore.util.Switch;
 
 /**
  * <!-- begin-user-doc -->
- * The <b>Switch</b> for the model's inheritance hierarchy.
+ * The <b>Switch </b> for the model's inheritance hierarchy.
  * It supports the call {@link #doSwitch(EObject) doSwitch(object)}
- * to invoke the <code>caseXXX</code> method for each class of the model,
+ * to invoke the <code>caseXXX </code> method for each class of the model,
  * starting with the actual class of the object
  * and proceeding up the inheritance hierarchy
  * until a non-null result is returned,
@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.util.Switch;
  * @see Changes.ChangesPackage
  * @generated
  */
-public class ChangesSwitch<T> extends Switch<T> {
+public class ChangesSwitch <T> extends Switch <T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -57,10 +57,10 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * Calls <code>caseXXX </code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @return the first non-null result returned by a <code>caseXXX </code> call.
 	 * @generated
 	 */
 	@Override
@@ -334,13 +334,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Model Change Set</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Model Change Set </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Model Change Set</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Model Change Set </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -349,13 +349,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Model Change</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Model Change </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Model Change</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Model Change </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -364,13 +364,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Elementary Change</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Elementary Change </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Elementary Change</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Elementary Change </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -379,13 +379,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Change Transaction</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Change Transaction </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Change Transaction</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Change Transaction </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -394,13 +394,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Composition Change</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Composition Change </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Composition Change</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Composition Change </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -409,13 +409,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Association Change</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Association Change </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Association Change</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Association Change </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -424,13 +424,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Attribute Change</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Attribute Change </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Attribute Change</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Attribute Change </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -439,13 +439,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Association Collection Deletion</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Association Collection Deletion </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Association Collection Deletion</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Association Collection Deletion </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -454,13 +454,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Composition Collection Deletion</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Composition Collection Deletion </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Composition Collection Deletion</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Composition Collection Deletion </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -469,13 +469,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Attribute Collection Deletion</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Attribute Collection Deletion </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Attribute Collection Deletion</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Attribute Collection Deletion </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -484,13 +484,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Association Collection Insertion</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Association Collection Insertion </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Association Collection Insertion</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Association Collection Insertion </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -499,13 +499,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Composition Collection Insertion</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Composition Collection Insertion </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Composition Collection Insertion</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Composition Collection Insertion </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -514,13 +514,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Attribute Collection Insertion</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Attribute Collection Insertion </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Attribute Collection Insertion</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Attribute Collection Insertion </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -529,13 +529,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Association Collection Reset</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Association Collection Reset </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Association Collection Reset</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Association Collection Reset </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -544,13 +544,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Composition Collection Reset</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Composition Collection Reset </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Composition Collection Reset</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Composition Collection Reset </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -559,13 +559,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Attribute Collection Reset</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Attribute Collection Reset </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Attribute Collection Reset</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Attribute Collection Reset </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -574,13 +574,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Association List Deletion</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Association List Deletion </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Association List Deletion</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Association List Deletion </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -589,13 +589,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Composition List Deletion</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Composition List Deletion </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Composition List Deletion</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Composition List Deletion </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -604,13 +604,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Attribute List Deletion</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Attribute List Deletion </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Attribute List Deletion</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Attribute List Deletion </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -619,13 +619,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Association List Insertion</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Association List Insertion </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Association List Insertion</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Association List Insertion </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -634,13 +634,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Composition List Insertion</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Composition List Insertion </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Composition List Insertion</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Composition List Insertion </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -649,13 +649,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Attribute List Insertion</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Attribute List Insertion </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Attribute List Insertion</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Attribute List Insertion </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -664,13 +664,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Attribute Property Change</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Attribute Property Change </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Attribute Property Change</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Attribute Property Change </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -679,13 +679,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Association Property Change</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Association Property Change </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Association Property Change</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Association Property Change </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -694,13 +694,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Composition Property Change</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Composition Property Change </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Composition Property Change</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Composition Property Change </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -709,13 +709,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Composition Move Into Property</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Composition Move Into Property </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Composition Move Into Property</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Composition Move Into Property </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -724,13 +724,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Composition Move To List</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Composition Move To List </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Composition Move To List</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Composition Move To List </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -739,13 +739,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Composition Move To Collection</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Composition Move To Collection </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Composition Move To Collection</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Composition Move To Collection </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -754,13 +754,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Operation Call</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Operation Call </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Operation Call</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Operation Call </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -769,13 +769,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Operation Argument</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Operation Argument </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Operation Argument</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Operation Argument </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -784,13 +784,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Value Argument</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Value Argument </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Value Argument</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Value Argument </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -799,13 +799,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Reference Argument</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>Reference Argument </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Reference Argument</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Reference Argument </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -814,13 +814,13 @@ public class ChangesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
+	 * Returns the result of interpreting the object as an instance of ' <em>EObject </em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch, but this is the last case anyway.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>EObject </em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */

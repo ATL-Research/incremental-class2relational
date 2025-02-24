@@ -9,13 +9,13 @@ import tools.refinery.store.query.substitution.Substitution;
 import tools.refinery.store.query.term.Term;
 
 public class RealMaxTerm extends RealBinaryTerm {
-	public RealMaxTerm(Term<Double> left, Term<Double> right) {
+	public RealMaxTerm(Term <Double> left, Term <Double> right) {
 		super(left, right);
 	}
 
 	@Override
-	public Term<Double> doSubstitute(Substitution substitution, Term<Double> substitutedLeft,
-									 Term<Double> substitutedRight) {
+	public Term <Double> doSubstitute(Substitution substitution, Term <Double> substitutedLeft,
+									 Term <Double> substitutedRight) {
 		return new RealMaxTerm(substitutedLeft, substitutedRight);
 	}
 

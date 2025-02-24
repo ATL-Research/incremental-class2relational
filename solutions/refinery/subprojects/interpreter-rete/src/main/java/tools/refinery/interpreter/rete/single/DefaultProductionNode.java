@@ -28,12 +28,12 @@ import tools.refinery.interpreter.rete.traceability.CompiledQuery;
  */
 public class DefaultProductionNode extends UniquenessEnforcerNode implements ProductionNode {
 
-    protected final Map<String, Integer> posMapping;
+    protected final Map <String, Integer> posMapping;
 
     /**
      * @since 1.6
      */
-    public DefaultProductionNode(final ReteContainer reteContainer, final Map<String, Integer> posMapping,
+    public DefaultProductionNode(final ReteContainer reteContainer, final Map <String, Integer> posMapping,
                                  final boolean deleteRederiveEvaluation) {
         this(reteContainer, posMapping, deleteRederiveEvaluation, null, null, null);
     }
@@ -41,7 +41,7 @@ public class DefaultProductionNode extends UniquenessEnforcerNode implements Pro
     /**
      * @since 1.6
      */
-    public DefaultProductionNode(final ReteContainer reteContainer, final Map<String, Integer> posMapping,
+    public DefaultProductionNode(final ReteContainer reteContainer, final Map <String, Integer> posMapping,
             final boolean deleteRederiveEvaluation, final TupleMask coreMask, final TupleMask posetMask,
             final IPosetComparator posetComparator) {
         super(reteContainer, posMapping.size(), deleteRederiveEvaluation, coreMask, posetMask, posetComparator);
@@ -49,12 +49,12 @@ public class DefaultProductionNode extends UniquenessEnforcerNode implements Pro
     }
 
     @Override
-    public Map<String, Integer> getPosMapping() {
+    public Map <String, Integer> getPosMapping() {
         return posMapping;
     }
 
     @Override
-    public Iterator<Tuple> iterator() {
+    public Iterator <Tuple> iterator() {
         return memory.iterator();
     }
 
@@ -70,7 +70,7 @@ public class DefaultProductionNode extends UniquenessEnforcerNode implements Pro
         for (final TraceInfo traceInfo : this.traceInfos) {
             if (traceInfo instanceof CompiledQuery) {
                 final String patternName = ((CompiledQuery) traceInfo).getPatternName();
-                return String.format(this.getClass().getName() + "<%s>=%s", patternName, super.toString());
+                return String.format(this.getClass().getName() + " <%s>=%s", patternName, super.toString());
             }
         }
         return super.toString();

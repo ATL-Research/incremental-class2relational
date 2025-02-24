@@ -24,18 +24,18 @@ import tools.refinery.interpreter.rete.index.IdentityIndexer;
 
 public class TimelyMemoryIdentityIndexer extends IdentityIndexer {
 
-    protected final TimelyMemory<Timestamp> memory;
+    protected final TimelyMemory <Timestamp> memory;
 
     public TimelyMemoryIdentityIndexer(final ReteContainer reteContainer, final int tupleWidth,
-                                       final TimelyMemory<Timestamp> memory, final Supplier parent, final Receiver activeNode,
-                                       final List<ListenerSubscription> sharedSubscriptionList) {
+                                       final TimelyMemory <Timestamp> memory, final Supplier parent, final Receiver activeNode,
+                                       final List <ListenerSubscription> sharedSubscriptionList) {
         super(reteContainer, tupleWidth, parent, activeNode, sharedSubscriptionList);
         this.memory = memory;
     }
 
     @Override
-    public Map<Tuple, Timeline<Timestamp>> getTimeline(final Tuple signature) {
-        final Timeline<Timestamp> timestamp = this.memory.get(signature);
+    public Map <Tuple, Timeline <Timestamp>> getTimeline(final Tuple signature) {
+        final Timeline <Timestamp> timestamp = this.memory.get(signature);
         if (timestamp != null) {
             return Collections.singletonMap(signature, timestamp);
         } else {
@@ -44,7 +44,7 @@ public class TimelyMemoryIdentityIndexer extends IdentityIndexer {
     }
 
     @Override
-    protected Collection<Tuple> getTuples() {
+    protected Collection <Tuple> getTuples() {
         return this.memory.getTuplesAtInfinity();
     }
 

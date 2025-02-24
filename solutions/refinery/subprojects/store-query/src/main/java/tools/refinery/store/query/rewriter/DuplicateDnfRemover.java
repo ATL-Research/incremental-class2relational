@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 public class DuplicateDnfRemover extends AbstractRecursiveRewriter {
-	private final Map<CanonicalDnf, Dnf> dnfCache = new HashMap<>();
-	private final Map<Dnf, Query<?>> queryCache = new HashMap<>();
+	private final Map <CanonicalDnf, Dnf> dnfCache = new HashMap<>();
+	private final Map <Dnf, Query <?>> queryCache = new HashMap<>();
 
 	@Override
 	protected Dnf map(Dnf dnf) {
@@ -36,9 +36,9 @@ public class DuplicateDnfRemover extends AbstractRecursiveRewriter {
 		return builder.build();
 	}
 
-	private List<Literal> rewriteClause(DnfClause clause) {
+	private List <Literal> rewriteClause(DnfClause clause) {
 		var originalLiterals = clause.literals();
-		var literals = new ArrayList<Literal>(originalLiterals.size());
+		var literals = new ArrayList <Literal>(originalLiterals.size());
 		for (var literal : originalLiterals) {
 			var rewrittenLiteral = literal;
 			if (literal instanceof AbstractCallLiteral abstractCallLiteral &&
@@ -52,11 +52,11 @@ public class DuplicateDnfRemover extends AbstractRecursiveRewriter {
 	}
 
 	@Override
-	public <T> Query<T> rewrite(Query<T> query) {
+	public <T> Query <T> rewrite(Query <T> query) {
 		var rewrittenDnf = rewrite(query.getDnf());
 		// {@code withDnf} will always return the appropriate type.
 		@SuppressWarnings("unchecked")
-		var rewrittenQuery = (Query<T>) queryCache.computeIfAbsent(rewrittenDnf, query::withDnf);
+		var rewrittenQuery = (Query <T>) queryCache.computeIfAbsent(rewrittenDnf, query::withDnf);
 		return rewrittenQuery;
 	}
 

@@ -24,7 +24,7 @@ import tools.refinery.interpreter.rete.network.mailbox.MessageIndexerFactory;
  * @since 2.0
  *
  */
-public abstract class AbstractUpdateSplittingMailbox<IndexerType extends MessageIndexer, ReceiverType extends Receiver> implements Mailbox {
+public abstract class AbstractUpdateSplittingMailbox <IndexerType extends MessageIndexer, ReceiverType extends Receiver> implements Mailbox {
 
     protected IndexerType monotoneQueue;
     protected IndexerType antiMonotoneQueue;
@@ -37,7 +37,7 @@ public abstract class AbstractUpdateSplittingMailbox<IndexerType extends Message
     protected CommunicationGroup group;
 
     public AbstractUpdateSplittingMailbox(final ReceiverType receiver, final ReteContainer container,
-            final MessageIndexerFactory<IndexerType> factory) {
+            final MessageIndexerFactory <IndexerType> factory) {
         this.receiver = receiver;
         this.container = container;
         this.monotoneQueue = factory.create();

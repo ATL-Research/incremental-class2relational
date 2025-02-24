@@ -9,8 +9,8 @@ import tools.refinery.store.query.substitution.Substitution;
 import tools.refinery.store.query.term.Term;
 import tools.refinery.store.query.term.UnaryTerm;
 
-public class RealToIntTerm extends UnaryTerm<Integer, Double> {
-	protected RealToIntTerm(Term<Double> body) {
+public class RealToIntTerm extends UnaryTerm <Integer, Double> {
+	protected RealToIntTerm(Term <Double> body) {
 		super(Integer.class, Double.class, body);
 	}
 
@@ -20,7 +20,7 @@ public class RealToIntTerm extends UnaryTerm<Integer, Double> {
 	}
 
 	@Override
-	protected Term<Integer> doSubstitute(Substitution substitution, Term<Double> substitutedBody) {
+	protected Term <Integer> doSubstitute(Substitution substitution, Term <Double> substitutedBody) {
 		return new RealToIntTerm(substitutedBody);
 	}
 

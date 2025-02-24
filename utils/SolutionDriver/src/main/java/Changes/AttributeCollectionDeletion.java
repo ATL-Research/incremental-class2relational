@@ -5,14 +5,14 @@ package Changes;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Attribute Collection Deletion</b></em>'.
+ * A representation of the model object ' <em> <b>Attribute Collection Deletion </b> </em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link Changes.AttributeCollectionDeletion#getDeletedValue <em>Deleted Value</em>}</li>
+ *   <li>{@link Changes.AttributeCollectionDeletion#getDeletedValue <em>Deleted Value </em>} </li>
  * </ul>
  *
  * @see Changes.ChangesPackage#getAttributeCollectionDeletion()
@@ -21,14 +21,14 @@ package Changes;
  */
 public interface AttributeCollectionDeletion extends AttributeChange {
 	/**
-	 * Returns the value of the '<em><b>Deleted Value</b></em>' attribute.
+	 * Returns the value of the ' <em> <b>Deleted Value </b> </em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Deleted Value</em>' attribute isn't clear,
+	 * If the meaning of the ' <em>Deleted Value </em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Deleted Value</em>' attribute.
+	 * @return the value of the ' <em>Deleted Value </em>' attribute.
 	 * @see #setDeletedValue(String)
 	 * @see Changes.ChangesPackage#getAttributeCollectionDeletion_DeletedValue()
 	 * @model required="true"
@@ -37,10 +37,10 @@ public interface AttributeCollectionDeletion extends AttributeChange {
 	String getDeletedValue();
 
 	/**
-	 * Sets the value of the '{@link Changes.AttributeCollectionDeletion#getDeletedValue <em>Deleted Value</em>}' attribute.
+	 * Sets the value of the '{@link Changes.AttributeCollectionDeletion#getDeletedValue <em>Deleted Value </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Deleted Value</em>' attribute.
+	 * @param value the new value of the ' <em>Deleted Value </em>' attribute.
 	 * @see #getDeletedValue()
 	 * @generated
 	 */

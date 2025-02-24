@@ -36,13 +36,13 @@ public class RemoteSupplier extends SingleInputNode {
     }
 
     @Override
-    public void pullInto(Collection<Tuple> collector, boolean flush) {
-        Collection<Tuple> pulled = counterpart.remotePull(flush);
+    public void pullInto(Collection <Tuple> collector, boolean flush) {
+        Collection <Tuple> pulled = counterpart.remotePull(flush);
         collector.addAll(pulled);
     }
 
     @Override
-    public void pullIntoWithTimeline(Map<Tuple, Timeline<Timestamp>> collector, boolean flush) {
+    public void pullIntoWithTimeline(Map <Tuple, Timeline <Timestamp>> collector, boolean flush) {
         throw new UnsupportedOperationException();
     }
 

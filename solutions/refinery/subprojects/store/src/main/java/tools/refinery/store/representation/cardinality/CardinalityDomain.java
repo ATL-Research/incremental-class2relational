@@ -11,19 +11,19 @@ import java.util.Optional;
 
 // Singleton pattern, because there is only one domain for truth values.
 @SuppressWarnings("squid:S6548")
-public class CardinalityDomain implements AbstractDomain<CardinalityInterval, Integer> {
+public class CardinalityDomain implements AbstractDomain <CardinalityInterval, Integer> {
 	public static final CardinalityDomain INSTANCE = new CardinalityDomain();
 
 	private CardinalityDomain() {
 	}
 
 	@Override
-	public Class<CardinalityInterval> abstractType() {
+	public Class <CardinalityInterval> abstractType() {
 		return CardinalityInterval.class;
 	}
 
 	@Override
-	public Class<Integer> concreteType() {
+	public Class <Integer> concreteType() {
 		return Integer.class;
 	}
 
@@ -33,7 +33,7 @@ public class CardinalityDomain implements AbstractDomain<CardinalityInterval, In
 	}
 
 	@Override
-	public Optional<Integer> toConcrete(CardinalityInterval abstractValue) {
+	public Optional <Integer> toConcrete(CardinalityInterval abstractValue) {
 		return isConcrete(abstractValue) ? Optional.of(abstractValue.lowerBound()) : Optional.empty();
 	}
 

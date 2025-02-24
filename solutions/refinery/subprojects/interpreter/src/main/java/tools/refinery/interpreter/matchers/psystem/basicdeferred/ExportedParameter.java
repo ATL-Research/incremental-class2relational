@@ -51,7 +51,7 @@ public class ExportedParameter extends VariableDeferredPConstraint {
     }
 
     @Override
-    public Set<PVariable> getDeducedVariables() {
+    public Set <PVariable> getDeducedVariables() {
         return Collections.emptySet();
     }
 
@@ -87,7 +87,7 @@ public class ExportedParameter extends VariableDeferredPConstraint {
     }
 
     @Override
-    public Set<PVariable> getDeferringVariables() {
+    public Set <PVariable> getDeferringVariables() {
         return Collections.singleton(parameterVariable);
     }
 

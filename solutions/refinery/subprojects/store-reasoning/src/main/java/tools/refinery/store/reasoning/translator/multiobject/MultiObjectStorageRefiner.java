@@ -14,9 +14,9 @@ import tools.refinery.store.representation.cardinality.CardinalityIntervals;
 import tools.refinery.store.tuple.Tuple;
 
 class MultiObjectStorageRefiner implements StorageRefiner {
-	private final Interpretation<CardinalityInterval> countInterpretation;
+	private final Interpretation <CardinalityInterval> countInterpretation;
 
-	public MultiObjectStorageRefiner(Symbol<CardinalityInterval> countSymbol, Model model) {
+	public MultiObjectStorageRefiner(Symbol <CardinalityInterval> countSymbol, Model model) {
 		countInterpretation = model.getInterpretation(countSymbol);
 	}
 

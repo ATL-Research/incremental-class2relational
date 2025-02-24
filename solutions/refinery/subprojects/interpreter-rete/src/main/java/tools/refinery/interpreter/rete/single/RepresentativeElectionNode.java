@@ -23,11 +23,11 @@ import tools.refinery.interpreter.matchers.util.timeline.Timeline;
 import java.util.Collection;
 import java.util.Map;
 
-public class RepresentativeElectionNode extends SingleInputNode implements Clearable, RepresentativeObserver<Object>,
+public class RepresentativeElectionNode extends SingleInputNode implements Clearable, RepresentativeObserver <Object>,
         ReinitializedNode {
 	private final RepresentativeElectionAlgorithm.Factory algorithmFactory;
-	private Graph<Object> graph;
-	private RepresentativeElectionAlgorithm<Object> algorithm;
+	private Graph <Object> graph;
+	private RepresentativeElectionAlgorithm <Object> algorithm;
 
 	public RepresentativeElectionNode(ReteContainer reteContainer,
                                       RepresentativeElectionAlgorithm.Factory algorithmFactory) {
@@ -48,7 +48,7 @@ public class RepresentativeElectionNode extends SingleInputNode implements Clear
 	}
 
 	@Override
-	public void reinitializeWith(Collection<Tuple> tuples) {
+	public void reinitializeWith(Collection <Tuple> tuples) {
 		algorithm.dispose();
 		graph = new Graph<>();
 		for (var tuple : tuples) {
@@ -103,7 +103,7 @@ public class RepresentativeElectionNode extends SingleInputNode implements Clear
 	}
 
 	@Override
-	public void pullInto(Collection<Tuple> collector, boolean flush) {
+	public void pullInto(Collection <Tuple> collector, boolean flush) {
 		for (var entry : algorithm.getComponents().entrySet()) {
 			var representative = entry.getKey();
 			for (var node : entry.getValue()) {
@@ -113,7 +113,7 @@ public class RepresentativeElectionNode extends SingleInputNode implements Clear
 	}
 
 	@Override
-	public void pullIntoWithTimeline(Map<Tuple, Timeline<Timestamp>> collector, boolean flush) {
+	public void pullIntoWithTimeline(Map <Tuple, Timeline <Timestamp>> collector, boolean flush) {
 		// Use all zero timestamps because this node cannot be used in recursive groups anyway.
 		for (var entry : algorithm.getComponents().entrySet()) {
 			var representative = entry.getKey();

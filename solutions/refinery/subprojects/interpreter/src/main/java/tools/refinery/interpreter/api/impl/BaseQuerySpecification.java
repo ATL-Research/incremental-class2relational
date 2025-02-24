@@ -30,8 +30,8 @@ import tools.refinery.interpreter.api.InterpreterMatcher;
  * @author Gabor Bergmann
  *
  */
-public abstract class BaseQuerySpecification<Matcher extends InterpreterMatcher<? extends IPatternMatch>> implements
-        IQuerySpecification<Matcher> {
+public abstract class BaseQuerySpecification <Matcher extends InterpreterMatcher <? extends IPatternMatch>> implements
+        IQuerySpecification <Matcher> {
 
     /**
      * @since 1.6
@@ -107,15 +107,15 @@ public abstract class BaseQuerySpecification<Matcher extends InterpreterMatcher<
     // // DELEGATIONS
 
     @Override
-    public List<PAnnotation> getAllAnnotations() {
+    public List <PAnnotation> getAllAnnotations() {
         return wrappedPQuery.getAllAnnotations();
     }
     @Override
-    public List<PAnnotation> getAnnotationsByName(String annotationName) {
+    public List <PAnnotation> getAnnotationsByName(String annotationName) {
         return wrappedPQuery.getAnnotationsByName(annotationName);
     }
     @Override
-    public Optional<PAnnotation> getFirstAnnotationByName(String annotationName) {
+    public Optional <PAnnotation> getFirstAnnotationByName(String annotationName) {
         return wrappedPQuery.getFirstAnnotationByName(annotationName);
     }
     @Override
@@ -123,11 +123,11 @@ public abstract class BaseQuerySpecification<Matcher extends InterpreterMatcher<
         return wrappedPQuery.getFullyQualifiedName();
     }
     @Override
-    public List<String> getParameterNames() {
+    public List <String> getParameterNames() {
         return wrappedPQuery.getParameterNames();
     }
     @Override
-    public List<PParameter> getParameters() {
+    public List <PParameter> getParameters() {
         return wrappedPQuery.getParameters();
     }
     @Override

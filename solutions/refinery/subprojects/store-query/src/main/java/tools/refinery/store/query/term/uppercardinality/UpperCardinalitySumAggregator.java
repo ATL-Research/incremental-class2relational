@@ -12,28 +12,28 @@ import tools.refinery.store.representation.cardinality.UnboundedUpperCardinality
 import tools.refinery.store.representation.cardinality.UpperCardinalities;
 import tools.refinery.store.representation.cardinality.UpperCardinality;
 
-public class UpperCardinalitySumAggregator implements StatefulAggregator<UpperCardinality, UpperCardinality> {
+public class UpperCardinalitySumAggregator implements StatefulAggregator <UpperCardinality, UpperCardinality> {
 	public static final UpperCardinalitySumAggregator INSTANCE = new UpperCardinalitySumAggregator();
 
 	private UpperCardinalitySumAggregator() {
 	}
 
 	@Override
-	public Class<UpperCardinality> getResultType() {
+	public Class <UpperCardinality> getResultType() {
 		return UpperCardinality.class;
 	}
 
 	@Override
-	public Class<UpperCardinality> getInputType() {
+	public Class <UpperCardinality> getInputType() {
 		return UpperCardinality.class;
 	}
 
 	@Override
-	public StatefulAggregate<UpperCardinality, UpperCardinality> createEmptyAggregate() {
+	public StatefulAggregate <UpperCardinality, UpperCardinality> createEmptyAggregate() {
 		return new Aggregate();
 	}
 
-	private static class Aggregate implements StatefulAggregate<UpperCardinality, UpperCardinality> {
+	private static class Aggregate implements StatefulAggregate <UpperCardinality, UpperCardinality> {
 		private int sumFiniteUpperBounds;
 		private int countUnbounded;
 
@@ -79,7 +79,7 @@ public class UpperCardinalitySumAggregator implements StatefulAggregator<UpperCa
 		}
 
 		@Override
-		public StatefulAggregate<UpperCardinality, UpperCardinality> deepCopy() {
+		public StatefulAggregate <UpperCardinality, UpperCardinality> deepCopy() {
 			return new Aggregate(sumFiniteUpperBounds, countUnbounded);
 		}
 	}

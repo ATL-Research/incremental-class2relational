@@ -44,7 +44,7 @@ public interface InitializablePQuery extends PQuery {
      * @param bodies
      * @throws InterpreterRuntimeException
      */
-    void initializeBodies(Set<PBody> bodies);
+    void initializeBodies(Set <PBody> bodies);
 
     /**
      * Adds an annotation to the specification. Only applicable if the pattern is still

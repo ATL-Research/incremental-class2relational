@@ -12,7 +12,7 @@ import tools.refinery.store.query.term.Variable;
 
 import java.util.Set;
 
-public enum BooleanLiteral implements CanNegate<BooleanLiteral> {
+public enum BooleanLiteral implements CanNegate <BooleanLiteral> {
 	TRUE(true),
 	FALSE(false);
 
@@ -23,17 +23,17 @@ public enum BooleanLiteral implements CanNegate<BooleanLiteral> {
 	}
 
 	@Override
-	public Set<Variable> getOutputVariables() {
+	public Set <Variable> getOutputVariables() {
 		return Set.of();
 	}
 
 	@Override
-	public Set<Variable> getInputVariables(Set<? extends Variable> positiveVariablesInClause) {
+	public Set <Variable> getInputVariables(Set <? extends Variable> positiveVariablesInClause) {
 		return Set.of();
 	}
 
 	@Override
-	public Set<Variable> getPrivateVariables(Set<? extends Variable> positiveVariablesInClause) {
+	public Set <Variable> getPrivateVariables(Set <? extends Variable> positiveVariablesInClause) {
 		return Set.of();
 	}
 

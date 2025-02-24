@@ -11,9 +11,9 @@ import tools.refinery.store.query.term.NodeVariable;
 import java.util.List;
 
 public interface ActionLiteral {
-	List<NodeVariable> getInputVariables();
+	List <NodeVariable> getInputVariables();
 
-	List<NodeVariable> getOutputVariables();
+	List <NodeVariable> getOutputVariables();
 
 	BoundActionLiteral bindToModel(Model model);
 }

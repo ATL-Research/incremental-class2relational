@@ -9,13 +9,13 @@ import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
- * The <b>Package</b> for the model.
+ * The <b>Package </b> for the model.
  * It contains accessors for the meta objects to represent
  * <ul>
- *   <li>each class,</li>
- *   <li>each feature of each class,</li>
- *   <li>each enum,</li>
- *   <li>and each data type</li>
+ *   <li>each class, </li>
+ *   <li>each feature of each class, </li>
+ *   <li>each enum, </li>
+ *   <li>and each data type </li>
  * </ul>
  * <!-- end-user-doc -->
  * @see class2relationalImperative.correspondence.class2relationalImperative.Class2relationalImperativeFactory
@@ -56,7 +56,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 	Class2relationalImperativePackage eINSTANCE = class2relationalImperative.correspondence.class2relationalImperative.impl.Class2relationalImperativePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link class2relationalImperative.correspondence.class2relationalImperative.impl.TransformationImpl <em>Transformation</em>}' class.
+	 * The meta object id for the '{@link class2relationalImperative.correspondence.class2relationalImperative.impl.TransformationImpl <em>Transformation </em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see class2relationalImperative.correspondence.class2relationalImperative.impl.TransformationImpl
@@ -66,7 +66,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 	int TRANSFORMATION = 0;
 
 	/**
-	 * The feature id for the '<em><b>Correspondences</b></em>' containment reference list.
+	 * The feature id for the ' <em> <b>Correspondences </b> </em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -75,7 +75,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 	int TRANSFORMATION__CORRESPONDENCES = 0;
 
 	/**
-	 * The number of structural features of the '<em>Transformation</em>' class.
+	 * The number of structural features of the ' <em>Transformation </em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -84,7 +84,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 	int TRANSFORMATION_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link class2relationalImperative.correspondence.class2relationalImperative.impl.CorrImpl <em>Corr</em>}' class.
+	 * The meta object id for the '{@link class2relationalImperative.correspondence.class2relationalImperative.impl.CorrImpl <em>Corr </em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see class2relationalImperative.correspondence.class2relationalImperative.impl.CorrImpl
@@ -94,7 +94,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 	int CORR = 1;
 
 	/**
-	 * The feature id for the '<em><b>Source Element</b></em>' reference.
+	 * The feature id for the ' <em> <b>Source Element </b> </em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -103,7 +103,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 	int CORR__SOURCE_ELEMENT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Target Element</b></em>' reference.
+	 * The feature id for the ' <em> <b>Target Element </b> </em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -112,7 +112,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 	int CORR__TARGET_ELEMENT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Desc</b></em>' attribute.
+	 * The feature id for the ' <em> <b>Desc </b> </em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -121,7 +121,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 	int CORR__DESC = 2;
 
 	/**
-	 * The number of structural features of the '<em>Corr</em>' class.
+	 * The number of structural features of the ' <em>Corr </em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -130,7 +130,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 	int CORR_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link class2relationalImperative.correspondence.class2relationalImperative.impl.BasicElemImpl <em>Basic Elem</em>}' class.
+	 * The meta object id for the '{@link class2relationalImperative.correspondence.class2relationalImperative.impl.BasicElemImpl <em>Basic Elem </em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see class2relationalImperative.correspondence.class2relationalImperative.impl.BasicElemImpl
@@ -140,7 +140,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 	int BASIC_ELEM = 2;
 
 	/**
-	 * The feature id for the '<em><b>Source Element</b></em>' reference.
+	 * The feature id for the ' <em> <b>Source Element </b> </em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -149,7 +149,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 	int BASIC_ELEM__SOURCE_ELEMENT = CORR__SOURCE_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Target Element</b></em>' reference.
+	 * The feature id for the ' <em> <b>Target Element </b> </em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -158,7 +158,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 	int BASIC_ELEM__TARGET_ELEMENT = CORR__TARGET_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Desc</b></em>' attribute.
+	 * The feature id for the ' <em> <b>Desc </b> </em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -167,7 +167,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 	int BASIC_ELEM__DESC = CORR__DESC;
 
 	/**
-	 * The number of structural features of the '<em>Basic Elem</em>' class.
+	 * The number of structural features of the ' <em>Basic Elem </em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -177,20 +177,20 @@ public interface Class2relationalImperativePackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link class2relationalImperative.correspondence.class2relationalImperative.Transformation <em>Transformation</em>}'.
+	 * Returns the meta object for class '{@link class2relationalImperative.correspondence.class2relationalImperative.Transformation <em>Transformation </em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Transformation</em>'.
+	 * @return the meta object for class ' <em>Transformation </em>'.
 	 * @see class2relationalImperative.correspondence.class2relationalImperative.Transformation
 	 * @generated
 	 */
 	EClass getTransformation();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link class2relationalImperative.correspondence.class2relationalImperative.Transformation#getCorrespondences <em>Correspondences</em>}'.
+	 * Returns the meta object for the containment reference list '{@link class2relationalImperative.correspondence.class2relationalImperative.Transformation#getCorrespondences <em>Correspondences </em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Correspondences</em>'.
+	 * @return the meta object for the containment reference list ' <em>Correspondences </em>'.
 	 * @see class2relationalImperative.correspondence.class2relationalImperative.Transformation#getCorrespondences()
 	 * @see #getTransformation()
 	 * @generated
@@ -198,20 +198,20 @@ public interface Class2relationalImperativePackage extends EPackage {
 	EReference getTransformation_Correspondences();
 
 	/**
-	 * Returns the meta object for class '{@link class2relationalImperative.correspondence.class2relationalImperative.Corr <em>Corr</em>}'.
+	 * Returns the meta object for class '{@link class2relationalImperative.correspondence.class2relationalImperative.Corr <em>Corr </em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Corr</em>'.
+	 * @return the meta object for class ' <em>Corr </em>'.
 	 * @see class2relationalImperative.correspondence.class2relationalImperative.Corr
 	 * @generated
 	 */
 	EClass getCorr();
 
 	/**
-	 * Returns the meta object for the reference '{@link class2relationalImperative.correspondence.class2relationalImperative.Corr#getSourceElement <em>Source Element</em>}'.
+	 * Returns the meta object for the reference '{@link class2relationalImperative.correspondence.class2relationalImperative.Corr#getSourceElement <em>Source Element </em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Source Element</em>'.
+	 * @return the meta object for the reference ' <em>Source Element </em>'.
 	 * @see class2relationalImperative.correspondence.class2relationalImperative.Corr#getSourceElement()
 	 * @see #getCorr()
 	 * @generated
@@ -219,10 +219,10 @@ public interface Class2relationalImperativePackage extends EPackage {
 	EReference getCorr_SourceElement();
 
 	/**
-	 * Returns the meta object for the reference '{@link class2relationalImperative.correspondence.class2relationalImperative.Corr#getTargetElement <em>Target Element</em>}'.
+	 * Returns the meta object for the reference '{@link class2relationalImperative.correspondence.class2relationalImperative.Corr#getTargetElement <em>Target Element </em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Target Element</em>'.
+	 * @return the meta object for the reference ' <em>Target Element </em>'.
 	 * @see class2relationalImperative.correspondence.class2relationalImperative.Corr#getTargetElement()
 	 * @see #getCorr()
 	 * @generated
@@ -230,10 +230,10 @@ public interface Class2relationalImperativePackage extends EPackage {
 	EReference getCorr_TargetElement();
 
 	/**
-	 * Returns the meta object for the attribute '{@link class2relationalImperative.correspondence.class2relationalImperative.Corr#getDesc <em>Desc</em>}'.
+	 * Returns the meta object for the attribute '{@link class2relationalImperative.correspondence.class2relationalImperative.Corr#getDesc <em>Desc </em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Desc</em>'.
+	 * @return the meta object for the attribute ' <em>Desc </em>'.
 	 * @see class2relationalImperative.correspondence.class2relationalImperative.Corr#getDesc()
 	 * @see #getCorr()
 	 * @generated
@@ -241,10 +241,10 @@ public interface Class2relationalImperativePackage extends EPackage {
 	EAttribute getCorr_Desc();
 
 	/**
-	 * Returns the meta object for class '{@link class2relationalImperative.correspondence.class2relationalImperative.BasicElem <em>Basic Elem</em>}'.
+	 * Returns the meta object for class '{@link class2relationalImperative.correspondence.class2relationalImperative.BasicElem <em>Basic Elem </em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Basic Elem</em>'.
+	 * @return the meta object for class ' <em>Basic Elem </em>'.
 	 * @see class2relationalImperative.correspondence.class2relationalImperative.BasicElem
 	 * @generated
 	 */
@@ -263,17 +263,17 @@ public interface Class2relationalImperativePackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * Defines literals for the meta objects that represent
 	 * <ul>
-	 *   <li>each class,</li>
-	 *   <li>each feature of each class,</li>
-	 *   <li>each enum,</li>
-	 *   <li>and each data type</li>
+	 *   <li>each class, </li>
+	 *   <li>each feature of each class, </li>
+	 *   <li>each enum, </li>
+	 *   <li>and each data type </li>
 	 * </ul>
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link class2relationalImperative.correspondence.class2relationalImperative.impl.TransformationImpl <em>Transformation</em>}' class.
+		 * The meta object literal for the '{@link class2relationalImperative.correspondence.class2relationalImperative.impl.TransformationImpl <em>Transformation </em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see class2relationalImperative.correspondence.class2relationalImperative.impl.TransformationImpl
@@ -283,7 +283,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 		EClass TRANSFORMATION = eINSTANCE.getTransformation();
 
 		/**
-		 * The meta object literal for the '<em><b>Correspondences</b></em>' containment reference list feature.
+		 * The meta object literal for the ' <em> <b>Correspondences </b> </em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -291,7 +291,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 		EReference TRANSFORMATION__CORRESPONDENCES = eINSTANCE.getTransformation_Correspondences();
 
 		/**
-		 * The meta object literal for the '{@link class2relationalImperative.correspondence.class2relationalImperative.impl.CorrImpl <em>Corr</em>}' class.
+		 * The meta object literal for the '{@link class2relationalImperative.correspondence.class2relationalImperative.impl.CorrImpl <em>Corr </em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see class2relationalImperative.correspondence.class2relationalImperative.impl.CorrImpl
@@ -301,7 +301,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 		EClass CORR = eINSTANCE.getCorr();
 
 		/**
-		 * The meta object literal for the '<em><b>Source Element</b></em>' reference feature.
+		 * The meta object literal for the ' <em> <b>Source Element </b> </em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -309,7 +309,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 		EReference CORR__SOURCE_ELEMENT = eINSTANCE.getCorr_SourceElement();
 
 		/**
-		 * The meta object literal for the '<em><b>Target Element</b></em>' reference feature.
+		 * The meta object literal for the ' <em> <b>Target Element </b> </em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -317,7 +317,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 		EReference CORR__TARGET_ELEMENT = eINSTANCE.getCorr_TargetElement();
 
 		/**
-		 * The meta object literal for the '<em><b>Desc</b></em>' attribute feature.
+		 * The meta object literal for the ' <em> <b>Desc </b> </em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -325,7 +325,7 @@ public interface Class2relationalImperativePackage extends EPackage {
 		EAttribute CORR__DESC = eINSTANCE.getCorr_Desc();
 
 		/**
-		 * The meta object literal for the '{@link class2relationalImperative.correspondence.class2relationalImperative.impl.BasicElemImpl <em>Basic Elem</em>}' class.
+		 * The meta object literal for the '{@link class2relationalImperative.correspondence.class2relationalImperative.impl.BasicElemImpl <em>Basic Elem </em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see class2relationalImperative.correspondence.class2relationalImperative.impl.BasicElemImpl

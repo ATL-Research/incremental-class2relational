@@ -20,16 +20,16 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public abstract class AbstractFunctionView<T> extends SymbolView<T> {
-	private final List<Parameter> parameters;
+public abstract class AbstractFunctionView <T> extends SymbolView <T> {
+	private final List <Parameter> parameters;
 
-	protected AbstractFunctionView(Symbol<T> symbol, String name, Parameter outParameter) {
+	protected AbstractFunctionView(Symbol <T> symbol, String name, Parameter outParameter) {
 		super(symbol, name);
 		parameters = createParameters(symbol.arity(), outParameter);
 	}
 
 	@Override
-	public Set<FunctionalDependency<Integer>> getFunctionalDependencies() {
+	public Set <FunctionalDependency<Integer>> getFunctionalDependencies() {
 		var arity = getSymbol().arity();
 		var forEach = IntStream.range(0, arity).boxed().collect(Collectors.toUnmodifiableSet());
 		var unique = Set.of(arity);
@@ -37,7 +37,7 @@ public abstract class AbstractFunctionView<T> extends SymbolView<T> {
 	}
 
 	@Override
-	public Set<ViewImplication> getImpliedRelationViews() {
+	public Set <ViewImplication> getImpliedRelationViews() {
 		var symbol = getSymbol();
 		var impliedIndices = IntStream.range(0, symbol.arity()).boxed().toList();
 		var keysView = new KeyOnlyView<>(symbol);
@@ -89,7 +89,7 @@ public abstract class AbstractFunctionView<T> extends SymbolView<T> {
 	}
 
 	@Override
-	public Iterable<Object[]> getAdjacent(Model model, int slot, Object value) {
+	public Iterable <Object[]> getAdjacent(Model model, int slot, Object value) {
 		if (!(value instanceof Tuple1 tuple1)) {
 			return Set.of();
 		}
@@ -98,7 +98,7 @@ public abstract class AbstractFunctionView<T> extends SymbolView<T> {
 	}
 
 	@Override
-	public List<Parameter> getParameters() {
+	public List <Parameter> getParameters() {
 		return parameters;
 	}
 
@@ -107,7 +107,7 @@ public abstract class AbstractFunctionView<T> extends SymbolView<T> {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		if (!super.equals(o)) return false;
-		AbstractFunctionView<?> that = (AbstractFunctionView<?>) o;
+		AbstractFunctionView <?> that = (AbstractFunctionView <?>) o;
 		return Objects.equals(parameters, that.parameters);
 	}
 
@@ -116,7 +116,7 @@ public abstract class AbstractFunctionView<T> extends SymbolView<T> {
 		return Objects.hash(super.hashCode(), parameters);
 	}
 
-	private static List<Parameter> createParameters(int symbolArity, Parameter outParameter) {
+	private static List <Parameter> createParameters(int symbolArity, Parameter outParameter) {
 		var parameters = new Parameter[symbolArity + 1];
 		Arrays.fill(parameters, Parameter.NODE_OUT);
 		parameters[symbolArity] = outParameter;

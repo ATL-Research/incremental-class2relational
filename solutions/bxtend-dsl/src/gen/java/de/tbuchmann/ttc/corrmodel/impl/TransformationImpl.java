@@ -22,27 +22,27 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Transformation</b></em>'.
+ * An implementation of the model object ' <em> <b>Transformation </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.tbuchmann.ttc.corrmodel.impl.TransformationImpl#getCorrespondences <em>Correspondences</em>}</li>
+ *   <li>{@link de.tbuchmann.ttc.corrmodel.impl.TransformationImpl#getCorrespondences <em>Correspondences </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class TransformationImpl extends EObjectImpl implements Transformation {
 	/**
-	 * The cached value of the '{@link #getCorrespondences() <em>Correspondences</em>}' containment reference list.
+	 * The cached value of the '{@link #getCorrespondences() <em>Correspondences </em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getCorrespondences()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Corr> correspondences;
+	protected EList <Corr> correspondences;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,9 +69,9 @@ public class TransformationImpl extends EObjectImpl implements Transformation {
 	 * @generated
 	 */
 	@Override
-	public EList<Corr> getCorrespondences() {
+	public EList <Corr> getCorrespondences() {
 		if (correspondences == null) {
-			correspondences = new EObjectContainmentEList<Corr>(Corr.class, this, CorrModelPackage.TRANSFORMATION__CORRESPONDENCES);
+			correspondences = new EObjectContainmentEList <Corr>(Corr.class, this, CorrModelPackage.TRANSFORMATION__CORRESPONDENCES);
 		}
 		return correspondences;
 	}
@@ -85,7 +85,7 @@ public class TransformationImpl extends EObjectImpl implements Transformation {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case CorrModelPackage.TRANSFORMATION__CORRESPONDENCES:
-				return ((InternalEList<?>)getCorrespondences()).basicRemove(otherEnd, msgs);
+				return ((InternalEList <?>)getCorrespondences()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -115,7 +115,7 @@ public class TransformationImpl extends EObjectImpl implements Transformation {
 		switch (featureID) {
 			case CorrModelPackage.TRANSFORMATION__CORRESPONDENCES:
 				getCorrespondences().clear();
-				getCorrespondences().addAll((Collection<? extends Corr>)newValue);
+				getCorrespondences().addAll((Collection <? extends Corr>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

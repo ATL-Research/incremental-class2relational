@@ -18,5 +18,5 @@ public interface ModelVisualizerStoreAdapter extends ModelStoreAdapter {
 
 	boolean isRenderStates();
 
-	Set<FileFormat> getFormats();
+	Set <FileFormat> getFormats();
 }

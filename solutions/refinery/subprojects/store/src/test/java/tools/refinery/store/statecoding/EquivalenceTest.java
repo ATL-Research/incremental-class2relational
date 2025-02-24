@@ -16,11 +16,11 @@ import tools.refinery.store.tuple.Tuple;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EquivalenceTest {
-	Symbol<Boolean> person = new Symbol<>("Person", 1, Boolean.class, false);
-	Symbol<Integer> age = new Symbol<>("age", 1, Integer.class, null);
-	Symbol<Boolean> friend = new Symbol<>("friend", 2, Boolean.class, false);
-	Symbol<Boolean> parents = new Symbol<>("parents", 3, Boolean.class, false);
-	Symbol<Integer> population = new Symbol<>("population", 0, Integer.class, 0);
+	Symbol <Boolean> person = new Symbol<>("Person", 1, Boolean.class, false);
+	Symbol <Integer> age = new Symbol<>("age", 1, Integer.class, null);
+	Symbol <Boolean> friend = new Symbol<>("friend", 2, Boolean.class, false);
+	Symbol <Boolean> parents = new Symbol<>("parents", 3, Boolean.class, false);
+	Symbol <Integer> population = new Symbol<>("population", 0, Integer.class, 0);
 
 	private ModelStore createStore() {
 		return ModelStore.builder()

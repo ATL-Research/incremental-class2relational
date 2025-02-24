@@ -18,7 +18,7 @@ public sealed interface AnyVersionedMap extends Versioned permits VersionedMap {
 	 * @return A hash code value for this object.
 	 * @deprecated {@link AnyVersionedMap} instances are mutable, and it is inappropriate to use them as keys in
 	 * hash-based collections. Use {@link AnyVersionedMap#contentHashCode(ContentHashCode)} to compute a
-	 * <code>hashCode</code> for a {@link AnyVersionedMap} instance according to its contents.
+	 * <code>hashCode </code> for a {@link AnyVersionedMap} instance according to its contents.
 	 */
 	@Override
 	// This method is mark as @Deprecated to prevent inappropriate use of built-in Java API.
@@ -31,7 +31,7 @@ public sealed interface AnyVersionedMap extends Versioned permits VersionedMap {
 	 * Compares two objects by reference.
 	 *
 	 * @param obj The reference object with which to compare.
-	 * @return <code>true</code> if this object is the same as the <code>obj</code> argument.
+	 * @return <code>true </code> if this object is the same as the <code>obj </code> argument.
 	 * @deprecated {@link AnyVersionedMap} instances are mutable, and it is inappropriate to use them as keys in
 	 * hash-based collections. Use {@link AnyVersionedMap#contentEquals(AnyVersionedMap)} to compare two
 	 * {@link AnyVersionedMap} instances by their contents.

@@ -50,7 +50,7 @@ public class ContainmentHierarchyTranslator implements ModelStoreConfiguration {
 			1);
 	public static final PartialRelation CONTAINS_SYMBOL = new PartialRelation("contains", 2);
 
-	private final Symbol<InferredContainment> containsStorage = Symbol.of("CONTAINS", 2, InferredContainment.class,
+	private final Symbol <InferredContainment> containsStorage = Symbol.of("CONTAINS", 2, InferredContainment.class,
 			InferredContainment.UNKNOWN);
 	private final AnySymbolView mustAnyContainmentLinkView = new MustAnyContainmentLinkView(containsStorage);
 	private final AnySymbolView forbiddenContainsView = new ForbiddenContainsView(containsStorage);
@@ -58,9 +58,9 @@ public class ContainmentHierarchyTranslator implements ModelStoreConfiguration {
 	private final RelationalQuery containsWithoutLink;
 	private final RelationalQuery weakComponents;
 	private final RelationalQuery strongComponents;
-	private final Map<PartialRelation, ContainmentInfo> containmentInfoMap;
+	private final Map <PartialRelation, ContainmentInfo> containmentInfoMap;
 
-	public ContainmentHierarchyTranslator(Map<PartialRelation, ContainmentInfo> containmentInfoMap) {
+	public ContainmentHierarchyTranslator(Map <PartialRelation, ContainmentInfo> containmentInfoMap) {
 		this.containmentInfoMap = containmentInfoMap;
 
 		var name = CONTAINS_SYMBOL.name();
@@ -117,7 +117,7 @@ public class ContainmentHierarchyTranslator implements ModelStoreConfiguration {
 		var upperCardinality = info.multiplicity().multiplicity().upperBound();
 
 		var mayNewSourceHelper = Query.of(name + "#mayNewSourceHelper", (builder, parent) -> {
-			var literals = new ArrayList<Literal>();
+			var literals = new ArrayList <Literal>();
 			literals.add(may(sourceType.call(parent)));
 			if (upperCardinality instanceof FiniteUpperCardinality finiteUpperCardinality) {
 				var existingCount = Variable.of("existingCount", Integer.class);

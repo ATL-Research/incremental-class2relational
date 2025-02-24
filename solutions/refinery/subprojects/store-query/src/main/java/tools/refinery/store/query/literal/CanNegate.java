@@ -5,6 +5,6 @@
  */
 package tools.refinery.store.query.literal;
 
-public interface CanNegate<T extends CanNegate<T>> extends Literal {
+public interface CanNegate <T extends CanNegate <T>> extends Literal {
 	T negate();
 }

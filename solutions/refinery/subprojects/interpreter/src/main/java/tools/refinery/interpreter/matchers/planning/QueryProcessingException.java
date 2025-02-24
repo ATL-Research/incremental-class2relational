@@ -29,7 +29,7 @@ public class QueryProcessingException extends InterpreterRuntimeException {
 
         String internal = message;
         for (int i = 0; i < context.length; i++) {
-            internal = internal.replace("{" + (i + 1) + "}", context[i] != null ? context[i] : "<<null>>");
+            internal = internal.replace("{" + (i + 1) + "}", context[i] != null ? context[i] : " <<null>>");
         }
         return internal;
     }

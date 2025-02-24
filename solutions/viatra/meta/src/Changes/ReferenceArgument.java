@@ -6,14 +6,14 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Reference Argument</b></em>'.
+ * A representation of the model object ' <em> <b>Reference Argument </b> </em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link Changes.ReferenceArgument#getValue <em>Value</em>}</li>
+ *   <li>{@link Changes.ReferenceArgument#getValue <em>Value </em>} </li>
  * </ul>
  *
  * @see Changes.ChangesPackage#getReferenceArgument()
@@ -22,14 +22,14 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ReferenceArgument extends OperationArgument {
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' reference.
+	 * Returns the value of the ' <em> <b>Value </b> </em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Value</em>' reference isn't clear,
+	 * If the meaning of the ' <em>Value </em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' reference.
+	 * @return the value of the ' <em>Value </em>' reference.
 	 * @see #setValue(EObject)
 	 * @see Changes.ChangesPackage#getReferenceArgument_Value()
 	 * @model required="true"
@@ -38,10 +38,10 @@ public interface ReferenceArgument extends OperationArgument {
 	EObject getValue();
 
 	/**
-	 * Sets the value of the '{@link Changes.ReferenceArgument#getValue <em>Value</em>}' reference.
+	 * Sets the value of the '{@link Changes.ReferenceArgument#getValue <em>Value </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' reference.
+	 * @param value the new value of the ' <em>Value </em>' reference.
 	 * @see #getValue()
 	 * @generated
 	 */

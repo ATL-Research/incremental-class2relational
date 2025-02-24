@@ -15,11 +15,11 @@ public class ValidationErrorsException extends IllegalArgumentException {
 
 	private final String resourceUriString;
 
-	private final transient List<Issue> errors;
+	private final transient List <Issue> errors;
 
-	private final List<String> errorStrings;
+	private final List <String> errorStrings;
 
-	public ValidationErrorsException(URI resourceUri, List<Issue> errors) {
+	public ValidationErrorsException(URI resourceUri, List <Issue> errors) {
 		this.resourceUri = resourceUri;
 		resourceUriString = resourceUri.toString();
 		this.errors = errors;
@@ -36,11 +36,11 @@ public class ValidationErrorsException extends IllegalArgumentException {
 		return resourceUriString;
 	}
 
-	public List<Issue> getErrors() {
+	public List <Issue> getErrors() {
 		return errors;
 	}
 
-	public List<String> getErrorStrings() {
+	public List <String> getErrorStrings() {
 		return errorStrings;
 	}
 

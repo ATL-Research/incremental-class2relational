@@ -276,9 +276,9 @@ class DecisionTreeTests {
 		assertThat(sut.getReducedValue(), is(TruthValue.TRUE));
 	}
 
-	private Map<Tuple, TruthValue> iterateAll(DecisionTree sut, TruthValue defaultValue, int nodeCount) {
+	private Map <Tuple, TruthValue> iterateAll(DecisionTree sut, TruthValue defaultValue, int nodeCount) {
 		var cursor = sut.getCursor(defaultValue, nodeCount);
-		var map = new LinkedHashMap<Tuple, TruthValue>();
+		var map = new LinkedHashMap <Tuple, TruthValue>();
 		while (cursor.move()) {
 			map.put(cursor.getKey(), cursor.getValue());
 		}

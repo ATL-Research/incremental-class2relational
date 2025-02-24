@@ -12,10 +12,10 @@ import tools.refinery.store.query.literal.Reduction;
 import java.util.*;
 
 public abstract sealed class CompositeCriterion implements Criterion permits AndCriterion, OrCriterion {
-	private final List<Criterion> criteria;
+	private final List <Criterion> criteria;
 
-	protected CompositeCriterion(Collection<? extends Criterion> criteria) {
-		var deDuplicatedCriteria = new LinkedHashSet<Criterion>();
+	protected CompositeCriterion(Collection <? extends Criterion> criteria) {
+		var deDuplicatedCriteria = new LinkedHashSet <Criterion>();
 		for (var criterion : criteria) {
 			if (criterion.getClass() == this.getClass()) {
 				var childCriteria = ((CompositeCriterion) criterion).getCriteria();
@@ -27,7 +27,7 @@ public abstract sealed class CompositeCriterion implements Criterion permits And
 		this.criteria = List.copyOf(deDuplicatedCriteria);
 	}
 
-	public List<Criterion> getCriteria() {
+	public List <Criterion> getCriteria() {
 		return criteria;
 	}
 

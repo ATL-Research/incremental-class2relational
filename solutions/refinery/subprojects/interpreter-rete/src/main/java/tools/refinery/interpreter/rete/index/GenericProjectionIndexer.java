@@ -41,22 +41,22 @@ public class GenericProjectionIndexer extends IndexerWithMemory implements Proje
     }
 
     @Override
-    public Collection<Tuple> get(Tuple signature) {
+    public Collection <Tuple> get(Tuple signature) {
         return memory.get(signature);
     }
 
     @Override
-    public Map<Tuple, Timeline<Timestamp>> getTimeline(Tuple signature) {
+    public Map <Tuple, Timeline <Timestamp>> getTimeline(Tuple signature) {
         return memory.getWithTimeline(signature);
     }
 
     @Override
-    public Iterator<Tuple> iterator() {
+    public Iterator <Tuple> iterator() {
         return memory.iterator();
     }
 
     @Override
-    public Iterable<Tuple> getSignatures() {
+    public Iterable <Tuple> getSignatures() {
         return memory.getSignatures();
     }
 

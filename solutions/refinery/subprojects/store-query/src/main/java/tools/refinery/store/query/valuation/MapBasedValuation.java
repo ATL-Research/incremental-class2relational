@@ -10,9 +10,9 @@ import tools.refinery.store.query.term.DataVariable;
 
 import java.util.Map;
 
-record MapBasedValuation(Map<AnyDataVariable, Object> values) implements Valuation {
+record MapBasedValuation(Map <AnyDataVariable, Object> values) implements Valuation {
 	@Override
-	public <T> T getValue(DataVariable<T> variable) {
+	public <T> T getValue(DataVariable <T> variable) {
 		if (!values.containsKey(variable)) {
 			throw new IllegalArgumentException("No value for variable %s".formatted(variable));
 		}

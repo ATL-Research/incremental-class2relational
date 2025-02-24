@@ -28,7 +28,7 @@ import tools.refinery.interpreter.matchers.psystem.VariableDeferredPConstraint;
 public abstract class BaseTypeSafeConstraint extends
         VariableDeferredPConstraint {
 
-    protected Set<PVariable> inputVariables;
+    protected Set <PVariable> inputVariables;
     protected PVariable outputVariable;
 
     public PVariable getOutputVariable() {
@@ -41,7 +41,7 @@ public abstract class BaseTypeSafeConstraint extends
      * @param outputVariable null iff no output (check-only)
      */
     public BaseTypeSafeConstraint(PBody pBody,
-            Set<PVariable> inputVariables, final PVariable outputVariable) {
+            Set <PVariable> inputVariables, final PVariable outputVariable) {
         super(pBody,
                 (outputVariable == null) ?
                         inputVariables :
@@ -52,7 +52,7 @@ public abstract class BaseTypeSafeConstraint extends
     }
 
     @Override
-    public Set<PVariable> getDeducedVariables() {
+    public Set <PVariable> getDeducedVariables() {
         if (outputVariable == null)
             return Collections.emptySet();
         else
@@ -60,7 +60,7 @@ public abstract class BaseTypeSafeConstraint extends
     }
 
     @Override
-    public Set<PVariable> getDeferringVariables() {
+    public Set <PVariable> getDeferringVariables() {
         return inputVariables;
     }
 
@@ -79,10 +79,10 @@ public abstract class BaseTypeSafeConstraint extends
      * @return a variable whose type safety is not enforced yet, or null if the plan is typesafe
      */
     public PVariable checkTypeSafety(SubPlan plan, IQueryMetaContext context) {
-        Set<TypeJudgement> impliedJudgements = plan.getAllImpliedTypeJudgements(context);
+        Set <TypeJudgement> impliedJudgements = plan.getAllImpliedTypeJudgements(context);
 
         for (PVariable pVariable : inputVariables) {
-            Set<TypeJudgement> allTypeRestrictionsForVariable = pBody.getAllUnaryTypeRestrictions(context).get(pVariable);
+            Set <TypeJudgement> allTypeRestrictionsForVariable = pBody.getAllUnaryTypeRestrictions(context).get(pVariable);
             if (allTypeRestrictionsForVariable != null && !impliedJudgements.containsAll(allTypeRestrictionsForVariable))
                 return pVariable;
         }

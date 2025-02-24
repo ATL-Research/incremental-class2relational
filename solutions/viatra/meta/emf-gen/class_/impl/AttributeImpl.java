@@ -18,22 +18,22 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Attribute</b></em>'.
+ * An implementation of the model object ' <em> <b>Attribute </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link class_.impl.AttributeImpl#isMultiValued <em>Multi Valued</em>}</li>
- *   <li>{@link class_.impl.AttributeImpl#getType <em>Type</em>}</li>
- *   <li>{@link class_.impl.AttributeImpl#getOwner <em>Owner</em>}</li>
+ *   <li>{@link class_.impl.AttributeImpl#isMultiValued <em>Multi Valued </em>} </li>
+ *   <li>{@link class_.impl.AttributeImpl#getType <em>Type </em>} </li>
+ *   <li>{@link class_.impl.AttributeImpl#getOwner <em>Owner </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class AttributeImpl extends NamedEltImpl implements Attribute {
 	/**
-	 * The default value of the '{@link #isMultiValued() <em>Multi Valued</em>}' attribute.
+	 * The default value of the '{@link #isMultiValued() <em>Multi Valued </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #isMultiValued()
@@ -43,7 +43,7 @@ public class AttributeImpl extends NamedEltImpl implements Attribute {
 	protected static final boolean MULTI_VALUED_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isMultiValued() <em>Multi Valued</em>}' attribute.
+	 * The cached value of the '{@link #isMultiValued() <em>Multi Valued </em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #isMultiValued()
@@ -53,7 +53,7 @@ public class AttributeImpl extends NamedEltImpl implements Attribute {
 	protected boolean multiValued = MULTI_VALUED_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * The cached value of the '{@link #getType() <em>Type </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getType()

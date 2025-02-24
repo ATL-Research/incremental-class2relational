@@ -28,15 +28,15 @@ import tools.refinery.interpreter.matchers.tuple.TupleMask;
  */
 public class SearchPlan {
 
-    private final List<ISearchOperation> operations;
-    private final Map<Integer, PVariable> variableMapping;
+    private final List <ISearchOperation> operations;
+    private final Map <Integer, PVariable> variableMapping;
     private final TupleMask parameterMask;
     private final PBody body;
 
     /**
      * @since 2.0
      */
-    public SearchPlan(PBody body, List<ISearchOperation> operations, TupleMask parameterMask, Map<PVariable, Integer> variableMapping) {
+    public SearchPlan(PBody body, List <ISearchOperation> operations, TupleMask parameterMask, Map <PVariable, Integer> variableMapping) {
         this.body = body;
         this.operations = Collections.unmodifiableList(new ArrayList<>(operations));
         this.parameterMask = parameterMask;
@@ -49,7 +49,7 @@ public class SearchPlan {
      * Returns an immutable list of operations stored in the plan.
      * @return the operations
      */
-    public List<ISearchOperation> getOperations() {
+    public List <ISearchOperation> getOperations() {
         return operations;
     }
 
@@ -57,7 +57,7 @@ public class SearchPlan {
      * Returns an immutable map of variable mappings for the plan
      * @since 2.0
      */
-    public Map<Integer, PVariable> getVariableMapping() {
+    public Map <Integer, PVariable> getVariableMapping() {
         return variableMapping;
     }
 

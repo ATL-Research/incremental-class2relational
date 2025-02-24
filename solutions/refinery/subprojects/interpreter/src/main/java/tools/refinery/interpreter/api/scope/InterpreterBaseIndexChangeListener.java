@@ -26,7 +26,7 @@ public interface InterpreterBaseIndexChangeListener {
 
     /**
      * Called after a model change is handled by the Refinery Interpreter base index and if <code>indexChanged ==
-	 * onlyOnIndexChange()</code>.
+	 * onlyOnIndexChange() </code>.
      *
      * @param indexChanged true, if the model change also affected the contents of the base index
      */

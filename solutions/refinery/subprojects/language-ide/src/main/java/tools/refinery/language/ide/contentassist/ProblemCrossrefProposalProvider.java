@@ -44,9 +44,9 @@ public class ProblemCrossrefProposalProvider extends IdeCrossrefProposalProvider
 	private ProblemDesugarer desugarer;
 
 	@Override
-	protected Iterable<IEObjectDescription> queryScope(IScope scope, CrossReference crossReference,
+	protected Iterable <IEObjectDescription> queryScope(IScope scope, CrossReference crossReference,
 													   ContentAssistContext context) {
-		var eObjectDescriptionsByName = new HashMap<QualifiedName, List<IEObjectDescription>>();
+		var eObjectDescriptionsByName = new HashMap <QualifiedName, List <IEObjectDescription>>();
 		for (var candidate : super.queryScope(scope, crossReference, context)) {
 			if (isExistingObject(candidate, crossReference, context)) {
 				// {@code getQualifiedName()} will refer to the full name for objects that are loaded from the global
@@ -58,7 +58,7 @@ public class ProblemCrossrefProposalProvider extends IdeCrossrefProposalProvider
 				candidateList.add(candidate);
 			}
 		}
-		var eObjectDescriptions = new ArrayList<IEObjectDescription>();
+		var eObjectDescriptions = new ArrayList <IEObjectDescription>();
 		for (var candidates : eObjectDescriptionsByName.values()) {
 			if (candidates.size() == 1) {
 				var candidate = candidates.get(0);

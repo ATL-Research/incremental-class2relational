@@ -35,7 +35,7 @@ class MultiObjectTest {
 	private ModelStore store;
 	private ReasoningStoreAdapter reasoningStoreAdapter;
 	private Model model;
-	private Interpretation<CardinalityInterval> countStorage;
+	private Interpretation <CardinalityInterval> countStorage;
 
 	@BeforeEach
 	void beforeEach() {

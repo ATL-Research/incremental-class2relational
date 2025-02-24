@@ -14,7 +14,7 @@ public interface StorageRefiner {
 	boolean cleanup(int nodeToDelete);
 
 	@FunctionalInterface
-	interface Factory<T> {
-		StorageRefiner create(Symbol<T> symbol, Model model);
+	interface Factory <T> {
+		StorageRefiner create(Symbol <T> symbol, Model model);
 	}
 }

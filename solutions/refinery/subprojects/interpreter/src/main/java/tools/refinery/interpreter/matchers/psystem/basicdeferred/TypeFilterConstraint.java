@@ -76,17 +76,17 @@ public class TypeFilterConstraint extends VariableDeferredPConstraint implements
     }
 
     @Override
-    public Set<TypeJudgement> getImpliedJudgements(IQueryMetaContext context) {
+    public Set <TypeJudgement> getImpliedJudgements(IQueryMetaContext context) {
         return Collections.singleton(equivalentJudgement);
     }
 
     @Override
-    public Set<PVariable> getDeducedVariables() {
+    public Set <PVariable> getDeducedVariables() {
         return Collections.emptySet();
     }
 
     @Override
-    public Set<PVariable> getDeferringVariables() {
+    public Set <PVariable> getDeferringVariables() {
         return getAffectedVariables();
     }
 
@@ -96,7 +96,7 @@ public class TypeFilterConstraint extends VariableDeferredPConstraint implements
     }
 
     @Override
-    public Map<Set<PVariable>, Set<PVariable>> getFunctionalDependencies(IQueryMetaContext context) {
+    public Map <Set<PVariable>, Set <PVariable>> getFunctionalDependencies(IQueryMetaContext context) {
         return TypeConstraintUtil.getFunctionalDependencies(context, inputKey, variablesTuple);
     }
 

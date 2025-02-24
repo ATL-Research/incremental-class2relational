@@ -18,11 +18,11 @@ import tools.refinery.interpreter.rete.util.OrderingCompareAgent;
  * @author Gabor Bergmann
  *
  */
-public class JoinOrderingHeuristics implements Comparator<JoinCandidate> {
+public class JoinOrderingHeuristics implements Comparator <JoinCandidate> {
 
     @Override
     public int compare(JoinCandidate jc1, JoinCandidate jc2) {
-        return new OrderingCompareAgent<JoinCandidate>(jc1, jc2) {
+        return new OrderingCompareAgent <JoinCandidate>(jc1, jc2) {
             @Override
             protected void doCompare() {
                 swallowBoolean(true && consider(preferTrue(a.isTrivial(), b.isTrivial()))

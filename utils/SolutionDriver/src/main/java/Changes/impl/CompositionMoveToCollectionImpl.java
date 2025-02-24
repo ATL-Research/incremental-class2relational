@@ -18,21 +18,21 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Composition Move To Collection</b></em>'.
+ * An implementation of the model object ' <em> <b>Composition Move To Collection </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.CompositionMoveToCollectionImpl#getMovedElement <em>Moved Element</em>}</li>
- *   <li>{@link Changes.impl.CompositionMoveToCollectionImpl#getOrigin <em>Origin</em>}</li>
+ *   <li>{@link Changes.impl.CompositionMoveToCollectionImpl#getMovedElement <em>Moved Element </em>} </li>
+ *   <li>{@link Changes.impl.CompositionMoveToCollectionImpl#getOrigin <em>Origin </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class CompositionMoveToCollectionImpl extends MinimalEObjectImpl.Container implements CompositionMoveToCollection {
 	/**
-	 * The cached value of the '{@link #getMovedElement() <em>Moved Element</em>}' reference.
+	 * The cached value of the '{@link #getMovedElement() <em>Moved Element </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getMovedElement()
@@ -42,7 +42,7 @@ public class CompositionMoveToCollectionImpl extends MinimalEObjectImpl.Containe
 	protected EObject movedElement;
 
 	/**
-	 * The cached value of the '{@link #getOrigin() <em>Origin</em>}' containment reference.
+	 * The cached value of the '{@link #getOrigin() <em>Origin </em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getOrigin()

@@ -10,7 +10,7 @@ import tools.refinery.store.map.Version;
 import java.util.Arrays;
 import java.util.Objects;
 
-public record MapTransaction<K, V>(MapDelta<K, V>[] deltas, MapTransaction<K, V> parent, int depth) implements Version {
+public record MapTransaction <K, V>(MapDelta <K, V>[] deltas, MapTransaction <K, V> parent, int depth) implements Version {
 
 	@Override
 	public int hashCode() {
@@ -30,7 +30,7 @@ public record MapTransaction<K, V>(MapDelta<K, V>[] deltas, MapTransaction<K, V>
 		if (getClass() != obj.getClass())
 			return false;
 		@SuppressWarnings("unchecked")
-		MapTransaction<K, V> other = (MapTransaction<K, V>) obj;
+		MapTransaction <K, V> other = (MapTransaction <K, V>) obj;
 		return depth == other.depth && Objects.equals(parent, other.parent) && Arrays.equals(deltas, other.deltas);
 	}
 

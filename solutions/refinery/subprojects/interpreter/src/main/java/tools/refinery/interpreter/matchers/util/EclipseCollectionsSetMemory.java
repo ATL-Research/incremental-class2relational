@@ -16,7 +16,7 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
  * @author Gabor Bergmann
  * @since 2.0
  */
-public class EclipseCollectionsSetMemory<Value> extends UnifiedSet<Value> implements ISetMemory<Value> {
+public class EclipseCollectionsSetMemory <Value> extends UnifiedSet <Value> implements ISetMemory <Value> {
     @Override
     public int getCount(Value value) {
         return super.contains(value) ? 1 : 0;
@@ -64,7 +64,7 @@ public class EclipseCollectionsSetMemory<Value> extends UnifiedSet<Value> implem
     }
 
     @Override
-    public Set<Value> distinctValues() {
+    public Set <Value> distinctValues() {
         return this;
     }
 

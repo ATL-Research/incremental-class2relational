@@ -51,7 +51,7 @@ public class GenericTypeCheck implements ISearchOperation, IIteratingSearchOpera
     }
 
     private final IInputKey type;
-    private final List<Integer> positionList;
+    private final List <Integer> positionList;
     private final TupleMask callMask;
 
     public GenericTypeCheck(IInputKey type, int[] positions, TupleMask callMask) {
@@ -59,7 +59,7 @@ public class GenericTypeCheck implements ISearchOperation, IIteratingSearchOpera
         Preconditions.checkArgument(positions.length == type.getArity(),
                 "The type %s requires %d parameters, but %d positions are provided", type.getPrettyPrintableName(),
                 type.getArity(), positions.length);
-        List<Integer> modifiablePositionList = new ArrayList<>();
+        List <Integer> modifiablePositionList = new ArrayList<>();
         for (int position : positions) {
             modifiablePositionList.add(position);
         }
@@ -68,7 +68,7 @@ public class GenericTypeCheck implements ISearchOperation, IIteratingSearchOpera
     }
 
     @Override
-    public List<Integer> getVariablePositions() {
+    public List <Integer> getVariablePositions() {
         return positionList;
     }
 
@@ -83,7 +83,7 @@ public class GenericTypeCheck implements ISearchOperation, IIteratingSearchOpera
     }
 
     @Override
-    public String toString(Function<Integer, String> variableMapping) {
+    public String toString(Function <Integer, String> variableMapping) {
         return "check     " + type.getPrettyPrintableName() + "("
                 + positionList.stream().map(input -> String.format("+%s", variableMapping.apply(input))).collect(Collectors.joining(", "))
                 + ")";

@@ -18,8 +18,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-class ContainsRefiner extends AbstractPartialInterpretationRefiner<TruthValue, Boolean> {
-	private static final Map<TruthValue, InferredContainment> EMPTY_VALUES;
+class ContainsRefiner extends AbstractPartialInterpretationRefiner <TruthValue, Boolean> {
+	private static final Map <TruthValue, InferredContainment> EMPTY_VALUES;
 
 	static {
 		var values = TruthValue.values();
@@ -29,11 +29,11 @@ class ContainsRefiner extends AbstractPartialInterpretationRefiner<TruthValue, B
 		}
 	}
 
-	private final Interpretation<InferredContainment> interpretation;
-	private final PartialInterpretationRefiner<TruthValue, Boolean> containedRefiner;
+	private final Interpretation <InferredContainment> interpretation;
+	private final PartialInterpretationRefiner <TruthValue, Boolean> containedRefiner;
 
-	private ContainsRefiner(ReasoningAdapter adapter, PartialSymbol<TruthValue, Boolean> partialSymbol,
-							Symbol<InferredContainment> containsStorage) {
+	private ContainsRefiner(ReasoningAdapter adapter, PartialSymbol <TruthValue, Boolean> partialSymbol,
+							Symbol <InferredContainment> containsStorage) {
 		super(adapter, partialSymbol);
 		interpretation = adapter.getModel().getInterpretation(containsStorage);
 		containedRefiner = adapter.getRefiner(ContainmentHierarchyTranslator.CONTAINED_SYMBOL);
@@ -65,7 +65,7 @@ class ContainsRefiner extends AbstractPartialInterpretationRefiner<TruthValue, B
 		return new InferredContainment(newContains, mustLinks, forbiddenLinks);
 	}
 
-	public static PartialInterpretationRefiner.Factory<TruthValue, Boolean> of(Symbol<InferredContainment> symbol) {
+	public static PartialInterpretationRefiner.Factory <TruthValue, Boolean> of(Symbol <InferredContainment> symbol) {
 		return (adapter, partialSymbol) -> new ContainsRefiner(adapter, partialSymbol, symbol);
 	}
 }

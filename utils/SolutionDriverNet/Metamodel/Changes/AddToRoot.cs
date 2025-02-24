@@ -41,7 +41,7 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
     public partial class AddToRoot : NMF.Models.Changes.ElementaryChange, IAddToRoot, NMF.Models.IModelElement
     {
         
-        private static Lazy<NMF.Models.Meta.ITypedElement> _newObjectReference = new Lazy<NMF.Models.Meta.ITypedElement>(RetrieveNewObjectReference);
+        private static Lazy <NMF.Models.Meta.ITypedElement> _newObjectReference = new Lazy <NMF.Models.Meta.ITypedElement>(RetrieveNewObjectReference);
         
         /// <summary>
         /// The backing field for the NewObject property
@@ -95,7 +95,7 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Gets the child model elements of this model element
         /// </summary>
-        public override IEnumerableExpression<NMF.Models.IModelElement> Children
+        public override IEnumerableExpression <NMF.Models.IModelElement> Children
         {
             get
             {
@@ -106,7 +106,7 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Gets the referenced model elements of this model element
         /// </summary>
-        public override IEnumerableExpression<NMF.Models.IModelElement> ReferencedElements
+        public override IEnumerableExpression <NMF.Models.IModelElement> ReferencedElements
         {
             get
             {
@@ -132,12 +132,12 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Gets fired before the NewObject property changes its value
         /// </summary>
-        public event System.EventHandler<ValueChangedEventArgs> NewObjectChanging;
+        public event System.EventHandler <ValueChangedEventArgs> NewObjectChanging;
         
         /// <summary>
         /// Gets fired when the NewObject property changed its value
         /// </summary>
-        public event System.EventHandler<ValueChangedEventArgs> NewObjectChanged;
+        public event System.EventHandler <ValueChangedEventArgs> NewObjectChanged;
         
         private static NMF.Models.Meta.ITypedElement RetrieveNewObjectReference()
         {
@@ -147,10 +147,10 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Raises the NewObjectChanging event
         /// </summary>
-        /// <param name="eventArgs">The event data</param>
+        /// <param name="eventArgs">The event data </param>
         protected virtual void OnNewObjectChanging(ValueChangedEventArgs eventArgs)
         {
-            System.EventHandler<ValueChangedEventArgs> handler = this.NewObjectChanging;
+            System.EventHandler <ValueChangedEventArgs> handler = this.NewObjectChanging;
             if ((handler != null))
             {
                 handler.Invoke(this, eventArgs);
@@ -160,10 +160,10 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Raises the NewObjectChanged event
         /// </summary>
-        /// <param name="eventArgs">The event data</param>
+        /// <param name="eventArgs">The event data </param>
         protected virtual void OnNewObjectChanged(ValueChangedEventArgs eventArgs)
         {
-            System.EventHandler<ValueChangedEventArgs> handler = this.NewObjectChanged;
+            System.EventHandler <ValueChangedEventArgs> handler = this.NewObjectChanged;
             if ((handler != null))
             {
                 handler.Invoke(this, eventArgs);
@@ -173,8 +173,8 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Handles the event that the NewObject property must reset
         /// </summary>
-        /// <param name="sender">The object that sent this reset request</param>
-        /// <param name="eventArgs">The event data for the reset event</param>
+        /// <param name="sender">The object that sent this reset request </param>
+        /// <param name="eventArgs">The event data for the reset event </param>
         private void OnResetNewObject(object sender, System.EventArgs eventArgs)
         {
             this.NewObject = null;
@@ -183,8 +183,8 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Gets the relative URI fragment for the given child model element
         /// </summary>
-        /// <returns>A fragment of the relative URI</returns>
-        /// <param name="element">The element that should be looked for</param>
+        /// <returns>A fragment of the relative URI </returns>
+        /// <param name="element">The element that should be looked for </param>
         protected override string GetRelativePathForNonIdentifiedChild(NMF.Models.IModelElement element)
         {
             if ((element == this.NewObject))
@@ -197,9 +197,9 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Resolves the given URI to a child model element
         /// </summary>
-        /// <returns>The model element or null if it could not be found</returns>
-        /// <param name="reference">The requested reference name</param>
-        /// <param name="index">The index of this reference</param>
+        /// <returns>The model element or null if it could not be found </returns>
+        /// <param name="reference">The requested reference name </param>
+        /// <param name="index">The index of this reference </param>
         protected override NMF.Models.IModelElement GetModelElementForReference(string reference, int index)
         {
             if ((reference == "NEWOBJECT"))
@@ -212,8 +212,8 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Sets a value to the given feature
         /// </summary>
-        /// <param name="feature">The requested feature</param>
-        /// <param name="value">The value that should be set to that feature</param>
+        /// <param name="feature">The requested feature </param>
+        /// <param name="value">The value that should be set to that feature </param>
         protected override void SetFeature(string feature, object value)
         {
             if ((feature == "NEWOBJECT"))
@@ -227,9 +227,9 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// Gets the property expression for the given reference
         /// </summary>
-        /// <returns>An incremental property expression</returns>
-        /// <param name="reference">The requested reference in upper case</param>
-        protected override NMF.Expressions.INotifyExpression<NMF.Models.IModelElement> GetExpressionForReference(string reference)
+        /// <returns>An incremental property expression </returns>
+        /// <param name="reference">The requested reference in upper case </param>
+        protected override NMF.Expressions.INotifyExpression <NMF.Models.IModelElement> GetExpressionForReference(string reference)
         {
             if ((reference == "NEWOBJECT"))
             {
@@ -253,7 +253,7 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
         /// <summary>
         /// The collection class to to represent the children of the AddToRoot class
         /// </summary>
-        public class AddToRootChildrenCollection : ReferenceCollection, ICollectionExpression<NMF.Models.IModelElement>, ICollection<NMF.Models.IModelElement>
+        public class AddToRootChildrenCollection : ReferenceCollection, ICollectionExpression <NMF.Models.IModelElement>, ICollection <NMF.Models.IModelElement>
         {
             
             private AddToRoot _parent;
@@ -295,7 +295,7 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
             /// <summary>
             /// Adds the given element to the collection
             /// </summary>
-            /// <param name="item">The item to add</param>
+            /// <param name="item">The item to add </param>
             public override void Add(NMF.Models.IModelElement item)
             {
                 if ((this._parent.NewObject == null))
@@ -316,8 +316,8 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
             /// <summary>
             /// Gets a value indicating whether the given element is contained in the collection
             /// </summary>
-            /// <returns>True, if it is contained, otherwise False</returns>
-            /// <param name="item">The item that should be looked out for</param>
+            /// <returns>True, if it is contained, otherwise False </returns>
+            /// <param name="item">The item that should be looked out for </param>
             public override bool Contains(NMF.Models.IModelElement item)
             {
                 if ((item == this._parent.NewObject))
@@ -330,8 +330,8 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
             /// <summary>
             /// Copies the contents of the collection to the given array starting from the given array index
             /// </summary>
-            /// <param name="array">The array in which the elements should be copied</param>
-            /// <param name="arrayIndex">The starting index</param>
+            /// <param name="array">The array in which the elements should be copied </param>
+            /// <param name="arrayIndex">The starting index </param>
             public override void CopyTo(NMF.Models.IModelElement[] array, int arrayIndex)
             {
                 if ((this._parent.NewObject != null))
@@ -344,8 +344,8 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
             /// <summary>
             /// Removes the given item from the collection
             /// </summary>
-            /// <returns>True, if the item was removed, otherwise False</returns>
-            /// <param name="item">The item that should be removed</param>
+            /// <returns>True, if the item was removed, otherwise False </returns>
+            /// <param name="item">The item that should be removed </param>
             public override bool Remove(NMF.Models.IModelElement item)
             {
                 if ((this._parent.NewObject == item))
@@ -359,17 +359,17 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
             /// <summary>
             /// Gets an enumerator that enumerates the collection
             /// </summary>
-            /// <returns>A generic enumerator</returns>
-            public override IEnumerator<NMF.Models.IModelElement> GetEnumerator()
+            /// <returns>A generic enumerator </returns>
+            public override IEnumerator <NMF.Models.IModelElement> GetEnumerator()
             {
-                return Enumerable.Empty<NMF.Models.IModelElement>().Concat(this._parent.NewObject).GetEnumerator();
+                return Enumerable.Empty <NMF.Models.IModelElement>().Concat(this._parent.NewObject).GetEnumerator();
             }
         }
         
         /// <summary>
         /// The collection class to to represent the children of the AddToRoot class
         /// </summary>
-        public class AddToRootReferencedElementsCollection : ReferenceCollection, ICollectionExpression<NMF.Models.IModelElement>, ICollection<NMF.Models.IModelElement>
+        public class AddToRootReferencedElementsCollection : ReferenceCollection, ICollectionExpression <NMF.Models.IModelElement>, ICollection <NMF.Models.IModelElement>
         {
             
             private AddToRoot _parent;
@@ -411,7 +411,7 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
             /// <summary>
             /// Adds the given element to the collection
             /// </summary>
-            /// <param name="item">The item to add</param>
+            /// <param name="item">The item to add </param>
             public override void Add(NMF.Models.IModelElement item)
             {
                 if ((this._parent.NewObject == null))
@@ -432,8 +432,8 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
             /// <summary>
             /// Gets a value indicating whether the given element is contained in the collection
             /// </summary>
-            /// <returns>True, if it is contained, otherwise False</returns>
-            /// <param name="item">The item that should be looked out for</param>
+            /// <returns>True, if it is contained, otherwise False </returns>
+            /// <param name="item">The item that should be looked out for </param>
             public override bool Contains(NMF.Models.IModelElement item)
             {
                 if ((item == this._parent.NewObject))
@@ -446,8 +446,8 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
             /// <summary>
             /// Copies the contents of the collection to the given array starting from the given array index
             /// </summary>
-            /// <param name="array">The array in which the elements should be copied</param>
-            /// <param name="arrayIndex">The starting index</param>
+            /// <param name="array">The array in which the elements should be copied </param>
+            /// <param name="arrayIndex">The starting index </param>
             public override void CopyTo(NMF.Models.IModelElement[] array, int arrayIndex)
             {
                 if ((this._parent.NewObject != null))
@@ -460,8 +460,8 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
             /// <summary>
             /// Removes the given item from the collection
             /// </summary>
-            /// <returns>True, if the item was removed, otherwise False</returns>
-            /// <param name="item">The item that should be removed</param>
+            /// <returns>True, if the item was removed, otherwise False </returns>
+            /// <param name="item">The item that should be removed </param>
             public override bool Remove(NMF.Models.IModelElement item)
             {
                 if ((this._parent.NewObject == item))
@@ -475,23 +475,23 @@ namespace HSRM.TTC2023.ClassToRelational.Changes
             /// <summary>
             /// Gets an enumerator that enumerates the collection
             /// </summary>
-            /// <returns>A generic enumerator</returns>
-            public override IEnumerator<NMF.Models.IModelElement> GetEnumerator()
+            /// <returns>A generic enumerator </returns>
+            public override IEnumerator <NMF.Models.IModelElement> GetEnumerator()
             {
-                return Enumerable.Empty<NMF.Models.IModelElement>().Concat(this._parent.NewObject).GetEnumerator();
+                return Enumerable.Empty <NMF.Models.IModelElement>().Concat(this._parent.NewObject).GetEnumerator();
             }
         }
         
         /// <summary>
         /// Represents a proxy to represent an incremental access to the newObject property
         /// </summary>
-        private sealed class NewObjectProxy : ModelPropertyChange<IAddToRoot, NMF.Models.IModelElement>
+        private sealed class NewObjectProxy : ModelPropertyChange <IAddToRoot, NMF.Models.IModelElement>
         {
             
             /// <summary>
             /// Creates a new observable property access proxy
             /// </summary>
-            /// <param name="modelElement">The model instance element for which to create the property access proxy</param>
+            /// <param name="modelElement">The model instance element for which to create the property access proxy </param>
             public NewObjectProxy(IAddToRoot modelElement) : 
                     base(modelElement, "newObject")
             {

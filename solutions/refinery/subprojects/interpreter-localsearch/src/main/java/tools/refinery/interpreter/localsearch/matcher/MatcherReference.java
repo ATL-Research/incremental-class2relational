@@ -16,7 +16,7 @@ import tools.refinery.interpreter.matchers.psystem.queries.PQuery;
 
 public class MatcherReference {
     final PQuery query;
-    final Set<PParameter> adornment;
+    final Set <PParameter> adornment;
 
     /**
      * Hints that can override the callee's own hints. This field is intentionally left out from hashCode and equals
@@ -26,21 +26,21 @@ public class MatcherReference {
     /**
      * @since 1.4
      */
-    public MatcherReference(PQuery query, Set<PParameter> adornment, QueryEvaluationHint hints) {
+    public MatcherReference(PQuery query, Set <PParameter> adornment, QueryEvaluationHint hints) {
         super();
         this.query = query;
         this.adornment = adornment;
         this.hints = hints;
     }
 
-    public MatcherReference(PQuery query, Set<PParameter> adornment){
+    public MatcherReference(PQuery query, Set <PParameter> adornment){
         this(query, adornment, null);
     }
 
     public PQuery getQuery() {
         return query;
     }
-    public Set<PParameter> getAdornment() {
+    public Set <PParameter> getAdornment() {
         return adornment;
     }
     @Override

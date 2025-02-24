@@ -14,20 +14,20 @@ import tools.refinery.store.tuple.Tuple;
 
 import java.util.Set;
 
-public non-sealed interface PartialInterpretation<A, C> extends AnyPartialInterpretation {
+public non-sealed interface PartialInterpretation <A, C> extends AnyPartialInterpretation {
 	@Override
-	PartialSymbol<A, C> getPartialSymbol();
+	PartialSymbol <A, C> getPartialSymbol();
 
 	A get(Tuple key);
 
-	Cursor<Tuple, A> getAll();
+	Cursor <Tuple, A> getAll();
 
 	@FunctionalInterface
-	interface Factory<A, C> {
-		PartialInterpretation<A, C> create(ReasoningAdapter adapter, Concreteness concreteness,
-										   PartialSymbol<A, C> partialSymbol);
+	interface Factory <A, C> {
+		PartialInterpretation <A, C> create(ReasoningAdapter adapter, Concreteness concreteness,
+										   PartialSymbol <A, C> partialSymbol);
 
-		default void configure(ModelStoreBuilder storeBuilder, Set<Concreteness> requiredInterpretations) {
+		default void configure(ModelStoreBuilder storeBuilder, Set <Concreteness> requiredInterpretations) {
 			// Nothing to configure by default.
 		}
 	}

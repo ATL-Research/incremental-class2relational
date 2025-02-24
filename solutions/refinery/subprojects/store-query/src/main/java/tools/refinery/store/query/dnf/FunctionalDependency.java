@@ -10,7 +10,7 @@ import tools.refinery.store.query.InvalidQueryException;
 import java.util.HashSet;
 import java.util.Set;
 
-public record FunctionalDependency<T>(Set<T> forEach, Set<T> unique) {
+public record FunctionalDependency <T>(Set <T> forEach, Set <T> unique) {
 	public FunctionalDependency {
 		var uniqueForEach = new HashSet<>(unique);
 		uniqueForEach.retainAll(forEach);

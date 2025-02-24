@@ -81,8 +81,8 @@ public class ProblemSemanticHighlightingCalculator extends DefaultSemanticHighli
 
 	protected void highlightManyValues(EObject object, EReference reference, IHighlightedPositionAcceptor acceptor) {
 		@SuppressWarnings("unchecked")
-		EList<? extends EObject> values = (EList<? extends EObject>) object.eGet(reference);
-		List<INode> nodes = NodeModelUtils.findNodesForFeature(object, reference);
+		EList <? extends EObject> values = (EList <? extends EObject>) object.eGet(reference);
+		List <INode> nodes = NodeModelUtils.findNodesForFeature(object, reference);
 		int size = Math.min(values.size(), nodes.size());
 		for (var i = 0; i < size; i++) {
 			EObject valueInList = values.get(i);
@@ -105,7 +105,7 @@ public class ProblemSemanticHighlightingCalculator extends DefaultSemanticHighli
 
 	@NotNull
 	private String[] getUserDefinedElementHighlightClass(EObject eObject, EReference reference, boolean isError) {
-		ImmutableList.Builder<String> classesBuilder = ImmutableList.builder();
+		ImmutableList.Builder <String> classesBuilder = ImmutableList.builder();
 		if (eObject instanceof ClassDeclaration classDeclaration && classDeclaration.isAbstract()) {
 			classesBuilder.add(ABSTRACT_CLASS);
 		}
@@ -127,7 +127,7 @@ public class ProblemSemanticHighlightingCalculator extends DefaultSemanticHighli
 				classesBuilder.add(NEW_NODE_CLASS);
 			}
 		}
-		List<String> classes = classesBuilder.build();
+		List <String> classes = classesBuilder.build();
 		return classes.toArray(new String[0]);
 	}
 }

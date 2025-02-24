@@ -15,20 +15,20 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Association Collection Insertion</b></em>'.
+ * An implementation of the model object ' <em> <b>Association Collection Insertion </b> </em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Changes.impl.AssociationCollectionInsertionImpl#getAddedElement <em>Added Element</em>}</li>
+ *   <li>{@link Changes.impl.AssociationCollectionInsertionImpl#getAddedElement <em>Added Element </em>} </li>
  * </ul>
  *
  * @generated
  */
 public class AssociationCollectionInsertionImpl extends AssociationChangeImpl implements AssociationCollectionInsertion {
 	/**
-	 * The cached value of the '{@link #getAddedElement() <em>Added Element</em>}' reference.
+	 * The cached value of the '{@link #getAddedElement() <em>Added Element </em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAddedElement()
@@ -155,7 +155,7 @@ public class AssociationCollectionInsertionImpl extends AssociationChangeImpl im
 
 	@Override
 	public void apply() {
-		EList<EObject> collection = (EList<EObject>)this.getAffectedElement().eGet(this.getFeature());
+		EList <EObject> collection = (EList <EObject>)this.getAffectedElement().eGet(this.getFeature());
 		collection.add(this.getAddedElement());
 	}
 

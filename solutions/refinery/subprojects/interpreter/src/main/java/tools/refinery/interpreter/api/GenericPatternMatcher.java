@@ -30,12 +30,12 @@ import tools.refinery.interpreter.matchers.tuple.Tuple;
  * @see GenericQuerySpecification
  * @since 0.9
  */
-public class GenericPatternMatcher extends BaseMatcher<GenericPatternMatch> {
+public class GenericPatternMatcher extends BaseMatcher <GenericPatternMatch> {
 
     /**
      * @since 1.4
      */
-    public GenericPatternMatcher(GenericQuerySpecification<? extends GenericPatternMatcher> specification) {
+    public GenericPatternMatcher(GenericQuerySpecification <? extends GenericPatternMatcher> specification) {
         super(specification);
     }
 
@@ -56,15 +56,15 @@ public class GenericPatternMatcher extends BaseMatcher<GenericPatternMatch> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public GenericQuerySpecification<? extends GenericPatternMatcher> getSpecification() {
-        return (GenericQuerySpecification<? extends GenericPatternMatcher>)querySpecification;
+    public GenericQuerySpecification <? extends GenericPatternMatcher> getSpecification() {
+        return (GenericQuerySpecification <? extends GenericPatternMatcher>)querySpecification;
     }
 
     /**
      * Internal method for {@link GenericQuerySpecification}
      * @noreference
      */
-    static <Matcher extends GenericPatternMatcher> GenericPatternMatcher instantiate(GenericQuerySpecification<Matcher> querySpecification) {
+    static <Matcher extends GenericPatternMatcher> GenericPatternMatcher instantiate(GenericQuerySpecification <Matcher> querySpecification) {
         return new GenericPatternMatcher(querySpecification);
     }
 
@@ -72,7 +72,7 @@ public class GenericPatternMatcher extends BaseMatcher<GenericPatternMatch> {
      * Internal method for {@link GenericQuerySpecification}
      * @noreference
      */
-    static <Matcher extends GenericPatternMatcher> GenericPatternMatcher instantiate(InterpreterEngine engine, GenericQuerySpecification<Matcher> querySpecification) {
+    static <Matcher extends GenericPatternMatcher> GenericPatternMatcher instantiate(InterpreterEngine engine, GenericQuerySpecification <Matcher> querySpecification) {
         // check if matcher already exists
         GenericPatternMatcher matcher = engine.getExistingMatcher(querySpecification);
         if (matcher == null) {

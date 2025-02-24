@@ -37,9 +37,9 @@ public class ExpressionEvalCheck implements ISearchOperation {
                 if (!unwind && result != null) {
                     Object currentValue = frame.get(outputPosition);
                     return result.equals(currentValue);
-                } else if (unwind && result instanceof Set<?>) {
+                } else if (unwind && result instanceof Set <?>) {
                     Object currentValue = frame.get(outputPosition);
-                    return ((Set<?>)result).contains(currentValue);
+                    return ((Set <?>)result).contains(currentValue);
                 }
             } catch (Exception e) {
                 context.getLogger().warn("Error while evaluating expression", e);
@@ -55,17 +55,17 @@ public class ExpressionEvalCheck implements ISearchOperation {
 
     private final int outputPosition;
     private final IExpressionEvaluator evaluator;
-    private final Map<String, Integer> nameMap;
+    private final Map <String, Integer> nameMap;
     private final boolean unwind;
 
-    public ExpressionEvalCheck(IExpressionEvaluator evaluator, Map<String, Integer> nameMap, int position) {
+    public ExpressionEvalCheck(IExpressionEvaluator evaluator, Map <String, Integer> nameMap, int position) {
         this(evaluator, nameMap, false, position);
     }
 
     /**
      * @since 2.7
      */
-    public ExpressionEvalCheck(IExpressionEvaluator evaluator, Map<String, Integer> nameMap, boolean unwind, int position) {
+    public ExpressionEvalCheck(IExpressionEvaluator evaluator, Map <String, Integer> nameMap, boolean unwind, int position) {
         this.evaluator = evaluator;
         this.nameMap = nameMap;
         this.unwind = unwind;
@@ -78,7 +78,7 @@ public class ExpressionEvalCheck implements ISearchOperation {
     }
 
     @Override
-    public List<Integer> getVariablePositions() {
+    public List <Integer> getVariablePositions() {
         // XXX not sure if this is the correct implementation to get the affected variable indicies
         return new ArrayList<>(nameMap.values());
     }
@@ -89,7 +89,7 @@ public class ExpressionEvalCheck implements ISearchOperation {
     }
 
     @Override
-    public String toString(Function<Integer, String> variableMapping) {
+    public String toString(Function <Integer, String> variableMapping) {
         return "check     "+variableMapping.apply(outputPosition)+" = expression "+evaluator.getShortDescription();
     }
 }

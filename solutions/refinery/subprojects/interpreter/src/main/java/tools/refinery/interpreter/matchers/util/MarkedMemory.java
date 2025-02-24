@@ -13,9 +13,9 @@ package tools.refinery.interpreter.matchers.util;
  * @noimplement This interface is not intended to be implemented by clients.
  * @since 2.0
  */
-public interface MarkedMemory<Value> extends IMemory<Value> {
+public interface MarkedMemory <Value> extends IMemory <Value> {
 
-    static interface MarkedSet<Value> extends MarkedMemory<Value> {}
-    static interface MarkedMultiset<Value> extends MarkedMemory<Value> {}
-    static interface MarkedDeltaBag<Value> extends MarkedMemory<Value> {}
+    static interface MarkedSet <Value> extends MarkedMemory <Value> {}
+    static interface MarkedMultiset <Value> extends MarkedMemory <Value> {}
+    static interface MarkedDeltaBag <Value> extends MarkedMemory <Value> {}
 }

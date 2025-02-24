@@ -30,7 +30,7 @@ class Class2TableImpl extends Class2Table {
 	}
 
 	// Transformation 
-	override protected colFrom(List<Column> attSinCol, List<Column> attSinCol_2, List<Table> attMulTbl,
+	override protected colFrom(List <Column> attSinCol, List <Column> attSinCol_2, List <Table> attMulTbl,
 		Table parent
 	) {		
 		// Helper 	

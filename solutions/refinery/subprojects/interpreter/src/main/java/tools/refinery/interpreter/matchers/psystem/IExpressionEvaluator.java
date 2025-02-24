@@ -26,7 +26,7 @@ public interface IExpressionEvaluator {
     /**
      * All input parameter names should be reported correctly.
      */
-    Iterable<String> getInputParameterNames();
+    Iterable <String> getInputParameterNames();
 
     /**
      * The expression evaluator code

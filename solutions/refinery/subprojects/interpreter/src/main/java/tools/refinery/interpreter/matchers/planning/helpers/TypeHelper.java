@@ -50,9 +50,9 @@ public class TypeHelper {
      * @return the mapping from variable to set of type constraints
      * @since 1.6
      */
-    public static Map<PVariable, Set<IInputKey>> inferUnaryTypesFor(Iterable<PVariable> variables,
-            Set<PConstraint> constraints, IQueryMetaContext context) {
-        Map<PVariable, Set<TypeJudgement>> typeMap = TypeHelper.inferUnaryTypes(constraints, context);
+    public static Map <PVariable, Set <IInputKey>> inferUnaryTypesFor(Iterable <PVariable> variables,
+            Set <PConstraint> constraints, IQueryMetaContext context) {
+        Map <PVariable, Set <TypeJudgement>> typeMap = TypeHelper.inferUnaryTypes(constraints, context);
         return inferUnaryTypesFor(variables, typeMap);
     }
 
@@ -72,17 +72,17 @@ public class TypeHelper {
      * @return the mapping from variable to set of type constraints
      * @since 1.6
      */
-    public static Map<PVariable, Set<IInputKey>> inferUnaryTypesFor(Iterable<PVariable> variables,
-            Map<PVariable, Set<TypeJudgement>> typeMap) {
-        Map<PVariable, Set<IInputKey>> result = new HashMap<PVariable, Set<IInputKey>>();
+    public static Map <PVariable, Set <IInputKey>> inferUnaryTypesFor(Iterable <PVariable> variables,
+            Map <PVariable, Set <TypeJudgement>> typeMap) {
+        Map <PVariable, Set <IInputKey>> result = new HashMap <PVariable, Set <IInputKey>>();
 
         for (PVariable original : variables) {
             // it can happen that the variable was unified into an other one due to equalities
-            Set<IInputKey> keys = new HashSet<IInputKey>();
+            Set <IInputKey> keys = new HashSet <IInputKey>();
             PVariable current = original;
 
             while (current != null) {
-                Set<TypeJudgement> judgements = typeMap.get(current);
+                Set <TypeJudgement> judgements = typeMap.get(current);
                 if (judgements != null) {
                     for (TypeJudgement judgement : judgements) {
                         keys.add(judgement.getInputKey());
@@ -105,17 +105,17 @@ public class TypeHelper {
      * @param constraints
      *            the set of constraints to extract type info from
      */
-    public static Map<PVariable, Set<TypeJudgement>> inferUnaryTypes(Set<PConstraint> constraints,
+    public static Map <PVariable, Set <TypeJudgement>> inferUnaryTypes(Set <PConstraint> constraints,
             IQueryMetaContext context) {
-        Set<TypeJudgement> equivalentJudgements = getDirectJudgements(constraints, context);
-        Set<TypeJudgement> impliedJudgements = typeClosure(equivalentJudgements, context);
+        Set <TypeJudgement> equivalentJudgements = getDirectJudgements(constraints, context);
+        Set <TypeJudgement> impliedJudgements = typeClosure(equivalentJudgements, context);
 
-        Map<PVariable, Set<TypeJudgement>> results = new HashMap<PVariable, Set<TypeJudgement>>();
+        Map <PVariable, Set <TypeJudgement>> results = new HashMap <PVariable, Set <TypeJudgement>>();
         for (TypeJudgement typeJudgement : impliedJudgements) {
             final IInputKey inputKey = typeJudgement.getInputKey();
             if (inputKey.getArity() == 1) {
                 PVariable variable = (PVariable) typeJudgement.getVariablesTuple().get(0);
-                Set<TypeJudgement> inferredTypes = results.computeIfAbsent(variable, v -> new HashSet<>());
+                Set <TypeJudgement> inferredTypes = results.computeIfAbsent(variable, v -> new HashSet<>());
                 inferredTypes.add(typeJudgement);
             }
         }
@@ -125,8 +125,8 @@ public class TypeHelper {
     /**
      * Gets direct judgements reported by constraints. No closure is applied yet.
      */
-    public static Set<TypeJudgement> getDirectJudgements(Set<PConstraint> constraints, IQueryMetaContext context) {
-        Set<TypeJudgement> equivalentJudgements = new HashSet<TypeJudgement>();
+    public static Set <TypeJudgement> getDirectJudgements(Set <PConstraint> constraints, IQueryMetaContext context) {
+        Set <TypeJudgement> equivalentJudgements = new HashSet <TypeJudgement>();
         for (PConstraint pConstraint : constraints) {
             if (pConstraint instanceof ITypeInfoProviderConstraint) {
                 equivalentJudgements.addAll(((ITypeInfoProviderConstraint) pConstraint).getImpliedJudgements(context));
@@ -140,7 +140,7 @@ public class TypeHelper {
      *
      * @return the set of all type judgements in typesToClose and all their direct and indirect supertypes
      */
-    public static Set<TypeJudgement> typeClosure(Set<TypeJudgement> typesToClose, IQueryMetaContext context) {
+    public static Set <TypeJudgement> typeClosure(Set <TypeJudgement> typesToClose, IQueryMetaContext context) {
         return typeClosure(Collections.<TypeJudgement> emptySet(), typesToClose, context);
     }
 
@@ -153,15 +153,15 @@ public class TypeHelper {
      * @return the set of all type judgements in typesToClose and all their direct and indirect supertypes
      * @since 1.6
      */
-    public static Set<TypeJudgement> typeClosure(Set<TypeJudgement> preclosedBaseSet, Set<TypeJudgement> delta,
+    public static Set <TypeJudgement> typeClosure(Set <TypeJudgement> preclosedBaseSet, Set <TypeJudgement> delta,
             IQueryMetaContext context) {
-        Queue<TypeJudgement> queue = delta.stream().filter(input -> !preclosedBaseSet.contains(input)).collect(Collectors.toCollection(LinkedList::new));
+        Queue <TypeJudgement> queue = delta.stream().filter(input -> !preclosedBaseSet.contains(input)).collect(Collectors.toCollection(LinkedList::new));
         if (queue.isEmpty())
             return preclosedBaseSet;
 
-        Set<TypeJudgement> closure = new HashSet<TypeJudgement>(preclosedBaseSet);
+        Set <TypeJudgement> closure = new HashSet <TypeJudgement>(preclosedBaseSet);
 
-        Map<TypeJudgement, Set<TypeJudgement>> conditionalImplications = new HashMap<>();
+        Map <TypeJudgement, Set <TypeJudgement>> conditionalImplications = new HashMap<>();
         for (TypeJudgement typeJudgement : closure) {
             conditionalImplications.putAll(typeJudgement.getConditionalImpliedJudgements(context));
         }
@@ -173,15 +173,15 @@ public class TypeHelper {
                 queue.addAll(deltaType.getDirectlyImpliedJudgements(context));
 
                 // conditional implications, source key processed before, this is the condition key
-                final Set<TypeJudgement> implicationSet = conditionalImplications.get(deltaType);
+                final Set <TypeJudgement> implicationSet = conditionalImplications.get(deltaType);
                 if (implicationSet != null) {
                      queue.addAll(implicationSet);
                 }
 
                 // conditional implications, this is the source key
-                Map<TypeJudgement, Set<TypeJudgement>> deltaConditionalImplications = deltaType
+                Map <TypeJudgement, Set <TypeJudgement>> deltaConditionalImplications = deltaType
                         .getConditionalImpliedJudgements(context);
-                for (Entry<TypeJudgement, Set<TypeJudgement>> entry : deltaConditionalImplications.entrySet()) {
+                for (Entry <TypeJudgement, Set <TypeJudgement>> entry : deltaConditionalImplications.entrySet()) {
                     if (closure.contains(entry.getKey())) {
                         // condition processed before
                         queue.addAll(entry.getValue());
@@ -207,10 +207,10 @@ public class TypeHelper {
      * @return the collection of types in subsumableTypes that are NOT identical to or supertypes of any type in
      *         subsumingTypes.
      */
-    public static Set<TypeJudgement> subsumeTypes(Set<TypeJudgement> subsumableTypes, Set<TypeJudgement> subsumingTypes,
+    public static Set <TypeJudgement> subsumeTypes(Set <TypeJudgement> subsumableTypes, Set <TypeJudgement> subsumingTypes,
             IQueryMetaContext context) {
-        Set<TypeJudgement> closure = typeClosure(subsumingTypes, context);
-        Set<TypeJudgement> subsumed = new HashSet<TypeJudgement>(subsumableTypes);
+        Set <TypeJudgement> closure = typeClosure(subsumingTypes, context);
+        Set <TypeJudgement> subsumed = new HashSet <TypeJudgement>(subsumableTypes);
         subsumed.removeAll(closure);
         return subsumed;
     }

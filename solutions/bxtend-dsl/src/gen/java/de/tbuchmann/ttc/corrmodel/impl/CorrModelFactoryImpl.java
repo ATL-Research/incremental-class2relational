@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model <b>Factory</b>.
+ * An implementation of the model <b>Factory </b>.
  * <!-- end-user-doc -->
  * @generated
  */

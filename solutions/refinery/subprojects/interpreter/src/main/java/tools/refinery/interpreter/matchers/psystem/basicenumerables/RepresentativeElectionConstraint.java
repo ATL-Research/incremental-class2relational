@@ -12,7 +12,7 @@ import tools.refinery.interpreter.matchers.tuple.Tuple;
 
 import java.util.Set;
 
-public class RepresentativeElectionConstraint extends KeyedEnumerablePConstraint<PQuery>
+public class RepresentativeElectionConstraint extends KeyedEnumerablePConstraint <PQuery>
 		implements IQueryReference, ITypeInfoProviderConstraint {
 	private final Connectivity connectivity;
 
@@ -32,7 +32,7 @@ public class RepresentativeElectionConstraint extends KeyedEnumerablePConstraint
 	}
 
 	@Override
-	public Set<TypeJudgement> getImpliedJudgements(IQueryMetaContext context) {
+	public Set <TypeJudgement> getImpliedJudgements(IQueryMetaContext context) {
 		return PositivePatternCall.getTypesImpliedByCall(supplierKey, variablesTuple);
 	}
 
