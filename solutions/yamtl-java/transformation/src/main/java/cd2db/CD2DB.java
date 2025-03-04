@@ -37,11 +37,11 @@ public class CD2DB extends YAMTLModule {
         header().in("cd", CD).out("db", DB);
         ruleStore(List.of(
         		rule("ClassToTable")
-        				// model navigation
+        				// model_navigation
         				.in("c", cd_Class())
         				// transformation	
                         .out("t", db_Table(), () -> {
-                        	// model navigation
+                        	// model_navigation
                         	Class c = c();
                             Table t = t();
                             // transformation
@@ -53,14 +53,14 @@ public class CD2DB extends YAMTLModule {
                                 t.setName("");
                             t.getCol().add(key());
                             t.getKey().add(key());
-                            // model navigation
+                            // model_navigation
                             List <Attribute> list = c.getAttr()
                             		.stream()
                             		.filter(a -> !a.getMultiValued())
                             		.collect(Collectors.toList());
                             // transformation 
                             t.getCol().addAll(
-                            		// trace
+                            		// tracing
                             		(List <Column>)fetch(list, "col" )
                             );
                         })
@@ -68,9 +68,9 @@ public class CD2DB extends YAMTLModule {
                         .out("key", db_Column(), () -> {
                             key().setName("objectId");
                             key().setType(
-                        		// trace
+                        		// tracing
                         		(Type)fetch(
-                                    // model navigation
+                                    // model_navigation
                                     fetch("objectIdType")
                                 )
                             );
@@ -78,7 +78,7 @@ public class CD2DB extends YAMTLModule {
 
                 // transformation	
                 rule("DataType2Type")
-                		// model navigation
+                		// model_navigation
                         .in("dt", cd_DataType())
                         // transformation	
                         .out("type", db_Type(), () -> {
@@ -86,7 +86,7 @@ public class CD2DB extends YAMTLModule {
                         }),
                 // transformation			
                 rule("DataTypeAttribute2Column")
-		                // model navigation
+		                // model_navigation
                         .in("att", cd_Attribute()).filter(() -> {
                             return att().getType() instanceof DataType &&
                                     !att().getMultiValued();
@@ -95,13 +95,13 @@ public class CD2DB extends YAMTLModule {
                         .out("col", db_Column(), () -> {
                             col().setName(att().getName());
                             col().setType(
-                            		// trace 
+                            		// tracing 
                             		(Type)fetch(att().getType())
                             );
                         }),
                 // transformation			
                 rule("MultiValuedDataTypeAttribute2Column")
-                // model navigation
+                // model_navigation
                         .in("att", cd_Attribute()).filter(() -> {
                             return att().getType() instanceof DataType &&
                                     att().getMultiValued();
@@ -117,12 +117,12 @@ public class CD2DB extends YAMTLModule {
                         .out("id", db_Column(), () -> {
                             if (att().getOwner() != null && att().getOwner().getName() != null)
                                 id().setName(firstToLower(att().getOwner().getName()) + "Id");
-                            // model navigation
+                            // model_navigation
                             var intDataType = fetch("objectIdType");
                             // transformation
                             if (intDataType != null)
                                 id().setType(
-                                		//trace
+                                		//tracing
                                 		(Type)fetch(intDataType)
                                 );
                         })
@@ -130,14 +130,14 @@ public class CD2DB extends YAMTLModule {
                         .out("col", db_Column(), () -> {
                             col().setName(att().getName());
                             col().setType(
-                            		// trace
+                            		// tracing
                             		(Type)fetch(att().getType())
                             );
                         }),
 
                 // transformation
                 rule("ClassAttribute2Column")
-                		// model navigation
+                		// model_navigation
                         .in("att", cd_Attribute()).filter(() -> {
                             return att().getType() instanceof Class &&
                                     !att().getMultiValued();
@@ -148,14 +148,14 @@ public class CD2DB extends YAMTLModule {
                             var intDataType = fetch("objectIdType");
                             if (intDataType != null)
                                 col().setType(
-                                		// trace 
+                                		// tracing 
                                 		(Type)fetch(intDataType)
                                 );
                         }),
 
                 // transformation
                 rule("MultiValuedClassAttribute2Column")
-                		// model navigation
+                		// model_navigation
                         .in("att", cd_Attribute()).filter(() -> {
                             return att().getType() instanceof Class &&
                                     att().getMultiValued();
@@ -175,24 +175,24 @@ public class CD2DB extends YAMTLModule {
                                 id().setName(firstToLower(att().getOwner().getName()) + "Id");
                             else 
                                 id().setName("Id");
-                            // model navigation
+                            // model_navigation
                             var intDataType = fetch("objectIdType");
                             // transformation
                             if (intDataType != null)
                                 id().setType(
-                                		// trace 
+                                		// tracing 
                                 		(Type)fetch(intDataType)
                                 );
                         })
                         // transformation
                         .out("col", db_Column(), () -> {
                             col().setName(att().getName() + "Id");
-                            // model navigation
+                            // model_navigation
                             var intDataType = fetch("objectIdType");
                             // transformation
                             if (intDataType != null)
                                 col().setType(
-                                		// trace
+                                		// tracing
                                 		(Type)fetch(intDataType)
                                 );
                         })
