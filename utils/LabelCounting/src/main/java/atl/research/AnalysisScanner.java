@@ -212,7 +212,7 @@ public class AnalysisScanner {
                 }
             }
             catch (IOException e) {
-                System.out.println("couldnt append numbers of " + line);
+                System.out.println("couldn't append numbers of " + line);
             }
         }
     }
@@ -286,7 +286,7 @@ public class AnalysisScanner {
         if (args.length != 1) {
             System.out.println("Usage: java AnalysisScanner <solution>");
             // set default value so that you can use the LabelCounting directly from your IDE:
-            solution = "bxtend-dsl"; 
+            solution = "emoflon-neo"; 
         }
         else {
             solution = args[0];

@@ -3,7 +3,7 @@ library(ggplot2)
 
 # Define file paths
 args <- commandArgs(trailingOnly = TRUE)
-input_folder <- ifelse(length(args) > 0, args[1], "../labels/")
+input_folder <- ifelse(length(args) > 0, args[1], "labels/")
 output_folder <- "plots/"
 
 # List the CSV files in the input folder
