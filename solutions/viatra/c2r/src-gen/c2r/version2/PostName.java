@@ -45,26 +45,32 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
  * 
  * <p>Original source:
- *         <code> <pre>
- *         Determine if column name for the attribute require Id suffix
- *          
+ *         <code><pre>
+ *         // helper
  *         pattern postName(attr: Attribute, post: java String){
+ *         	// MODEL_NAVIGATION
  *         	Attribute.type(attr, type);
+ *         	// MODEL_NAVIGATION
  *         	Class(type);
+ *         	// Transformation
  *         	post == "Id";
+ *         // transformation
  *         } or {
+ *         	// MODEL_NAVIGATION
  *         	Attribute.type(attr, type);
+ *         	// MODEL_NAVIGATION
  *         	DataType(type);
+ *         	// transformation 
  *         	post == "";
  *         }
- * </pre> </code>
+ * </pre></code>
  * 
  * @see Matcher
  * @see Match
  * 
  */
 @SuppressWarnings("all")
-public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName.Matcher> {
+public final class PostName extends BaseGeneratedEMFQuerySpecification<PostName.Matcher> {
   /**
    * Pattern-specific match representation of the c2r.version2.postName pattern,
    * to be used in conjunction with {@link Matcher}.
@@ -82,7 +88,7 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
 
     private String fPost;
 
-    private static List <String> parameterNames = makeImmutableList("attr", "post");
+    private static List<String> parameterNames = makeImmutableList("attr", "post");
 
     private Match(final Attribute pAttr, final String pPost) {
       this.fAttr = pAttr;
@@ -145,7 +151,7 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
     }
 
     @Override
-    public List <String> parameterNames() {
+    public List<String> parameterNames() {
       return PostName.Match.parameterNames;
     }
 
@@ -267,25 +273,31 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
    * <p>Matches of the pattern will be represented as {@link Match}.
    * 
    * <p>Original source:
-   * <code> <pre>
-   * Determine if column name for the attribute require Id suffix
-   *  
+   * <code><pre>
+   * // helper
    * pattern postName(attr: Attribute, post: java String){
+   * 	// MODEL_NAVIGATION
    * 	Attribute.type(attr, type);
+   * 	// MODEL_NAVIGATION
    * 	Class(type);
+   * 	// Transformation
    * 	post == "Id";
+   * // transformation
    * } or {
+   * 	// MODEL_NAVIGATION
    * 	Attribute.type(attr, type);
+   * 	// MODEL_NAVIGATION
    * 	DataType(type);
+   * 	// transformation 
    * 	post == "";
    * }
-   * </pre> </code>
+   * </pre></code>
    * 
    * @see Match
    * @see PostName
    * 
    */
-  public static class Matcher extends BaseMatcher <PostName.Match> {
+  public static class Matcher extends BaseMatcher<PostName.Match> {
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
@@ -338,22 +350,22 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
      * @return matches represented as a Match object.
      * 
      */
-    public Collection <PostName.Match> getAllMatches(final Attribute pAttr, final String pPost) {
+    public Collection<PostName.Match> getAllMatches(final Attribute pAttr, final String pPost) {
       return rawStreamAllMatches(new Object[]{pAttr, pPost}).collect(Collectors.toSet());
     }
 
     /**
      * Returns a stream of all matches of the pattern that conform to the given fixed values of some parameters.
      * </p>
-     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      * @param pAttr the fixed value of pattern parameter attr, or null if not bound.
      * @param pPost the fixed value of pattern parameter post, or null if not bound.
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream <PostName.Match> streamAllMatches(final Attribute pAttr, final String pPost) {
+    public Stream<PostName.Match> streamAllMatches(final Attribute pAttr, final String pPost) {
       return rawStreamAllMatches(new Object[]{pAttr, pPost});
     }
 
@@ -365,7 +377,7 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional <PostName.Match> getOneArbitraryMatch(final Attribute pAttr, final String pPost) {
+    public Optional<PostName.Match> getOneArbitraryMatch(final Attribute pAttr, final String pPost) {
       return rawGetOneArbitraryMatch(new Object[]{pAttr, pPost});
     }
 
@@ -401,7 +413,7 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final Attribute pAttr, final String pPost, final Consumer <? super PostName.Match> processor) {
+    public boolean forOneArbitraryMatch(final Attribute pAttr, final String pPost, final Consumer<? super PostName.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pAttr, pPost}, processor);
     }
 
@@ -423,7 +435,7 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream <Attribute> rawStreamAllValuesOfattr(final Object[] parameters) {
+    protected Stream<Attribute> rawStreamAllValuesOfattr(final Object[] parameters) {
       return rawStreamAllValues(POSITION_ATTR, parameters).map(Attribute.class::cast);
     }
 
@@ -432,7 +444,7 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <Attribute> getAllValuesOfattr() {
+    public Set<Attribute> getAllValuesOfattr() {
       return rawStreamAllValuesOfattr(emptyArray()).collect(Collectors.toSet());
     }
 
@@ -441,35 +453,35 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream <Attribute> streamAllValuesOfattr() {
+    public Stream<Attribute> streamAllValuesOfattr() {
       return rawStreamAllValuesOfattr(emptyArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for attr.
      * </p>
-     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream <Attribute> streamAllValuesOfattr(final PostName.Match partialMatch) {
+    public Stream<Attribute> streamAllValuesOfattr(final PostName.Match partialMatch) {
       return rawStreamAllValuesOfattr(partialMatch.toArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for attr.
      * </p>
-     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream <Attribute> streamAllValuesOfattr(final String pPost) {
+    public Stream<Attribute> streamAllValuesOfattr(final String pPost) {
       return rawStreamAllValuesOfattr(new Object[]{null, pPost});
     }
 
@@ -478,7 +490,7 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <Attribute> getAllValuesOfattr(final PostName.Match partialMatch) {
+    public Set<Attribute> getAllValuesOfattr(final PostName.Match partialMatch) {
       return rawStreamAllValuesOfattr(partialMatch.toArray()).collect(Collectors.toSet());
     }
 
@@ -487,7 +499,7 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <Attribute> getAllValuesOfattr(final String pPost) {
+    public Set<Attribute> getAllValuesOfattr(final String pPost) {
       return rawStreamAllValuesOfattr(new Object[]{null, pPost}).collect(Collectors.toSet());
     }
 
@@ -496,7 +508,7 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream <String> rawStreamAllValuesOfpost(final Object[] parameters) {
+    protected Stream<String> rawStreamAllValuesOfpost(final Object[] parameters) {
       return rawStreamAllValues(POSITION_POST, parameters).map(String.class::cast);
     }
 
@@ -505,7 +517,7 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <String> getAllValuesOfpost() {
+    public Set<String> getAllValuesOfpost() {
       return rawStreamAllValuesOfpost(emptyArray()).collect(Collectors.toSet());
     }
 
@@ -514,35 +526,35 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream <String> streamAllValuesOfpost() {
+    public Stream<String> streamAllValuesOfpost() {
       return rawStreamAllValuesOfpost(emptyArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for post.
      * </p>
-     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream <String> streamAllValuesOfpost(final PostName.Match partialMatch) {
+    public Stream<String> streamAllValuesOfpost(final PostName.Match partialMatch) {
       return rawStreamAllValuesOfpost(partialMatch.toArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for post.
      * </p>
-     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream <String> streamAllValuesOfpost(final Attribute pAttr) {
+    public Stream<String> streamAllValuesOfpost(final Attribute pAttr) {
       return rawStreamAllValuesOfpost(new Object[]{pAttr, null});
     }
 
@@ -551,7 +563,7 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <String> getAllValuesOfpost(final PostName.Match partialMatch) {
+    public Set<String> getAllValuesOfpost(final PostName.Match partialMatch) {
       return rawStreamAllValuesOfpost(partialMatch.toArray()).collect(Collectors.toSet());
     }
 
@@ -560,7 +572,7 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <String> getAllValuesOfpost(final Attribute pAttr) {
+    public Set<String> getAllValuesOfpost(final Attribute pAttr) {
       return rawStreamAllValuesOfpost(new Object[]{pAttr, null}).collect(Collectors.toSet());
     }
 
@@ -599,7 +611,7 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
      * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
      * 
      */
-    public static IQuerySpecification <PostName.Matcher> querySpecification() {
+    public static IQuerySpecification<PostName.Matcher> querySpecification() {
       return PostName.instance();
     }
   }
@@ -643,7 +655,7 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
 
   /**
    * Inner class allowing the singleton instance of {@link PostName} to be created 
-   *     <b>not </b> at the class load time of the outer class, 
+   *     <b>not</b> at the class load time of the outer class, 
    *     but rather at the first call to {@link PostName#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
@@ -653,7 +665,7 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
     private static final PostName INSTANCE = new PostName();
 
     /**
-     * Statically initializes the query specification <b>after </b> the field {@link #INSTANCE} is assigned.
+     * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
      * This initialization order is required to support indirect recursion.
      * 
      * <p> The static initializer is defined using a helper field to work around limitations of the code generator.
@@ -674,7 +686,7 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
 
     private final PParameter parameter_post = new PParameter("post", "java.lang.String", new JavaTransitiveInstancesKey(java.lang.String.class), PParameterDirection.INOUT);
 
-    private final List <PParameter> parameters = Arrays.asList(parameter_attr, parameter_post);
+    private final List<PParameter> parameters = Arrays.asList(parameter_attr, parameter_post);
 
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -686,19 +698,19 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
     }
 
     @Override
-    public List <String> getParameterNames() {
+    public List<String> getParameterNames() {
       return Arrays.asList("attr","post");
     }
 
     @Override
-    public List <PParameter> getParameters() {
+    public List<PParameter> getParameters() {
       return parameters;
     }
 
     @Override
-    public Set <PBody> doGetContainedBodies() {
+    public Set<PBody> doGetContainedBodies() {
       setEvaluationHints(new QueryEvaluationHint(null, QueryEvaluationHint.BackendRequirement.UNSPECIFIED));
-      Set <PBody> bodies = new LinkedHashSet<>();
+      Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
           PVariable var_attr = body.getOrCreateVariableByName("attr");
@@ -710,15 +722,15 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
              new ExportedParameter(body, var_attr, parameter_attr),
              new ExportedParameter(body, var_post, parameter_post)
           ));
-          // 	Attribute.type(attr, type)
+          // 	// MODEL_NAVIGATION	Attribute.type(attr, type)
           new TypeConstraint(body, Tuples.flatTupleOf(var_attr), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Attribute")));
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
           new TypeConstraint(body, Tuples.flatTupleOf(var_attr, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Class", "Attribute", "type")));
           new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Classifier")));
           new Equality(body, var__virtual_0_, var_type);
-          // 	Class(type)
+          // 	// MODEL_NAVIGATION	Class(type)
           new TypeConstraint(body, Tuples.flatTupleOf(var_type), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Class")));
-          // 	post == "Id"
+          // 	// Transformation	post == "Id"
           PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
           new ConstantValue(body, var__virtual_1_, "Id");
           new Equality(body, var_post, var__virtual_1_);
@@ -735,15 +747,15 @@ public final class PostName extends BaseGeneratedEMFQuerySpecification <PostName
              new ExportedParameter(body, var_attr, parameter_attr),
              new ExportedParameter(body, var_post, parameter_post)
           ));
-          // 	Attribute.type(attr, type)
+          // 	// MODEL_NAVIGATION	Attribute.type(attr, type)
           new TypeConstraint(body, Tuples.flatTupleOf(var_attr), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Attribute")));
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
           new TypeConstraint(body, Tuples.flatTupleOf(var_attr, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Class", "Attribute", "type")));
           new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Classifier")));
           new Equality(body, var__virtual_0_, var_type);
-          // 	DataType(type)
+          // 	// MODEL_NAVIGATION	DataType(type)
           new TypeConstraint(body, Tuples.flatTupleOf(var_type), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "DataType")));
-          // 	post == ""
+          // 	// transformation 	post == ""
           PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
           new ConstantValue(body, var__virtual_1_, "");
           new Equality(body, var_post, var__virtual_1_);
