@@ -14,17 +14,17 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package c2r.version2, the group contains the definition of the following patterns: <ul>
- * <li>makeInteger </li>
- * <li>fromDataType </li>
- * <li>fromClass </li>
- * <li>fromAttribute2Table </li>
- * <li>fromAttribute2Column </li>
- * <li>namedMap </li>
- * <li>postName </li>
- * <li>traceMapping </li>
- * <li>typeMapping </li>
- * <li>specifiedTypeMapping </li>
- * <li>sourcelessTrace </li>
+ * <li>makeInteger</li>
+ * <li>fromDataType</li>
+ * <li>fromClass</li>
+ * <li>fromAttribute2Table</li>
+ * <li>fromAttribute2Column</li>
+ * <li>namedMap</li>
+ * <li>postName</li>
+ * <li>traceMapping</li>
+ * <li>typeMapping</li>
+ * <li>specifiedTypeMapping</li>
+ * <li>sourcelessTrace</li>
  * </ul>
  * 
  * @see IQueryGroup

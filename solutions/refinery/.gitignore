@@ -1,29 +1,42 @@
-# SPDX-FileCopyrightText: 2021-2023 The Refinery Authors
-#
-# SPDX-License-Identifier: CC0-1.0
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
 
-*._trace
+### IntelliJ IDEA ###
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### Eclipse ###
+.apt_generated
 .classpath
-.idea/
-.gradle/
-.launch
-.log/
-.node/
-.pnp.*
+.factorypath
 .project
 .settings
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
+.springBeans
+.sts4-cache
 bin/
-build/
-dev-dist/
-emf-gen/
-node_modules/
-*.typegen.ts
-xtend-gen/
-*.xtendbin
-xtext-gen/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store

@@ -141,7 +141,7 @@ class IncrementalC2R_v2 {
 		//SETUP
 		].addLifeCycle(Lifecycles.getDefault(true, true)).build
 	}
-	// transformation
+	// transformation ???
 	def createTypeChangeRule() {
 		// CHANGE_IDENTIFICATION
 		return createRule(TypeMapping.Matcher.querySpecification).action(CRUDActivationStateEnum.CREATED) [
@@ -177,7 +177,7 @@ class IncrementalC2R_v2 {
 		].addLifeCycle(Lifecycles.getDefault(true, true)).build
 	}
 	// transformation
-	def createClassMappingRule() {
+	def createClassMappingRule() { 
 		// CHANGE_IDENTIFICATION
 		return createRule(FromClass.Matcher.querySpecification).action(CRUDActivationStateEnum.CREATED) [
 			// TRANSFORMATION

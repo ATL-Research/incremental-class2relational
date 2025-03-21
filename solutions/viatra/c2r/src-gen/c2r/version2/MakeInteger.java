@@ -38,29 +38,24 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
  * 
  * <p>Original source:
- *         <code> <pre>
- *         /////////////////
- *         // Object mapping
- *         /////////////////
- *         
- *         
- *           Integer type is needed if 
- *           	(a) the source model contains a class (id column is Integer), or
- *           	(b) There is an Integer DataType
- *          
+ *         <code><pre>
+ *         // MODEL_NAVIGATION
  *         pattern makeInteger(){
+ *         	// MODEL_NAVIGATION
  *         	Class(_);
+ *         // MODEL_NAVIGATION
  *         } or {
+ *         	// MODEL_NAVIGATION
  *         	DataType.name(_,"Integer");
  *         }
- * </pre> </code>
+ * </pre></code>
  * 
  * @see Matcher
  * @see Match
  * 
  */
 @SuppressWarnings("all")
-public final class MakeInteger extends BaseGeneratedEMFQuerySpecification <MakeInteger.Matcher> {
+public final class MakeInteger extends BaseGeneratedEMFQuerySpecification<MakeInteger.Matcher> {
   /**
    * Pattern-specific match representation of the c2r.version2.makeInteger pattern,
    * to be used in conjunction with {@link Matcher}.
@@ -74,7 +69,7 @@ public final class MakeInteger extends BaseGeneratedEMFQuerySpecification <MakeI
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private static List <String> parameterNames = makeImmutableList();
+    private static List<String> parameterNames = makeImmutableList();
 
     private Match() {
       
@@ -104,7 +99,7 @@ public final class MakeInteger extends BaseGeneratedEMFQuerySpecification <MakeI
     }
 
     @Override
-    public List <String> parameterNames() {
+    public List<String> parameterNames() {
       return MakeInteger.Match.parameterNames;
     }
 
@@ -218,28 +213,23 @@ public final class MakeInteger extends BaseGeneratedEMFQuerySpecification <MakeI
    * <p>Matches of the pattern will be represented as {@link Match}.
    * 
    * <p>Original source:
-   * <code> <pre>
-   * /////////////////
-   * // Object mapping
-   * /////////////////
-   * 
-   * 
-   *   Integer type is needed if 
-   *   	(a) the source model contains a class (id column is Integer), or
-   *   	(b) There is an Integer DataType
-   *  
+   * <code><pre>
+   * // MODEL_NAVIGATION
    * pattern makeInteger(){
+   * 	// MODEL_NAVIGATION
    * 	Class(_);
+   * // MODEL_NAVIGATION
    * } or {
+   * 	// MODEL_NAVIGATION
    * 	DataType.name(_,"Integer");
    * }
-   * </pre> </code>
+   * </pre></code>
    * 
    * @see Match
    * @see MakeInteger
    * 
    */
-  public static class Matcher extends BaseMatcher <MakeInteger.Match> {
+  public static class Matcher extends BaseMatcher<MakeInteger.Match> {
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
@@ -325,7 +315,7 @@ public final class MakeInteger extends BaseGeneratedEMFQuerySpecification <MakeI
      * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
      * 
      */
-    public static IQuerySpecification <MakeInteger.Matcher> querySpecification() {
+    public static IQuerySpecification<MakeInteger.Matcher> querySpecification() {
       return MakeInteger.instance();
     }
   }
@@ -369,7 +359,7 @@ public final class MakeInteger extends BaseGeneratedEMFQuerySpecification <MakeI
 
   /**
    * Inner class allowing the singleton instance of {@link MakeInteger} to be created 
-   *     <b>not </b> at the class load time of the outer class, 
+   *     <b>not</b> at the class load time of the outer class, 
    *     but rather at the first call to {@link MakeInteger#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
@@ -379,7 +369,7 @@ public final class MakeInteger extends BaseGeneratedEMFQuerySpecification <MakeI
     private static final MakeInteger INSTANCE = new MakeInteger();
 
     /**
-     * Statically initializes the query specification <b>after </b> the field {@link #INSTANCE} is assigned.
+     * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
      * This initialization order is required to support indirect recursion.
      * 
      * <p> The static initializer is defined using a helper field to work around limitations of the code generator.
@@ -396,7 +386,7 @@ public final class MakeInteger extends BaseGeneratedEMFQuerySpecification <MakeI
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final MakeInteger.GeneratedPQuery INSTANCE = new GeneratedPQuery();
 
-    private final List <PParameter> parameters = Arrays.asList();
+    private final List<PParameter> parameters = Arrays.asList();
 
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -408,34 +398,34 @@ public final class MakeInteger extends BaseGeneratedEMFQuerySpecification <MakeI
     }
 
     @Override
-    public List <String> getParameterNames() {
+    public List<String> getParameterNames() {
       return Arrays.asList();
     }
 
     @Override
-    public List <PParameter> getParameters() {
+    public List<PParameter> getParameters() {
       return parameters;
     }
 
     @Override
-    public Set <PBody> doGetContainedBodies() {
+    public Set<PBody> doGetContainedBodies() {
       setEvaluationHints(new QueryEvaluationHint(null, QueryEvaluationHint.BackendRequirement.UNSPECIFIED));
-      Set <PBody> bodies = new LinkedHashSet<>();
+      Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var___0_ = body.getOrCreateVariableByName("_ <0>");
+          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
           ));
-          // 	Class(_)
+          // 	// MODEL_NAVIGATION	Class(_)
           new TypeConstraint(body, Tuples.flatTupleOf(var___0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Class")));
           bodies.add(body);
       }
       {
           PBody body = new PBody(this);
-          PVariable var___0_ = body.getOrCreateVariableByName("_ <0>");
+          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
           ));
-          // 	DataType.name(_,"Integer")
+          // 	// MODEL_NAVIGATION	DataType.name(_,"Integer")
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
           new ConstantValue(body, var__virtual_0_, "Integer");
           new TypeConstraint(body, Tuples.flatTupleOf(var___0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "DataType")));
