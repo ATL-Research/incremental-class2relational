@@ -45,22 +45,24 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
  * 
  * <p>Original source:
- *         <code> <pre>
- *         Helper to access trace info
- *          
+ *         <code><pre>
+ *         // helper
  *         pattern traceMapping(source: EObject, trace: TraceEntry, idx: EInt, target: EObject){
+ *         	// TRACING
  *         	TraceEntry.source(trace,source);
+ *         	// TRACING
  *         	TraceEntry.target(trace,target);
+ *         	// TRACING
  *         	TraceEntry.index(trace,idx);
  *         }
- * </pre> </code>
+ * </pre></code>
  * 
  * @see Matcher
  * @see Match
  * 
  */
 @SuppressWarnings("all")
-public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <TraceMapping.Matcher> {
+public final class TraceMapping extends BaseGeneratedEMFQuerySpecification<TraceMapping.Matcher> {
   /**
    * Pattern-specific match representation of the c2r.version2.traceMapping pattern,
    * to be used in conjunction with {@link Matcher}.
@@ -82,7 +84,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
 
     private EObject fTarget;
 
-    private static List <String> parameterNames = makeImmutableList("source", "trace", "idx", "target");
+    private static List<String> parameterNames = makeImmutableList("source", "trace", "idx", "target");
 
     private Match(final EObject pSource, final TraceEntry pTrace, final Integer pIdx, final EObject pTarget) {
       this.fSource = pSource;
@@ -177,7 +179,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
     }
 
     @Override
-    public List <String> parameterNames() {
+    public List<String> parameterNames() {
       return TraceMapping.Match.parameterNames;
     }
 
@@ -305,21 +307,23 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
    * <p>Matches of the pattern will be represented as {@link Match}.
    * 
    * <p>Original source:
-   * <code> <pre>
-   * Helper to access trace info
-   *  
+   * <code><pre>
+   * // helper
    * pattern traceMapping(source: EObject, trace: TraceEntry, idx: EInt, target: EObject){
+   * 	// TRACING
    * 	TraceEntry.source(trace,source);
+   * 	// TRACING
    * 	TraceEntry.target(trace,target);
+   * 	// TRACING
    * 	TraceEntry.index(trace,idx);
    * }
-   * </pre> </code>
+   * </pre></code>
    * 
    * @see Match
    * @see TraceMapping
    * 
    */
-  public static class Matcher extends BaseMatcher <TraceMapping.Match> {
+  public static class Matcher extends BaseMatcher<TraceMapping.Match> {
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
@@ -378,15 +382,15 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return matches represented as a Match object.
      * 
      */
-    public Collection <TraceMapping.Match> getAllMatches(final EObject pSource, final TraceEntry pTrace, final Integer pIdx, final EObject pTarget) {
+    public Collection<TraceMapping.Match> getAllMatches(final EObject pSource, final TraceEntry pTrace, final Integer pIdx, final EObject pTarget) {
       return rawStreamAllMatches(new Object[]{pSource, pTrace, pIdx, pTarget}).collect(Collectors.toSet());
     }
 
     /**
      * Returns a stream of all matches of the pattern that conform to the given fixed values of some parameters.
      * </p>
-     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      * @param pSource the fixed value of pattern parameter source, or null if not bound.
      * @param pTrace the fixed value of pattern parameter trace, or null if not bound.
@@ -395,7 +399,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream <TraceMapping.Match> streamAllMatches(final EObject pSource, final TraceEntry pTrace, final Integer pIdx, final EObject pTarget) {
+    public Stream<TraceMapping.Match> streamAllMatches(final EObject pSource, final TraceEntry pTrace, final Integer pIdx, final EObject pTarget) {
       return rawStreamAllMatches(new Object[]{pSource, pTrace, pIdx, pTarget});
     }
 
@@ -409,7 +413,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional <TraceMapping.Match> getOneArbitraryMatch(final EObject pSource, final TraceEntry pTrace, final Integer pIdx, final EObject pTarget) {
+    public Optional<TraceMapping.Match> getOneArbitraryMatch(final EObject pSource, final TraceEntry pTrace, final Integer pIdx, final EObject pTarget) {
       return rawGetOneArbitraryMatch(new Object[]{pSource, pTrace, pIdx, pTarget});
     }
 
@@ -451,7 +455,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final EObject pSource, final TraceEntry pTrace, final Integer pIdx, final EObject pTarget, final Consumer <? super TraceMapping.Match> processor) {
+    public boolean forOneArbitraryMatch(final EObject pSource, final TraceEntry pTrace, final Integer pIdx, final EObject pTarget, final Consumer<? super TraceMapping.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pSource, pTrace, pIdx, pTarget}, processor);
     }
 
@@ -475,7 +479,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream <EObject> rawStreamAllValuesOfsource(final Object[] parameters) {
+    protected Stream<EObject> rawStreamAllValuesOfsource(final Object[] parameters) {
       return rawStreamAllValues(POSITION_SOURCE, parameters).map(EObject.class::cast);
     }
 
@@ -484,7 +488,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <EObject> getAllValuesOfsource() {
+    public Set<EObject> getAllValuesOfsource() {
       return rawStreamAllValuesOfsource(emptyArray()).collect(Collectors.toSet());
     }
 
@@ -493,35 +497,35 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream <EObject> streamAllValuesOfsource() {
+    public Stream<EObject> streamAllValuesOfsource() {
       return rawStreamAllValuesOfsource(emptyArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for source.
      * </p>
-     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream <EObject> streamAllValuesOfsource(final TraceMapping.Match partialMatch) {
+    public Stream<EObject> streamAllValuesOfsource(final TraceMapping.Match partialMatch) {
       return rawStreamAllValuesOfsource(partialMatch.toArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for source.
      * </p>
-     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream <EObject> streamAllValuesOfsource(final TraceEntry pTrace, final Integer pIdx, final EObject pTarget) {
+    public Stream<EObject> streamAllValuesOfsource(final TraceEntry pTrace, final Integer pIdx, final EObject pTarget) {
       return rawStreamAllValuesOfsource(new Object[]{null, pTrace, pIdx, pTarget});
     }
 
@@ -530,7 +534,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <EObject> getAllValuesOfsource(final TraceMapping.Match partialMatch) {
+    public Set<EObject> getAllValuesOfsource(final TraceMapping.Match partialMatch) {
       return rawStreamAllValuesOfsource(partialMatch.toArray()).collect(Collectors.toSet());
     }
 
@@ -539,7 +543,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <EObject> getAllValuesOfsource(final TraceEntry pTrace, final Integer pIdx, final EObject pTarget) {
+    public Set<EObject> getAllValuesOfsource(final TraceEntry pTrace, final Integer pIdx, final EObject pTarget) {
       return rawStreamAllValuesOfsource(new Object[]{null, pTrace, pIdx, pTarget}).collect(Collectors.toSet());
     }
 
@@ -548,7 +552,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream <TraceEntry> rawStreamAllValuesOftrace(final Object[] parameters) {
+    protected Stream<TraceEntry> rawStreamAllValuesOftrace(final Object[] parameters) {
       return rawStreamAllValues(POSITION_TRACE, parameters).map(TraceEntry.class::cast);
     }
 
@@ -557,7 +561,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <TraceEntry> getAllValuesOftrace() {
+    public Set<TraceEntry> getAllValuesOftrace() {
       return rawStreamAllValuesOftrace(emptyArray()).collect(Collectors.toSet());
     }
 
@@ -566,35 +570,35 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream <TraceEntry> streamAllValuesOftrace() {
+    public Stream<TraceEntry> streamAllValuesOftrace() {
       return rawStreamAllValuesOftrace(emptyArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for trace.
      * </p>
-     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream <TraceEntry> streamAllValuesOftrace(final TraceMapping.Match partialMatch) {
+    public Stream<TraceEntry> streamAllValuesOftrace(final TraceMapping.Match partialMatch) {
       return rawStreamAllValuesOftrace(partialMatch.toArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for trace.
      * </p>
-     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream <TraceEntry> streamAllValuesOftrace(final EObject pSource, final Integer pIdx, final EObject pTarget) {
+    public Stream<TraceEntry> streamAllValuesOftrace(final EObject pSource, final Integer pIdx, final EObject pTarget) {
       return rawStreamAllValuesOftrace(new Object[]{pSource, null, pIdx, pTarget});
     }
 
@@ -603,7 +607,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <TraceEntry> getAllValuesOftrace(final TraceMapping.Match partialMatch) {
+    public Set<TraceEntry> getAllValuesOftrace(final TraceMapping.Match partialMatch) {
       return rawStreamAllValuesOftrace(partialMatch.toArray()).collect(Collectors.toSet());
     }
 
@@ -612,7 +616,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <TraceEntry> getAllValuesOftrace(final EObject pSource, final Integer pIdx, final EObject pTarget) {
+    public Set<TraceEntry> getAllValuesOftrace(final EObject pSource, final Integer pIdx, final EObject pTarget) {
       return rawStreamAllValuesOftrace(new Object[]{pSource, null, pIdx, pTarget}).collect(Collectors.toSet());
     }
 
@@ -621,7 +625,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream <Integer> rawStreamAllValuesOfidx(final Object[] parameters) {
+    protected Stream<Integer> rawStreamAllValuesOfidx(final Object[] parameters) {
       return rawStreamAllValues(POSITION_IDX, parameters).map(Integer.class::cast);
     }
 
@@ -630,7 +634,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <Integer> getAllValuesOfidx() {
+    public Set<Integer> getAllValuesOfidx() {
       return rawStreamAllValuesOfidx(emptyArray()).collect(Collectors.toSet());
     }
 
@@ -639,35 +643,35 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream <Integer> streamAllValuesOfidx() {
+    public Stream<Integer> streamAllValuesOfidx() {
       return rawStreamAllValuesOfidx(emptyArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for idx.
      * </p>
-     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream <Integer> streamAllValuesOfidx(final TraceMapping.Match partialMatch) {
+    public Stream<Integer> streamAllValuesOfidx(final TraceMapping.Match partialMatch) {
       return rawStreamAllValuesOfidx(partialMatch.toArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for idx.
      * </p>
-     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream <Integer> streamAllValuesOfidx(final EObject pSource, final TraceEntry pTrace, final EObject pTarget) {
+    public Stream<Integer> streamAllValuesOfidx(final EObject pSource, final TraceEntry pTrace, final EObject pTarget) {
       return rawStreamAllValuesOfidx(new Object[]{pSource, pTrace, null, pTarget});
     }
 
@@ -676,7 +680,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <Integer> getAllValuesOfidx(final TraceMapping.Match partialMatch) {
+    public Set<Integer> getAllValuesOfidx(final TraceMapping.Match partialMatch) {
       return rawStreamAllValuesOfidx(partialMatch.toArray()).collect(Collectors.toSet());
     }
 
@@ -685,7 +689,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <Integer> getAllValuesOfidx(final EObject pSource, final TraceEntry pTrace, final EObject pTarget) {
+    public Set<Integer> getAllValuesOfidx(final EObject pSource, final TraceEntry pTrace, final EObject pTarget) {
       return rawStreamAllValuesOfidx(new Object[]{pSource, pTrace, null, pTarget}).collect(Collectors.toSet());
     }
 
@@ -694,7 +698,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream <EObject> rawStreamAllValuesOftarget(final Object[] parameters) {
+    protected Stream<EObject> rawStreamAllValuesOftarget(final Object[] parameters) {
       return rawStreamAllValues(POSITION_TARGET, parameters).map(EObject.class::cast);
     }
 
@@ -703,7 +707,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <EObject> getAllValuesOftarget() {
+    public Set<EObject> getAllValuesOftarget() {
       return rawStreamAllValuesOftarget(emptyArray()).collect(Collectors.toSet());
     }
 
@@ -712,35 +716,35 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream <EObject> streamAllValuesOftarget() {
+    public Stream<EObject> streamAllValuesOftarget() {
       return rawStreamAllValuesOftarget(emptyArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for target.
      * </p>
-     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream <EObject> streamAllValuesOftarget(final TraceMapping.Match partialMatch) {
+    public Stream<EObject> streamAllValuesOftarget(final TraceMapping.Match partialMatch) {
       return rawStreamAllValuesOftarget(partialMatch.toArray());
     }
 
     /**
      * Retrieve the set of values that occur in matches for target.
      * </p>
-     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      *      
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream <EObject> streamAllValuesOftarget(final EObject pSource, final TraceEntry pTrace, final Integer pIdx) {
+    public Stream<EObject> streamAllValuesOftarget(final EObject pSource, final TraceEntry pTrace, final Integer pIdx) {
       return rawStreamAllValuesOftarget(new Object[]{pSource, pTrace, pIdx, null});
     }
 
@@ -749,7 +753,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <EObject> getAllValuesOftarget(final TraceMapping.Match partialMatch) {
+    public Set<EObject> getAllValuesOftarget(final TraceMapping.Match partialMatch) {
       return rawStreamAllValuesOftarget(partialMatch.toArray()).collect(Collectors.toSet());
     }
 
@@ -758,7 +762,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <EObject> getAllValuesOftarget(final EObject pSource, final TraceEntry pTrace, final Integer pIdx) {
+    public Set<EObject> getAllValuesOftarget(final EObject pSource, final TraceEntry pTrace, final Integer pIdx) {
       return rawStreamAllValuesOftarget(new Object[]{pSource, pTrace, pIdx, null}).collect(Collectors.toSet());
     }
 
@@ -797,7 +801,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
      * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
      * 
      */
-    public static IQuerySpecification <TraceMapping.Matcher> querySpecification() {
+    public static IQuerySpecification<TraceMapping.Matcher> querySpecification() {
       return TraceMapping.instance();
     }
   }
@@ -841,7 +845,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
 
   /**
    * Inner class allowing the singleton instance of {@link TraceMapping} to be created 
-   *     <b>not </b> at the class load time of the outer class, 
+   *     <b>not</b> at the class load time of the outer class, 
    *     but rather at the first call to {@link TraceMapping#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
@@ -851,7 +855,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
     private static final TraceMapping INSTANCE = new TraceMapping();
 
     /**
-     * Statically initializes the query specification <b>after </b> the field {@link #INSTANCE} is assigned.
+     * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
      * This initialization order is required to support indirect recursion.
      * 
      * <p> The static initializer is defined using a helper field to work around limitations of the code generator.
@@ -876,7 +880,7 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
 
     private final PParameter parameter_target = new PParameter("target", "org.eclipse.emf.ecore.EObject", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.eclipse.org/emf/2002/Ecore", "EObject")), PParameterDirection.INOUT);
 
-    private final List <PParameter> parameters = Arrays.asList(parameter_source, parameter_trace, parameter_idx, parameter_target);
+    private final List<PParameter> parameters = Arrays.asList(parameter_source, parameter_trace, parameter_idx, parameter_target);
 
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -888,19 +892,19 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
     }
 
     @Override
-    public List <String> getParameterNames() {
+    public List<String> getParameterNames() {
       return Arrays.asList("source","trace","idx","target");
     }
 
     @Override
-    public List <PParameter> getParameters() {
+    public List<PParameter> getParameters() {
       return parameters;
     }
 
     @Override
-    public Set <PBody> doGetContainedBodies() {
+    public Set<PBody> doGetContainedBodies() {
       setEvaluationHints(new QueryEvaluationHint(null, QueryEvaluationHint.BackendRequirement.UNSPECIFIED));
-      Set <PBody> bodies = new LinkedHashSet<>();
+      Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
           PVariable var_source = body.getOrCreateVariableByName("source");
@@ -917,19 +921,19 @@ public final class TraceMapping extends BaseGeneratedEMFQuerySpecification <Trac
              new ExportedParameter(body, var_idx, parameter_idx),
              new ExportedParameter(body, var_target, parameter_target)
           ));
-          // 	TraceEntry.source(trace,source)
+          // 	// TRACING	TraceEntry.source(trace,source)
           new TypeConstraint(body, Tuples.flatTupleOf(var_trace), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Trace", "TraceEntry")));
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
           new TypeConstraint(body, Tuples.flatTupleOf(var_trace, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Trace", "TraceEntry", "source")));
           new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EObject")));
           new Equality(body, var__virtual_0_, var_source);
-          // 	TraceEntry.target(trace,target)
+          // 	// TRACING	TraceEntry.target(trace,target)
           new TypeConstraint(body, Tuples.flatTupleOf(var_trace), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Trace", "TraceEntry")));
           PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
           new TypeConstraint(body, Tuples.flatTupleOf(var_trace, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Trace", "TraceEntry", "target")));
           new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EObject")));
           new Equality(body, var__virtual_1_, var_target);
-          // 	TraceEntry.index(trace,idx)
+          // 	// TRACING	TraceEntry.index(trace,idx)
           new TypeConstraint(body, Tuples.flatTupleOf(var_trace), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Trace", "TraceEntry")));
           PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
           new TypeConstraint(body, Tuples.flatTupleOf(var_trace, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Trace", "TraceEntry", "index")));

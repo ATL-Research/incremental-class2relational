@@ -45,22 +45,24 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
  * 
  * <p>Original source:
- *         <code> <pre>
- *         Multi-valued attributes to be mapped
- *          
+ *         <code><pre>
+ *         // MODEL_NAVIGATION
  *         pattern fromAttribute2Table(named: Attribute) {
+ *         	// MODEL_NAVIGATION
  *         	Attribute.multiValued(named,true);
+ *         	// MODEL_NAVIGATION
  *         	Attribute.owner(named,_);
+ *         	// MODEL_NAVIGATION
  *         	Attribute.type(named,_);
  *         }
- * </pre> </code>
+ * </pre></code>
  * 
  * @see Matcher
  * @see Match
  * 
  */
 @SuppressWarnings("all")
-public final class FromAttribute2Table extends BaseGeneratedEMFQuerySpecification <FromAttribute2Table.Matcher> {
+public final class FromAttribute2Table extends BaseGeneratedEMFQuerySpecification<FromAttribute2Table.Matcher> {
   /**
    * Pattern-specific match representation of the c2r.version2.fromAttribute2Table pattern,
    * to be used in conjunction with {@link Matcher}.
@@ -76,7 +78,7 @@ public final class FromAttribute2Table extends BaseGeneratedEMFQuerySpecificatio
   public static abstract class Match extends BasePatternMatch {
     private Attribute fNamed;
 
-    private static List <String> parameterNames = makeImmutableList("named");
+    private static List<String> parameterNames = makeImmutableList("named");
 
     private Match(final Attribute pNamed) {
       this.fNamed = pNamed;
@@ -123,7 +125,7 @@ public final class FromAttribute2Table extends BaseGeneratedEMFQuerySpecificatio
     }
 
     @Override
-    public List <String> parameterNames() {
+    public List<String> parameterNames() {
       return FromAttribute2Table.Match.parameterNames;
     }
 
@@ -242,21 +244,23 @@ public final class FromAttribute2Table extends BaseGeneratedEMFQuerySpecificatio
    * <p>Matches of the pattern will be represented as {@link Match}.
    * 
    * <p>Original source:
-   * <code> <pre>
-   * Multi-valued attributes to be mapped
-   *  
+   * <code><pre>
+   * // MODEL_NAVIGATION
    * pattern fromAttribute2Table(named: Attribute) {
+   * 	// MODEL_NAVIGATION
    * 	Attribute.multiValued(named,true);
+   * 	// MODEL_NAVIGATION
    * 	Attribute.owner(named,_);
+   * 	// MODEL_NAVIGATION
    * 	Attribute.type(named,_);
    * }
-   * </pre> </code>
+   * </pre></code>
    * 
    * @see Match
    * @see FromAttribute2Table
    * 
    */
-  public static class Matcher extends BaseMatcher <FromAttribute2Table.Match> {
+  public static class Matcher extends BaseMatcher<FromAttribute2Table.Match> {
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
@@ -306,21 +310,21 @@ public final class FromAttribute2Table extends BaseGeneratedEMFQuerySpecificatio
      * @return matches represented as a Match object.
      * 
      */
-    public Collection <FromAttribute2Table.Match> getAllMatches(final Attribute pNamed) {
+    public Collection<FromAttribute2Table.Match> getAllMatches(final Attribute pNamed) {
       return rawStreamAllMatches(new Object[]{pNamed}).collect(Collectors.toSet());
     }
 
     /**
      * Returns a stream of all matches of the pattern that conform to the given fixed values of some parameters.
      * </p>
-     * <strong>NOTE </strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined </strong>.
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      * @param pNamed the fixed value of pattern parameter named, or null if not bound.
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream <FromAttribute2Table.Match> streamAllMatches(final Attribute pNamed) {
+    public Stream<FromAttribute2Table.Match> streamAllMatches(final Attribute pNamed) {
       return rawStreamAllMatches(new Object[]{pNamed});
     }
 
@@ -331,7 +335,7 @@ public final class FromAttribute2Table extends BaseGeneratedEMFQuerySpecificatio
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional <FromAttribute2Table.Match> getOneArbitraryMatch(final Attribute pNamed) {
+    public Optional<FromAttribute2Table.Match> getOneArbitraryMatch(final Attribute pNamed) {
       return rawGetOneArbitraryMatch(new Object[]{pNamed});
     }
 
@@ -364,7 +368,7 @@ public final class FromAttribute2Table extends BaseGeneratedEMFQuerySpecificatio
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final Attribute pNamed, final Consumer <? super FromAttribute2Table.Match> processor) {
+    public boolean forOneArbitraryMatch(final Attribute pNamed, final Consumer<? super FromAttribute2Table.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pNamed}, processor);
     }
 
@@ -385,7 +389,7 @@ public final class FromAttribute2Table extends BaseGeneratedEMFQuerySpecificatio
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream <Attribute> rawStreamAllValuesOfnamed(final Object[] parameters) {
+    protected Stream<Attribute> rawStreamAllValuesOfnamed(final Object[] parameters) {
       return rawStreamAllValues(POSITION_NAMED, parameters).map(Attribute.class::cast);
     }
 
@@ -394,7 +398,7 @@ public final class FromAttribute2Table extends BaseGeneratedEMFQuerySpecificatio
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set <Attribute> getAllValuesOfnamed() {
+    public Set<Attribute> getAllValuesOfnamed() {
       return rawStreamAllValuesOfnamed(emptyArray()).collect(Collectors.toSet());
     }
 
@@ -403,7 +407,7 @@ public final class FromAttribute2Table extends BaseGeneratedEMFQuerySpecificatio
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream <Attribute> streamAllValuesOfnamed() {
+    public Stream<Attribute> streamAllValuesOfnamed() {
       return rawStreamAllValuesOfnamed(emptyArray());
     }
 
@@ -442,7 +446,7 @@ public final class FromAttribute2Table extends BaseGeneratedEMFQuerySpecificatio
      * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
      * 
      */
-    public static IQuerySpecification <FromAttribute2Table.Matcher> querySpecification() {
+    public static IQuerySpecification<FromAttribute2Table.Matcher> querySpecification() {
       return FromAttribute2Table.instance();
     }
   }
@@ -486,7 +490,7 @@ public final class FromAttribute2Table extends BaseGeneratedEMFQuerySpecificatio
 
   /**
    * Inner class allowing the singleton instance of {@link FromAttribute2Table} to be created 
-   *     <b>not </b> at the class load time of the outer class, 
+   *     <b>not</b> at the class load time of the outer class, 
    *     but rather at the first call to {@link FromAttribute2Table#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
@@ -496,7 +500,7 @@ public final class FromAttribute2Table extends BaseGeneratedEMFQuerySpecificatio
     private static final FromAttribute2Table INSTANCE = new FromAttribute2Table();
 
     /**
-     * Statically initializes the query specification <b>after </b> the field {@link #INSTANCE} is assigned.
+     * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
      * This initialization order is required to support indirect recursion.
      * 
      * <p> The static initializer is defined using a helper field to work around limitations of the code generator.
@@ -515,7 +519,7 @@ public final class FromAttribute2Table extends BaseGeneratedEMFQuerySpecificatio
 
     private final PParameter parameter_named = new PParameter("named", "class_.Attribute", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("Class", "Attribute")), PParameterDirection.INOUT);
 
-    private final List <PParameter> parameters = Arrays.asList(parameter_named);
+    private final List<PParameter> parameters = Arrays.asList(parameter_named);
 
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -527,29 +531,29 @@ public final class FromAttribute2Table extends BaseGeneratedEMFQuerySpecificatio
     }
 
     @Override
-    public List <String> getParameterNames() {
+    public List<String> getParameterNames() {
       return Arrays.asList("named");
     }
 
     @Override
-    public List <PParameter> getParameters() {
+    public List<PParameter> getParameters() {
       return parameters;
     }
 
     @Override
-    public Set <PBody> doGetContainedBodies() {
+    public Set<PBody> doGetContainedBodies() {
       setEvaluationHints(new QueryEvaluationHint(null, QueryEvaluationHint.BackendRequirement.UNSPECIFIED));
-      Set <PBody> bodies = new LinkedHashSet<>();
+      Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
           PVariable var_named = body.getOrCreateVariableByName("named");
-          PVariable var___0_ = body.getOrCreateVariableByName("_ <0>");
-          PVariable var___1_ = body.getOrCreateVariableByName("_ <1>");
+          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
+          PVariable var___1_ = body.getOrCreateVariableByName("_<1>");
           new TypeConstraint(body, Tuples.flatTupleOf(var_named), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Attribute")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_named, parameter_named)
           ));
-          // 	Attribute.multiValued(named,true)
+          // 	// MODEL_NAVIGATION	Attribute.multiValued(named,true)
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
           new ConstantValue(body, var__virtual_0_, true);
           new TypeConstraint(body, Tuples.flatTupleOf(var_named), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Attribute")));
@@ -557,13 +561,13 @@ public final class FromAttribute2Table extends BaseGeneratedEMFQuerySpecificatio
           new TypeConstraint(body, Tuples.flatTupleOf(var_named, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Class", "Attribute", "multiValued")));
           new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EBoolean")));
           new Equality(body, var__virtual_1_, var__virtual_0_);
-          // 	Attribute.owner(named,_)
+          // 	// MODEL_NAVIGATION	Attribute.owner(named,_)
           new TypeConstraint(body, Tuples.flatTupleOf(var_named), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Attribute")));
           PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
           new TypeConstraint(body, Tuples.flatTupleOf(var_named, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Class", "Attribute", "owner")));
           new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_2_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Class")));
           new Equality(body, var__virtual_2_, var___0_);
-          // 	Attribute.type(named,_)
+          // 	// MODEL_NAVIGATION	Attribute.type(named,_)
           new TypeConstraint(body, Tuples.flatTupleOf(var_named), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Attribute")));
           PVariable var__virtual_3_ = body.getOrCreateVariableByName(".virtual{3}");
           new TypeConstraint(body, Tuples.flatTupleOf(var_named, var__virtual_3_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Class", "Attribute", "type")));
