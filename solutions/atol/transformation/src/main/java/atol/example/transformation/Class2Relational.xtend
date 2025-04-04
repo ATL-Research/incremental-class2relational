@@ -10,7 +10,7 @@ import org.eclipse.papyrus.aof.core.IBox
 	@Metamodel(name="Relational", impl=Relational)
 ])
 class Class2Relational {
-	// Helper 9
+	// Helper
 	def firstToLower(IBox <String> it) {
 		it.collect[toFirstLower]
 	}

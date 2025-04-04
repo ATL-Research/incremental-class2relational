@@ -1,9 +1,9 @@
--- Setup 2
+-- Setup
 module Class2Relational;
--- Setup 6
+-- Setup
 create OUT : Relational from IN : class_;
 
--- Setup 2
+-- Setup
 uses strings;
 
 
@@ -20,7 +20,7 @@ uses strings;
 -- global variable
 -- context 
 
--- Helper 22
+-- Helper 
 helper def: objectIdType : Relational!Type =
 	class_!DataType.allInstances()->select(e | e.name = 'Integer')->first();
 

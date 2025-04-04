@@ -94,7 +94,6 @@ public class ATLRunner extends AbstractDriver {
 			compiler.compile(fin, path + ".emftvm");
 			fin.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -30,15 +30,15 @@ class Run extends AbstractDriver implements AOFExtensions {
 
 	new() {
 		// initialize transformation
-	// Setup 6
+	// Setup
         this.transformation = new Class2Relational()
 
 		// other initialization code
 	}
 
-	// Setup 3
+	// Setup
 	override void applyTransformation() {
-		// Setup 45
+		// Setup
 		val res = source.<EObject>allContents(null).collect[ e |
 			val r = switch (e) {
 				Class: this.transformation.Class2Table(e)._out
@@ -46,7 +46,7 @@ class Run extends AbstractDriver implements AOFExtensions {
 			}
 			r as EObject
 		].select[ e | e !== null ]
-		// Setup 50
+		// Setup
 		res.addObserver(new DefaultObserver <EObject> {
 			override added(int index, EObject element) {
 				target.contents.add(element)
@@ -62,7 +62,7 @@ class Run extends AbstractDriver implements AOFExtensions {
 				added(index, newElement)
 			}
 		})
-		// Setup 10
+		// Setup
 		res.forEach[ e |
 			target.contents.add(e)
 		]

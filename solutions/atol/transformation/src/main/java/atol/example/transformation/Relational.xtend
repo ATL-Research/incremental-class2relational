@@ -3,8 +3,6 @@ package atol.example.transformation
 import fr.eseo.aof.xtend.utils.AOFAccessors
 import atl.research.relational_.Relational_Package
 
-//import static fr.eseo.atol.gen.MetamodelUtils.*
-
 // Helper
 @AOFAccessors(Relational_Package)
 class Relational {
