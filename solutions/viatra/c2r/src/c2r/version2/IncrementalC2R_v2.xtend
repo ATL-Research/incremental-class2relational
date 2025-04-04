@@ -23,7 +23,7 @@ import c2r.version2.TraceMapping.Match
 import org.eclipse.viatra.transformation.runtime.emf.rules.eventdriven.EventDrivenTransformationRule
 import java.util.List
 
-// Wrapper
+// Setup
 class IncrementalC2R_v2 {
 	// Setup
 	extension Relational_Factory = Relational_Factory.eINSTANCE
