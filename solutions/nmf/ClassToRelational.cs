@@ -115,7 +115,7 @@ namespace HSRM.TTC2023.ClassToRelational
                     (a, c) => a.Type is IDataType);
             }
 
-            // Transformation 14
+            // Transformation
             protected override IColumn CreateRightOutput(IAttribute input, IEnumerable <IColumn> candidates, ISynchronizationContext context, out bool existing)
             {
                 // Transformation
