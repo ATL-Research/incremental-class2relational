@@ -37,7 +37,7 @@ public class Class2Relational {
 		return objectIdType;
 	}
 
-    // Traversal
+    // Model_Traversal
 	public static List <Named> transform(List <EObject> input) {
 
 		for (EObject namedElt : input) {
@@ -50,7 +50,7 @@ public class Class2Relational {
 		return actualTransform(input);
 	}
 
-	// Traversal
+	// Model_Traversal
     private static void preTransform(List <EObject> input) {
     	var iterator = input.iterator();
         var traverser = new Traverser(TRACER);
@@ -65,7 +65,7 @@ public class Class2Relational {
         traverser.traverseAndAcceptPre(iterator);
     }
 
-    // Traversal
+    // Model_Traversal
     private static List <Named> actualTransform(List <EObject> input) {
     	var newRoot = Classes2List(input);
 
