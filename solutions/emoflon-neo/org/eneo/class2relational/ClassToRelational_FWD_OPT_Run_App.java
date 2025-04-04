@@ -19,30 +19,30 @@ import org.emoflon.neo.engine.modules.updatepolicies.ForwardTransformationOperat
 import org.emoflon.neo.engine.modules.valueGenerators.LoremIpsumStringValueGenerator;
 import org.emoflon.neo.engine.modules.valueGenerators.ModelNameValueGenerator;
 
-// Setup 5
+// Setup
 public class ClassToRelational_FWD_OPT_Run_App extends ClassToRelational_FWD_OPT_Run {
-	// Setup 6
+	// Setup
 	public ClassToRelational_FWD_OPT_Run_App(String srcModelName, String trgModelName) {
-		// Setup 4
+		// Setup
 		super(srcModelName, trgModelName, SupportedILPSolver.Sat4J);
 	}
 	
-	// Setup 5
+	// Setup
 	public NeoGenerator createGenerator(NeoCoreBuilder builder) {
-		// Setup 5
+		// Setup
 		var api = new API_ClassToRelational(builder);
-		// Setup 5
+		// Setup
 		var genAPI = new API_ClassToRelational_GEN(builder);
-		// Setup 5
+		// Setup
 		var fwd_optAPI = new API_ClassToRelational_FWD_OPT(builder);
-		// Setup 3
+		// Setup
 		var genRules = genAPI.getAllRulesForClassToRelational_GEN();
-		// Setup 8
+		// Setup
 		var analyser = new TripleRuleAnalyser(new API_ClassToRelational(builder).getTripleRulesOfClassToRelational());
-		// Setup 4
+		// Setup
 		var choiceOfFwdRules = fwd_optAPI.getAllRulesForClassToRelational_FWD_OPT();
 		
-		// Setup 11
+		// Setup
 		forwardTransformation = new ForwardTransformationOperationalStrategy(//
 				solver, //
 				builder, //
@@ -53,7 +53,7 @@ public class ClassToRelational_FWD_OPT_Run_App extends ClassToRelational_FWD_OPT
 				trgModelName//
 		);
 		
-		// Setup 27
+		// Setup
 		var gen = new NeoGenerator(//
 				choiceOfFwdRules, //
 				new NoOpStartup(), //
@@ -66,10 +66,10 @@ public class ClassToRelational_FWD_OPT_Run_App extends ClassToRelational_FWD_OPT
 				new ModelNameValueGenerator(srcModelName, trgModelName), //
 				List.of(new LoremIpsumStringValueGenerator()));
 		
-		// Setup 6
+		// Setup
 		gen.getAttrConstrContainer().addCreator("firstToLowerCase", () -> new FirstToLowerCase());
 		
-		// Setup 2
+		// Setup
 		return gen;
 	}
 }

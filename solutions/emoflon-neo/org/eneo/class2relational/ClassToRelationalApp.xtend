@@ -20,21 +20,21 @@ import org.emoflon.neo.api.classtorelational.models.correctness13.API_change13
 import java.util.ArrayList
 import org.emoflon.neo.emsl.eMSL.Model
 
-// Setup 2
+// Setup
 class ClassToRelationalApp {
 	
-// Setup 6
+// Setup
 def static void main(String[] args) {
-	// Setup 5
+	// Setup
     try (val builder = API_Common.createBuilder) {
-      // Setup 5
+      // Setup
       val apiClass = new API_Class(builder)
-	  // Setup 5
+	  // Setup
       val apiRel = new API_Relational(builder)
-      // Setup 5
+      // Setup
 	  var apiArray = new ArrayList <Model>()
       
-	  // Setup 78 (13*6)
+	  // Setup
       apiArray.add(new API_change1(builder).model_Class1)
       apiArray.add(new API_change2(builder).model_Class2)
       apiArray.add(new API_change3(builder).model_Class3)
@@ -49,23 +49,23 @@ def static void main(String[] args) {
       apiArray.add(new API_change12(builder).model_Class12)
       apiArray.add(new API_change13(builder).model_Class13)
       
-      // Setup 2
+      // Setup
       builder.clearDataBase
                   
-      // Setup 4
+      // Setup
       builder.exportEMSLEntityToNeo4j(apiClass.metamodel_Class_)
-      // Setup 4
+      // Setup
 	  builder.exportEMSLEntityToNeo4j(apiRel.metamodel_Relational_)
       
-	  // Setup 7
+	  // Setup
       for (var i=1; i <=13; i++) {
-		// Setup 7
+		// Setup
 		builder.exportEMSLEntityToNeo4j(apiArray.get(i-1))
-		// Setup 13		
+		// Setup		
 		val fwd = new ClassToRelational_FWD_OPT_Run_App("class"+i, "correctness"+i+"relational")
-		// Setup 4
+		// Setup
 		var result = fwd.runForwardTransformation()
-		// Setup 3
+		// Setup
 		print(result.determineInconsistentElements())
    	  }
    }
