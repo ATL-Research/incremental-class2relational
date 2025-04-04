@@ -41,6 +41,7 @@ public class AnalysisScanner {
     protected static Path analyzedDirectory;
     protected final File labelCountFile;
     protected final Path labelCountFileAbsPath; 
+    protected Path currentFilePath;
     protected String skippedSymbolsRegex = "";
     protected List <String> commentSymbols = new LinkedList <String>();
     protected List <String> importTokens = new LinkedList <String>();
@@ -74,44 +75,45 @@ public class AnalysisScanner {
                 System.out.println("Could not create label-count file " + e);
             }
     }
-
     public void extractLabelsFromFiles() {
         for (String fileString : filesToScan) {
-             Path filePath  = Paths.get(System.getProperty("user.dir") + "/" + analyzedDirectory + "/" + fileString);
-                if (Files.isDirectory(filePath)) {
+            // TODO does that work on windows?
+            currentFilePath  = Paths.get(System.getProperty("user.dir") + "/" + analyzedDirectory + "/" + fileString);
+                if (Files.isDirectory(currentFilePath)) {
                     // iterate directory and add each file (!) to the list of filesToscan
                     continue;
                 }
                 fileCt++;
                 System.out.println("-------------------------------");
                 System.out.println("scanning file " + fileString);
+                System.out.println("-------------------------------");
                 resetFileCounters();
                 // add name of file to csv for tracing/logging reasons
                 try{
-                    scanTrafoFile(filePath);
+                    scanTrafoFile();
                 } catch(IOException e ) {
                     System.out.println("couldnt append the file name of " + fileString);
                 }
         }
     }
 
-    public void scanTrafoFile(Path filepath) throws IOException {
+    public void scanTrafoFile() throws IOException {
         currentLine = 1;
         Scanner in;
         try {
-            in = new Scanner(new File(filepath.toString()));
+            in = new Scanner(new File(currentFilePath.toString()));
             while (in.hasNextLine()) {
                 String line = in.nextLine();
                 lineCt++;
                 if (line.length() > 0) {
-                    processLine(in, line, filepath.getFileName().toString());
+                    processLine(line);
                 }
                 currentLine++;
             }
             in.close();
 
             // add analysis of last line
-            writeLabelCount(filepath.getFileName().toString());   
+            writeLabelCount(currentFilePath.getFileName().toString());   
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -128,11 +130,15 @@ public class AnalysisScanner {
         return false;
     }
 
-    public void processLine(Scanner in, String line, String filepath) throws IOException {
+    public void processLine( String line) throws IOException {
+
         if (!line.isEmpty()) {
             // preprocessing of String for counting
             line = line.stripLeading();
-            line = line.replaceAll("\"([^\"]|\\\")*\"", "a"); //TODO replace by configurable comments
+            
+
+            if (!currentFilePath.getFileName().toString().endsWith(".groovy"))
+                line = line.replaceAll("\"([^\"]|\\\")*\"", "a"); //TODO replace by configurable String symbols
   
             line  = line.replaceAll(skippedSymbolsRegex, " ");
             line = line.replaceAll("\\s+", " ");
@@ -147,65 +153,22 @@ public class AnalysisScanner {
 
             try{
                 String[] wordArray = getCleanedArray(preprocessed);
+
+                // if we have a regular LOC that we want to count (no manual label)
                 if (!isComment(preprocessed) && !skipLinesWithManualAnnotation) {
+                    
                     if (DEBUG) {
-                        System.out.println(line + " \t consists of " + wordArray.length + " words associated with label: " + currentLabel);
+                        System.out.println(currentLine + " " + line + " \t consists of " + wordArray.length + " words associated with label: " + currentLabel);
                     }
                     currentLabelCount += wordArray.length; 
                     wordCt += wordArray.length;
                 }
+                // if we have a comment which contains a label
                 else if (isComment(preprocessed) && wordArray.length > 1 ) {
                     int manualLabelCt = getCustomLabelCount(wordArray);
-
-                    switch (wordArray[1].toUpperCase()) {
-                        case Labels.TRANSFORMATION_LABEL: 
-                            if (currentLabel != Labels.TRANSFORMATION_LABEL) {
-                                updateLabels(Labels.TRANSFORMATION_LABEL, filepath);
-                            } 
-                            break;
-
-                        case Labels.TRAVERSAL_LABEL: 
-                        case Labels.NAVIGATION_LABEL:
-                            if (currentLabel != Labels.TRAVERSAL_LABEL) {
-                                updateLabels(Labels.TRAVERSAL_LABEL, filepath);
-                            } 
-                            break;
-                                                
-                        case Labels.SETUP_LABEL: 
-                            if (currentLabel != Labels.SETUP_LABEL) {
-                                updateLabels(Labels.SETUP_LABEL, filepath);
-                            } 
-                            break;
-                        
-                        case Labels.TRACING_LABEL: 
-                            if (currentLabel!= Labels.TRACING_LABEL) {
-                                updateLabels(Labels. TRACING_LABEL, filepath); 
-                            }
-                            break;
-                        
-                        case Labels.CHANGE_IDENTIFICATION: 
-                            if (currentLabel != Labels.CHANGE_IDENTIFICATION) {
-                                updateLabels(Labels.CHANGE_IDENTIFICATION, filepath);
-                            } 
-                            break;
-                        
-                        case Labels.CHANGE_PROPAGATION: 
-                            if (currentLabel != Labels.CHANGE_PROPAGATION) {
-                                updateLabels(Labels.CHANGE_PROPAGATION, filepath);
-                            } 
-                            break;
-                        case Labels.HELPER_LABEL: 
-                            if (currentLabel != Labels.HELPER_LABEL) {
-                                updateLabels(Labels.HELPER_LABEL, filepath);
-                            } 
-                            break;
-                        
-                        case Labels.WRAPPER_LABEL: 
-                            if (currentLabel != Labels.WRAPPER_LABEL) {
-                                updateLabels(Labels.WRAPPER_LABEL, filepath);
-                            } 
-                            break;                        
-                    }
+                    
+                    // update the current label if it has changed
+                    switchLabel(wordArray[1]);
                     if (manualLabelCt != -1) {
                         currentLabelCount += manualLabelCt;
                     }
@@ -216,9 +179,62 @@ public class AnalysisScanner {
             }
         }
     }
+
+    private void switchLabel(String label) throws IOException {
+        switch (label.toUpperCase()) {
+            case Labels.TRANSFORMATION_LABEL: 
+                if (currentLabel != Labels.TRANSFORMATION_LABEL) {
+                    updateLabels(Labels.TRANSFORMATION_LABEL);
+                } 
+                break;
+
+            case Labels.TRAVERSAL_LABEL: 
+            case Labels.NAVIGATION_LABEL:
+                if (currentLabel != Labels.TRAVERSAL_LABEL) {
+                    updateLabels(Labels.TRAVERSAL_LABEL);
+                } 
+                break;
+                                    
+            case Labels.SETUP_LABEL: 
+                if (currentLabel != Labels.SETUP_LABEL) {
+                    updateLabels(Labels.SETUP_LABEL);
+                } 
+                break;
+            
+            case Labels.TRACING_LABEL: 
+                if (currentLabel!= Labels.TRACING_LABEL) {
+                    updateLabels(Labels. TRACING_LABEL); 
+                }
+                break;
+            
+            case Labels.CHANGE_IDENTIFICATION: 
+                if (currentLabel != Labels.CHANGE_IDENTIFICATION) {
+                    updateLabels(Labels.CHANGE_IDENTIFICATION);
+                } 
+                break;
+            
+            case Labels.CHANGE_PROPAGATION: 
+                if (currentLabel != Labels.CHANGE_PROPAGATION) {
+                    updateLabels(Labels.CHANGE_PROPAGATION);
+                } 
+                break;
+            case Labels.HELPER_LABEL: 
+                if (currentLabel != Labels.HELPER_LABEL) {
+                    updateLabels(Labels.HELPER_LABEL);
+                } 
+                break;
+            
+            case Labels.WRAPPER_LABEL: 
+                if (currentLabel != Labels.WRAPPER_LABEL) {
+                    updateLabels(Labels.WRAPPER_LABEL);
+                } 
+                break;                        
+        }
+    }
+    
     String[] getCleanedArray(String preprocessed) {
         String[] array = preprocessed.split(" ");
-        List <String> arraylist = new LinkedList<>();
+        List<String> arraylist = new LinkedList<>();
         for (String a : array) {
             if (!a.equals(""))
                 arraylist.add(a);
@@ -226,8 +242,8 @@ public class AnalysisScanner {
         return arraylist.toArray(new String[0]);
     }
 
-    private void updateLabels(String newLabel, String filepath) throws IOException {
-        writeLabelCount(filepath);
+    private void updateLabels(String newLabel) throws IOException {
+        writeLabelCount(currentFilePath.getFileName().toString());
         updateForNewLabelType(newLabel);
     }
 
@@ -250,7 +266,7 @@ public class AnalysisScanner {
         if (wordArray.length > 2) {
             String secondEntry = wordArray[2];
             if (secondEntry.matches("\\d+")) {
-                System.out.println("second entry " + secondEntry + " current label " + currentLabel);
+                System.out.println(currentLine + "second entry " + secondEntry + " current label " + currentLabel);
                 skipLinesWithManualAnnotation = true;
                 return Integer.parseInt(secondEntry);
             }
@@ -263,7 +279,6 @@ public class AnalysisScanner {
     }
 
     public List <String> extractFilesFromPath(String path) {
-
         List <String> filesToScan = new LinkedList <String>();
         // get all files in directory
         FileIterator <Path> fiMV = new FileIterator <Path>();
