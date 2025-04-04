@@ -1,12 +1,9 @@
-// Setup
 package org.eneo.class2relational;
 
-//Setup 2
 import org.emoflon.neo.engine.modules.attributeConstraints.NeoAttributeConstraint;
-//Setup 2
 import org.emoflon.neo.engine.modules.attributeConstraints.NeoAttributeConstraintVariable;
 
-//Setup 5
+//Setup 
 public class FirstToLowerCase extends NeoAttributeConstraint {
 
 	@Override
