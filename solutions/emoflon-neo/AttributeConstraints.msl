@@ -1,22 +1,22 @@
-// Setup 2
+// Setup
 attributeConstraint firstToLowerCase(
-	// Setup 2
+	// Setup
 	word : EString,
-	// Setup 2
+	// Setup
 	lowerCase : EString
 ){
-	// Setup 2
+	// Setup
 	B B,
-	// Setup 2
+	// Setup
 	B F
 
-	// Setup 1
+	// Setup
 	gen:
 
-	// Setup 2
+	// Setup
 	B F,
-	// Setup 2
+	// Setup
 	F F,
-	// Setup 2
+	// Setup
 	F B
 }

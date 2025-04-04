@@ -1,681 +1,681 @@
-// Setup 2
+// Setup
 import "platform:/resource/ClassToRelational/src/metamodels/Class.msl"
-// Setup 2
+// Setup
 import "platform:/resource/ClassToRelational/src/metamodels/Relational.msl"
-// Setup 2
+// Setup
 import "platform:/plugin/org.emoflon.neo.neocore/model/AttributeConstraintsLibrary.msl"
-// Setup 2
+// Setup
 import "platform:/resource/ClassToRelational/src/AttributeConstraints.msl"
 
-// Setup 2
+// Setup
 tripleGrammar ClassToRelational {
-	// Setup 1
+	// Setup
 	source {
-		// Setup 1
+		// Setup
 		class_
 	}
 
-	// Setup 1
+	// Setup
 	target {
-		// Setup 1
+		// Setup
 		relational_
 	}
 
-	// Setup 1
+	// Setup
 	correspondence {
-		// Tracing 3
+		// Tracing
 		Class <- ClassToTable -> Table
-		// Tracing 3
+		// Tracing
 		DataType <- DateTypeToType -> Type
-		// Tracing 3
+		// Tracing
 		Attribute <- AttributeToColumn -> Column
-		// Tracing 3
+		// Tracing
 		Attribute <- AttributeToTable -> Table
-		// Tracing 3
+		// Tracing
 		Class <- ClassToType -> Type
 	}
 
-	// Setup 1
+	// Setup
 	rules {
-		// Setup 1
+		// Setup
 		ClassToTable
-		// Setup 1
+		// Setup
 		DataTypeToType
 
-		// Setup 1
+		// Setup
 		PrimitiveAttributeToColumn
-		// Setup 1		
+		// Setup		
 		ClassAttributeToColumn
-		// Setup 1		
+		// Setup		
 		ClassAttributeToColumnNonInjective
 
-		// Setup 1
+		// Setup
 		PrimitiveAttributeToTable
-		// Setup 1		
+		// Setup		
 		ClassAttributeToTable
-		// Setup 1		
+		// Setup		
 		ClassAttributeToTableNonInjective
 	}
 }
 
-// Setup 3
+// Setup
 tripleRule ClassToTable : ClassToRelational {
-	// Setup 1
+	// Setup
 	source {
-		// Transformation 3
+		// Transformation
 		++ class : Class {
-			// Transformation 2
+			// Transformation
 			.name := <className>
 		}
 
-		// Model_Traversal 2
+		// Model_Traversal
 		integerType : DataType {
-			// Model_Traversal 2
+			// Model_Traversal
 			.name : "Integer"
 		}
 	}
 
-	// Setup 1
+	// Setup
 	target {
-		// Transformation 3
+		// Transformation
 		++ table : Table {
-			// Model_Traversal 2
+			// Model_Traversal
 			.name := <className>
-			// Transformation 3
+			// Transformation
 			++-col->objectId
-			// Transformation 3
+			// Transformation
 			++-key->objectId
 		}
-		// Transformation 3
+		// Transformation
 		++ objectId : Column {
-			// Model_Traversal 2
+			// Model_Traversal
 			.name := "objectId"
-			// Transformation 3
+			// Transformation
 			++-owner->table
-			// Transformation 3
+			// Transformation
 			++-type->integer
-			// Transformation 3
+			// Transformation
 			++-keyOf->table
 		}
 
-		// Model_Traversal 2
+		// Model_Traversal
 		integer : Type {
-			// Model_Traversal 2
+			// Model_Traversal
 			.name : "Integer"
 		}
 	}
 
-	// Setup 1
+	// Setup
 	correspondence {
-		// Tracing 4
+		// Tracing
 		++ class <-:ClassToTable-> table
-		// Tracing 3
+		// Tracing
 		integerType <-:DateTypeToType-> integer
 	}
 } 
 
-// Setup 3
+// Setup
 tripleRule DataTypeToType : ClassToRelational {
-	// Setup 1
+	// Setup
 	source {
-		// Transformation 3
+		// Transformation
 		++ dataType : DataType {
-			// Transformation 2
+			// Transformation
 			.name := <typeName>
 		}
 	}
 
-	// Setup 1
+	// Setup
 	target {
-		// Transformation 3
+		// Transformation
 		++ type : Type {
-			// Transformation 2
+			// Transformation
 			.name := <typeName>
 		}
 	}
 
-	// Setup 1
+	// Setup
 	correspondence {
-		// Tracing 4 
+		// Tracing 
 		++ dataType <-:DateTypeToType-> type
 	}
 }
 
-// Setup 3
+// Setup
 tripleRule PrimitiveAttributeToColumn : ClassToRelational {
-	// Setup 1
+	// Setup
 	source {
-		// Model_Traversal 2
+		// Model_Traversal
 		class : Class {
-			// Transformation 3
+			// Transformation
 			++-attr->attribute
 		}
 
-		// Transformation 3
+		// Transformation
 		++ attribute : Attribute {
-			// Transformation 2
+			// Transformation
 			.name := <attrName>
-			// Transformation 2
+			// Transformation
 			.multiValued := false
-			// Transformation 3
+			// Transformation
 			++-owner->class
-			// Transformation 3
+			// Transformation
 			++-type->attrType
 		}
 
-		// Model_Traversal 2
+		// Model_Traversal
 		attrType : DataType
 	}
 
-	// Setup 1
+	// Setup
 	target { 
-		// Model_Traversal 2
+		// Model_Traversal
 		table : Table {
-			// Transformation 3
+			// Transformation
 			++-col-> column
 		}
 
-		// Transformation 3
+		// Transformation
 		++ column : Column {
-			// Transformation 2
+			// Transformation
 			.name := <attrName>
-			// Transformation 2
+			// Transformation
 			++-type->colType
-			// Transformation 2
+			// Transformation
 			++-owner->table
 		}
 		
-		// Model_Traversal 2
+		// Model_Traversal
 		colType : Type
 	}
 
-	// Setup 1
+	// Setup
 	correspondence {
-		// Tracing 3
+		// Tracing
 		class <- :ClassToTable->table
-		// Tracing 3
+		// Tracing
 		attrType <-:DateTypeToType->colType
-		// Tracing 4
+		// Tracing
 		++attribute <-:AttributeToColumn->column
 	}
 }
 
-// Setup 3
+// Setup
 tripleRule ClassAttributeToColumn : ClassToRelational {
-	// Setup 1
+	// Setup
 	source {
-		// Model_Traversal 2
+		// Model_Traversal
 		class : Class {
-			// Transformation 3
+			// Transformation
 			++-attr->attribute
 		}
 
-		// Transformation 3
+		// Transformation
 		++ attribute : Attribute {
-			// Transformation 2
+			// Transformation
 			.name := <attrName>
-			// Transformation 2
+			// Transformation
 			.multiValued := false
-			// Transformation 3
+			// Transformation
 			++-owner->class
-			// Transformation 3
+			// Transformation
 			++-type->attrType
 		}
 
-		// Model_Traversal 2
+		// Model_Traversal
 		attrType : Class
 	}
 
-	// Setup 1
+	// Setup
 	target { 
-		// Model_Traversal 2
+		// Model_Traversal
 		table : Table {
-			// Transformation 3
+			// Transformation
 			++-col-> column
 		}
 
-		// Transformation 3
+		// Transformation
 		++ column : Column {
-			// Transformation 2
+			// Transformation
 			.name := <colName>
-			// Transformation 3
+			// Transformation
 			++-type->integer
-			// Transformation 3
+			// Transformation
 			++-owner->table
 		}
 
-		// Model_Traversal 2
+		// Model_Traversal
 		integer : Type {
-			// Model_Traversal 2
+			// Model_Traversal
 			.name : "Integer"
 		}
 	}
 
-	// Setup 1
+	// Setup
 	correspondence {
-		// Tracing 3
+		// Tracing
 		class <- :ClassToTable->table
-		// Tracing 4
+		// Tracing
 		++attribute <-:AttributeToColumn->column
 	}
 
-	// Setup 1
+	// Setup
 	attributeConstraints {
-		// Tracing 1
+		// Tracing
 		addSuffix(
-			// Tracing 2
+			// Tracing
 			word=<attrName>,
-			// Tracing 2
+			// Tracing
 			suffix="Id",
-			// Tracing 2
+			// Tracing
 			result=<colName>
 		)
 	}
 }
 
-// Setup 3
+// Setup
 tripleRule ClassAttributeToColumnNonInjective : ClassToRelational {
-	// Setup 1
+	// Setup
 	source {
-		// Model_Traversal 2
+		// Model_Traversal
 		class : Class {
-			// Transformation 3
+			// Transformation
 			++-attr->attribute
 		}
 
-		// Transformation 3
+		// Transformation
 		++ attribute : Attribute {
-			// Transformation 2
+			// Transformation
 			.name := <attrName>
-			// Transformation 2
+			// Transformation
 			.multiValued := false
-			// Transformation 3
+			// Transformation
 			++-owner->class
-			// Transformation 3
+			// Transformation
 			++-type->class
 		}		
 	}
 
-	// Setup 1
+	// Setup
 	target { 
-		// Model_Traversal 2
+		// Model_Traversal
 		table : Table {
-			// Transformation 3
+			// Transformation
 			++-col-> column
 		}
 
-		// Transformation 3
+		// Transformation
 		++ column : Column {
-			// Transformation 2
+			// Transformation
 			.name := <colName>
-			// Transformation 3
+			// Transformation
 			++-type->integer
-			// Transformation 3
+			// Transformation
 			++-owner->table
 		}
 
-		// Model_Traversal 2
+		// Model_Traversal
 		integer : Type {
-			// Model_Traversal 2
+			// Model_Traversal
 			.name : "Integer"
 		}
 	}
 
-	// Setup 1
+	// Setup
 	correspondence {
-		// Tracing 3
+		// Tracing
 		class <- :ClassToTable->table
-		// Tracing 4
+		// Tracing
 		++attribute <-:AttributeToColumn->column
 	}
 
-	// Setup 1
+	// Setup
 	attributeConstraints {
-		// Tracing 1
+		// Tracing
 		addSuffix(
-			// Tracing 2
+			// Tracing
 			word=<attrName>,
-			// Tracing 2
+			// Tracing
 			suffix="Id",
-			// Tracing 2
+			// Tracing
 			result=<colName>
 		)
 	}
 }
 
-// Setup 3
+// Setup
 tripleRule PrimitiveAttributeToTable : ClassToRelational {
-	// Setup 1
+	// Setup
 	source {
-		// Model_Traversal 2
+		// Model_Traversal
 		class : Class {
-			// Model_Traversal 2
+			// Model_Traversal
 			.name : <className>
 			++-attr->attribute
 		}
 
-		// Transformation 3
+		// Transformation
 		++ attribute : Attribute {
-			// Transformation 2
+			// Transformation
 			.name := <attrName>
-			// Transformation 2
+			// Transformation
 			.multiValued := true
-			// Transformation 3
+			// Transformation
 			++-owner->class
-			// Transformation 3
+			// Transformation
 			++-type->attrType
 		}
 
-		// Model_Traversal 2
+		// Model_Traversal
 		attrType : DataType
 	}
 
-	// Setup 1
+	// Setup
 	target {
-		// Transformation 3
+		// Transformation
 		++ table : Table {
-			// Transformation 2
+			// Transformation
 			.name := <tableName>
-			// Transformation 3
+			// Transformation
 			++-col->column
-			// Transformation 3
+			// Transformation
 			++-col->id
 		}
 
-		// Transformation 3
+		// Transformation
 		++ id : Column {
-			// Transformation 2
+			// Transformation
 			.name := <idName>
-			// Transformation 3
+			// Transformation
 			++-type->integer
-			// Transformation 3
+			// Transformation
 			++-owner->table
 		}
 
-		// Transformation 3
+		// Transformation
 		++ column : Column {
-			// Transformation 2
+			// Transformation
 			.name := <attrName>
-			// Transformation 3
+			// Transformation
 			++-owner->table
-			// Transformation 3
+			// Transformation
 			++-type->colType
 		}
 
-		// Model_Traversal 2
+		// Model_Traversal
 		colType : Type
 
-		// Model_Traversal 2
+		// Model_Traversal
 		integer : Type {
-			// Model_Traversal 2
+			// Model_Traversal
 			.name : "Integer"
 		}
 	}
 
-	// Setup 1
+	// Setup
 	correspondence {
-		// Tracing 4
+		// Tracing
 		++attribute <-:AttributeToTable->table
-		// Tracing 3
+		// Tracing
 		attrType <-:DateTypeToType->colType
 		
 	}
 
-	// Setup 1
+	// Setup
 	attributeConstraints {
-		// Tracing 1
+		// Tracing
 		concat(
-			// Tracing 2
+			// Tracing
 			separator="_",
-			// Tracing 2
+			// Tracing
 			left=<className>,
-			// Tracing 2
+			// Tracing
 			right=<attrName>,
-			// Tracing 2
+			// Tracing
 			combined=<tableName>
 		)
 
-		// Tracing 1
+		// Tracing
 		firstToLowerCase(
-			// Tracing 2
+			// Tracing
 			word=<className>,
-			// Tracing 2
+			// Tracing
 			lowerCase=<lower>
 		)
 
-		// Tracing 1
+		// Tracing
 		addSuffix(
-			// Tracing 2
+			// Tracing
 			word=<lower>,
-			// Tracing 2
+			// Tracing
 			suffix="Id",
-			// Tracing 2
+			// Tracing
 			result=<idName>
 		)
 	}
 }
 
-// Setup 3
+// Setup
 tripleRule ClassAttributeToTable : ClassToRelational {
-	// Setup 1
+	// Setup
 	source {
-		// Model_Traversal 2
+		// Model_Traversal
 		class : Class {
-			// Model_Traversal 2
+			// Model_Traversal
 			.name : <className>
 			++-attr->attribute
 		}
 
-		// Transformation 3
+		// Transformation
 		++ attribute : Attribute {
 			.name := <attrName>
-			// Transformation 2
+			// Transformation
 			.multiValued := true
-			// Transformation 3
+			// Transformation
 			++-owner->class
-			// Transformation 3
+			// Transformation
 			++-type->attrType
 		}
 
-		// Model_Traversal 2
+		// Model_Traversal
 		attrType : Class
 
-		// Model_Traversal 2
+		// Model_Traversal
 		integerType : DataType {
-			// Model_Traversal 2
+			// Model_Traversal
 			.name : "Integer"
 		}
 	}
 
-	// Setup 1
+	// Setup
 	target { 	
-		// Transformation 3
+		// Transformation
 		++ table : Table {
-			// Transformation 2
+			// Transformation
 			.name := <tableName>
-			// Transformation 3
+			// Transformation
 			++-col->column
-			// Transformation 3
+			// Transformation
 			++-col->id
 		}
 
-		// Transformation 3
+		// Transformation
 		++ id : Column {
-			// Transformation 2
+			// Transformation
 			.name := <idName>
-			// Transformation 3
+			// Transformation
 			++-type->integer
-			// Transformation 3
+			// Transformation
 			++-owner->table
 		}
 
-		// Transformation 3
+		// Transformation
 		++ column : Column {
-			// Transformation 2
+			// Transformation
 			.name := <attrIdName>
-			// Transformation 3
+			// Transformation
 			++-owner->table
-			// Transformation 3
+			// Transformation
 			++-type->integer
 		}
 
-		// Model_Traversal 2
+		// Model_Traversal
 		integer : Type {
-			// Model_Traversal 2
+			// Model_Traversal
 			.name : "Integer"
 		}
 	}
 
-	// Setup 1
+	// Setup
 	correspondence {
-		// Tracing 4
+		// Tracing
 		++attribute <-:AttributeToTable->table
-		// Tracing 3
+		// Tracing
 		integerType <-:DateTypeToType-> integer
 	}
 
-	// Setup 1
+	// Setup
 	attributeConstraints {
-		// Tracing 1
+		// Tracing
 		concat(
-			// Tracing 2
+			// Tracing
 			separator="_",
-			// Tracing 2
+			// Tracing
 			left=<className>,
-			// Tracing 2
+			// Tracing
 			right=<attrName>,
-			// Tracing 2
+			// Tracing
 			combined=<tableName>
 		)
 
-		// Tracing 1
+		// Tracing
 		firstToLowerCase(
-			// Tracing 2
+			// Tracing
 			word=<className>,
-			// Tracing 2
+			// Tracing
 			lowerCase=<lower>
 		)
 
-		// Tracing 1
+		// Tracing
 		addSuffix(
-			// Tracing 2
+			// Tracing
 			word=<lower>,
-			// Tracing 2
+			// Tracing
 			suffix="Id",
-			// Tracing 2
+			// Tracing
 			result=<idName>
 		)
 
-		// Tracing 1
+		// Tracing
 		addSuffix(
-			// Tracing 2
+			// Tracing
 			word=<attrName>,
-			// Tracing 2
+			// Tracing
 			suffix="Id",
-			// Tracing 2
+			// Tracing
 			result=<attrIdName>
 		)
 	}
 }
 
-// Setup 3
+// Setup
 tripleRule ClassAttributeToTableNonInjective : ClassToRelational {
-	// Setup 1
+	// Setup
 	source {
-		// Model_Traversal 2
+		// Model_Traversal
 		class : Class {
-			// Model_Traversal 2
+			// Model_Traversal
 			.name : <className>
 			++-attr->attribute
 		}
 
-		// Transformation 3
+		// Transformation
 		++ attribute : Attribute {
-			// Transformation 2
+			// Transformation
 			.name := <attrName>
-			// Transformation 2
+			// Transformation
 			.multiValued := true
-			// Transformation 3
+			// Transformation
 			++-owner->class
-			// Transformation 3
+			// Transformation
 			++-type->class
 		}
 	}
 
-	// Setup 1
+	// Setup
 	target { 	
-		// Transformation 3
+		// Transformation
 		++ table : Table {
-			// Transformation 2
+			// Transformation
 			.name := <tableName>
-			// Transformation 3
+			// Transformation
 			++-col->column
-			// Transformation 3
+			// Transformation
 			++-col->id
 		}
 
-		// Transformation 3
+		// Transformation
 		++ id : Column {
-			// Transformation 2
+			// Transformation
 			.name := <idName>
-			// Transformation 3
+			// Transformation
 			++-type->integer
-			// Transformation 3
+			// Transformation
 			++-owner->table
 		}
 
-		// Transformation 3
+		// Transformation
 		++ column : Column {
-			// Transformation 2
+			// Transformation
 			.name := <attrName>
-			// Transformation 3
+			// Transformation
 			++-owner->table
-			// Transformation 3
+			// Transformation
 			++-type->integer
 		}
 
-		// Model_Traversal 2
+		// Model_Traversal
 		integer : Type {
-			// Model_Traversal 2
+			// Model_Traversal
 			.name : "Integer"
 		}
 	}
 
-	// Setup 1
+	// Setup
 	correspondence {
-		// Tracing 4
+		// Tracing
 		++attribute <-:AttributeToTable->table
 	}
 
-	// Setup 1
+	// Setup
 	attributeConstraints {
-		// Tracing 1
+		// Tracing
 		concat(
-			// Tracing 2
+			// Tracing
 			separator="_",
-			// Tracing 2
+			// Tracing
 			left=<className>,
-			// Tracing 2
+			// Tracing
 			right=<attrName>,
-			// Tracing 2
+			// Tracing
 			combined=<tableName>
 		)
 
-		// Tracing 1
+		// Tracing
 		firstToLowerCase(
-			// Tracing 2
+			// Tracing
 			word=<className>,
-			// Tracing 2
+			// Tracing
 			lowerCase=<lower>
 		)
 
-		// Tracing 1
+		// Tracing
 		addSuffix(
-			// Tracing 2
+			// Tracing
 			word=<lower>,
-			// Tracing 2
+			// Tracing
 			suffix="Id",
-			// Tracing 2
+			// Tracing
 			result=<idName>
 		)
 	}
