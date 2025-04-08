@@ -6,6 +6,9 @@ LABELS := $(addprefix ../labels/label-, $(addsuffix .csv,$(notdir $(FOLDERS:/=))
 
 all: docker ../utils/LabelCounting/build/libs/LabelCounting-all.jar $(FIGURES) $(LABELS) ## uncomment so that make keeps CSV files with labels
 
+../utils/LabelCounting/build/libs/LabelCounting-all.jar:
+	cd ../utils/LabelCounting && ./gradlew build
+
 plots/summary.pdf: $(LABELS)
 	@echo "Generating the summary plot"
 	touch plots/summary.pdf
@@ -35,8 +38,8 @@ docker: Dockerfile generate-plots.r
 	@echo "Building docker image..."
 	docker build -t incr-c2r-plot .
 
-../utils/LabelCounting/build/libs/LabelCounting-all.jar:
-	cd ../utils/LabelCounting && ./gradlew build
+# ../utils/LabelCounting/build/libs/LabelCounting-all.jar:
+# 	cd ../utils/LabelCounting && ./gradlew build
 
 clean:
 	@echo "Cleaning up..."
