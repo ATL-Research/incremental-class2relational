@@ -2,11 +2,11 @@ FOLDERS := $(wildcard ../solutions/*/)
 FIGURES := $(addprefix plots/, $(addsuffix .pdf,$(notdir $(FOLDERS:/=)))) plots/javaEMF-batch.pdf plots/summary.pdf
 LABELS := $(addprefix ../labels/label-, $(addsuffix .csv,$(notdir $(FOLDERS:/=))))
 
-.PHONY: all clean ../utils/LabelCounting/build/libs/LabelCounting-all.jar
+.PHONY: all clean docker counter
 
-all: docker ../utils/LabelCounting/build/libs/LabelCounting-all.jar $(FIGURES) $(LABELS) ## uncomment so that make keeps CSV files with labels
+all: docker counter $(FIGURES) $(LABELS) ## uncomment so that make keeps CSV files with labels
 
-../utils/LabelCounting/build/libs/LabelCounting-all.jar:
+counter:
 	cd ../utils/LabelCounting && ./gradlew build
 
 plots/summary.pdf: $(LABELS)
@@ -30,7 +30,7 @@ plots/%.pdf: ../labels/label-%.csv
 			-v $(shell pwd)/plots/$*.pdf:/$*.pdf \
 			incr-c2r-plot:latest /usr/bin/Rscript generate-plots.r $*
 
-../labels/label-%.csv: ../utils/LabelCounting/build/libs/LabelCounting-all.jar FORCE
+../labels/label-%.csv: counter FORCE
 	@echo "Generating labels for $*.."
 	cd ../utils/LabelCounting && java -jar build/libs/LabelCounting-all.jar $*
 
