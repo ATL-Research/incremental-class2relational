@@ -2,7 +2,7 @@ FOLDERS := $(wildcard ../solutions/*/)
 FIGURES := $(addprefix plots/, $(addsuffix .pdf,$(notdir $(FOLDERS:/=)))) plots/javaEMF-batch.pdf plots/summary.pdf
 LABELS := $(addprefix ../labels/label-, $(addsuffix .csv,$(notdir $(FOLDERS:/=))))
 
-.PHONY: all clean 
+.PHONY: all clean ../utils/LabelCounting/build/libs/LabelCounting-all.jar
 
 all: docker ../utils/LabelCounting/build/libs/LabelCounting-all.jar $(FIGURES) $(LABELS) ## uncomment so that make keeps CSV files with labels
 
@@ -37,9 +37,6 @@ plots/%.pdf: ../labels/label-%.csv
 docker: Dockerfile generate-plots.r
 	@echo "Building docker image..."
 	docker build -t incr-c2r-plot .
-
-# ../utils/LabelCounting/build/libs/LabelCounting-all.jar:
-# 	cd ../utils/LabelCounting && ./gradlew build
 
 clean:
 	@echo "Cleaning up..."
