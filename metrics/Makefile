@@ -1,6 +1,7 @@
 FOLDERS := $(wildcard ../solutions/*/)
-FIGURES := $(addprefix plots/, $(addsuffix .pdf,$(notdir $(FOLDERS:/=)))) plots/javaEMF-batch.pdf plots/summary.pdf
 LABELS := $(addprefix ../labels/label-, $(addsuffix .csv,$(notdir $(FOLDERS:/=))))
+TAR_DIR := ./plots
+FIGURES := $(addprefix $(TAR_DIR)/, $(addsuffix .pdf,$(notdir $(FOLDERS:/=)))) $(TAR_DIR)/javaEMF-batch.pdf $(TAR_DIR)/summary.pdf
 
 .PHONY: all clean docker counter
 
@@ -9,26 +10,29 @@ all: docker counter $(FIGURES) $(LABELS) ## uncomment so that make keeps CSV fil
 counter:
 	cd ../utils/LabelCounting && ./gradlew build
 
-plots/summary.pdf: $(LABELS)
+$(TAR_DIR)/summary.pdf: $(LABELS)
 	@echo "Generating the summary plot"
-	touch plots/summary.pdf
+	touch $(TAR_DIR)/summary.pdf
 	docker run --rm \
 			-v $(shell pwd)/labels/:/labels \
-			-v $(shell pwd)/plots/summary.pdf:/plots/summary.pdf \
+			-v $(shell pwd)/$(TAR_DIR)/summary.pdf:/$(TAR_DIR)/summary.pdf \
 			incr-c2r-plot:latest /usr/bin/Rscript generate-summary.r /labels
 	@echo "Generating the summary plot per aspects"
 	docker run --rm \
 			-v $(shell pwd)/labels/:/labels \
-			-v $(shell pwd)/plots/:/plots/ \
+			-v $(shell pwd)/$(TAR_DIR)/:/$(TAR_DIR)/ \
 			incr-c2r-plot:latest /usr/bin/Rscript generate-summary-per-aspect.r /labels
 
-plots/%.pdf: ../labels/label-%.csv
+$(TAR_DIR)/%.pdf: ../labels/label-%.csv | $(TAR_DIR) 
 	@echo "Generating figure for $*.."
-	touch plots/$*.pdf
+	touch $(TAR_DIR)/$*.pdf
 	docker run --rm \
 			-v $(shell pwd)/labels/label-$*.csv:/$*.csv \
-			-v $(shell pwd)/plots/$*.pdf:/$*.pdf \
+			-v $(shell pwd)/$(TAR_DIR)/$*.pdf:/$*.pdf \
 			incr-c2r-plot:latest /usr/bin/Rscript generate-plots.r $*
+
+$(TAR_DIR):
+	mkdir -p $@ 
 
 ../labels/label-%.csv: counter FORCE
 	@echo "Generating labels for $*.."
@@ -40,7 +44,7 @@ docker: Dockerfile generate-plots.r
 
 clean:
 	@echo "Cleaning up..."
-	rm -f plots/*
+	rm -f $(TAR_DIR)/*
 	rm -f ../labels/*
 	find . -name '*.csv' -delete
 
