@@ -22,6 +22,12 @@ $(TAR_DIR)/summary.pdf: $(LABELS)
 			-v $(shell pwd)/labels/:/labels \
 			-v $(shell pwd)/$(TAR_DIR)/:/$(TAR_DIR)/ \
 			incr-c2r-plot:latest /usr/bin/Rscript generate-summary-per-aspect.r /labels
+	@echo "Generating the a merged summary"
+	touch $(TAR_DIR)/merge-summary.pdf
+	docker run --rm \
+			-v $(shell pwd)/labels/:/labels \
+			-v $(shell pwd)/$(TAR_DIR)/merge-summary.pdf:/$(TAR_DIR)/merge-summary.pdf \
+			incr-c2r-plot:latest /usr/bin/Rscript generate-merge-summary.r /labels
 
 $(TAR_DIR)/%.pdf: ../labels/label-%.csv | $(TAR_DIR) 
 	@echo "Generating figure for $*.."
