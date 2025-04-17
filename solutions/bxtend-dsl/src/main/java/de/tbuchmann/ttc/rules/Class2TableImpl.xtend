@@ -10,14 +10,14 @@ import java.util.List
 import org.eclipse.emf.ecore.util.EcoreUtil
 import atl.research.relational_.Relational_Factory
 
-// Setup
+// EMPTY 
 class Class2TableImpl extends Class2Table {	
 	new(Class2Relational trafo) {
-		// Setup
+		// EMPTY
 		super(trafo)
 	}
 
-	// Transformation 
+	// EMPTY 
 	override protected onTblCreation(Table tbl) {
 		// Transformation 
 		var key = Relational_Factory.eINSTANCE.createColumn => [name = "objectId"]
@@ -29,7 +29,7 @@ class Class2TableImpl extends Class2Table {
 		tbl.key += key
 	}
 
-	// Transformation 
+	// EMPTY 
 	override protected colFrom(List <Column> attSinCol, List <Column> attSinCol_2, List <Table> attMulTbl,
 		Table parent
 	) {		

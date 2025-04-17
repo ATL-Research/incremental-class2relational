@@ -24,10 +24,10 @@ class Class2Table extends Elem2Elem {
 			val corr = clz.getOrCreateCorrModelElement("Class2Table")
 			// Transformation
 			val targetTable = corr.getOrCreateTargetElem(targetPackage.table) as Table
-			// Transformation
+			// CHANGE_PROPAGATION
 			targetTable.name = clz.name
 			// Transformation
-			if (targetTable.col.size == 0) { 
+			if (targetTable.col.size == 0) { // if targetTable has been newly created, create objectId column
 				// Transformation
 				val colId = targetFactory.createColumn => [
 					// Transformation
@@ -39,13 +39,13 @@ class Class2Table extends Elem2Elem {
 				targetTable.col += colId
 				// Transformation
 				targetTable.key += colId
-			}
+			} // end initial creation of targetTable
 			// Transformation
-			for (Attribute a : clz.attr) {
+			for (Attribute a : clz.attr) { // iterate over class attributes and transform them
 				// Transformation
 				if (!a.multiValued) {
 					// Transformation
-					targetTable.col += elementsToCorr.get(a).targetElement as Column
+					targetTable.col += elementsToCorr.get(a).targetElement as Column // establish link between table and column
 				}
 			}
 			// Transformation
