@@ -24,22 +24,22 @@ class SingleAttribute2Column extends Elem2Elem {
 			var targetObj = corr.getOrCreateTargetElem(targetPackage.column)
 			// Transformation
 			if (targetObj instanceof Table)
-				// Transformation
+				// CHANGE_PROPAGATION
 				EcoreUtil.delete(targetObj)
 			// Transformation
 			val target = corr.getOrCreateTargetElem(targetPackage.column) as Column
 			// Transformation
 			if (attribute.type instanceof DataType) {
-				// Transformation
+				// CHANGE_PROPAGATION
 				target.name = attribute.name
-				// Transformation
+				// CHANGE_PROPAGATION
 				target.type = DataType2Type.getType(attribute.type as DataType)
 			}
 			// Transformation
 			else {
-				// Transformation
+				// CHANGE_PROPAGATION
 				target.name = attribute.name + "Id"
-				// Transformation
+				// CHANGE_PROPAGATION
 				target.type = DataType2Type.getType(sourceModel.contents.filter(typeof(DataType)).findFirst[name == "Integer"])
 			}
 		]

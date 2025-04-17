@@ -26,7 +26,7 @@ class DataType2Type extends Elem2Elem {
 			val corrDT = datatype.getOrCreateCorrModelElement("DataType2Type")
 			// Transformation
 			val targetElem = corrDT.getOrCreateTargetElem(targetPackage.type) as Type => [
-				// Transformation
+				// CHANGE_PROPAGATION
 				name = datatype.name
 			]
 			// Transformation
