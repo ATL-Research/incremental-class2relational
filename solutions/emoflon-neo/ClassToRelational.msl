@@ -82,20 +82,20 @@ tripleRule ClassToTable : ClassToRelational {
 			// Model_Traversal
 			.name := <className>
 			// Transformation
-			++-col->objectId
+			++ -col->objectId
 			// Transformation
-			++-key->objectId
+			++ -key->objectId
 		}
 		// Transformation
 		++ objectId : Column {
 			// Model_Traversal
 			.name := "objectId"
 			// Transformation
-			++-owner->table
+			++ -owner->table
 			// Transformation
-			++-type->integer
+			++ -type->integer
 			// Transformation
-			++-keyOf->table
+			++ -keyOf->table
 		}
 
 		// Model_Traversal
@@ -148,7 +148,7 @@ tripleRule PrimitiveAttributeToColumn : ClassToRelational {
 		// Model_Traversal
 		class : Class {
 			// Transformation
-			++-attr->attribute
+			++ -attr->attribute
 		}
 
 		// Transformation
@@ -158,9 +158,9 @@ tripleRule PrimitiveAttributeToColumn : ClassToRelational {
 			// Transformation
 			.multiValued := false
 			// Transformation
-			++-owner->class
+			++ -owner->class
 			// Transformation
-			++-type->attrType
+			++ -type->attrType
 		}
 
 		// Model_Traversal
@@ -172,7 +172,7 @@ tripleRule PrimitiveAttributeToColumn : ClassToRelational {
 		// Model_Traversal
 		table : Table {
 			// Transformation
-			++-col-> column
+			++ -col-> column
 		}
 
 		// Transformation
@@ -180,9 +180,9 @@ tripleRule PrimitiveAttributeToColumn : ClassToRelational {
 			// Transformation
 			.name := <attrName>
 			// Transformation
-			++-type->colType
+			++ -type->colType
 			// Transformation
-			++-owner->table
+			++ -owner->table
 		}
 		
 		// Model_Traversal
@@ -196,7 +196,7 @@ tripleRule PrimitiveAttributeToColumn : ClassToRelational {
 		// Tracing
 		attrType <-:DateTypeToType->colType
 		// Tracing
-		++attribute <-:AttributeToColumn->column
+		++ attribute <-:AttributeToColumn->column
 	}
 }
 
@@ -207,7 +207,7 @@ tripleRule ClassAttributeToColumn : ClassToRelational {
 		// Model_Traversal
 		class : Class {
 			// Transformation
-			++-attr->attribute
+			++ -attr->attribute
 		}
 
 		// Transformation
@@ -217,9 +217,9 @@ tripleRule ClassAttributeToColumn : ClassToRelational {
 			// Transformation
 			.multiValued := false
 			// Transformation
-			++-owner->class
+			++ -owner->class
 			// Transformation
-			++-type->attrType
+			++ -type->attrType
 		}
 
 		// Model_Traversal
@@ -231,7 +231,7 @@ tripleRule ClassAttributeToColumn : ClassToRelational {
 		// Model_Traversal
 		table : Table {
 			// Transformation
-			++-col-> column
+			++ -col-> column
 		}
 
 		// Transformation
@@ -239,9 +239,9 @@ tripleRule ClassAttributeToColumn : ClassToRelational {
 			// Transformation
 			.name := <colName>
 			// Transformation
-			++-type->integer
+			++ -type->integer
 			// Transformation
-			++-owner->table
+			++ -owner->table
 		}
 
 		// Model_Traversal
@@ -280,7 +280,7 @@ tripleRule ClassAttributeToColumnNonInjective : ClassToRelational {
 		// Model_Traversal
 		class : Class {
 			// Transformation
-			++-attr->attribute
+			++ -attr->attribute
 		}
 
 		// Transformation
@@ -290,9 +290,9 @@ tripleRule ClassAttributeToColumnNonInjective : ClassToRelational {
 			// Transformation
 			.multiValued := false
 			// Transformation
-			++-owner->class
+			++ -owner->class
 			// Transformation
-			++-type->class
+			++ -type->class
 		}		
 	}
 
@@ -301,7 +301,7 @@ tripleRule ClassAttributeToColumnNonInjective : ClassToRelational {
 		// Model_Traversal
 		table : Table {
 			// Transformation
-			++-col-> column
+			++ -col-> column
 		}
 
 		// Transformation
@@ -309,9 +309,9 @@ tripleRule ClassAttributeToColumnNonInjective : ClassToRelational {
 			// Transformation
 			.name := <colName>
 			// Transformation
-			++-type->integer
+			++ -type->integer
 			// Transformation
-			++-owner->table
+			++ -owner->table
 		}
 
 		// Model_Traversal
@@ -351,7 +351,7 @@ tripleRule PrimitiveAttributeToTable : ClassToRelational {
 		class : Class {
 			// Model_Traversal
 			.name : <className>
-			++-attr->attribute
+			++ -attr->attribute
 		}
 
 		// Transformation
@@ -361,9 +361,9 @@ tripleRule PrimitiveAttributeToTable : ClassToRelational {
 			// Transformation
 			.multiValued := true
 			// Transformation
-			++-owner->class
+			++ -owner->class
 			// Transformation
-			++-type->attrType
+			++ -type->attrType
 		}
 
 		// Model_Traversal
@@ -377,9 +377,9 @@ tripleRule PrimitiveAttributeToTable : ClassToRelational {
 			// Transformation
 			.name := <tableName>
 			// Transformation
-			++-col->column
+			++ -col->column
 			// Transformation
-			++-col->id
+			++ -col->id
 		}
 
 		// Transformation
@@ -387,9 +387,9 @@ tripleRule PrimitiveAttributeToTable : ClassToRelational {
 			// Transformation
 			.name := <idName>
 			// Transformation
-			++-type->integer
+			++ -type->integer
 			// Transformation
-			++-owner->table
+			++ -owner->table
 		}
 
 		// Transformation
@@ -397,9 +397,9 @@ tripleRule PrimitiveAttributeToTable : ClassToRelational {
 			// Transformation
 			.name := <attrName>
 			// Transformation
-			++-owner->table
+			++ -owner->table
 			// Transformation
-			++-type->colType
+			++ -type->colType
 		}
 
 		// Model_Traversal
@@ -463,7 +463,7 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 		class : Class {
 			// Model_Traversal
 			.name : <className>
-			++-attr->attribute
+			++ -attr->attribute
 		}
 
 		// Transformation
@@ -472,9 +472,9 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 			// Transformation
 			.multiValued := true
 			// Transformation
-			++-owner->class
+			++ -owner->class
 			// Transformation
-			++-type->attrType
+			++ -type->attrType
 		}
 
 		// Model_Traversal
@@ -494,9 +494,9 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 			// Transformation
 			.name := <tableName>
 			// Transformation
-			++-col->column
+			++ -col->column
 			// Transformation
-			++-col->id
+			++ -col->id
 		}
 
 		// Transformation
@@ -504,9 +504,9 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 			// Transformation
 			.name := <idName>
 			// Transformation
-			++-type->integer
+			++ -type->integer
 			// Transformation
-			++-owner->table
+			++ -owner->table
 		}
 
 		// Transformation
@@ -514,9 +514,9 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 			// Transformation
 			.name := <attrIdName>
 			// Transformation
-			++-owner->table
+			++ -owner->table
 			// Transformation
-			++-type->integer
+			++ -type->integer
 		}
 
 		// Model_Traversal
@@ -529,7 +529,7 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 	// Setup
 	correspondence {
 		// Tracing
-		++attribute <-:AttributeToTable->table
+		++ attribute <-:AttributeToTable->table
 		// Tracing
 		integerType <-:DateTypeToType-> integer
 	}
@@ -586,7 +586,7 @@ tripleRule ClassAttributeToTableNonInjective : ClassToRelational {
 		class : Class {
 			// Model_Traversal
 			.name : <className>
-			++-attr->attribute
+			++ -attr->attribute
 		}
 
 		// Transformation
@@ -596,9 +596,9 @@ tripleRule ClassAttributeToTableNonInjective : ClassToRelational {
 			// Transformation
 			.multiValued := true
 			// Transformation
-			++-owner->class
+			++ -owner->class
 			// Transformation
-			++-type->class
+			++ -type->class
 		}
 	}
 
@@ -609,9 +609,9 @@ tripleRule ClassAttributeToTableNonInjective : ClassToRelational {
 			// Transformation
 			.name := <tableName>
 			// Transformation
-			++-col->column
+			++ -col->column
 			// Transformation
-			++-col->id
+			++ -col->id
 		}
 
 		// Transformation
@@ -619,9 +619,9 @@ tripleRule ClassAttributeToTableNonInjective : ClassToRelational {
 			// Transformation
 			.name := <idName>
 			// Transformation
-			++-type->integer
+			++ -type->integer
 			// Transformation
-			++-owner->table
+			++ -owner->table
 		}
 
 		// Transformation
@@ -629,9 +629,9 @@ tripleRule ClassAttributeToTableNonInjective : ClassToRelational {
 			// Transformation
 			.name := <attrName>
 			// Transformation
-			++-owner->table
+			++ -owner->table
 			// Transformation
-			++-type->integer
+			++ -type->integer
 		}
 
 		// Model_Traversal
@@ -644,7 +644,7 @@ tripleRule ClassAttributeToTableNonInjective : ClassToRelational {
 	// Setup
 	correspondence {
 		// Tracing
-		++attribute <-:AttributeToTable->table
+		++ attribute <-:AttributeToTable->table
 	}
 
 	// Setup
