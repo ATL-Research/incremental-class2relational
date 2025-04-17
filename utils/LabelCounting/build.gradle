@@ -1,11 +1,14 @@
 plugins {
     id 'application'
     id 'java'
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'com.gradleup.shadow' version '8.3.5'
 }
 
-sourceCompatibility = "11"
-targetCompatibility = "11"
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
 
 repositories {
     mavenCentral()
