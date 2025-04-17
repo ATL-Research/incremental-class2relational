@@ -242,10 +242,10 @@ namespace HSRM.TTC2023.ClassToRelational
                     table!.Col.Remove((IColumn)_trace[att]);
                 }
             }
-            // Model Traversal 
+            // Model_Traversal 
             foreach (var attr in @class.Attr)
             {
-                // Model Traversal 
+                // Model_Traversal 
                 if (!attr.MultiValued)
                 {
                     //  Transformation 
