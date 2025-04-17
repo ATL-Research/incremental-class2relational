@@ -3,7 +3,6 @@
  */
 package c2r.version2;
 
-import Trace.TraceEntry;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -39,6 +38,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
+import org.eclipse.viatra.transformation.views.traceability.Trace;
 import relational_.Named;
 
 /**
@@ -47,11 +47,11 @@ import relational_.Named;
  * <p>Original source:
  *         <code><pre>
  *         // TRACING
- *         pattern sourcelessTrace(trace: TraceEntry, named: Named){
+ *         pattern sourcelessTrace(trace: Trace, named: Named){
  *         	// TRACING
- *         	neg TraceEntry.source(trace, _);
+ *         	neg Trace.params(trace, _);
  *         	// TRACING
- *         	TraceEntry.target(trace,named);
+ *         	Trace.targets(trace,named);
  *         }
  * </pre></code>
  * 
@@ -74,13 +74,13 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private TraceEntry fTrace;
+    private Trace fTrace;
 
     private Named fNamed;
 
     private static List<String> parameterNames = makeImmutableList("trace", "named");
 
-    private Match(final TraceEntry pTrace, final Named pNamed) {
+    private Match(final Trace pTrace, final Named pNamed) {
       this.fTrace = pTrace;
       this.fNamed = pNamed;
     }
@@ -103,7 +103,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
       }
     }
 
-    public TraceEntry getTrace() {
+    public Trace getTrace() {
       return this.fTrace;
     }
 
@@ -115,7 +115,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       if ("trace".equals(parameterName) ) {
-          this.fTrace = (TraceEntry) newValue;
+          this.fTrace = (Trace) newValue;
           return true;
       }
       if ("named".equals(parameterName) ) {
@@ -125,7 +125,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
       return false;
     }
 
-    public void setTrace(final TraceEntry pTrace) {
+    public void setTrace(final Trace pTrace) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       this.fTrace = pTrace;
     }
@@ -213,7 +213,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static SourcelessTrace.Match newMutableMatch(final TraceEntry pTrace, final Named pNamed) {
+    public static SourcelessTrace.Match newMutableMatch(final Trace pTrace, final Named pNamed) {
       return new Mutable(pTrace, pNamed);
     }
 
@@ -226,12 +226,12 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the (partial) match object.
      * 
      */
-    public static SourcelessTrace.Match newMatch(final TraceEntry pTrace, final Named pNamed) {
+    public static SourcelessTrace.Match newMatch(final Trace pTrace, final Named pNamed) {
       return new Immutable(pTrace, pNamed);
     }
 
     private static final class Mutable extends SourcelessTrace.Match {
-      Mutable(final TraceEntry pTrace, final Named pNamed) {
+      Mutable(final Trace pTrace, final Named pNamed) {
         super(pTrace, pNamed);
       }
 
@@ -242,7 +242,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
     }
 
     private static final class Immutable extends SourcelessTrace.Match {
-      Immutable(final TraceEntry pTrace, final Named pNamed) {
+      Immutable(final Trace pTrace, final Named pNamed) {
         super(pTrace, pNamed);
       }
 
@@ -265,11 +265,11 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
    * <p>Original source:
    * <code><pre>
    * // TRACING
-   * pattern sourcelessTrace(trace: TraceEntry, named: Named){
+   * pattern sourcelessTrace(trace: Trace, named: Named){
    * 	// TRACING
-   * 	neg TraceEntry.source(trace, _);
+   * 	neg Trace.params(trace, _);
    * 	// TRACING
-   * 	TraceEntry.target(trace,named);
+   * 	Trace.targets(trace,named);
    * }
    * </pre></code>
    * 
@@ -330,7 +330,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<SourcelessTrace.Match> getAllMatches(final TraceEntry pTrace, final Named pNamed) {
+    public Collection<SourcelessTrace.Match> getAllMatches(final Trace pTrace, final Named pNamed) {
       return rawStreamAllMatches(new Object[]{pTrace, pNamed}).collect(Collectors.toSet());
     }
 
@@ -345,7 +345,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<SourcelessTrace.Match> streamAllMatches(final TraceEntry pTrace, final Named pNamed) {
+    public Stream<SourcelessTrace.Match> streamAllMatches(final Trace pTrace, final Named pNamed) {
       return rawStreamAllMatches(new Object[]{pTrace, pNamed});
     }
 
@@ -357,7 +357,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<SourcelessTrace.Match> getOneArbitraryMatch(final TraceEntry pTrace, final Named pNamed) {
+    public Optional<SourcelessTrace.Match> getOneArbitraryMatch(final Trace pTrace, final Named pNamed) {
       return rawGetOneArbitraryMatch(new Object[]{pTrace, pNamed});
     }
 
@@ -369,7 +369,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final TraceEntry pTrace, final Named pNamed) {
+    public boolean hasMatch(final Trace pTrace, final Named pNamed) {
       return rawHasMatch(new Object[]{pTrace, pNamed});
     }
 
@@ -380,7 +380,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final TraceEntry pTrace, final Named pNamed) {
+    public int countMatches(final Trace pTrace, final Named pNamed) {
       return rawCountMatches(new Object[]{pTrace, pNamed});
     }
 
@@ -393,7 +393,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final TraceEntry pTrace, final Named pNamed, final Consumer<? super SourcelessTrace.Match> processor) {
+    public boolean forOneArbitraryMatch(final Trace pTrace, final Named pNamed, final Consumer<? super SourcelessTrace.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pTrace, pNamed}, processor);
     }
 
@@ -406,7 +406,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the (partial) match object.
      * 
      */
-    public SourcelessTrace.Match newMatch(final TraceEntry pTrace, final Named pNamed) {
+    public SourcelessTrace.Match newMatch(final Trace pTrace, final Named pNamed) {
       return SourcelessTrace.Match.newMatch(pTrace, pNamed);
     }
 
@@ -415,8 +415,8 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<TraceEntry> rawStreamAllValuesOftrace(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_TRACE, parameters).map(TraceEntry.class::cast);
+    protected Stream<Trace> rawStreamAllValuesOftrace(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_TRACE, parameters).map(Trace.class::cast);
     }
 
     /**
@@ -424,7 +424,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceEntry> getAllValuesOftrace() {
+    public Set<Trace> getAllValuesOftrace() {
       return rawStreamAllValuesOftrace(emptyArray()).collect(Collectors.toSet());
     }
 
@@ -433,7 +433,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<TraceEntry> streamAllValuesOftrace() {
+    public Stream<Trace> streamAllValuesOftrace() {
       return rawStreamAllValuesOftrace(emptyArray());
     }
 
@@ -447,7 +447,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<TraceEntry> streamAllValuesOftrace(final SourcelessTrace.Match partialMatch) {
+    public Stream<Trace> streamAllValuesOftrace(final SourcelessTrace.Match partialMatch) {
       return rawStreamAllValuesOftrace(partialMatch.toArray());
     }
 
@@ -461,7 +461,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<TraceEntry> streamAllValuesOftrace(final Named pNamed) {
+    public Stream<Trace> streamAllValuesOftrace(final Named pNamed) {
       return rawStreamAllValuesOftrace(new Object[]{null, pNamed});
     }
 
@@ -470,7 +470,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceEntry> getAllValuesOftrace(final SourcelessTrace.Match partialMatch) {
+    public Set<Trace> getAllValuesOftrace(final SourcelessTrace.Match partialMatch) {
       return rawStreamAllValuesOftrace(partialMatch.toArray()).collect(Collectors.toSet());
     }
 
@@ -479,7 +479,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceEntry> getAllValuesOftrace(final Named pNamed) {
+    public Set<Trace> getAllValuesOftrace(final Named pNamed) {
       return rawStreamAllValuesOftrace(new Object[]{null, pNamed}).collect(Collectors.toSet());
     }
 
@@ -534,7 +534,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Named> streamAllValuesOfnamed(final TraceEntry pTrace) {
+    public Stream<Named> streamAllValuesOfnamed(final Trace pTrace) {
       return rawStreamAllValuesOfnamed(new Object[]{pTrace, null});
     }
 
@@ -552,14 +552,14 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Named> getAllValuesOfnamed(final TraceEntry pTrace) {
+    public Set<Named> getAllValuesOfnamed(final Trace pTrace) {
       return rawStreamAllValuesOfnamed(new Object[]{pTrace, null}).collect(Collectors.toSet());
     }
 
     @Override
     protected SourcelessTrace.Match tupleToMatch(final Tuple t) {
       try {
-          return SourcelessTrace.Match.newMatch((TraceEntry) t.get(POSITION_TRACE), (Named) t.get(POSITION_NAMED));
+          return SourcelessTrace.Match.newMatch((Trace) t.get(POSITION_TRACE), (Named) t.get(POSITION_NAMED));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -569,7 +569,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
     @Override
     protected SourcelessTrace.Match arrayToMatch(final Object[] match) {
       try {
-          return SourcelessTrace.Match.newMatch((TraceEntry) match[POSITION_TRACE], (Named) match[POSITION_NAMED]);
+          return SourcelessTrace.Match.newMatch((Trace) match[POSITION_TRACE], (Named) match[POSITION_NAMED]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -579,7 +579,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
     @Override
     protected SourcelessTrace.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return SourcelessTrace.Match.newMutableMatch((TraceEntry) match[POSITION_TRACE], (Named) match[POSITION_NAMED]);
+          return SourcelessTrace.Match.newMutableMatch((Trace) match[POSITION_TRACE], (Named) match[POSITION_NAMED]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -630,7 +630,7 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
 
   @Override
   public SourcelessTrace.Match newMatch(final Object... parameters) {
-    return SourcelessTrace.Match.newMatch((Trace.TraceEntry) parameters[0], (relational_.Named) parameters[1]);
+    return SourcelessTrace.Match.newMatch((org.eclipse.viatra.transformation.views.traceability.Trace) parameters[0], (relational_.Named) parameters[1]);
   }
 
   /**
@@ -662,26 +662,26 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final SourcelessTrace.GeneratedPQuery INSTANCE = new GeneratedPQuery();
 
-    private final PParameter parameter_trace = new PParameter("trace", "Trace.TraceEntry", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("Trace", "TraceEntry")), PParameterDirection.INOUT);
+    private final PParameter parameter_trace = new PParameter("trace", "org.eclipse.viatra.transformation.views.traceability.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.eclipse.org/viatra/transformation/views/traceability/1.0", "Trace")), PParameterDirection.INOUT);
 
     private final PParameter parameter_named = new PParameter("named", "relational_.Named", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("Relational", "Named")), PParameterDirection.INOUT);
 
     private final List<PParameter> parameters = Arrays.asList(parameter_trace, parameter_named);
 
-    private class Embedded_1_TraceEntry_source extends BaseGeneratedEMFPQuery {
-      private final PParameter parameter_p0 = new PParameter("p0", "Trace.TraceEntry", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("Trace", "TraceEntry")), PParameterDirection.INOUT);
+    private class Embedded_1_Trace_params extends BaseGeneratedEMFPQuery {
+      private final PParameter parameter_p0 = new PParameter("p0", "org.eclipse.viatra.transformation.views.traceability.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.eclipse.org/viatra/transformation/views/traceability/1.0", "Trace")), PParameterDirection.INOUT);
 
       private final PParameter parameter_p1 = new PParameter("p1", "org.eclipse.emf.ecore.EObject", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.eclipse.org/emf/2002/Ecore", "EObject")), PParameterDirection.INOUT);
 
       private final List<PParameter> embeddedParameters = Arrays.asList(parameter_p0, parameter_p1);
 
-      public Embedded_1_TraceEntry_source() {
+      public Embedded_1_Trace_params() {
         super(PVisibility.EMBEDDED);
       }
 
       @Override
       public String getFullyQualifiedName() {
-        return GeneratedPQuery.this.getFullyQualifiedName() + "$Embedded_1_TraceEntry_source";
+        return GeneratedPQuery.this.getFullyQualifiedName() + "$Embedded_1_Trace_params";
       }
 
       @Override
@@ -698,10 +698,10 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
            new ExportedParameter(body, var_p0, parameter_p0),
            new ExportedParameter(body, var_p1, parameter_p1)
         ));
-        //  TraceEntry.source(trace, _)
-        new TypeConstraint(body, Tuples.flatTupleOf(var_p0), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Trace", "TraceEntry")));
+        //  Trace.params(trace, _)
+        new TypeConstraint(body, Tuples.flatTupleOf(var_p0), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.eclipse.org/viatra/transformation/views/traceability/1.0", "Trace")));
         PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-        new TypeConstraint(body, Tuples.flatTupleOf(var_p0, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Trace", "TraceEntry", "source")));
+        new TypeConstraint(body, Tuples.flatTupleOf(var_p0, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.eclipse.org/viatra/transformation/views/traceability/1.0", "Trace", "params")));
         new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EObject")));
         new Equality(body, var__virtual_0_, var_p1);
         return Collections.singleton(body);
@@ -736,18 +736,18 @@ public final class SourcelessTrace extends BaseGeneratedEMFQuerySpecification<So
           PVariable var_trace = body.getOrCreateVariableByName("trace");
           PVariable var_named = body.getOrCreateVariableByName("named");
           PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_trace), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Trace", "TraceEntry")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_trace), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.eclipse.org/viatra/transformation/views/traceability/1.0", "Trace")));
           new TypeConstraint(body, Tuples.flatTupleOf(var_named), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Relational", "Named")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_trace, parameter_trace),
              new ExportedParameter(body, var_named, parameter_named)
           ));
-          // 	// TRACING	neg TraceEntry.source(trace, _)
-          new NegativePatternCall(body, Tuples.flatTupleOf(var_trace, var___0_), new SourcelessTrace.GeneratedPQuery.Embedded_1_TraceEntry_source());
-          // 	// TRACING	TraceEntry.target(trace,named)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_trace), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Trace", "TraceEntry")));
+          // 	// TRACING	neg Trace.params(trace, _)
+          new NegativePatternCall(body, Tuples.flatTupleOf(var_trace, var___0_), new SourcelessTrace.GeneratedPQuery.Embedded_1_Trace_params());
+          // 	// TRACING	Trace.targets(trace,named)
+          new TypeConstraint(body, Tuples.flatTupleOf(var_trace), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.eclipse.org/viatra/transformation/views/traceability/1.0", "Trace")));
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_trace, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Trace", "TraceEntry", "target")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_trace, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.eclipse.org/viatra/transformation/views/traceability/1.0", "Trace", "targets")));
           new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EObject")));
           new Equality(body, var__virtual_0_, var_named);
           bodies.add(body);

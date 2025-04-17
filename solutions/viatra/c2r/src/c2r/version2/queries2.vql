@@ -2,8 +2,8 @@ package c2r.version2
 
 import "Class"
 import "Relational" 
-import "Trace"
 import "http://www.eclipse.org/emf/2002/Ecore"
+import "http://www.eclipse.org/viatra/transformation/views/traceability/1.0"
 
 // MODEL_NAVIGATION
 pattern makeInteger(){
@@ -54,14 +54,14 @@ pattern namedMap(named: Named, name: java String){
 	// MODEL_NAVIGATION
 	DataType.name(dtype,name);
 	// TRACING
-	find traceMapping(dtype,_,0,named);
+	find traceMapping(dtype,_,"default",named);
 // transformation
 } or {
 
 	// MODEL_NAVIGATION
 	Class(class);
 	// TRACING
-	find traceMapping(class,_,0,named); //Index 0 is the table
+	find traceMapping(class,_,"default",named);
 	// MODEL_NAVIGATION
 	Class.name(class,name);
 // transformation	
@@ -69,7 +69,7 @@ pattern namedMap(named: Named, name: java String){
 	// MODEL_NAVIGATION
 	Class(class);
 	// TRACING
-	find traceMapping(class,_,1,named); //Index 1 is the id column
+	find traceMapping(class,_,"idColumn",named);
 	// MODEL_NAVIGATION
 	Column(named);
 	// transformation
@@ -79,7 +79,7 @@ pattern namedMap(named: Named, name: java String){
 	// MODEL_NAVIGATION
 	Attribute.multiValued(attr,true);
 	// TRACING
-	find traceMapping(attr,_,0,named); //Index 0 is the table
+	find traceMapping(attr,_,"default",named);
 	// MODEL_NAVIGATION
 	Attribute.name(attr, aname);
 	// MODEL_NAVIGATION
@@ -93,7 +93,7 @@ pattern namedMap(named: Named, name: java String){
 	// MODEL_NAVIGATION
 	Attribute.multiValued(attr,true);
 	// TRACING
-	find traceMapping(attr,_,1,named); //Index 1 is the id-column
+	find traceMapping(attr,_,"idColumn",named);
 	// MODEL_NAVIGATION
 	Attribute.owner(attr,class);
 	// MODEL_NAVIGATION
@@ -105,7 +105,7 @@ pattern namedMap(named: Named, name: java String){
 	// MODEL_NAVIGATION
 	Attribute.multiValued(attr,true);
 	// TRACING
-	find traceMapping(attr,_,2,named); //Index 2 is the value column
+	find traceMapping(attr,_,"valueColumn",named);
 	// MODEL_NAVIGATION
 	Attribute.name(attr,aname);
 	// Helper
@@ -118,7 +118,7 @@ pattern namedMap(named: Named, name: java String){
 	// MODEL_NAVIGATION
 	Attribute.multiValued(attr,false);
 	// TRACING
-	find traceMapping(attr,_,0,named);
+	find traceMapping(attr,_,"default",named);
 	// MODEL_NAVIGATION
 	Attribute.name(attr, aname);
 	// helper
@@ -146,13 +146,13 @@ pattern postName(attr: Attribute, post: java String){
 }
 
 // helper
-pattern traceMapping(source: EObject, trace: TraceEntry, idx: EInt, target: EObject){
+pattern traceMapping(source: EObject, trace: Trace, idx: EString, target: EObject){
 	// TRACING
-	TraceEntry.source(trace,source);
+	Trace.params(trace,source);
 	// TRACING
-	TraceEntry.target(trace,target);
+	Trace.targets(trace,target);
 	// TRACING
-	TraceEntry.index(trace,idx);
+	Trace.id(trace,idx);
 }
 
 // transformation
@@ -180,7 +180,7 @@ pattern specifiedTypeMapping(column: Column, type: Type){
 	// TRACING
 	find traceMapping(attr,_,index,column);
 	// TRACING
-	index != 1;
+	index != "idColumn";
 	// MODEL_NAVIGATION
 	Attribute.type(attr,stype);
 	// MODEL_NAVIGATION
@@ -191,11 +191,11 @@ pattern specifiedTypeMapping(column: Column, type: Type){
 
 
 // TRACING
-pattern sourcelessTrace(trace: TraceEntry, named: Named){
+pattern sourcelessTrace(trace: Trace, named: Named){
 	// TRACING
-	neg TraceEntry.source(trace, _);
+	neg Trace.params(trace, _);
 	// TRACING
-	TraceEntry.target(trace,named);
+	Trace.targets(trace,named);
 }
 
 

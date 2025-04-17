@@ -1,7 +1,5 @@
 package c2r.version2
 
-import Trace.TraceFactory
-import Trace.TracePackage
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
@@ -22,6 +20,8 @@ import relational_.Type
 import c2r.version2.TraceMapping.Match
 import org.eclipse.viatra.transformation.runtime.emf.rules.eventdriven.EventDrivenTransformationRule
 import java.util.List
+import org.eclipse.viatra.transformation.views.traceability.TraceabilityFactory
+import org.eclipse.viatra.transformation.views.traceability.TraceabilityPackage
 
 // Setup
 class IncrementalC2R_v2 {
@@ -47,7 +47,7 @@ class IncrementalC2R_v2 {
 	// Setup
 	new(ResourceSet set, Resource target) {
 		// TRACING
-		TracePackage.eINSTANCE.class
+		TraceabilityPackage.eINSTANCE.class
 		// Setup
 		this.target = target
 		// TRACING
@@ -170,7 +170,7 @@ class IncrementalC2R_v2 {
 			// TRANSFORMATION
 			val type = createType
 			// TRACING
-			makeTrace(dtype, type, 0)
+			makeTrace(dtype, type, "default")
 			// TRANSFORMATION
 			target.contents.add(type)
 		// Setup
@@ -185,9 +185,9 @@ class IncrementalC2R_v2 {
 			// TRANSFORMATION
 			val idcolumn = createColumn
 			// TRACING
-			makeTrace(named, idcolumn, 1)
+			makeTrace(named, idcolumn, "idColumn")
 			// TRACING
-			makeTrace(named, table, 0)
+			makeTrace(named, table, "default")
 			// TRANSFORMATION
 			addColumnToTable(table, idcolumn)
 			// TRANSFORMATION
@@ -208,11 +208,11 @@ class IncrementalC2R_v2 {
 			// TRANSFORMATION
 			val valuecolumn = createColumn
 			// TRACING
-			makeTrace(named, idcolumn, 1)
+			makeTrace(named, idcolumn, "idColumn")
 			// TRACING
-			makeTrace(named, valuecolumn, 2)
+			makeTrace(named, valuecolumn, "valueColumn")
 			// TRACING
-			makeTrace(named, table, 0)
+			makeTrace(named, table, "default")
 			// TRANSFORMATION
 			addColumnToTable(table, idcolumn)
 			// TRANSFORMATION
@@ -233,7 +233,7 @@ class IncrementalC2R_v2 {
 			// TRANSFORMATION
 			val column = createColumn
 			// TRACING
-			makeTrace(named, column, 0)
+			makeTrace(named, column, "default")
 			// MODEL_NAVIGATION
 			val table = named.owner.traceQueryImage.findFirst[it.target instanceof Table].target as Table 
 			// TRANSFORMATION
@@ -263,15 +263,15 @@ class IncrementalC2R_v2 {
 		])
 	}
 	// Helper
-	def makeTrace(EObject source, EObject target, int index) {
+	def makeTrace(EObject source, EObject target, String index) {
 		// TRACING
-		val traceEntry = TraceFactory.eINSTANCE.createTraceEntry
+		val traceEntry = TraceabilityFactory.eINSTANCE.createTrace
 		// TRACING
-		traceEntry.source = source
+		traceEntry.params.add(source)
 		// TRACING
-		traceEntry.target = target
+		traceEntry.targets.add(target)
 		// TRACING
-		traceEntry.index = index
+		traceEntry.id = index
 		// TRACING
 		trace.contents.add(traceEntry)
 	}

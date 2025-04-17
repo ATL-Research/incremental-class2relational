@@ -1,7 +1,5 @@
 package c2r.init;
 
-import org.eclipse.emf.ecore.EObject;
-
 import c2r.version2.IncrementalC2R_v2;
 
 // Setup

@@ -58,14 +58,14 @@ import relational_.Named;
  *         	// MODEL_NAVIGATION
  *         	DataType.name(dtype,name);
  *         	// TRACING
- *         	find traceMapping(dtype,_,0,named);
+ *         	find traceMapping(dtype,_,"default",named);
  *         // transformation
  *         } or {
  *         
  *         	// MODEL_NAVIGATION
  *         	Class(class);
  *         	// TRACING
- *         	find traceMapping(class,_,0,named); //Index 0 is the table
+ *         	find traceMapping(class,_,"default",named);
  *         	// MODEL_NAVIGATION
  *         	Class.name(class,name);
  *         // transformation	
@@ -73,7 +73,7 @@ import relational_.Named;
  *         	// MODEL_NAVIGATION
  *         	Class(class);
  *         	// TRACING
- *         	find traceMapping(class,_,1,named); //Index 1 is the id column
+ *         	find traceMapping(class,_,"idColumn",named);
  *         	// MODEL_NAVIGATION
  *         	Column(named);
  *         	// transformation
@@ -83,7 +83,7 @@ import relational_.Named;
  *         	// MODEL_NAVIGATION
  *         	Attribute.multiValued(attr,true);
  *         	// TRACING
- *         	find traceMapping(attr,_,0,named); //Index 0 is the table
+ *         	find traceMapping(attr,_,"default",named);
  *         	// MODEL_NAVIGATION
  *         	Attribute.name(attr, aname);
  *         	// MODEL_NAVIGATION
@@ -97,7 +97,7 @@ import relational_.Named;
  *         	// MODEL_NAVIGATION
  *         	Attribute.multiValued(attr,true);
  *         	// TRACING
- *         	find traceMapping(attr,_,1,named); //Index 1 is the id-column
+ *         	find traceMapping(attr,_,"idColumn",named);
  *         	// MODEL_NAVIGATION
  *         	Attribute.owner(attr,class);
  *         	// MODEL_NAVIGATION
@@ -109,7 +109,7 @@ import relational_.Named;
  *         	// MODEL_NAVIGATION
  *         	Attribute.multiValued(attr,true);
  *         	// TRACING
- *         	find traceMapping(attr,_,2,named); //Index 2 is the value column
+ *         	find traceMapping(attr,_,"valueColumn",named);
  *         	// MODEL_NAVIGATION
  *         	Attribute.name(attr,aname);
  *         	// Helper
@@ -122,7 +122,7 @@ import relational_.Named;
  *         	// MODEL_NAVIGATION
  *         	Attribute.multiValued(attr,false);
  *         	// TRACING
- *         	find traceMapping(attr,_,0,named);
+ *         	find traceMapping(attr,_,"default",named);
  *         	// MODEL_NAVIGATION
  *         	Attribute.name(attr, aname);
  *         	// helper
@@ -346,14 +346,14 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
    * 	// MODEL_NAVIGATION
    * 	DataType.name(dtype,name);
    * 	// TRACING
-   * 	find traceMapping(dtype,_,0,named);
+   * 	find traceMapping(dtype,_,"default",named);
    * // transformation
    * } or {
    * 
    * 	// MODEL_NAVIGATION
    * 	Class(class);
    * 	// TRACING
-   * 	find traceMapping(class,_,0,named); //Index 0 is the table
+   * 	find traceMapping(class,_,"default",named);
    * 	// MODEL_NAVIGATION
    * 	Class.name(class,name);
    * // transformation	
@@ -361,7 +361,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
    * 	// MODEL_NAVIGATION
    * 	Class(class);
    * 	// TRACING
-   * 	find traceMapping(class,_,1,named); //Index 1 is the id column
+   * 	find traceMapping(class,_,"idColumn",named);
    * 	// MODEL_NAVIGATION
    * 	Column(named);
    * 	// transformation
@@ -371,7 +371,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
    * 	// MODEL_NAVIGATION
    * 	Attribute.multiValued(attr,true);
    * 	// TRACING
-   * 	find traceMapping(attr,_,0,named); //Index 0 is the table
+   * 	find traceMapping(attr,_,"default",named);
    * 	// MODEL_NAVIGATION
    * 	Attribute.name(attr, aname);
    * 	// MODEL_NAVIGATION
@@ -385,7 +385,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
    * 	// MODEL_NAVIGATION
    * 	Attribute.multiValued(attr,true);
    * 	// TRACING
-   * 	find traceMapping(attr,_,1,named); //Index 1 is the id-column
+   * 	find traceMapping(attr,_,"idColumn",named);
    * 	// MODEL_NAVIGATION
    * 	Attribute.owner(attr,class);
    * 	// MODEL_NAVIGATION
@@ -397,7 +397,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
    * 	// MODEL_NAVIGATION
    * 	Attribute.multiValued(attr,true);
    * 	// TRACING
-   * 	find traceMapping(attr,_,2,named); //Index 2 is the value column
+   * 	find traceMapping(attr,_,"valueColumn",named);
    * 	// MODEL_NAVIGATION
    * 	Attribute.name(attr,aname);
    * 	// Helper
@@ -410,7 +410,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
    * 	// MODEL_NAVIGATION
    * 	Attribute.multiValued(attr,false);
    * 	// TRACING
-   * 	find traceMapping(attr,_,0,named);
+   * 	find traceMapping(attr,_,"default",named);
    * 	// MODEL_NAVIGATION
    * 	Attribute.name(attr, aname);
    * 	// helper
@@ -856,9 +856,9 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
           new TypeConstraint(body, Tuples.flatTupleOf(var_dtype, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Class", "NamedElt", "name")));
           new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EString")));
           new Equality(body, var__virtual_0_, var_name);
-          // 	// TRACING	find traceMapping(dtype,_,0,named)
+          // 	// TRACING	find traceMapping(dtype,_,"default",named)
           PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
-          new ConstantValue(body, var__virtual_1_, 0);
+          new ConstantValue(body, var__virtual_1_, "default");
           new PositivePatternCall(body, Tuples.flatTupleOf(var_dtype, var___0_, var__virtual_1_, var_named), TraceMapping.instance().getInternalQueryRepresentation());
           bodies.add(body);
       }
@@ -876,11 +876,11 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
           ));
           // 	// MODEL_NAVIGATION	Class(class)
           new TypeConstraint(body, Tuples.flatTupleOf(var_class), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Class")));
-          // 	// TRACING	find traceMapping(class,_,0,named)
+          // 	// TRACING	find traceMapping(class,_,"default",named)
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new ConstantValue(body, var__virtual_0_, 0);
+          new ConstantValue(body, var__virtual_0_, "default");
           new PositivePatternCall(body, Tuples.flatTupleOf(var_class, var___0_, var__virtual_0_, var_named), TraceMapping.instance().getInternalQueryRepresentation());
-          //  //Index 0 is the table	// MODEL_NAVIGATION	Class.name(class,name)
+          // 	// MODEL_NAVIGATION	Class.name(class,name)
           new TypeConstraint(body, Tuples.flatTupleOf(var_class), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Class")));
           PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
           new TypeConstraint(body, Tuples.flatTupleOf(var_class, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Class", "NamedElt", "name")));
@@ -902,11 +902,11 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
           ));
           // 	// MODEL_NAVIGATION	Class(class)
           new TypeConstraint(body, Tuples.flatTupleOf(var_class), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Class")));
-          // 	// TRACING	find traceMapping(class,_,1,named)
+          // 	// TRACING	find traceMapping(class,_,"idColumn",named)
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new ConstantValue(body, var__virtual_0_, 1);
+          new ConstantValue(body, var__virtual_0_, "idColumn");
           new PositivePatternCall(body, Tuples.flatTupleOf(var_class, var___0_, var__virtual_0_, var_named), TraceMapping.instance().getInternalQueryRepresentation());
-          //  //Index 1 is the id column	// MODEL_NAVIGATION	Column(named)
+          // 	// MODEL_NAVIGATION	Column(named)
           new TypeConstraint(body, Tuples.flatTupleOf(var_named), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Relational", "Column")));
           // 	// transformation	name == "objectId"
           PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
@@ -937,11 +937,11 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
           new TypeConstraint(body, Tuples.flatTupleOf(var_attr, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Class", "Attribute", "multiValued")));
           new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EBoolean")));
           new Equality(body, var__virtual_1_, var__virtual_0_);
-          // 	// TRACING	find traceMapping(attr,_,0,named)
+          // 	// TRACING	find traceMapping(attr,_,"default",named)
           PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
-          new ConstantValue(body, var__virtual_2_, 0);
+          new ConstantValue(body, var__virtual_2_, "default");
           new PositivePatternCall(body, Tuples.flatTupleOf(var_attr, var___0_, var__virtual_2_, var_named), TraceMapping.instance().getInternalQueryRepresentation());
-          //  //Index 0 is the table	// MODEL_NAVIGATION	Attribute.name(attr, aname)
+          // 	// MODEL_NAVIGATION	Attribute.name(attr, aname)
           new TypeConstraint(body, Tuples.flatTupleOf(var_attr), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Attribute")));
           PVariable var__virtual_3_ = body.getOrCreateVariableByName(".virtual{3}");
           new TypeConstraint(body, Tuples.flatTupleOf(var_attr, var__virtual_3_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Class", "NamedElt", "name")));
@@ -976,7 +976,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
               public Object evaluateExpression(IValueProvider provider) throws Exception {
                   String aname = (String) provider.getValue("aname");
                   String cname = (String) provider.getValue("cname");
-                  return evaluateExpression_4_3(aname, cname);
+                  return evaluateExpression_4_2(aname, cname);
               }
           },  var__virtual_6_ , false);
           new Equality(body, var_name, var__virtual_6_);
@@ -1004,11 +1004,11 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
           new TypeConstraint(body, Tuples.flatTupleOf(var_attr, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Class", "Attribute", "multiValued")));
           new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EBoolean")));
           new Equality(body, var__virtual_1_, var__virtual_0_);
-          // 	// TRACING	find traceMapping(attr,_,1,named)
+          // 	// TRACING	find traceMapping(attr,_,"idColumn",named)
           PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
-          new ConstantValue(body, var__virtual_2_, 1);
+          new ConstantValue(body, var__virtual_2_, "idColumn");
           new PositivePatternCall(body, Tuples.flatTupleOf(var_attr, var___0_, var__virtual_2_, var_named), TraceMapping.instance().getInternalQueryRepresentation());
-          //  //Index 1 is the id-column	// MODEL_NAVIGATION	Attribute.owner(attr,class)
+          // 	// MODEL_NAVIGATION	Attribute.owner(attr,class)
           new TypeConstraint(body, Tuples.flatTupleOf(var_attr), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Attribute")));
           PVariable var__virtual_3_ = body.getOrCreateVariableByName(".virtual{3}");
           new TypeConstraint(body, Tuples.flatTupleOf(var_attr, var__virtual_3_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Class", "Attribute", "owner")));
@@ -1036,7 +1036,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
               @Override
               public Object evaluateExpression(IValueProvider provider) throws Exception {
                   String cname = (String) provider.getValue("cname");
-                  return evaluateExpression_5_3(cname);
+                  return evaluateExpression_5_2(cname);
               }
           },  var__virtual_5_ , false);
           new Equality(body, var_name, var__virtual_5_);
@@ -1064,11 +1064,11 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
           new TypeConstraint(body, Tuples.flatTupleOf(var_attr, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Class", "Attribute", "multiValued")));
           new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EBoolean")));
           new Equality(body, var__virtual_1_, var__virtual_0_);
-          // 	// TRACING	find traceMapping(attr,_,2,named)
+          // 	// TRACING	find traceMapping(attr,_,"valueColumn",named)
           PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
-          new ConstantValue(body, var__virtual_2_, 2);
+          new ConstantValue(body, var__virtual_2_, "valueColumn");
           new PositivePatternCall(body, Tuples.flatTupleOf(var_attr, var___0_, var__virtual_2_, var_named), TraceMapping.instance().getInternalQueryRepresentation());
-          //  //Index 2 is the value column	// MODEL_NAVIGATION	Attribute.name(attr,aname)
+          // 	// MODEL_NAVIGATION	Attribute.name(attr,aname)
           new TypeConstraint(body, Tuples.flatTupleOf(var_attr), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Attribute")));
           PVariable var__virtual_3_ = body.getOrCreateVariableByName(".virtual{3}");
           new TypeConstraint(body, Tuples.flatTupleOf(var_attr, var__virtual_3_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Class", "NamedElt", "name")));
@@ -1093,7 +1093,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
               public Object evaluateExpression(IValueProvider provider) throws Exception {
                   String aname = (String) provider.getValue("aname");
                   String pname = (String) provider.getValue("pname");
-                  return evaluateExpression_6_3(aname, pname);
+                  return evaluateExpression_6_2(aname, pname);
               }
           },  var__virtual_4_ , false);
           new Equality(body, var_name, var__virtual_4_);
@@ -1121,9 +1121,9 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
           new TypeConstraint(body, Tuples.flatTupleOf(var_attr, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("Class", "Attribute", "multiValued")));
           new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EBoolean")));
           new Equality(body, var__virtual_1_, var__virtual_0_);
-          // 	// TRACING	find traceMapping(attr,_,0,named)
+          // 	// TRACING	find traceMapping(attr,_,"default",named)
           PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
-          new ConstantValue(body, var__virtual_2_, 0);
+          new ConstantValue(body, var__virtual_2_, "default");
           new PositivePatternCall(body, Tuples.flatTupleOf(var_attr, var___0_, var__virtual_2_, var_named), TraceMapping.instance().getInternalQueryRepresentation());
           // 	// MODEL_NAVIGATION	Attribute.name(attr, aname)
           new TypeConstraint(body, Tuples.flatTupleOf(var_attr), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Attribute")));
@@ -1150,7 +1150,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
               public Object evaluateExpression(IValueProvider provider) throws Exception {
                   String aname = (String) provider.getValue("aname");
                   String pname = (String) provider.getValue("pname");
-                  return evaluateExpression_7_3(aname, pname);
+                  return evaluateExpression_7_2(aname, pname);
               }
           },  var__virtual_4_ , false);
           new Equality(body, var_name, var__virtual_4_);
@@ -1160,27 +1160,11 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
     }
   }
 
-  private static int evaluateExpression_1_1() {
-    return 0;
-  }
-
-  private static int evaluateExpression_2_1() {
-    return 0;
-  }
-
-  private static int evaluateExpression_3_1() {
-    return 1;
-  }
-
   private static boolean evaluateExpression_4_1() {
     return true;
   }
 
-  private static int evaluateExpression_4_2() {
-    return 0;
-  }
-
-  private static String evaluateExpression_4_3(final String aname, final String cname) {
+  private static String evaluateExpression_4_2(final String aname, final String cname) {
     return ((cname + "_") + aname);
   }
 
@@ -1188,11 +1172,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
     return true;
   }
 
-  private static int evaluateExpression_5_2() {
-    return 1;
-  }
-
-  private static String evaluateExpression_5_3(final String cname) {
+  private static String evaluateExpression_5_2(final String cname) {
     String _firstLower = StringExtensions.toFirstLower(cname);
     String _plus = (_firstLower + "Id");
     return _plus;
@@ -1202,11 +1182,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
     return true;
   }
 
-  private static int evaluateExpression_6_2() {
-    return 2;
-  }
-
-  private static String evaluateExpression_6_3(final String aname, final String pname) {
+  private static String evaluateExpression_6_2(final String aname, final String pname) {
     String _firstLower = StringExtensions.toFirstLower(aname);
     String _plus = (_firstLower + pname);
     return _plus;
@@ -1216,11 +1192,7 @@ public final class NamedMap extends BaseGeneratedEMFQuerySpecification<NamedMap.
     return false;
   }
 
-  private static int evaluateExpression_7_2() {
-    return 0;
-  }
-
-  private static String evaluateExpression_7_3(final String aname, final String pname) {
+  private static String evaluateExpression_7_2(final String aname, final String pname) {
     return (aname + pname);
   }
 }

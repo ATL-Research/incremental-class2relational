@@ -60,7 +60,7 @@ import relational_.Type;
  *         	// TRACING
  *         	find traceMapping(attr,_,index,column);
  *         	// TRACING
- *         	index != 1;
+ *         	index != "idColumn";
  *         	// MODEL_NAVIGATION
  *         	Attribute.type(attr,stype);
  *         	// MODEL_NAVIGATION
@@ -290,7 +290,7 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
    * 	// TRACING
    * 	find traceMapping(attr,_,index,column);
    * 	// TRACING
-   * 	index != 1;
+   * 	index != "idColumn";
    * 	// MODEL_NAVIGATION
    * 	Attribute.type(attr,stype);
    * 	// MODEL_NAVIGATION
@@ -763,9 +763,9 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
           ));
           // 	// TRACING	find traceMapping(attr,_,index,column)
           new PositivePatternCall(body, Tuples.flatTupleOf(var_attr, var___0_, var_index, var_column), TraceMapping.instance().getInternalQueryRepresentation());
-          // 	// TRACING	index != 1
+          // 	// TRACING	index != "idColumn"
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new ConstantValue(body, var__virtual_0_, 1);
+          new ConstantValue(body, var__virtual_0_, "idColumn");
           new Inequality(body, var_index, var__virtual_0_);
           // 	// MODEL_NAVIGATION	Attribute.type(attr,stype)
           new TypeConstraint(body, Tuples.flatTupleOf(var_attr), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("Class", "Attribute")));
@@ -789,9 +789,5 @@ public final class SpecifiedTypeMapping extends BaseGeneratedEMFQuerySpecificati
       }
       return bodies;
     }
-  }
-
-  private static int evaluateExpression_2_1() {
-    return 1;
   }
 }

@@ -1,8 +1,5 @@
 package c2r.version2;
 
-import Trace.TraceEntry;
-import Trace.TraceFactory;
-import Trace.TracePackage;
 import c2r.version2.FromAttribute2Column;
 import c2r.version2.FromAttribute2Table;
 import c2r.version2.FromClass;
@@ -30,6 +27,9 @@ import org.eclipse.viatra.transformation.runtime.emf.modelmanipulation.SimpleMod
 import org.eclipse.viatra.transformation.runtime.emf.rules.eventdriven.EventDrivenTransformationRule;
 import org.eclipse.viatra.transformation.runtime.emf.rules.eventdriven.EventDrivenTransformationRuleFactory;
 import org.eclipse.viatra.transformation.runtime.emf.transformation.eventdriven.EventDrivenTransformation;
+import org.eclipse.viatra.transformation.views.traceability.Trace;
+import org.eclipse.viatra.transformation.views.traceability.TraceabilityFactory;
+import org.eclipse.viatra.transformation.views.traceability.TraceabilityPackage;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -64,7 +64,7 @@ public class IncrementalC2R_v2 {
   protected Resource trace;
 
   public IncrementalC2R_v2(final ResourceSet set, final Resource target) {
-    TracePackage.eINSTANCE.getClass();
+    TraceabilityPackage.eINSTANCE.getClass();
     this.target = target;
     this.trace = set.createResource(URI.createFileURI("Trace.tmp.xmi"));
     EMFScope _eMFScope = new EMFScope(set);
@@ -163,7 +163,7 @@ public class IncrementalC2R_v2 {
     final Consumer<FromDataType.Match> _function = new Consumer<FromDataType.Match>() {
       public void accept(final FromDataType.Match it) {
         final Type type = IncrementalC2R_v2.this._relational_Factory.createType();
-        IncrementalC2R_v2.this.makeTrace(it.getDtype(), type, 0);
+        IncrementalC2R_v2.this.makeTrace(it.getDtype(), type, "default");
         IncrementalC2R_v2.this.target.getContents().add(type);
       }
     };
@@ -175,8 +175,8 @@ public class IncrementalC2R_v2 {
       public void accept(final FromClass.Match it) {
         final Table table = IncrementalC2R_v2.this._relational_Factory.createTable();
         final Column idcolumn = IncrementalC2R_v2.this._relational_Factory.createColumn();
-        IncrementalC2R_v2.this.makeTrace(it.getNamed(), idcolumn, 1);
-        IncrementalC2R_v2.this.makeTrace(it.getNamed(), table, 0);
+        IncrementalC2R_v2.this.makeTrace(it.getNamed(), idcolumn, "idColumn");
+        IncrementalC2R_v2.this.makeTrace(it.getNamed(), table, "default");
         IncrementalC2R_v2.this.addColumnToTable(table, idcolumn);
         table.getKey().add(idcolumn);
         IncrementalC2R_v2.this.target.getContents().add(table);
@@ -191,9 +191,9 @@ public class IncrementalC2R_v2 {
         final Table table = IncrementalC2R_v2.this._relational_Factory.createTable();
         final Column idcolumn = IncrementalC2R_v2.this._relational_Factory.createColumn();
         final Column valuecolumn = IncrementalC2R_v2.this._relational_Factory.createColumn();
-        IncrementalC2R_v2.this.makeTrace(it.getNamed(), idcolumn, 1);
-        IncrementalC2R_v2.this.makeTrace(it.getNamed(), valuecolumn, 2);
-        IncrementalC2R_v2.this.makeTrace(it.getNamed(), table, 0);
+        IncrementalC2R_v2.this.makeTrace(it.getNamed(), idcolumn, "idColumn");
+        IncrementalC2R_v2.this.makeTrace(it.getNamed(), valuecolumn, "valueColumn");
+        IncrementalC2R_v2.this.makeTrace(it.getNamed(), table, "default");
         IncrementalC2R_v2.this.addColumnToTable(table, idcolumn);
         IncrementalC2R_v2.this.addColumnToTable(table, valuecolumn);
         IncrementalC2R_v2.this.target.getContents().add(table);
@@ -211,7 +211,7 @@ public class IncrementalC2R_v2 {
     final Consumer<FromAttribute2Column.Match> _function = new Consumer<FromAttribute2Column.Match>() {
       public void accept(final FromAttribute2Column.Match it) {
         final Column column = IncrementalC2R_v2.this._relational_Factory.createColumn();
-        IncrementalC2R_v2.this.makeTrace(it.getNamed(), column, 0);
+        IncrementalC2R_v2.this.makeTrace(it.getNamed(), column, "default");
         final Function1<TraceMapping.Match, Boolean> _function = new Function1<TraceMapping.Match, Boolean>() {
           public Boolean apply(final TraceMapping.Match it_1) {
             EObject _target = it_1.getTarget();
@@ -250,13 +250,13 @@ public class IncrementalC2R_v2 {
     this.traceQueryImage(source).forEach(_function);
   }
 
-  public boolean makeTrace(final EObject source, final EObject target, final int index) {
+  public boolean makeTrace(final EObject source, final EObject target, final String index) {
     boolean _xblockexpression = false;
     {
-      final TraceEntry traceEntry = TraceFactory.eINSTANCE.createTraceEntry();
-      traceEntry.setSource(source);
-      traceEntry.setTarget(target);
-      traceEntry.setIndex(index);
+      final Trace traceEntry = TraceabilityFactory.eINSTANCE.createTrace();
+      traceEntry.getParams().add(source);
+      traceEntry.getTargets().add(target);
+      traceEntry.setId(index);
       _xblockexpression = this.trace.getContents().add(traceEntry);
     }
     return _xblockexpression;

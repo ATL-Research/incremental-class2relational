@@ -1,0 +1,201 @@
+package c2r.version2
+
+import "Class"
+import "Relational" 
+import "Trace"
+import "http://www.eclipse.org/emf/2002/Ecore"
+
+// MODEL_NAVIGATION
+pattern makeInteger(){
+	// MODEL_NAVIGATION
+	Class(_);
+// MODEL_NAVIGATION
+} or {
+	// MODEL_NAVIGATION
+	DataType.name(_,"Integer");
+}
+
+// MODEL_NAVIGATION
+pattern fromDataType(dtype: DataType){
+	// model navigation
+	DataType.name(dtype,name);
+	// model navigation
+	name != "Integer";
+}
+
+// MODEL_NAVIGATION
+pattern fromClass(named: NamedElt){
+	// MODEL_NAVIGATION
+	Class(named);
+}
+
+// MODEL_NAVIGATION
+pattern fromAttribute2Table(named: Attribute) {
+	// MODEL_NAVIGATION
+	Attribute.multiValued(named,true);
+	// MODEL_NAVIGATION
+	Attribute.owner(named,_);
+	// MODEL_NAVIGATION
+	Attribute.type(named,_);
+}
+
+// MODEL_NAVIGATION
+pattern fromAttribute2Column(named: Attribute) {
+	// MODEL_NAVIGATION
+	Attribute.multiValued(named,false);
+	// MODEL_NAVIGATION
+	Attribute.owner(named,_);
+	// MODEL_NAVIGATION
+	Attribute.type(named,_);
+}
+
+// transformation
+pattern namedMap(named: Named, name: java String){
+	// MODEL_NAVIGATION
+	DataType.name(dtype,name);
+	// TRACING
+	find traceMapping(dtype,_,0,named);
+// transformation
+} or {
+
+	// MODEL_NAVIGATION
+	Class(class);
+	// TRACING
+	find traceMapping(class,_,0,named); //Index 0 is the table
+	// MODEL_NAVIGATION
+	Class.name(class,name);
+// transformation	
+} or {
+	// MODEL_NAVIGATION
+	Class(class);
+	// TRACING
+	find traceMapping(class,_,1,named); //Index 1 is the id column
+	// MODEL_NAVIGATION
+	Column(named);
+	// transformation
+	name == "objectId";
+//transformation	
+} or {
+	// MODEL_NAVIGATION
+	Attribute.multiValued(attr,true);
+	// TRACING
+	find traceMapping(attr,_,0,named); //Index 0 is the table
+	// MODEL_NAVIGATION
+	Attribute.name(attr, aname);
+	// MODEL_NAVIGATION
+	Attribute.owner(attr,class);
+	// MODEL_NAVIGATION
+	Class.name(class,cname);
+	// transformation
+	name == eval(cname+'_'+aname);
+// transformation
+} or {
+	// MODEL_NAVIGATION
+	Attribute.multiValued(attr,true);
+	// TRACING
+	find traceMapping(attr,_,1,named); //Index 1 is the id-column
+	// MODEL_NAVIGATION
+	Attribute.owner(attr,class);
+	// MODEL_NAVIGATION
+	Class.name(class,cname);
+	// transformation
+	name == eval(cname.toFirstLower+"Id");
+// transformation
+} or {
+	// MODEL_NAVIGATION
+	Attribute.multiValued(attr,true);
+	// TRACING
+	find traceMapping(attr,_,2,named); //Index 2 is the value column
+	// MODEL_NAVIGATION
+	Attribute.name(attr,aname);
+	// Helper
+	find postName(attr,pname);
+	//transformation
+	name == eval(aname.toFirstLower+pname);
+//transformation
+} or {
+
+	// MODEL_NAVIGATION
+	Attribute.multiValued(attr,false);
+	// TRACING
+	find traceMapping(attr,_,0,named);
+	// MODEL_NAVIGATION
+	Attribute.name(attr, aname);
+	// helper
+	find postName(attr,pname);
+	// transformation
+	name == eval(aname+pname);
+}
+
+// helper
+pattern postName(attr: Attribute, post: java String){
+	// MODEL_NAVIGATION
+	Attribute.type(attr, type);
+	// MODEL_NAVIGATION
+	Class(type);
+	// Transformation
+	post == "Id";
+// transformation
+} or {
+	// MODEL_NAVIGATION
+	Attribute.type(attr, type);
+	// MODEL_NAVIGATION
+	DataType(type);
+	// transformation 
+	post == "";
+}
+
+// helper
+pattern traceMapping(source: EObject, trace: TraceEntry, idx: EInt, target: EObject){
+	// TRACING
+	TraceEntry.source(trace,source);
+	// TRACING
+	TraceEntry.target(trace,target);
+	// TRACING
+	TraceEntry.index(trace,idx);
+}
+
+// transformation
+pattern typeMapping(column: Column, type: Type){
+	// transformation
+	find specifiedTypeMapping(column,type);
+// transformation
+} or {
+	// MODEL_NAVIGATION
+	Column(column);
+	// transformation
+	neg find specifiedTypeMapping(column,_);
+	// MODEL_NAVIGATION
+	Type.name(type,"Integer");
+}
+
+// transformation
+pattern specifiedTypeMapping(column: Column, type: Type){
+	// MODEL_NAVIGATION
+	Column.name(column,"objectId");
+	// MODEL_NAVIGATION
+	Type.name(type,"Integer");
+// transformation
+} or {
+	// TRACING
+	find traceMapping(attr,_,index,column);
+	// TRACING
+	index != 1;
+	// MODEL_NAVIGATION
+	Attribute.type(attr,stype);
+	// MODEL_NAVIGATION
+	DataType.name(stype,typename);
+	// MODEL_NAVIGATION
+	Type.name(type,typename);
+}
+
+
+// TRACING
+pattern sourcelessTrace(trace: TraceEntry, named: Named){
+	// TRACING
+	neg TraceEntry.source(trace, _);
+	// TRACING
+	TraceEntry.target(trace,named);
+}
+
+
