@@ -1,10 +1,7 @@
-// Setup
+// we said that we do not count imports
 import "platform:/resource/ClassToRelational/src/metamodels/Class.msl"
-// Setup
 import "platform:/resource/ClassToRelational/src/metamodels/Relational.msl"
-// Setup
 import "platform:/plugin/org.emoflon.neo.neocore/model/AttributeConstraintsLibrary.msl"
-// Setup
 import "platform:/resource/ClassToRelational/src/AttributeConstraints.msl"
 
 // Setup
@@ -541,11 +538,11 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 			// Tracing
 			separator="_",
 			// Tracing
-			left=<className>,
+			left = <className>,
 			// Tracing
-			right=<attrName>,
+			right = <attrName>,
 			// Tracing
-			combined=<tableName>
+			combined = <tableName>
 		)
 
 		// Tracing
