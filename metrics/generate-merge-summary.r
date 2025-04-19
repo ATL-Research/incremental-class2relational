@@ -34,14 +34,14 @@ for (file in csv_files) {
   data <- read.csv(file)
 
   # Filter the data to exclude rows where "Transformation Aspect" is "EMPTY"
-  data_filtered <- data[data$Transformation.Aspect != "EMPTY", ]
+  data_filtered <- data[data$Transformation_Aspect != "EMPTY", ]
 	
-  data_filtered <- data_filtered %>% mutate(Transformation.Aspect = factor(Transformation.Aspect, levels = type_order))
+  data_filtered <- data_filtered %>% mutate(Transformation_Aspect = factor(Transformation_Aspect, levels = type_order))
 
 	# Calculate the total value for each typetype_ord
 	data_summary <- data %>%
 	  mutate(Total = sum(Value, na.rm = TRUE)) %>%
-	  group_by(Transformation.Aspect, Total) %>%
+	  group_by(Transformation_Aspect, Total) %>%
 	  reframe(Value = sum(Value, na.rm = TRUE), Percentage = Value / Total * 100, File = file_name) %>% 
     ungroup() %>%
     unique()
@@ -65,7 +65,7 @@ if (!dir.exists("plots")) {
 pdf(output_pdf)
 
 # Plot the results
-ggplot(results, aes(x = File, y = Value, fill = Transformation.Aspect)) +
+ggplot(results, aes(x = File, y = Value, fill = Transformation_Aspect)) +
   geom_bar(stat = "identity") +
   geom_text(data = results %>% select(File, Total) %>% unique(), mapping = aes(x = File, label = Total, y = Total), inherit.aes = FALSE, size = 3, position = position_stack(), vjust = 0) +
   geom_text(aes(label = paste0(signif(Percentage, 2), "%"), alpha = Percentage > 3), show.legend = FALSE, size = 2, position = position_stack(vjust = 0.5)) +

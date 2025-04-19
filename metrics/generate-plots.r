@@ -19,16 +19,16 @@ createPlot <- function(data, title) {
 	#missing_data <- if (!length(missing_types)) data.frame(File.name=0,Transformation.Aspect = missing_types, Value = 0, Lines=0) else NULL
 	#data <- rbind(data, missing_data)
 	
-    data <- data %>% mutate(Transformation.Aspect = factor(Transformation.Aspect, levels = type_order))
+    data <- data %>% mutate(Transformation_Aspect = factor(Transformation_Aspect, levels = type_order))
 
 	# Calculate the total value for each typetype_ord
 	data_summary <- data %>%
 	  mutate(Total = sum(Value)) %>%
-	  group_by(Transformation.Aspect) %>%
+	  group_by(Transformation_Aspect) %>%
 	  reframe(Value = sum(Value), Percentage = Value / Total * 100) %>% unique()
 
 	# Create the stacked bar plot
-	plot <- ggplot(data_summary, aes(x = "", y = Value, fill = Transformation.Aspect)) +
+	plot <- ggplot(data_summary, aes(x = "", y = Value, fill = Transformation_Aspect)) +
 	  geom_bar(stat = "identity") +
   	  scale_fill_manual(values = color_values) +
 	  xlab("Transformation Aspect") +
@@ -47,7 +47,7 @@ print(args)
 solution <- args[1]
 
 values <- read.csv(paste0(solution, ".csv"), header = TRUE, , sep = ",", stringsAsFactors = FALSE)
-values$Transformation.Aspect <- trimws(values$Transformation.Aspect)
+values$Transformation_Aspect <- trimws(values$Transformation_Aspect)
 valuesPlot <- createPlot(values, solution)
 savePlot(valuesPlot, paste0(solution, ".pdf"))
 
