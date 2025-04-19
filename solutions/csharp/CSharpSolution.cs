@@ -1,4 +1,5 @@
-﻿using NMF.Models;
+﻿
+using NMF.Models;
 
 // Setup
 namespace HSRM.TTC2023.ClassToRelational
