@@ -24,6 +24,7 @@ public class Labels {
         TRACING_LABEL,
         HELPER_LABEL,
         CHANGE_IDENTIFICATION,
-        CHANGE_PROPAGATION,
-        WRAPPER_LABEL);
+        CHANGE_PROPAGATION
+        // WRAPPER_LABEL // wrapper is no longer used
+        );
 }
