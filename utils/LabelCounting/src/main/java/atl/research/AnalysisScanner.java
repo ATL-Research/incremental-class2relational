@@ -253,6 +253,14 @@ public class AnalysisScanner {
         Files.write(labelCountFileAbsPath, csvLine.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
     }
 
+    private void writeZeroLabelValues() throws IOException {
+        for (String aspect : Labels.ASPECTS_LABELS) {
+            String csvLine = "dummy" + "," + aspect + "," + 0 + "," + 0 + "-"
+                    + 0 + "\n";
+            Files.write(labelCountFileAbsPath, csvLine.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        }
+    }
+
     private void updateForNewLabelType(String newLabel) {
         currentLabel = newLabel;
         currentLabelCount = 0;
@@ -294,7 +302,7 @@ public class AnalysisScanner {
         return filesToScan;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String solution;
 
         if (args.length != 1) {
@@ -313,6 +321,9 @@ public class AnalysisScanner {
         AnalysisScanner analysis = new AnalysisScanner(config);
 
         analysis.extractLabelsFromFiles();
+
+        // add dummy lines with 0 value for each aspect so that all solution appear in the summaries
+        analysis.writeZeroLabelValues();
 
         System.out.println("-------------------------------");
         System.out.println("analyzed " + analysis.wordCt + " words in " + analysis.lineCt + " lines of "
