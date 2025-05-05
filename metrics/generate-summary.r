@@ -27,7 +27,7 @@ for (file in csv_files) {
   data <- read.csv(file)
 
   # Filter the data to exclude rows where "Transformation Aspect" is "EMPTY"
-  data_filtered <- data[data$Transformation.Aspect != "EMPTY", ]
+  data_filtered <- data[data$Transformation_Aspect != "EMPTY", ]
   
   # Sum the specific column (replace 'column_name' with the actual column name)
   column_sum <- sum(data_filtered$Value, na.rm = TRUE)  # Replace 'column_name' with your actual column name

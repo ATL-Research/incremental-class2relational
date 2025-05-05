@@ -21,7 +21,7 @@ if (!dir.exists(output_folder)) {
 }
 
 # Initialize a data frame to store aggregated results
-results <- data.frame(File = character(), Transformation.Aspect = character(), Sum = numeric(), stringsAsFactors = FALSE)
+results <- data.frame(File = character(), Transformation_Aspect = character(), Sum = numeric(), stringsAsFactors = FALSE)
 
 # Loop over each CSV file
 for (file in csv_files) {
@@ -35,15 +35,15 @@ for (file in csv_files) {
   cat("Columns in file", file_name, ":", colnames(data), "\n")
   
   # Filter the data to exclude rows where "Transformation Aspect" is "EMPTY"
-  if (!("Transformation.Aspect" %in% colnames(data)) || !("Value" %in% colnames(data))) {
+  if (!("Transformation_Aspect" %in% colnames(data)) || !("Value" %in% colnames(data))) {
     cat("Missing required columns in file:", file_name, "\n")
     next
   }
   
-  data_filtered <- data[data$Transformation.Aspect != "EMPTY", ]
+  data_filtered <- data[data$Transformation_Aspect != "EMPTY", ]
   
   # Group data by "Transformation Aspect" and calculate the sum of "Value"
-  grouped_data <- aggregate(Value ~ Transformation.Aspect, data = data_filtered, sum)
+  grouped_data <- aggregate(Value ~ Transformation_Aspect, data = data_filtered, sum)
   grouped_data$File <- file_name
   
   # Append grouped data to the results data frame
@@ -51,10 +51,10 @@ for (file in csv_files) {
 }
 
 # Generate a separate plot for each "Transformation Aspect"
-unique_aspects <- unique(results$Transformation.Aspect)
+unique_aspects <- unique(results$Transformation_Aspect)
 for (aspect in unique_aspects) {
   # Filter results for the current "Transformation Aspect"
-  aspect_data <- results[results$Transformation.Aspect == aspect, ]
+  aspect_data <- results[results$Transformation_Aspect == aspect, ]
   
   # Debug: Print aspect data
   print(paste("Data for Transformation Aspect:", aspect))

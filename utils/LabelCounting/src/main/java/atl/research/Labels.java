@@ -1,5 +1,7 @@
 package atl.research;
 
+import java.util.List;
+
 public class Labels {
         
     public static final String EMPTY_LABEL = "EMPTY";        //starting state    
@@ -13,4 +15,16 @@ public class Labels {
     public static final String CHANGE_PROPAGATION = "CHANGE_PROPAGATION";
     public static final String WRAPPER_LABEL = "WRAPPER";
 
+    public static final List<String> ASPECTS_LABELS = List.of(
+        EMPTY_LABEL,
+        SETUP_LABEL,
+        TRAVERSAL_LABEL,
+        // NAVIGATION_LABEL, // navigation is no longer used
+        TRANSFORMATION_LABEL,
+        TRACING_LABEL,
+        HELPER_LABEL,
+        CHANGE_IDENTIFICATION,
+        CHANGE_PROPAGATION
+        // WRAPPER_LABEL // wrapper is no longer used
+        );
 }
