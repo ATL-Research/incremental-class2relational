@@ -10,7 +10,7 @@ savePlot <- function(plot, name) {
 createPlot <- function(data, title) {
 
 	# Define the order of types for stacking
-	type_order <- c("SETUP", "MODEL_TRAVERSAL", "CHANGE_PROPAGATION", "HELPER", "TRACING", "CHANGE_IDENTIFICATION", "TRANSFORMATION", "EMPTY")
+	type_order <- c("SETUP", "HELPER", "MODEL_TRAVERSAL", "TRACING", "TRANSFORMATION", "CHANGE_IDENTIFICATION", "CHANGE_PROPAGATION", "EMPTY")
     color_values = c("#F8766D", "#C49A00", "#53B400", "#00C094", "#00B5EB", "#619CFF", "#ABABAB", "#FF00FF", "#EFEFEF")
 
 	names(color_values) <- type_order
