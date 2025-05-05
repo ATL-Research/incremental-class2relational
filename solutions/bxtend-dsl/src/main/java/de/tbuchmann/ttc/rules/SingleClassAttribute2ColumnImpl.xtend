@@ -5,14 +5,14 @@ import atl.research.class_.Attribute
 import atl.research.class_.Classifier
 import atl.research.class_.DataType
 
-// EMPTY
+// Generated
 class SingleClassAttribute2ColumnImpl extends SingleClassAttribute2Column {	
 	new(Class2Relational trafo) {
-		// EMPTY
+		// Generated
 		super(trafo)
 	}
 
-	// EMPTY 
+	// Generated
 	override protected filterAtt(Attribute att) {		
 		// Model_Traversal
 		!(att.multiValued) && !(att.type instanceof DataType)
@@ -22,13 +22,13 @@ class SingleClassAttribute2ColumnImpl extends SingleClassAttribute2Column {
 		//
 	}
 
-	// EMPTY 
+	// Generated 
 	override protected colNameFrom(String attName, Classifier attType) {
 		// Transformation
 		new Type4colName(attName + "Id")
 	}
 
-	// EMPTY 
+	// Generated 
 	override protected colTypeFrom(String attName, Classifier attType) {
 		// Transformation
 		new Type4colType(Utils.getType(findIntegerDatatype()))

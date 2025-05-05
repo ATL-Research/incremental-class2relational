@@ -12,6 +12,7 @@ import java.util.List
 
 import de.ubt.ai1.m2m.bidir.imperative.xtend.BXtendTransformation
 
+// Generated
 public class Class2relationalImperativeTransformation implements BXtendTransformation {
 
 	private Resource sourceModel

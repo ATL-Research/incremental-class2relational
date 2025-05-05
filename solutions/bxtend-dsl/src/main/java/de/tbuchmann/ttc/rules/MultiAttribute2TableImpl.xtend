@@ -7,20 +7,20 @@ import atl.research.class_.Classifier
 import atl.research.relational_.Relational_Factory
 import atl.research.class_.DataType
 
-// EMPTY
+// Generated
 class MultiAttribute2TableImpl extends MultiAttribute2Table {	
 	new(Class2Relational trafo) {
-		// EMPTY
+		// Generated
 		super(trafo)
 	}
 
-	// EMPTY
+	// Generated
 	override protected filterAtt(Attribute att) {	
 		// Model Traversal 
 		(att.multiValued) && !(att.type instanceof Class)
 	}
 
-	// EMPTY 
+	// Generated
 	override protected tblNameFrom(String attName, Class owner) {
 		// Transformation
 		var tblName = (owner !== null && owner.name !== null && owner.name !== "")? owner.name : "" 	
@@ -28,7 +28,7 @@ class MultiAttribute2TableImpl extends MultiAttribute2Table {
 		new Type4tblName(tblName + "_" + attName)
 	}
 
-	// EMPTY 
+	// Generated
 	override protected colFrom(String attName, Classifier type, Class owner) {
 		// Transformation 
 		val colList = newArrayList
