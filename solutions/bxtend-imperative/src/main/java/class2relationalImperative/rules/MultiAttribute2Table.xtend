@@ -24,22 +24,22 @@ class MultiAttribute2Table extends Elem2Elem {
 			val targetObject = corr.getOrCreateTargetElem(targetPackage.table)			
 			// Transformation
 			if (targetObject instanceof Column)
-				// Transformation
-				EcoreUtil.delete(targetObject)
+				// CHANGE_PROPAGAION
+				EcoreUtil.delete(targetObject) // in that case, the attribute was single valued and has been changed to multivalued
 			// Transformation
 			var targetTable = corr.getOrCreateTargetElem(targetPackage.table) as Table
 			// Transformation
 			var owner  = attribute.eContainer as atl.research.class_.Class
-			// Transformation
+			// CHANGE_PROPAGATION
 			targetTable.name = (owner !== null && owner.name !== null && owner.name !== "")? owner.name : "Table" 
-			// Transformation
+			// CHANGE_PROPAGATION
 			targetTable.name = targetTable.name + "_" + attribute.name
 			// Transformation
 			var idCol = targetFactory.createColumn() => [
 				// Transformation
 				type = DataType2Type.getType(sourceModel.contents.filter(typeof(DataType)).findFirst[name == "Integer"])
 			]
-			// Transformation
+			// CHANGE_PROPAGATION
 			idCol.name = (owner === null || owner.name === null || owner.name === "")? "tableId" : owner.name.toFirstLower + "Id"
 
 			// Transformation
@@ -58,9 +58,9 @@ class MultiAttribute2Table extends Elem2Elem {
 				}
 				// Transformation
 				else {
-					// Transformation
+					// MODEL_TRAVERSAL
 					idCol = targetTable.col.get(0)
-					// Transformation
+					// CHANGE_PROPAGATION
 					idCol.name = (owner === null || owner.name === null || owner.name === "")? "tableId" : owner.name.toFirstLower + "Id"
 				}
 			}
@@ -80,9 +80,9 @@ class MultiAttribute2Table extends Elem2Elem {
 				} 
 				// Transformation
 				else {
-					// Transformation
+					// MODEL_TRAVERSAL
 					idCol = targetTable.col.get(0)
-					// Transformation
+					// CHANGE_PROPAGATION
 					idCol.name = (owner === null || owner.name === null || owner.name === "")? "tableId" : owner.name.toFirstLower + "Id"
 				}
 			}

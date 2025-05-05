@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 
+// Generated
 abstract class Elem2Elem {
 	
 	protected Resource sourceModel

@@ -7,14 +7,14 @@ import atl.research.class_.Class
 import atl.research.class_.Classifier
 import atl.research.class_.DataType
 
-// Setup
+// Generated
 class MultiClassAttribute2ColumnImpl extends MultiClassAttribute2Column {	
 	new(Class2Relational trafo) {
-		// Setup
+		// Generated
 		super(trafo)
 	}
 
-	// Transformation 
+	// Generated 
 	override protected onIdCreation(Column id) {
 		// Transformation 
 		id.type = Utils.getType(findIntegerDatatype())
@@ -22,7 +22,7 @@ class MultiClassAttribute2ColumnImpl extends MultiClassAttribute2Column {
 		id.corr.target().t.col += id
 	}
 
-	// Transformation 
+	// Generated
 	override protected onFkCreation(Column fk) {
 		// Transformation 
 		fk.type = Utils.getType(findIntegerDatatype())
@@ -30,13 +30,13 @@ class MultiClassAttribute2ColumnImpl extends MultiClassAttribute2Column {
 		fk.corr.target().t.col += fk
 	}
 
-	// Model_Traversal 
+	// Generated
 	override protected filterAtt(Attribute att) {		
 		// Model_Traversal
 		(att.multiValued) && (att.type instanceof Class)
 	}
 
-	// Transformation 
+	// Generated
 	override protected tNameFrom(String attName, Class owner, Classifier attType) {
 		// Transformation 
 		var tblName = (owner !== null && owner.name !== null && owner.name !== "")? owner.name : "" 
@@ -44,7 +44,7 @@ class MultiClassAttribute2ColumnImpl extends MultiClassAttribute2Column {
 		new Type4tName(tblName + "_" + attName)
 	}
 
-	// Transformation 
+	// Generated
 	override protected idNameFrom(String attName, Class attOwner) {
 		// Transformation 
 		var name = (attOwner === null || attOwner.name === null || attOwner.name === "")? "Id" : attOwner.name.toFirstLower + "Id"
@@ -52,7 +52,7 @@ class MultiClassAttribute2ColumnImpl extends MultiClassAttribute2Column {
 		new Type4idName(name)
 	}
 
-	// Transformation 
+	// Generated
 	override protected fkNameFrom(String attName, Class attOwner) {
 		// Transformation 
 		new Type4fkName(attName + "Id")
