@@ -229,6 +229,13 @@ public class AnalysisScanner {
                     updateLabels(Labels.WRAPPER_LABEL);
                 }
                 break;
+            
+            case Labels.GENERATED_LABEL:
+                if (currentLabel != Labels.GENERATED_LABEL) {
+                    updateLabels(Labels.GENERATED_LABEL);
+                }
+                break;
+
         }
     }
 
@@ -309,7 +316,7 @@ public class AnalysisScanner {
             System.out.println("Usage: java AnalysisScanner <solution>");
             // set default value so that you can use the LabelCounting directly from your
             // IDE:
-            solution = "emoflon-neo";
+            solution = "bxtend-dsl";
         } else {
             solution = args[0];
         }
@@ -343,7 +350,7 @@ public class AnalysisScanner {
     }
 }
 
-class FileIterator<Path> implements FileVisitor<Path> {
+class FileIterator<T> implements FileVisitor<Path> {
     private List<Path> regFiles = new LinkedList<Path>();
 
     @Override
