@@ -261,11 +261,11 @@ tripleRule ClassAttributeToColumn : ClassToRelational {
 		// Tracing
 		addSuffix(
 			// Tracing
-			word=<attrName>,
+			word = <attrName>,
 			// Tracing
-			suffix="Id",
+			suffix = "Id",
 			// Tracing
-			result=<colName>
+			result = <colName>
 		)
 	}
 }
@@ -331,11 +331,11 @@ tripleRule ClassAttributeToColumnNonInjective : ClassToRelational {
 		// Tracing
 		addSuffix(
 			// Tracing
-			word=<attrName>,
+			word = <attrName>,
 			// Tracing
-			suffix="Id",
+			suffix = "Id",
 			// Tracing
-			result=<colName>
+			result = <colName>
 		)
 	}
 }
@@ -423,31 +423,31 @@ tripleRule PrimitiveAttributeToTable : ClassToRelational {
 		// Tracing
 		concat(
 			// Tracing
-			separator="_",
+			separator = "_",
 			// Tracing
-			left=<className>,
+			left = <className>,
 			// Tracing
-			right=<attrName>,
+			right = <attrName>,
 			// Tracing
-			combined=<tableName>
+			combined = <tableName>
 		)
 
 		// Tracing
 		firstToLowerCase(
 			// Tracing
-			word=<className>,
+			word = <className>,
 			// Tracing
-			lowerCase=<lower>
+			lowerCase = <lower>
 		)
 
 		// Tracing
 		addSuffix(
 			// Tracing
-			word=<lower>,
+			word = <lower>,
 			// Tracing
-			suffix="Id",
+			suffix = "Id",
 			// Tracing
-			result=<idName>
+			result = <idName>
 		)
 	}
 }
@@ -526,9 +526,9 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 	// Setup
 	correspondence {
 		// Tracing
-		++ attribute <-:AttributeToTable->table
+		++ attribute<-:AttributeToTable->table
 		// Tracing
-		integerType <-:DateTypeToType-> integer
+		integerType<-:DateTypeToType-> integer
 	}
 
 	// Setup
@@ -536,7 +536,7 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 		// Tracing
 		concat(
 			// Tracing
-			separator="_",
+			separator = "_",
 			// Tracing
 			left = <className>,
 			// Tracing
@@ -548,29 +548,29 @@ tripleRule ClassAttributeToTable : ClassToRelational {
 		// Tracing
 		firstToLowerCase(
 			// Tracing
-			word=<className>,
+			word = <className>,
 			// Tracing
-			lowerCase=<lower>
+			lowerCase = <lower>
 		)
 
 		// Tracing
 		addSuffix(
 			// Tracing
-			word=<lower>,
+			word = <lower>,
 			// Tracing
-			suffix="Id",
+			suffix = "Id",
 			// Tracing
-			result=<idName>
+			result = <idName>
 		)
 
 		// Tracing
 		addSuffix(
 			// Tracing
-			word=<attrName>,
+			word = <attrName>,
 			// Tracing
-			suffix="Id",
+			suffix = "Id",
 			// Tracing
-			result=<attrIdName>
+			result = <attrIdName>
 		)
 	}
 }
@@ -649,31 +649,31 @@ tripleRule ClassAttributeToTableNonInjective : ClassToRelational {
 		// Tracing
 		concat(
 			// Tracing
-			separator="_",
+			separator = "_",
 			// Tracing
-			left=<className>,
+			left = <className>,
 			// Tracing
-			right=<attrName>,
+			right = <attrName>,
 			// Tracing
-			combined=<tableName>
+			combined = <tableName>
 		)
 
 		// Tracing
 		firstToLowerCase(
 			// Tracing
-			word=<className>,
+			word = <className>,
 			// Tracing
-			lowerCase=<lower>
+			lowerCase = <lower>
 		)
 
 		// Tracing
 		addSuffix(
 			// Tracing
-			word=<lower>,
+			word = <lower>,
 			// Tracing
-			suffix="Id",
+			suffix = "Id",
 			// Tracing
-			result=<idName>
+			result = <idName>
 		)
 	}
 }
