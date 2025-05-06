@@ -2,6 +2,8 @@ FOLDERS := $(wildcard ../solutions/*/)
 LABELS := $(addprefix ../labels/label-, $(addsuffix .csv,$(notdir $(FOLDERS:/=))))
 TAR_DIR := ./plots
 FIGURES := $(addprefix $(TAR_DIR)/, $(addsuffix .pdf,$(notdir $(FOLDERS:/=)))) $(TAR_DIR)/javaEMF-batch.pdf $(TAR_DIR)/summary.pdf
+UID := $(shell id -u)
+GID := $(shell id -g)
 
 .PHONY: all clean docker counter
 
@@ -14,17 +16,20 @@ $(TAR_DIR)/summary.pdf: $(LABELS)
 	@echo "Generating the summary plot"
 	touch $(TAR_DIR)/summary.pdf
 	docker run --rm \
+			--user $(UID):$(GID) \
 			-v $(shell pwd)/labels/:/labels \
 			-v $(shell pwd)/$(TAR_DIR)/summary.pdf:/$(TAR_DIR)/summary.pdf \
 			incr-c2r-plot:latest /usr/bin/Rscript generate-summary.r /labels
 	@echo "Generating the summary plot per aspects"
 	docker run --rm \
+			--user $(UID):$(GID) \
 			-v $(shell pwd)/labels/:/labels \
 			-v $(shell pwd)/$(TAR_DIR)/:/$(TAR_DIR)/ \
 			incr-c2r-plot:latest /usr/bin/Rscript generate-summary-per-aspect.r /labels
 	@echo "Generating the a merged summary"
 	touch $(TAR_DIR)/merge-summary.pdf
 	docker run --rm \
+			--user $(UID):$(GID) \
 			-v $(shell pwd)/labels/:/labels \
 			-v $(shell pwd)/$(TAR_DIR)/merge-summary.pdf:/$(TAR_DIR)/merge-summary.pdf \
 			incr-c2r-plot:latest /usr/bin/Rscript generate-merge-summary.r /labels
@@ -33,6 +38,7 @@ $(TAR_DIR)/%.pdf: ../labels/label-%.csv | $(TAR_DIR)
 	@echo "Generating figure for $*.."
 	touch $(TAR_DIR)/$*.pdf
 	docker run --rm \
+			--user $(UID):$(GID) \
 			-v $(shell pwd)/labels/label-$*.csv:/$*.csv \
 			-v $(shell pwd)/$(TAR_DIR)/$*.pdf:/$*.pdf \
 			incr-c2r-plot:latest /usr/bin/Rscript generate-plots.r $*
