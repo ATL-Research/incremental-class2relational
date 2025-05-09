@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>se.liu.ida.sas.pelab.c2r</groupId>
+	<artifactId>se.liu.ida.sas.pelab.c2r</artifactId>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<emf.version>2.38.0</emf.version>
+		<emf.common.version>2.40.0</emf.common.version>
+		<viatra.version>2.9.0</viatra.version>
+		<xtend.version>2.38.0</xtend.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>eclipse</id>
+			<url>https://repo.eclipse.org/content/groups/releases/</url>
+		</repository>
+	</repositories>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.6.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/main/java</source>
+								<source>src/main/vql-gen</source>
+								<source>src/main/xtend-gen</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.5</version>
+				<executions>
+					<execution>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+						<configuration>
+							<filesets>
+								<fileset>
+									<!-- Generated code folder -->
+									<directory>src/main/vql-gen</directory>
+									<includes>
+										<include>**/*</include>
+									</includes>
+								</fileset>
+								<fileset>
+									<!-- Generated code folder -->
+									<directory>src/main/xtend-gen</directory>
+									<includes>
+										<include>**/*</include>
+									</includes>
+								</fileset>
+							</filesets>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Setting up generator -->
+			<plugin>
+				<groupId>org.eclipse.viatra</groupId>
+				<artifactId>viatra-maven-plugin</artifactId>
+				<version>${viatra.version}</version>
+				<!-- Binding execution to the code generation lifecycle phase -->
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!-- Output directory - required -->
+					<outputDirectory>src/main/vql-gen</outputDirectory>
+					<metamodels>
+						<metamodel>
+							<packageClass>atl.research.class_.Class_Package</packageClass>
+						</metamodel>
+						<metamodel>
+							<packageClass>atl.research.relational_.Relational_Package</packageClass>
+						</metamodel>
+						<metamodel>
+							<packageClass>org.eclipse.viatra.transformation.views.traceability.TraceabilityPackage</packageClass>
+						</metamodel>
+					</metamodels>
+					<!-- Since 1.5, you can use the project dependencies instead of specific Maven dependencies - optional -->
+					<useProjectDependencies>true</useProjectDependencies>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+				<version>${xtend.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>testCompile</goal>
+							<goal>xtend-install-debug-info</goal>
+							<goal>xtend-test-install-debug-info</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<outputDirectory>src/main/xtend-gen</outputDirectory>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.3.0</version>
+				<configuration>
+					<mainClass>se.liu.ida.sas.pelab.c2r.ViatraIncrementalSolution</mainClass>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.github.atlresearch.ttc2023</groupId>
+			<artifactId>solutiondriver</artifactId>
+			<version>0.6</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.common</artifactId>
+			<version>${emf.common.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+			<version>${emf.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore</artifactId>
+			<version>${emf.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.viatra</groupId>
+			<artifactId>viatra-transformation-runtime</artifactId>
+			<version>${viatra.version}</version>
+		</dependency>
+				
+		<dependency>
+			<groupId>org.eclipse.viatra</groupId>
+			<artifactId>viatra-query-runtime</artifactId>
+			<version>${viatra.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.viatra</groupId>
+			<artifactId>viatra-maven-plugin</artifactId>
+			<version>${viatra.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.viatra</groupId>
+			<artifactId>org.eclipse.viatra.transformation.views</artifactId>
+			<version>${viatra.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>org.eclipse.xtend.lib</artifactId>
+			<version>${xtend.version}</version>
+		</dependency>
+	</dependencies>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>eclipse</id>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<url>https://repo.eclipse.org/content/groups/releases/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+</project>
