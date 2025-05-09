@@ -1,0 +1,5 @@
+!src/
+!.gitignore
+target/
+src/main/vql-gen
+src/main/xtend-gen
