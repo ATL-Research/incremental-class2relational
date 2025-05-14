@@ -1,4 +1,4 @@
-package c2r.version2
+package se.liu.ida.sas.pelab.c2r
 
 import "Class"
 import "Relational" 
