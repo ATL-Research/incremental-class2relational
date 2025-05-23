@@ -10,7 +10,7 @@ output_pdf <- "plots/summary.pdf"
 csv_files <- list.files(path = input_folder, pattern = "*.csv", full.names = TRUE)
 
 # Define a vector of files to exclude
-files_to_exclude <- c("label-cheptre.csv")
+files_to_exclude <- c("label-cheptre.csv", "label-refinery.csv")
 
 # Exclude the specific files from the list
 csv_files <- csv_files[!basename(csv_files) %in% files_to_exclude]
@@ -26,8 +26,9 @@ for (file in csv_files) {
   # Read the CSV file
   data <- read.csv(file)
 
-  # Filter the data to exclude rows where "Transformation Aspect" is "EMPTY"
+  # Filter the data to exclude rows where "Transformation Aspect" is "EMPTY" then "GENERATED"
   data_filtered <- data[data$Transformation_Aspect != "EMPTY", ]
+  data_filtered <- data_filtered[data_filtered$Transformation_Aspect != "GENERATED",]
   
   # Sum the specific column (replace 'column_name' with the actual column name)
   column_sum <- sum(data_filtered$Value, na.rm = TRUE)  # Replace 'column_name' with your actual column name

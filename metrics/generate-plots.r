@@ -10,7 +10,7 @@ savePlot <- function(plot, name) {
 createPlot <- function(data, title) {
 
 	# Define the order of types for stacking
-	type_order <- c("SETUP", "HELPER", "MODEL_TRAVERSAL", "TRACING", "TRANSFORMATION", "CHANGE_IDENTIFICATION", "CHANGE_PROPAGATION", "EMPTY")
+	type_order <- c("SETUP", "HELPER", "MODEL_TRAVERSAL", "TRACING", "TRANSFORMATION", "CHANGE_IDENTIFICATION", "CHANGE_PROPAGATION")
     color_values = c("#F8766D", "#C49A00", "#53B400", "#00C094", "#00B5EB", "#619CFF", "#ABABAB", "#FF00FF", "#EFEFEF")
 
 	names(color_values) <- type_order
@@ -19,7 +19,10 @@ createPlot <- function(data, title) {
 	#missing_data <- if (!length(missing_types)) data.frame(File.name=0,Transformation.Aspect = missing_types, Value = 0, Lines=0) else NULL
 	#data <- rbind(data, missing_data)
 	
-    data <- data %>% mutate(Transformation_Aspect = factor(Transformation_Aspect, levels = type_order))
+	data_filtered <- data[data$Transformation_Aspect != "EMPTY",]
+  	data_filtered <- data_filtered[data_filtered$Transformation_Aspect != "GENERATED",]
+    #data <- data %>% mutate(Transformation_Aspect = factor(Transformation_Aspect, levels = type_order))
+    data_filtered <- data_filtered %>% mutate(Transformation_Aspect = factor(Transformation_Aspect, levels = type_order))
 
 	# Calculate the total value for each typetype_ord
 	data_summary <- data %>%

@@ -10,7 +10,7 @@ output_folder <- "plots/"
 csv_files <- list.files(path = input_folder, pattern = "*.csv", full.names = TRUE)
 
 # Define a vector of files to exclude
-files_to_exclude <- c("label-cheptre.csv")
+files_to_exclude <- c("label-cheptre.csv", "label-refinery.csv")
 
 # Exclude the specific files from the list
 csv_files <- csv_files[!basename(csv_files) %in% files_to_exclude]
@@ -40,7 +40,9 @@ for (file in csv_files) {
     next
   }
   
-  data_filtered <- data[data$Transformation_Aspect != "EMPTY", ]
+  # Filtering EMPTY THEN GENERATED aspects
+  data_filtered <- data[data$Transformation_Aspect != "EMPTY",]
+  data_filtered <- data_filtered[data_filtered$Transformation_Aspect != "GENERATED",]
   
   # Group data by "Transformation Aspect" and calculate the sum of "Value"
   grouped_data <- aggregate(Value ~ Transformation_Aspect, data = data_filtered, sum)

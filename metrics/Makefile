@@ -12,7 +12,7 @@ all: docker counter $(FIGURES) $(LABELS) ## uncomment so that make keeps CSV fil
 counter:
 	cd ../utils/LabelCounting && ./gradlew build
 
-$(TAR_DIR)/summary.pdf: $(LABELS)
+$(TAR_DIR)/summary.pdf: $(LABELS) docker
 	@echo "Generating the summary plot"
 	touch $(TAR_DIR)/summary.pdf
 	docker run --rm \
@@ -50,7 +50,7 @@ $(TAR_DIR):
 	@echo "Generating labels for $*.."
 	cd ../utils/LabelCounting && java -jar build/libs/LabelCounting-all.jar $*
 
-docker: Dockerfile generate-plots.r
+docker: Dockerfile generate-plots.r generate-summary-per-aspect.r
 	@echo "Building docker image..."
 	docker build -t incr-c2r-plot .
 
