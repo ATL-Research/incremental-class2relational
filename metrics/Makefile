@@ -50,7 +50,7 @@ $(TAR_DIR):
 	@echo "Generating labels for $*.."
 	cd ../utils/LabelCounting && java -jar build/libs/LabelCounting-all.jar $*
 
-docker: Dockerfile generate-plots.r generate-summary-per-aspect.r
+docker: Dockerfile generate-plots.r generate-summary-per-aspect.r generate-summary.r generate-merge-summary.r
 	@echo "Building docker image..."
 	docker build -t incr-c2r-plot .
 
