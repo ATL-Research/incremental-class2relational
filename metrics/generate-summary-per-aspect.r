@@ -81,7 +81,7 @@ for (aspect in unique_aspects) {
     geom_text() +
     labs(
       title = paste("Total Word Count for Transformation Aspect:", aspect),
-      x = "File",
+      x = "Solutions",
       y = "Sum of Values"
     ) +
     theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none")

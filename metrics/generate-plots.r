@@ -43,8 +43,10 @@ createPlot <- function(data, title) {
 	  theme_bw() +
 	  theme(plot.title = element_text(hjust = 0.5)) +
 	  #guides(fill = guide_legend(reverse = TRUE, override.aes = list(order = type_order))) #+
-	  geom_text(aes(label = paste0(Value, " (", round(Percentage, 1), "%)")), 
-            position = position_stack(vjust = 0.5), size = 3)
+	  geom_text(aes(label = paste0(Value, " (", round(Percentage, 1), "%)"), alpha = Value > 0), 
+            position = position_stack(vjust = 0.5), size = 3, show.legend = FALSE) +
+      scale_alpha_manual(values = c(0, 1)) +
+      scale_fill_manual(values = color_values)
 }
 
 args <- commandArgs(trailingOnly = TRUE)
