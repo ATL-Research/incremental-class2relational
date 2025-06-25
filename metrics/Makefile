@@ -34,7 +34,7 @@ $(TAR_DIR)/summary.pdf: $(LABELS) docker
 			-v $(shell pwd)/$(TAR_DIR)/merge-summary.pdf:/$(TAR_DIR)/merge-summary.pdf \
 			incr-c2r-plot:latest /usr/bin/Rscript generate-merge-summary.r /labels
 
-$(TAR_DIR)/%.pdf: ../labels/label-%.csv | $(TAR_DIR) 
+$(TAR_DIR)/%.pdf: ../labels/label-%.csv docker | $(TAR_DIR)
 	@echo "Generating figure for $*.."
 	touch $(TAR_DIR)/$*.pdf
 	docker run --rm \
@@ -50,7 +50,7 @@ $(TAR_DIR):
 	@echo "Generating labels for $*.."
 	cd ../utils/LabelCounting && java -jar build/libs/LabelCounting-all.jar $*
 
-docker: Dockerfile generate-plots.r generate-summary-per-aspect.r
+docker: Dockerfile generate-plots.r generate-summary-per-aspect.r generate-summary.r generate-merge-summary.r
 	@echo "Building docker image..."
 	docker build -t incr-c2r-plot .
 
