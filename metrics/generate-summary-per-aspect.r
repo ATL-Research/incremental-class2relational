@@ -41,8 +41,9 @@ for (file in csv_files) {
   }
   
   # Filtering EMPTY THEN GENERATED aspects
-  data_filtered <- data[data$Transformation_Aspect != "EMPTY",]
-  data_filtered <- data_filtered[data_filtered$Transformation_Aspect != "GENERATED",]
+# data_filtered <- data[data$Transformation_Aspect != "EMPTY",]
+  data_filtered <- data[!data$Transformation_Aspect %in%  c("EMPTY","GENERATED"),]
+  #data_filtered <- data_filtered[data_filtered$Transformation_Aspect != "GENERATED",]
   
   # Group data by "Transformation Aspect" and calculate the sum of "Value"
   grouped_data <- aggregate(Value ~ Transformation_Aspect, data = data_filtered, sum)

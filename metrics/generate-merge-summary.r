@@ -21,8 +21,9 @@ results <- vector("list", length(csv_files))
 
 # type_order <- c("SETUP", "MODEL_TRAVERSAL", "CHANGE_PROPAGATION", "HELPER", "TRACING", "CHANGE_IDENTIFICATION", "TRANSFORMATION", "EMPTY")
 #type_order <- c("SETUP", "HELPER", "MODEL_TRAVERSAL", "TRACING", "TRANSFORMATION", "CHANGE_IDENTIFICATION", "CHANGE_PROPAGATION", "EMPTY")
-type_order <- c("SETUP", "HELPER", "MODEL_TRAVERSAL", "TRACING", "TRANSFORMATION", "CHANGE_IDENTIFICATION", "CHANGE_PROPAGATION")
-color_values = c("#F8766D", "#C49A00", "#53B400", "#00C094", "#00B5EB", "#619CFF", "#ABABAB")#, "#FF00FF", "#EFEFEF")
+#type_order <- c("SETUP", "HELPER", "MODEL_TRAVERSAL", "TRACING", "TRANSFORMATION", "CHANGE_IDENTIFICATION", "CHANGE_PROPAGATION")
+type_order <- c("CHANGE_IDENTIFICATION", "CHANGE_PROPAGATION", "HELPER", "MODEL_TRAVERSAL", "SETUP", "TRACING", "TRANSFORMATION")
+color_values = c("#619CFF", "#ABABAB", "#C49A00", "#53B400", "#F8766D", "#00C094", "#00B5EB")#, "#FF00FF", "#EFEFEF")
 names(color_values) <- type_order
 
 i <- 0
@@ -36,13 +37,14 @@ for (file in csv_files) {
   data <- read.csv(file)
 
   # Filter the data to exclude rows where "Transformation Aspect" is "EMPTY" then "GENERATED"
-  data_filtered <- data[data$Transformation_Aspect != "EMPTY", ]
-  data_filtered <- data_filtered[data_filtered$Transformation_Aspect != "GENERATED",]
+  #data_filtered <- data[data$Transformation_Aspect != "EMPTY", ]
+  #data_filtered <- data_filtered[data_filtered$Transformation_Aspect != "GENERATED",]
+  data_filtered <- data[!data$Transformation_Aspect %in%  c("EMPTY","GENERATED"),]
 	
   data_filtered <- data_filtered %>% mutate(Transformation_Aspect = factor(Transformation_Aspect, levels = type_order))
 
 	# Calculate the total value for each typetype_ord
-	data_summary <- data %>%
+	data_summary <- data_filtered %>%
 	  mutate(Total = sum(Value, na.rm = TRUE)) %>%
 	  group_by(Transformation_Aspect, Total) %>%
 	  reframe(Value = sum(Value, na.rm = TRUE), Percentage = Value / Total * 100, File = file_name) %>% 
@@ -68,13 +70,13 @@ if (!dir.exists("plots")) {
 pdf(output_pdf)
 
 # Plot the results
-ggplot(results, aes(x = File, y = Value, fill = Transformation_Aspect)) +
+ggplot(results, aes(x = File, y = Percentage, fill = Transformation_Aspect)) +
   geom_bar(stat = "identity") +
-  geom_text(data = results %>% select(File, Total) %>% unique(), mapping = aes(x = File, label = Total, y = Total), inherit.aes = FALSE, size = 3, position = position_stack(), vjust = 0) +
-  geom_text(aes(label = paste0(signif(Percentage, 2), "%"), alpha = Percentage > 3), show.legend = FALSE, size = 2, position = position_stack(vjust = 0.5)) +
+  #geom_text(data = results %>% select(File, Total) %>% unique(), mapping = aes(x = File, label = Total, y = Total), inherit.aes = FALSE, size = 3, position = position_stack(), vjust = 0) +
+  geom_text(aes(label = paste0(signif(Percentage, 2), "%"), alpha = Percentage > 0), show.legend = FALSE, size = 2, position = position_stack(vjust = 0.5)) +
   scale_fill_manual(values = color_values) +
   scale_alpha_manual(values = c(0, 1)) +
-  labs(title = "Total word count per solution", x = "Solution", y = "Word count") +
+  labs(title = "Aspect ratio per solution", x = "Solution", y = "Aspect ratio") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability and get rid of the legend on the right
 
 # Close the PDF device
