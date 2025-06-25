@@ -68,11 +68,11 @@ class Run extends AbstractDriver implements AOFExtensions {
 		]
 	}
 
-	def fuzzerExample() {
-		val fuzzer = new SimpleEMFModelFuzzer(source, /* seed */ 3, /* log to console */ true)
-		// perform some random changes
-		for(var i = 1 ; i < 1000 ; i++) {
-			fuzzer.performOneChange
-		}
-	}
+	// def fuzzerExample() {
+	// 	val fuzzer = new SimpleEMFModelFuzzer(source, /* seed */ 3, /* log to console */ true)
+	// 	// perform some random changes
+	// 	for(var i = 1 ; i < 1000 ; i++) {
+	// 		fuzzer.performOneChange
+	// 	}
+	// }
 }
