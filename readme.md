@@ -11,15 +11,17 @@ The overall objective is to leverage this data set to better undertand whether G
 
 ## Contents of this repository
 
-- case description:  submitted TTC proposal
-- labeling:  examples of how to provide labels to a MTL (ATOL) and GPL (Java) solution
-- metamodels: source and target metamodel as well as the Change metamodel used for incremental updates of the input model
-- models: the source models
-- solutions: implementations of ATOL (incremental variant of ATL), and Java solutions
-- utils: 
-    - the SolutionDriver which executes the transformation, 
-    - the Comparator which evaluates the outcome of batch and incremental transformations
-    - ecore2class: utility Ecore2Class transformation which can turn any Ecore model into an instance of the expected source model
+- [case description](case description/ttc23_GPL_vs_MTL.pdf): TTC 2023 case description
+- [labeling](labeling):  examples of how to provide labels to an MTL (ATOL) and GPL (Java) solution
+- [metamodels](metamodels): source and target metamodel as well as the Change metamodel used for incremental updates of the input model
+- [metrics](metrics): R-scripts to extract plots from the labels collected with the [LabelCounting tool](utils/LabelCounting), using a Docker setup
+- [models](models): 13 cases of input source models, change models and expected models (all in xmi-format)
+- [solutions](solutions): solutions to the case implemented in various transformation languages, each in one directory
+- [utils](utils): tools that benchmark the solutions, and automatically count the labels provided in the solutions
+    - the [SolutionDriver](utils/SolutionDriver) which executes and benchmarks a given transformation solution , 
+    - the [Comparator](utils/Comparator) which evaluates the outcome of batch and incremental transformations
+    - the [LabelCounter](utils/LabelCounting) which scans a transformation solution and counts how many words are used for a transformation aspect
+    - [ecore2class](utils/ecore2class_): utility Ecore2Class transformation which can turn any Ecore model into an instance of the expected source model
   
 
 ## Using Github maven repository
